@@ -29,9 +29,22 @@
 		5592B37B2F3A5D3F0054BD84 /* MuttaqiUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MuttaqiUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		5592B3A42F3A61500054BD84 /* Exceptions for "Muttaqi" folder in "Muttaqi" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Info.plist,
+			);
+			target = 5592B3612F3A5D3F0054BD84 /* Muttaqi */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
+
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		5592B3642F3A5D3F0054BD84 /* Muttaqi */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				5592B3A42F3A61500054BD84 /* Exceptions for "Muttaqi" folder in "Muttaqi" target */,
+			);
 			path = Muttaqi;
 			sourceTree = "<group>";
 		};
@@ -400,6 +413,9 @@
 				DEVELOPMENT_TEAM = 9L228XEPZQ;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = Muttaqi/Info.plist;
+				INFOPLIST_KEY_LSApplicationCategoryType = en;
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Muttaqi needs your location for accurate prayer times";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -432,6 +448,9 @@
 				DEVELOPMENT_TEAM = 9L228XEPZQ;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = Muttaqi/Info.plist;
+				INFOPLIST_KEY_LSApplicationCategoryType = en;
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Muttaqi needs your location for accurate prayer times";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
