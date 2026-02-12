@@ -2,11 +2,11 @@ import SwiftUI
 
 struct OnboardingView: View {
     @State private var viewModel: OnboardingViewModel
-    
+
     init(viewModel: OnboardingViewModel) {
         self._viewModel = State(initialValue: viewModel)
     }
-    
+
     var body: some View {
         Group {
             switch viewModel.currentStep {
@@ -33,10 +33,13 @@ struct OnboardingView: View {
                     onSkip: { viewModel.send(.skipLocation) }
                 )
             case .setup:
-                SetupStepView()
-                    .task {
-                        viewModel.send(.finishSetup)
-                    }
+                SetupStepView(
+                    errorMessage: viewModel.setupError,
+                    onRetry: { viewModel.send(.finishSetup) }
+                )
+                .task {
+                    viewModel.send(.finishSetup)
+                }
             }
         }
         .animation(.easeInOut(duration: 0.3), value: viewModel.currentStep)

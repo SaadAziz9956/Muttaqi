@@ -2,11 +2,12 @@ import SwiftUI
 
 struct MainTabView: View {
     @State private var router = AppRouter()
-    
+    @Environment(\.container) private var container
+
     init() {
         Self.configureTabBarAppearance()
     }
-    
+
     var body: some View {
         TabView(selection: $router.selectedTab) {
             ForEach(AppTab.allCases, id: \.self) { tab in
@@ -16,7 +17,7 @@ struct MainTabView: View {
         .tint(.appPrimary)
         .environment(router)
     }
-        
+
     private func tabView(for tab: AppTab) -> some View {
         NavigationStack(path: pathBinding(for: tab)) {
             tabContent(for: tab)
@@ -31,17 +32,17 @@ struct MainTabView: View {
             }
         }
     }
-    
+
     @ViewBuilder
     private func tabContent(for tab: AppTab) -> some View {
         switch tab {
         case .home: Text("Home")
         case .explore: Text("Explore")
-        case .quran: Text("Quran")
+        case .quran: QuranListView(viewModel: container!.makeQuranListViewModel())
         case .dua: Text("Dua")
         }
     }
-    
+
     private func pathBinding(for tab: AppTab) -> Binding<NavigationPath> {
         switch tab {
         case .home: $router.homePath
@@ -50,7 +51,7 @@ struct MainTabView: View {
         case .dua: $router.duaPath
         }
     }
-        
+
     private static func configureTabBarAppearance() {
         let appearance = UITabBarAppearance()
         let fontAttributes: [NSAttributedString.Key: Any] = [
