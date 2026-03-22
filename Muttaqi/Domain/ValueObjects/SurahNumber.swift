@@ -1,6 +1,5 @@
 import Foundation
 
-/// Value object representing a Surah number with validation
 struct SurahNumber: Hashable, Codable, Sendable, Comparable {
     let value: Int
     
@@ -14,7 +13,6 @@ struct SurahNumber: Hashable, Codable, Sendable, Comparable {
         self.value = value
     }
     
-    /// Unsafe initializer - crashes if invalid. Use only when you're certain the value is valid.
     init(unchecked value: Int) {
         guard value >= Self.minimum && value <= Self.maximum else {
             fatalError("Invalid surah number: \(value)")
@@ -33,7 +31,6 @@ struct SurahNumber: Hashable, Codable, Sendable, Comparable {
     var isFirst: Bool { value == Self.minimum }
     var isLast: Bool { value == Self.maximum }
     
-    // MARK: - Comparable
     static func < (lhs: SurahNumber, rhs: SurahNumber) -> Bool {
         lhs.value < rhs.value
     }
