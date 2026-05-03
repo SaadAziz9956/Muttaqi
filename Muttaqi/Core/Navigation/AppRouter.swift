@@ -18,7 +18,7 @@ final class AppRouter {
     }
     
     enum QuranDestination: Hashable {
-        case surahDetail(number: Int)
+        case surahDetail(surah: Surah)
     }
     
     enum DuaDestination: Hashable {

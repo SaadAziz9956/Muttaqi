@@ -46,10 +46,10 @@ struct ReadingSettingsSheet: View {
                             .foregroundStyle(.appPrimary)
                     }
 
-                    Text("\(settingsViewModel.fontSize.value)")
+                    Text("\(settingsViewModel.fontSize.percentage)%")
                         .font(.bodyLarge)
                         .foregroundStyle(.textPrimary)
-                        .frame(width: 30, alignment: .center)
+                        .frame(width: 50, alignment: .center)
 
                     Button {
                         settingsViewModel.increaseFontSize()

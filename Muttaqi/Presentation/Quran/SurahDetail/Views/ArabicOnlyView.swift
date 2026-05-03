@@ -2,49 +2,50 @@ import SwiftUI
 
 struct ArabicOnlyView: View {
     let ayahs: [Ayah]
-    let fontSize: Int
+    let fontSize: FontSize
 
     var body: some View {
-        let arabicText = buildArabicText()
+        ForEach(ayahs) { ayah in
+            Text(arabicText(for: ayah))
+                .multilineTextAlignment(.trailing)
+                .frame(maxWidth: .infinity, alignment: .trailing)
+                .padding(.top, 40)
 
-        Text(arabicText)
-            .font(.arabic(CGFloat(fontSize)))
-            .foregroundStyle(.textPrimary)
-            .multilineTextAlignment(.center)
-            .lineSpacing(CGFloat(fontSize) * 0.6)
-            .frame(maxWidth: .infinity)
-            .environment(\.layoutDirection, .rightToLeft)
+            Rectangle()
+                .fill(Color(.systemGray5))
+                .frame(height: 1)
+                .padding(.top, 12)
+        }
     }
 
-    private func buildArabicText() -> AttributedString {
-        var result = AttributedString()
+    private func arabicText(for ayah: Ayah) -> AttributedString {
+        let clean = ayah.arabicText
+            .replacingOccurrences(of: "\u{06DD}", with: "")
+            .trimmingCharacters(in: .whitespaces)
 
-        for (index, ayah) in ayahs.enumerated() {
-            // Strip any existing end-of-ayah markers from API text
-            let cleanText = ayah.arabicText
-                .replacingOccurrences(of: "\u{06DD}", with: "")
-                .trimmingCharacters(in: .whitespaces)
+        var text = AttributedString(clean + " ")
+        text.font = .arabic(fontSize.arabicSize)
+        text.foregroundColor = .textPrimary
 
-            var ayahText = AttributedString(cleanText)
-            ayahText.foregroundColor = .textPrimary
-            result.append(ayahText)
+        var openParen = AttributedString("\u{FD3F}")
+        openParen.font = .arabic(10)
+        openParen.foregroundColor = .appPrimary
 
-            // Ornate parentheses ﴿ number ﴾ as ayah separator
-            let numberStr = " \u{FD3F}\(ayah.numberInSurah.arabicNumeral)\u{FD3E} "
-            var marker = AttributedString(numberStr)
-            marker.foregroundColor = .appPrimary
-            result.append(marker)
+        var num = AttributedString(ayah.numberInSurah.arabicNumeral)
+        num.font = .arabic(14)
+        num.foregroundColor = .appPrimary
 
-            if index < ayahs.count - 1 {
-                result.append(AttributedString(" "))
-            }
-        }
+        var closeParen = AttributedString("\u{FD3E}")
+        closeParen.font = .arabic(10)
+        closeParen.foregroundColor = .appPrimary
 
-        return result
+        text.append(openParen)
+        text.append(num)
+        text.append(closeParen)
+        return text
     }
 }
 
-// MARK: - Arabic Numeral Conversion
 private extension Int {
     var arabicNumeral: String {
         let formatter = NumberFormatter()

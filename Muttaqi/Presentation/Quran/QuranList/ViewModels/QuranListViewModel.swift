@@ -13,7 +13,7 @@ final class QuranListViewModel {
     enum Intent {
         case onAppear
         case retry
-        case surahTapped(Int)
+        case surahTapped(Surah)
         case continueTapped
     }
 
@@ -21,8 +21,8 @@ final class QuranListViewModel {
     private(set) var surahs: [Surah] = []
     private(set) var readingProgress: ReadingProgress?
 
-    var onSurahSelected: ((Int) -> Void)?
-    var onContinueReading: ((Int, Int) -> Void)?
+    var onSurahSelected: ((Surah) -> Void)?
+    var onContinueReading: ((Surah, Int) -> Void)?
 
     private let fetchSurahsUseCase: FetchSurahsUseCase
     private let getLastReadingUseCase: GetLastReadingUseCase
@@ -42,11 +42,12 @@ final class QuranListViewModel {
             loadData()
         case .retry:
             loadData()
-        case .surahTapped(let number):
-            onSurahSelected?(number)
+        case .surahTapped(let surah):
+            onSurahSelected?(surah)
         case .continueTapped:
-            guard let progress = readingProgress else { return }
-            onContinueReading?(progress.surahNumber, progress.lastAyahNumber)
+            guard let progress = readingProgress,
+                  let surah = surahs.first(where: { $0.number == progress.surahNumber }) else { return }
+            onContinueReading?(surah, progress.lastAyahNumber)
         }
     }
 

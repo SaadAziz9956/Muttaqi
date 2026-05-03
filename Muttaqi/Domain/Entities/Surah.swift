@@ -1,6 +1,6 @@
 import Foundation
 
-struct Surah: Equatable, Identifiable, Sendable {
+struct Surah: Equatable, Hashable, Identifiable, Sendable {
     let id: Int
     let number: Int
     let name: String

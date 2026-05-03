@@ -2,7 +2,14 @@ import SwiftUI
 
 struct MainTabView: View {
     @State private var router = AppRouter()
-    @Environment(\.container) private var container
+    @Environment(\.container) private var _container
+
+    private var container: DependencyContainer {
+        guard let _container else {
+            fatalError("DependencyContainer not set in environment — inject via .environment(\\.container, container)")
+        }
+        return _container
+    }
 
     init() {
         Self.configureTabBarAppearance()
@@ -38,13 +45,12 @@ struct MainTabView: View {
         switch tab {
         case .home: Text("Home")
         case .explore: Text("Explore")
-        case .quran: 
-            QuranListView(viewModel: container!.makeQuranListViewModel())
+        case .quran:
+            QuranListView(viewModel: container.makeQuranListViewModel())
                 .navigationDestination(for: AppRouter.QuranDestination.self) { dest in
                     switch dest {
-                    case .surahDetail(let number):
-                        // ✅ REFACTORED: Using new coordinator architecture
-                        SurahDetailView(coordinator: container!.makeSurahDetailCoordinator(surahNumber: number))
+                    case .surahDetail(let surah):
+                        SurahDetailView(coordinator: container.makeSurahDetailCoordinator(surah: surah))
                     }
                 }
         case .dua: Text("Dua")

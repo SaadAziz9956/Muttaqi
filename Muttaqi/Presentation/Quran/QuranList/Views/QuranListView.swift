@@ -24,11 +24,11 @@ struct QuranListView: View {
             viewModel.send(.onAppear)
         }
         .onAppear {
-            viewModel.onSurahSelected = { number in
-                router.push(AppRouter.QuranDestination.surahDetail(number: number))
+            viewModel.onSurahSelected = { surah in
+                router.push(AppRouter.QuranDestination.surahDetail(surah: surah))
             }
-            viewModel.onContinueReading = { surahNumber, _ in
-                router.push(AppRouter.QuranDestination.surahDetail(number: surahNumber))
+            viewModel.onContinueReading = { surah, _ in
+                router.push(AppRouter.QuranDestination.surahDetail(surah: surah))
             }
         }
     }
@@ -153,7 +153,7 @@ struct QuranListView: View {
             ForEach(viewModel.surahs) { surah in
                 SurahCardView(surah: surah)
                     .onTapGesture {
-                        viewModel.send(.surahTapped(surah.number))
+                        viewModel.send(.surahTapped(surah))
                     }
             }
         }

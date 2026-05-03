@@ -2,6 +2,7 @@ import SwiftUI
 
 struct SurahDetailView: View {
     @State private var coordinator: SurahDetailCoordinator
+    @Environment(\.dismiss) private var dismiss
 
     init(coordinator: SurahDetailCoordinator) {
         self._coordinator = State(initialValue: coordinator)
@@ -10,11 +11,17 @@ struct SurahDetailView: View {
     var body: some View {
         VStack(spacing: 0) {
             SurahHeaderView(
-                content: content,
+                surah: coordinator.headerSurah,
                 canGoNext: coordinator.navigator.canGoNext,
                 canGoPrevious: coordinator.navigator.canGoPrevious,
-                onPrevious: { Task { await coordinator.navigatePrevious() } },
-                onNext: { Task { await coordinator.navigateNext() } }
+                onPrevious: {
+                    let moved = withAnimation(.easeInOut(duration: 0.35)) { coordinator.goPrevious() }
+                    if moved { Task { await coordinator.loadCurrentSurah() } }
+                },
+                onNext: {
+                    let moved = withAnimation(.easeInOut(duration: 0.35)) { coordinator.goNext() }
+                    if moved { Task { await coordinator.loadCurrentSurah() } }
+                }
             )
 
             ScrollView {
@@ -27,10 +34,17 @@ struct SurahDetailView: View {
             .transition(slideTransition)
             .clipped()
         }
-        .animation(.easeInOut(duration: 0.3), value: coordinator.navigator.currentSurah)
         .navigationBarBackButtonHidden(true)
+        .background(SwipeBackEnabler())
         .toolbar(.hidden, for: .tabBar)
         .toolbar {
+            ToolbarItem(placement: .navigationBarLeading) {
+                Button { dismiss() } label: {
+                    Image(systemName: "chevron.left")
+                        .font(.system(size: 17, weight: .semibold))
+                        .foregroundStyle(.textPrimary)
+                }
+            }
             ToolbarItem(placement: .navigationBarTrailing) {
                 Button { coordinator.toggleSettings() } label: {
                     Image("ic_settings")
@@ -85,13 +99,13 @@ struct SurahDetailView: View {
             ForEach(content.displayAyahs) { ayah in
                 AyahCardView(
                     ayah: ayah,
-                    fontSize: coordinator.settingsViewModel.fontSize.value
+                    fontSize: coordinator.settingsViewModel.fontSize
                 )
             }
         case .arabicOnly:
             ArabicOnlyView(
                 ayahs: content.displayAyahs,
-                fontSize: coordinator.settingsViewModel.fontSize.value
+                fontSize: coordinator.settingsViewModel.fontSize
             )
             .padding(.top, 16)
             .padding(.bottom, 32)
@@ -152,3 +166,25 @@ struct SurahDetailView: View {
     }
 }
 
+// Re-enables the swipe-back gesture that navigationBarBackButtonHidden(true) disables.
+private struct SwipeBackEnabler: UIViewRepresentable {
+    func makeUIView(context: Context) -> UIView {
+        let view = UIView()
+        view.backgroundColor = .clear
+        return view
+    }
+
+    func updateUIView(_ uiView: UIView, context: Context) {
+        DispatchQueue.main.async {
+            uiView.next(ofType: UINavigationController.self)?
+                .interactivePopGestureRecognizer?.isEnabled = true
+        }
+    }
+}
+
+private extension UIResponder {
+    func next<T>(ofType type: T.Type) -> T? {
+        guard let next else { return nil }
+        return (next as? T) ?? next.next(ofType: type)
+    }
+}

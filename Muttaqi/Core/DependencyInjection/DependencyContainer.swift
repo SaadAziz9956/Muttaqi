@@ -70,13 +70,14 @@ final class DependencyContainer {
         )
     }
     
-    func makeSurahDetailCoordinator(surahNumber: Int) -> SurahDetailCoordinator {
-        guard let surah = SurahNumber(surahNumber) else {
-            fatalError("Invalid surah number: \(surahNumber)")
+    func makeSurahDetailCoordinator(surah: Surah) -> SurahDetailCoordinator {
+        guard let surahNumber = SurahNumber(surah.number) else {
+            fatalError("Invalid surah number: \(surah.number)")
         }
-        
+
         return SurahDetailCoordinator(
-            initialSurah: surah,
+            initialSurah: surahNumber,
+            headerSurah: surah,
             fetchSurahs: fetchSurahsUseCase,
             fetchAyahs: fetchAyahsUseCase,
             syncQuranData: syncQuranDataUseCase,

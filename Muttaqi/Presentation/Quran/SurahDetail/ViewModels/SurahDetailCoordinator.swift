@@ -6,13 +6,15 @@ final class SurahDetailCoordinator {
     let navigator: SurahNavigator
     let contentViewModel: SurahContentViewModel
     let settingsViewModel: ReadingSettingsViewModel
-    
+
     var showSettings = false
-    
+    private(set) var headerSurah: Surah?
+
     private let syncQuranData: SyncQuranDataUseCase
-    
+
     init(
         initialSurah: SurahNumber,
+        headerSurah: Surah? = nil,
         fetchSurahs: FetchSurahsUseCase,
         fetchAyahs: FetchAyahsUseCase,
         syncQuranData: SyncQuranDataUseCase,
@@ -25,27 +27,45 @@ final class SurahDetailCoordinator {
         )
         self.settingsViewModel = ReadingSettingsViewModel(preferences: readingPreferences)
         self.syncQuranData = syncQuranData
+        self.headerSurah = headerSurah
     }
-    
+
     func onAppear() async {
         guard contentViewModel.state == .idle else { return }
         await contentViewModel.loadSurah(navigator.currentSurah)
+        updateHeaderSurah()
     }
     
-    func navigateNext() async {
-        guard navigator.canGoNext else { return }
+    // Synchronous: updates navigator state only. Call inside withAnimation {}.
+    @discardableResult
+    func goNext() -> Bool {
+        guard navigator.canGoNext else { return false }
         navigator.navigateNext()
-        await contentViewModel.loadSurah(navigator.currentSurah)
+        return true
     }
-    
-    func navigatePrevious() async {
-        guard navigator.canGoPrevious else { return }
+
+    @discardableResult
+    func goPrevious() -> Bool {
+        guard navigator.canGoPrevious else { return false }
         navigator.navigatePrevious()
-        await contentViewModel.loadSurah(navigator.currentSurah)
+        return true
     }
-    
+
+    // Async: loads content for the current surah after navigation.
+    func loadCurrentSurah() async {
+        await contentViewModel.loadSurah(navigator.currentSurah)
+        updateHeaderSurah()
+    }
+
     func retry() async {
         await contentViewModel.retry(surahNumber: navigator.currentSurah)
+        updateHeaderSurah()
+    }
+
+    private func updateHeaderSurah() {
+        if case .loaded(let content) = contentViewModel.state {
+            headerSurah = content.surah
+        }
     }
     
     func toggleSettings() {

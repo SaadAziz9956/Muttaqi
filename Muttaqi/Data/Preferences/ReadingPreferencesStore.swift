@@ -44,12 +44,13 @@ final class ReadingPreferencesStore: ReadingPreferences {
     }
 
     func getFontSize() -> FontSize {
-        let value = storage.integer(forKey: Keys.fontSize)
-        return value > 0 ? FontSize(value) : .default
+        let stored = storage.integer(forKey: Keys.fontSize)
+        // Values below the minimum percent are from the old raw-pt storage format; reset to default
+        return stored >= FontSize.minimumPercent ? FontSize(stored) : .default
     }
 
     func setFontSize(_ size: FontSize) {
-        storage.set(size.value, forKey: Keys.fontSize)
+        storage.set(size.percentage, forKey: Keys.fontSize)
     }
 
     func getSelectedLanguage() -> Language {

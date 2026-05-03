@@ -2,7 +2,7 @@ import SwiftUI
 
 struct AyahCardView: View {
     let ayah: Ayah
-    let fontSize: Int
+    let fontSize: FontSize
 
     private var cleanArabicText: String {
         ayah.arabicText
@@ -12,7 +12,7 @@ struct AyahCardView: View {
 
     private var attributedAyah: AttributedString {
         var text = AttributedString(cleanArabicText + " ")
-        text.font = .arabic(CGFloat(fontSize))
+        text.font = .arabic(fontSize.arabicSize)
         text.foregroundColor = .textPrimary
 
         var openParen = AttributedString("\u{FD3F}")
@@ -42,14 +42,14 @@ struct AyahCardView: View {
 
             if let transliteration = ayah.transliteration, !transliteration.isEmpty {
                 Text(transliteration)
-                    .font(.bodyMedium)
+                    .font(.custom("ReemKufi-Regular", size: fontSize.transliterationSize))
                     .foregroundStyle(.appPrimary)
                     .padding(.top, 12)
             }
 
             if let translation = ayah.translation, !translation.isEmpty {
                 Text("\(ayah.numberInSurah).  \(translation)")
-                    .font(.bodySmall)
+                    .font(.custom("ReemKufi-Regular", size: fontSize.translationSize))
                     .foregroundStyle(.textPrimary)
                     .padding(.top, 8)
             }

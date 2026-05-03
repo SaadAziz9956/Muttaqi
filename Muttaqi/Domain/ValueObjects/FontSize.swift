@@ -1,33 +1,25 @@
 import Foundation
 
 struct FontSize: Equatable, Codable, Sendable {
-    private(set) var value: Int
-    
-    static let minimum = 10
-    static let maximum = 32
-    static let `default` = FontSize(16)
-    
-    init(_ value: Int) {
-        self.value = min(Self.maximum, max(Self.minimum, value))
+    private(set) var percentage: Int
+
+    static let minimumPercent = 70
+    static let maximumPercent = 200
+    static let `default` = FontSize(100)
+
+    // Base sizes at 100% — matches the static typography defaults
+    static let arabicBase: CGFloat = 24
+    static let transliterationBase: CGFloat = 16
+    static let translationBase: CGFloat = 16
+
+    init(_ percentage: Int) {
+        self.percentage = min(Self.maximumPercent, max(Self.minimumPercent, percentage))
     }
-    
-    mutating func increase(by step: Int = 2) {
-        value = min(Self.maximum, value + step)
-    }
-    
-    mutating func decrease(by step: Int = 2) {
-        value = max(Self.minimum, value - step)
-    }
-    
-    func increased(by step: Int = 2) -> FontSize {
-        var copy = self
-        copy.increase(by: step)
-        return copy
-    }
-    
-    func decreased(by step: Int = 2) -> FontSize {
-        var copy = self
-        copy.decrease(by: step)
-        return copy
-    }
+
+    var arabicSize: CGFloat { Self.arabicBase * CGFloat(percentage) / 100 }
+    var transliterationSize: CGFloat { Self.transliterationBase * CGFloat(percentage) / 100 }
+    var translationSize: CGFloat { Self.translationBase * CGFloat(percentage) / 100 }
+
+    func increased() -> FontSize { FontSize(percentage + 2) }
+    func decreased() -> FontSize { FontSize(percentage - 2) }
 }
