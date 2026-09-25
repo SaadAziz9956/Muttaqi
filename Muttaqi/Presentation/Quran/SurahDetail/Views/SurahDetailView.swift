@@ -2,6 +2,7 @@ import SwiftUI
 
 struct SurahDetailView: View {
     @State private var coordinator: SurahDetailCoordinator
+    @State private var contentWidth: CGFloat = 0
     @Environment(\.dismiss) private var dismiss
 
     init(coordinator: SurahDetailCoordinator) {
@@ -34,9 +35,10 @@ struct SurahDetailView: View {
                 .padding(.horizontal, 16)
             }
             .id(coordinator.navigator.currentSurah.value)
-            .transition(slideTransition)
+            .transition(SurahSlideTransition(navigator: coordinator.navigator, width: contentWidth))
             .clipped()
         }
+        .onGeometryChange(for: CGFloat.self) { $0.size.width } action: { contentWidth = $0 }
         .navigationBarBackButtonHidden(true)
         .background(SwipeBackEnabler())
         .toolbar(.hidden, for: .tabBar)
@@ -132,21 +134,6 @@ struct SurahDetailView: View {
         return nil
     }
 
-    private var slideTransition: AnyTransition {
-        switch coordinator.navigator.navigationDirection {
-        case .forward:
-            return .asymmetric(
-                insertion: .move(edge: .trailing),
-                removal: .move(edge: .leading)
-            )
-        case .backward:
-            return .asymmetric(
-                insertion: .move(edge: .leading),
-                removal: .move(edge: .trailing)
-            )
-        }
-    }
-
     private func errorView(_ error: SurahDetailError) -> some View {
         VStack(spacing: 16) {
             Text("Failed to load")
@@ -176,6 +163,20 @@ struct SurahDetailView: View {
             }
         }
         .padding(.top, 100)
+    }
+}
+
+// Slides the surah in from, and out toward, the side of the arrow that was tapped.
+// The direction is read from the navigator as the transition runs rather than captured: SwiftUI animates an outgoing
+// view with the transition from its last render, which still holds the old direction when the user switches arrows.
+private struct SurahSlideTransition: Transition {
+    let navigator: SurahNavigator
+    let width: CGFloat
+
+    func body(content: Content, phase: TransitionPhase) -> some View {
+        // Forward: the new surah enters from the trailing edge and the old one leaves by the leading edge
+        let sign: CGFloat = navigator.navigationDirection == .forward ? 1 : -1
+        content.offset(x: -phase.value * sign * width)
     }
 }
 
