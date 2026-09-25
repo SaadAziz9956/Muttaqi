@@ -6,6 +6,7 @@ struct SurahHeaderView: View {
     let canGoPrevious: Bool
     let onPrevious: () -> Void
     let onNext: () -> Void
+    let onExplanation: () -> Void
 
     var body: some View {
         VStack(spacing: 0) {
@@ -48,9 +49,7 @@ struct SurahHeaderView: View {
             }
             .padding(.top, 16)
 
-            Button {
-                // TODO: Navigate to explanation
-            } label: {
+            Button(action: onExplanation) {
                 Text("Explanation")
                     .font(.labelSmall)
                     .foregroundStyle(.white)

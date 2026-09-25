@@ -7,15 +7,33 @@ private enum FontName {
         static let semiBold = "ReemKufi-SemiBold"
         static let bold = "ReemKufi-Bold"
     }
-    
+
     enum Arabic {
         static let regular = "kfgqpchafsuthmanicscript-Reg"
+    }
+
+    // iOS system Nastaliq font — available on all iOS 9+ devices, no bundling needed
+    enum Urdu {
+        static let nastaliq = "NotoNastaliqUrdu"
+    }
+
+    // Apple's own Devanagari font — available on all iOS 9+ devices, no bundling needed
+    enum Hindi {
+        static let devanagari = "KohinoorDevanagari-Regular"
     }
 }
 
 extension Font {
     static func arabic(_ size: CGFloat) -> Font {
         .custom(FontName.Arabic.regular, size: size, relativeTo: .body)
+    }
+
+    static func urduNastaliq(_ size: CGFloat) -> Font {
+        .custom(FontName.Urdu.nastaliq, size: size, relativeTo: .body)
+    }
+
+    static func hindiDevanagari(_ size: CGFloat) -> Font {
+        .custom(FontName.Hindi.devanagari, size: size, relativeTo: .body)
     }
     
     static let displayLarge = Font.custom(FontName.ReemKufi.bold, size: 34, relativeTo: .largeTitle)

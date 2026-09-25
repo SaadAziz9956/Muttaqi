@@ -11,6 +11,7 @@ final class DependencyContainer {
     // MARK: - Services
     private lazy var networkClient: NetworkClientProtocol = NetworkClient()
     private lazy var apiService: QuranAPIServiceProtocol = QuranAPIService(networkClient: networkClient)
+    private lazy var tafsirAPIService: TafsirAPIServiceProtocol = TafsirAPIService(networkClient: networkClient)
 
     // MARK: - Repositories
     private lazy var syncRepo: QuranSyncRepositoryProtocol = QuranSyncRepository(
@@ -22,6 +23,10 @@ final class DependencyContainer {
     )
     private lazy var readingProgressRepo: ReadingProgressRepositoryProtocol = ReadingProgressRepository(
         modelContainer: modelContainer
+    )
+    private lazy var tafsirRepo: TafsirRepositoryProtocol = TafsirRepository(
+        modelContainer: modelContainer,
+        apiService: tafsirAPIService
     )
 
     // MARK: - Use Cases
@@ -39,6 +44,9 @@ final class DependencyContainer {
     private lazy var getLastReadingUseCase = GetLastReadingUseCase(
         progressRepository: readingProgressRepo,
         quranRepository: quranRepo
+    )
+    private lazy var fetchTafsirUseCase = FetchTafsirUseCase(
+        repository: tafsirRepo
     )
 
     init() {
@@ -81,7 +89,8 @@ final class DependencyContainer {
             fetchSurahs: fetchSurahsUseCase,
             fetchAyahs: fetchAyahsUseCase,
             syncQuranData: syncQuranDataUseCase,
-            readingPreferences: readingPreferences
+            readingPreferences: readingPreferences,
+            fetchTafsir: fetchTafsirUseCase
         )
     }
 }

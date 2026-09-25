@@ -3,6 +3,10 @@ import SwiftUI
 struct AyahCardView: View {
     let ayah: Ayah
     let fontSize: FontSize
+    let language: Language
+
+    private var isUrdu: Bool { language == .urdu }
+    private var isHindi: Bool { language == .hindi }
 
     private var cleanArabicText: String {
         ayah.arabicText
@@ -48,10 +52,24 @@ struct AyahCardView: View {
             }
 
             if let translation = ayah.translation, !translation.isEmpty {
-                Text("\(ayah.numberInSurah).  \(translation)")
-                    .font(.custom("ReemKufi-Regular", size: fontSize.translationSize))
-                    .foregroundStyle(.textPrimary)
-                    .padding(.top, 8)
+                if isUrdu {
+                    Text(translation)
+                        .font(.urduNastaliq(fontSize.translationSize))
+                        .foregroundStyle(.textPrimary)
+                        .multilineTextAlignment(.trailing)
+                        .frame(maxWidth: .infinity, alignment: .trailing)
+                        .padding(.top, 8)
+                } else if isHindi {
+                    Text("\(ayah.numberInSurah).  \(translation)")
+                        .font(.hindiDevanagari(fontSize.translationSize))
+                        .foregroundStyle(.textPrimary)
+                        .padding(.top, 8)
+                } else {
+                    Text("\(ayah.numberInSurah).  \(translation)")
+                        .font(.custom("ReemKufi-Regular", size: fontSize.translationSize))
+                        .foregroundStyle(.textPrimary)
+                        .padding(.top, 8)
+                }
             }
 
             Rectangle()

@@ -21,6 +21,9 @@ struct SurahDetailView: View {
                 onNext: {
                     let moved = withAnimation(.easeInOut(duration: 0.35)) { coordinator.goNext() }
                     if moved { Task { await coordinator.loadCurrentSurah() } }
+                },
+                onExplanation: {
+                    coordinator.toggleTafsir()
                 }
             )
 
@@ -64,6 +67,15 @@ struct SurahDetailView: View {
             .presentationDetents([.medium])
             .presentationDragIndicator(.visible)
         }
+        .sheet(isPresented: $coordinator.showTafsir) {
+            TafsirView(
+                surah: coordinator.headerSurah,
+                viewModel: coordinator.tafsirViewModel,
+                language: coordinator.settingsViewModel.selectedLanguage
+            )
+            .presentationDetents([.large])
+            .presentationDragIndicator(.visible)
+        }
         .task {
             await coordinator.onAppear()
         }
@@ -99,7 +111,8 @@ struct SurahDetailView: View {
             ForEach(content.displayAyahs) { ayah in
                 AyahCardView(
                     ayah: ayah,
-                    fontSize: coordinator.settingsViewModel.fontSize
+                    fontSize: coordinator.settingsViewModel.fontSize,
+                    language: coordinator.settingsViewModel.selectedLanguage
                 )
             }
         case .arabicOnly:
