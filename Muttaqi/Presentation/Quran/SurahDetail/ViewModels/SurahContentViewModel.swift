@@ -14,7 +14,9 @@ final class SurahContentViewModel {
     struct SurahContent: Equatable {
         let surah: Surah
         let ayahs: [Ayah]
-        
+        let previousSurah: Surah?
+        let nextSurah: Surah?
+
         var displayAyahs: [Ayah] {
             // Surah 1 (Al-Fatihah) includes Bismillah as first ayah
             if surah.number == 1 {
@@ -70,7 +72,12 @@ final class SurahContentViewModel {
             // Fetch ayahs
             let ayahs = try await fetchAyahs.execute(surahNumber: surahNumber)
             
-            let content = SurahContent(surah: surah, ayahs: ayahs)
+            let content = SurahContent(
+                surah: surah,
+                ayahs: ayahs,
+                previousSurah: allSurahs.first { $0.number == surah.number - 1 },
+                nextSurah: allSurahs.first { $0.number == surah.number + 1 }
+            )
             state = .loaded(content: content)
             
         } catch let error as SurahDetailError {

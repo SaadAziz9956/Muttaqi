@@ -10,6 +10,8 @@ final class SurahDetailCoordinator {
     var showSettings = false
     var showTafsir = false
     private(set) var headerSurah: Surah?
+    private(set) var previousSurah: Surah?
+    private(set) var nextSurah: Surah?
     private(set) var tafsirViewModel: TafsirViewModel
 
     private let syncQuranData: SyncQuranDataUseCase
@@ -72,6 +74,8 @@ final class SurahDetailCoordinator {
     private func updateHeaderSurah() {
         if case .loaded(let content) = contentViewModel.state {
             headerSurah = content.surah
+            previousSurah = content.previousSurah
+            nextSurah = content.nextSurah
         }
     }
 

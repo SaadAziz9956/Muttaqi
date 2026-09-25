@@ -3,6 +3,8 @@ import SwiftUI
 struct SurahDetailView: View {
     @State private var coordinator: SurahDetailCoordinator
     @State private var contentWidth: CGFloat = 0
+    @State private var scrollTop: CGFloat = 0
+    @State private var showsBarTitle = false
     @Environment(\.dismiss) private var dismiss
 
     init(coordinator: SurahDetailCoordinator) {
@@ -11,34 +13,35 @@ struct SurahDetailView: View {
 
     var body: some View {
         VStack(spacing: 0) {
-            SurahHeaderView(
-                surah: coordinator.headerSurah,
-                canGoNext: coordinator.navigator.canGoNext,
-                canGoPrevious: coordinator.navigator.canGoPrevious,
-                onPrevious: {
-                    let moved = withAnimation(.easeInOut(duration: 0.35)) { coordinator.goPrevious() }
-                    if moved { Task { await coordinator.loadCurrentSurah() } }
-                },
-                onNext: {
-                    let moved = withAnimation(.easeInOut(duration: 0.35)) { coordinator.goNext() }
-                    if moved { Task { await coordinator.loadCurrentSurah() } }
-                },
-                onExplanation: {
-                    coordinator.toggleTafsir()
-                }
-            )
-
             ScrollView {
                 LazyVStack(spacing: 0) {
+                    SurahHeaderView(
+                        surah: coordinator.headerSurah,
+                        previousSurah: coordinator.previousSurah,
+                        nextSurah: coordinator.nextSurah,
+                        onPrevious: goToPreviousSurah,
+                        onNext: goToNextSurah,
+                        onExplanation: {
+                            coordinator.toggleTafsir()
+                        },
+                        // The bar title takes over once the header's title has scrolled up past the top of the page
+                        onTitleBottomChange: { titleBottom in
+                            showsBarTitle = titleBottom < scrollTop
+                        }
+                    )
+
                     contentView
                 }
                 .padding(.horizontal, 16)
             }
             .id(coordinator.navigator.currentSurah.value)
             .transition(SurahSlideTransition(navigator: coordinator.navigator, width: contentWidth))
-            .clipped()
         }
-        .onGeometryChange(for: CGFloat.self) { $0.size.width } action: { contentWidth = $0 }
+        .onGeometryChange(for: CGRect.self) { $0.frame(in: .global) } action: { frame in
+            contentWidth = frame.width
+            scrollTop = frame.minY
+        }
+        .animation(.easeInOut(duration: 0.2), value: showsBarTitle)
         .navigationBarBackButtonHidden(true)
         .background(SwipeBackEnabler())
         .toolbar(.hidden, for: .tabBar)
@@ -49,6 +52,13 @@ struct SurahDetailView: View {
                         .font(.system(size: 17, weight: .semibold))
                         .foregroundStyle(.textPrimary)
                 }
+            }
+            ToolbarItem(placement: .principal) {
+                Text(coordinator.headerSurah?.englishName ?? "")
+                    .font(.titleMedium)
+                    .foregroundStyle(.appPrimary)
+                    .lineLimit(1)
+                    .opacity(showsBarTitle ? 1 : 0)
             }
             ToolbarItem(placement: .navigationBarTrailing) {
                 Button { coordinator.toggleSettings() } label: {
@@ -123,8 +133,26 @@ struct SurahDetailView: View {
                 fontSize: coordinator.settingsViewModel.fontSize
             )
             .padding(.top, 16)
-            .padding(.bottom, 32)
         }
+
+        SurahEndNavigationView(
+            previousSurah: content.previousSurah,
+            nextSurah: content.nextSurah,
+            onPrevious: goToPreviousSurah,
+            onNext: goToNextSurah
+        )
+        .padding(.top, 24)
+        .padding(.bottom, 32)
+    }
+
+    private func goToPreviousSurah() {
+        let moved = withAnimation(.easeInOut(duration: 0.35)) { coordinator.goPrevious() }
+        if moved { Task { await coordinator.loadCurrentSurah() } }
+    }
+
+    private func goToNextSurah() {
+        let moved = withAnimation(.easeInOut(duration: 0.35)) { coordinator.goNext() }
+        if moved { Task { await coordinator.loadCurrentSurah() } }
     }
 
     private var content: SurahContentViewModel.SurahContent? {
