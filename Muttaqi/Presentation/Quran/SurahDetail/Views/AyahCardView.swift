@@ -12,6 +12,7 @@ struct AyahCardView: View {
         ayah.arabicText
             .replacingOccurrences(of: "\u{06DD}", with: "")
             .trimmingCharacters(in: .whitespaces)
+            .kfgqpcEncoded
     }
 
     private var attributedAyah: AttributedString {
