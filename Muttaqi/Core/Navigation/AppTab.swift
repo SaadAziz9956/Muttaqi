@@ -13,21 +13,22 @@ enum AppTab: Int, CaseIterable {
         }
     }
     
+    // Iconsax icons: Linear for unselected tabs, Bold for the selected one
     var icon: String {
         switch self {
-        case .home: "ic_home"
-        case .explore: "ic_explore"
-        case .quran: "ic_book"
-        case .dua: "ic_duaa"
+        case .home: "home-linear"
+        case .explore: "search-normal-linear"
+        case .quran: "book-saved-linear"
+        case .dua: "moon-linear"
         }
     }
-    
+
     var selectedIcon: String {
         switch self {
-        case .home: "ic_home_selected"
-        case .explore: "ic_explore"
-        case .quran: "ic_book"
-        case .dua: "ic_duaa"
+        case .home: "home-bold"
+        case .explore: "search-normal-bold"
+        case .quran: "book-saved-bold"
+        case .dua: "moon-bold"
         }
     }
 }

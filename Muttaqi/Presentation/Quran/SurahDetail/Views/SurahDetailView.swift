@@ -41,14 +41,15 @@ struct SurahDetailView: View {
         .toolbar {
             ToolbarItem(placement: .navigationBarLeading) {
                 Button { dismiss() } label: {
-                    Image(systemName: "chevron.left")
-                        .font(.system(size: 17, weight: .semibold))
+                    Image("arrow-left-02-linear")
+                        .resizable()
+                        .frame(width: 24, height: 24)
                         .foregroundStyle(.textPrimary)
                 }
             }
             ToolbarItem(placement: .navigationBarTrailing) {
                 Button { coordinator.toggleSettings() } label: {
-                    Image("ic_settings")
+                    Image("setting-4-linear")
                         .resizable()
                         .frame(width: 22, height: 22)
                         .foregroundStyle(.textPrimary)

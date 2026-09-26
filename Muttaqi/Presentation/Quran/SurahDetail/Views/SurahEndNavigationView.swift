@@ -31,11 +31,11 @@ struct SurahEndNavigationView: View {
                     .foregroundStyle(.textSecondary)
 
                 HStack(spacing: 4) {
-                    if !isNext { Image(systemName: "chevron.left") }
+                    if !isNext { chevron("arrow-left-02-linear") }
                     Text(neighbour.englishName)
                         .lineLimit(1)
                         .minimumScaleFactor(0.8)
-                    if isNext { Image(systemName: "chevron.right") }
+                    if isNext { chevron("arrow-right-02-linear") }
                 }
                 .font(.bodyMedium)
                 .foregroundStyle(.textPrimary)
@@ -47,5 +47,11 @@ struct SurahEndNavigationView: View {
         }
         .buttonStyle(.plain)
         .accessibilityLabel("\(isNext ? "Next" : "Previous") surah, \(neighbour.englishName)")
+    }
+
+    private func chevron(_ name: String) -> some View {
+        Image(name)
+            .resizable()
+            .frame(width: 16, height: 16)
     }
 }

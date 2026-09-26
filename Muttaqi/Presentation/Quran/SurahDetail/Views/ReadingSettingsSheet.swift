@@ -41,8 +41,9 @@ struct ReadingSettingsSheet: View {
                     Button {
                         settingsViewModel.decreaseFontSize()
                     } label: {
-                        Image(systemName: "minus.circle.fill")
-                            .font(.title2)
+                        Image("minus-circle-bold")
+                            .resizable()
+                            .frame(width: 28, height: 28)
                             .foregroundStyle(.appPrimary)
                     }
 
@@ -54,8 +55,9 @@ struct ReadingSettingsSheet: View {
                     Button {
                         settingsViewModel.increaseFontSize()
                     } label: {
-                        Image(systemName: "plus.circle.fill")
-                            .font(.title2)
+                        Image("add-circle-bold")
+                            .resizable()
+                            .frame(width: 28, height: 28)
                             .foregroundStyle(.appPrimary)
                     }
                 }
@@ -78,8 +80,9 @@ struct ReadingSettingsSheet: View {
                             .font(.bodyMedium)
                             .foregroundStyle(.textPrimary)
 
-                        Image(systemName: "chevron.down")
-                            .font(.caption)
+                        Image("arrow-down-02-linear")
+                            .resizable()
+                            .frame(width: 14, height: 14)
                             .foregroundStyle(.textSecondary)
                     }
                 }

@@ -59,9 +59,9 @@ struct SurahHeaderView: View {
     private func neighbourButton(_ neighbour: Surah, isNext: Bool, action: @escaping () -> Void) -> some View {
         Button(action: action) {
             HStack(spacing: 4) {
-                if !isNext { Image(systemName: "chevron.left") }
+                if !isNext { chevron("arrow-left-02-linear") }
                 Text(neighbour.englishName)
-                if isNext { Image(systemName: "chevron.right") }
+                if isNext { chevron("arrow-right-02-linear") }
             }
             .font(.labelLarge)
             .foregroundStyle(.textSecondary)
@@ -69,5 +69,11 @@ struct SurahHeaderView: View {
             .contentShape(Rectangle())
         }
         .accessibilityLabel("\(isNext ? "Next" : "Previous") surah, \(neighbour.englishName)")
+    }
+
+    private func chevron(_ name: String) -> some View {
+        Image(name)
+            .resizable()
+            .frame(width: 16, height: 16)
     }
 }
