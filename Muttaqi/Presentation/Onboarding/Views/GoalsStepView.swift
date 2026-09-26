@@ -5,11 +5,6 @@ struct GoalsStepView: View {
     
     var body: some View {
         VStack {
-            Text("متقي")
-                .font(.custom("ReemKufi-Regular", size: 60))
-                .foregroundStyle(.appPrimary)
-                .padding(.top, 48)
-            
             Spacer()
             
             VStack(alignment: .leading, spacing: 0) {
