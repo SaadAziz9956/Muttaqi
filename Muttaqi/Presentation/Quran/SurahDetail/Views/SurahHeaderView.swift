@@ -27,7 +27,7 @@ struct SurahHeaderView: View {
             Button(action: onExplanation) {
                 Text("Explanation")
                     .font(.labelSmall)
-                    .foregroundStyle(.white)
+                    .foregroundStyle(.onPrimaryButton)
                     .padding(.horizontal, 30)
                     .padding(.vertical, 6)
                     .background(.primaryButton)

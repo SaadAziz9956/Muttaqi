@@ -176,7 +176,7 @@ struct QuranListView: View {
             } label: {
                 Text("Retry")
                     .font(.titleSmall)
-                    .foregroundStyle(.white)
+                    .foregroundStyle(.onPrimary)
                     .frame(width: 120, height: 40)
                     .background(.appPrimary)
                     .clipShape(Capsule())
