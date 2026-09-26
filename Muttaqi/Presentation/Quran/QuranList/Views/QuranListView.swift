@@ -2,6 +2,7 @@ import SwiftUI
 
 struct QuranListView: View {
     @State private var viewModel: QuranListViewModel
+    @State private var titleBottom: CGFloat = .infinity
     @Environment(AppRouter.self) private var router
 
     init(viewModel: QuranListViewModel) {
@@ -42,6 +43,7 @@ struct QuranListView: View {
                 Text("The Quran")
                     .font(.custom("ReemKufi-Bold", size: 32))
                     .foregroundStyle(.appPrimary)
+                    .onGeometryChange(for: CGFloat.self) { $0.frame(in: .global).maxY } action: { titleBottom = $0 }
                     .padding(.top, 24)
 
                 headerSection
@@ -53,11 +55,7 @@ struct QuranListView: View {
             .padding(.horizontal, 16)
         }
         .navigationBarTitleDisplayMode(.inline)
-        .toolbar {
-            ToolbarItem(placement: .principal) {
-                EmptyView()
-            }
-        }
+        .collapsingBarTitle("The Quran", titleBottom: titleBottom)
     }
 
     // MARK: - Header

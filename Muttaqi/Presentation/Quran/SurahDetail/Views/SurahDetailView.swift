@@ -3,8 +3,7 @@ import SwiftUI
 struct SurahDetailView: View {
     @State private var coordinator: SurahDetailCoordinator
     @State private var contentWidth: CGFloat = 0
-    @State private var scrollTop: CGFloat = 0
-    @State private var showsBarTitle = false
+    @State private var titleBottom: CGFloat = .infinity
     @Environment(\.dismiss) private var dismiss
 
     init(coordinator: SurahDetailCoordinator) {
@@ -24,10 +23,7 @@ struct SurahDetailView: View {
                         onExplanation: {
                             coordinator.toggleTafsir()
                         },
-                        // The bar title takes over once the header's title has scrolled up past the top of the page
-                        onTitleBottomChange: { titleBottom in
-                            showsBarTitle = titleBottom < scrollTop
-                        }
+                        onTitleBottomChange: { titleBottom = $0 }
                     )
 
                     contentView
@@ -37,11 +33,8 @@ struct SurahDetailView: View {
             .id(coordinator.navigator.currentSurah.value)
             .transition(SurahSlideTransition(navigator: coordinator.navigator, width: contentWidth))
         }
-        .onGeometryChange(for: CGRect.self) { $0.frame(in: .global) } action: { frame in
-            contentWidth = frame.width
-            scrollTop = frame.minY
-        }
-        .animation(.easeInOut(duration: 0.2), value: showsBarTitle)
+        .onGeometryChange(for: CGFloat.self) { $0.size.width } action: { contentWidth = $0 }
+        .collapsingBarTitle(coordinator.headerSurah?.englishName ?? "", titleBottom: titleBottom)
         .navigationBarBackButtonHidden(true)
         .background(SwipeBackEnabler())
         .toolbar(.hidden, for: .tabBar)
@@ -52,13 +45,6 @@ struct SurahDetailView: View {
                         .font(.system(size: 17, weight: .semibold))
                         .foregroundStyle(.textPrimary)
                 }
-            }
-            ToolbarItem(placement: .principal) {
-                Text(coordinator.headerSurah?.englishName ?? "")
-                    .font(.titleMedium)
-                    .foregroundStyle(.appPrimary)
-                    .lineLimit(1)
-                    .opacity(showsBarTitle ? 1 : 0)
             }
             ToolbarItem(placement: .navigationBarTrailing) {
                 Button { coordinator.toggleSettings() } label: {
