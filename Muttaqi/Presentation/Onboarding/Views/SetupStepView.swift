@@ -61,7 +61,7 @@ struct SetupStepView: View {
             Button(action: onRetry) {
                 Text("Retry")
                     .font(.titleSmall)
-                    .foregroundStyle(.white)
+                    .foregroundStyle(.onPrimary)
                     .frame(width: 160, height: 48)
                     .background(.appPrimary)
                     .clipShape(Capsule())

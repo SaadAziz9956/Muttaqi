@@ -2,6 +2,8 @@ import SwiftUI
 
 struct SurahDetailView: View {
     @State private var coordinator: SurahDetailCoordinator
+    @State private var contentWidth: CGFloat = 0
+    @State private var titleBottom: CGFloat = .infinity
     @Environment(\.dismiss) private var dismiss
 
     init(coordinator: SurahDetailCoordinator) {
@@ -10,44 +12,44 @@ struct SurahDetailView: View {
 
     var body: some View {
         VStack(spacing: 0) {
-            SurahHeaderView(
-                surah: coordinator.headerSurah,
-                canGoNext: coordinator.navigator.canGoNext,
-                canGoPrevious: coordinator.navigator.canGoPrevious,
-                onPrevious: {
-                    let moved = withAnimation(.easeInOut(duration: 0.35)) { coordinator.goPrevious() }
-                    if moved { Task { await coordinator.loadCurrentSurah() } }
-                },
-                onNext: {
-                    let moved = withAnimation(.easeInOut(duration: 0.35)) { coordinator.goNext() }
-                    if moved { Task { await coordinator.loadCurrentSurah() } }
-                }
-            )
-
             ScrollView {
                 LazyVStack(spacing: 0) {
+                    SurahHeaderView(
+                        surah: coordinator.headerSurah,
+                        previousSurah: coordinator.previousSurah,
+                        nextSurah: coordinator.nextSurah,
+                        onPrevious: goToPreviousSurah,
+                        onNext: goToNextSurah,
+                        onExplanation: {
+                            coordinator.toggleTafsir()
+                        },
+                        onTitleBottomChange: { titleBottom = $0 }
+                    )
+
                     contentView
                 }
                 .padding(.horizontal, 16)
             }
             .id(coordinator.navigator.currentSurah.value)
-            .transition(slideTransition)
-            .clipped()
+            .transition(SurahSlideTransition(navigator: coordinator.navigator, width: contentWidth))
         }
+        .onGeometryChange(for: CGFloat.self) { $0.size.width } action: { contentWidth = $0 }
+        .collapsingBarTitle(coordinator.headerSurah?.englishName ?? "", titleBottom: titleBottom)
         .navigationBarBackButtonHidden(true)
         .background(SwipeBackEnabler())
         .toolbar(.hidden, for: .tabBar)
         .toolbar {
             ToolbarItem(placement: .navigationBarLeading) {
                 Button { dismiss() } label: {
-                    Image(systemName: "chevron.left")
-                        .font(.system(size: 17, weight: .semibold))
+                    Image("arrow-left-02-linear")
+                        .resizable()
+                        .frame(width: 24, height: 24)
                         .foregroundStyle(.textPrimary)
                 }
             }
             ToolbarItem(placement: .navigationBarTrailing) {
                 Button { coordinator.toggleSettings() } label: {
-                    Image("ic_settings")
+                    Image("setting-4-linear")
                         .resizable()
                         .frame(width: 22, height: 22)
                         .foregroundStyle(.textPrimary)
@@ -62,6 +64,15 @@ struct SurahDetailView: View {
                 }
             )
             .presentationDetents([.medium])
+            .presentationDragIndicator(.visible)
+        }
+        .sheet(isPresented: $coordinator.showTafsir) {
+            TafsirView(
+                surah: coordinator.headerSurah,
+                viewModel: coordinator.tafsirViewModel,
+                language: coordinator.settingsViewModel.selectedLanguage
+            )
+            .presentationDetents([.large])
             .presentationDragIndicator(.visible)
         }
         .task {
@@ -99,7 +110,8 @@ struct SurahDetailView: View {
             ForEach(content.displayAyahs) { ayah in
                 AyahCardView(
                     ayah: ayah,
-                    fontSize: coordinator.settingsViewModel.fontSize
+                    fontSize: coordinator.settingsViewModel.fontSize,
+                    language: coordinator.settingsViewModel.selectedLanguage
                 )
             }
         case .arabicOnly:
@@ -108,8 +120,26 @@ struct SurahDetailView: View {
                 fontSize: coordinator.settingsViewModel.fontSize
             )
             .padding(.top, 16)
-            .padding(.bottom, 32)
         }
+
+        SurahEndNavigationView(
+            previousSurah: content.previousSurah,
+            nextSurah: content.nextSurah,
+            onPrevious: goToPreviousSurah,
+            onNext: goToNextSurah
+        )
+        .padding(.top, 24)
+        .padding(.bottom, 32)
+    }
+
+    private func goToPreviousSurah() {
+        let moved = withAnimation(.easeInOut(duration: 0.35)) { coordinator.goPrevious() }
+        if moved { Task { await coordinator.loadCurrentSurah() } }
+    }
+
+    private func goToNextSurah() {
+        let moved = withAnimation(.easeInOut(duration: 0.35)) { coordinator.goNext() }
+        if moved { Task { await coordinator.loadCurrentSurah() } }
     }
 
     private var content: SurahContentViewModel.SurahContent? {
@@ -117,21 +147,6 @@ struct SurahDetailView: View {
             return content
         }
         return nil
-    }
-
-    private var slideTransition: AnyTransition {
-        switch coordinator.navigator.navigationDirection {
-        case .forward:
-            return .asymmetric(
-                insertion: .move(edge: .trailing),
-                removal: .move(edge: .leading)
-            )
-        case .backward:
-            return .asymmetric(
-                insertion: .move(edge: .leading),
-                removal: .move(edge: .trailing)
-            )
-        }
     }
 
     private func errorView(_ error: SurahDetailError) -> some View {
@@ -156,13 +171,27 @@ struct SurahDetailView: View {
             } label: {
                 Text("Retry")
                     .font(.titleSmall)
-                    .foregroundStyle(.white)
+                    .foregroundStyle(.onPrimary)
                     .frame(width: 120, height: 40)
                     .background(.appPrimary)
                     .clipShape(Capsule())
             }
         }
         .padding(.top, 100)
+    }
+}
+
+// Slides the surah in from, and out toward, the side of the arrow that was tapped.
+// The direction is read from the navigator as the transition runs rather than captured: SwiftUI animates an outgoing
+// view with the transition from its last render, which still holds the old direction when the user switches arrows.
+private struct SurahSlideTransition: Transition {
+    let navigator: SurahNavigator
+    let width: CGFloat
+
+    func body(content: Content, phase: TransitionPhase) -> some View {
+        // Forward: the new surah enters from the trailing edge and the old one leaves by the leading edge
+        let sign: CGFloat = navigator.navigationDirection == .forward ? 1 : -1
+        content.offset(x: -phase.value * sign * width)
     }
 }
 

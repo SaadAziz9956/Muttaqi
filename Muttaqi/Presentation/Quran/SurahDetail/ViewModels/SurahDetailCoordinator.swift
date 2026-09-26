@@ -8,9 +8,14 @@ final class SurahDetailCoordinator {
     let settingsViewModel: ReadingSettingsViewModel
 
     var showSettings = false
+    var showTafsir = false
     private(set) var headerSurah: Surah?
+    private(set) var previousSurah: Surah?
+    private(set) var nextSurah: Surah?
+    private(set) var tafsirViewModel: TafsirViewModel
 
     private let syncQuranData: SyncQuranDataUseCase
+    private let fetchTafsirUseCase: FetchTafsirUseCase
 
     init(
         initialSurah: SurahNumber,
@@ -18,7 +23,8 @@ final class SurahDetailCoordinator {
         fetchSurahs: FetchSurahsUseCase,
         fetchAyahs: FetchAyahsUseCase,
         syncQuranData: SyncQuranDataUseCase,
-        readingPreferences: ReadingPreferences
+        readingPreferences: ReadingPreferences,
+        fetchTafsir: FetchTafsirUseCase
     ) {
         self.navigator = SurahNavigator(surah: initialSurah)
         self.contentViewModel = SurahContentViewModel(
@@ -27,7 +33,9 @@ final class SurahDetailCoordinator {
         )
         self.settingsViewModel = ReadingSettingsViewModel(preferences: readingPreferences)
         self.syncQuranData = syncQuranData
+        self.fetchTafsirUseCase = fetchTafsir
         self.headerSurah = headerSurah
+        self.tafsirViewModel = TafsirViewModel(fetchTafsir: fetchTafsir)
     }
 
     func onAppear() async {
@@ -35,7 +43,7 @@ final class SurahDetailCoordinator {
         await contentViewModel.loadSurah(navigator.currentSurah)
         updateHeaderSurah()
     }
-    
+
     // Synchronous: updates navigator state only. Call inside withAnimation {}.
     @discardableResult
     func goNext() -> Bool {
@@ -55,6 +63,7 @@ final class SurahDetailCoordinator {
     func loadCurrentSurah() async {
         await contentViewModel.loadSurah(navigator.currentSurah)
         updateHeaderSurah()
+        resetTafsir()
     }
 
     func retry() async {
@@ -65,13 +74,24 @@ final class SurahDetailCoordinator {
     private func updateHeaderSurah() {
         if case .loaded(let content) = contentViewModel.state {
             headerSurah = content.surah
+            previousSurah = content.previousSurah
+            nextSurah = content.nextSurah
         }
     }
-    
+
+    // Fresh view model so the tafsir reloads for the current surah and language next time it opens
+    private func resetTafsir() {
+        tafsirViewModel = TafsirViewModel(fetchTafsir: fetchTafsirUseCase)
+    }
+
     func toggleSettings() {
         showSettings.toggle()
     }
-    
+
+    func toggleTafsir() {
+        showTafsir.toggle()
+    }
+
     func selectLanguage(_ language: Language) async {
         do {
             try await settingsViewModel.selectLanguage(language) { [weak self] lang in
@@ -80,6 +100,7 @@ final class SurahDetailCoordinator {
             }
             // Reload content with new language
             await contentViewModel.loadSurah(navigator.currentSurah)
+            resetTafsir()
         } catch {
             // Handle error (could add error state to settings view model)
             print("Failed to download language: \(error)")
