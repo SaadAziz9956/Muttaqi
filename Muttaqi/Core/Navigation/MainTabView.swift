@@ -57,10 +57,12 @@ struct MainTabView: View {
                         DhikrListView(viewModel: container.makeDhikrListViewModel())
                     case .names:
                         NamesView(viewModel: container.makeNamesViewModel())
+                    case .emotions:
+                        EmotionsListView(viewModel: container.makeEmotionsViewModel())
+                    case .emotion(let id):
+                        EmotionDetailView(viewModel: container.makeEmotionsViewModel(selectedID: id))
                     case .dhikr(let dhikr):
                         DhikrCounterView(viewModel: container.makeDhikrCounterViewModel(dhikr: dhikr))
-                    case .comingSoon(let title, let icon):
-                        ComingSoonView(title: title, icon: icon)
                     }
                 }
         case .explore: Text("Explore")
