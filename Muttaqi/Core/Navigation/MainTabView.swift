@@ -62,7 +62,16 @@ struct MainTabView: View {
                         SurahDetailView(coordinator: container.makeSurahDetailCoordinator(surah: surah, startAyah: startAyah))
                     }
                 }
-        case .dua: Text("Dua")
+        case .dua:
+            DuaListView(viewModel: container.makeDuaListViewModel())
+                .navigationDestination(for: AppRouter.DuaDestination.self) { dest in
+                    switch dest {
+                    case .category(let category):
+                        DuaCategoryView(category: category)
+                    case .chapter(let chapter):
+                        DuaChapterView(chapter: chapter)
+                    }
+                }
         }
     }
 
