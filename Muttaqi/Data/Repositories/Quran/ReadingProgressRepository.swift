@@ -22,7 +22,7 @@ actor ReadingProgressRepository: ReadingProgressRepositoryProtocol {
     func updateProgress(
         surahNumber: Int,
         lastAyahNumber: Int,
-        completedAyahs: Int,
+        readAyahs: Set<Int>,
         totalAyahs: Int
     ) async throws {
         let descriptor = FetchDescriptor<ReadingProgressEntity>(
@@ -30,20 +30,26 @@ actor ReadingProgressRepository: ReadingProgressRepositoryProtocol {
         )
         if let existing = try modelContext.fetch(descriptor).first {
             existing.lastAyahNumber = lastAyahNumber
-            // Completion only moves forward, so scrolling back to re-read an ayah doesn't lower it
-            existing.completedAyahs = max(existing.completedAyahs, completedAyahs)
+            // A union, so re-reading an ayah never counts it twice and skipping around never loses any
+            let merged = Set(existing.readAyahs).union(readAyahs).sorted()
+            existing.readAyahs = merged
+            existing.completedAyahs = merged.count
             existing.totalAyahs = totalAyahs
             existing.lastReadAt = .now
         } else {
             let entity = ReadingProgressEntity(
                 surahNumber: surahNumber,
                 lastAyahNumber: lastAyahNumber,
-                completedAyahs: completedAyahs,
+                readAyahs: readAyahs.sorted(),
                 totalAyahs: totalAyahs
             )
             modelContext.insert(entity)
         }
         try modelContext.save()
+    }
+
+    func totalAyahsRead() async throws -> Int {
+        try modelContext.fetch(FetchDescriptor<ReadingProgressEntity>()).reduce(0) { $0 + $1.readAyahs.count }
     }
 }
 
