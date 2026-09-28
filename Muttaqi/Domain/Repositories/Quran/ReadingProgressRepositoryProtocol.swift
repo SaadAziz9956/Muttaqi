@@ -10,6 +10,4 @@ protocol ReadingProgressRepositoryProtocol: Sendable {
         readAyahs: Set<Int>,
         totalAyahs: Int
     ) async throws
-    /// Distinct ayahs read across the whole Quran
-    func totalAyahsRead() async throws -> Int
 }

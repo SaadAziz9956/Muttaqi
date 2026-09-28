@@ -47,10 +47,6 @@ actor ReadingProgressRepository: ReadingProgressRepositoryProtocol {
         }
         try modelContext.save()
     }
-
-    func totalAyahsRead() async throws -> Int {
-        try modelContext.fetch(FetchDescriptor<ReadingProgressEntity>()).reduce(0) { $0 + $1.readAyahs.count }
-    }
 }
 
 private extension ReadingProgressEntity {
