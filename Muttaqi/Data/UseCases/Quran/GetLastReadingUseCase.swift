@@ -19,16 +19,12 @@ struct GetLastReadingUseCase: Sendable {
         guard let surah = try await quranRepository.getSurah(number: entity.surahNumber) else {
             return nil
         }
-        // The Quran's size comes from the stored surahs (6,236 ayahs) rather than a hard-coded number
-        let quranTotal = try await quranRepository.getSurahs().reduce(0) { $0 + $1.numberOfAyahs }
         return ReadingProgress(
             surahNumber: entity.surahNumber,
             surahName: surah.name,
             surahEnglishName: surah.englishName,
             lastAyahNumber: entity.lastAyahNumber,
-            lastReadAt: entity.lastReadAt,
-            quranAyahsRead: try await progressRepository.totalAyahsRead(),
-            quranTotalAyahs: quranTotal
+            lastReadAt: entity.lastReadAt
         )
     }
 }

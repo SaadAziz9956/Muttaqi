@@ -82,46 +82,27 @@ struct QuranListView: View {
     @ViewBuilder
     private var continueReadingCard: some View {
         if let progress = viewModel.readingProgress {
-            // Completion of the whole Quran, not just the current surah
-            let completed = progress.quranCompletion
-            let completedText = Self.completionText(completed)
-
             Button {
                 viewModel.send(.continueTapped)
             } label: {
-                VStack(alignment: .leading, spacing: 0) {
-                    HStack(alignment: .top) {
-                        VStack(alignment: .leading, spacing: 2) {
-                            Text("Surah \(progress.surahEnglishName)")
-                                .font(.bodyLarge)
-                                .foregroundStyle(.brandTeal)
-                            Text("Ayah: \(progress.lastAyahNumber)")
-                                .font(.labelSmall)
-                                .foregroundStyle(.textSecondary)
-                        }
-
-                        Spacer()
-
-                        Text("Continue")
-                            .font(.bodySmall)
+                HStack {
+                    VStack(alignment: .leading, spacing: 2) {
+                        Text("Surah \(progress.surahEnglishName)")
+                            .font(.bodyLarge)
                             .foregroundStyle(.brandTeal)
-                            .padding(.horizontal, 20)
-                            .padding(.vertical, 8)
-                            .background(Color(.systemBackground), in: .rect(cornerRadius: 8))
+                        Text("Ayah: \(progress.lastAyahNumber)")
+                            .font(.labelSmall)
+                            .foregroundStyle(.textSecondary)
                     }
 
-                    HStack {
-                        Text("Completed")
-                        Spacer()
-                        Text(completedText)
-                    }
-                    .font(.bodyMedium)
-                    .foregroundStyle(.textPrimary)
-                    .padding(.top, 20)
+                    Spacer()
 
-                    ProgressView(value: completed)
-                        .tint(.brandTeal)
-                        .padding(.top, 10)
+                    Text("Continue")
+                        .font(.bodySmall)
+                        .foregroundStyle(.brandTeal)
+                        .padding(.horizontal, 20)
+                        .padding(.vertical, 8)
+                        .background(Color(.systemBackground), in: .rect(cornerRadius: 8))
                 }
                 .padding(20)
                 .background(Color.brandTeal.opacity(0.12), in: .rect(cornerRadius: 16))
@@ -129,20 +110,9 @@ struct QuranListView: View {
             .buttonStyle(.plain)
             .accessibilityElement(children: .ignore)
             .accessibilityLabel("Continue reading Surah \(progress.surahEnglishName), ayah \(progress.lastAyahNumber)")
-            .accessibilityValue("\(completedText) of the Quran completed, \(progress.quranAyahsLeft.formatted()) ayahs left")
             .accessibilityAddTraits(.isButton)
             .padding(.bottom, 24)
             .transition(.opacity)
-        }
-    }
-
-    /// One ayah is 0.016% of the Quran, so small values keep a decimal instead of sitting at "0%" for weeks
-    private static func completionText(_ completion: Double) -> String {
-        switch completion {
-        case 0: return 0.0.formatted(.percent.precision(.fractionLength(0)))
-        case ..<0.001: return "< " + 0.001.formatted(.percent.precision(.fractionLength(1)))
-        case ..<0.1: return completion.formatted(.percent.precision(.fractionLength(1)))
-        default: return completion.formatted(.percent.precision(.fractionLength(0)))
         }
     }
 
