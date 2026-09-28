@@ -38,7 +38,7 @@ struct HomeView: View {
                         case .journal: router.pushHome(.journal)
                         case .dikr: router.pushHome(.dhikrList)
                         case .names: router.pushHome(.names)
-                        default: router.pushHome(.comingSoon(title: action.title, icon: action.icon))
+                        case .emotions: router.pushHome(.emotions)
                         }
                     }
                     .padding(.top, 40)

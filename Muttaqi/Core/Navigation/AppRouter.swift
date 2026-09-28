@@ -16,10 +16,11 @@ final class AppRouter {
         case journalEntry(JournalEntry)
         case dhikrList
         case names
+        case emotions
+        /// One emotion's page, opened at that emotion's tab
+        case emotion(id: String)
         /// One dhikr with its counter
         case dhikr(Dhikr)
-        /// A home shortcut whose feature isn't built yet
-        case comingSoon(title: String, icon: String)
     }
     
     enum ExploreDestination: Hashable {

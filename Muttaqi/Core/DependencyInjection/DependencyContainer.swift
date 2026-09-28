@@ -42,6 +42,7 @@ final class DependencyContainer {
     private lazy var dhikrRepo: DhikrRepositoryProtocol = BundledDhikrRepository()
     private lazy var dhikrProgress: DhikrProgressStoring = DhikrProgressStore()
     private lazy var namesRepo: NamesRepositoryProtocol = BundledNamesRepository()
+    private lazy var emotionsRepo: EmotionsRepositoryProtocol = BundledEmotionsRepository(duaRepository: duaRepo)
 
     // MARK: - Shared State
     // One store for the journal list and the entry screen, so an edit shows in the list straight away
@@ -148,6 +149,13 @@ final class DependencyContainer {
         NamesViewModel(
             getNames: GetAllahNamesUseCase(repository: namesRepo, languagePreferences: readingPreferences),
             languagePreferences: readingPreferences
+        )
+    }
+
+    func makeEmotionsViewModel(selectedID: String? = nil) -> EmotionsViewModel {
+        EmotionsViewModel(
+            getEmotions: GetEmotionsUseCase(repository: emotionsRepo, languagePreferences: readingPreferences),
+            selectedID: selectedID
         )
     }
 
