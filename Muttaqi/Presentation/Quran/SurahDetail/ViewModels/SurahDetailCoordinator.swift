@@ -19,7 +19,11 @@ final class SurahDetailCoordinator {
     private let syncQuranData: SyncQuranDataUseCase
     private let fetchTafsirUseCase: FetchTafsirUseCase
     private let updateReadingProgress: UpdateReadingProgressUseCase
-    private var pendingProgress: (surah: Int, lastAyah: Int, reachedAyah: Int, totalAyahs: Int)?
+    private var pendingProgress: (surah: Int, lastAyah: Int, readAyahs: Set<Int>, totalAyahs: Int)?
+    /// Ayahs of the current surah that have been on screen since it was opened
+    private var sessionReadAyahs: Set<Int> = []
+    /// The scroll-target IDs on screen now, kept even while jumping so they can be counted once it lands
+    private var currentVisibleIDs: [Int] = []
     private var saveProgressTask: Task<Void, Never>?
 
     init(
@@ -71,6 +75,8 @@ final class SurahDetailCoordinator {
     // Async: loads content for the current surah after navigation.
     func loadCurrentSurah() async {
         saveProgressNow()
+        sessionReadAyahs = []
+        currentVisibleIDs = []
         pendingStartAyah = nil
         await contentViewModel.loadSurah(navigator.currentSurah)
         updateHeaderSurah()
@@ -99,28 +105,35 @@ final class SurahDetailCoordinator {
 
     func didScrollToStartAyah() {
         pendingStartAyah = nil
+        // The screen the jump lands on only reports a visibility change once the reader scrolls, so count it now
+        recordVisible(currentVisibleIDs)
     }
 
     /// Records what's on screen. `visibleIDs` are the scroll-target IDs: an ayah's `id` in translation mode,
     /// and the `id` of each Mushaf page's first ayah in Arabic Only mode.
     func recordVisible(_ visibleIDs: [Int]) {
+        currentVisibleIDs = visibleIDs
         // Ignore what scrolls past while jumping to the saved position, or it would overwrite that position
         guard pendingStartAyah == nil, case .loaded(let content) = contentViewModel.state else { return }
         let visible = content.displayAyahs.filter { visibleIDs.contains($0.id) }
         guard let first = visible.min(by: { $0.numberInSurah < $1.numberInSurah }) else { return }
 
-        // The furthest ayah on screen: in Arabic Only mode a visible page shows every ayah up to its last one
-        let reached: Int
+        // Every ayah on screen counts as read; in Arabic Only mode a visible page shows all of its ayahs
+        var onScreen: Set<Int>
         switch settingsViewModel.readingMode {
         case .withTranslation:
-            reached = visible.map(\.numberInSurah).max() ?? first.numberInSurah
+            onScreen = Set(visible.map(\.numberInSurah))
         case .arabicOnly:
             let visiblePages = Set(visible.map(\.page))
-            reached = content.displayAyahs.filter { visiblePages.contains($0.page) }.map(\.numberInSurah).max()
-                ?? first.numberInSurah
+            onScreen = Set(content.displayAyahs.filter { visiblePages.contains($0.page) }.map(\.numberInSurah))
         }
+        // Al-Fatiha's first ayah is the Bismillah, shown above the list rather than as its own card
+        if content.surah.number == 1, first.numberInSurah <= 3 {
+            onScreen.insert(1)
+        }
+        sessionReadAyahs.formUnion(onScreen)
 
-        pendingProgress = (content.surah.number, first.numberInSurah, reached, content.surah.numberOfAyahs)
+        pendingProgress = (content.surah.number, first.numberInSurah, sessionReadAyahs, content.surah.numberOfAyahs)
         // Saved once scrolling settles rather than on every frame
         saveProgressTask?.cancel()
         saveProgressTask = Task { [weak self] in
@@ -140,7 +153,7 @@ final class SurahDetailCoordinator {
             try? await useCase.execute(
                 surahNumber: progress.surah,
                 lastAyahNumber: progress.lastAyah,
-                completedAyahs: progress.reachedAyah,
+                readAyahs: progress.readAyahs,
                 totalAyahs: progress.totalAyahs
             )
         }

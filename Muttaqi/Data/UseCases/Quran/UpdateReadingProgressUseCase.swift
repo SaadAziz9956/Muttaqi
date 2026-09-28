@@ -10,13 +10,13 @@ struct UpdateReadingProgressUseCase: Sendable {
     func execute(
         surahNumber: Int,
         lastAyahNumber: Int,
-        completedAyahs: Int,
+        readAyahs: Set<Int>,
         totalAyahs: Int
     ) async throws {
         try await repository.updateProgress(
             surahNumber: surahNumber,
             lastAyahNumber: lastAyahNumber,
-            completedAyahs: completedAyahs,
+            readAyahs: readAyahs,
             totalAyahs: totalAyahs
         )
     }

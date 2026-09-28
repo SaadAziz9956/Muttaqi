@@ -82,7 +82,9 @@ struct QuranListView: View {
     @ViewBuilder
     private var continueReadingCard: some View {
         if let progress = viewModel.readingProgress {
-            let completed = min(max(progress.progressPercentage / 100, 0), 1)
+            // Completion of the whole Quran, not just the current surah
+            let completed = progress.quranCompletion
+            let completedText = Self.completionText(completed)
 
             Button {
                 viewModel.send(.continueTapped)
@@ -111,7 +113,7 @@ struct QuranListView: View {
                     HStack {
                         Text("Completed")
                         Spacer()
-                        Text(completed, format: .percent.precision(.fractionLength(0)))
+                        Text(completedText)
                     }
                     .font(.bodyMedium)
                     .foregroundStyle(.textPrimary)
@@ -127,10 +129,20 @@ struct QuranListView: View {
             .buttonStyle(.plain)
             .accessibilityElement(children: .ignore)
             .accessibilityLabel("Continue reading Surah \(progress.surahEnglishName), ayah \(progress.lastAyahNumber)")
-            .accessibilityValue("\(completed.formatted(.percent.precision(.fractionLength(0)))) completed")
+            .accessibilityValue("\(completedText) of the Quran completed, \(progress.quranAyahsLeft.formatted()) ayahs left")
             .accessibilityAddTraits(.isButton)
             .padding(.bottom, 24)
             .transition(.opacity)
+        }
+    }
+
+    /// One ayah is 0.016% of the Quran, so small values keep a decimal instead of sitting at "0%" for weeks
+    private static func completionText(_ completion: Double) -> String {
+        switch completion {
+        case 0: return 0.0.formatted(.percent.precision(.fractionLength(0)))
+        case ..<0.001: return "< " + 0.001.formatted(.percent.precision(.fractionLength(1)))
+        case ..<0.1: return completion.formatted(.percent.precision(.fractionLength(1)))
+        default: return completion.formatted(.percent.precision(.fractionLength(0)))
         }
     }
 
