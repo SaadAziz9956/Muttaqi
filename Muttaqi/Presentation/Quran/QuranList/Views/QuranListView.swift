@@ -41,7 +41,7 @@ struct QuranListView: View {
             LazyVStack(spacing: 0) {
                 // Custom title
                 Text("The Quran")
-                    .font(.custom("ReemKufi-Bold", size: 32))
+                    .font(.custom("ReemKufi-Regular", size: 28))
                     .foregroundStyle(.appPrimary)
                     .onGeometryChange(for: CGFloat.self) { $0.frame(in: .global).maxY } action: { titleBottom = $0 }
                     .padding(.top, 24)
@@ -62,14 +62,14 @@ struct QuranListView: View {
 
     private var headerSection: some View {
         VStack(spacing: 0) {
-            Text("The best among you [Muslims] are those who learn the Quran and teach it.")
-                .font(.bodyMedium)
-                .foregroundStyle(.textSecondary)
+            Text("“The best among you [Muslims] are those who learn the Quran and teach it.”")
+                .font(.custom("ReemKufi-Regular", size: 14))
+                .foregroundStyle(.textPrimary)
                 .multilineTextAlignment(.center)
                 .padding(.top, 8)
 
             Text("Sahih Bukhari (5027)")
-                .font(.labelMedium)
+                .font(.labelSmall)
                 .foregroundStyle(.textSecondary)
                 .padding(.top, 4)
                 .padding(.bottom, 24)
