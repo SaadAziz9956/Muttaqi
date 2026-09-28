@@ -10,7 +10,9 @@ final class AppRouter {
     var duaPath = NavigationPath()
     
     enum HomeDestination: Hashable {
-        case placeholder // Remove this when adding real destinations
+        case qibla
+        /// A home shortcut whose feature isn't built yet
+        case comingSoon(title: String, icon: String)
     }
     
     enum ExploreDestination: Hashable {
@@ -36,6 +38,13 @@ final class AppRouter {
     
     func pushQuran(_ destination: QuranDestination) {
         quranPath.append(destination)
+    }
+
+    /// Switches to the Quran tab and opens the surah at the given ayah, e.g. from the Ayah of the Day
+    func openInQuran(surah: Surah, ayah: Int) {
+        quranPath = NavigationPath()
+        quranPath.append(QuranDestination.surahDetail(surah: surah, startAyah: ayah))
+        selectedTab = .quran
     }
     
     func pushDua(_ destination: DuaDestination) {

@@ -12,6 +12,7 @@ final class DependencyContainer {
     private lazy var networkClient: NetworkClientProtocol = NetworkClient()
     private lazy var apiService: QuranAPIServiceProtocol = QuranAPIService(networkClient: networkClient)
     private lazy var tafsirAPIService: TafsirAPIServiceProtocol = TafsirAPIService(networkClient: networkClient)
+    private lazy var locationService: LocationServiceProtocol = LocationService()
 
     // MARK: - Repositories
     private lazy var syncRepo: QuranSyncRepositoryProtocol = QuranSyncRepository(
@@ -27,6 +28,13 @@ final class DependencyContainer {
     private lazy var tafsirRepo: TafsirRepositoryProtocol = TafsirRepository(
         modelContainer: modelContainer,
         apiService: tafsirAPIService
+    )
+    // Karachi method with Hanafi Asr by default
+    private lazy var prayerTimesRepo: PrayerTimesRepositoryProtocol = AdhanPrayerTimesRepository()
+    private lazy var duaRepo: DuaRepositoryProtocol = BundledDuaRepository()
+    private lazy var locationRepo: LocationRepositoryProtocol = LocationRepository(
+        service: locationService,
+        preferences: userPreferences
     )
 
     // MARK: - Use Cases
@@ -51,6 +59,10 @@ final class DependencyContainer {
     private lazy var updateReadingProgressUseCase = UpdateReadingProgressUseCase(
         repository: readingProgressRepo
     )
+    private lazy var fetchAyahUseCase = FetchAyahUseCase(
+        repository: quranRepo,
+        languagePreferences: readingPreferences
+    )
 
     init() {
         do {
@@ -71,6 +83,24 @@ final class DependencyContainer {
             notificationService: NotificationService(),
             locationService: LocationService(),
             syncQuranDataUseCase: syncQuranDataUseCase
+        )
+    }
+
+    func makeHomeViewModel() -> HomeViewModel {
+        HomeViewModel(
+            location: locationRepo,
+            getPrayerSchedule: GetPrayerScheduleUseCase(repository: prayerTimesRepo),
+            fetchAyah: fetchAyahUseCase,
+            getAyahOfTheDay: GetAyahOfTheDayUseCase(fetchAyah: fetchAyahUseCase),
+            getDuaOfTheDay: GetDuaOfTheDayUseCase(repository: duaRepo, languagePreferences: readingPreferences)
+        )
+    }
+
+    func makeQiblaViewModel() -> QiblaViewModel {
+        QiblaViewModel(
+            location: locationRepo,
+            compass: CompassService(),
+            getQiblaDirection: GetQiblaDirectionUseCase(repository: prayerTimesRepo)
         )
     }
 

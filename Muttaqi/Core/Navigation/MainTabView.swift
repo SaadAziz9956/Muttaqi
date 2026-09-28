@@ -43,7 +43,16 @@ struct MainTabView: View {
     @ViewBuilder
     private func tabContent(for tab: AppTab) -> some View {
         switch tab {
-        case .home: Text("Home")
+        case .home:
+            HomeView(viewModel: container.makeHomeViewModel())
+                .navigationDestination(for: AppRouter.HomeDestination.self) { dest in
+                    switch dest {
+                    case .qibla:
+                        QiblaView(viewModel: container.makeQiblaViewModel())
+                    case .comingSoon(let title, let icon):
+                        ComingSoonView(title: title, icon: icon)
+                    }
+                }
         case .explore: Text("Explore")
         case .quran:
             QuranListView(viewModel: container.makeQuranListViewModel())
