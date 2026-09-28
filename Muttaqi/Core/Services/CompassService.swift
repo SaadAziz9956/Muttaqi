@@ -12,29 +12,47 @@ protocol CompassServiceProtocol: Sendable {
     func headings() -> AsyncStream<CompassHeading>
 }
 
-final class CompassService: NSObject, CompassServiceProtocol, CLLocationManagerDelegate {
-    private let manager = CLLocationManager()
-    private var continuation: AsyncStream<CompassHeading>.Continuation?
-
+struct CompassService: CompassServiceProtocol {
     var isAvailable: Bool {
         CLLocationManager.headingAvailable()
     }
 
     func headings() -> AsyncStream<CompassHeading> {
         AsyncStream { continuation in
-            self.continuation = continuation
-            manager.delegate = self
-            manager.headingFilter = 1
-            manager.startUpdatingHeading()
+            // Each stream has its own location manager, so an old stream finishing can never stop a newer one
+            let tracker = HeadingTracker(continuation: continuation)
             // Stops the compass once whoever is reading the stream goes away
             continuation.onTermination = { _ in
-                Task { @MainActor [weak self] in self?.manager.stopUpdatingHeading() }
+                Task { @MainActor in tracker.stop() }
             }
         }
+    }
+}
+
+private final class HeadingTracker: NSObject, CLLocationManagerDelegate {
+    private let manager = CLLocationManager()
+    private let continuation: AsyncStream<CompassHeading>.Continuation
+
+    init(continuation: AsyncStream<CompassHeading>.Continuation) {
+        self.continuation = continuation
+        super.init()
+        manager.delegate = self
+        manager.headingFilter = 1
+        // Core Location only reports true north while this manager also has a location; a rough one is enough
+        if [.authorizedWhenInUse, .authorizedAlways].contains(manager.authorizationStatus) {
+            manager.desiredAccuracy = kCLLocationAccuracyThreeKilometers
+            manager.startUpdatingLocation()
+        }
+        manager.startUpdatingHeading()
+    }
+
+    func stop() {
+        manager.stopUpdatingHeading()
+        manager.stopUpdatingLocation()
     }
 
     func locationManager(_ manager: CLLocationManager, didUpdateHeading newHeading: CLHeading) {
         let degrees = newHeading.trueHeading >= 0 ? newHeading.trueHeading : newHeading.magneticHeading
-        continuation?.yield(CompassHeading(degrees: degrees, accuracy: newHeading.headingAccuracy))
+        continuation.yield(CompassHeading(degrees: degrees, accuracy: newHeading.headingAccuracy))
     }
 }

@@ -9,7 +9,9 @@ struct QiblaView: View {
     }
 
     var body: some View {
-        Group {
+        // A ZStack rather than a Group: modifiers on a Group attach to each branch, so switching from loading
+        // to the compass would restart the tasks below
+        ZStack {
             switch viewModel.state {
             case .locating:
                 ProgressView()
