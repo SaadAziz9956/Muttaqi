@@ -1,4 +1,4 @@
-import Foundation
+import SwiftUI
 
 @Observable
 @MainActor
@@ -38,7 +38,8 @@ final class QuranListViewModel {
     func send(_ intent: Intent) {
         switch intent {
         case .onAppear:
-            guard state == .idle else { return }
+            // Coming back from a surah: the list is already loaded, only the reading position has moved
+            guard state == .idle else { return refreshProgress() }
             loadData()
         case .retry:
             loadData()
@@ -48,6 +49,13 @@ final class QuranListViewModel {
             guard let progress = readingProgress,
                   let surah = surahs.first(where: { $0.number == progress.surahNumber }) else { return }
             onContinueReading?(surah, progress.lastAyahNumber)
+        }
+    }
+
+    private func refreshProgress() {
+        Task {
+            guard let progress = try? await getLastReadingUseCase.execute(), progress != readingProgress else { return }
+            withAnimation(.smooth) { readingProgress = progress }
         }
     }
 

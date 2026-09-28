@@ -12,26 +12,46 @@ struct SurahDetailView: View {
 
     var body: some View {
         VStack(spacing: 0) {
-            ScrollView {
-                LazyVStack(spacing: 0) {
-                    SurahHeaderView(
-                        surah: coordinator.headerSurah,
-                        previousSurah: coordinator.previousSurah,
-                        nextSurah: coordinator.nextSurah,
-                        onPrevious: goToPreviousSurah,
-                        onNext: goToNextSurah,
-                        onExplanation: {
-                            coordinator.toggleTafsir()
-                        },
-                        onTitleBottomChange: { titleBottom = $0 }
-                    )
+            ScrollViewReader { proxy in
+                ScrollView {
+                    LazyVStack(spacing: 0) {
+                        SurahHeaderView(
+                            surah: coordinator.headerSurah,
+                            previousSurah: coordinator.previousSurah,
+                            nextSurah: coordinator.nextSurah,
+                            onPrevious: goToPreviousSurah,
+                            onNext: goToNextSurah,
+                            onExplanation: {
+                                coordinator.toggleTafsir()
+                            },
+                            onTitleBottomChange: { titleBottom = $0 }
+                        )
 
-                    contentView
+                        contentView
+                    }
+                    .scrollTargetLayout()
+                    .padding(.horizontal, 16)
                 }
-                .padding(.horizontal, 16)
+                // Ayahs (or Mushaf pages) at least a fifth on screen count as read
+                .onScrollTargetVisibilityChange(idType: Int.self, threshold: 0.2) { visibleIDs in
+                    coordinator.recordVisible(visibleIDs)
+                }
+                .task(id: startScrollTarget) {
+                    guard let target = startScrollTarget else { return }
+                    // Ayah cards are laid out lazily, so the first jump uses estimated heights and can land an ayah
+                    // off; once the cards around the target are laid out, a second jump lands exactly
+                    proxy.scrollTo(target, anchor: .top)
+                    try? await Task.sleep(for: .milliseconds(300))
+                    proxy.scrollTo(target, anchor: .top)
+                    try? await Task.sleep(for: .milliseconds(300))
+                    coordinator.didScrollToStartAyah()
+                }
             }
             .id(coordinator.navigator.currentSurah.value)
             .transition(SurahSlideTransition(navigator: coordinator.navigator, width: contentWidth))
+        }
+        .onDisappear {
+            coordinator.saveProgressNow()
         }
         .onGeometryChange(for: CGFloat.self) { $0.size.width } action: { contentWidth = $0 }
         .collapsingBarTitle(coordinator.headerSurah?.englishName ?? "", titleBottom: titleBottom)
@@ -77,6 +97,19 @@ struct SurahDetailView: View {
         }
         .task {
             await coordinator.onAppear()
+        }
+    }
+
+    /// Scroll ID for the ayah the reader is continuing from: the ayah itself, or its Mushaf page in Arabic Only mode
+    private var startScrollTarget: Int? {
+        guard let startAyah = coordinator.pendingStartAyah,
+              case .loaded(let content) = coordinator.contentViewModel.state,
+              let ayah = content.displayAyahs.first(where: { $0.numberInSurah == startAyah }) else { return nil }
+        switch coordinator.settingsViewModel.readingMode {
+        case .withTranslation:
+            return ayah.id
+        case .arabicOnly:
+            return content.displayAyahs.first(where: { $0.page == ayah.page })?.id
         }
     }
 

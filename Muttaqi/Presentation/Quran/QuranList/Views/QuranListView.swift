@@ -28,8 +28,8 @@ struct QuranListView: View {
             viewModel.onSurahSelected = { surah in
                 router.push(AppRouter.QuranDestination.surahDetail(surah: surah))
             }
-            viewModel.onContinueReading = { surah, _ in
-                router.push(AppRouter.QuranDestination.surahDetail(surah: surah))
+            viewModel.onContinueReading = { surah, ayah in
+                router.push(AppRouter.QuranDestination.surahDetail(surah: surah, startAyah: ayah))
             }
         }
     }
@@ -41,7 +41,7 @@ struct QuranListView: View {
             LazyVStack(spacing: 0) {
                 // Custom title
                 Text("The Quran")
-                    .font(.custom("ReemKufi-Bold", size: 32))
+                    .font(.custom("ReemKufi-Regular", size: 28))
                     .foregroundStyle(.appPrimary)
                     .onGeometryChange(for: CGFloat.self) { $0.frame(in: .global).maxY } action: { titleBottom = $0 }
                     .padding(.top, 24)
@@ -62,14 +62,14 @@ struct QuranListView: View {
 
     private var headerSection: some View {
         VStack(spacing: 0) {
-            Text("The best among you [Muslims] are those who learn the Quran and teach it.")
-                .font(.bodyMedium)
-                .foregroundStyle(.textSecondary)
+            Text("“The best among you [Muslims] are those who learn the Quran and teach it.”")
+                .font(.custom("ReemKufi-Regular", size: 14))
+                .foregroundStyle(.textPrimary)
                 .multilineTextAlignment(.center)
                 .padding(.top, 8)
 
             Text("Sahih Bukhari (5027)")
-                .font(.labelMedium)
+                .font(.labelSmall)
                 .foregroundStyle(.textSecondary)
                 .padding(.top, 4)
                 .padding(.bottom, 24)
@@ -78,64 +78,59 @@ struct QuranListView: View {
 
     // MARK: - Continue Reading Card
 
+    // The whole card is one button, so it can be tapped anywhere and VoiceOver reads it as a single control
+    @ViewBuilder
     private var continueReadingCard: some View {
-        Group {
-            if let progress = viewModel.readingProgress {
+        if let progress = viewModel.readingProgress {
+            let completed = min(max(progress.progressPercentage / 100, 0), 1)
+
+            Button {
+                viewModel.send(.continueTapped)
+            } label: {
                 VStack(alignment: .leading, spacing: 0) {
-                    HStack {
+                    HStack(alignment: .top) {
                         VStack(alignment: .leading, spacing: 2) {
                             Text("Surah \(progress.surahEnglishName)")
-                                .font(.titleSmall)
-                                .foregroundStyle(.appPrimary)
+                                .font(.bodyLarge)
+                                .foregroundStyle(.brandTeal)
                             Text("Ayah: \(progress.lastAyahNumber)")
-                                .font(.bodySmall)
+                                .font(.labelSmall)
                                 .foregroundStyle(.textSecondary)
                         }
+
                         Spacer()
-                        Button {
-                            viewModel.send(.continueTapped)
-                        } label: {
-                            Text("Continue")
-                                .font(.bodyMedium)
-                                .foregroundStyle(.appPrimary)
-                                .padding(.horizontal, 16)
-                                .padding(.vertical, 8)
-                                .background(
-                                    RoundedRectangle(cornerRadius: 16)
-                                        .stroke(.appPrimary, lineWidth: 1)
-                                )
-                        }
+
+                        Text("Continue")
+                            .font(.bodySmall)
+                            .foregroundStyle(.brandTeal)
+                            .padding(.horizontal, 20)
+                            .padding(.vertical, 8)
+                            .background(Color(.systemBackground), in: .rect(cornerRadius: 8))
                     }
 
                     HStack {
                         Text("Completed")
-                            .font(.bodySmall)
-                            .foregroundStyle(.textPrimary)
                         Spacer()
-                        Text("\(Int(progress.progressPercentage)) %")
-                            .font(.bodySmall)
-                            .foregroundStyle(.textPrimary)
+                        Text(completed, format: .percent.precision(.fractionLength(0)))
                     }
-                    .padding(.top, 12)
+                    .font(.bodyMedium)
+                    .foregroundStyle(.textPrimary)
+                    .padding(.top, 20)
 
-                    GeometryReader { geo in
-                        ZStack(alignment: .leading) {
-                            RoundedRectangle(cornerRadius: 4)
-                                .fill(Color(.systemGray5))
-                                .frame(height: 8)
-                            RoundedRectangle(cornerRadius: 4)
-                                .fill(.appPrimary)
-                                .frame(width: geo.size.width * progress.progressPercentage / 100, height: 8)
-                        }
-                    }
-                    .frame(height: 8)
-                    .padding(.top, 8)
+                    ProgressView(value: completed)
+                        .tint(.brandTeal)
+                        .padding(.top, 10)
                 }
-                .padding(16)
-                .background(Color(.systemGray6))
-                .clipShape(RoundedRectangle(cornerRadius: 12))
-                .padding(.bottom, 16)
+                .padding(20)
+                .background(Color.brandTeal.opacity(0.12), in: .rect(cornerRadius: 16))
             }
+            .buttonStyle(.plain)
+            .accessibilityElement(children: .ignore)
+            .accessibilityLabel("Continue reading Surah \(progress.surahEnglishName), ayah \(progress.lastAyahNumber)")
+            .accessibilityValue("\(completed.formatted(.percent.precision(.fractionLength(0)))) completed")
+            .accessibilityAddTraits(.isButton)
+            .padding(.bottom, 24)
+            .transition(.opacity)
         }
     }
 

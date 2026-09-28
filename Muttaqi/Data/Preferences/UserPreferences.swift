@@ -5,6 +5,8 @@ protocol UserPreferencesProtocol: Sendable {
     func getUserName() -> String?
     func setOnboardingComplete(_ complete: Bool)
     func isOnboardingComplete() -> Bool
+    func setLastKnownCoordinates(_ coordinates: Coordinates)
+    func getLastKnownCoordinates() -> Coordinates?
 }
 
 final class UserPreferences: UserPreferencesProtocol, @unchecked Sendable {
@@ -13,6 +15,7 @@ final class UserPreferences: UserPreferencesProtocol, @unchecked Sendable {
     private enum Keys {
         static let userName = "user_name"
         static let onboardingComplete = "onboarding_complete"
+        static let lastKnownCoordinates = "last_known_coordinates"
     }
     
     init(defaults: UserDefaults = .standard) {
@@ -33,5 +36,14 @@ final class UserPreferences: UserPreferencesProtocol, @unchecked Sendable {
     
     func isOnboardingComplete() -> Bool {
         defaults.bool(forKey: Keys.onboardingComplete)
+    }
+
+    func setLastKnownCoordinates(_ coordinates: Coordinates) {
+        defaults.set(try? JSONEncoder().encode(coordinates), forKey: Keys.lastKnownCoordinates)
+    }
+
+    func getLastKnownCoordinates() -> Coordinates? {
+        guard let data = defaults.data(forKey: Keys.lastKnownCoordinates) else { return nil }
+        return try? JSONDecoder().decode(Coordinates.self, from: data)
     }
 }

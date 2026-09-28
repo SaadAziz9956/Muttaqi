@@ -17,6 +17,8 @@ struct SurahHeaderView: View {
                     .font(.custom("ReemKufi-Regular", size: 28))
                     .foregroundStyle(.appPrimary)
                     .onGeometryChange(for: CGFloat.self) { $0.frame(in: .global).maxY } action: { onTitleBottomChange($0) }
+                    // Jumping to an ayah far down unloads the header without a last geometry update, so report it gone
+                    .onDisappear { onTitleBottomChange(-.infinity) }
 
                 Text(subtitle)
                     .font(.bodySmall)

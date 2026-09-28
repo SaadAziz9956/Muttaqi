@@ -32,6 +32,16 @@ actor QuranRepository: QuranRepositoryProtocol {
         }
     }
 
+    func getAyah(surahNumber: Int, numberInSurah: Int, language: String) async throws -> Ayah? {
+        var descriptor = FetchDescriptor<AyahEntity>(
+            predicate: #Predicate { $0.surahNumber == surahNumber && $0.numberInSurah == numberInSurah }
+        )
+        descriptor.fetchLimit = 1
+        guard let entity = try modelContext.fetch(descriptor).first else { return nil }
+        let translation = entity.translations.first { $0.language == language }?.text
+        return entity.toDomain(translation: translation)
+    }
+
     func isDataAvailable() async -> Bool {
         let descriptor = FetchDescriptor<SurahEntity>()
         let count = (try? modelContext.fetchCount(descriptor)) ?? 0

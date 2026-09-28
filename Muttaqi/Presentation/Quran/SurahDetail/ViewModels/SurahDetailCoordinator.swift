@@ -13,19 +13,28 @@ final class SurahDetailCoordinator {
     private(set) var previousSurah: Surah?
     private(set) var nextSurah: Surah?
     private(set) var tafsirViewModel: TafsirViewModel
+    /// Ayah (number within the surah) to scroll to once the surah loads; cleared after the view has scrolled there
+    private(set) var pendingStartAyah: Int?
 
     private let syncQuranData: SyncQuranDataUseCase
     private let fetchTafsirUseCase: FetchTafsirUseCase
+    private let updateReadingProgress: UpdateReadingProgressUseCase
+    private var pendingProgress: (surah: Int, lastAyah: Int, reachedAyah: Int, totalAyahs: Int)?
+    private var saveProgressTask: Task<Void, Never>?
 
     init(
         initialSurah: SurahNumber,
         headerSurah: Surah? = nil,
+        startAyah: Int? = nil,
         fetchSurahs: FetchSurahsUseCase,
         fetchAyahs: FetchAyahsUseCase,
         syncQuranData: SyncQuranDataUseCase,
         readingPreferences: ReadingPreferences,
-        fetchTafsir: FetchTafsirUseCase
+        fetchTafsir: FetchTafsirUseCase,
+        updateReadingProgress: UpdateReadingProgressUseCase
     ) {
+        self.pendingStartAyah = startAyah
+        self.updateReadingProgress = updateReadingProgress
         self.navigator = SurahNavigator(surah: initialSurah)
         self.contentViewModel = SurahContentViewModel(
             fetchSurahs: fetchSurahs,
@@ -61,6 +70,8 @@ final class SurahDetailCoordinator {
 
     // Async: loads content for the current surah after navigation.
     func loadCurrentSurah() async {
+        saveProgressNow()
+        pendingStartAyah = nil
         await contentViewModel.loadSurah(navigator.currentSurah)
         updateHeaderSurah()
         resetTafsir()
@@ -82,6 +93,57 @@ final class SurahDetailCoordinator {
     // Fresh view model so the tafsir reloads for the current surah and language next time it opens
     private func resetTafsir() {
         tafsirViewModel = TafsirViewModel(fetchTafsir: fetchTafsirUseCase)
+    }
+
+    // MARK: - Reading progress
+
+    func didScrollToStartAyah() {
+        pendingStartAyah = nil
+    }
+
+    /// Records what's on screen. `visibleIDs` are the scroll-target IDs: an ayah's `id` in translation mode,
+    /// and the `id` of each Mushaf page's first ayah in Arabic Only mode.
+    func recordVisible(_ visibleIDs: [Int]) {
+        // Ignore what scrolls past while jumping to the saved position, or it would overwrite that position
+        guard pendingStartAyah == nil, case .loaded(let content) = contentViewModel.state else { return }
+        let visible = content.displayAyahs.filter { visibleIDs.contains($0.id) }
+        guard let first = visible.min(by: { $0.numberInSurah < $1.numberInSurah }) else { return }
+
+        // The furthest ayah on screen: in Arabic Only mode a visible page shows every ayah up to its last one
+        let reached: Int
+        switch settingsViewModel.readingMode {
+        case .withTranslation:
+            reached = visible.map(\.numberInSurah).max() ?? first.numberInSurah
+        case .arabicOnly:
+            let visiblePages = Set(visible.map(\.page))
+            reached = content.displayAyahs.filter { visiblePages.contains($0.page) }.map(\.numberInSurah).max()
+                ?? first.numberInSurah
+        }
+
+        pendingProgress = (content.surah.number, first.numberInSurah, reached, content.surah.numberOfAyahs)
+        // Saved once scrolling settles rather than on every frame
+        saveProgressTask?.cancel()
+        saveProgressTask = Task { [weak self] in
+            try? await Task.sleep(for: .seconds(1))
+            guard !Task.isCancelled else { return }
+            self?.saveProgressNow()
+        }
+    }
+
+    /// Writes any unsaved position immediately, e.g. when the reader leaves the screen
+    func saveProgressNow() {
+        saveProgressTask?.cancel()
+        guard let progress = pendingProgress else { return }
+        pendingProgress = nil
+        let useCase = updateReadingProgress
+        Task {
+            try? await useCase.execute(
+                surahNumber: progress.surah,
+                lastAyahNumber: progress.lastAyah,
+                completedAyahs: progress.reachedAyah,
+                totalAyahs: progress.totalAyahs
+            )
+        }
     }
 
     func toggleSettings() {
