@@ -49,6 +49,16 @@ struct MainTabView: View {
                     switch dest {
                     case .qibla:
                         QiblaView(viewModel: container.makeQiblaViewModel())
+                    case .journal:
+                        JournalListView(viewModel: container.makeJournalListViewModel())
+                    case .journalEntry(let entry):
+                        JournalEntryView(viewModel: container.makeJournalEntryViewModel(entry: entry))
+                    case .dhikrList:
+                        DhikrListView(viewModel: container.makeDhikrListViewModel())
+                    case .names:
+                        NamesView(viewModel: container.makeNamesViewModel())
+                    case .dhikr(let dhikr):
+                        DhikrCounterView(viewModel: container.makeDhikrCounterViewModel(dhikr: dhikr))
                     case .comingSoon(let title, let icon):
                         ComingSoonView(title: title, icon: icon)
                     }

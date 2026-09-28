@@ -40,6 +40,24 @@ extension String {
     }
 }
 
+extension AttributedString {
+    /// Arabic text in the Quran font, for text from outside the Quran such as duas and dhikr. The font has no Arabic
+    /// punctuation, since the Quran uses none, so ، ؛ ؟ would draw as dotted-circle placeholders; they're set in the
+    /// system font instead, as are ﴿ ﴾, which the font draws as large ayah ornaments.
+    static func arabic(_ text: String, size: CGFloat) -> AttributedString {
+        var styled = AttributedString(text.kfgqpcEncoded)
+        styled.font = .arabic(size)
+        for mark in ["،", "؛", "؟", "﴿", "﴾"] {
+            var searchStart = styled.startIndex
+            while let range = styled[searchStart...].range(of: mark) {
+                styled[range].font = .system(size: size * 0.9)
+                searchStart = range.upperBound
+            }
+        }
+        return styled
+    }
+}
+
 extension Font {
     static func arabic(_ size: CGFloat) -> Font {
         .custom(FontName.Arabic.regular, size: size, relativeTo: .body)

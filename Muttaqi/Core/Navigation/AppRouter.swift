@@ -11,6 +11,13 @@ final class AppRouter {
     
     enum HomeDestination: Hashable {
         case qibla
+        case journal
+        /// A journal entry to read or edit; a blank one for a new entry
+        case journalEntry(JournalEntry)
+        case dhikrList
+        case names
+        /// One dhikr with its counter
+        case dhikr(Dhikr)
         /// A home shortcut whose feature isn't built yet
         case comingSoon(title: String, icon: String)
     }

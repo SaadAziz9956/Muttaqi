@@ -61,14 +61,16 @@ struct QuranListView: View {
     // MARK: - Header
 
     private var headerSection: some View {
-        VStack(spacing: 0) {
-            Text("“The best among you [Muslims] are those who learn the Quran and teach it.”")
-                .font(.custom("ReemKufi-Regular", size: 14))
+        let quote = HadithQuote.learnAndTeachQuran.text(language: viewModel.language)
+
+        return VStack(spacing: 0) {
+            Text(quote.quoted)
+                .font(TranslationStyle(for: quote, size: 14).font)
                 .foregroundStyle(.textPrimary)
                 .multilineTextAlignment(.center)
                 .padding(.top, 8)
 
-            Text("Sahih Bukhari (5027)")
+            Text(HadithQuote.learnAndTeachQuran.source)
                 .font(.labelSmall)
                 .foregroundStyle(.textSecondary)
                 .padding(.top, 4)

@@ -26,13 +26,21 @@ final class QuranListViewModel {
 
     private let fetchSurahsUseCase: FetchSurahsUseCase
     private let getLastReadingUseCase: GetLastReadingUseCase
+    private let languagePreferences: LanguagePreferences
 
     init(
         fetchSurahsUseCase: FetchSurahsUseCase,
-        getLastReadingUseCase: GetLastReadingUseCase
+        getLastReadingUseCase: GetLastReadingUseCase,
+        languagePreferences: LanguagePreferences
     ) {
         self.fetchSurahsUseCase = fetchSurahsUseCase
         self.getLastReadingUseCase = getLastReadingUseCase
+        self.languagePreferences = languagePreferences
+    }
+
+    /// The reader's translation language, for the page's hadith
+    var language: String {
+        languagePreferences.getSelectedLanguage().code
     }
 
     func send(_ intent: Intent) {

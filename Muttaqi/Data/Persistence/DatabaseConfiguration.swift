@@ -7,7 +7,8 @@ enum DatabaseConfiguration {
         AyahEntity.self,
         AyahTranslationEntity.self,
         TafsirEntity.self,
-        ReadingProgressEntity.self
+        ReadingProgressEntity.self,
+        JournalEntryEntity.self
     ])
 
     static func makeContainer(inMemory: Bool = false) throws -> ModelContainer {

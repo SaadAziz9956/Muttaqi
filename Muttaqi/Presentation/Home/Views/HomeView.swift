@@ -33,7 +33,13 @@ struct HomeView: View {
                         .padding(.top, 34)
 
                     QuickActionsRow { action in
-                        router.pushHome(action == .qibla ? .qibla : .comingSoon(title: action.title, icon: action.icon))
+                        switch action {
+                        case .qibla: router.pushHome(.qibla)
+                        case .journal: router.pushHome(.journal)
+                        case .dikr: router.pushHome(.dhikrList)
+                        case .names: router.pushHome(.names)
+                        default: router.pushHome(.comingSoon(title: action.title, icon: action.icon))
+                        }
                     }
                     .padding(.top, 40)
 
@@ -84,7 +90,7 @@ struct HomeView: View {
 
             if let quote = viewModel.quote, let translation = quote.ayah.translation {
                 let style = TranslationStyle(for: translation, size: 14)
-                Text("\u{201C}\(translation)\u{201D}")
+                Text(translation.quoted)
                     .font(style.font)
                     .foregroundStyle(.textPrimary)
                     .multilineTextAlignment(.center)

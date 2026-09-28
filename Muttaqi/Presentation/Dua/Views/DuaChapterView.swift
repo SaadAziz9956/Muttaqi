@@ -27,6 +27,13 @@ struct DuaChapterView: View {
                 ForEach(chapter.entries) { entry in
                     DuaEntryCard(entry: entry)
                 }
+
+                // Names whose translations are shown, as their publishers ask
+                Text("Translation: " + Self.credits(for: chapter).joined(separator: ", "))
+                    .font(.system(size: 11))
+                    .foregroundStyle(.textSecondary)
+                    .multilineTextAlignment(.center)
+                    .padding(.top, 8)
             }
             .padding(.horizontal, 22)
             .padding(.bottom, 32)
@@ -34,5 +41,11 @@ struct DuaChapterView: View {
         .navigationBarTitleDisplayMode(.inline)
         .collapsingBarTitle(chapter.title, titleBottom: titleBottom)
         .toolbar(.hidden, for: .tabBar)
+    }
+
+    private static func credits(for chapter: DuaChapter) -> [String] {
+        chapter.entries.reduce(into: []) { credits, entry in
+            if !credits.contains(entry.translationCredit) { credits.append(entry.translationCredit) }
+        }
     }
 }

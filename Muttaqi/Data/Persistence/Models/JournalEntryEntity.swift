@@ -1,0 +1,19 @@
+import Foundation
+import SwiftData
+
+@Model
+final class JournalEntryEntity {
+    @Attribute(.unique) var id: UUID
+    var title: String
+    var body: String
+    var createdAt: Date
+    var updatedAt: Date
+
+    init(id: UUID, title: String, body: String, createdAt: Date, updatedAt: Date) {
+        self.id = id
+        self.title = title
+        self.body = body
+        self.createdAt = createdAt
+        self.updatedAt = updatedAt
+    }
+}
