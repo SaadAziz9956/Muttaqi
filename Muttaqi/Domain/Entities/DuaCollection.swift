@@ -12,6 +12,8 @@ struct DuaEntry: Hashable, Identifiable, Sendable {
     let source: String
     /// Full reference as the book gives it, e.g. «البخاري مع الفتح 11/113 ومسلم 4/2083»
     let reference: String
+    /// Whose translation is shown, e.g. "Saheeh International"
+    let translationCredit: String
 }
 
 /// A chapter of related duas, e.g. "What to say before sleeping"

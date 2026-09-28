@@ -63,8 +63,7 @@ struct DuaOfTheDayCard: View {
             cardTitle("Dua of the Day")
                 .frame(maxWidth: .infinity)
 
-            Text(dua.arabic.kfgqpcEncoded)
-                .font(.arabic(20))
+            Text(AttributedString.arabic(dua.arabic, size: 20))
                 .lineSpacing(10)
                 .foregroundStyle(.textPrimary)
                 .multilineTextAlignment(.trailing)

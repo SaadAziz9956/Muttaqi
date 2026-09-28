@@ -3,18 +3,8 @@ import SwiftUI
 struct DuaEntryCard: View {
     let entry: DuaEntry
 
-    // The Quran font draws ﴿ ﴾ as large ayah-marker ornaments, so the brackets around quoted verses use the system font
     private var arabicText: AttributedString {
-        var text = AttributedString(entry.arabic.kfgqpcEncoded)
-        text.font = .arabic(20)
-        for bracket in ["﴿", "﴾"] {
-            var searchStart = text.startIndex
-            while let range = text[searchStart...].range(of: bracket) {
-                text[range].font = .system(size: 18)
-                searchStart = range.upperBound
-            }
-        }
-        return text
+        .arabic(entry.arabic, size: 20)
     }
 
     private var shareText: String {

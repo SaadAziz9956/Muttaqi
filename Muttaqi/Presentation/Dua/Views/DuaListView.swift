@@ -44,7 +44,7 @@ struct DuaListView: View {
                 .onGeometryChange(for: CGFloat.self) { $0.frame(in: .global).maxY } action: { titleBottom = $0 }
 
             if let quote = viewModel.quote, let translation = quote.ayah.translation {
-                Text("\u{201C}\(translation)\u{201D}")
+                Text(translation.quoted)
                     .font(TranslationStyle(for: translation, size: 14).font)
                     .foregroundStyle(.textPrimary)
                     .multilineTextAlignment(.center)

@@ -36,6 +36,20 @@ final class DependencyContainer {
         service: locationService,
         preferences: userPreferences
     )
+    private lazy var journalRepo: JournalRepositoryProtocol = JournalRepository(
+        modelContainer: modelContainer
+    )
+    private lazy var dhikrRepo: DhikrRepositoryProtocol = BundledDhikrRepository()
+    private lazy var dhikrProgress: DhikrProgressStoring = DhikrProgressStore()
+    private lazy var namesRepo: NamesRepositoryProtocol = BundledNamesRepository()
+
+    // MARK: - Shared State
+    // One store for the journal list and the entry screen, so an edit shows in the list straight away
+    private lazy var journalStore = JournalStore(
+        getEntries: GetJournalEntriesUseCase(repository: journalRepo),
+        saveEntry: SaveJournalEntryUseCase(repository: journalRepo),
+        deleteEntry: DeleteJournalEntryUseCase(repository: journalRepo)
+    )
 
     // MARK: - Use Cases
     private lazy var syncQuranDataUseCase = SyncQuranDataUseCase(
@@ -111,10 +125,37 @@ final class DependencyContainer {
         )
     }
 
+    func makeJournalListViewModel() -> JournalListViewModel {
+        JournalListViewModel(store: journalStore, fetchAyah: fetchAyahUseCase)
+    }
+
+    func makeJournalEntryViewModel(entry: JournalEntry) -> JournalEntryViewModel {
+        JournalEntryViewModel(entry: entry, store: journalStore)
+    }
+
+    func makeDhikrListViewModel() -> DhikrListViewModel {
+        DhikrListViewModel(
+            getSections: GetDhikrSectionsUseCase(repository: dhikrRepo, languagePreferences: readingPreferences),
+            languagePreferences: readingPreferences
+        )
+    }
+
+    func makeDhikrCounterViewModel(dhikr: Dhikr) -> DhikrCounterViewModel {
+        DhikrCounterViewModel(dhikr: dhikr, store: dhikrProgress)
+    }
+
+    func makeNamesViewModel() -> NamesViewModel {
+        NamesViewModel(
+            getNames: GetAllahNamesUseCase(repository: namesRepo, languagePreferences: readingPreferences),
+            languagePreferences: readingPreferences
+        )
+    }
+
     func makeQuranListViewModel() -> QuranListViewModel {
         QuranListViewModel(
             fetchSurahsUseCase: fetchSurahsUseCase,
-            getLastReadingUseCase: getLastReadingUseCase
+            getLastReadingUseCase: getLastReadingUseCase,
+            languagePreferences: readingPreferences
         )
     }
     
