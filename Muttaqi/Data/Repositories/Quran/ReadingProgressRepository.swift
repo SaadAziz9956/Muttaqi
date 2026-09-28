@@ -30,7 +30,8 @@ actor ReadingProgressRepository: ReadingProgressRepositoryProtocol {
         )
         if let existing = try modelContext.fetch(descriptor).first {
             existing.lastAyahNumber = lastAyahNumber
-            existing.completedAyahs = completedAyahs
+            // Completion only moves forward, so scrolling back to re-read an ayah doesn't lower it
+            existing.completedAyahs = max(existing.completedAyahs, completedAyahs)
             existing.totalAyahs = totalAyahs
             existing.lastReadAt = .now
         } else {

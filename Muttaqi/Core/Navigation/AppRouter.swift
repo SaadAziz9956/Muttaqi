@@ -18,7 +18,8 @@ final class AppRouter {
     }
     
     enum QuranDestination: Hashable {
-        case surahDetail(surah: Surah)
+        /// `startAyah` is the ayah (number within the surah) to open at, e.g. when continuing where the reader left off
+        case surahDetail(surah: Surah, startAyah: Int? = nil)
     }
     
     enum DuaDestination: Hashable {

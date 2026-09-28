@@ -48,6 +48,9 @@ final class DependencyContainer {
     private lazy var fetchTafsirUseCase = FetchTafsirUseCase(
         repository: tafsirRepo
     )
+    private lazy var updateReadingProgressUseCase = UpdateReadingProgressUseCase(
+        repository: readingProgressRepo
+    )
 
     init() {
         do {
@@ -78,7 +81,7 @@ final class DependencyContainer {
         )
     }
     
-    func makeSurahDetailCoordinator(surah: Surah) -> SurahDetailCoordinator {
+    func makeSurahDetailCoordinator(surah: Surah, startAyah: Int? = nil) -> SurahDetailCoordinator {
         guard let surahNumber = SurahNumber(surah.number) else {
             fatalError("Invalid surah number: \(surah.number)")
         }
@@ -86,11 +89,13 @@ final class DependencyContainer {
         return SurahDetailCoordinator(
             initialSurah: surahNumber,
             headerSurah: surah,
+            startAyah: startAyah,
             fetchSurahs: fetchSurahsUseCase,
             fetchAyahs: fetchAyahsUseCase,
             syncQuranData: syncQuranDataUseCase,
             readingPreferences: readingPreferences,
-            fetchTafsir: fetchTafsirUseCase
+            fetchTafsir: fetchTafsirUseCase,
+            updateReadingProgress: updateReadingProgressUseCase
         )
     }
 }

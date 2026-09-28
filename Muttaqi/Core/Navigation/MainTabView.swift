@@ -49,8 +49,8 @@ struct MainTabView: View {
             QuranListView(viewModel: container.makeQuranListViewModel())
                 .navigationDestination(for: AppRouter.QuranDestination.self) { dest in
                     switch dest {
-                    case .surahDetail(let surah):
-                        SurahDetailView(coordinator: container.makeSurahDetailCoordinator(surah: surah))
+                    case .surahDetail(let surah, let startAyah):
+                        SurahDetailView(coordinator: container.makeSurahDetailCoordinator(surah: surah, startAyah: startAyah))
                     }
                 }
         case .dua: Text("Dua")

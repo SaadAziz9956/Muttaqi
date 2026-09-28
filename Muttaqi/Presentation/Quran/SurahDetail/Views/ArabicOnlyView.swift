@@ -8,38 +8,45 @@ struct ArabicOnlyView: View {
     let fontSize: FontSize
 
     private struct MushafPage: Identifiable {
+        /// The page's first ayah `id`, so pages and ayah cards share one scroll-target ID space for reading progress
         let id: Int
+        let number: Int
         var ayahs: [Ayah]
     }
 
     private var pages: [MushafPage] {
         var pages: [MushafPage] = []
         for ayah in ayahs {
-            if pages.last?.id == ayah.page {
+            if pages.last?.number == ayah.page {
                 pages[pages.count - 1].ayahs.append(ayah)
             } else {
-                pages.append(MushafPage(id: ayah.page, ayahs: [ayah]))
+                pages.append(MushafPage(id: ayah.id, number: ayah.page, ayahs: [ayah]))
             }
         }
         return pages
     }
 
     var body: some View {
-        ForEach(pages) { page in
-            VStack(spacing: 20) {
-                MushafPageText(ayahs: page.ayahs, fontSize: fontSize.arabicSize)
+        // Laid out eagerly (at most ~50 pages a surah): a lazy stack only estimates the height of pages it hasn't
+        // drawn, which sent "Continue reading" several pages past the saved one
+        VStack(spacing: 0) {
+            ForEach(pages) { page in
+                VStack(spacing: 20) {
+                    MushafPageText(ayahs: page.ayahs, fontSize: fontSize.arabicSize)
 
-                // Page number, as printed at the foot of each Mushaf page
-                HStack(spacing: 12) {
-                    hairline
-                    Text("\(page.id)")
-                        .font(.labelSmall)
-                        .foregroundStyle(.textSecondary)
-                    hairline
+                    // Page number, as printed at the foot of each Mushaf page
+                    HStack(spacing: 12) {
+                        hairline
+                        Text("\(page.number)")
+                            .font(.labelSmall)
+                            .foregroundStyle(.textSecondary)
+                        hairline
+                    }
                 }
+                .padding(.vertical, 16)
             }
-            .padding(.vertical, 16)
         }
+        .scrollTargetLayout()
     }
 
     private var hairline: some View {
