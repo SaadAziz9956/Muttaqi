@@ -1,10 +1,24 @@
+import Shared
 import SwiftUI
 
 struct DuaChapterView: View {
-    let chapter: DuaChapter
+    @State private var screen: SharedViewModel<DuaChapterViewModel, DuaChapterState>
     @State private var titleBottom: CGFloat = .infinity
+    @Environment(AppRouter.self) private var router
+
+    init(chapterId: String) {
+        _screen = State(initialValue: SharedViewModel(DuaViewModels.shared.chapter(id: chapterId)) { $0.state })
+    }
 
     var body: some View {
+        if let chapter = screen.state.chapter {
+            content(chapter)
+        } else {
+            Color.clear.background { SoftBackdrop() }
+        }
+    }
+
+    private func content(_ chapter: Shared.DuaChapter) -> some View {
         ScrollView {
             LazyVStack(spacing: 16) {
                 VStack(spacing: 6) {
@@ -24,12 +38,16 @@ struct DuaChapterView: View {
                 .padding(.top, 12)
                 .padding(.bottom, 12)
 
-                ForEach(chapter.entries) { entry in
-                    DuaEntryCard(entry: entry)
+                ForEach(chapter.entries, id: \.id) { entry in
+                    DuaEntryCard(
+                        entry: entry,
+                        onShare: { screen.viewModel.dispatch(intent: DuaChapterIntentShareTapped(entryId: entry.id)) },
+                        onCopy: { screen.viewModel.dispatch(intent: DuaChapterIntentCopyTapped(entryId: entry.id)) }
+                    )
                 }
 
                 // Names whose translations are shown, as their publishers ask
-                Text("Translation: " + Self.credits(for: chapter).joined(separator: ", "))
+                Text("Translation: " + screen.state.translationCredits.joined(separator: ", "))
                     .font(.system(size: 11))
                     .foregroundStyle(.textSecondary)
                     .multilineTextAlignment(.center)
@@ -42,11 +60,13 @@ struct DuaChapterView: View {
         .navigationBarTitleDisplayMode(.inline)
         .collapsingBarTitle(chapter.title, titleBottom: titleBottom)
         .toolbar(.hidden, for: .tabBar)
-    }
-
-    private static func credits(for chapter: DuaChapter) -> [String] {
-        chapter.entries.reduce(into: []) { credits, entry in
-            if !credits.contains(entry.translationCredit) { credits.append(entry.translationCredit) }
+        .task {
+            for await effect in screen.viewModel.effects {
+                switch onEnum(of: effect) {
+                case .openShare(let share): router.push(SharePassage(share.passage))
+                case .copy(let copy): UIPasteboard.general.string = copy.text
+                }
+            }
         }
     }
 }

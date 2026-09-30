@@ -86,13 +86,13 @@ struct MainTabView: View {
                     }
                 }
         case .dua:
-            DuaListView(viewModel: container.makeDuaListViewModel())
+            DuaListView()
                 .navigationDestination(for: AppRouter.DuaDestination.self) { dest in
                     switch dest {
-                    case .category(let category):
-                        DuaCategoryView(category: category)
-                    case .chapter(let chapter):
-                        DuaChapterView(chapter: chapter)
+                    case .category(let id):
+                        DuaCategoryView(categoryId: id)
+                    case .chapter(let id):
+                        DuaChapterView(chapterId: id)
                     }
                 }
         }

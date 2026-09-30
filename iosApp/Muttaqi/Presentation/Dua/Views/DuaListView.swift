@@ -1,14 +1,13 @@
+import Shared
 import SwiftUI
 
 struct DuaListView: View {
-    @State private var viewModel: DuaListViewModel
+    @State private var screen = SharedViewModel(DuaViewModels.shared.list()) { $0.state }
     @State private var titleBottom: CGFloat = .infinity
     @FocusState private var isSearchFocused: Bool
     @Environment(AppRouter.self) private var router
 
-    init(viewModel: DuaListViewModel) {
-        self._viewModel = State(initialValue: viewModel)
-    }
+    private var state: DuaListState { screen.state }
 
     var body: some View {
         ScrollView {
@@ -19,7 +18,7 @@ struct DuaListView: View {
                 searchField
                     .padding(.top, 36)
 
-                if viewModel.isSearching {
+                if state.isSearching {
                     searchResults
                         .padding(.top, 20)
                 } else {
@@ -34,7 +33,18 @@ struct DuaListView: View {
         .background { SoftBackdrop() }
         .navigationBarTitleDisplayMode(.inline)
         .collapsingBarTitle("Dua", titleBottom: titleBottom)
-        .task { await viewModel.load() }
+        .task {
+            for await effect in screen.viewModel.effects {
+                switch onEnum(of: effect) {
+                case .openCategory(let open): router.pushDua(.category(id: open.categoryId))
+                case .openChapter(let open): router.pushDua(.chapter(id: open.chapterId))
+                }
+            }
+        }
+    }
+
+    private func dispatch(_ intent: DuaListIntent) {
+        screen.viewModel.dispatch(intent: intent)
     }
 
     private var header: some View {
@@ -44,14 +54,14 @@ struct DuaListView: View {
                 .foregroundStyle(.appPrimary)
                 .onGeometryChange(for: CGFloat.self) { $0.frame(in: .global).maxY } action: { titleBottom = $0 }
 
-            if let quote = viewModel.quote, let translation = quote.ayah.translation {
-                Text(translation.quoted)
-                    .font(TranslationStyle(for: translation, size: 14).font)
+            if let quote = state.header {
+                Text(quote.text.quoted)
+                    .font(TranslationStyle(for: quote.text, size: 14).font)
                     .foregroundStyle(.textPrimary)
                     .multilineTextAlignment(.center)
                     .padding(.top, 16)
 
-                Text("Quran (\(quote.reference))")
+                Text(quote.source)
                     .font(.labelSmall)
                     .foregroundStyle(.textSecondary)
                     .padding(.top, 4)
@@ -67,7 +77,7 @@ struct DuaListView: View {
                 .foregroundStyle(.textSecondary)
                 .accessibilityHidden(true)
 
-            TextField("Search", text: $viewModel.query)
+            TextField("Search", text: Binding(get: { state.query }, set: { dispatch(DuaListIntentQueryChanged(query: $0)) }))
                 .font(.bodyMedium)
                 .foregroundStyle(.textPrimary)
                 .submitLabel(.search)
@@ -75,9 +85,9 @@ struct DuaListView: View {
                 .autocorrectionDisabled()
                 .focused($isSearchFocused)
 
-            if viewModel.isSearching {
+            if state.isSearching {
                 Button {
-                    viewModel.query = ""
+                    dispatch(DuaListIntentClearQuery.shared)
                     isSearchFocused = false
                 } label: {
                     Image("close-circle-bold")
@@ -96,9 +106,9 @@ struct DuaListView: View {
 
     private var categoryGrid: some View {
         LazyVGrid(columns: [GridItem(.flexible(), spacing: 14), GridItem(.flexible(), spacing: 14)], spacing: 14) {
-            ForEach(viewModel.categories) { category in
+            ForEach(state.categories, id: \.id) { category in
                 Button {
-                    open(category)
+                    dispatch(DuaListIntentCategoryTapped(categoryId: category.id))
                 } label: {
                     VStack(alignment: .leading, spacing: 6) {
                         Text(category.title)
@@ -124,15 +134,15 @@ struct DuaListView: View {
 
     @ViewBuilder
     private var searchResults: some View {
-        let results = viewModel.searchResults
+        let results = state.results
         if results.isEmpty {
-            ContentUnavailableView.search(text: viewModel.query)
+            ContentUnavailableView.search(text: state.query)
                 .padding(.top, 20)
         } else {
             LazyVStack(spacing: 0) {
-                ForEach(results) { result in
+                ForEach(results, id: \.chapter.id) { result in
                     Button {
-                        router.pushDua(.chapter(result.chapter))
+                        dispatch(DuaListIntentSearchResultTapped(chapterId: result.chapter.id))
                     } label: {
                         HStack {
                             VStack(alignment: .leading, spacing: 3) {
@@ -157,15 +167,6 @@ struct DuaListView: View {
                     .padding(.bottom, 12)
                 }
             }
-        }
-    }
-
-    // A category with a single chapter opens straight to its duas
-    private func open(_ category: DuaCategory) {
-        if category.chapters.count == 1, let chapter = category.chapters.first {
-            router.pushDua(.chapter(chapter))
-        } else {
-            router.pushDua(.category(category))
         }
     }
 }

@@ -1,0 +1,56 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="24dp"
+    android:height="24dp"
+    android:viewportWidth="24"
+    android:viewportHeight="24">
+    <group>
+        <path
+            android:strokeColor="#FF000000"
+            android:strokeWidth="1.5"
+            android:strokeLineCap="round"
+            android:strokeLineJoin="round"
+            android:pathData="M4.93 16.14L5.89 9.37C6.01 8.5 6.75 7.86 7.63 7.86H16.37C17.25 7.86 17.99 8.5 18.11 9.37L19.07 16.14"/>
+        <path
+            android:strokeColor="#FF000000"
+            android:strokeWidth="1.5"
+            android:strokeLineCap="round"
+            android:strokeLineJoin="round"
+            android:pathData="M12 7.86C12.65 7.86 13.17 7.34 13.17 6.69 13.17 6.04 12.65 5.52 12 5.52 11.35 5.52 10.83 6.04 10.83 6.69 10.83 7.34 11.35 7.86 12 7.86Z"/>
+        <path
+            android:strokeColor="#FF000000"
+            android:strokeWidth="1.5"
+            android:strokeLineCap="round"
+            android:strokeLineJoin="round"
+            android:pathData="M20.24 16.14V17.31C20.24 17.96 19.72 18.48 19.07 18.48H4.93C4.28 18.48 3.76 17.96 3.76 17.31V16.14"/>
+        <path
+            android:strokeColor="#FF000000"
+            android:strokeWidth="1.5"
+            android:strokeLineCap="round"
+            android:strokeLineJoin="round"
+            android:pathData="M2 16.14H22"/>
+        <path
+            android:strokeColor="#FF000000"
+            android:strokeWidth="1.5"
+            android:strokeLineCap="round"
+            android:strokeLineJoin="round"
+            android:pathData="M13.17 14.3V11.37C13.17 10.72 13.69 10.2 14.34 10.2 14.99 10.2 15.51 10.72 15.51 11.37V13.13"/>
+        <path
+            android:strokeColor="#FF000000"
+            android:strokeWidth="1.5"
+            android:strokeLineCap="round"
+            android:strokeLineJoin="round"
+            android:pathData="M15.52 11.37C15.52 10.72 16.04 10.2 16.69 10.2"/>
+        <path
+            android:strokeColor="#FF000000"
+            android:strokeWidth="1.5"
+            android:strokeLineCap="round"
+            android:strokeLineJoin="round"
+            android:pathData="M13.17 11.37C13.17 10.72 12.65 10.2 12 10.2"/>
+        <path
+            android:strokeColor="#FF000000"
+            android:strokeWidth="1.5"
+            android:strokeLineCap="round"
+            android:strokeLineJoin="round"
+            android:pathData="M5.77 10.2H18.23"/>
+    </group>
+</vector>

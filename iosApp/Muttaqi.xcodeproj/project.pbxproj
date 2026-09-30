@@ -121,6 +121,7 @@
 				5592B35E2F3A5D3F0054BD84 /* Sources */,
 				5592B35F2F3A5D3F0054BD84 /* Frameworks */,
 				5592B3602F3A5D3F0054BD84 /* Resources */,
+				5592B3A12F3A5D3F0054BD84 /* Copy Bundled Content */,
 			);
 			buildRules = (
 			);
@@ -273,6 +274,25 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "if [ \"YES\" = \"$OVERRIDE_KOTLIN_BUILD_IDE_SUPPORTED\" ]; then\n  echo \"Skipping the Kotlin build: OVERRIDE_KOTLIN_BUILD_IDE_SUPPORTED is YES\"\n  exit 0\nfi\ncd \"$SRCROOT/..\"\n./gradlew :shared:embedAndSignAppleFrameworkForXcode\n";
+		};
+		5592B3A12F3A5D3F0054BD84 /* Copy Bundled Content */ = {
+			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Bundled Content";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# The texts both apps bundle, kept once in content/data\ncp \"$SRCROOT/../content/data/\"*.json \"$TARGET_BUILD_DIR/$UNLOCALIZED_RESOURCES_FOLDER_PATH/\"\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 

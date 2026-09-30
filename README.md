@@ -9,7 +9,7 @@ gratitude journal, and topics and emotions with authentic texts in English and U
 iosApp/       SwiftUI app (Xcode). Views, the soft design system, navigation and platform services
 androidApp/   Compose app with Material 3 Expressive. Screens, theme, navigation and platform services
 shared/       Kotlin Multiplatform: domain, data and MVI view models used by both apps
-content/      The pipeline that builds the bundled texts from published sources (see content/tools/README.md)
+content/      The bundled texts (data/) and the pipeline that builds them from published sources (tools/)
 ```
 
 Xcode builds `shared` itself: a build phase runs `./gradlew :shared:embedAndSignAppleFrameworkForXcode` and the
@@ -48,3 +48,5 @@ heading, the reading position) get their own flows, so they don't redraw a whole
 - iOS: open `iosApp/Muttaqi.xcodeproj` and run. Needs a JDK (17+) for the Kotlin build.
 - Android: `./gradlew :androidApp:installDebug`.
 - Shared tests: `./gradlew :shared:iosSimulatorArm64Test :shared:testAndroidHostTest`.
+
+Migrating a feature to shared Kotlin: see MIGRATION.md (Duas is the finished template).

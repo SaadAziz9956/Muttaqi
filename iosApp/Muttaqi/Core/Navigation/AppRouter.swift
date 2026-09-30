@@ -34,8 +34,8 @@ final class AppRouter {
     }
     
     enum DuaDestination: Hashable {
-        case category(DuaCategory)
-        case chapter(DuaChapter)
+        case category(id: String)
+        case chapter(id: String)
     }
     
     func pushHome(_ destination: HomeDestination) {

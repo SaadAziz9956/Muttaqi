@@ -1,4 +1,5 @@
 import Foundation
+import Shared
 
 /// A verse, hadith, dua, dhikr or Name of Allah to share as a card, in the reader's language
 struct SharePassage: Hashable {
@@ -11,6 +12,11 @@ struct SharePassage: Hashable {
 }
 
 extension SharePassage {
+    /// A passage from the shared code, e.g. a dua the chapter's view model asked to share
+    init(_ passage: Shared.SharePassage) {
+        self.init(arabic: passage.arabic, transliteration: passage.transliteration, translation: passage.translation, reference: passage.reference)
+    }
+
     init(verse: QuranPassage) {
         self.init(arabic: verse.arabic, translation: verse.translation, reference: "Quran (\(verse.reference))")
     }

@@ -15,11 +15,18 @@ internal val ReemKufi = FontFamily(
     Font(R.font.reem_kufi_bold, FontWeight.Bold),
 )
 
+/** KFGQPC Hafs, for Quran and dua Arabic; text goes through `kfgqpcEncoded()` first (see ArabicText) */
+internal val QuranFont = FontFamily(Font(R.font.kfgqpc_uthmanic))
+
+/** Noto Nastaliq Urdu, for Urdu translations */
+internal val NastaliqFont = FontFamily(Font(R.font.noto_nastaliq_urdu))
+
 // The iOS type scale (Typography.swift), in Reem Kufi
 internal val MuttaqiTypography = Typography(
     displayLarge = TextStyle(fontFamily = ReemKufi, fontWeight = FontWeight.Bold, fontSize = 34.sp),
     displayMedium = TextStyle(fontFamily = ReemKufi, fontWeight = FontWeight.Bold, fontSize = 28.sp),
     headlineMedium = TextStyle(fontFamily = ReemKufi, fontWeight = FontWeight.Normal, fontSize = 28.sp),
+    headlineSmall = TextStyle(fontFamily = ReemKufi, fontWeight = FontWeight.Normal, fontSize = 24.sp),
     titleLarge = TextStyle(fontFamily = ReemKufi, fontWeight = FontWeight.SemiBold, fontSize = 22.sp),
     titleMedium = TextStyle(fontFamily = ReemKufi, fontWeight = FontWeight.SemiBold, fontSize = 18.sp),
     titleSmall = TextStyle(fontFamily = ReemKufi, fontWeight = FontWeight.Medium, fontSize = 16.sp),

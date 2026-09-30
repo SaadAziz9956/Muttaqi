@@ -129,13 +129,6 @@ final class DependencyContainer {
         )
     }
 
-    func makeDuaListViewModel() -> DuaListViewModel {
-        DuaListViewModel(
-            getCategories: GetDuaCategoriesUseCase(repository: duaRepo, languagePreferences: readingPreferences),
-            fetchAyah: fetchAyahUseCase
-        )
-    }
-
     func makeQiblaViewModel() -> QiblaViewModel {
         QiblaViewModel(
             location: locationRepo,

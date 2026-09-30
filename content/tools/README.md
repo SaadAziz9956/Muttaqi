@@ -29,7 +29,7 @@ Then, for Explore and the hadith Arabic in Emotions:
 ```
 cd content/tools/explore
 python3 check.py selections/worship.json   # each group: every reference exists, cuts are exact, grades allowed
-python3 build_explore.py                   # writes iosApp/Muttaqi/Resources/Data/Explore.json (and Emotions' Arabic)
+python3 build_explore.py                   # writes content/data/Explore.json (and Emotions' Arabic)
 ```
 
 A rebuild from the committed selections reproduces the shipped `Explore.json` byte for byte.

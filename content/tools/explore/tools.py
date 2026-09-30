@@ -23,7 +23,7 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 # the HadeethEnc API; see ../README.md
 SCRATCH = os.path.join(os.path.dirname(HERE), "cache")
 REPO = os.path.abspath(os.path.join(HERE, "..", "..", ".."))
-PROJECT = os.path.join(REPO, "iosApp", "Muttaqi", "Resources", "Data")
+PROJECT = os.path.join(REPO, "content", "data")
 
 UNGRADED = ("No judgment", "left no comment")
 

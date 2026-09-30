@@ -1,14 +1,22 @@
+import Shared
 import SwiftUI
 
 /// The chapters in one category, e.g. every chapter under "Prayer & Purification"
 struct DuaCategoryView: View {
-    let category: DuaCategory
+    @State private var screen: SharedViewModel<DuaCategoryViewModel, DuaCategoryState>
     @State private var titleBottom: CGFloat = .infinity
+    @Environment(AppRouter.self) private var router
+
+    init(categoryId: String) {
+        _screen = State(initialValue: SharedViewModel(DuaViewModels.shared.category(id: categoryId)) { $0.state })
+    }
 
     var body: some View {
+        let category = screen.state.category
+
         ScrollView {
             LazyVStack(spacing: 12) {
-                Text(category.title)
+                Text(category?.title ?? "")
                     .font(.custom("ReemKufi-Regular", size: 26))
                     .foregroundStyle(.appPrimary)
                     .multilineTextAlignment(.center)
@@ -17,8 +25,10 @@ struct DuaCategoryView: View {
                     .padding(.top, 12)
                     .padding(.bottom, 12)
 
-                ForEach(category.chapters) { chapter in
-                    NavigationLink(value: AppRouter.DuaDestination.chapter(chapter)) {
+                ForEach(category?.chapters ?? [], id: \.id) { chapter in
+                    Button {
+                        screen.viewModel.dispatch(intent: DuaCategoryIntentChapterTapped(chapterId: chapter.id))
+                    } label: {
                         HStack(spacing: 12) {
                             VStack(alignment: .leading, spacing: 4) {
                                 Text(chapter.title)
@@ -47,7 +57,14 @@ struct DuaCategoryView: View {
         }
         .background { SoftBackdrop() }
         .navigationBarTitleDisplayMode(.inline)
-        .collapsingBarTitle(category.title, titleBottom: titleBottom)
+        .collapsingBarTitle(category?.title ?? "", titleBottom: titleBottom)
         .toolbar(.hidden, for: .tabBar)
+        .task {
+            for await effect in screen.viewModel.effects {
+                switch onEnum(of: effect) {
+                case .openChapter(let open): router.pushDua(.chapter(id: open.chapterId))
+                }
+            }
+        }
     }
 }

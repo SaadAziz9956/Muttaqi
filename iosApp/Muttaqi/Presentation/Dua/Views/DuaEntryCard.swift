@@ -1,17 +1,13 @@
+import Shared
 import SwiftUI
 
 struct DuaEntryCard: View {
-    let entry: DuaEntry
-    @Environment(AppRouter.self) private var router
+    let entry: Shared.DuaEntry
+    let onShare: () -> Void
+    let onCopy: () -> Void
 
     private var arabicText: AttributedString {
         .arabic(entry.arabic, size: 20)
-    }
-
-    private var shareText: String {
-        [entry.arabic, entry.transliteration, entry.translation, entry.source]
-            .filter { !$0.isEmpty }
-            .joined(separator: "\n\n")
     }
 
     var body: some View {
@@ -47,7 +43,16 @@ struct DuaEntryCard: View {
 
                 Spacer(minLength: 8)
 
-                ShareButton(passage: SharePassage(dua: entry))
+                Button(action: onShare) {
+                    Image("export-arrow-01-linear")
+                        .resizable()
+                        .frame(width: 18, height: 18)
+                        .foregroundStyle(.textSecondary)
+                        .padding(6)
+                        .contentShape(.rect)
+                }
+                .buttonStyle(SoftPressStyle())
+                .accessibilityLabel("Share")
 
                 if entry.repeatCount > 1 {
                     Text("\(entry.repeatCount)×")
@@ -77,8 +82,8 @@ struct DuaEntryCard: View {
         .padding(.bottom, 18)
         .softCard(cornerRadius: 26)
         .contextMenu {
-            Button("Copy", systemImage: "doc.on.doc") { UIPasteboard.general.string = shareText }
-            Button("Share", systemImage: "square.and.arrow.up") { router.push(SharePassage(dua: entry)) }
+            Button("Copy", systemImage: "doc.on.doc", action: onCopy)
+            Button("Share", systemImage: "square.and.arrow.up", action: onShare)
         }
     }
 }

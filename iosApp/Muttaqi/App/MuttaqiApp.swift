@@ -1,5 +1,6 @@
-import SwiftUI
+import Shared
 import SwiftData
+import SwiftUI
 
 @main
 struct MuttaqiApp: App {
@@ -7,6 +8,8 @@ struct MuttaqiApp: App {
     private let container: DependencyContainer
 
     init() {
+        // The shared (Kotlin) code's dependency injection, before any shared view model is made
+        IosKoinKt.doInitKoinIos()
         let container = DependencyContainer()
         self.container = container
         self._appViewModel = State(initialValue: AppViewModel(userPreferences: container.userPreferences))
