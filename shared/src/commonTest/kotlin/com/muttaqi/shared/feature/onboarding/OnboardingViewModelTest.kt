@@ -1,9 +1,12 @@
 package com.muttaqi.shared.feature.onboarding
 
 import app.cash.turbine.test
+import com.muttaqi.shared.core.domain.DomainError
+import com.muttaqi.shared.core.domain.Outcome
+import com.muttaqi.shared.core.model.Language
+import com.muttaqi.shared.core.preferences.LanguageSelector
 import com.muttaqi.shared.feature.onboarding.data.repository.SettingsOnboardingRepository
 import com.muttaqi.shared.feature.onboarding.domain.model.OnboardingStep
-import com.muttaqi.shared.feature.onboarding.domain.platform.FirstLaunchSetup
 import com.muttaqi.shared.feature.onboarding.domain.platform.NotificationPermission
 import com.muttaqi.shared.feature.onboarding.domain.usecase.FinishOnboarding
 import com.muttaqi.shared.feature.onboarding.domain.usecase.IsOnboardingComplete
@@ -20,7 +23,12 @@ import com.muttaqi.shared.feature.prayer.data.location.DeviceLocationRepository
 import com.muttaqi.shared.feature.prayer.domain.model.LocationAccess
 import com.muttaqi.shared.feature.prayer.domain.usecase.RequestLocationAccess
 import com.muttaqi.shared.feature.prayer.savedCoordinates
+import com.muttaqi.shared.feature.quran.FakeDownloadRecord
+import com.muttaqi.shared.feature.quran.domain.repository.QuranLibrary
+import com.muttaqi.shared.feature.quran.domain.usecase.SyncQuran
+import com.muttaqi.shared.feature.quran.presentation.QuranMessages
 import com.russhwolf.settings.MapSettings
+import kotlinx.coroutines.CompletableDeferred
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.UnconfinedTestDispatcher
@@ -42,13 +50,14 @@ class OnboardingViewModelTest {
     private val repository = SettingsOnboardingRepository(settings)
     private val location = FakeLocationProvider()
     private val notifications = FakeNotificationPermission()
-    private val setup = FakeFirstLaunchSetup()
+    private val quran = FakeQuranDownload()
+    private var readingLanguage: Language? = null
 
     private fun viewModel() = OnboardingViewModel(
         SaveUserName(repository),
         RequestNotificationPermission(notifications),
         RequestLocationAccess(DeviceLocationRepository(location, savedCoordinates())),
-        FinishOnboarding(setup, repository),
+        FinishOnboarding(SyncQuran(quran, FakeDownloadRecord(), LanguageSelector { readingLanguage = it }), repository),
     )
 
     private val path = listOf(
@@ -133,7 +142,7 @@ class OnboardingViewModelTest {
         assertEquals(1, location.accessRequests)
         assertEquals(LocationAccess.Granted, location.access)
         assertEquals(OnboardingStep.Setup, viewModel.state.value.step)
-        assertEquals(1, setup.runs)
+        assertEquals(1, quran.runs)
     }
 
     @Test
@@ -146,42 +155,45 @@ class OnboardingViewModelTest {
 
     @Test
     fun aFinishedSetupCompletesOnboardingAndOpensHome() = runTest {
-        setup.hold = true
+        quran.hold = true
         val viewModel = viewModel()
         viewModel.effects.test {
             viewModel.walkTo(OnboardingStep.Setup)
             assertTrue(viewModel.state.value.isSettingUp)
             assertFalse(IsOnboardingComplete(repository)())
-            setup.finish(null)
+            quran.finish(error = null)
             assertEquals(OnboardingEffect.Finished, awaitItem())
         }
         assertFalse(viewModel.state.value.isSettingUp)
         assertTrue(IsOnboardingComplete(repository)())
         assertEquals(true, settings.getBooleanOrNull("onboarding_complete"))
+        // The English translation it downloaded is what the Quran reads in
+        assertEquals(Language.English, readingLanguage)
     }
 
     @Test
     fun aFailedSetupShowsWhyAndRetries() {
-        setup.hold = true
+        quran.hold = true
         val viewModel = viewModel()
         viewModel.walkTo(OnboardingStep.Setup)
-        setup.finish("The Internet connection appears to be offline.")
-        assertEquals("The Internet connection appears to be offline.", viewModel.state.value.setupError)
+        quran.finish(DomainError.NoConnection)
+        assertEquals("Failed to download English translation. Please check your connection.", viewModel.state.value.setupError)
+        assertEquals(QuranMessages.downloadFailed(Language.English), viewModel.state.value.setupError)
         assertFalse(IsOnboardingComplete(repository)())
 
         viewModel.dispatch(OnboardingIntent.RetrySetup)
         assertTrue(viewModel.state.value.isSettingUp)
         assertNull(viewModel.state.value.setupError)
-        assertEquals(2, setup.runs)
+        assertEquals(2, quran.runs)
     }
 
     @Test
     fun aSetupAlreadyRunningIsntStartedAgain() {
-        setup.hold = true
+        quran.hold = true
         val viewModel = viewModel()
         viewModel.walkTo(OnboardingStep.Setup)
         viewModel.dispatch(OnboardingIntent.RetrySetup)
-        assertEquals(1, setup.runs)
+        assertEquals(1, quran.runs)
     }
 }
 
@@ -194,21 +206,29 @@ class FakeNotificationPermission(var answer: Boolean = true) : NotificationPermi
     }
 }
 
-/** The first-launch download; with [hold] it waits for [finish] */
-class FakeFirstLaunchSetup : FirstLaunchSetup {
+/** The Quran's download; with [hold] it waits, as over a slow connection, until [finish] */
+class FakeQuranDownload : QuranLibrary {
     var runs = 0
     var hold = false
-    private var pending: Pair<() -> Unit, (String) -> Unit>? = null
+    private var stored = false
+    private var pending: CompletableDeferred<Outcome<Unit>>? = null
 
-    override fun run(onDone: () -> Unit, onFailed: (message: String) -> Unit) {
+    override suspend fun hasText() = stored
+
+    override suspend fun hasTranslation(language: Language) = stored
+
+    override suspend fun downloadText(): Outcome<Unit> {
         runs++
-        if (hold) pending = onDone to onFailed else onDone()
+        val outcome = if (hold) CompletableDeferred<Outcome<Unit>>().also { pending = it }.await() else Outcome.Success(Unit)
+        stored = outcome is Outcome.Success
+        return outcome
     }
 
+    override suspend fun downloadTranslation(language: Language): Outcome<Unit> = Outcome.Success(Unit)
+
     /** Finishes the download, failing with [error] when there is one */
-    fun finish(error: String?) {
-        val (onDone, onFailed) = pending ?: return
+    fun finish(error: DomainError?) {
+        pending?.complete(if (error == null) Outcome.Success(Unit) else Outcome.Failure(error))
         pending = null
-        if (error == null) onDone() else onFailed(error)
     }
 }

@@ -30,11 +30,6 @@ final class DependencyContainer {
     }
 
     // MARK: - Factories
-    /// The Quran download the shared onboarding waits for on first launch
-    func makeFirstLaunchSetup() -> QuranFirstLaunchSetup {
-        QuranFirstLaunchSetup(quran: QuranUseCases.shared)
-    }
-
     func makeHomeViewModel() -> HomeViewModel {
         HomeViewModel(
             fetchAyah: fetchAyahUseCase,

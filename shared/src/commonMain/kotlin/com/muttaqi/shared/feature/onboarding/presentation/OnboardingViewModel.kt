@@ -1,8 +1,8 @@
 package com.muttaqi.shared.feature.onboarding.presentation
 
 import androidx.lifecycle.viewModelScope
-import com.muttaqi.shared.core.domain.DomainError
 import com.muttaqi.shared.core.domain.Outcome
+import com.muttaqi.shared.core.model.Language
 import com.muttaqi.shared.core.mvi.MviViewModel
 import com.muttaqi.shared.core.mvi.Reducer
 import com.muttaqi.shared.feature.onboarding.domain.model.OnboardingStep
@@ -10,6 +10,7 @@ import com.muttaqi.shared.feature.onboarding.domain.usecase.FinishOnboarding
 import com.muttaqi.shared.feature.onboarding.domain.usecase.RequestNotificationPermission
 import com.muttaqi.shared.feature.onboarding.domain.usecase.SaveUserName
 import com.muttaqi.shared.feature.prayer.domain.usecase.RequestLocationAccess
+import com.muttaqi.shared.feature.quran.presentation.QuranMessages
 import kotlinx.coroutines.launch
 
 internal object OnboardingReducer : Reducer<OnboardingState, OnboardingMutation> {
@@ -65,8 +66,7 @@ class OnboardingViewModel(
                     mutate(OnboardingMutation.SetupFinished)
                     emit(OnboardingEffect.Finished)
                 }
-                // The platform's own description of what went wrong, as the Swift app showed it
-                is Outcome.Failure -> mutate(OnboardingMutation.SetupFailed((outcome.error as? DomainError.Unexpected)?.message.orEmpty()))
+                is Outcome.Failure -> mutate(OnboardingMutation.SetupFailed(QuranMessages.downloadFailed(Language.English)))
             }
         }
     }

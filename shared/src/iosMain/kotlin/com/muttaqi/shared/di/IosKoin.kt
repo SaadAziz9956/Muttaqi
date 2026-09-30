@@ -2,7 +2,6 @@ package com.muttaqi.shared.di
 
 import com.muttaqi.shared.core.content.BundleContentSource
 import com.muttaqi.shared.core.content.BundledContentSource
-import com.muttaqi.shared.feature.onboarding.domain.platform.FirstLaunchSetup
 import com.muttaqi.shared.feature.onboarding.domain.platform.NotificationPermission
 import com.muttaqi.shared.feature.prayer.domain.platform.HeadingProvider
 import com.muttaqi.shared.feature.prayer.domain.platform.LocationProvider
@@ -20,22 +19,16 @@ internal val iosPlatformModule = module {
 
 /**
  * Called once from Swift at launch with the app's own services, which stay in Swift on Core Location and
- * UserNotifications: `IosKoinKt.doInitKoinIos(location: LocationService(), compass: CompassService(), …)`.
- * [firstLaunchSetup] is the Quran download, which is Swift's until the Quran is shared
+ * UserNotifications:
+ * `IosKoinKt.doInitKoinIos(location: LocationService(), compass: CompassService(), notifications: NotificationService())`
  */
-fun initKoinIos(
-    location: LocationProvider,
-    compass: HeadingProvider,
-    notifications: NotificationPermission,
-    firstLaunchSetup: FirstLaunchSetup,
-) {
+fun initKoinIos(location: LocationProvider, compass: HeadingProvider, notifications: NotificationPermission) {
     initKoin(
         module {
             includes(iosPlatformModule)
             single { location }
             single { compass }
             single { notifications }
-            single { firstLaunchSetup }
         },
     )
 }

@@ -2,9 +2,11 @@ package com.muttaqi.shared.feature.onboarding.domain.usecase
 
 import com.muttaqi.shared.core.domain.DomainError
 import com.muttaqi.shared.core.domain.Outcome
-import com.muttaqi.shared.feature.onboarding.domain.platform.FirstLaunchSetup
+import com.muttaqi.shared.core.model.Language
 import com.muttaqi.shared.feature.onboarding.domain.platform.NotificationPermission
 import com.muttaqi.shared.feature.onboarding.domain.repository.OnboardingRepository
+import com.muttaqi.shared.feature.quran.domain.usecase.SyncQuran
+import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.suspendCancellableCoroutine
 import kotlin.coroutines.resume
 
@@ -29,16 +31,18 @@ class RequestNotificationPermission(private val permission: NotificationPermissi
     }
 }
 
-/** Runs the first-launch download and, once it's done, marks onboarding complete */
-class FinishOnboarding(private val setup: FirstLaunchSetup, private val repository: OnboardingRepository) {
+/**
+ * The first launch's download, the Quran's Arabic, transliteration and English translation, which English becomes
+ * the reading language with; once it's done, onboarding is complete
+ */
+class FinishOnboarding(private val syncQuran: SyncQuran, private val repository: OnboardingRepository) {
     suspend operator fun invoke(): Outcome<Unit> {
-        val outcome = suspendCancellableCoroutine<Outcome<Unit>> { continuation ->
-            setup.run(
-                onDone = { if (continuation.isActive) continuation.resume(Outcome.Success(Unit)) },
-                onFailed = { message ->
-                    if (continuation.isActive) continuation.resume(Outcome.Failure(DomainError.Unexpected(message)))
-                },
-            )
+        val outcome = try {
+            syncQuran(Language.English)
+        } catch (cancelled: CancellationException) {
+            throw cancelled
+        } catch (failure: Exception) {
+            Outcome.Failure(DomainError.Unexpected(failure.message))
         }
         if (outcome is Outcome.Success) repository.markComplete()
         return outcome
