@@ -4,9 +4,6 @@ import androidx.room.ConstructedBy
 import androidx.room.Database
 import androidx.room.RoomDatabase
 import androidx.room.RoomDatabaseConstructor
-import androidx.sqlite.driver.bundled.BundledSQLiteDriver
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.IO
 
 /**
  * The Quran's own database: the text and translations synced from the Quran API, reading progress and the tafsir
@@ -38,8 +35,3 @@ internal abstract class QuranDatabase : RoomDatabase() {
 internal expect object QuranDatabaseConstructor : RoomDatabaseConstructor<QuranDatabase> {
     override fun initialize(): QuranDatabase
 }
-
-/** Opens the database with the bundled SQLite, so both platforms run the same SQLite, with queries off the main thread */
-internal fun RoomDatabase.Builder<QuranDatabase>.open(): QuranDatabase = setDriver(BundledSQLiteDriver())
-    .setQueryCoroutineContext(Dispatchers.IO)
-    .build()

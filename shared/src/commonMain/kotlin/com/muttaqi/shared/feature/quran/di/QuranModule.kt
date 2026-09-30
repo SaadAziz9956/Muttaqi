@@ -1,5 +1,8 @@
 package com.muttaqi.shared.feature.quran.di
 
+import androidx.room.RoomDatabase
+import androidx.sqlite.driver.bundled.BundledSQLiteDriver
+import com.muttaqi.shared.core.domain.DispatcherProvider
 import com.muttaqi.shared.feature.quran.data.local.QuranDatabase
 import com.muttaqi.shared.feature.quran.data.remote.QuranApi
 import com.muttaqi.shared.feature.quran.data.remote.TafsirApi
@@ -41,6 +44,7 @@ import org.koin.core.module.dsl.singleOf
 import org.koin.core.module.dsl.viewModel
 import org.koin.core.module.dsl.viewModelOf
 import org.koin.core.qualifier.named
+import org.koin.core.scope.Scope
 import org.koin.dsl.binds
 import org.koin.dsl.module
 import kotlin.time.Clock
@@ -49,7 +53,13 @@ private val QuranHttpClient = named("quranHttpClient")
 
 /** The Quran: surah list, reader, reading progress, reading settings and tafsir */
 val quranModule = module {
-    includes(quranPlatformModule)
+    // The bundled SQLite, so both platforms run the same SQLite, with queries off the main thread
+    single {
+        quranDatabaseBuilder()
+            .setDriver(BundledSQLiteDriver())
+            .setQueryCoroutineContext(get<DispatcherProvider>().io)
+            .build()
+    }
 
     // Named, so it's the Quran's own client and never another feature's
     single(QuranHttpClient) { quranHttpClient() }
@@ -91,3 +101,6 @@ val quranModule = module {
     viewModelOf(::ReadingSettingsViewModel)
     viewModelOf(::TafsirViewModel)
 }
+
+/** The database file's builder, in each platform's place for app data */
+internal expect fun Scope.quranDatabaseBuilder(): RoomDatabase.Builder<QuranDatabase>
