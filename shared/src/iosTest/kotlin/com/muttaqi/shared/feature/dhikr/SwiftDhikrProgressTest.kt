@@ -1,7 +1,7 @@
 package com.muttaqi.shared.feature.dhikr
 
+import com.muttaqi.shared.core.preferences.UserDefaultsLegacyDataSource
 import com.muttaqi.shared.feature.dhikr.data.progress.SettingsDhikrProgressRepository
-import com.muttaqi.shared.feature.dhikr.data.progress.UserDefaultsLegacyDhikrProgressSource
 import com.muttaqi.shared.feature.dhikr.domain.model.DhikrProgress
 import com.russhwolf.settings.NSUserDefaultsSettings
 import kotlinx.datetime.LocalDate
@@ -16,7 +16,7 @@ import kotlin.test.assertEquals
 import kotlin.test.assertNull
 
 /** The Swift app's saved progress read from real user defaults, as it's stored on a phone before the update */
-class UserDefaultsLegacyDhikrProgressSourceTest {
+class SwiftDhikrProgressTest {
     private val suite = "com.muttaqi.shared.tests.dhikr"
     private val defaults = NSUserDefaults(suiteName = suite)
 
@@ -37,7 +37,7 @@ class UserDefaultsLegacyDhikrProgressSourceTest {
         val today = LocalDate(2026, 9, 30)
         val repository = SettingsDhikrProgressRepository(
             settings,
-            UserDefaultsLegacyDhikrProgressSource(defaults),
+            UserDefaultsLegacyDataSource(defaults),
             timeZone = { TimeZone.of("Asia/Karachi") },
         )
         assertEquals(DhikrProgress(7, 0, today), repository.saved("subhanallah"))
@@ -45,10 +45,5 @@ class UserDefaultsLegacyDhikrProgressSourceTest {
         repository.save("subhanallah", DhikrProgress(8, 0, today))
         assertEquals("""{"count":8,"rounds":0,"day":812401200}""", defaults.stringForKey("dhikr_progress.subhanallah"))
         assertEquals(DhikrProgress(8, 0, today), repository.saved("subhanallah"))
-    }
-
-    @Test
-    fun nothingSavedIsNothing() {
-        assertNull(UserDefaultsLegacyDhikrProgressSource(defaults).json("dhikr_progress.subhanallah"))
     }
 }

@@ -1,5 +1,6 @@
 package com.muttaqi.shared.feature.dhikr.data.progress
 
+import com.muttaqi.shared.core.preferences.LegacyDataSource
 import com.muttaqi.shared.feature.dhikr.data.dto.DhikrProgressDto
 import com.muttaqi.shared.feature.dhikr.domain.model.DhikrProgress
 import com.muttaqi.shared.feature.dhikr.domain.repository.DhikrProgressRepository
@@ -18,13 +19,13 @@ import kotlin.time.Instant
  */
 class SettingsDhikrProgressRepository(
     private val settings: Settings,
-    private val legacy: LegacyDhikrProgressSource,
+    private val legacy: LegacyDataSource,
     private val timeZone: () -> TimeZone = { TimeZone.currentSystemDefault() },
 ) : DhikrProgressRepository {
 
     override fun saved(dhikrId: String): DhikrProgress? {
         val key = key(dhikrId)
-        val json = settings.getStringOrNull(key) ?: legacy.json(key) ?: return null
+        val json = settings.getStringOrNull(key) ?: legacy.text(key) ?: return null
         // Unreadable progress counts as none, as it did in the Swift app; it only ever holds one day's count
         val dto = try {
             ProgressJson.decodeFromString<DhikrProgressDto>(json)
@@ -51,11 +52,3 @@ class SettingsDhikrProgressRepository(
         fun key(dhikrId: String) = "dhikr_progress.$dhikrId"
     }
 }
-
-/** Progress the Swift app saved as data rather than text, as JSON; only iOS has any */
-fun interface LegacyDhikrProgressSource {
-    fun json(key: String): String?
-}
-
-/** This platform's [LegacyDhikrProgressSource]: iOS reads the standard user defaults, Android has nothing to read */
-internal expect fun platformLegacyDhikrProgressSource(): LegacyDhikrProgressSource

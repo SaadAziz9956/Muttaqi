@@ -2,9 +2,9 @@ package com.muttaqi.shared.feature.dhikr
 
 import app.cash.turbine.test
 import com.muttaqi.shared.core.model.Language
+import com.muttaqi.shared.core.preferences.LegacyDataSource
 import com.muttaqi.shared.core.share.SharePassage
 import com.muttaqi.shared.feature.dhikr.DhikrTestData.today
-import com.muttaqi.shared.feature.dhikr.data.progress.LegacyDhikrProgressSource
 import com.muttaqi.shared.feature.dhikr.data.progress.SettingsDhikrProgressRepository
 import com.muttaqi.shared.feature.dhikr.data.repository.BundledDhikrRepository
 import com.muttaqi.shared.feature.dhikr.domain.model.DhikrMilestone
@@ -46,7 +46,7 @@ class DhikrCounterViewModelTest {
     private val language = FakeSelectedLanguage()
     private val day = FakeCurrentDay()
     private val settings = MapSettings()
-    private val progress = SettingsDhikrProgressRepository(settings, LegacyDhikrProgressSource { null }, timeZone = { TimeZone.UTC })
+    private val progress = SettingsDhikrProgressRepository(settings, LegacyDataSource { null }, timeZone = { TimeZone.UTC })
 
     private fun viewModel(id: String) = DhikrCounterViewModel(
         dhikrId = id,

@@ -1,8 +1,8 @@
 package com.muttaqi.shared.feature.dhikr
 
 import com.muttaqi.shared.core.model.Language
+import com.muttaqi.shared.core.preferences.LegacyDataSource
 import com.muttaqi.shared.feature.dhikr.DhikrTestData.today
-import com.muttaqi.shared.feature.dhikr.data.progress.LegacyDhikrProgressSource
 import com.muttaqi.shared.feature.dhikr.data.progress.SettingsDhikrProgressRepository
 import com.muttaqi.shared.feature.dhikr.data.repository.BundledDhikrRepository
 import com.muttaqi.shared.feature.dhikr.domain.model.DhikrProgress
@@ -26,7 +26,7 @@ import kotlin.test.assertNull
 
 class DhikrUseCasesTest {
     private val day = FakeCurrentDay()
-    private val progress = SettingsDhikrProgressRepository(MapSettings(), LegacyDhikrProgressSource { null }, timeZone = { TimeZone.UTC })
+    private val progress = SettingsDhikrProgressRepository(MapSettings(), LegacyDataSource { null }, timeZone = { TimeZone.UTC })
     private val getProgress = GetTodaysDhikrProgress(progress, day)
 
     private fun TestScope.repository() =
