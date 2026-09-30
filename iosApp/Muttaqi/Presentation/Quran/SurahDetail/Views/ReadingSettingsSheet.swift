@@ -1,12 +1,18 @@
+import Shared
 import SwiftUI
 
-/// Settings sheet - loosely coupled and reusable
+/// The reader's settings: the reading mode, the font size and the translation
 struct ReadingSettingsSheet: View {
-    @Bindable var settingsViewModel: ReadingSettingsViewModel
-    let onLanguageSelected: (Language) -> Void
-    
+    let screen: SharedViewModel<ReadingSettingsViewModel, ReadingSettingsState>
+
     @State private var showLanguagePicker = false
-    
+
+    private var state: ReadingSettingsState { screen.state }
+
+    private func dispatch(_ intent: ReadingSettingsIntent) {
+        screen.viewModel.dispatch(intent: intent)
+    }
+
     var body: some View {
         VStack(alignment: .leading, spacing: 0) {
             Text("Reading mode")
@@ -19,12 +25,12 @@ struct ReadingSettingsSheet: View {
                 readingModeCard(
                     mode: .withTranslation,
                     label: "With Translation",
-                    isSelected: settingsViewModel.readingMode == .withTranslation
+                    isSelected: state.mode == .withTranslation
                 )
                 readingModeCard(
                     mode: .arabicOnly,
                     label: "Arabic Only",
-                    isSelected: settingsViewModel.readingMode == .arabicOnly
+                    isSelected: state.mode == .arabicOnly
                 )
             }
             .padding(.top, 16)
@@ -39,7 +45,7 @@ struct ReadingSettingsSheet: View {
 
                 HStack(spacing: 16) {
                     Button {
-                        settingsViewModel.decreaseFontSize()
+                        dispatch(ReadingSettingsIntentFontSizeDecreased.shared)
                     } label: {
                         Image("minus-circle-bold")
                             .resizable()
@@ -47,13 +53,13 @@ struct ReadingSettingsSheet: View {
                             .foregroundStyle(.appPrimary)
                     }
 
-                    Text("\(settingsViewModel.fontSize.percentage)%")
+                    Text("\(state.fontSize.percentage)%")
                         .font(.bodyLarge)
                         .foregroundStyle(.textPrimary)
                         .frame(width: 50, alignment: .center)
 
                     Button {
-                        settingsViewModel.increaseFontSize()
+                        dispatch(ReadingSettingsIntentFontSizeIncreased.shared)
                     } label: {
                         Image("add-circle-bold")
                             .resizable()
@@ -76,7 +82,7 @@ struct ReadingSettingsSheet: View {
                     showLanguagePicker = true
                 } label: {
                     HStack(spacing: 4) {
-                        Text(settingsViewModel.selectedLanguage.name)
+                        Text(state.language.displayName)
                             .font(.bodyMedium)
                             .foregroundStyle(.textPrimary)
 
@@ -90,7 +96,7 @@ struct ReadingSettingsSheet: View {
             .padding(.top, 28)
             .padding(.horizontal, 20)
 
-            if settingsViewModel.isDownloadingLanguage {
+            if state.isDownloadingLanguage {
                 HStack(spacing: 8) {
                     ProgressView()
                         .tint(.appPrimary)
@@ -113,7 +119,7 @@ struct ReadingSettingsSheet: View {
 
     private func readingModeCard(mode: ReadingMode, label: String, isSelected: Bool) -> some View {
         Button {
-            settingsViewModel.setReadingMode(mode)
+            dispatch(ReadingSettingsIntentModeSelected(mode: mode))
         } label: {
             VStack(spacing: 8) {
                 RoundedRectangle(cornerRadius: 8)
@@ -182,12 +188,12 @@ struct ReadingSettingsSheet: View {
                 .padding(.top, 24)
 
             VStack(spacing: 12) {
-                ForEach(Language.available, id: \.code) { language in
+                ForEach(state.languages, id: \.self) { language in
                     Button {
-                        onLanguageSelected(language)
+                        dispatch(ReadingSettingsIntentLanguageSelected(language: language))
                         showLanguagePicker = false
                     } label: {
-                        Text(language.name)
+                        Text(language.displayName)
                             .font(.bodyLarge)
                             .foregroundStyle(.textPrimary)
                             .frame(maxWidth: .infinity, alignment: .leading)
@@ -196,8 +202,8 @@ struct ReadingSettingsSheet: View {
                             .background(
                                 RoundedRectangle(cornerRadius: 8)
                                     .stroke(
-                                        settingsViewModel.selectedLanguage == language ? .appPrimary : Color(.systemGray4),
-                                        lineWidth: settingsViewModel.selectedLanguage == language ? 2 : 1
+                                        state.language == language ? .appPrimary : Color(.systemGray4),
+                                        lineWidth: state.language == language ? 2 : 1
                                     )
                             )
                     }

@@ -1,14 +1,34 @@
+import Shared
 import SwiftUI
 
 struct SurahDetailView: View {
-    @State private var coordinator: SurahDetailCoordinator
+    /// The surah opened, shown in the header until the reader has loaded
+    private let surah: Shared.Surah
+    @State private var screen: SharedViewModel<SurahReaderViewModel, SurahReaderState>
+    @State private var readingPosition: SharedValue<String>
+    // Made with the reader, so a translation still downloading when the sheet closes carries on, and the explanation
+    // loaded once is there straight away when it's opened again
+    @State private var settings = SharedViewModel(QuranViewModels.shared.settings()) { $0.state }
+    @State private var tafsir = SharedViewModel(QuranViewModels.shared.tafsir()) { $0.state }
+    @State private var showSettings = false
+    /// The explanation being shown, if any. An item rather than a flag, so the sheet always opens at the ayah just
+    /// asked for
+    @State private var tafsirRequest: TafsirRequest?
     @State private var contentWidth: CGFloat = 0
     @State private var titleBottom: CGFloat = .infinity
     @Environment(\.dismiss) private var dismiss
+    @Environment(AppRouter.self) private var router
 
-    init(coordinator: SurahDetailCoordinator) {
-        self._coordinator = State(initialValue: coordinator)
+    /// `startAyah` is the ayah (number within the surah) to open at, e.g. when continuing where the reader left off
+    init(surah: Surah, startAyah: Int? = nil) {
+        self.surah = Shared.Surah(surah)
+        let viewModel = QuranViewModels.shared.reader(surahNumber: Int32(surah.number), startAyah: Int32(startAyah ?? 0))
+        _screen = State(initialValue: SharedViewModel(viewModel) { $0.state })
+        _readingPosition = State(initialValue: SharedValue(viewModel.readingPosition))
     }
+
+    private var state: SurahReaderState { screen.state }
+    private var headerSurah: Shared.Surah { state.headerSurah ?? surah }
 
     var body: some View {
         VStack(spacing: 0) {
@@ -16,14 +36,12 @@ struct SurahDetailView: View {
                 ScrollView {
                     LazyVStack(spacing: 0) {
                         SurahHeaderView(
-                            surah: coordinator.headerSurah,
-                            previousSurah: coordinator.previousSurah,
-                            nextSurah: coordinator.nextSurah,
-                            onPrevious: goToPreviousSurah,
-                            onNext: goToNextSurah,
-                            onExplanation: {
-                                coordinator.toggleTafsir()
-                            },
+                            surah: headerSurah,
+                            previousSurah: state.previousSurah,
+                            nextSurah: state.nextSurah,
+                            onPrevious: { dispatch(SurahReaderIntentPreviousTapped.shared) },
+                            onNext: { dispatch(SurahReaderIntentNextTapped.shared) },
+                            onExplanation: { dispatch(SurahReaderIntentExplanationTapped.shared) },
                             onTitleBottomChange: { titleBottom = $0 }
                         )
 
@@ -33,8 +51,8 @@ struct SurahDetailView: View {
                     .padding(.horizontal, 16)
                 }
                 // Ayahs (or Mushaf pages) at least a fifth on screen count as read
-                .onScrollTargetVisibilityChange(idType: Int.self, threshold: 0.2) { visibleIDs in
-                    coordinator.recordVisible(visibleIDs)
+                .onScrollTargetVisibilityChange(idType: Int32.self, threshold: 0.2) { visibleIDs in
+                    dispatch(SurahReaderIntentVisibleAyahsChanged(ids: visibleIDs.map { KotlinInt(value: $0) }))
                 }
                 .task(id: startScrollTarget) {
                     guard let target = startScrollTarget else { return }
@@ -44,22 +62,24 @@ struct SurahDetailView: View {
                     try? await Task.sleep(for: .milliseconds(300))
                     proxy.scrollTo(target, anchor: .top)
                     try? await Task.sleep(for: .milliseconds(300))
-                    coordinator.didScrollToStartAyah()
+                    dispatch(SurahReaderIntentReachedStart.shared)
                 }
             }
-            .id(coordinator.navigator.currentSurah.value)
-            .transition(SurahSlideTransition(navigator: coordinator.navigator, width: contentWidth))
+            .id(state.surahNumber)
+            .transition(SurahSlideTransition(screen: screen, width: contentWidth))
         }
+        // The next or previous surah slides in from the side of the arrow that was tapped
+        .animation(.easeInOut(duration: 0.35), value: state.surahNumber)
         .background { SoftBackdrop() }
         .overlay(alignment: .bottom) {
-            ReadingPositionPill(coordinator: coordinator)
+            ReadingPositionPill(position: readingPosition)
                 .padding(.bottom, 8)
         }
         .onDisappear {
-            coordinator.saveProgressNow()
+            dispatch(SurahReaderIntentLeft.shared)
         }
         .onGeometryChange(for: CGFloat.self) { $0.size.width } action: { contentWidth = $0 }
-        .collapsingBarTitle(coordinator.headerSurah?.englishName ?? "", titleBottom: titleBottom)
+        .collapsingBarTitle(headerSurah.englishName, titleBottom: titleBottom)
         .navigationBarBackButtonHidden(true)
         .background(SwipeBackEnabler())
         .toolbar(.hidden, for: .tabBar)
@@ -73,7 +93,7 @@ struct SurahDetailView: View {
                 }
             }
             ToolbarItem(placement: .navigationBarTrailing) {
-                Button { coordinator.toggleSettings() } label: {
+                Button { showSettings.toggle() } label: {
                     Image("setting-4-linear")
                         .resizable()
                         .frame(width: 22, height: 22)
@@ -81,134 +101,110 @@ struct SurahDetailView: View {
                 }
             }
         }
-        .sheet(isPresented: $coordinator.showSettings) {
-            ReadingSettingsSheet(
-                settingsViewModel: coordinator.settingsViewModel,
-                onLanguageSelected: { language in
-                    Task { await coordinator.selectLanguage(language) }
-                }
-            )
-            .presentationDetents([.medium])
-            .presentationDragIndicator(.visible)
+        .sheet(isPresented: $showSettings) {
+            ReadingSettingsSheet(screen: settings)
+                .presentationDetents([.medium])
+                .presentationDragIndicator(.visible)
         }
-        .sheet(isPresented: $coordinator.showTafsir) {
-            TafsirView(
-                surah: coordinator.headerSurah,
-                viewModel: coordinator.tafsirViewModel,
-                language: coordinator.settingsViewModel.selectedLanguage,
-                startAyah: coordinator.tafsirStartAyah
-            )
-            .presentationDetents([.large])
-            .presentationDragIndicator(.visible)
+        .sheet(item: $tafsirRequest) { request in
+            TafsirView(surah: headerSurah, screen: tafsir, startAyah: request.startAyah)
+                .presentationDetents([.large])
+                .presentationDragIndicator(.visible)
         }
         .task {
-            await coordinator.onAppear()
+            for await effect in screen.viewModel.effects {
+                switch onEnum(of: effect) {
+                case .openTafsir(let open):
+                    tafsirRequest = TafsirRequest(startAyah: open.startAyah?.int32Value)
+                case .openShare(let share):
+                    router.push(SharePassage(share.passage))
+                case .copy(let copy):
+                    UIPasteboard.general.string = copy.text
+                }
+            }
         }
     }
 
+    private func dispatch(_ intent: SurahReaderIntent) {
+        screen.viewModel.dispatch(intent: intent)
+    }
+
     /// Scroll ID for the ayah the reader is continuing from: the ayah itself, or its Mushaf page in Arabic Only mode
-    private var startScrollTarget: Int? {
-        guard let startAyah = coordinator.pendingStartAyah,
-              case .loaded(let content) = coordinator.contentViewModel.state,
-              let ayah = content.displayAyahs.first(where: { $0.numberInSurah == startAyah }) else { return nil }
-        switch coordinator.settingsViewModel.readingMode {
-        case .withTranslation:
-            return ayah.id
-        case .arabicOnly:
-            return content.displayAyahs.first(where: { $0.page == ayah.page })?.id
-        }
+    private var startScrollTarget: Int32? {
+        state.startScrollTarget?.int32Value
     }
 
     @ViewBuilder
     private var contentView: some View {
-        switch coordinator.contentViewModel.state {
-        case .idle:
-            EmptyView()
+        switch onEnum(of: state.content) {
         case .loading:
             ProgressView()
                 .tint(.appPrimary)
                 .padding(.top, 100)
-        case .loaded(let content):
-            loadedContent(content)
-        case .error(let error):
-            errorView(error)
+        case .loaded(let loaded):
+            loadedContent(loaded.reading)
+        case .failed(let failed):
+            errorView(message: failed.message, suggestion: failed.suggestion)
         }
     }
 
     @ViewBuilder
-    private func loadedContent(_ content: SurahContentViewModel.SurahContent) -> some View {
-        if content.showBismillah {
+    private func loadedContent(_ reading: SurahReading) -> some View {
+        if reading.showsBismillah {
             BismillahView(
-                text: content.bismillahText,
-                translation: content.bismillahTranslation
+                text: reading.bismillahText,
+                translation: reading.bismillahTranslation
             )
         }
 
-        switch coordinator.settingsViewModel.readingMode {
+        switch state.settings.mode {
         case .withTranslation:
-            ForEach(content.displayAyahs) { ayah in
+            ForEach(reading.displayAyahs, id: \.number) { ayah in
                 AyahCardView(
                     ayah: ayah,
-                    fontSize: coordinator.settingsViewModel.fontSize,
-                    language: coordinator.settingsViewModel.selectedLanguage,
-                    onExplanation: { coordinator.openTafsir(at: ayah.numberInSurah) }
+                    fontSize: state.settings.fontSize,
+                    language: state.settings.language,
+                    onExplanation: { dispatch(SurahReaderIntentAyahExplanationTapped(numberInSurah: ayah.numberInSurah)) },
+                    onCopy: { dispatch(SurahReaderIntentCopyTapped(ayahNumber: ayah.number)) },
+                    onShare: { dispatch(SurahReaderIntentShareTapped(ayahNumber: ayah.number)) }
                 )
             }
         case .arabicOnly:
             ArabicOnlyView(
-                ayahs: content.displayAyahs,
-                fontSize: coordinator.settingsViewModel.fontSize
+                pages: reading.pages,
+                fontSize: state.settings.fontSize
             )
             .padding(.top, 16)
         }
 
         SurahEndNavigationView(
-            previousSurah: content.previousSurah,
-            nextSurah: content.nextSurah,
-            onPrevious: goToPreviousSurah,
-            onNext: goToNextSurah
+            previousSurah: reading.previousSurah,
+            nextSurah: reading.nextSurah,
+            onPrevious: { dispatch(SurahReaderIntentPreviousTapped.shared) },
+            onNext: { dispatch(SurahReaderIntentNextTapped.shared) }
         )
         .padding(.top, 24)
         // Room for the reading position pill, so it never covers the last cards
         .padding(.bottom, 72)
     }
 
-    private func goToPreviousSurah() {
-        let moved = withAnimation(.easeInOut(duration: 0.35)) { coordinator.goPrevious() }
-        if moved { Task { await coordinator.loadCurrentSurah() } }
-    }
-
-    private func goToNextSurah() {
-        let moved = withAnimation(.easeInOut(duration: 0.35)) { coordinator.goNext() }
-        if moved { Task { await coordinator.loadCurrentSurah() } }
-    }
-
-    private var content: SurahContentViewModel.SurahContent? {
-        if case .loaded(let content) = coordinator.contentViewModel.state {
-            return content
-        }
-        return nil
-    }
-
-    private func errorView(_ error: SurahDetailError) -> some View {
+    private func errorView(message: String, suggestion: String) -> some View {
         VStack(spacing: 16) {
             Text("Failed to load")
                 .font(.titleMedium)
                 .foregroundStyle(.textPrimary)
-            Text(error.localizedDescription)
+            Text(message)
                 .font(.bodySmall)
                 .foregroundStyle(.textSecondary)
                 .multilineTextAlignment(.center)
                 .padding(.horizontal, 32)
-            if let suggestion = error.recoverySuggestion {
-                Text(suggestion)
-                    .font(.caption)
-                    .foregroundStyle(.textSecondary)
-                    .multilineTextAlignment(.center)
-                    .padding(.horizontal, 32)
-            }
+            Text(suggestion)
+                .font(.caption)
+                .foregroundStyle(.textSecondary)
+                .multilineTextAlignment(.center)
+                .padding(.horizontal, 32)
             Button {
-                Task { await coordinator.retry() }
+                dispatch(SurahReaderIntentRetry.shared)
             } label: {
                 Text("Retry")
                     .font(.titleSmall)
@@ -222,16 +218,23 @@ struct SurahDetailView: View {
     }
 }
 
+/// The explanation to open: at the passage covering `startAyah`, or at the start when it's nil
+private struct TafsirRequest: Identifiable {
+    let id = UUID()
+    let startAyah: Int32?
+}
+
 // Slides the surah in from, and out toward, the side of the arrow that was tapped.
-// The direction is read from the navigator as the transition runs rather than captured: SwiftUI animates an outgoing
-// view with the transition from its last render, which still holds the old direction when the user switches arrows.
+// The direction is read from the reader's state as the transition runs rather than captured: SwiftUI animates an
+// outgoing view with the transition from its last render, which still holds the old direction when the user switches
+// arrows.
 private struct SurahSlideTransition: Transition {
-    let navigator: SurahNavigator
+    let screen: SharedViewModel<SurahReaderViewModel, SurahReaderState>
     let width: CGFloat
 
     func body(content: Content, phase: TransitionPhase) -> some View {
         // Forward: the new surah enters from the trailing edge and the old one leaves by the leading edge
-        let sign: CGFloat = navigator.navigationDirection == .forward ? 1 : -1
+        let sign: CGFloat = screen.state.direction == .forward ? 1 : -1
         content.offset(x: -phase.value * sign * width)
     }
 }
@@ -239,10 +242,10 @@ private struct SurahSlideTransition: Transition {
 /// Where the reader is, floating at the foot of the screen. It reads the position in its own body, so scrolling
 /// redraws only the pill, not the ayahs.
 private struct ReadingPositionPill: View {
-    let coordinator: SurahDetailCoordinator
+    let position: SharedValue<String>
 
     var body: some View {
-        if let position = coordinator.readingPosition {
+        if let position = position.value {
             Text(position)
                 .font(.custom("ReemKufi-Medium", size: 13))
                 .foregroundStyle(.appPrimary)

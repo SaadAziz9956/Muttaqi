@@ -1,4 +1,5 @@
 import Foundation
+import Shared
 
 @Observable
 @MainActor
@@ -23,18 +24,18 @@ final class OnboardingViewModel {
     private let userPreferences: UserPreferencesProtocol
     private let notificationService: NotificationServiceProtocol
     private let locationService: LocationServiceProtocol
-    private let syncQuranDataUseCase: SyncQuranDataUseCase
+    private let quran: QuranUseCases
 
     init(
         userPreferences: UserPreferencesProtocol,
         notificationService: NotificationServiceProtocol,
         locationService: LocationServiceProtocol,
-        syncQuranDataUseCase: SyncQuranDataUseCase
+        quran: QuranUseCases
     ) {
         self.userPreferences = userPreferences
         self.notificationService = notificationService
         self.locationService = locationService
-        self.syncQuranDataUseCase = syncQuranDataUseCase
+        self.quran = quran
     }
 
     func send(_ intent: Intent) {
@@ -72,17 +73,15 @@ final class OnboardingViewModel {
         setupError = nil
 
         Task {
-            do {
-                // Download Arabic + transliteration + English translation
-                try await syncQuranDataUseCase.execute(language: .english)
-
-                isLoading = false
-                userPreferences.setOnboardingComplete(true)
-                onOnboardingComplete?()
-            } catch {
-                isLoading = false
-                setupError = error.localizedDescription
+            // Download Arabic + transliteration + English translation
+            let outcome = try? await quran.sync(language: .english)
+            isLoading = false
+            guard let outcome, !(outcome is OutcomeFailure) else {
+                setupError = QuranMessages.shared.downloadFailed(language: .english)
+                return
             }
+            userPreferences.setOnboardingComplete(true)
+            onOnboardingComplete?()
         }
     }
 

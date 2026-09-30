@@ -10,26 +10,9 @@ final class DependencyContainer {
     let readingPreferences: ReadingPreferencesStore
 
     // MARK: - Services
-    private lazy var networkClient: NetworkClientProtocol = NetworkClient()
-    private lazy var apiService: QuranAPIServiceProtocol = QuranAPIService(networkClient: networkClient)
-    private lazy var tafsirAPIService: TafsirAPIServiceProtocol = TafsirAPIService(networkClient: networkClient)
     private lazy var locationService: LocationServiceProtocol = LocationService()
 
     // MARK: - Repositories
-    private lazy var syncRepo: QuranSyncRepositoryProtocol = QuranSyncRepository(
-        modelContainer: modelContainer,
-        apiService: apiService
-    )
-    private lazy var quranRepo: QuranRepositoryProtocol = QuranRepository(
-        modelContainer: modelContainer
-    )
-    private lazy var readingProgressRepo: ReadingProgressRepositoryProtocol = ReadingProgressRepository(
-        modelContainer: modelContainer
-    )
-    private lazy var tafsirRepo: TafsirRepositoryProtocol = TafsirRepository(
-        modelContainer: modelContainer,
-        apiService: tafsirAPIService
-    )
     // Karachi method with Hanafi Asr by default
     private lazy var prayerTimesRepo: PrayerTimesRepositoryProtocol = AdhanPrayerTimesRepository()
     private lazy var duaRepo: DuaRepositoryProtocol = BundledDuaRepository()
@@ -39,31 +22,8 @@ final class DependencyContainer {
     )
 
     // MARK: - Use Cases
-    private lazy var syncQuranDataUseCase = SyncQuranDataUseCase(
-        syncRepository: syncRepo,
-        preferences: readingPreferences
-    )
-    private lazy var fetchSurahsUseCase = FetchSurahsUseCase(
-        repository: quranRepo
-    )
-    private lazy var fetchAyahsUseCase = FetchAyahsUseCase(
-        repository: quranRepo,
-        languagePreferences: readingPreferences
-    )
-    private lazy var getLastReadingUseCase = GetLastReadingUseCase(
-        progressRepository: readingProgressRepo,
-        quranRepository: quranRepo
-    )
-    private lazy var fetchTafsirUseCase = FetchTafsirUseCase(
-        repository: tafsirRepo
-    )
-    private lazy var updateReadingProgressUseCase = UpdateReadingProgressUseCase(
-        repository: readingProgressRepo
-    )
-    private lazy var fetchAyahUseCase = FetchAyahUseCase(
-        repository: quranRepo,
-        languagePreferences: readingPreferences
-    )
+    // The Quran is shared code now; this reads one ayah from it for Home's verses
+    private lazy var fetchAyahUseCase = FetchAyahUseCase()
 
     init() {
         do {
@@ -86,7 +46,7 @@ final class DependencyContainer {
             userPreferences: userPreferences,
             notificationService: NotificationService(),
             locationService: LocationService(),
-            syncQuranDataUseCase: syncQuranDataUseCase
+            quran: QuranUseCases.shared
         )
     }
 
@@ -97,8 +57,7 @@ final class DependencyContainer {
             fetchAyah: fetchAyahUseCase,
             getAyahOfTheDay: GetAyahOfTheDayUseCase(fetchAyah: fetchAyahUseCase),
             getDuaOfTheDay: GetDuaOfTheDayUseCase(repository: duaRepo, languagePreferences: readingPreferences),
-            getLastReading: getLastReadingUseCase,
-            fetchSurahs: fetchSurahsUseCase,
+            quran: QuranUseCases.shared,
             getQiblaDirection: GetQiblaDirectionUseCase(repository: prayerTimesRepo),
             compass: CompassService(),
             journal: SharedViewModel(JournalViewModels.shared.today()) { $0.state }
@@ -113,30 +72,22 @@ final class DependencyContainer {
         )
     }
 
-    func makeQuranListViewModel() -> QuranListViewModel {
-        QuranListViewModel(
-            fetchSurahsUseCase: fetchSurahsUseCase,
-            getLastReadingUseCase: getLastReadingUseCase,
-            languagePreferences: readingPreferences
-        )
-    }
-    
-    func makeSurahDetailCoordinator(surah: Surah, startAyah: Int? = nil) -> SurahDetailCoordinator {
-        guard let surahNumber = SurahNumber(surah.number) else {
-            fatalError("Invalid surah number: \(surah.number)")
-        }
+    // MARK: - Quran
 
-        return SurahDetailCoordinator(
-            initialSurah: surahNumber,
-            headerSurah: surah,
-            startAyah: startAyah,
-            fetchSurahs: fetchSurahsUseCase,
-            fetchAyahs: fetchAyahsUseCase,
-            syncQuranData: syncQuranDataUseCase,
-            readingPreferences: readingPreferences,
-            fetchTafsir: fetchTafsirUseCase,
-            updateReadingProgress: updateReadingProgressUseCase
-        )
+    /// Readies the shared Quran at launch, during the splash: the reading progress SwiftData kept is brought over
+    /// once, and for someone past onboarding the Quran text, which the Swift code also kept in SwiftData, is
+    /// downloaded into the shared database the first time after the update. The splash waits for that a little, so
+    /// Home opens with its ayahs; a slow or failed download carries on or retries from the Quran tab.
+    func prepareQuran() async {
+        await StoredReadingProgressImport(modelContainer: modelContainer).run()
+        guard userPreferences.isOnboardingComplete() else { return }
+        let sync = Task { _ = try? await QuranUseCases.shared.syncIfNeeded() }
+        await withTaskGroup(of: Void.self) { group in
+            group.addTask { await sync.value }
+            group.addTask { try? await Task.sleep(for: .seconds(8)) }
+            await group.next()
+            group.cancelAll()
+        }
     }
 }
 

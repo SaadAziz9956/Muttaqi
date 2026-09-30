@@ -1,38 +1,47 @@
+import Shared
 import SwiftUI
 
 struct QuranListView: View {
-    @State private var viewModel: QuranListViewModel
+    @State private var screen = SharedViewModel(QuranViewModels.shared.list()) { $0.state }
     @State private var titleBottom: CGFloat = .infinity
     @FocusState private var isSearchFocused: Bool
     @Environment(AppRouter.self) private var router
 
-    init(viewModel: QuranListViewModel) {
-        self._viewModel = State(initialValue: viewModel)
-    }
+    private var state: QuranListState { screen.state }
 
     var body: some View {
         Group {
-            switch viewModel.state {
-            case .idle, .loading:
+            if state.isLoading {
                 ProgressView()
                     .tint(.appPrimary)
-            case .loaded:
+            } else if let error = state.error {
+                errorView(error)
+            } else {
                 quranContent
-            case .error(let message):
-                errorView(message)
             }
         }
         .task {
-            viewModel.send(.onAppear)
-        }
-        .onAppear {
-            viewModel.onSurahSelected = { surah in
-                router.push(AppRouter.QuranDestination.surahDetail(surah: surah))
+            // Coming back from a surah: the reading position may have moved
+            dispatch(QuranListIntentAppeared.shared)
+            for await effect in screen.viewModel.effects {
+                switch onEnum(of: effect) {
+                case .openSurah(let open):
+                    guard let surah = surah(open.surahNumber) else { continue }
+                    router.push(AppRouter.QuranDestination.surahDetail(surah: Surah(surah)))
+                case .continueReading(let next):
+                    guard let surah = surah(next.surahNumber) else { continue }
+                    router.push(AppRouter.QuranDestination.surahDetail(surah: Surah(surah), startAyah: Int(next.ayahNumber)))
+                }
             }
-            viewModel.onContinueReading = { surah, ayah in
-                router.push(AppRouter.QuranDestination.surahDetail(surah: surah, startAyah: ayah))
-            }
         }
+    }
+
+    private func dispatch(_ intent: QuranListIntent) {
+        screen.viewModel.dispatch(intent: intent)
+    }
+
+    private func surah(_ number: Int32) -> Shared.Surah? {
+        state.surahs.first { $0.number == number }
     }
 
     // MARK: - Main Content
@@ -48,7 +57,7 @@ struct QuranListView: View {
                     .padding(.top, 24)
 
                 headerSection
-                if viewModel.readingProgress != nil {
+                if state.readingProgress != nil {
                     continueReadingCard
                 }
                 searchField
@@ -58,6 +67,9 @@ struct QuranListView: View {
                     .padding(.top, 18)
             }
             .padding(.horizontal, 20)
+            // A new reading position slides in, and a filter or search reflows the grid
+            .animation(.smooth, value: state.readingProgress)
+            .animation(.snappy, value: state.filter)
         }
         .scrollDismissesKeyboard(.immediately)
         .background { SoftBackdrop() }
@@ -67,21 +79,22 @@ struct QuranListView: View {
 
     // MARK: - Header
 
+    @ViewBuilder
     private var headerSection: some View {
-        let quote = PublishedQuote.learnAndTeachQuran.text(language: viewModel.language)
+        if let quote = state.header {
+            VStack(spacing: 0) {
+                Text(quote.text.quoted)
+                    .font(TranslationStyle(for: quote.text, size: 14).font)
+                    .foregroundStyle(.textPrimary)
+                    .multilineTextAlignment(.center)
+                    .padding(.top, 8)
 
-        return VStack(spacing: 0) {
-            Text(quote.quoted)
-                .font(TranslationStyle(for: quote, size: 14).font)
-                .foregroundStyle(.textPrimary)
-                .multilineTextAlignment(.center)
-                .padding(.top, 8)
-
-            Text(PublishedQuote.learnAndTeachQuran.source)
-                .font(.labelSmall)
-                .foregroundStyle(.textSecondary)
-                .padding(.top, 4)
-                .padding(.bottom, 24)
+                Text(quote.source)
+                    .font(.labelSmall)
+                    .foregroundStyle(.textSecondary)
+                    .padding(.top, 4)
+                    .padding(.bottom, 24)
+            }
         }
     }
 
@@ -90,9 +103,9 @@ struct QuranListView: View {
     // The whole card is one button, so it can be tapped anywhere and VoiceOver reads it as a single control
     @ViewBuilder
     private var continueReadingCard: some View {
-        if let progress = viewModel.readingProgress {
+        if let progress = state.readingProgress {
             Button {
-                viewModel.send(.continueTapped)
+                dispatch(QuranListIntentContinueTapped.shared)
             } label: {
                 VStack(alignment: .leading, spacing: 0) {
                     Text("Continue reading")
@@ -145,17 +158,20 @@ struct QuranListView: View {
                 .foregroundStyle(.textSecondary)
                 .accessibilityHidden(true)
 
-            TextField("Search surah or number", text: $viewModel.query)
-                .font(.bodyMedium)
-                .foregroundStyle(.textPrimary)
-                .submitLabel(.search)
-                .textInputAutocapitalization(.never)
-                .autocorrectionDisabled()
-                .focused($isSearchFocused)
+            TextField(
+                "Search surah or number",
+                text: Binding(get: { state.query }, set: { dispatch(QuranListIntentQueryChanged(query: $0)) })
+            )
+            .font(.bodyMedium)
+            .foregroundStyle(.textPrimary)
+            .submitLabel(.search)
+            .textInputAutocapitalization(.never)
+            .autocorrectionDisabled()
+            .focused($isSearchFocused)
 
-            if viewModel.isSearching {
+            if state.isSearching {
                 Button {
-                    viewModel.query = ""
+                    dispatch(QuranListIntentClearQuery.shared)
                     isSearchFocused = false
                 } label: {
                     Image("close-circle-bold")
@@ -176,12 +192,12 @@ struct QuranListView: View {
         // Native glass rendered as one group, which is cheaper than each on its own
         GlassEffectContainer(spacing: 4) {
             HStack(spacing: 8) {
-                ForEach(QuranListViewModel.Revelation.allCases) { place in
-                    let isSelected = viewModel.revelation == place
+                ForEach(RevelationFilter.allCases, id: \.self) { filter in
+                    let isSelected = state.filter == filter
                     Button {
-                        withAnimation(.snappy) { viewModel.revelation = place }
+                        dispatch(QuranListIntentFilterSelected(filter: filter))
                     } label: {
-                        Text(place.rawValue)
+                        Text(filter.label)
                             .font(.custom("ReemKufi-Medium", size: 13))
                             .foregroundStyle(isSelected ? Color.white : Color.appPrimary)
                             .padding(.horizontal, 18)
@@ -200,9 +216,9 @@ struct QuranListView: View {
 
     @ViewBuilder
     private var surahGrid: some View {
-        let surahs = viewModel.visibleSurahs
+        let surahs = state.visibleSurahs
         if surahs.isEmpty {
-            ContentUnavailableView.search(text: viewModel.query)
+            ContentUnavailableView.search(text: state.query)
                 .padding(.top, 20)
         } else {
             let columns = [
@@ -211,9 +227,9 @@ struct QuranListView: View {
             ]
 
             LazyVGrid(columns: columns, spacing: 14) {
-                ForEach(surahs) { surah in
+                ForEach(surahs, id: \.number) { surah in
                     Button {
-                        viewModel.send(.surahTapped(surah))
+                        dispatch(QuranListIntentSurahTapped(surahNumber: surah.number))
                     } label: {
                         SurahCardView(surah: surah)
                     }
@@ -236,7 +252,7 @@ struct QuranListView: View {
                 .foregroundStyle(.textSecondary)
                 .multilineTextAlignment(.center)
             Button {
-                viewModel.send(.retry)
+                dispatch(QuranListIntentRetry.shared)
             } label: {
                 Text("Retry")
                     .font(.titleSmall)

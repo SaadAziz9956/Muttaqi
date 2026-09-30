@@ -1,56 +1,18 @@
 import Foundation
 
-protocol ReadingModePreferences: Sendable {
-    func getReadingMode() -> ReadingMode
-    func setReadingMode(_ mode: ReadingMode)
-}
-
-protocol FontPreferences: Sendable {
-    func getFontSize() -> FontSize
-    func setFontSize(_ size: FontSize)
-}
-
 protocol LanguagePreferences: Sendable {
     func getSelectedLanguage() -> Language
     func setSelectedLanguage(_ language: Language)
-    func getDownloadedLanguages() -> [Language]
-    func markLanguageAsDownloaded(_ language: Language)
 }
 
-protocol QuranDataPreferences: Sendable {
-    func isDataDownloaded() -> Bool
-    func setDataDownloaded(_ downloaded: Bool)
-}
-
-protocol ReadingPreferences: ReadingModePreferences, FontPreferences, LanguagePreferences, QuranDataPreferences {}
-
-final class ReadingPreferencesStore: ReadingPreferences {
+/// The reader's translation language, for the Swift features still to move to shared code. The Quran's reading mode,
+/// font size and download notes are in the shared code now, under the same keys; the language is stored under the key
+/// the shared code reads too, so both always agree
+final class ReadingPreferencesStore: LanguagePreferences {
     private let storage: KeyValueStorage
 
     init(storage: KeyValueStorage) {
         self.storage = storage
-    }
-
-    func getReadingMode() -> ReadingMode {
-        guard let raw = storage.string(forKey: Keys.readingMode),
-              let mode = ReadingMode(rawValue: raw) else {
-            return .withTranslation
-        }
-        return mode
-    }
-
-    func setReadingMode(_ mode: ReadingMode) {
-        storage.set(mode.rawValue, forKey: Keys.readingMode)
-    }
-
-    func getFontSize() -> FontSize {
-        let stored = storage.integer(forKey: Keys.fontSize)
-        // Values below the minimum percent are from the old raw-pt storage format; reset to default
-        return stored >= FontSize.minimumPercent ? FontSize(stored) : .default
-    }
-
-    func setFontSize(_ size: FontSize) {
-        storage.set(size.percentage, forKey: Keys.fontSize)
     }
 
     func getSelectedLanguage() -> Language {
@@ -64,33 +26,8 @@ final class ReadingPreferencesStore: ReadingPreferences {
         storage.set(language.code, forKey: Keys.selectedLanguage)
     }
 
-    func getDownloadedLanguages() -> [Language] {
-        let codes = storage.stringArray(forKey: Keys.downloadedLanguages) ?? []
-        return codes.map { Language.from(code: $0) }
-    }
-
-    func markLanguageAsDownloaded(_ language: Language) {
-        var languages = getDownloadedLanguages()
-        if !languages.contains(language) {
-            languages.append(language)
-            storage.set(languages.map(\.code), forKey: Keys.downloadedLanguages)
-        }
-    }
-
-    func isDataDownloaded() -> Bool {
-        storage.bool(forKey: Keys.dataDownloaded)
-    }
-
-    func setDataDownloaded(_ downloaded: Bool) {
-        storage.set(downloaded, forKey: Keys.dataDownloaded)
-    }
-
     private enum Keys {
-        static let readingMode = "reading_mode"
-        static let fontSize = "reading_font_size"
         static let selectedLanguage = "reading_selected_language"
-        static let dataDownloaded = "quran_data_downloaded"
-        static let downloadedLanguages = "downloaded_languages"
     }
 }
 

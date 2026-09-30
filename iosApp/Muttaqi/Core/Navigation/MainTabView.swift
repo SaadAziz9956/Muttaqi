@@ -78,11 +78,11 @@ struct MainTabView: View {
                     }
                 }
         case .quran:
-            QuranListView(viewModel: container.makeQuranListViewModel())
+            QuranListView()
                 .navigationDestination(for: AppRouter.QuranDestination.self) { dest in
                     switch dest {
                     case .surahDetail(let surah, let startAyah):
-                        SurahDetailView(coordinator: container.makeSurahDetailCoordinator(surah: surah, startAyah: startAyah))
+                        SurahDetailView(surah: surah, startAyah: startAyah)
                     }
                 }
         case .dua:

@@ -21,7 +21,11 @@ class QuranListViewModel(
     private val getLastReading: GetLastReading,
     private val filterSurahs: FilterSurahs,
     private val selectedLanguage: SelectedLanguage,
-) : MviViewModel<QuranListState, QuranListIntent, QuranListMutation, QuranListEffect>(QuranListState(), QuranListReducer) {
+) : MviViewModel<QuranListState, QuranListIntent, QuranListMutation, QuranListEffect>(
+    // The hadith is there from the first frame, so the page never reflows as it arrives
+    QuranListState(header = PageQuotes.learnAndTeachQuran.displayed(selectedLanguage.current)),
+    QuranListReducer,
+) {
 
     private var loading: Job? = null
 

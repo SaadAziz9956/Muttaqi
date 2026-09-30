@@ -1,6 +1,8 @@
 import Foundation
 import SwiftData
 
+// Read once at launch by StoredReadingProgressImport, which hands it to the shared Quran database; kept in the schema
+// so the store, which also holds the journal, opens without a migration
 @Model
 final class ReadingProgressEntity {
     @Attribute(.unique) var surahNumber: Int
