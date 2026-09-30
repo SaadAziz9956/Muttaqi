@@ -33,8 +33,8 @@ import androidx.compose.material3.LoadingIndicator
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.ModalBottomSheet
 import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Text
 import androidx.compose.material3.SheetValue
+import androidx.compose.material3.Text
 import androidx.compose.material3.rememberBottomSheetState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.DisposableEffect
@@ -67,6 +67,7 @@ import androidx.compose.ui.unit.sp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.muttaqi.android.R
 import com.muttaqi.android.designsystem.MuttaqiTheme
+import com.muttaqi.android.designsystem.NastaliqFont
 import com.muttaqi.android.designsystem.QuranFont
 import com.muttaqi.android.designsystem.component.ArabicText
 import com.muttaqi.android.designsystem.component.SoftBackdrop
@@ -475,7 +476,7 @@ fun AyahCard(
     }
 }
 
-/** The ayah's Arabic, right-aligned, followed by its number between the Quran font's ornate brackets */
+/** The ayah's Arabic, right-aligned, followed by its number between ornate brackets, flowered as on iOS */
 @Composable
 private fun AyahArabic(ayah: Ayah, fontSize: FontSize) {
     val soft = MuttaqiTheme.soft
@@ -483,9 +484,9 @@ private fun AyahArabic(ayah: Ayah, fontSize: FontSize) {
         buildAnnotatedString {
             append(ayah.arabicWithoutEndSign().kfgqpcEncoded())
             append(' ')
-            withStyle(SpanStyle(color = soft.appPrimary, fontSize = 10.sp)) { append('﴿') }
+            withStyle(SpanStyle(color = soft.appPrimary, fontSize = 10.sp, fontFamily = NastaliqFont)) { append('﴿') }
             withStyle(SpanStyle(color = soft.appPrimary, fontSize = 14.sp)) { append("${ayah.numberInSurah}") }
-            withStyle(SpanStyle(color = soft.appPrimary, fontSize = 10.sp)) { append('﴾') }
+            withStyle(SpanStyle(color = soft.appPrimary, fontSize = 10.sp, fontFamily = NastaliqFont)) { append('﴾') }
         }
     }
     Text(
@@ -587,7 +588,8 @@ private fun EndCard(neighbour: Surah, isNext: Boolean, onClick: () -> Unit) {
 /** Where the reader is, floating over the ayahs as they scroll beneath it */
 @Composable
 private fun ReadingPositionPill(position: String) {
-    SoftPillSurface(Modifier.height(36.dp)) {
+    // Nearly solid, since nothing blurs the ayahs passing under it as iOS's glass does
+    SoftPillSurface(Modifier.height(36.dp), fill = MuttaqiTheme.soft.surface.copy(alpha = 0.96f)) {
         AnimatedContent(position, label = "position") {
             Text(it, Modifier.padding(horizontal = 16.dp), style = MaterialTheme.typography.labelLarge.copy(fontSize = 13.sp), color = MuttaqiTheme.soft.appPrimary)
         }

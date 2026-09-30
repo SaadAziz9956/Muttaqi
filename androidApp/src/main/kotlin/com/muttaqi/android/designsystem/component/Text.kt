@@ -24,6 +24,7 @@ import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.isSpecified
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.em
 import androidx.compose.ui.unit.sp
 import com.muttaqi.android.designsystem.MuttaqiTheme
 import com.muttaqi.android.designsystem.NastaliqFont
@@ -36,8 +37,9 @@ import com.muttaqi.shared.core.text.kfgqpcEncoded
 import com.muttaqi.shared.core.text.quoted
 
 /**
- * Arabic in the Quran font (KFGQPC Hafs), right to left. Marks the font can't draw (Arabic punctuation and the ornate
- * brackets) are set in the system font, as on iOS. `lineSpacing` is the space between lines, as iOS's `lineSpacing`;
+ * Arabic in the Quran font (KFGQPC Hafs), right to left. Marks the font can't draw are set as iOS sets them, a little
+ * smaller: Arabic punctuation in the system font, and the ornate brackets in Nastaliq, whose flowered ones are iOS's
+ * look where Android's own are plain. `lineSpacing` is the space between lines, as iOS's `lineSpacing`;
  * text cut off at `maxLines` ends in an ellipsis
  */
 @Composable
@@ -54,7 +56,9 @@ fun ArabicText(
         buildAnnotatedString {
             for (char in text.kfgqpcEncoded().withRightToLeftGuillemets()) {
                 if (char in arabicMarksOutsideQuranFont) {
-                    withStyle(SpanStyle(fontFamily = FontFamily.Default)) { append(char) }
+                    withStyle(SpanStyle(fontFamily = if (char in OrnateBrackets) NastaliqFont else FontFamily.Default, fontSize = 0.9.em)) {
+                        append(char)
+                    }
                 } else {
                     append(char)
                 }
@@ -145,6 +149,9 @@ private fun String.withRightToLeftGuillemets(): String = buildString(length) {
 private const val QURAN_FONT_LINE_HEIGHT = 1.758f
 private const val NASTALIQ_LINE_HEIGHT = 2.5f
 private const val REEM_KUFI_LINE_HEIGHT = 1.5f
+
+/** Drawn in Nastaliq wherever Arabic sets them, e.g. around an ayah's number or a verse quoted in a dua */
+internal val OrnateBrackets = setOf('﴾', '﴿')
 
 /** A line as tall as iOS makes it: the font's own line height, then the spacing */
 private fun lineHeight(fontSize: TextUnit, fontLineHeight: Float, lineSpacing: TextUnit): TextUnit =

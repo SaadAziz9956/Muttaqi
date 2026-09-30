@@ -1,6 +1,7 @@
 package com.muttaqi.android.designsystem.component
 
 import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
 import androidx.compose.foundation.layout.RowScope
@@ -11,7 +12,11 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.drawBehind
+import androidx.compose.ui.geometry.Size
+import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
@@ -20,7 +25,8 @@ import com.muttaqi.android.designsystem.MuttaqiTheme
 
 /**
  * The bar over a page: a round back button, and the page's title once its own large title has scrolled away (like
- * iOS's collapsing titles). [showTitle] is usually `listState.firstVisibleItemIndex > 0`
+ * iOS's collapsing titles). [showTitle] is usually `listState.firstVisibleItemIndex > 0`. While it shows, the page
+ * fades out under the bar, as under iOS's soft scroll edge, so text passing beneath never shows through
  */
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -31,8 +37,25 @@ fun SoftTopBar(
     modifier: Modifier = Modifier,
     actions: @Composable RowScope.() -> Unit = {},
 ) {
+    val canvas = MuttaqiTheme.soft.canvas
+    val edge by animateFloatAsState(if (showTitle) 1f else 0f, label = "edge")
     CenterAlignedTopAppBar(
-        modifier = modifier,
+        modifier = modifier.drawBehind {
+            if (edge > 0f) {
+                val fade = EdgeFade.toPx()
+                val height = size.height + fade
+                drawRect(
+                    Brush.verticalGradient(
+                        0f to canvas,
+                        size.height / height to canvas.copy(alpha = 0.85f),
+                        1f to canvas.copy(alpha = 0f),
+                        endY = height,
+                    ),
+                    size = Size(size.width, height),
+                    alpha = edge,
+                )
+            }
+        },
         title = {
             AnimatedVisibility(showTitle, enter = fadeIn(), exit = fadeOut()) {
                 Text(title, style = MaterialTheme.typography.titleMedium, color = MuttaqiTheme.soft.appPrimary, maxLines = 1, overflow = TextOverflow.Ellipsis)
@@ -47,3 +70,6 @@ fun SoftTopBar(
         colors = TopAppBarDefaults.centerAlignedTopAppBarColors(containerColor = Color.Transparent, scrolledContainerColor = Color.Transparent),
     )
 }
+
+/** How far below the bar the page takes to fade back in */
+private val EdgeFade = 28.dp

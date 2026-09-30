@@ -2,6 +2,7 @@ package com.muttaqi.android.navigation
 
 import androidx.annotation.DrawableRes
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
@@ -75,6 +76,8 @@ fun MuttaqiApp() {
 
         Scaffold(
             containerColor = Color.Transparent,
+            // Screens reach the bottom edge and draw their backdrop under the system bar; only the tab bar takes room
+            contentWindowInsets = WindowInsets(0, 0, 0, 0),
             bottomBar = {
                 if (onTabRoot) {
                     ShortNavigationBar(containerColor = MuttaqiTheme.soft.surface) {
