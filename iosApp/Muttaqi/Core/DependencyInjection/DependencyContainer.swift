@@ -1,4 +1,5 @@
 import Foundation
+import Shared
 import SwiftData
 import SwiftUI
 
@@ -35,17 +36,6 @@ final class DependencyContainer {
     private lazy var locationRepo: LocationRepositoryProtocol = LocationRepository(
         service: locationService,
         preferences: userPreferences
-    )
-    private lazy var journalRepo: JournalRepositoryProtocol = JournalRepository(
-        modelContainer: modelContainer
-    )
-
-    // MARK: - Shared State
-    // One store for the journal list and the entry screen, so an edit shows in the list straight away
-    private lazy var journalStore = JournalStore(
-        getEntries: GetJournalEntriesUseCase(repository: journalRepo),
-        saveEntry: SaveJournalEntryUseCase(repository: journalRepo),
-        deleteEntry: DeleteJournalEntryUseCase(repository: journalRepo)
     )
 
     // MARK: - Use Cases
@@ -85,6 +75,9 @@ final class DependencyContainer {
         self.readingPreferences = ReadingPreferencesStore(
             storage: UserDefaultsStorage()
         )
+        // The journal now lives in the shared database; entries written before are brought over from SwiftData once
+        let modelContainer = self.modelContainer
+        Task { await SwiftDataJournalImport.run(from: modelContainer) }
     }
 
     // MARK: - Factories
@@ -108,7 +101,7 @@ final class DependencyContainer {
             fetchSurahs: fetchSurahsUseCase,
             getQiblaDirection: GetQiblaDirectionUseCase(repository: prayerTimesRepo),
             compass: CompassService(),
-            journal: journalStore
+            journal: SharedViewModel(JournalViewModels.shared.today()) { $0.state }
         )
     }
 
@@ -118,14 +111,6 @@ final class DependencyContainer {
             compass: CompassService(),
             getQiblaDirection: GetQiblaDirectionUseCase(repository: prayerTimesRepo)
         )
-    }
-
-    func makeJournalListViewModel() -> JournalListViewModel {
-        JournalListViewModel(store: journalStore, fetchAyah: fetchAyahUseCase)
-    }
-
-    func makeJournalEntryViewModel(entry: JournalEntry) -> JournalEntryViewModel {
-        JournalEntryViewModel(entry: entry, store: journalStore)
     }
 
     func makeQuranListViewModel() -> QuranListViewModel {

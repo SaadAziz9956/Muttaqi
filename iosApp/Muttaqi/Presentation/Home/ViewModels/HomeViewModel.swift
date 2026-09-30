@@ -41,7 +41,8 @@ final class HomeViewModel {
     private let fetchSurahs: FetchSurahsUseCase
     private let getQiblaDirection: GetQiblaDirectionUseCase
     private let compass: CompassServiceProtocol
-    let journal: JournalStore
+    /// Today's journal entry, from the shared journal
+    let journal: SharedViewModel<JournalTodayViewModel, JournalTodayState>
     private let calendar: Calendar
 
     private static let hijriFormatter: DateFormatter = {
@@ -64,7 +65,7 @@ final class HomeViewModel {
         fetchSurahs: FetchSurahsUseCase,
         getQiblaDirection: GetQiblaDirectionUseCase,
         compass: CompassServiceProtocol,
-        journal: JournalStore,
+        journal: SharedViewModel<JournalTodayViewModel, JournalTodayState>,
         exploreOfTheDay: ExploreOfTheDay = .shared,
         nameOfTheDay: NameOfTheDay = .shared,
         dhikrSaidToday: DhikrSaidToday = .shared,
@@ -93,7 +94,7 @@ final class HomeViewModel {
         duaOfTheDay = try? getDuaOfTheDay.execute()
         await loadDailyPicks()
         dhikrToday = (try? await dhikrSaidToday.count().intValue) ?? 0
-        await journal.load()
+        journal.viewModel.dispatch(intent: JournalTodayIntentRefresh.shared)
         await loadLastReading()
         await loadPrayerTimes()
         if let coordinates = location.lastKnownCoordinates() {
@@ -103,7 +104,7 @@ final class HomeViewModel {
 
     /// Today's journal entry, if one has been written
     var journalToday: JournalEntry? {
-        journal.entries.first { calendar.isDateInToday($0.createdAt) }
+        journal.state.entry
     }
 
     func isFriday(_ date: Date) -> Bool {

@@ -105,7 +105,7 @@ struct HomeBento: View {
     private var journal: some View {
         let entry = viewModel.journalToday
         return Button {
-            router.pushHome(.journalEntry(entry ?? JournalEntry()))
+            router.pushHome(.journalEntry(id: entry?.id))
         } label: {
             HStack(spacing: 14) {
                 VStack(alignment: .leading, spacing: 8) {
