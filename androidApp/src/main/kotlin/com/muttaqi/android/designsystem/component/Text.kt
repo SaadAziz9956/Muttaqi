@@ -15,6 +15,7 @@ import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.font.FontFamily
+import androidx.compose.ui.text.style.LineBreak
 import androidx.compose.ui.text.style.LineHeightStyle
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextDirection
@@ -72,6 +73,7 @@ fun ArabicText(
             fontSize = fontSize,
             lineHeight = lineHeight(fontSize, QURAN_FONT_LINE_HEIGHT, lineSpacing),
             lineHeightStyle = SpacingBelowLines,
+            lineBreak = LineBreak.Paragraph,
             textDirection = TextDirection.Rtl,
         ),
     )
@@ -108,6 +110,7 @@ fun TranslationText(
                 fontSize = size,
                 lineHeight = lineHeight(size, NASTALIQ_LINE_HEIGHT, if (lineSpacing.isSpecified) lineSpacing else 8.sp),
                 lineHeightStyle = SpacingBelowLines,
+                lineBreak = LineBreak.Paragraph,
                 textDirection = TextDirection.Rtl,
             )
         } else {
@@ -116,6 +119,7 @@ fun TranslationText(
                 fontSize = fontSize,
                 lineHeight = lineHeight(fontSize, REEM_KUFI_LINE_HEIGHT, if (lineSpacing.isSpecified) lineSpacing else 4.sp),
                 lineHeightStyle = SpacingBelowLines,
+                lineBreak = LineBreak.Paragraph,
             )
         },
     )
@@ -145,6 +149,8 @@ private const val REEM_KUFI_LINE_HEIGHT = 1.5f
 /** A line as tall as iOS makes it: the font's own line height, then the spacing */
 private fun lineHeight(fontSize: TextUnit, fontLineHeight: Float, lineSpacing: TextUnit): TextUnit =
     (fontSize.value * fontLineHeight + lineSpacing.value).sp
+
+// Lines are broken for the paragraph as a whole, as iOS does, which keeps a lone word off the last line
 
 /** The spacing goes under each line but the last, as on iOS, so the text starts and ends where its glyphs do */
 private val SpacingBelowLines = LineHeightStyle(LineHeightStyle.Alignment.Top, LineHeightStyle.Trim.Both)

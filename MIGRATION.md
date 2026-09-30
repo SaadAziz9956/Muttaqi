@@ -92,8 +92,9 @@ cd iosApp && xcodebuild -project Muttaqi.xcodeproj -scheme Muttaqi \
 - Tests: reducers, view models (intents → state and effects, language switch), repositories with fakes
   (`shared/src/commonTest/.../testing/Fakes.kt`), and a host test that decodes the real bundled file if you read one.
 - iOS: install the build on your own simulator (`xcrun simctl install/launch`), walk every screen of your feature in
-  light and dark and in Urdu (`plutil -replace reading_selected_language -string ur` on the app's preferences plist in
-  its data container), and take screenshots (`xcrun simctl io <id> screenshot`). They must match the pre-migration app.
+  light and dark and in Urdu (`xcrun simctl spawn <id> defaults write <data container>/Library/Preferences/com.muttaqi.islamic
+  reading_selected_language ur`, then relaunch; editing the plist directly is often undone by the preferences cache), and
+  take screenshots (`xcrun simctl io <id> screenshot`). They must match the pre-migration app.
 - Android: screenshot tests for every screen in light and dark, compared by eye with the iOS screenshots.
 
 ## Pull request
