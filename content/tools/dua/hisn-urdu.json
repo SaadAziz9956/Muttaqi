@@ -1,0 +1,1892 @@
+{
+ "sources": {
+  "islamicurdubooks": {
+   "title": "مختصر حصن المسلم (Hisn al-Muslim, Urdu) on IslamicUrduBooks.com",
+   "url": "https://www.islamicurdubooks.com/hadith/index.php?bookid=19",
+   "author": "Sa'id ibn Ali ibn Wahf al-Qahtani",
+   "translator": "Urdu translation credited on every entry to Hafiz Zubair Ali Za'i (his tahqiq/takhrij edition; Mohaddis library lists an edition with Urdu by Abdul Hamid Sindhi, tahqiq/takhrij by Zubair Ali Za'i, Dar al-Fikr al-Islami, Wah Cantt; that this is the same edition is not confirmed)",
+   "format": "HTML, one page per entry (hadith-.php?bookid=19&hadith_number=N), 276 numbered entries + Quran verses",
+   "license": "None stated. Site footer only says \"(c) 2005-2026, Developed by Islamic Urdu Books\"; the translation's copyright lies with the translator/publisher. Needs permission (contact: islamicurdubooks@gmail.com, WhatsApp +92 331 5902482).",
+   "licensingRisk": true,
+   "extraction": "Text is cut verbatim from the entry's Urdu block: by default the first quoted segment (outer quote marks removed) before the first reference bracket, leaving out references, \"نوٹ\" notes and virtue remarks. Where the Hisn entry itself includes a narrative, count or evening variant, a longer verbatim span was kept. The per-entry \"note\" field marks the 4 composites (78, 114, 133, 160), which are verbatim pieces joined with line breaks, and entry 100, which takes its text from another entry."
+  },
+  "hadeethenc": {
+   "title": "HadeethEnc.com - Encyclopedia of Translated Prophetic Hadiths (Urdu)",
+   "url": "https://hadeethenc.com/ur",
+   "api": "https://hadeethenc.com/api/v1/hadeeths/one/?language=ur&id=ID",
+   "translator": "HadeethEnc Urdu translation team (Rowad Translation Center with IslamHouse)",
+   "license": "May be republished only with no modification, addition or deletion, citing HadeethEnc.com and the version number. An excerpt counts as a deletion, so each entry also stores fullText.",
+   "licensingRisk": true
+  },
+  "evaluatedNotUsed": {
+   "hisnmuslim.com": "No Urdu. API index /api/husn.json lists only ar and en; site language pages are bn,bs,en,es,fa,ha,hi,id,pt,so,sw,th,yo,zh; /i/ur/* and /api/ur/* return 404.",
+   "IslamHouse item 1584 (حصن المسلم (کتاب وسنت سے دعائیں))": "PDF only (ur_Hisnul_Muslim.pdf 34.4 MB, 1436 edition 78.6 MB; no EPUB/DOC). Translation by Hafiz Arshad Basheer Umari Madani (AskIslamPedia); IslamHouse description also names Farooq Rafi. Downloaded the 34.4 MB PDF: pypdf and PDFKit get no text from the inner pages because the text was converted to vector outlines (Adobe Illustrator); the cover gives garbled glyphs. Not usable without OCR.",
+   "AskIslamPedia (same Arshad Basheer Madani translation as HTML)": "The Urdu wiki page \"حصن المسلم کی تمام ادعیہ ...\" timed out or returned Cloudflare 524; no Wayback snapshot. Worth retrying, because it could be a second full HTML source.",
+   "Darussalam Urdu (tr. Hafiz Salah-ud-Din Yusuf)": "Found only as a print book, PDF scans (archive.org, Scribd) and closed apps; no HTML text.",
+   "Mohaddis / Kitab-o-Sunnat": "PDF only.",
+   "GitHub / app datasets": "No Urdu Hisn dataset with clear provenance (khalid-hussain/hisnulMuslimDB and others have no Urdu; scattered app files with Urdu name no translator)."
+  }
+ },
+ "entries": {
+  "1": {
+   "text": "تمام تعریفات اس اللہ کے لئے ہیں جس نے ہمیں مارنے کے بعد زندہ کیا اور اسی کی طرف ہی لوٹ کر جانا ہے۔",
+   "source": "islamicurdubooks",
+   "sourceUrl": "https://islamicurdubooks.com/hadith/hadith-.php?bookid=19&hadith_number=10",
+   "licensingRisk": true,
+   "iubNumber": "10"
+  },
+  "2": {
+   "text": "اللہ کے علاوہ کوئی سچا معبود نہیں، جو وحدہ لا شریک ہے، اسی کے لئے بادشاہت اور اسی کے لئے تمام حمد و ثنا اور وہ ہر چیز پر قادر ہے۔ اللہ پاک ہے، تمام تعریفات اللہ کے لئے ہیں، اللہ کے علاوہ کوئی معبود برحق نہیں اللہ سب سے بڑا ہے۔ (کسی گناہ سے بچنے کی) کوئی طاقت اور (نیکی کرنے کی) کوئی قوت اللہ بلند و عظمت والے کی توفیق و مدد کے بغیر نہیں۔ اے میرے پروردگار! مجھے بخش دے۔",
+   "source": "islamicurdubooks",
+   "sourceUrl": "https://islamicurdubooks.com/hadith/hadith-.php?bookid=19&hadith_number=11",
+   "licensingRisk": true,
+   "iubNumber": "11"
+  },
+  "3": {
+   "text": "تمام تعریفات اس اللہ کے لئے ہیں جس نے مجھے میرے جسم میں صحت و عافیت عطا کی، اور میری روح مجھے لوٹا دی اور مجھے اپنا ذکر کرنے کی اجازت دی۔",
+   "source": "islamicurdubooks",
+   "sourceUrl": "https://islamicurdubooks.com/hadith/hadith-.php?bookid=19&hadith_number=12",
+   "licensingRisk": true,
+   "iubNumber": "12"
+  },
+  "4": {
+   "text": "آسمان اور زمین کی پیدائش میں، اور رات دن کے آنے جانے میں یقینا عقلمندوں کے لئے نشانیاں ہیں۔ جو اللہ تعالیٰ کا ذکر کھڑے ہو کر، بیٹھ کر اور اپنی کروٹوں پر لیٹے ہوئے کرتے ہیں، آسمان و زمین کی پیدائش میں غور و فکر کرتے ہیں اور کہتے ہیں اے پروردگار تو نے یہ سب کچھ بے فائدہ نہیں بنایا، تو پاک ہے، ہمیں آگ کے عذاب سے بچا لے۔ اے ہمارے پالنے والے تو جسے جہنم میں ڈالے یقیناً تو نے اسے رسوا کیا، اور ظالموں کا کوئی مدد گار نہیں۔ اے ہمارے رب! ہم نے سنا کہ منادی کرنے والا با آواز بلند ایمان کی طرف بلارہا ہے کہ لوگو! اپنے رب پر ایمان لاؤ، اس لئے ہم ایمان لے آئے، یا الہٰی! اب تو ہمارے گناہ معاف فرمااور ہماری برائیان ہم سے ختم کر دے اور ہمیں نیک لوگوں کے ساتھ موت دے۔ اے ہمارے پالنے والے معبود! ہمیں وہ دے جس کا وعدہ تو نے ہم سے اپنے رسولوں کی زبانی کیا ہے۔ اور ہمیں قیامت کے دن رسوا نہ کرنا۔ یقیناً تو وعدہ خلافی نہیں کرتا۔ ان کے رب نے ان کی دعا قبول فرمالی کہ میں تم میں سے کسی عمل کرنے والے کے عمل کو خواہ وہ مرد ہو یا عورت ہرگز ضائع نہیں کروں گا، تم آپس میں ایک دوسرے کے ہم جنس ہو، اس لئے وہ لوگ جنہوں نے ہجرت کی اور اپنے گھروں سے نکال دئیے گئےاور جنہیں میری راہ میں تکلیف دی گئی، اور جنہوں نے جہاد کیا اور شہید کر دئیے گئے میں ضرور ان کی برائیاں ان سے ختم کردوں گا، اور بلاشبہ انہیں ان جنتوں میں داخل کروں گا جن کے نیچے سے نہریں بہہ رہی ہیں یہ ہے ثواب اللہ کی طرف سے اور اللہ تعالیٰ ہی کے پاس بہترین اجر ہے۔ تجھے کافروں کا شہروں میں چلنا پھرنا دھوکے میں مبتلا نہ کر دے۔ یہ تو بہت ہی تھوڑا فائدہ ہے، پھر ان کا ٹھکانہ تو جہنم ہی ہے اور وہ بہت بری جگہ ہے۔ لیکن وہ لوگ جو اپنے پروردگار سے ڈرتے ہیں ان کے لئے جنّتیں ہیں جن کے نیچے نہریں جاری ہیں ان میں وہ ہمیشہ رہیں گے۔ یہ اللہ کی طرف سے مہمانی سے اور نیک لوگوں کے لئےجو کچھ اللہ تعالیٰ کے پاس ہے وہ بہت ہی بہتر ہے یقیناً اہل کتاب میں سے بعض ایسے بھی ہیں جو اللہ پر ایمان لاتے ہیں اور تمہاری طرف جو اتارا گیا ہے اور جو ان کی جانب اترا اس پر بھی اللہ تعالیٰ سے ڈرتے ہیں اور اللہ تعالیٰ کی آیات کو کم قیمت پر بیچتے بھی نہیں، ان لوگوں کا بدلہ ان کے رب کے ہاں ہے، یقیناً اللہ تعالیٰ بہت جلد حساب لینے والا ہے۔ اے اہل ایمان! تم ثابت قدمی اختیار کرو اور ایک دوسرے کو تھامے رکھو اور جہاد کے لئے تیار رہو تاکہ تم کامیاب ہو جاؤ۔",
+   "source": "islamicurdubooks",
+   "sourceUrl": "https://islamicurdubooks.com/hadith/hadith-.php?bookid=19&hadith_number=13",
+   "licensingRisk": true,
+   "iubNumber": "13"
+  },
+  "5": {
+   "text": "تمام تعریفات اللہ کے لئے ہیں جس نے مجھے یہ کپڑا پہنایا، اور اس نے مجھے (یہ کپڑا) میری کسی طاقت اور قوت کے بغیر عطا فرمایا۔",
+   "source": "islamicurdubooks",
+   "sourceUrl": "https://islamicurdubooks.com/hadith/hadith-.php?bookid=19&hadith_number=14",
+   "licensingRisk": true,
+   "iubNumber": "14"
+  },
+  "6": {
+   "text": "اے اللہ تیرے ہی لئے تمام تعریفات ہیں، تو نے ہی مجھے یہ (لباس) پہنایا ہے میں تجھ سے اس لباس کی اور جس کے لئے یہ بنایا گیا ہے اس کی بھلائی کا تجھ سے سوال کرتا ہوں۔ اور میں اس کے شر اور جس کے لئے اسے بنایا گیا ہے اس کے شر سے تیری پناہ میں آتا ہو۔",
+   "source": "islamicurdubooks",
+   "sourceUrl": "https://islamicurdubooks.com/hadith/hadith-.php?bookid=19&hadith_number=15",
+   "licensingRisk": true,
+   "iubNumber": "15"
+  },
+  "7": {
+   "text": "تو اسے بوسیدہ کرے اور اللہ تعالیٰ اس کے بعد تمہیں مزید عطا فرمائے۔",
+   "source": "islamicurdubooks",
+   "sourceUrl": "https://islamicurdubooks.com/hadith/hadith-.php?bookid=19&hadith_number=16",
+   "licensingRisk": true,
+   "iubNumber": "16"
+  },
+  "8": {
+   "text": "تم نیا کپڑا پہنو، قابل تعریف زندگی گزارو اور شہید ہو کر فوت ہو۔",
+   "source": "islamicurdubooks",
+   "sourceUrl": "https://islamicurdubooks.com/hadith/hadith-.php?bookid=19&hadith_number=17",
+   "licensingRisk": true,
+   "iubNumber": "17"
+  },
+  "9": {
+   "text": "اللہ کے نام کے ساتھ۔",
+   "source": "islamicurdubooks",
+   "sourceUrl": "https://islamicurdubooks.com/hadith/hadith-.php?bookid=19&hadith_number=18",
+   "licensingRisk": true,
+   "iubNumber": "18"
+  },
+  "10": null,
+  "11": {
+   "text": "اے اللہ میں تیری بخشش طلب کرتا ہوں۔",
+   "source": "islamicurdubooks",
+   "sourceUrl": "https://islamicurdubooks.com/hadith/hadith-.php?bookid=19&hadith_number=20",
+   "licensingRisk": true,
+   "iubNumber": "20"
+  },
+  "12": {
+   "text": "اللہ کے نام کے ساتھ۔",
+   "source": "islamicurdubooks",
+   "sourceUrl": "https://islamicurdubooks.com/hadith/hadith-.php?bookid=19&hadith_number=21",
+   "licensingRisk": true,
+   "iubNumber": "21"
+  },
+  "13": {
+   "text": "میں گواہی دیتا ہوں کہ اللہ کے علاوہ کوئی سچا معبود نہیں وہ اکیلا ہے اس کا کوئی شریک نہیں، اور میں گواہی دیتا ہوں کہ یقیناً محمد صلی اللہ علیہ وسلم اس کے بندے اور رسول ہیں۔",
+   "source": "islamicurdubooks",
+   "sourceUrl": "https://islamicurdubooks.com/hadith/hadith-.php?bookid=19&hadith_number=22",
+   "licensingRisk": true,
+   "iubNumber": "22"
+  },
+  "14": {
+   "text": "اے اللہ! مجھے بہت زیادہ توبہ کرنے والوں میں سے بنا دے اور مجھے بہت زیادہ پاک رہنے والوں میں سے بنا دے۔",
+   "source": "islamicurdubooks",
+   "sourceUrl": "https://islamicurdubooks.com/hadith/hadith-.php?bookid=19&hadith_number=23",
+   "licensingRisk": true,
+   "iubNumber": "23"
+  },
+  "15": {
+   "text": "اے اللہ! تو اپنی تعریف کے ساتھ پاک ہے، اور میں گواہی دیتا ہوں کہ تیرے علاوہ کوئی سچا معبود نہیں، میں تجھ سے بخشش طلب کرتا ہوں اور تیری طرف توبہ کرتا ہوں۔",
+   "source": "islamicurdubooks",
+   "sourceUrl": "https://islamicurdubooks.com/hadith/hadith-.php?bookid=19&hadith_number=24",
+   "licensingRisk": true,
+   "iubNumber": "24"
+  },
+  "16": {
+   "text": "اللہ کے نام کے ساتھ میں نے اللہ پر بھروسہ کیا اور اللہ کی توفیق و مدد کے بغیر کسی گناہ سے بچنے کی طاقت اور کوئی نیکی کرنے کی قوت نہیں۔",
+   "source": "islamicurdubooks",
+   "sourceUrl": "https://islamicurdubooks.com/hadith/hadith-.php?bookid=19&hadith_number=25",
+   "licensingRisk": true,
+   "iubNumber": "25"
+  },
+  "17": {
+   "text": "اے اللہ! میں تیری پناہ میں آتا ہوں کہ میں گمراہ ہو جاؤں یا گمراہ کر دیا جاؤں، یا میں پھسل جاؤں یا پھسلا دیا جاؤں یا میں ظلم کروں یا مجھ پر ظلم کیا جائے یا میں کوئی جہالت (کا کام) کروں یا مجھ پر جہالت (کا کام) کیا جائے۔",
+   "source": "islamicurdubooks",
+   "sourceUrl": "https://islamicurdubooks.com/hadith/hadith-.php?bookid=19&hadith_number=26",
+   "licensingRisk": true,
+   "iubNumber": "26"
+  },
+  "18": {
+   "text": "اللہ کے نام کے ساتھ ہم داخل ہوئے اور اللہ کے نام کے ساتھ ہی ہم باہر نکلے اور ہم نے اپنے پروردگار اللہ ہی پر بھروسہ کیا۔",
+   "source": "islamicurdubooks",
+   "sourceUrl": "https://islamicurdubooks.com/hadith/hadith-.php?bookid=19&hadith_number=27",
+   "licensingRisk": true,
+   "iubNumber": "27"
+  },
+  "19": {
+   "text": "اے اللہ! میرے دل میں نور بھر دے، اور میری زبان میں نور اور میری سماعت میں نور اور میری بصارت میں نور، میرے اوپر نور، میرے نیچے نور، میرے دائیں نور، میرے بائیں نور، میرے سامنے نور اور میرے پیچھے نور، اور میرے نفس میں نور، اور تو میرے نور کو زیادہ کرے اور مجھے بہت زیادہ نور عطا فرما، میرے لئے نور بنا اور مجھے نور بنا دے، اے اللہ مجھے نور عطا فرما، اور میرے پٹھوں میں نور بھر دے، میرے گوشت میں، میرے خون میں، میرے بالوں میں اور میری جلد میں نور بھر دے۔ اے اللہ میرے لئے میری قبر میں نور بھر دے، اور میری ہڈیوں میں نور بھر دے (اور مجھے مزید نور عطا فرما، مجھے مزید نور عطا فرما، مجھے مزید نور عطا فرما) اور مجھے نور ہی نور عطا فرما۔",
+   "source": "islamicurdubooks",
+   "sourceUrl": "https://islamicurdubooks.com/hadith/hadith-.php?bookid=19&hadith_number=28",
+   "licensingRisk": true,
+   "iubNumber": "28"
+  },
+  "20": {
+   "text": "میں عظمت والے اللہ، اس کے معزز چہرے اور اس کی قدیم سلطنت کی پناہ میں آتا ہوں، شیطان مردود سے، اللہ کے نام کے ساتھ اور درود و سلام ہوں اللہ کے رسول پر، اے اللہ! میرے لئے اپنی رحمت کے دروازے کھول دے۔",
+   "source": "islamicurdubooks",
+   "sourceUrl": "https://islamicurdubooks.com/hadith/hadith-.php?bookid=19&hadith_number=29",
+   "licensingRisk": true,
+   "iubNumber": "29"
+  },
+  "21": {
+   "text": "اللہ کے نام کے ساتھ اور درود و سلام ہوں اللہ کے رسول پر، اے اللہ! میں تجھ سے تیرا فضل مانگتا ہوں، اے اللہ! مجھے شیطان مردود سے بچا لے۔",
+   "source": "islamicurdubooks",
+   "sourceUrl": "https://islamicurdubooks.com/hadith/hadith-.php?bookid=19&hadith_number=30",
+   "licensingRisk": true,
+   "iubNumber": "30"
+  },
+  "22": null,
+  "23": {
+   "text": "میں گواہی دیتا ہوں کہ اللہ کے علاوہ کوئی سچا معبود نہیں وہ اکیلا ہے اس کا کوئی شریک نہیں اور بالیقین محمد صلی اللہ علیہ وسلم اس کے بندے اور اس کے رسول ہیں۔ میں اللہ کے رب ہونے، محمد صلی اللہ علیہ وسلم کے رسول ہونے اور اسلام کے دین ہونے پر راضی ہوا۔",
+   "source": "islamicurdubooks",
+   "sourceUrl": "https://islamicurdubooks.com/hadith/hadith-.php?bookid=19&hadith_number=31",
+   "licensingRisk": true,
+   "iubNumber": "31"
+  },
+  "24": {
+   "text": "اذان کے جواب سے فارغ ہونے کے بعد نبی کریم صلی اللہ علیہ وسلم پر درود پڑھے۔",
+   "source": "islamicurdubooks",
+   "sourceUrl": "https://islamicurdubooks.com/hadith/hadith-.php?bookid=19&hadith_number=32",
+   "licensingRisk": true,
+   "iubNumber": "32"
+  },
+  "25": {
+   "text": "اے اللہ اس کامل دعوت اور قائم نماز کے رب! محمد صلی اللہ علیہ وسلم کو وسیلہ اور فضیلت عطا فرما، اور انہیں مقام محمود پر پہنچا جس کا تو نےان سے وعدہ کیا ہے۔ یقیناً تو وعدہ خلافی نہیں کرتا۔",
+   "source": "islamicurdubooks",
+   "sourceUrl": "https://islamicurdubooks.com/hadith/hadith-.php?bookid=19&hadith_number=33",
+   "licensingRisk": true,
+   "iubNumber": "33"
+  },
+  "26": {
+   "text": "اذان اور اقامت کے درمیان اپنے لئے اللہ سے دعا کرے کیونکہ اس وقت دعا رد نہیں کی جاتی۔",
+   "source": "islamicurdubooks",
+   "sourceUrl": "https://islamicurdubooks.com/hadith/hadith-.php?bookid=19&hadith_number=34",
+   "licensingRisk": true,
+   "iubNumber": "34"
+  },
+  "27": {
+   "text": "اے اللہ! میرے اور میری خطاؤں کے درمیان اس طرح دوری فرما دے جس طرح تو نے مشرق اور مغرب کے درمیان دوری پیدا کی ہے۔ اے اللہ مجھے میری خطاؤں سے اس طرح صاف کر دے جس طرح سفید کپڑا میل کچیل سے صاف کیا جاتا ہے، اے اللہ مجھے میری خطاؤں سے برف، پانی اور اولوں کے ساتھ دھو ڈال۔",
+   "source": "islamicurdubooks",
+   "sourceUrl": "https://islamicurdubooks.com/hadith/hadith-.php?bookid=19&hadith_number=35",
+   "licensingRisk": true,
+   "iubNumber": "35"
+  },
+  "28": {
+   "text": "اے اللہ! تو اپنی تعریف کے ساتھ پاک ہے، تیرا نام بابرکت ہے، تیری شان بلند ہے اور تیرے علاوہ کوئی سچا معبود نہیں۔",
+   "source": "islamicurdubooks",
+   "sourceUrl": "https://islamicurdubooks.com/hadith/hadith-.php?bookid=19&hadith_number=36",
+   "licensingRisk": true,
+   "iubNumber": "36"
+  },
+  "29": {
+   "text": "میں نے اپنا چہرہ یکسو ہو کر اس ذات کی طرف متوجہ کر لیا جس نے آسمانوں اور زمین کو نئے سرے سے پیدا کیا، اور میں مشرکین میں سے نہیں ہوں، بے شک میری نماز، میری قربانی، میرا زندہ رہنا اور میرا مرنا اللہ رب العالمین کے لئے ہے، جس کا کوئی شریک نہیں، مجھے اسی بات کا حکم دیا گیا ہے اور میں مطیع و فرمانبرداروں میں سے ہوں، اے اللہ! تو ہی بادشاہ ہے تیرے علاوہ کوئی سچا معبود نہیں، تو میرا رب ہے اور میں تیرا بندہ، میں نے اپنی جان پر ظلم کیا، میں اپنے گناہوں کا اعتراف کرتا ہوں، میرے تمام گناہ بخش دے۔ کیونکہ تیرے علاوہ کوئی بھی گناہوں کو نہیں بخش سکتا، مجھے بہترین اخلاق کی ہدایت دے، تیرے علاوہ بہترین اخلاق کی ہدایت کوئی نہیں دے سکتا۔ مجھ سے برا اخلاق ہٹا دے، تیرے علاوہ مجھ سے برا اخلاق کوئی دور نہیں کر سکتا، میں حاضر ہوں، تیرا فرمانبردار ہوں، اور بھلائی تمام کی تمام تیرے ہاتھ میں ہے، جبکہ برائی تیری طرف سے نہیں، میں تیری مدد سے (کھڑا) ہوں اور تیری طرف (متوجہ) ہوں، تو بابرکت ہے، بلند ہے میں تجھ سے بخشش طلب کرتا ہوں اور تیری طرف رجوع کرتا ہوں۔",
+   "source": "islamicurdubooks",
+   "sourceUrl": "https://islamicurdubooks.com/hadith/hadith-.php?bookid=19&hadith_number=37",
+   "licensingRisk": true,
+   "iubNumber": "37"
+  },
+  "30": {
+   "text": "اے اللہ، جبرائیل، میکائیل اور اسرافیل کے رب، آسمانوں اور زمینوں کو نئے سرے سے پیدا کرنے والے، غیب اور حاضر کا علم رکھنے والے تو اپنے بندوں کے درمیان فیصلہ کرے گا جس معاملے میں(بھی) یہ اختلاف کرتے ہیں، تو مجھے اختلافی باتوں میں حق (سچائی) کی ہدایت دے، یقیناً تو جسے چاہتا ہےصراط مستقیم کی طرف ہدایت دے دیتا ہے۔",
+   "source": "islamicurdubooks",
+   "sourceUrl": "https://islamicurdubooks.com/hadith/hadith-.php?bookid=19&hadith_number=38",
+   "licensingRisk": true,
+   "iubNumber": "38"
+  },
+  "31": {
+   "text": "اللہ سب سے بڑا ہے، بہت بڑا، اللہ سب سے بڑا ہے، بہت بڑا، اللہ سب سے بڑا ہے، بہت بڑا، تمام تعریفات اللہ کے لئے ہیں، بہت زیادہ، تمام تعریفات اللہ کے لئے ہیں، بہت زیادہ، تمام تعریفات اللہ کے لئے ہیں، بہت زیادہ، اور صبح و شام اللہ ہی کی تقدیس و پاکی بیان کی جاتی ہے میں اللہ کی پناہ میں آتا ہوں، شیطان مردود سے، اس کے مغرور بنانے سے، اس کے تھوک سے اور اس کے چوکا لگانے سے۔",
+   "source": "islamicurdubooks",
+   "sourceUrl": "https://islamicurdubooks.com/hadith/hadith-.php?bookid=19&hadith_number=39",
+   "licensingRisk": true,
+   "iubNumber": "39"
+  },
+  "32": {
+   "text": "اے اللہ تیرے لئے ہی تمام تعریفات ہیں، تو آسمانوں، زمین اور جو کچھ ان میں ہے سب کا نور ہے، تیرے لئے ہی تعریف ہے، تو آسمانوں، زمین اور جو ان میں ہے سب کا قائم رکھنے والا ہے، تیرے لئے ہی تعریف ہے تو آسمانوں، زمین اور جو ان میں ہے سب کا پروردگار ہے، تیرے لئے ہی تعریف ہے، تیرے لئے آسمانوں، زمین اور جو کچھ ان میں ہے سب کی بادشاہت ہے۔ تیرے لئے ہی تعریف ہے، تو آسمانوں اور زمین کا رب ہے، تیرے لئے ہی تعریف ہے، تو حق ہے، تیرا وعدہ حق ہے، تیرا قول حق ہے، تیری ملاقات حق ہے، جنت حق ہے، آگ حق ہے، تمام انبیاء حق ہیں، محمد صلی اللہ علیہ وسلم حق ہیں اور قیامت حق ہے۔ اے اللہ میں تیرا فرمانبردار ہوا، تجھ ہی پر بھروسہ کیا، تجھ پر ہی ایمان لایا، تیری طرف ہی رجوع کیا، تیری مدد کے ساتھ (تیرے دشمنوں سے) جھگڑا کیا، تیری طرف ہی فیصلہ لے کر آیا، مجھے بخش دے جو میں نے پہلے کیا اور جو میں نے بعد میں کیا، جو میں نے پوشیدہ کیا اور جو میں نے اعلانیہ کیا۔ تو ہی بھلائی اور نیکی کے کاموں میں آگے کرنے والا ہے اور تو ہی پیچھے کرنے والا، تیرے علاوہ کوئی سچا معبود نہیں، تو ہی میرا معبود ہے تیرے علاوہ کوئی سچا معبود نہیں۔",
+   "source": "islamicurdubooks",
+   "sourceUrl": "https://islamicurdubooks.com/hadith/hadith-.php?bookid=19&hadith_number=40",
+   "licensingRisk": true,
+   "iubNumber": "40"
+  },
+  "33": {
+   "text": "”پاک ہے میرا رب عظمت والا۔“ (تین مرتبہ)",
+   "source": "islamicurdubooks",
+   "sourceUrl": "https://islamicurdubooks.com/hadith/hadith-.php?bookid=19&hadith_number=42",
+   "licensingRisk": true,
+   "iubNumber": "42"
+  },
+  "34": {
+   "text": "پاک ہے تو اے اللہ، اے ہمارے رب اپنی تعریف کے ساتھ، اے اللہ مجھے بخش دے۔",
+   "source": "islamicurdubooks",
+   "sourceUrl": "https://islamicurdubooks.com/hadith/hadith-.php?bookid=19&hadith_number=43",
+   "licensingRisk": true,
+   "iubNumber": "43"
+  },
+  "35": {
+   "text": "انتہائی زیادہ پاک، انتہائی مقدس، فرشتوں اور روح (جبرئیل) کا رب۔",
+   "source": "islamicurdubooks",
+   "sourceUrl": "https://islamicurdubooks.com/hadith/hadith-.php?bookid=19&hadith_number=44",
+   "licensingRisk": true,
+   "iubNumber": "44"
+  },
+  "36": {
+   "text": "اے اللہ تیرے لئے ہی میں نے رکوع کیا، تجھ پر ہی میں ایمان لایا، تیرے لئے ہی میں فرمانبردار ہوا، میرے کان، میری آنکھیں، میرا دماغ، میری ہڈیاں، میرے پٹھے اور وہ جسم جسے میرے قدم اٹھائے ہوئے ہیں، اللہ رب العالمین کے لئے جھک گئے ہیں۔",
+   "source": "islamicurdubooks",
+   "sourceUrl": "https://islamicurdubooks.com/hadith/hadith-.php?bookid=19&hadith_number=45",
+   "licensingRisk": true,
+   "iubNumber": "45"
+  },
+  "37": {
+   "text": "پاک ہے (اللہ تعالیٰ) زبردست طاقت والا، عظیم بادشاہت والا، بڑائی اور عظمت والا۔",
+   "source": "islamicurdubooks",
+   "sourceUrl": "https://islamicurdubooks.com/hadith/hadith-.php?bookid=19&hadith_number=46",
+   "licensingRisk": true,
+   "iubNumber": "46"
+  },
+  "38": {
+   "text": "اللہ نے اس شخص کی بات سن لی جس نے اس کی تعریف کی۔",
+   "source": "islamicurdubooks",
+   "sourceUrl": "https://islamicurdubooks.com/hadith/hadith-.php?bookid=19&hadith_number=47",
+   "licensingRisk": true,
+   "iubNumber": "47"
+  },
+  "39": {
+   "text": "اے ہمارے پروردگار! تیرے لئے ہی تمام تعریفیں ہیں، بہت زیادہ پاکیزہ، بابرکت۔",
+   "source": "islamicurdubooks",
+   "sourceUrl": "https://islamicurdubooks.com/hadith/hadith-.php?bookid=19&hadith_number=48",
+   "licensingRisk": true,
+   "iubNumber": "48"
+  },
+  "40": {
+   "text": "آسمان و زمین اور جو ان دونوں کے درمیان ہے بھر جائے، پھر اس کے بعد جس چیز کے بارے میں تو چاہے اس کا بھر جانا حمد و ثنا اور بزرگی والے، سب سے سچی بات جو تیرے بندے نے کہی اور ہم سب تیرے بندے ہیں۔ اے اللہ! جو تو عطا کرنا چاہے اسے کوئی روکنے والا نہیں اور جو تو روکنا چاہے اسے کوئی عطا کرنے والا نہیں، اور کسی شان والے کی شان تیرے پاس اسے کوئی فائدہ نہیں پہنچا سکتی۔",
+   "source": "islamicurdubooks",
+   "sourceUrl": "https://islamicurdubooks.com/hadith/hadith-.php?bookid=19&hadith_number=49",
+   "licensingRisk": true,
+   "iubNumber": "49"
+  },
+  "41": {
+   "text": "”پاک ہے میرا رب بلند واعلیٰ۔“ (کم از کم تین مرتبہ)",
+   "source": "islamicurdubooks",
+   "sourceUrl": "https://islamicurdubooks.com/hadith/hadith-.php?bookid=19&hadith_number=50",
+   "licensingRisk": true,
+   "iubNumber": "50"
+  },
+  "42": {
+   "text": "پاک ہے تو اے اللہ! اے ہمارے رب، اپنی تعریف کے ساتھ اے اللہ بخش دے۔",
+   "source": "islamicurdubooks",
+   "sourceUrl": "https://islamicurdubooks.com/hadith/hadith-.php?bookid=19&hadith_number=51",
+   "licensingRisk": true,
+   "iubNumber": "51"
+  },
+  "43": {
+   "text": "نہایت پاکیزگی والا، نہایت مقدس، فرشتوں اور روح (جبریل) کا رب۔",
+   "source": "islamicurdubooks",
+   "sourceUrl": "https://islamicurdubooks.com/hadith/hadith-.php?bookid=19&hadith_number=52",
+   "licensingRisk": true,
+   "iubNumber": "52"
+  },
+  "44": {
+   "text": "اے اللہ! میں نے تیرے لئے سجدہ کیا، تجھ پر ہی میں ایمان لایا، تیرے لئے ہی فرمانبردار ہوا، میرے چہرے نے اس ذات کے لئے سجدہ کیا جس نے اسے پیدا کیا، اس کی صورت بنائی، اس کی سماعت (کانوں کے سوارخ) اور بصارت (آنکھوں کے سوراخ) کو کھولا، بابرکت ہے اللہ تعالیٰ، بہترین (انداز سے) پیدا کرنے والا ہے۔",
+   "source": "islamicurdubooks",
+   "sourceUrl": "https://islamicurdubooks.com/hadith/hadith-.php?bookid=19&hadith_number=53",
+   "licensingRisk": true,
+   "iubNumber": "53"
+  },
+  "45": {
+   "text": "پاک ہے (میرا رب) زبردست غلبے والا، بادشاہت، کبریائی اور عظمت والا۔",
+   "source": "islamicurdubooks",
+   "sourceUrl": "https://islamicurdubooks.com/hadith/hadith-.php?bookid=19&hadith_number=54",
+   "licensingRisk": true,
+   "iubNumber": "54"
+  },
+  "46": {
+   "text": "اے اللہ! میرے تمام گناہ معاف فرما دے، چھوٹے، بڑے، پہلے، پچھلے، ظاہر اور پوشیدہ گناہ۔",
+   "source": "islamicurdubooks",
+   "sourceUrl": "https://islamicurdubooks.com/hadith/hadith-.php?bookid=19&hadith_number=55",
+   "licensingRisk": true,
+   "iubNumber": "55"
+  },
+  "47": {
+   "text": "اے اللہ! میں تیری خوشنودی کے ساتھ تیری ناراضگی سے، تیری عافیت کے ساتھ تیری سزا سے، (تیری) پناہ میں آتا ہوں، میں تجھ سے تیری ہی پناہ طلب کرتا ہوں، میں تیری تعریف (کےکلمات) شمار نہیں کر سکتا، تو اسی طرح ہے جس طرح تو نے خود اپنی تعریف کی۔",
+   "source": "islamicurdubooks",
+   "sourceUrl": "https://islamicurdubooks.com/hadith/hadith-.php?bookid=19&hadith_number=56",
+   "licensingRisk": true,
+   "iubNumber": "56"
+  },
+  "48": {
+   "text": "اے میرے رب! مجھے بخش دے، اے میرے رب! مجھے معاف کردے۔",
+   "source": "islamicurdubooks",
+   "sourceUrl": "https://islamicurdubooks.com/hadith/hadith-.php?bookid=19&hadith_number=57",
+   "licensingRisk": true,
+   "iubNumber": "57"
+  },
+  "49": {
+   "text": "اے اللہ! مجھے معاف فرما دے مجھ پر رحم فرما، مجھے ہدایت دے، میرا نقصان پورا فرما، مجھے عافیت دے، مجھے رزق دے، اور مجھے بلند فرما۔",
+   "source": "islamicurdubooks",
+   "sourceUrl": "https://islamicurdubooks.com/hadith/hadith-.php?bookid=19&hadith_number=58",
+   "licensingRisk": true,
+   "iubNumber": "58"
+  },
+  "50": {
+   "text": "میرے چہرے نے اس ذات کے لئے سجدہ کیا جس نے اسے پیدا کیا، اس کی سماعت اور بصارت کو اپنی طاقت و بصارت کے ساتھ کھولا، بابرکت ہے اللہ تعالیٰ بہترین انداز سے پیدا کرنے والا۔",
+   "source": "islamicurdubooks",
+   "sourceUrl": "https://islamicurdubooks.com/hadith/hadith-.php?bookid=19&hadith_number=59",
+   "licensingRisk": true,
+   "iubNumber": "59"
+  },
+  "51": {
+   "text": "اے اللہ! میرے لئے اس سجدے کے بدلے اپنے ہاں اجر لکھ دے اور اس کے بدلے سے (میرے گناہوں کا) بوجھ ختم کر دے، اور اپنے پاس اسے ذخیرہ بنا، اور مجھ سے اسی طرح قبول فرما جس طرح تو نے اپنے بندے داؤد سے قبول فرمایا تھا۔",
+   "source": "islamicurdubooks",
+   "sourceUrl": "https://islamicurdubooks.com/hadith/hadith-.php?bookid=19&hadith_number=60",
+   "licensingRisk": true,
+   "iubNumber": "60"
+  },
+  "52": {
+   "text": "تمام قولی، بدنی اور مالی عبادتیں اللہ کے لئے ہیں، اے نبی ( صلی اللہ علیہ وسلم ) آپ پر سلام، اللہ کی رحمت اور اس کی برکتیں ہوں، ہم پر بھی اور اللہ کے نیک بندوں پر بھی سلام ہو، میں گواہی دیتا ہوں کہ اللہ کے علاوہ کوئی سچا معبود نہیں اور میں گواہی دیتا ہوں کہ محمد ( صلی اللہ علیہ وسلم ) اس کے بندے اور رسول ہیں۔",
+   "source": "islamicurdubooks",
+   "sourceUrl": "https://islamicurdubooks.com/hadith/hadith-.php?bookid=19&hadith_number=61",
+   "licensingRisk": true,
+   "iubNumber": "61"
+  },
+  "53": {
+   "text": "اے اللہ! محمد صلی اللہ علیہ وسلم کی آل پر رحمتیں نازل فرما جس طرح تو نے ابراہیم علیہ السلام اور ابراہیم علیہ السلام کی آل پر رحمتیں نازل کیں، یقیناً تو بزرگی والا قابل تعریف ہے۔ اے اللہ! محمد صلی اللہ علیہ وسلم اور محمد صلی اللہ علیہ وسلم کی آل پر برکتیں نازل فرما جس طرح تو نے ابراہیم علیہ السلام اور ابراہیم علیہ السلام کی آل پر برکتیں نازل کیں یقیناً تو بزرگی والا قابل تعریف ہے۔",
+   "source": "islamicurdubooks",
+   "sourceUrl": "https://islamicurdubooks.com/hadith/hadith-.php?bookid=19&hadith_number=62",
+   "licensingRisk": true,
+   "iubNumber": "62"
+  },
+  "54": {
+   "text": "اے اللہ! محمد صلی اللہ علیہ وسلم ، ان کی ازواج اور ان کی اولاد پر رحمتیں نازل فرما جس طرح تو نے آل ابراہیم پر رحمتیں نازل کیں، اور محمد صلی اللہ علیہ وسلم ، ان کی ازواج اور ان کی اولاد پر برکتیں نازل فرما جس طرح تو نے آل ابراہیم پر برکتیں نازل کیں یقینا تو بزرگی والا قابل تعریف ہے۔",
+   "source": "islamicurdubooks",
+   "sourceUrl": "https://islamicurdubooks.com/hadith/hadith-.php?bookid=19&hadith_number=63",
+   "licensingRisk": true,
+   "iubNumber": "63"
+  },
+  "55": {
+   "text": "اے اللہ! میں قبر کے عذاب، جہنم کے عذاب، زندگی اور موت کے فتنے اور مسیح دجال کے فتنے سے تیری پناہ میں آتا ہوں۔",
+   "source": "islamicurdubooks",
+   "sourceUrl": "https://islamicurdubooks.com/hadith/hadith-.php?bookid=19&hadith_number=64",
+   "licensingRisk": true,
+   "iubNumber": "64"
+  },
+  "56": {
+   "text": "اے اللہ! میں قبر کے عذاب سے تیری پناہ میں آتا ہوں، مسیح دجال کے فتنے سے تیری پناہ میں آتا ہوں، زندگی اور موت کے فتنے سے تیری پناہ میں آتا ہوں۔ اے اللہ! میں گناہ اور قرض سے تیری پناہ مانگتا ہوں۔",
+   "source": "islamicurdubooks",
+   "sourceUrl": "https://islamicurdubooks.com/hadith/hadith-.php?bookid=19&hadith_number=65",
+   "licensingRisk": true,
+   "iubNumber": "65"
+  },
+  "57": {
+   "text": "اے اللہ! یقیناً میں نے اپنے نفس پر بہت ظلم کیا اور تیرے علاوہ کوئی بھی گناہوں کو نہیں بخش سکتا، اپنے پاس سے مجھے بخشش عنایت فرما اور مجھ پر رحم فرما، یقیناً تو بخشنے والا رحم کرنے والا ہے۔",
+   "source": "islamicurdubooks",
+   "sourceUrl": "https://islamicurdubooks.com/hadith/hadith-.php?bookid=19&hadith_number=66",
+   "licensingRisk": true,
+   "iubNumber": "66"
+  },
+  "58": {
+   "text": "اے اللہ! مجھے معاف فرما دے جو کچھ میں نے پہلے کیا اور جو بعد میں کیا، جو پوشیدہ کیا اور جو اعلانیہ کیا، میں نے جو زیادتی کی اور جسے تو مجھ سے زیادہ جانتا ہے، تو ہی آگے کرنے والا ہے اور تو ہی پیچھے کرنے والا ہے، تیرے علاوہ کوئی سچا معبود نہیں۔",
+   "source": "islamicurdubooks",
+   "sourceUrl": "https://islamicurdubooks.com/hadith/hadith-.php?bookid=19&hadith_number=67",
+   "licensingRisk": true,
+   "iubNumber": "67"
+  },
+  "59": {
+   "text": "اے اللہ! میری مدد کر، اپنے ذکر پر، اپنے شکر پر اور اپنی بہترین عبادت پر۔",
+   "source": "islamicurdubooks",
+   "sourceUrl": "https://islamicurdubooks.com/hadith/hadith-.php?bookid=19&hadith_number=68",
+   "licensingRisk": true,
+   "iubNumber": "68"
+  },
+  "60": {
+   "text": "اے اللہ! میں بخل سے تیری پناہ میں آتا ہوں اور میں (اس بات سے) تیری پناہ میں آتا ہوں کہ ناکارہ عمر کی طرف لوٹا دیا جاؤں، میں دنیا کے فتنے اور قبر کے عذاب سے تیری پناہ میں آتا ہوں۔",
+   "source": "islamicurdubooks",
+   "sourceUrl": "https://islamicurdubooks.com/hadith/hadith-.php?bookid=19&hadith_number=69",
+   "licensingRisk": true,
+   "iubNumber": "69"
+  },
+  "61": {
+   "text": "اے اللہ! میں تجھ سے جنت کا سوال کرتا ہوں اور آگ سے تیری پناہ میں آتا ہوں۔",
+   "source": "islamicurdubooks",
+   "sourceUrl": "https://islamicurdubooks.com/hadith/hadith-.php?bookid=19&hadith_number=70",
+   "licensingRisk": true,
+   "iubNumber": "70"
+  },
+  "62": null,
+  "63": {
+   "text": "اے اللہ! میں تجھ سے اس لئے سوال کرتا ہوں یا اللہ کہ یقیناً تو اکیلا ہے، واحد ہے، بے نیاز ہے، جس نے نہ کسی کو جنا اور نہ خود جنا گیا، اور اس کا کوئی ہمسر نہیں، یہ کہ تو میرے گناہوں کو معاف فرما دے یقیناً تو ہی معاف کرنے والا رحم کرنے والا ہے۔",
+   "source": "islamicurdubooks",
+   "sourceUrl": "https://islamicurdubooks.com/hadith/hadith-.php?bookid=19&hadith_number=72",
+   "licensingRisk": true,
+   "iubNumber": "72"
+  },
+  "64": {
+   "text": "اے اللہ! میں تجھ سے سوال کرتا ہوں کہ تمام تعریفات تیرے لئے ہی ہیں، تیرے علاوہ کوئی سچا معبود نہیں تو اکیلا ہے، تیرا کوئی شریک نہیں، بے شمار احسانات کرنے والا، اے آسمانوں اور زمین کو نئے سرے سے بنانے والے، اے بزرگی اور عزّت والے، اے ہمیشہ زندہ رہنے والے اے قائم رکھنے والے، میں تجھ سے جنّت کا سوال کرتا ہوں اور آگ سے تیری پناہ میں آتا ہوں۔",
+   "source": "islamicurdubooks",
+   "sourceUrl": "https://islamicurdubooks.com/hadith/hadith-.php?bookid=19&hadith_number=73",
+   "licensingRisk": true,
+   "iubNumber": "73"
+  },
+  "65": {
+   "text": "اے اللہ! میں تجھ سے اس وجہ سے سوال کرتا ہوں کہ میں گواہی دیتا ہوں کہ یقیناً تو ہی اللہ ہے تیرے علاوہ کوئی سچا معبود نہیں، تو اکیلا ہے، بے نیاز ہے، جس نے نہ کسی کو جنا، نہ خود کسی سے جنا گیا اور نہ کوئی اس کے برابر ہے۔",
+   "source": "islamicurdubooks",
+   "sourceUrl": "https://islamicurdubooks.com/hadith/hadith-.php?bookid=19&hadith_number=74",
+   "licensingRisk": true,
+   "iubNumber": "74"
+  },
+  "66": {
+   "text": "میں اللہ سے بخشش طلب کرتا ہوں، میں اللہ سے بخشش طلب کرتا ہوں، میں اللہ سے بخشش طلب کرتا ہوں، اے اللہ! تو ہی سلامتی والا ہے اور تیری طرف سے ہی سلامتی ہے، تو بابرکت ہے اے بزرگی اور عزت والے۔",
+   "source": "islamicurdubooks",
+   "sourceUrl": "https://islamicurdubooks.com/hadith/hadith-.php?bookid=19&hadith_number=75",
+   "licensingRisk": true,
+   "iubNumber": "75"
+  },
+  "67": {
+   "text": "اللہ کے سوا کوئی عبادت کے لائق نہیں ہے۔ وہ اکیلا ہے۔ اس کا کوئی شریک نہیں ہے۔ اسی کی بادشاہت اور اسی کی تعریف ہے۔ وہ ہر چیز پر قادر ہے۔ اے اللہ! تو جو کچھ دے، اسے کوئی روکنے والا نہيں ہے اور تو جو روک لے، اسے کوئی دینے والا نہیں ہے۔ کسی صاحب دولت کی دولت تیرے خلاف اس کے کچھ کام نہیں آ سکتی۔",
+   "source": "hadeethenc",
+   "sourceUrl": "https://hadeethenc.com/ur/browse/hadith/65102",
+   "fullText": "مغیرہ بن شعبہ رضی اللہ عنہ کے کاتب ورّاد کہتے ہیں : مغیرہ بن شعبہ نے مجھ سے معاویہ رضی اللہ عنہ کے نام بھیجے گئے ایک خط میں لکھوایا : اللہ کے نبی صلی اللہ علیہ و سلم ہر فرض نماز کے بعد یہ دعا پڑھا کرتے تھے : \"لَا إِلَهَ إِلَّا اللهُ وَحْدَهُ لَا شَرِيكَ لَهُ، لَهُ الْمُلْكُ وَلَهُ الْحَمْدُ، وَهُوَ عَلَى كُلِّ شَيْءٍ قَدِيرٌ، اللَّهُمَّ لَا مَانِعَ لِمَا أَعْطَيْتَ، وَلَا مُعْطِيَ لِمَا مَنَعْتَ، وَلَا يَنْفَعُ ذَا الْجَدِّ مِنْكَ الْجَدُّ۔\" (اللہ کے سوا کوئی عبادت کے لائق نہیں ہے۔ وہ اکیلا ہے۔ اس کا کوئی شریک نہیں ہے۔ اسی کی بادشاہت اور اسی کی تعریف ہے۔ وہ ہر چیز پر قادر ہے۔ اے اللہ! تو جو کچھ دے، اسے کوئی روکنے والا نہيں ہے اور تو جو روک لے، اسے کوئی دینے والا نہیں ہے۔ کسی صاحب دولت کی دولت تیرے خلاف اس کے کچھ کام نہیں آ سکتی۔)",
+   "licensingRisk": true,
+   "hadeethencId": 65102,
+   "grade": "صحيح",
+   "attribution": "متفق عليه",
+   "note": "Verbatim excerpt of the dua words; HadeethEnc terms forbid republishing modified/partial text, so show fullText (with attribution) or get permission."
+  },
+  "68": {
+   "text": "اللہ کے علاوہ کوئی سچا معبود نہیں، وہ اکیلا ہے اس کا کوئی شریک نہیں، اسی کے لئے بادشاہت ہے، اور اس کے لئے تمام تعریفات اور وہ ہر چیز پر قادر ہے، اللہ کی توفیق و مدد کے بغیر، گناہ سےبچنے کی طاقت اور نیکی کرنے کی قوت نہیں، اللہ کے علاوہ کوئی سچا معبود نہیں، ہم اسی کی عبادت کرتے ہیں، اسی کے لئے فضل ہے اور بہترین ثناء (تعریف) اسی کے لئے ہے، اللہ کے علاوہ کوئی سچا معبود نہیں، ہم اسی کے لئے عبادت کو خالص کرنے والے ہیں اگرچہ کافروں کو ناپسند ہو۔",
+   "source": "islamicurdubooks",
+   "sourceUrl": "https://islamicurdubooks.com/hadith/hadith-.php?bookid=19&hadith_number=77",
+   "licensingRisk": true,
+   "iubNumber": "77"
+  },
+  "69": {
+   "text": "”اللہ پاک ہے۔“، ”تمام تعریفات اللہ کے لئے ہیں۔“، ”اللہ سب سے بڑا ہے۔“، ”اللہ کے علاوہ کوئی سچا معبود نہیں اور اکیلا ہے اس کا کوئی شریک نہیں، اسی کے لئے بادشاہت ہے اور اسی کے لئے تمام تعریفات اور وہ ہر چیز پر قادر ہے۔“",
+   "source": "islamicurdubooks",
+   "sourceUrl": "https://islamicurdubooks.com/hadith/hadith-.php?bookid=19&hadith_number=78",
+   "licensingRisk": true,
+   "iubNumber": "78"
+  },
+  "70": {
+   "text": "”اے نبی ( صلی اللہ علیہ وسلم )! کہہ دیجئے اللہ ایک ہی ہے، اللہ بے نیاز ہے، نہ اس نے کسی کو جنا، نہ اس سے کوئی جنا گیا، اور کوئی اس کا ہمسر نہیں۔“ ”اے نبی ( صلی اللہ علیہ وسلم )! کہہ دیجئے کہ رب کی پناہ میں آتا ہوں، ہر اس چیز کے شر سے جو اس نے پیدا کی، اور اندھیری رات کی تاریکی کے شر سے جب وہ چھا جائے، اور گرہوں میں پھونک مارنے والیوں کے شر سے، اور حسد کرنے والے کے شر سے جب وہ حسد کرنے لگے۔“، ”اے نبی ( صلی اللہ علیہ وسلم )! کہہ دیجئے میں لوگوں کے رب کی پناہ میں آتا ہوں، لوگوں کے مالک کی، لوگوں کے معبود کی، وسوسہ ڈالنے والے پیچھے ہٹ جانے والے (شیطان) کے شر سے، جو لوگوں کے سینوں میں وسوسہ ڈالتا ہے، جنوں میں سے ہو یا انسانوں میں سے۔“",
+   "source": "islamicurdubooks",
+   "sourceUrl": "https://islamicurdubooks.com/hadith/hadith-.php?bookid=19&hadith_number=79",
+   "licensingRisk": true,
+   "iubNumber": "79"
+  },
+  "71": {
+   "text": "اللہ وہ ذات ہے جس کے علاوہ کوئی سچا معبود نہیں، ہمیشہ زندہ رہنے والا اور (سب کو) قائم رکھنے والا ہے، نہ اسے اونگھ آتی ہے اور نہ نیند، اسی کے لئے ہے جو آسمانوں میں ہے اور جو زمین میں ہے، کون ہے جو اس کی اجازت کے بغیر اس کے پاس سفارش کر سکے۔ جو لوگوں کے سامنے ہے اور جو ان کے پیچھے ہے سب کو جانتا ہے، لوگ اس کے علم میں سے کسی چیز کا احاطہ نہیں کر سکتے مگر جو وہ چاہے، اسی کی کرسی آسمانوں اور زمین کو گھیرے ہوئے ہے، اور ان دونوں کی حفاظت اسے تھکاتی نہیں، اور وہ بلند ہے عظمت والا ہے۔",
+   "source": "islamicurdubooks",
+   "sourceUrl": "https://islamicurdubooks.com/hadith/hadith-.php?bookid=19&hadith_number=80",
+   "licensingRisk": true,
+   "iubNumber": "80"
+  },
+  "72": {
+   "text": "اللہ کے علاوہ کوئی سچا معبود نہیں، وہ اکیلا ہے اس کا کوئی شریک نہیں، اسی کے لئے بادشاہت ہے اور اسی کے لئے تمام تعریفات، وہ زندہ کرتا ہے اور مارتا ہے، اور وہ ہر چیز پر قادر ہے۔",
+   "source": "islamicurdubooks",
+   "sourceUrl": "https://islamicurdubooks.com/hadith/hadith-.php?bookid=19&hadith_number=81",
+   "licensingRisk": true,
+   "iubNumber": "81"
+  },
+  "73": {
+   "text": "اے اللہ میں تجھ سے نفع مند علم، پاکیزہ رزق اور مقبول عمل کا سوال کرتا ہوں۔",
+   "source": "islamicurdubooks",
+   "sourceUrl": "https://islamicurdubooks.com/hadith/hadith-.php?bookid=19&hadith_number=82",
+   "licensingRisk": true,
+   "iubNumber": "82"
+  },
+  "74": {
+   "text": "سیدنا جابر رضی اللہ عنہ کہتے ہیں کہ رسول اللہ صلی اللہ علیہ وسلم ہمیں تمام کاموں میں استخارہ کی تعلیم اس طرح دیا کرتے تھے، جس طرح قرآن مجید کی سورت سکھلایا کرتے تھے۔\nآپ صلی اللہ علیہ وسلم فرماتے ہیں: ”تم میں سے اگر کوئی شخص کسی کام کا ارادہ کرے تو وہ (فرض کے علاوہ) دو رکعت نماز ادا کرے اور پھر یہ کہے۔“، ”اے اللہ! بے شک میں تجھ سے تیرے علم کے ذریعے خیر طلب کرتا ہوں، اور تیری قدرت کے ذریعے طاقت مانگتا ہوں، اور میں تیرے عظیم فضل کا سوال کرتا ہوں، کیونکہ تو قدرت رکھتا ہے اور میں قدرت نہیں رکھتا، اور تو جانتا ہے اور میں نہیں جانتا۔ اور تو غیب کے امور جاننے والا ہے، اے اللہ! اگر تو جانتا ہے کہ یہ کام (کام کا نام لے) میرے لئے میرے دین میں میری معاش، اور میری آخرت کے انجام کے لئے بہتر ہے تو اسے میرے مقدر میں کر دے، اور اسے میرے لئے آسان کر دے، پھر میرے لئے اس میں برکت ڈال۔ اور اگر تو جانتا ہے کہ یہ کام (کام کانام لے) میرے لئے میرے دین میں، میری معاش اور میری آخرت کے انجام کے لئے برا ہے تو اسے مجھ سے ہٹا دے اور مجھے اس سے ہٹا دے اور میرے لئے بھلائی کر دے جہاں کہیں بھی ہو پھر مجھے اس پر راضی کر دے۔“ جو شخص اپنے خالق سے استخارہ کرے، مومن مخلوق سے مشورہ کرے، اپنا کام دلجمعی سے کرے وہ کبھی بھی شرمندہ نہیں ہوتا۔ اللہ تعالیٰ نے فرمایا: «وَشَاوِرْهُمْ فِي الْأَمْرِ فَإِذَا عَزَمْتَ فَتَوَكَّلْ عَلَى اللَّهِ»\n”اور ان سے کام میں مشورہ کرو، اور جب تم پختہ ارادہ کر لو تو اللہ پر بھروسہ رکھو۔“",
+   "source": "islamicurdubooks",
+   "sourceUrl": "https://islamicurdubooks.com/hadith/hadith-.php?bookid=19&hadith_number=83",
+   "licensingRisk": true,
+   "iubNumber": "83"
+  },
+  "75": {
+   "text": "اللہ وہ ذات ہے جس کے علاوہ کوئی سچا معبود نہیں ہمیشہ زندہ رہنے والا اور (سب کو) قائم رکھنے والا ہے، نہ اسے اونگھ آتی ہے اور نہ نیند، اسی کے لئے ہے جو آسمانوں میں ہے اور جو زمین میں ہے، کون ہے جو اس کی اجازت کے بغیر اس کے پاس سفارش کر سکے۔ جو لوگوں کے سامنے ہے اور جو ان کے پیچھے ہے سب کو جانتا ہے۔ لوگ اس کے علم میں سے کسی چیز کا احاطہ نہیں کر سکتے مگر جو وہ چاہے اسی کی کرسی آسمانوں اور زمین کو گھیرے ہوئے ہے اور ان دونوں کی حفاظت اسے تھکاتی نہیں، اور وہ بلند ہے عظمت والا ہے۔",
+   "source": "islamicurdubooks",
+   "sourceUrl": "https://islamicurdubooks.com/hadith/hadith-.php?bookid=19&hadith_number=85",
+   "licensingRisk": true,
+   "iubNumber": "85"
+  },
+  "76": {
+   "text": "”اللہ کے نام سے جو رحمان و رحیم ہے، اے نبی ( صلی اللہ علیہ وسلم )! کہہ دیجئے اللہ ایک ہی ہے، اللہ بے نیاز ہے، نہ اس نے کسی کو جنا نہ اس سے کوئی جنا گیا، اور کوئی اس کا ہمسر نہیں۔“، ”اللہ کے نام سے جو رحمان و رحیم ہے، اے نبی ( صلی اللہ علیہ وسلم )! کہہ دیجئے کہ رب کی پناہ میں آتا ہوں، ہر اس چیز کے شر سے جو اس نے پیدا کی، اور اندھیری رات کی تاریکی کے شر سے جب وہ چھا جائے، اور گرہوں میں پھونک مارنے والیوں کے شر سے، اور حسد کرنے والے کے شر سے جب وہ حسد کرنے لگے۔“، ”اللہ کے نام سے جو رحمان و رحیم ہے، اے نبی ( صلی اللہ علیہ وسلم )! کہہ دیجئے میں لوگوں کے رب کی پناہ میں آتا ہوں، لوگوں کے مالک کی، لوگوں کے معبود کی، وسوسہ ڈالنے والے پیچھے ہٹ جانے والے (شیطان) کے شر سے، جو لوگوں کے سینوں میں وسوسہ ڈالتا ہے، جنوں میں سے ہو یا انسانوں میں سے۔“\n(تین تین بار پڑھنا ہے)",
+   "source": "islamicurdubooks",
+   "sourceUrl": "https://islamicurdubooks.com/hadith/hadith-.php?bookid=19&hadith_number=86",
+   "licensingRisk": true,
+   "iubNumber": "86"
+  },
+  "77": {
+   "text": "ہم نے صبح کی اور اللہ کی بادشاہت (کائنات وغیرہ) نے صبح کی، تمام تعریفات اللہ کے لئے ہیں، اللہ کے علاوہ کوئی سچا معبود نہیں وہ اکیلا ہے، اس کا کوئی شریک نہیں، اسی کے لئے بادشاہت ہے اور اسی کے لئے تمام تعریفات اور وہ ہر چیز پر قادر ہے، اے میرے رب! میں تجھ سے اس دن کی بھلائی اور جو اس کے بعد بھلائی ہے کا سوال کرتا ہوں، اور میں اس دن کے شر اور جو اس کے بعد شر ہے سے تیری پناہ میں آتا ہوں، اے میرے رب! میں سُستی، اور بُرے بڑھاپے سے تیری پناہ میں آتا ہوں، اے میرے رب! میں آگ میں اور قبر کے عذاب سے تیری پناہ میں آتا ہوں۔",
+   "source": "islamicurdubooks",
+   "sourceUrl": "https://islamicurdubooks.com/hadith/hadith-.php?bookid=19&hadith_number=87",
+   "licensingRisk": true,
+   "iubNumber": "87"
+  },
+  "78": {
+   "text": "اے اللہ! ہم نے تیرے نام کے ساتھ صبح کی، تیرے نام کے ساتھ شام کی، تیرے نام کے ساتھ ہم زندہ ہیں اور تیرے نام کے ساتھ ہم مرتے ہیں اور تیری طرف ہی لوٹ کر جانا ہے۔\nاے اللہ! تیرے نام کے ساتھ ہم نے شام کی اور تیرے نام کے ساتھ ہم نے صبح کی، تیرے نام کے ساتھ ہم زندہ رہتے ہیں اور تیرے نام کے ساتھ ہم مرتے ہیں اور تیری طرف ہی اٹھ کر جانا ہے۔",
+   "source": "islamicurdubooks",
+   "sourceUrl": "https://islamicurdubooks.com/hadith/hadith-.php?bookid=19&hadith_number=88",
+   "licensingRisk": true,
+   "iubNumbers": [
+    "88",
+    "89"
+   ],
+   "note": "Composite: verbatim piece from #88 + verbatim piece from #89 joined with line breaks; no words added."
+  },
+  "79": {
+   "text": "اے اللہ! تو میرا رب ہے تیرے علاوہ کوئی سچا معبود نہیں تو نے مجھے پیدا کیا ہے، میں تیرا بندہ ہوں اور تیرے عہد اور تیرے وعدے پر قائم ہوں، جتنی مجھ میں طاقت ہے، جو (خطا، گناہ) میں نے کیا اس کے شر سے تیرے پناہ میں آتا ہوں، میں تیرے لئے اپنے اوپر تیری نعمت کا اقرار کرتا ہوں، اور اپنے گناہ کا بھی اقرار کرتا ہوں، مجھے بخش دے کیونکہ گناہوں کو تیرے علاوہ کوئی نہیں بخش سکتا۔",
+   "source": "islamicurdubooks",
+   "sourceUrl": "https://islamicurdubooks.com/hadith/hadith-.php?bookid=19&hadith_number=90",
+   "licensingRisk": true,
+   "iubNumber": "90"
+  },
+  "80": {
+   "text": "”اے اللہ! میں نے صبح کی، میں تجھے گواہ بناتا ہوں اور تیرا عرش اٹھانے والے فرشتوں اور تمام فرشتوں، اور تیری مخلوق کو گواہ بناتا ہوں کہ تو ہی اللہ ہے، تیرے علاوہ کوئی سچا معبود نہیں، تو اکیلا ہے، تیرا کوئی شریک نہیں، اور یقینا محمد ( صلی اللہ علیہ وسلم ) تیرے بندے اور رسول ہیں۔“، اور شام کے وقت کہے: «اللَّهُمَّ إِنِّي أَمْسَيْتُ» ”اے اللہ میں نے شام کی۔“",
+   "source": "islamicurdubooks",
+   "sourceUrl": "https://islamicurdubooks.com/hadith/hadith-.php?bookid=19&hadith_number=91",
+   "licensingRisk": true,
+   "iubNumber": "91"
+  },
+  "81": {
+   "text": "اے اللہ! مجھ پر یا تیری مخلوق میں سے کسی پر صبح کے وقت جو بھی نعمت اتری تو وہ صرف تیری طرف سے ہی ہے، تو اکیلا ہے، تیرا کوئی شریک نہیں، تیرے لئے ہی تمام تعریفات اور تیرے لئے ہی شکر ہے۔",
+   "source": "islamicurdubooks",
+   "sourceUrl": "https://islamicurdubooks.com/hadith/hadith-.php?bookid=19&hadith_number=92",
+   "licensingRisk": true,
+   "iubNumber": "92"
+  },
+  "82": {
+   "text": "اے اللہ! مجھے میرے بدن میں عافیت دے، اے اللہ! مجھے میری سماعت میں عافیت دے، اے اللہ! مجھے میری بصارت میں عافیت دے، تیرے علاوہ کوئی سچا معبود نہیں، اے اللہ! میں کفر اور محتاجی سے تیری پناہ میں آتا ہوں اور میں قبر کے عذاب سے تیری پناہ میں آتا ہوں تیرے علاوہ کوئی سچا معبود نہیں۔",
+   "source": "islamicurdubooks",
+   "sourceUrl": "https://islamicurdubooks.com/hadith/hadith-.php?bookid=19&hadith_number=93",
+   "licensingRisk": true,
+   "iubNumber": "93"
+  },
+  "83": {
+   "text": "میرے لئے اللہ ہی کافی ہے جس کے علاوہ کوئی سچا معبود نہیں۔ میں نے اسی پر بھروسہ کیا اور وہ عرش عظیم کا رب ہے۔",
+   "source": "islamicurdubooks",
+   "sourceUrl": "https://islamicurdubooks.com/hadith/hadith-.php?bookid=19&hadith_number=94",
+   "licensingRisk": true,
+   "iubNumber": "94"
+  },
+  "84": {
+   "text": "اے اللہ! میں تجھ سے دنیا وآخرت میں درگزر اور عافیت کا سوال کرتا ہوں، اے اللہ! میں تجھ سے اپنے دین، اپنی دنیا، اپنے اہل اور اپنے مال میں درگزر اور عافیت کا سوال کرتا ہوں، اے اللہ! میرے پوشیدہ امور پر پردہ ڈال اور میری گھبراہٹوں میں مجھے امن دے، اے اللہ! میرے سامنے سے، میرے پیچھے سے، میرے دائیں سے، میرے بائیں سے، میرے اوپر سے میری حفاظت فرما، اور میں تیری عظمت کے ساتھ پناہ میں آتا ہوں کہ میں اپنے نیچے سے اچانک ہلاک کر دیا جاؤں۔",
+   "source": "islamicurdubooks",
+   "sourceUrl": "https://islamicurdubooks.com/hadith/hadith-.php?bookid=19&hadith_number=95",
+   "licensingRisk": true,
+   "iubNumber": "95"
+  },
+  "85": {
+   "text": "اے اللہ! اے غائب و حاضر کو جاننے والے، اے آسمانوں اور زمین کو نئے سرے سے بنانے والے، اے ہر چیز کے رب اور مالک، میں گواہی دیتا ہوں کہ تیرے علاوہ کوئی سچا معبود نہیں، میں اپنے نفس کے شر، شیطان کے شر اور اس کے شرک سے تیری پناہ میں آتا ہوں، اور اس بات سے تیری پناہ میں آتا ہوں کہ میں اپنے نفس پر برائی کا ارتکاب کروں یا کسی مسلمان کی طرف اسے کھینچ کر لاؤں۔",
+   "source": "islamicurdubooks",
+   "sourceUrl": "https://islamicurdubooks.com/hadith/hadith-.php?bookid=19&hadith_number=96",
+   "licensingRisk": true,
+   "iubNumber": "96"
+  },
+  "86": {
+   "text": "اللہ کے نام کے ساتھ جس کے نام کے ساتھ نہ زمین میں اور نہ ہی آسمان میں کوئی چیز نقصان دے سکتی ہے، اور وہ سننے والا، جاننے والا ہے۔",
+   "source": "islamicurdubooks",
+   "sourceUrl": "https://islamicurdubooks.com/hadith/hadith-.php?bookid=19&hadith_number=97",
+   "licensingRisk": true,
+   "iubNumber": "97"
+  },
+  "87": {
+   "text": "میں اللہ کے رب ہونے پر، اسلام کے دین ہونے پر اور محمد ( صلی اللہ علیہ وسلم ) کے نبی ہونے پر راضی ہوا۔",
+   "source": "islamicurdubooks",
+   "sourceUrl": "https://islamicurdubooks.com/hadith/hadith-.php?bookid=19&hadith_number=98",
+   "licensingRisk": true,
+   "iubNumber": "98"
+  },
+  "88": {
+   "text": "اے ہمیشہ زندہ رہنے والے، اے قائم رکھنے والے، تیری رحمت کے ساتھ ہی میں مدد مانگتا ہوں، میری مکمل حالت درست فرما دے، اور مجھے لحظہ بھر بھی میرے نفس کے سپرد نہ کر۔",
+   "source": "islamicurdubooks",
+   "sourceUrl": "https://islamicurdubooks.com/hadith/hadith-.php?bookid=19&hadith_number=99",
+   "licensingRisk": true,
+   "iubNumber": "99"
+  },
+  "89": {
+   "text": "”ہم نے صبح کی اور اللہ رب العالمین کے لئے (بادشاہت) نے بھی صبح کی، اے اللہ! میں تجھ سے اس دن کی بھلائی، فتح، نصرت، نور، برکت اور اس کی ہدایت کا سوال کرتا ہوں اور اس پر جو شر ہے اور اس کے بعد جو شر ہے اس سے تیری پناہ میں آتا ہوں۔“، ”ہم نے شام کی اور اللہ رب العالمین کے لئے کائنات نے شام کی، اے اللہ! میں تجھ سے اس رات کی بھلائی، فتح، نصرت، نور، برکت اور اس کی ہدایت کا سوال کرتا ہوں، اور اس کے شر سے اور اس کے بعد جو شر ہے اس سے تیری پناہ میں آتا ہوں۔“",
+   "source": "islamicurdubooks",
+   "sourceUrl": "https://islamicurdubooks.com/hadith/hadith-.php?bookid=19&hadith_number=100",
+   "licensingRisk": true,
+   "iubNumber": "100"
+  },
+  "90": {
+   "text": "ہم نے صبح کی (ہم نے شام کی) فطرت اسلام، کلمہ اخلاص، اپنے نبی محمد صلی اللہ علیہ وسلم کے دین اور اپنے والد ابراہیم علیہ السلام کی ملّت پر جو کہ یکسُو مسلمان تھے اور مشرکین سے نہیں تھے۔",
+   "source": "islamicurdubooks",
+   "sourceUrl": "https://islamicurdubooks.com/hadith/hadith-.php?bookid=19&hadith_number=101",
+   "licensingRisk": true,
+   "iubNumber": "101"
+  },
+  "91": {
+   "text": "اللہ تعالیٰ اپنی تعریف کے ساتھ پاک ہے۔",
+   "source": "islamicurdubooks",
+   "sourceUrl": "https://islamicurdubooks.com/hadith/hadith-.php?bookid=19&hadith_number=102",
+   "licensingRisk": true,
+   "iubNumber": "102"
+  },
+  "92": {
+   "text": "اللہ کے علاوہ کوئی سچا معبود نہیں وہ اکیلا ہے، اس کا کوئی شریک نہیں، اسی کے لئے بادشاہت ہے اور اسی کے لئے تمام تعریفات ہیں اور وہ ہر چیز پر قادر ہے۔",
+   "source": "islamicurdubooks",
+   "sourceUrl": "https://islamicurdubooks.com/hadith/hadith-.php?bookid=19&hadith_number=103",
+   "licensingRisk": true,
+   "iubNumber": "103"
+  },
+  "93": {
+   "text": "اللہ کے علاوہ کوئی سچا معبود نہیں وہ اکیلا ہے، اس کا کوئی شریک نہیں، اسی کے لئے بادشاہت ہے اور اسی کے لئے تمام تعریفات ہیں اور وہ ہر چیز پر قادر ہے۔",
+   "source": "islamicurdubooks",
+   "sourceUrl": "https://islamicurdubooks.com/hadith/hadith-.php?bookid=19&hadith_number=103",
+   "licensingRisk": true,
+   "iubNumber": "103"
+  },
+  "94": {
+   "text": "”اللہ تعالی پاک ہے اپنی تعریف کے ساتھ، اپنی مخلوق کی تعداد کے برابر، اپنے نفس کی خوشنودی کے برابر، اپنے عرش کے وزن کے برابر اور اپنے کلمات کی سیاہی کے برابر۔“ (تین مرتبہ صبح کے وقت)",
+   "source": "islamicurdubooks",
+   "sourceUrl": "https://islamicurdubooks.com/hadith/hadith-.php?bookid=19&hadith_number=104",
+   "licensingRisk": true,
+   "iubNumber": "104"
+  },
+  "95": {
+   "text": "اے اللہ! میں تجھ سے نفع مند علم، پاکیزہ رزق اور مقبول عمل کا سوال کرتا ہوں۔",
+   "source": "islamicurdubooks",
+   "sourceUrl": "https://islamicurdubooks.com/hadith/hadith-.php?bookid=19&hadith_number=105",
+   "licensingRisk": true,
+   "iubNumber": "105"
+  },
+  "96": {
+   "text": "میں اللہ سے بخشش مانگتا ہوں اور اسی کی طرف توبہ کرتا ہوں۔",
+   "source": "islamicurdubooks",
+   "sourceUrl": "https://islamicurdubooks.com/hadith/hadith-.php?bookid=19&hadith_number=106",
+   "licensingRisk": true,
+   "iubNumber": "106"
+  },
+  "97": {
+   "text": "میں اللہ تعالی کے کامل کلمات کے ساتھ ہر اس مخلوق کے شر سے جو اس نے پیدا کی (اللہ کی) پناہ میں آتا ہوں۔",
+   "source": "islamicurdubooks",
+   "sourceUrl": "https://islamicurdubooks.com/hadith/hadith-.php?bookid=19&hadith_number=107",
+   "licensingRisk": true,
+   "iubNumber": "107"
+  },
+  "98": null,
+  "99": {
+   "text": "اپنی دونوں ہتھیلیوں کو اکٹھا کرے، پھر سورۃ اخلاص، سورۃ فلق اور سورۃ الناس پڑھ کر ان پر پھونک مارے پھر سر، چہرے اور جسم کے سامنے سے شروع کرتے ہوئے سارے بدن پر پھیرے اس طرح تین مرتبہ کرے۔",
+   "source": "islamicurdubooks",
+   "sourceUrl": "https://islamicurdubooks.com/hadith/hadith-.php?bookid=19&hadith_number=109",
+   "licensingRisk": true,
+   "iubNumber": "109"
+  },
+  "100": {
+   "text": "اللہ وہ ذات ہے جس کے علاوہ کوئی سچا معبود نہیں ہمیشہ زندہ رہنے والا اور (سب کو) قائم رکھنے والا ہے، نہ اسے اونگھ آتی ہے اور نہ نیند، اسی کے لئے ہے جو آسمانوں میں ہے اور جو زمین میں ہے، کون ہے جو اس کی اجازت کے بغیر اس کے پاس سفارش کر سکے۔ جو لوگوں کے سامنے ہے اور جو ان کے پیچھے ہے سب کو جانتا ہے۔ لوگ اس کے علم میں سے کسی چیز کا احاطہ نہیں کر سکتے مگر جو وہ چاہے اسی کی کرسی آسمانوں اور زمین کو گھیرے ہوئے ہے اور ان دونوں کی حفاظت اسے تھکاتی نہیں، اور وہ بلند ہے عظمت والا ہے۔",
+   "source": "islamicurdubooks",
+   "sourceUrl": "https://islamicurdubooks.com/hadith/hadith-.php?bookid=19&hadith_number=85",
+   "licensingRisk": true,
+   "iubNumber": "85",
+   "note": "Ayat al-Kursi translation taken from the same book's morning-adhkar entry (#85); the sleep entry (#110) gives only the virtue."
+  },
+  "101": {
+   "text": "رسول ایمان لایا اس چیز پر جو اس کی طرف اللہ کی جانب سے اتری اور مومن بھی ایمان لائے، یہ سب اللہ تعالیٰ اور اس کے فرشتوں پر اور اس کی کتابوں پر اور اس کے رسولوں پر ایمان لائے، اس کے رسولوں میں سے ہم کسی میں تفریق نہیں کرتے، انہوں نے کہا ہم نے سنا اور اطاعت کی، ہم تیری بخشش طلب کرتے ہیں، اے ہمارے رب! ہمیں تیری طرف ہی لوٹنا ہے۔ اللہ تعالیٰ کسی جان کو اس کی طاقت سے زیادہ تکلیف نہیں دیتا جو نیکی وہ کرے وہ اس کے لئے اور جو برائی کرے وہ اس کے خلاف ہے، اے ہمارے رب! اگر ہم بھول گئے ہوں یا خطا کی ہو تو ہمیں نہ پکڑنا، اے ہمارے رب! ہم پروہ بوجھ نہ ڈال جو ہم سے پہلے لوگوں پر ڈالا تھا، اے ہمارے رب! ہم پر وہ بوجھ نہ ڈال جس کی ہم میں طاقت نہ ہو اور ہم سے درگزر فرما اور ہمیں بخش دے اور ہم پر رحم فرما، تو ہی ہمارا مالک ہے، ہمیں کافروں کی قوم پر غلبہ عطا فرما۔",
+   "source": "islamicurdubooks",
+   "sourceUrl": "https://islamicurdubooks.com/hadith/hadith-.php?bookid=19&hadith_number=111",
+   "licensingRisk": true,
+   "iubNumber": "111"
+  },
+  "102": {
+   "text": "اے میرے رب! میں نے تیرے نام کے ساتھ اپنا پہلو رکھا اور تیرے نام کے ساتھ ہی اسے اٹھاؤں گا، اگر تو میری جان کو روک لے تو اس پر رحم فرما، اور اگر تو نے اسے چھوڑ دیا، تو اس کی حفاظت اس طرح فرما جس طرح تو اپنے نیک بندوں کی حفاظت کرتا ہے۔",
+   "source": "islamicurdubooks",
+   "sourceUrl": "https://islamicurdubooks.com/hadith/hadith-.php?bookid=19&hadith_number=112",
+   "licensingRisk": true,
+   "iubNumber": "112"
+  },
+  "103": {
+   "text": "اے اللہ! یقیناً تو نے ہی میری جان کو پیدا کیا ہے اور تو ہی اسے فوت کرے گا، تیرے لئے ہی اس کا مرنا اور جینا ہے اگر تو اسے زندہ رکھے تو اس کی حفاظت فرما، اور اگر تو اسے مار دے، تو اسے بخش دے، اے اللہ! میں تجھ سے عافیت کا سوال کرتا ہوں۔",
+   "source": "islamicurdubooks",
+   "sourceUrl": "https://islamicurdubooks.com/hadith/hadith-.php?bookid=19&hadith_number=113",
+   "licensingRisk": true,
+   "iubNumber": "113"
+  },
+  "104": {
+   "text": "اے اللہ! مجھے اس دن کے عذاب سے بچا جس دن تو اپنے بندوں کو اٹھائے گا۔",
+   "source": "islamicurdubooks",
+   "sourceUrl": "https://islamicurdubooks.com/hadith/hadith-.php?bookid=19&hadith_number=114",
+   "licensingRisk": true,
+   "iubNumber": "114"
+  },
+  "105": {
+   "text": "اے اللہ! تیرے نام کے ساتھ ہی مرتا ہوں اور جیتا ہوں۔",
+   "source": "islamicurdubooks",
+   "sourceUrl": "https://islamicurdubooks.com/hadith/hadith-.php?bookid=19&hadith_number=115",
+   "licensingRisk": true,
+   "iubNumber": "115"
+  },
+  "106": {
+   "text": "اللہ پاک ہے، تمام تعریفات اللہ کے لئے ہیں، اللہ سب سے بڑا ہے۔",
+   "source": "islamicurdubooks",
+   "sourceUrl": "https://islamicurdubooks.com/hadith/hadith-.php?bookid=19&hadith_number=116",
+   "licensingRisk": true,
+   "iubNumber": "116"
+  },
+  "107": {
+   "text": "اے اللہ! ساتوں آسمانوں اور زمینوں کے رب، اور عرش عظیم کے رب، ہمارے رب اور ہر چیز کے رب، اے دانے اور گٹھلی کو پھاڑنے والے، اور تورات، انجیل، اور قرآن کو نازل کرنے والے، میں ہر اس چیز کے شر سے تیری پناہ میں آتا ہوں جسے تو پیشانی کے بالوں سے پکڑے ہوئے ہے، اے اللہ! تو ہی اول ہے، تجھ سے پہلے کوئی چیز نہیں اور تو ہی آخر ہے تیرے بعد کوئی چیز نہیں، تو غالب ہے، تیرے اوپر کوئی چیز نہیں، تو ہی باطن ہے تجھ سے مخفی کوئی چیز نہیں، ہمارا قرض ادا فرما دے اور ہمیں محتاجی سے خوشحالی عطا فرما۔",
+   "source": "islamicurdubooks",
+   "sourceUrl": "https://islamicurdubooks.com/hadith/hadith-.php?bookid=19&hadith_number=117",
+   "licensingRisk": true,
+   "iubNumber": "117"
+  },
+  "108": {
+   "text": "تمام تعریفات اللہ کے لئے ہیں جس نے ہمیں کھلایا اور پلایا، ہمیں کافی ہوا، اور ہمیں پناہ دی، کتنے ہی ایسے لوگ ہیں جنہیں نہ ہی کوئی کفایت کرنے والا ہے اور نہ ہی کوئی پناہ دینے والا۔",
+   "source": "islamicurdubooks",
+   "sourceUrl": "https://islamicurdubooks.com/hadith/hadith-.php?bookid=19&hadith_number=118",
+   "licensingRisk": true,
+   "iubNumber": "118"
+  },
+  "109": {
+   "text": "اے اللہ! غیب اور حاضر کو جاننے والے، آسمانوں اور زمین کو نئے سرے سے پیدا کرنے والے، ہر چیز کے رب اور مالک میں گواہی دیتا ہوں کہ تیرے علاوہ کوئی سچا معبود نہیں، میں اپنے نفس کے شر اور شیطان کے شر اور اس کے شرک سے تیری پناہ میں آتا ہوں اور اس بات سے تیری پناہ میں آتا ہوں کہ میں اپنے نفس پر برائی کا ارتکاب کروں یا اسے کسی مسلمان کی طرف کھینچ لاؤں۔",
+   "source": "islamicurdubooks",
+   "sourceUrl": "https://islamicurdubooks.com/hadith/hadith-.php?bookid=19&hadith_number=119",
+   "licensingRisk": true,
+   "iubNumber": "119"
+  },
+  "110": {
+   "text": "سورۃ السجدۃ اور سورۃ الملک پڑھے۔",
+   "source": "islamicurdubooks",
+   "sourceUrl": "https://islamicurdubooks.com/hadith/hadith-.php?bookid=19&hadith_number=120",
+   "licensingRisk": true,
+   "iubNumber": "120"
+  },
+  "111": {
+   "text": "اے اللہ! میں نے اپنی جان کو تیرا فرمانبردار بنا لیا، اپنا کام تیرے سپرد کر دیا، اپنا چہرہ تیری طرف متوجہ کر لیا، اپنی کمر تیرے لئے جھکا دی، تیری طرف رغبت کرتے ہوئے اور تجھ سے ڈرتے ہوئے، نہ تجھ سے بھاگ کر جانے کی کوئی پناہ ہے نہ راہ نجات ہے مگر تیری طرف ہی، میں تیری اس کتاب پر ایمان لایا جسے تو نے نازل کیا اور تیرے اس نبی پر ایمان لایا جسے تو نے بھیجا۔",
+   "source": "islamicurdubooks",
+   "sourceUrl": "https://islamicurdubooks.com/hadith/hadith-.php?bookid=19&hadith_number=121",
+   "licensingRisk": true,
+   "iubNumber": "121"
+  },
+  "112": {
+   "text": "اللہ کے علاوہ کوئی سچا معبود نہیں، وہ اکیلا ہے، وہ زبردست ہے، آسمانوں اور زمین کا رب اور جو ان دونوں کے درمیان ہے، غالب ہے، بخشنے والا ہے۔",
+   "source": "islamicurdubooks",
+   "sourceUrl": "https://islamicurdubooks.com/hadith/hadith-.php?bookid=19&hadith_number=122",
+   "licensingRisk": true,
+   "iubNumber": "122"
+  },
+  "113": {
+   "text": "میں اللہ تعالیٰ کے کامل کلمات کے ساتھ، اس کے غصے، اس کی سزا، اس کے بندوں کے شر، شیاطین کے وسوسوں اور اس بات سے کہ وہ میرے پاس حاضر ہوں، پناہ میں آتا ہوں۔",
+   "source": "islamicurdubooks",
+   "sourceUrl": "https://islamicurdubooks.com/hadith/hadith-.php?bookid=19&hadith_number=123",
+   "licensingRisk": true,
+   "iubNumber": "123"
+  },
+  "114": {
+   "text": "بائیں طرف تین مرتبہ تھوک دے۔\nاللہ تعالیٰ سے شیطان اور جو کچھ اس نے دیکھا ہے اس کے شر سے پناہ طلب کرے (تین مرتبہ)۔\nکسی کو خواب کے متعلق نہ بتائے۔\nجس پہلو پر لیٹا ہوا تھا اسے تبدیل کر لے۔",
+   "source": "islamicurdubooks",
+   "sourceUrl": "https://islamicurdubooks.com/hadith/hadith-.php?bookid=19&hadith_number=124",
+   "licensingRisk": true,
+   "iubNumbers": [
+    "124",
+    "125",
+    "126",
+    "127"
+   ],
+   "note": "Composite: verbatim piece from #124 + verbatim piece from #125 + verbatim piece from #126 + verbatim piece from #127 joined with line breaks; no words added."
+  },
+  "115": {
+   "text": "چاہے تو دو رکعت نماز ادا کر لے۔",
+   "source": "islamicurdubooks",
+   "sourceUrl": "https://islamicurdubooks.com/hadith/hadith-.php?bookid=19&hadith_number=128",
+   "licensingRisk": true,
+   "iubNumber": "128"
+  },
+  "116": null,
+  "117": {
+   "text": "اے اللہ! یقیناً میں تیری خوشنودی کے ساتھ ناراضگی سے پناہ میں آتا ہوں، تیری معافی کے ساتھ تیری سزا سے پناہ میں آتا ہوں، اور میں تجھ سے تیرے ذریعے ہی پناہ طلب کرتا ہوں، میں تیری حمد و ثنا کو شمار نہیں کر سکتا، تو اسی طرح ہے جس طرح تو نے اپنی تعریف کی۔",
+   "source": "islamicurdubooks",
+   "sourceUrl": "https://islamicurdubooks.com/hadith/hadith-.php?bookid=19&hadith_number=130",
+   "licensingRisk": true,
+   "iubNumber": "130"
+  },
+  "118": {
+   "text": "اے اللہ! ہم تیری ہی عبادت کرتے ہیں، اور تیرے لئے ہی نماز پڑھتے اور سجدہ کرتے ہیں، تیری طرف ہی ہم دوڑتے ہیں اور جلدی کرتے ہیں، تیری رحمت کی امید کرتے ہیں اور تیرے عذاب سے ڈرتے ہیں، یقیناً تیرا عذاب کافروں کو ملنے والا ہے، اے اللہ! بے شک ہم تجھ سے مدد طلب کرتے ہیں اور بخشش مانگتے ہیں، تیری اچھی تعریف کرتے ہیں، تیرا کفر نہیں کرتے، ہم تجھ پر ایمان لاتے ہیں اور تیرے لئے کبھی جھکتے ہیں، اور جو تجھ سے کفر کرتا ہے ہم اس سے علیحدہ ہوتے ہیں۔",
+   "source": "islamicurdubooks",
+   "sourceUrl": "https://islamicurdubooks.com/hadith/hadith-.php?bookid=19&hadith_number=131",
+   "licensingRisk": true,
+   "iubNumber": "131"
+  },
+  "119": {
+   "text": "”پاک ہے (میرا رب) بادشاہ نہایت مقدس۔“\nآپ صلی اللہ علیہ وسلم تین مرتبہ یہ کلمات کہتے، تیسری مرتبہ بلند آواز سے کہتے تو انہیں لمبا کرتے پھر کہتے «رَبِّ الْمَلَائِكَةِ وَالرُّوحِ» ”فرشتوں اور روح کا رب۔“",
+   "source": "islamicurdubooks",
+   "sourceUrl": "https://islamicurdubooks.com/hadith/hadith-.php?bookid=19&hadith_number=132",
+   "licensingRisk": true,
+   "iubNumber": "132"
+  },
+  "120": {
+   "text": "اے اللہ! میں تیرا بندہ ہوں تیرے بندے کا بیٹا ہوں، تیری باندی کا بیٹا ہوں، میری پیشانی تیرے ہاتھ میں ہے، تیرا حکم مجھ میں جاری ہے، میرے بارے میں تیرا فیصلہ عدل پر مبنی ہے، میں تجھ سے ہر اس نام کے ساتھ سوال کرتا ہوں جو تیرا ہے، جس کے ساتھ تو نے اپنا نام رکھا ہے، یا تو نے اسے اپنی کتاب میں نازل کیا ہے یا اسے اپنی مخلوق میں سے کسی کو سکھایا ہے، یا اسے اپنے پاس علم غیب میں رکھنے کو ترجیح دی ہے، کہ تو قرآن کو میرے دل کی بہار، میرے سینے کا نور، میرے غم کو دور کرنے والا اور میری فکر و پریشانی کو لے جانے والا بنا۔",
+   "source": "islamicurdubooks",
+   "sourceUrl": "https://islamicurdubooks.com/hadith/hadith-.php?bookid=19&hadith_number=133",
+   "licensingRisk": true,
+   "iubNumber": "133"
+  },
+  "121": {
+   "text": "اے اللہ! میں پریشانی، غم، عاجزی، سستی، بزدلی، بخل، قرض چڑھنے اور لوگوں کے غلبے سے تیری پناہ میں آتا ہوں۔",
+   "source": "islamicurdubooks",
+   "sourceUrl": "https://islamicurdubooks.com/hadith/hadith-.php?bookid=19&hadith_number=134",
+   "licensingRisk": true,
+   "iubNumber": "134"
+  },
+  "122": {
+   "text": "اللہ کے علاوہ کوئی سچا معبود نہیں عظمت والا، بردبار ہے۔ اللہ کے علاوہ کوئی معبود برحق نہیں عرش عظیم کا رب ہے۔ اللہ کے علاوہ کوئی معبود برحق نہیں۔ آسمانوں کا رب ہے اور زمین کا رب ہے، عرش کریم کا رب ہے۔",
+   "source": "islamicurdubooks",
+   "sourceUrl": "https://islamicurdubooks.com/hadith/hadith-.php?bookid=19&hadith_number=135",
+   "licensingRisk": true,
+   "iubNumber": "135"
+  },
+  "123": {
+   "text": "اے اللہ! میں تیری ہی رحمت کی امید کرتا ہوں، مجھے لحظہ بھر بھی میرے نفس کے سپرد نہ کر، میری مکمل حالت درست فرما دے، تیرے علاوہ کوئی سچا معبود نہیں۔",
+   "source": "islamicurdubooks",
+   "sourceUrl": "https://islamicurdubooks.com/hadith/hadith-.php?bookid=19&hadith_number=136",
+   "licensingRisk": true,
+   "iubNumber": "136"
+  },
+  "124": {
+   "text": "تیرے علاوہ کوئی سچا معبود نہیں، تو پاک ہے، یقیناً میں ہی ظالموں میں سے ہوں۔",
+   "source": "islamicurdubooks",
+   "sourceUrl": "https://islamicurdubooks.com/hadith/hadith-.php?bookid=19&hadith_number=137",
+   "licensingRisk": true,
+   "iubNumber": "137"
+  },
+  "125": {
+   "text": "اللہ اللہ میرا رب ہے، میں اس کے ساتھ کسی چیز کو بھی شریک نہیں کرتا۔",
+   "source": "islamicurdubooks",
+   "sourceUrl": "https://islamicurdubooks.com/hadith/hadith-.php?bookid=19&hadith_number=138",
+   "licensingRisk": true,
+   "iubNumber": "138"
+  },
+  "126": {
+   "text": "اے اللہ! یقیناً ہم تجھے ہی ان کے سامنے کرتے ہیں اور ان کے شر سے تیری پناہ میں آتے ہیں۔",
+   "source": "islamicurdubooks",
+   "sourceUrl": "https://islamicurdubooks.com/hadith/hadith-.php?bookid=19&hadith_number=139",
+   "licensingRisk": true,
+   "iubNumber": "139"
+  },
+  "127": {
+   "text": "اے اللہ! تو ہی میرا بازو ہے اور تو ہی میرا مدد گار ہے، تیری مدد کے ساتھ ہی میں چکر لگاتا ہوں، تیری مدد کے ساتھ ہی میں حملہ کرتا ہوں اور تیری مدد کے ساتھ ہی میں لڑائی کرتا ہوں۔",
+   "source": "islamicurdubooks",
+   "sourceUrl": "https://islamicurdubooks.com/hadith/hadith-.php?bookid=19&hadith_number=140",
+   "licensingRisk": true,
+   "iubNumber": "140"
+  },
+  "128": {
+   "text": "ہمیں اللہ ہی کافی ہے اور وہ اچھا کارساز ہے۔",
+   "source": "islamicurdubooks",
+   "sourceUrl": "https://islamicurdubooks.com/hadith/hadith-.php?bookid=19&hadith_number=141",
+   "licensingRisk": true,
+   "iubNumber": "141"
+  },
+  "129": {
+   "text": "اے اللہ! ساتوں آسمانوں کے رب، اور عرش عظیم کے رب، فلاں بن فلاں اور تیری مخلوق میں سے اس کے لشکروں کے مقابلے میں میرا پڑوسی (مدد گار) بن جا، کہ کہیں ان میں سے کوئی شخص مجھ پر ظلم یا سرکشی کرے، تیرا پناہ یافتہ طاقتور ہے، تیری تعریف شان والی ہے اور تیرے علاوہ کوئی سچا معبود نہیں۔",
+   "source": "islamicurdubooks",
+   "sourceUrl": "https://islamicurdubooks.com/hadith/hadith-.php?bookid=19&hadith_number=142",
+   "licensingRisk": true,
+   "iubNumber": "142"
+  },
+  "130": {
+   "text": "اللہ سب سے بڑا، اللہ اپنی تمام مخلوق سے زیادہ طاقتور (غالب) ہے، اللہ اس سے بھی زیادہ طاقتور ہے جس سے میں خوف کھا رہا ہوں یا بچنے کی کوشش کر رہا ہوں، میں اللہ کی پناہ میں آتا ہوں، جس کے علاوہ کوئی سچا معبود نہیں، ساتوں آسمانوں کو تھامنے والا ہے کہ کہیں وہ زمین پر نہ گر پڑیں، مگر اس کے حکم کے ساتھ، تیرے فلاں بندے، اس کے لشکروں، اس کے پیروکاروں جنوں اور انسانوں میں سے اس کے گروہ کے شر سے، اے اللہ ان کے شر کے مقابلے میں میرا مدد گار بن جا تیری تعریف شان والی ہے، تیری پناہ یافتہ طاقتور ہے، تیرا نام بابرکت ہے، تیرے علاوہ کوئی سچا معبود نہیں۔",
+   "source": "islamicurdubooks",
+   "sourceUrl": "https://islamicurdubooks.com/hadith/hadith-.php?bookid=19&hadith_number=143",
+   "licensingRisk": true,
+   "iubNumber": "143"
+  },
+  "131": {
+   "text": "اے اللہ! کتاب کو نازل کرنے والے، جلد حساب لینے والے، لشکروں کو شکست دے دے، اے اللہ انہیں شکست دے اور انہیں ہلاکر رکھ دے۔",
+   "source": "islamicurdubooks",
+   "sourceUrl": "https://islamicurdubooks.com/hadith/hadith-.php?bookid=19&hadith_number=144",
+   "licensingRisk": true,
+   "iubNumber": "144"
+  },
+  "132": {
+   "text": "اے اللہ! جس طرح تو چاہے مجھے ان سے کافی ہو جا۔",
+   "source": "islamicurdubooks",
+   "sourceUrl": "https://islamicurdubooks.com/hadith/hadith-.php?bookid=19&hadith_number=145",
+   "licensingRisk": true,
+   "iubNumber": "145"
+  },
+  "133": {
+   "text": "”اللہ تعالیٰ کی پناہ طلب کرے۔“\n”جس چیز میں شک ہو اس میں غور و فکر ترک کر دے۔“",
+   "source": "islamicurdubooks",
+   "sourceUrl": "https://islamicurdubooks.com/hadith/hadith-.php?bookid=19&hadith_number=146",
+   "licensingRisk": true,
+   "iubNumbers": [
+    "146",
+    "147"
+   ],
+   "note": "Composite: verbatim piece from #146 + verbatim piece from #147 joined with line breaks; no words added."
+  },
+  "134": {
+   "text": "میں اللہ اور اس کے رسولوں پر ایمان لایا۔",
+   "source": "islamicurdubooks",
+   "sourceUrl": "https://islamicurdubooks.com/hadith/hadith-.php?bookid=19&hadith_number=148",
+   "licensingRisk": true,
+   "iubNumber": "148"
+  },
+  "135": {
+   "text": "وہی اول ہے، وہی آخر ہے، وہی ظاہر ہے، وہی باطن ہے اور وہ ہر چیز کے بارے میں علم رکھنے والا ہے۔",
+   "source": "islamicurdubooks",
+   "sourceUrl": "https://islamicurdubooks.com/hadith/hadith-.php?bookid=19&hadith_number=148",
+   "licensingRisk": true,
+   "iubNumber": "148"
+  },
+  "136": {
+   "text": "اے اللہ! مجھے اپنے حلال کے ساتھ اپنے حرام سے کافی ہو جا اور اپنے فضل کے ساتھ، مجھے اپنے علاوہ ہر چیز سے بے پرواہ کر دے۔",
+   "source": "islamicurdubooks",
+   "sourceUrl": "https://islamicurdubooks.com/hadith/hadith-.php?bookid=19&hadith_number=149",
+   "licensingRisk": true,
+   "iubNumber": "149"
+  },
+  "137": {
+   "text": "اے اللہ! میں پریشانی، غم، عاجزی، سستی، بزدلی، بخل، قرض چڑھ جانے اور لوگوں کے غلبے سے تیری پناہ میں آتا ہوں۔",
+   "source": "islamicurdubooks",
+   "sourceUrl": "https://islamicurdubooks.com/hadith/hadith-.php?bookid=19&hadith_number=150",
+   "licensingRisk": true,
+   "iubNumber": "150"
+  },
+  "138": {
+   "text": "”میں شیطان مردود سے اللہ کی پناہ میں آتا ہوں۔“ تین مرتبہ کہے اور اپنی بائیں جانب تھوک دے",
+   "source": "islamicurdubooks",
+   "sourceUrl": "https://islamicurdubooks.com/hadith/hadith-.php?bookid=19&hadith_number=151",
+   "licensingRisk": true,
+   "iubNumber": "151"
+  },
+  "139": {
+   "text": "اے اللہ! کوئی آسانی نہیں مگر جسے تو آسان بنا دے، اور تو ہر سختی کو جب چاہے آسان بنا دیتا ہے۔",
+   "source": "islamicurdubooks",
+   "sourceUrl": "https://islamicurdubooks.com/hadith/hadith-.php?bookid=19&hadith_number=152",
+   "licensingRisk": true,
+   "iubNumber": "152"
+  },
+  "140": {
+   "text": "جس آدمی سے کوئی گناہ ہو جائے وہ اچھی طرح وضو کرے، پھر دو رکعت نماز ادا کرے، پھر اللہ تعالیٰ سے بخشش طلب کرے تو اللہ تعالیٰ اسے معاف فرما دیتا ہے۔",
+   "source": "islamicurdubooks",
+   "sourceUrl": "https://islamicurdubooks.com/hadith/hadith-.php?bookid=19&hadith_number=153",
+   "licensingRisk": true,
+   "iubNumber": "153"
+  },
+  "141": {
+   "text": "اللہ تعالیٰ کی پناہ طلب کرے۔",
+   "source": "islamicurdubooks",
+   "sourceUrl": "https://islamicurdubooks.com/hadith/hadith-.php?bookid=19&hadith_number=154",
+   "licensingRisk": true,
+   "iubNumber": "154"
+  },
+  "142": {
+   "text": "اذان",
+   "source": "islamicurdubooks",
+   "sourceUrl": "https://islamicurdubooks.com/hadith/hadith-.php?bookid=19&hadith_number=155",
+   "licensingRisk": true,
+   "iubNumber": "155"
+  },
+  "143": {
+   "text": "مسنون اذکار اور قرآن مجید کی تلاوت:\nنبی کریم صلی اللہ علیہ وسلم نے فرمایا: ”اپنے گھروں کو قبرستان نہ بناؤ کیونکہ شیطان اس گھر سے بھا گتا ہے جس میں سورہ بقرہ کی تلاوت کی جائے۔“",
+   "source": "islamicurdubooks",
+   "sourceUrl": "https://islamicurdubooks.com/hadith/hadith-.php?bookid=19&hadith_number=156",
+   "licensingRisk": true,
+   "iubNumber": "156"
+  },
+  "144": {
+   "text": "اللہ نے تقدیر میں لکھ دیا اور جو چاہا کیا۔",
+   "source": "islamicurdubooks",
+   "sourceUrl": "https://islamicurdubooks.com/hadith/hadith-.php?bookid=19&hadith_number=157",
+   "licensingRisk": true,
+   "iubNumber": "157"
+  },
+  "145": {
+   "text": "”اللہ تعالیٰ تجھے عطا کردہ بچے میں تیرے لئے برکت کرے، تو دینے والے کا شکر ادا کرے، یہ بچہ جوانی کی عمر کو پہنچے، اور تجھے اس کی بھلائی نصیب ہو۔“ دوسرا شخص اس کے جواب میں کہے: «بَارَكَ اللَّهُ لَك وَبَارَكَ عَلَيْك أَوْ جَزَاك اللَّهُ خَيْرًا و رَزَقَك اللَّهُ مِثْلَهُ وَاَجَزَلَ ثَوَابَك» ”اللہ تجھے برکت دے تیرے اوپر برکت نازل کرے، اللہ تجھے بہترین جزا دے، اللہ تجھے اس جیسا عطا کرے اور تجھے پورا ثواب عطا فرمائے۔“",
+   "source": "islamicurdubooks",
+   "sourceUrl": "https://islamicurdubooks.com/hadith/hadith-.php?bookid=19&hadith_number=158",
+   "licensingRisk": true,
+   "iubNumber": "158"
+  },
+  "146": {
+   "text": "رسول اللہ صلی اللہ علیہ وسلم ، حسن اور حسین رضی اللہ عنہما کو ان کلمات کے ساتھ پناہ دیا کرتے تھے: ”میں تم دونوں کو اللہ کے کامل کلمات کے ساتھ ہر شیطان اور زہریلے جانور سے اور ہر لگ جانے والی نظر سے اللہ کی پناہ میں دیتا ہوں۔“",
+   "source": "islamicurdubooks",
+   "sourceUrl": "https://islamicurdubooks.com/hadith/hadith-.php?bookid=19&hadith_number=159",
+   "licensingRisk": true,
+   "iubNumber": "159"
+  },
+  "147": {
+   "text": "کوئی پریشانی نہیں اگر اللہ نے چاہا تو یہ بیماری (گناہوں سے) پاک کرنے والی ہے۔",
+   "source": "islamicurdubooks",
+   "sourceUrl": "https://islamicurdubooks.com/hadith/hadith-.php?bookid=19&hadith_number=160",
+   "licensingRisk": true,
+   "iubNumber": "160"
+  },
+  "148": {
+   "text": "”میں عظمت والے اللہ اور عرش عظیم کے رب سے سوال کرتا ہوں کہ وہ تجھے شفا دے۔“ (سات مرتبہ)",
+   "source": "islamicurdubooks",
+   "sourceUrl": "https://islamicurdubooks.com/hadith/hadith-.php?bookid=19&hadith_number=161",
+   "licensingRisk": true,
+   "iubNumber": "161"
+  },
+  "149": {
+   "text": "نبی کریم صلی اللہ علیہ وسلم نے فرمایا: ”جب انسان اپنے مسلمان بھائی کی تیمارداری کے لئے جاتا ہے تو وہ جنت کے پھلوں میں چلتا ہے اور جب وہ اس کے پاس بیٹھ جاتا ہے تو اسے رحمت ڈھانپ لیتی ہے، اگر یہ صبح کا وقت ہو تو شام تک ستر ہزار فرشتے اس کے لئے رحمت کی دعا کرتے رہتے ہیں، یہاں تک کہ شام ہو جائے اور اگر شام کا وقت ہو تو ستر ہزار فرشتے صبح تک اس کے لئے دعا کرتے رہتے ہیں، یہاں تک کہ صبح ہو جائے۔“",
+   "source": "islamicurdubooks",
+   "sourceUrl": "https://islamicurdubooks.com/hadith/hadith-.php?bookid=19&hadith_number=162",
+   "licensingRisk": true,
+   "iubNumber": "162"
+  },
+  "150": {
+   "text": "اے اللہ! مجھے بخش دے، مجھ پر رحم فرما اور مجھے رفیق اعلی سے ملا دے۔",
+   "source": "islamicurdubooks",
+   "sourceUrl": "https://islamicurdubooks.com/hadith/hadith-.php?bookid=19&hadith_number=163",
+   "licensingRisk": true,
+   "iubNumber": "163"
+  },
+  "151": {
+   "text": "نبی کریم صلی اللہ علیہ وسلم وفات کے وقت دونوں ہاتھوں کو پانی میں داخل کرتے، اپنے چہرے پر پھیرتے اور فرماتے: ”اللہ کے علاوہ کوئی سچا معبود نہیں، یقیناً موت کے لئے سختیاں ہیں۔“",
+   "source": "islamicurdubooks",
+   "sourceUrl": "https://islamicurdubooks.com/hadith/hadith-.php?bookid=19&hadith_number=164",
+   "licensingRisk": true,
+   "iubNumber": "164"
+  },
+  "152": {
+   "text": "اللہ کے علاوہ کوئی سچا معبود نہیں، اللہ سب سے بڑا ہے، اللہ کے علاوہ کوئی سچا معبود نہیں وہ اکیلا ہے، اللہ کے علاوہ کوئی سچا معبود نہیں وہ اکیلا ہے، اس کا کوئی شریک نہیں، اللہ کے علاوہ کوئی سچا معبود نہیں، اسی کے لئے بادشاہت ہے اور اسی کے لئے تمام تعریفیں ہیں، اللہ کے علاوہ کوئی سچا معبود نہیں، گناہ سے بچنے کی طاقت اور نیکی کرنے کی قوت اللہ کی توفیق و مدد کے بغیر ممکن نہیں۔",
+   "source": "islamicurdubooks",
+   "sourceUrl": "https://islamicurdubooks.com/hadith/hadith-.php?bookid=19&hadith_number=165",
+   "licensingRisk": true,
+   "iubNumber": "165"
+  },
+  "153": {
+   "text": "جس شخص کا آخری کلام «لَا إِلٰهَ إِلَّا اللَٰهُ» ہو وہ جنت میں جائے گا۔",
+   "source": "islamicurdubooks",
+   "sourceUrl": "https://islamicurdubooks.com/hadith/hadith-.php?bookid=19&hadith_number=166",
+   "licensingRisk": true,
+   "iubNumber": "166"
+  },
+  "154": {
+   "text": "یقیناً ہم اللہ کے لئے ہیں اور ہم اسی کی طرف لوٹ کر جانے والے ہیں، اے اللہ! مجھے میری مصیبت میں اجر عطا فرما، اور مجھے اس سے بہتر بدلہ عطا فرما۔",
+   "source": "islamicurdubooks",
+   "sourceUrl": "https://islamicurdubooks.com/hadith/hadith-.php?bookid=19&hadith_number=167",
+   "licensingRisk": true,
+   "iubNumber": "167"
+  },
+  "155": {
+   "text": "اے اللہ! فلاں کو بخش دے (میت کا نام لے) ہدایت یافتہ لوگوں میں اس کا درجہ بلند فرما، پیچھے رہنے والے ورثا میں اس کا جانشین بنا، اے رب العالمین! ہمیں اور اسے بخش دے، اس کی قبر میں اس کے لئے کشادہ کر دے، اور اس میں اس کے لئے روشنی کر دے۔",
+   "source": "islamicurdubooks",
+   "sourceUrl": "https://islamicurdubooks.com/hadith/hadith-.php?bookid=19&hadith_number=168",
+   "licensingRisk": true,
+   "iubNumber": "168"
+  },
+  "156": {
+   "text": "اے اللہ! اسے بخش دے، اس پر رحم فرما اور اسے عافیت دے، اس سے درگزر فرما، اس کی مہمانی باعزت کر، اس کی قبر کشادہ کر، اسے پانی، برف اور اولوں سے دھو ڈال، اور اسے خطاؤں سے اس طرح صاف کر دے جس طرح تو نے سفید کپڑا میل کچیل سے صاف کیا، اسے اس کے گھر سے بہتر گھر بدلے میں دے، اس کے گھر والوں سے بہتر گھر والے، اور اس کی بیوی سے بہتر بیوی بدلے میں دے، اسے جنت میں داخل کر اور قبر کے عذاب اور آگ کے عذاب سے بچا۔",
+   "source": "islamicurdubooks",
+   "sourceUrl": "https://islamicurdubooks.com/hadith/hadith-.php?bookid=19&hadith_number=169",
+   "licensingRisk": true,
+   "iubNumber": "169"
+  },
+  "157": {
+   "text": "اے اللہ! ہمارے زندہ، مردہ، حاضر، غائب، چھوٹے، بڑے، مرد اور عورت کو بخش، اے اللہ! تو ہم میں سے جسے زندہ رکھے اسے اسلام پر زندہ رکھ اور ہم میں سے جسے تو فوت کر اسے ایمان پر فوت کر، اے اللہ! ہمیں اس کے اجر سے محروم نہ کر اور اس کے بعد گمراہ نہ کر۔",
+   "source": "islamicurdubooks",
+   "sourceUrl": "https://islamicurdubooks.com/hadith/hadith-.php?bookid=19&hadith_number=170",
+   "licensingRisk": true,
+   "iubNumber": "170"
+  },
+  "158": {
+   "text": "اے اللہ! بے شک فلاں بن فلاں (میت کا نام لے) تیرے ذمے اور امان میں ہے، اسے قبر کے فتنے اور آگ کے عذاب سے بچا، تو وفا اور حق والا ہے، اسے بخش دے اور اس پر رحم فرما، یقیناً تو بخشنے والا، رحم کرنے والا ہے۔",
+   "source": "islamicurdubooks",
+   "sourceUrl": "https://islamicurdubooks.com/hadith/hadith-.php?bookid=19&hadith_number=171",
+   "licensingRisk": true,
+   "iubNumber": "171"
+  },
+  "159": {
+   "text": "اے اللہ! تیرا بندہ، تیری باندی کا بیٹا، تیری رحمت کا محتاج ہوا ہے اور تو اسے عذاب دینے سے بے پرواہ ہے، اگر یہ نیک تھا تو اس کی نیکیوں میں اضافہ فرما اور اگر گناہ گار تھا تو اس کی برائیوں سے درگزر کر۔",
+   "source": "islamicurdubooks",
+   "sourceUrl": "https://islamicurdubooks.com/hadith/hadith-.php?bookid=19&hadith_number=172",
+   "licensingRisk": true,
+   "iubNumber": "172"
+  },
+  "160": {
+   "text": "اے اللہ! اسے قبر کے عذاب سے بچا۔\nاور اگر درج ذیل الفاظ کہے تو بہتر ہے:\n”اے اللہ! اسے اس کے والدین کے لئے پیش رو اور ذخیرہ بنا، اسے سفارشی بنا جس کی سفارش قبول کی جائے، اے اللہ! اس کے ذریعے ان دونوں کے اعمال کا وزن بھاری کر دے، اور اس کے ذریعے ان دونوں کے اجر زیادہ کر دے، اسے نیک مؤمنین کے ساتھ ملا، اسے ابراہیم علیہ السلام کی کفالت میں کر دے، اور اپنی رحمت سے اسے جہنم کے عذاب سے بچا، اسے اس کے گھر سے بہتر گھر عطا کر، اس کے گھر والوں سے بہتر گھر والے عطا کر، اے اللہ! ہمارے گزر جانے والوں کو، ہمارے پیش رو بچوں کو اور ہم میں سے جو ایمان کے ساتھ سبقت لے گئے معاف فرما۔“",
+   "source": "islamicurdubooks",
+   "sourceUrl": "https://islamicurdubooks.com/hadith/hadith-.php?bookid=19&hadith_number=173",
+   "licensingRisk": true,
+   "iubNumbers": [
+    "173"
+   ],
+   "note": "Composite: verbatim piece from #173 joined with line breaks; no words added."
+  },
+  "161": {
+   "text": "اے اللہ! اسے ہمارے لئے پیش رو، میزبان اور اجر بنا دے۔",
+   "source": "islamicurdubooks",
+   "sourceUrl": "https://islamicurdubooks.com/hadith/hadith-.php?bookid=19&hadith_number=174",
+   "licensingRisk": true,
+   "iubNumber": "174"
+  },
+  "162": {
+   "text": "یقیناً اللہ ہی کے لئے ہے جو اس نے لے لیا، اور اسی کے لئے ہے جو اس نے عطا کیا، اور ہر چیز اس کے پاس ایک مقررہ مدت کے ساتھ ہے، تم صبر کرو اور ثواب کی امید رکھو۔",
+   "source": "islamicurdubooks",
+   "sourceUrl": "https://islamicurdubooks.com/hadith/hadith-.php?bookid=19&hadith_number=175",
+   "licensingRisk": true,
+   "iubNumber": "175"
+  },
+  "163": {
+   "text": "اللہ کے نام سے اور رسول اللہ صلی اللہ علیہ وسلم کے طریقے پر۔",
+   "source": "islamicurdubooks",
+   "sourceUrl": "https://islamicurdubooks.com/hadith/hadith-.php?bookid=19&hadith_number=176",
+   "licensingRisk": true,
+   "iubNumber": "176"
+  },
+  "164": {
+   "text": "اے اللہ! اسے بخش دے، اے اللہ اسے ثابت قدم رکھ۔",
+   "source": "islamicurdubooks",
+   "sourceUrl": "https://islamicurdubooks.com/hadith/hadith-.php?bookid=19&hadith_number=177",
+   "licensingRisk": true,
+   "iubNumber": "177"
+  },
+  "165": {
+   "text": "ان گھروں میں رہنے والے مؤمنوں اور مسلمانوں تم پر سلام ہو، اور یقیناً ہم اگر اللہ نے چاہا تو تم سے ملنے والے ہیں۔ (اللہ تعالیٰ ہم میں سے پہلے آنے والوں اور بعد میں آنے والوں پر رحم فرمائے) میں اللہ سے اپنے لئے اور تمہارے لئے عافیت کا سوال کرتا ہوں۔",
+   "source": "islamicurdubooks",
+   "sourceUrl": "https://islamicurdubooks.com/hadith/hadith-.php?bookid=19&hadith_number=178",
+   "licensingRisk": true,
+   "iubNumber": "178"
+  },
+  "166": {
+   "text": "اے اللہ! میں تجھ سے اس کی بھلائی کا سوال کرتا ہوں اور اس کے شر سے تیری پناہ میں آتا ہوں۔",
+   "source": "islamicurdubooks",
+   "sourceUrl": "https://islamicurdubooks.com/hadith/hadith-.php?bookid=19&hadith_number=179",
+   "licensingRisk": true,
+   "iubNumber": "179"
+  },
+  "167": {
+   "text": "اے اللہ! میں تجھ سے اس کی بھلائی، جو اس میں ہے اس کی بھلائی اور جس کے ساتھ یہ بھیجی گئی ہے اس کی بھلائی کا سوال کرتا ہوں، اور میں تجھ سے اس کے شر، جو اس میں ہے اس کے شر اور جس کے ساتھ یہ بھیجی گئی ہے اس کے شر سے تیری پناہ میں آتا ہوں۔",
+   "source": "islamicurdubooks",
+   "sourceUrl": "https://islamicurdubooks.com/hadith/hadith-.php?bookid=19&hadith_number=180",
+   "licensingRisk": true,
+   "iubNumber": "180"
+  },
+  "168": {
+   "text": "پاک ہے وہ ذات جس کی تعریف کے ساتھ یہ گرج تسبیح کرتی ہے اور فرشتے اس کے خوف سے تسبیح کرتے ہیں۔",
+   "source": "islamicurdubooks",
+   "sourceUrl": "https://islamicurdubooks.com/hadith/hadith-.php?bookid=19&hadith_number=181",
+   "licensingRisk": true,
+   "iubNumber": "181"
+  },
+  "169": {
+   "text": "اے اللہ! ہمیں ایسی بارش سے سیراب کر جو مددگار، خوشگوار، سرسبز و شاداب، نفع بخش، نقصان نہ دینے والی، جلد برسنے والی، دیر سے برسنے والی نہ ہو۔",
+   "source": "islamicurdubooks",
+   "sourceUrl": "https://islamicurdubooks.com/hadith/hadith-.php?bookid=19&hadith_number=182",
+   "licensingRisk": true,
+   "iubNumber": "182"
+  },
+  "170": {
+   "text": "اے اللہ! ہم پر بارش برسا، اے اللہ ہم پر بارش برسا، اے اللہ ہم پر بارش برسا۔",
+   "source": "islamicurdubooks",
+   "sourceUrl": "https://islamicurdubooks.com/hadith/hadith-.php?bookid=19&hadith_number=183",
+   "licensingRisk": true,
+   "iubNumber": "183"
+  },
+  "171": {
+   "text": "اے اللہ! اپنے بندوں اور جانوروں کو پانی پلا، اپنی رحمت کو پھیلا اور اپنے مردہ شہر کو زندہ کر۔",
+   "source": "islamicurdubooks",
+   "sourceUrl": "https://islamicurdubooks.com/hadith/hadith-.php?bookid=19&hadith_number=184",
+   "licensingRisk": true,
+   "iubNumber": "184"
+  },
+  "172": {
+   "text": "اے اللہ! نفع مند بارش برسا۔",
+   "source": "islamicurdubooks",
+   "sourceUrl": "https://islamicurdubooks.com/hadith/hadith-.php?bookid=19&hadith_number=185",
+   "licensingRisk": true,
+   "iubNumber": "185"
+  },
+  "173": {
+   "text": "ہم پر اللہ کے فضل اور رحمت سے بارش برسائی گئی۔",
+   "source": "islamicurdubooks",
+   "sourceUrl": "https://islamicurdubooks.com/hadith/hadith-.php?bookid=19&hadith_number=186",
+   "licensingRisk": true,
+   "iubNumber": "186"
+  },
+  "174": {
+   "text": "اے اللہ! اسے ہمارے ارد گرد برسا، اسے ہم پر نہ برسا، اے اللہ! (اس بارش کو تو) ٹیلوں پر، پہاڑوں کی چوٹیوں پر، وادیوں کے اندر اور درخت اگنے کی جگہوں پر (لے جا)",
+   "source": "islamicurdubooks",
+   "sourceUrl": "https://islamicurdubooks.com/hadith/hadith-.php?bookid=19&hadith_number=187",
+   "licensingRisk": true,
+   "iubNumber": "187"
+  },
+  "175": {
+   "text": "اللہ سب سے بڑا ہے، اے اللہ! اسے ہم پر امن و ایمان کے ساتھ اور سلامتی و اسلام کے ساتھ طلوع فرما، اور اس چیز کی توفیق کے ساتھ جسے اے ہمارے رب تو پسند کرتا ہے اور اس سے خوش ہوتا ہے، ہمارا اور تیرا رب اللہ ہے۔",
+   "source": "islamicurdubooks",
+   "sourceUrl": "https://islamicurdubooks.com/hadith/hadith-.php?bookid=19&hadith_number=188",
+   "licensingRisk": true,
+   "iubNumber": "188"
+  },
+  "176": {
+   "text": "پیاس چلی گئی، رگیں تر ہو گئیں اور اجر ثابت ہو گیا اگر اللہ نے چاہا۔",
+   "source": "islamicurdubooks",
+   "sourceUrl": "https://islamicurdubooks.com/hadith/hadith-.php?bookid=19&hadith_number=189",
+   "licensingRisk": true,
+   "iubNumber": "189"
+  },
+  "177": {
+   "text": "اے اللہ! میں تجھ سے تیری اس رحمت کا سوال کرتا ہوں جس نے ہر چیز کو ڈھانپ رکھا ہے کہ یہ تو مجھے بخش دے۔",
+   "source": "islamicurdubooks",
+   "sourceUrl": "https://islamicurdubooks.com/hadith/hadith-.php?bookid=19&hadith_number=190",
+   "licensingRisk": true,
+   "iubNumber": "190"
+  },
+  "178": {
+   "text": "نبی اکرم صلی اللہ علیہ وسلم نے فرمایا: جب تم میں سے کوئی کھانا کھانے کا ارادہ کرے تو کہے۔ «بسم الله» ”اللہ کے نام کے ساتھ۔“ اگر اسے شروع میں یاد نہ رہے تو پھر یہ کہے۔ «بِسْمِ اللَّهِ أَوَّلَهُ وَآخِرَهُ» ”اللہ کے نام کے ساتھ اس کے شروع اور اس کے آخر میں۔“",
+   "source": "islamicurdubooks",
+   "sourceUrl": "https://islamicurdubooks.com/hadith/hadith-.php?bookid=19&hadith_number=191",
+   "licensingRisk": true,
+   "iubNumber": "191"
+  },
+  "179": {
+   "text": "”اللہ کے نبی صلی اللہ علیہ وسلم نے فرمایا: جس شخص کو اللہ تعالی کھانا کھلائے تو اسے چاہئے کہ وہ یہ کہے: «اللَّهُمَّ بَارِكْ لَنَا فِيهِ، وَأَطْعِمْنَا خَيْرًا مِنْهُ» ”اے اللہ! ہمارے لئے اس کھانے میں برکت دے اور ہمیں اس سے بہتر کھانا کھلا۔“ «اللَّهُمَّ بَارِكْ لَنَا فِيهِ، وَزِدْنَا مِنْهُ» اے اللہ! ہمارے لئے اس میں برکت ڈال اور ہمیں اس سے زیادہ عطا کر۔“",
+   "source": "islamicurdubooks",
+   "sourceUrl": "https://islamicurdubooks.com/hadith/hadith-.php?bookid=19&hadith_number=192",
+   "licensingRisk": true,
+   "iubNumber": "192"
+  },
+  "180": {
+   "text": "تمام تعریفات اللہ کے لئے ہیں جس نے مجھے یہ کھانا کھلایا اور مجھے میری کسی طاقت اور قوت کے بغیر عطا کیا۔",
+   "source": "islamicurdubooks",
+   "sourceUrl": "https://islamicurdubooks.com/hadith/hadith-.php?bookid=19&hadith_number=193",
+   "licensingRisk": true,
+   "iubNumber": "193"
+  },
+  "181": {
+   "text": "تمام تعریفات اللہ کے لئے ہیں، بہت زیادہ تعریف، پاکیزہ، بابرکت، جسے کافی نہیں سمجھا گیا، نہ ہی اسے الوداع کیا گیا، اور نہ ہی اس سے بے پرواہ ہوا گیا اے ہمارے رب۔",
+   "source": "islamicurdubooks",
+   "sourceUrl": "https://islamicurdubooks.com/hadith/hadith-.php?bookid=19&hadith_number=194",
+   "licensingRisk": true,
+   "iubNumber": "194"
+  },
+  "182": {
+   "text": "اے اللہ! ان کے لئے ان کے رزق میں برکت عطا فرما، انہیں بخش دے اور ان پر رحم فرما۔",
+   "source": "islamicurdubooks",
+   "sourceUrl": "https://islamicurdubooks.com/hadith/hadith-.php?bookid=19&hadith_number=195",
+   "licensingRisk": true,
+   "iubNumber": "195"
+  },
+  "183": {
+   "text": "اے اللہ! جس نے مجھے کھلایا تو بھی اسے کھلا اور جس نے مجھے پلایا تو بھی اسے پلا۔",
+   "source": "islamicurdubooks",
+   "sourceUrl": "https://islamicurdubooks.com/hadith/hadith-.php?bookid=19&hadith_number=196",
+   "licensingRisk": true,
+   "iubNumber": "196"
+  },
+  "184": {
+   "text": "تمہارے پاس روزہ دار افطار کریں، تمہارا کھانا نیک لوگ کھائیں اور تمہارے لئے فرشتے دعائیں کرتے رہیں۔",
+   "source": "islamicurdubooks",
+   "sourceUrl": "https://islamicurdubooks.com/hadith/hadith-.php?bookid=19&hadith_number=197",
+   "licensingRisk": true,
+   "iubNumber": "197"
+  },
+  "185": {
+   "text": "جب تم میں سے کسی شخص کو کھانے کی دعوت دی جائے تو اسے قبول کرے، اگر اس نے روزہ رکھا ہو تو دعا کر دے اور اگر روزے سے نہ ہو تو کھا لے۔",
+   "source": "islamicurdubooks",
+   "sourceUrl": "https://islamicurdubooks.com/hadith/hadith-.php?bookid=19&hadith_number=198",
+   "licensingRisk": true,
+   "iubNumber": "198"
+  },
+  "186": {
+   "text": "میں روزے سے ہوں، میں روزے سے ہوں۔",
+   "source": "islamicurdubooks",
+   "sourceUrl": "https://islamicurdubooks.com/hadith/hadith-.php?bookid=19&hadith_number=199",
+   "licensingRisk": true,
+   "iubNumber": "199"
+  },
+  "187": {
+   "text": "اے اللہ! ہمارے لئے ہمارے پھل میں برکت دے، ہمارے لئے ہمارے شہر میں برکت دے، ہمارے لئے ہمارے صاع میں برکت دے، اور ہمارے لئے ہمارے مد میں برکت دے۔",
+   "source": "islamicurdubooks",
+   "sourceUrl": "https://islamicurdubooks.com/hadith/hadith-.php?bookid=19&hadith_number=200",
+   "licensingRisk": true,
+   "iubNumber": "200"
+  },
+  "188": {
+   "text": "نبی صلی اللہ علیہ وسلم نے فرمایا: ”جب تم میں سے کسی شخص کو چھینک آئے تو وہ «الحَمْدُ لِلَّهِ» کہے اور اس کے لئے اس کا بھائی «يَرْحَمُكَ اللَّهُ» اللہ تجھ پر رحم فرمائے کہے، جب وہ یہ کہے تو چھینک مارنے والا کہے «يَهْدِيكُمُ اللَّهُ وَيُصْلِحُ بَالَكُمْ» اللہ تمہیں ہدایت دے اور تمہاری حالت درست کرے“",
+   "source": "islamicurdubooks",
+   "sourceUrl": "https://islamicurdubooks.com/hadith/hadith-.php?bookid=19&hadith_number=201",
+   "licensingRisk": true,
+   "iubNumber": "201"
+  },
+  "189": {
+   "text": "اللہ تمہیں ہدایت دے اور تمہاری حالت درست کرے",
+   "source": "islamicurdubooks",
+   "sourceUrl": "https://islamicurdubooks.com/hadith/hadith-.php?bookid=19&hadith_number=201",
+   "licensingRisk": true,
+   "iubNumber": "201"
+  },
+  "190": {
+   "text": "اللہ تمہیں برکت دے، تم پر برکت کرے اور تم دونوں کو بھلائی میں جمع کرے۔",
+   "source": "islamicurdubooks",
+   "sourceUrl": "https://islamicurdubooks.com/hadith/hadith-.php?bookid=19&hadith_number=202",
+   "licensingRisk": true,
+   "iubNumber": "202"
+  },
+  "191": {
+   "text": "جب تم میں سے کوئی شخص شادی کرے یا خادمہ خریدے تو وہ یہ کہے۔ ”اے اللہ! میں تجھ سے اس کی بھلائی اور جس پر اسے پیدا کیا گیا اس کی بھلائی کا سوال کرتا ہوں، اور میں اس کے شر اور جس پر اسے پیدا کیا گیا ہے اس کے شر سے تیری پناہ میں آتا ہوں۔“ جب کوئی اونٹ خریدے تو اس کی کوہان پکڑ کر یہی کہے۔“",
+   "source": "islamicurdubooks",
+   "sourceUrl": "https://islamicurdubooks.com/hadith/hadith-.php?bookid=19&hadith_number=203",
+   "licensingRisk": true,
+   "iubNumber": "203"
+  },
+  "192": {
+   "text": "اللہ کے نام کے ساتھ، اے اللہ! ہمیں شیطان سے بچا اور جو تو ہمیں عطا کرے اسے بھی شیطان سے بچا۔",
+   "source": "islamicurdubooks",
+   "sourceUrl": "https://islamicurdubooks.com/hadith/hadith-.php?bookid=19&hadith_number=204",
+   "licensingRisk": true,
+   "iubNumber": "204"
+  },
+  "193": {
+   "text": "میں شیطان مردود سے اللہ کی پناہ میں آتا ہوں۔",
+   "source": "islamicurdubooks",
+   "sourceUrl": "https://islamicurdubooks.com/hadith/hadith-.php?bookid=19&hadith_number=205",
+   "licensingRisk": true,
+   "iubNumber": "205"
+  },
+  "194": {
+   "text": "تمام تعریفات اللہ کے لئے ہیں جس نے مجھے اس مصیبت سے عافیت دی جس میں تجھے مبتلا کیا اور اس نے مجھے بہت ساری مخلوق پر فضیلت دی۔",
+   "source": "islamicurdubooks",
+   "sourceUrl": "https://islamicurdubooks.com/hadith/hadith-.php?bookid=19&hadith_number=206",
+   "licensingRisk": true,
+   "iubNumber": "206"
+  },
+  "195": {
+   "text": "عبداللہ بن عمر رضی اللہ عنہما کہتے ہیں کہ رسول اللہ صلی اللہ علیہ وسلم مجلس میں اپنے اٹھنے سے پہلے سو مرتبہ یہ کلمات کہا کرتے تھے: ”اے میرے رب مجھے بخش دے اور میری توبہ قبول کر یقیناً تو ہی توبہ قبول کرنے والا بخشنے والا ہے۔“",
+   "source": "islamicurdubooks",
+   "sourceUrl": "https://islamicurdubooks.com/hadith/hadith-.php?bookid=19&hadith_number=207",
+   "licensingRisk": true,
+   "iubNumber": "207"
+  },
+  "196": {
+   "text": "اے اللہ! تو اپنی تعریف کے ساتھ پاک ہے میں گواہی دیتا ہوں کہ تیرے علاوہ کوئی سچا معبود نہیں۔ میں تجھ سے بخشش طلب کرتا ہوں اور تیری طرف توبہ کرتا ہوں۔",
+   "source": "islamicurdubooks",
+   "sourceUrl": "https://islamicurdubooks.com/hadith/hadith-.php?bookid=19&hadith_number=208",
+   "licensingRisk": true,
+   "iubNumber": "208"
+  },
+  "197": null,
+  "198": {
+   "text": "اللہ تجھے بہتر بدلہ عطا کرے۔",
+   "source": "islamicurdubooks",
+   "sourceUrl": "https://islamicurdubooks.com/hadith/hadith-.php?bookid=19&hadith_number=209",
+   "licensingRisk": true,
+   "iubNumber": "209"
+  },
+  "199": {
+   "text": "”جس شخص نے سورہ کہف کی پہلی دس آیات یاد کر لیں وہ دجال (کے فتنہ) سے بچا لیا گیا۔“\nہر نماز کے آخری تشہد میں دجال کے فتنے سے اللہ کی پناہ میں آئے۔",
+   "source": "islamicurdubooks",
+   "sourceUrl": "https://islamicurdubooks.com/hadith/hadith-.php?bookid=19&hadith_number=210",
+   "licensingRisk": true,
+   "iubNumber": "210"
+  },
+  "200": {
+   "text": "وہ بھی تجھ سے محبت کرے جس کے لئے تو نے مجھ سے محبت کی۔",
+   "source": "islamicurdubooks",
+   "sourceUrl": "https://islamicurdubooks.com/hadith/hadith-.php?bookid=19&hadith_number=211",
+   "licensingRisk": true,
+   "iubNumber": "211"
+  },
+  "201": {
+   "text": "اللہ تجھے تیرے اہل و عیال اور تیرے مال میں برکت دے۔",
+   "source": "islamicurdubooks",
+   "sourceUrl": "https://islamicurdubooks.com/hadith/hadith-.php?bookid=19&hadith_number=212",
+   "licensingRisk": true,
+   "iubNumber": "212"
+  },
+  "202": {
+   "text": "اللہ تجھے تیرے اہل و عیال اور مال میں برکت دے۔ قرض کا بدلہ تو صرف شکریہ اور ادائیگی ہی ہے۔",
+   "source": "islamicurdubooks",
+   "sourceUrl": "https://islamicurdubooks.com/hadith/hadith-.php?bookid=19&hadith_number=213",
+   "licensingRisk": true,
+   "iubNumber": "213"
+  },
+  "203": {
+   "text": "اے اللہ! میں تیری پناہ میں آتا ہوں اس بات سے کہ تیرے ساتھ شرک کروں اور میں جانتا ہوں، اور جس کے بارے میں میں نہیں جانتا اس کے لئے تجھ سے بخشش طلب کرتا ہوں۔",
+   "source": "islamicurdubooks",
+   "sourceUrl": "https://islamicurdubooks.com/hadith/hadith-.php?bookid=19&hadith_number=214",
+   "licensingRisk": true,
+   "iubNumber": "214"
+  },
+  "204": {
+   "text": "اور اللہ تجھ میں بھی برکت دے۔",
+   "source": "islamicurdubooks",
+   "sourceUrl": "https://islamicurdubooks.com/hadith/hadith-.php?bookid=19&hadith_number=215",
+   "licensingRisk": true,
+   "iubNumber": "215"
+  },
+  "205": {
+   "text": "اے اللہ! کوئی بدشگونی نہیں مگر (تیرے حکم سے ہی) بدشگونی ہوتی ہے، اور تیری بھلائی کے علاوہ کوئی بھلائی نہیں اور تیرے علاوہ کوئی سچا معبود نہیں۔",
+   "source": "islamicurdubooks",
+   "sourceUrl": "https://islamicurdubooks.com/hadith/hadith-.php?bookid=19&hadith_number=216",
+   "licensingRisk": true,
+   "iubNumber": "216"
+  },
+  "206": {
+   "text": "اللہ کے نام کے ساتھ! تمام تعریفات اللہ کے لئے ہیں، پاک ہے وہ ذات جس نے ہمارے لئے اسے مسخر کیا، جبکہ ہم اسے مطیع کرنے والے نہیں تھے اور ہم اپنے رب کی طرف ہی لوٹنے والے ہیں۔ تمام تعریفات اللہ کے لئے ہیں، تمام تعریفات اللہ کے لئے ہیں، تمام تعریفات اللہ کے لئے ہیں، اللہ سب سے بڑا ہے، اللہ سب سے بڑا ہے، اللہ سب سے بڑا ہے، اے اللہ پاک ہے تو، اے اللہ یقیناً میں نے اپنے نفس پر ظلم کیا مجھے بخش دے کیونکہ گناہوں کو تیرے علاوہ کوئی نہیں بخش سکتا۔",
+   "source": "islamicurdubooks",
+   "sourceUrl": "https://islamicurdubooks.com/hadith/hadith-.php?bookid=19&hadith_number=217",
+   "licensingRisk": true,
+   "iubNumber": "217"
+  },
+  "207": {
+   "text": "”اللہ سب سے بڑا ہے، اللہ سب سے بڑا ہے، اللہ سب سے بڑا ہے، پاک ہے وہ ذات جس نے ہمارے لئے اسے مسخر کیا، جبکہ ہم اسے مطیع کرنے والے نہیں تھے اور یقیناً ہم اپنے رب کی طرف ہی لوٹنے والے ہیں، اے اللہ! ہم تجھ سے اپنے اس سفر میں نیکی اور تقویٰ کا سوال کرتے ہیں۔ اور اس عمل کا جسے تو پسند کرتا ہے۔ اے اللہ! ہم پر ہمارا یہ سفر آسان کر دے اور ہم سے اس کی دوری کو لپیٹ دے۔ اے اللہ! سفر میں تو ہی ہمارا ساتھی اور گھر والوں پر نگہبان ہے، اے اللہ! میں سفر کی مشقت، تکلیف دہ منظر اور مال اور گھر والوں میں برے لوٹنے سے تیری پناہ میں آتا ہوں۔“ جب آپ صلی اللہ علیہ وسلم واپس تشریف لاتے تو یہی کلمات کہتے اور مزید اضافہ کرتے: «آيِبُونَ تَائِبُونَ عَابِدُونَ لِرَبِّنَا حَامِدُونَ» ”ہم لوٹنے والے، توبہ کرنے والے، عبادت کرنے والے اور اپنے رب کی تعریف کرنے والے ہیں۔“",
+   "source": "islamicurdubooks",
+   "sourceUrl": "https://islamicurdubooks.com/hadith/hadith-.php?bookid=19&hadith_number=218",
+   "licensingRisk": true,
+   "iubNumber": "218"
+  },
+  "208": {
+   "text": "اے اللہ! ساتوں آسمانوں اور جن چیزوں پر ان کا سایہ ہے، کے رب اور ساتوں زمینوں اور جن چیزوں کو انھوں نے اٹھایا ہوا ہے، کے رب، اور شیاطین اور جن لوگوں کو انہوں نے گمراہ کیا ہے، کے رب، اور ہواؤں اور جن چیزوں کو یہ اڑائے پھرتی ہیں، کے رب، میں تجھ سے اس بستی کی بھلائی، اس میں رہنے والوں کی بھلائی اور جو اس میں ہے اس کی بھلائی کا سوال کرتا ہوں، اور میں اس کے شر، اس کے رہنے والوں کے شر اور جو اس میں ہے اس کے شر سے تیری پناہ میں آتا ہوں۔",
+   "source": "islamicurdubooks",
+   "sourceUrl": "https://islamicurdubooks.com/hadith/hadith-.php?bookid=19&hadith_number=219",
+   "licensingRisk": true,
+   "iubNumber": "219"
+  },
+  "209": {
+   "text": "اللہ کے علاوہ کوئی سچا معبود نہیں وہ اکیلا ہے اس کا کوئی شریک نہیں، اسی کے لئے بادشاہت ہےاور اسی کے لئے تمام تعریفات، وہ زندہ کرتا ہے اور مارتا ہے، وہ ہمیشہ زندہ رہنے والا ہے کبھی نہیں مرے گا، اسی کے ہاتھ میں بھلائی ہے اور وہ ہر شے پر قدرت رکھنے والا ہے۔",
+   "source": "islamicurdubooks",
+   "sourceUrl": "https://islamicurdubooks.com/hadith/hadith-.php?bookid=19&hadith_number=220",
+   "licensingRisk": true,
+   "iubNumber": "220"
+  },
+  "210": {
+   "text": "اللہ کے نام کے ساتھ۔",
+   "source": "islamicurdubooks",
+   "sourceUrl": "https://islamicurdubooks.com/hadith/hadith-.php?bookid=19&hadith_number=221",
+   "licensingRisk": true,
+   "iubNumber": "221"
+  },
+  "211": {
+   "text": "میں تمہیں اللہ کے سپرد کرتا ہوں جس کی امانتیں ضائع نہیں ہوتیں۔",
+   "source": "islamicurdubooks",
+   "sourceUrl": "https://islamicurdubooks.com/hadith/hadith-.php?bookid=19&hadith_number=222",
+   "licensingRisk": true,
+   "iubNumber": "222"
+  },
+  "212": {
+   "text": "میں تمہارا دین، تمہاری امانت اور تمہارے اعمال کا انجام اللہ کے سپرد کرتا ہوں۔",
+   "source": "islamicurdubooks",
+   "sourceUrl": "https://islamicurdubooks.com/hadith/hadith-.php?bookid=19&hadith_number=223",
+   "licensingRisk": true,
+   "iubNumber": "223"
+  },
+  "213": {
+   "text": "اللہ تعالیٰ تمہیں زاد راہ میں تقویٰ دے، تمہارے گناہ معاف کرے اور جہاں کہیں بھلائی ہو تمہارے لئے آسان کر دے۔",
+   "source": "islamicurdubooks",
+   "sourceUrl": "https://islamicurdubooks.com/hadith/hadith-.php?bookid=19&hadith_number=224",
+   "licensingRisk": true,
+   "iubNumber": "224"
+  },
+  "214": {
+   "text": "سیدنا جابر رضی اللہ عنہ کہتے ہیں کہ جب ہم اونچی جگہ پر چڑھتے تو «الله أَكْبَرُ» کہتے اور جب نیچے اترتے تو «سُبْحَان الله» کہتے۔",
+   "source": "islamicurdubooks",
+   "sourceUrl": "https://islamicurdubooks.com/hadith/hadith-.php?bookid=19&hadith_number=225",
+   "licensingRisk": true,
+   "iubNumber": "225"
+  },
+  "215": {
+   "text": "سننے والے نے اللہ کی تعریف سنی اور ہم پر اس کی اچھی نعمتوں کو اے ہمارے رب ہمارا ساتھی بن جا، اور ہم پر فضل فرمانا، آگ سے اللہ کی پناہ میں آتے ہوئے۔",
+   "source": "islamicurdubooks",
+   "sourceUrl": "https://islamicurdubooks.com/hadith/hadith-.php?bookid=19&hadith_number=226",
+   "licensingRisk": true,
+   "iubNumber": "226"
+  },
+  "216": {
+   "text": "میں اللہ تعالیٰ کے کامل کلمات کے ساتھ اس کی مخلوق کے شر سے، پناہ میں آتا ہوں۔",
+   "source": "islamicurdubooks",
+   "sourceUrl": "https://islamicurdubooks.com/hadith/hadith-.php?bookid=19&hadith_number=227",
+   "licensingRisk": true,
+   "iubNumber": "227"
+  },
+  "217": {
+   "text": "رسول اللہ صلی اللہ علیہ وسلم جب کسی جنگ یا حج سے واپس آتے تو بلند جگہ پر تین مرتبہ «الله اكبر» کہتے پھر یہ دعا پڑھتے: ”اللہ کے علاوہ کوئی سچا معبود نہیں، اس کا کوئی شریک نہیں، اسی کے لئے بادشاہت ہے اور اسی کے لئے تمام تعریفات اور وہ ہر چیز پر قدرت رکھنے والا ہے، ہم لوٹنے والے، توبہ کرنے والے، عبادت کرنے والے اور اپنے رب کی تعریف کرنے والے ہیں، اللہ نے اپنا وعدہ سچا کر دیا، اپنے بندے کی مدد کی اور اکیلے ہی تمام لشکروں کو شکست دی۔“",
+   "source": "islamicurdubooks",
+   "sourceUrl": "https://islamicurdubooks.com/hadith/hadith-.php?bookid=19&hadith_number=228",
+   "licensingRisk": true,
+   "iubNumber": "228"
+  },
+  "218": {
+   "text": "جب آپ صلی اللہ علیہ وسلم کوئی اچھی خبر سنتے تو فرماتے: «اَلْحَمْدُ لِلَّهِ الَّذِي بِنِعْمَتِهِ تَتِمُّ الصَّالِحَاتُ» ”تمام تعریفات اللہ کے لئے ہیں جس کی نعمت و احسان سے تمام نیک کام پایہ تکمیل کو پہنچتے ہیں۔“ اور جب کوئی ناپسندیدہ کام دیکھتے تو فرماتے: «اَلْحَمْدُ لِلَّهِ عَلَى كُلِّ حَالٍ» ”تمام تعریفات اللہ کے لئے ہیں ہر حال میں۔“",
+   "source": "islamicurdubooks",
+   "sourceUrl": "https://islamicurdubooks.com/hadith/hadith-.php?bookid=19&hadith_number=229",
+   "licensingRisk": true,
+   "iubNumber": "229"
+  },
+  "219": {
+   "text": "آپ صلی اللہ علیہ وسلم نے فرمایا: جس شخص نے مجھ پر ایک مرتبہ درود پڑھا اللہ تعالیٰ اس پر دس رحمتیں نازل فرمائے گا۔",
+   "source": "islamicurdubooks",
+   "sourceUrl": "https://islamicurdubooks.com/hadith/hadith-.php?bookid=19&hadith_number=230",
+   "licensingRisk": true,
+   "iubNumber": "230"
+  },
+  "220": {
+   "text": "میری قبر کو میلہ گاہ نہ بناؤ۔ مجھ پر درود بھیجو۔ تمہارا بھیجا گیا درود مجھ تک پہنچتا ہے  تم چاہے جہاں بھی رہو",
+   "source": "hadeethenc",
+   "sourceUrl": "https://hadeethenc.com/ur/browse/hadith/3350",
+   "fullText": "ابو ہریرہ رضی اللہ عنہ سے روایت ہے، وہ کہتے ہیں کہ اللہ کے رسول ﷺ نے فرمایا: ”اپنے گھروں کو قبرستان نہ بناؤ اور میری قبر کو میلہ گاہ نہ بناؤ۔ مجھ پر درود بھیجو۔ تمہارا بھیجا گیا درود مجھ تک پہنچتا ہے  تم چاہے جہاں بھی رہو“۔",
+   "licensingRisk": true,
+   "hadeethencId": 3350,
+   "grade": "حسن",
+   "attribution": "رواه أبو داود",
+   "note": "Verbatim excerpt of the dua words; HadeethEnc terms forbid republishing modified/partial text, so show fullText (with attribution) or get permission."
+  },
+  "221": {
+   "text": "وہ آدمی بخیل ہے جس کے پاس میرا ذکر ہو اور وہ مجھ پر درود نہ بھیجے۔",
+   "source": "islamicurdubooks",
+   "sourceUrl": "https://islamicurdubooks.com/hadith/hadith-.php?bookid=19&hadith_number=232",
+   "licensingRisk": true,
+   "iubNumber": "232"
+  },
+  "222": {
+   "text": "اللہ کے کچھ فرشتے ایسے ہیں جو زمین میں چلتے پھرتے رہتے ہیں، وہ میری امت کا سلام مجھے پہنچا دیتے ہیں۔",
+   "source": "islamicurdubooks",
+   "sourceUrl": "https://islamicurdubooks.com/hadith/hadith-.php?bookid=19&hadith_number=233",
+   "licensingRisk": true,
+   "iubNumber": "233"
+  },
+  "223": {
+   "text": "جب بھی کوئی شخص مجھے سلام کہتا ہے تو اللہ تعالیٰ میری روح مجھ میں لوٹاتا ہے یہاں تک کہ میں اس کے سلام کا جواب دوں۔",
+   "source": "islamicurdubooks",
+   "sourceUrl": "https://islamicurdubooks.com/hadith/hadith-.php?bookid=19&hadith_number=234",
+   "licensingRisk": true,
+   "iubNumber": "234"
+  },
+  "224": {
+   "text": "”رسول اللہ صلی اللہ علیہ وسلم نے فرمایا: تم جنت میں داخل نہیں ہو سکتے یہاں تک کہ تم مؤمن بن جاؤ، اور تم مؤمن نہیں بن سکتے جب تک آپس میں محبت نہ کرنے لگو، کیا میں تمہیں ایسی چیز نہ بتاؤں کہ جب تم وہ کرو تو باہم محبت کرنے لگو آپس میں سلام کو عام کرو۔“",
+   "source": "islamicurdubooks",
+   "sourceUrl": "https://islamicurdubooks.com/hadith/hadith-.php?bookid=19&hadith_number=235",
+   "licensingRisk": true,
+   "iubNumber": "235"
+  },
+  "225": {
+   "text": "سیدنا عمار بن یاسر رضی اللہ عنہ کہتے ہیں: تین چیزیں ایسی ہیں جس نے انہیں جمع کر لیا اس نے ایمان حاصل کر لیا، خود سے انصاف کرنا، تمام لوگوں کے لئے سلام عام کرنا، اور تنگدستی میں خرچ کرنا۔",
+   "source": "islamicurdubooks",
+   "sourceUrl": "https://islamicurdubooks.com/hadith/hadith-.php?bookid=19&hadith_number=236",
+   "licensingRisk": true,
+   "iubNumber": "236"
+  },
+  "226": {
+   "text": "سیدنا عبد اللہ بن عمر رضی اللہ عنہما سے مروی ہے کہ ایک آدمی نے نبی صلی اللہ علیہ وسلم سے پوچھا: اسلام میں کون سا عمل سب سے بہتر ہے؟ آپ صلی اللہ علیہ وسلم نے فرمایا: ”تو کھانا کھلا، اور ہر جاننے والے اور ہر اجنبی کو سلام کر۔“",
+   "source": "islamicurdubooks",
+   "sourceUrl": "https://islamicurdubooks.com/hadith/hadith-.php?bookid=19&hadith_number=237",
+   "licensingRisk": true,
+   "iubNumber": "237"
+  },
+  "227": {
+   "text": "جب تمہیں اہل کتاب سلام کہیں تو انہیں «وَعَلَيْكُمْ» کہو۔",
+   "source": "islamicurdubooks",
+   "sourceUrl": "https://islamicurdubooks.com/hadith/hadith-.php?bookid=19&hadith_number=238",
+   "licensingRisk": true,
+   "iubNumber": "238"
+  },
+  "228": null,
+  "229": {
+   "text": "جب تم رات کو کتوں کے بھونکنے اور گدھے کے ہینگنے کی آواز سنو تو اس سے اللہ کی پناہ طلب کرو کیونکہ وہ ایسی چیز دیکھتے ہیں جو تم نہیں دیکھ سکتے۔",
+   "source": "islamicurdubooks",
+   "sourceUrl": "https://islamicurdubooks.com/hadith/hadith-.php?bookid=19&hadith_number=240",
+   "licensingRisk": true,
+   "iubNumber": "240"
+  },
+  "230": {
+   "text": "اے اللہ! جس مؤمن کو بھی میں نے برا بھلا کہا ہے تو قیامت کے دن اس کے لئے اسے اپنی قربت کا ذریعہ بنا۔",
+   "source": "islamicurdubooks",
+   "sourceUrl": "https://islamicurdubooks.com/hadith/hadith-.php?bookid=19&hadith_number=241",
+   "licensingRisk": true,
+   "iubNumber": "241"
+  },
+  "231": {
+   "text": "جب تم میں سے کوئی شخص کسی دوسرے کی تعریف کرنا ہی چاہتا ہو تو وہ یوں کہے: ”میں فلاں کے متعلق گمان کرتا ہوں (کہ وہ اچھا ہے) اور اللہ تعالیٰ اس کا حساب لینے والا ہے میں کسی کو اللہ کے ہاں پاک قرار نہیں دیتا میں فلاں کو ایسا ایسا گمان کرتا ہوں بشرطیکہ وہ اسے اچھی طرح جانتا ہو۔“",
+   "source": "islamicurdubooks",
+   "sourceUrl": "https://islamicurdubooks.com/hadith/hadith-.php?bookid=19&hadith_number=242",
+   "licensingRisk": true,
+   "iubNumber": "242"
+  },
+  "232": {
+   "text": "اے اللہ! جو یہ کہہ رہے ہیں اس وجہ سے تو میرا مواخذہ نہ کرنا، اور جو یہ نہیں جانتے وہ میرے لئے معاف فرما دے (اور جو یہ گمان کرتے ہیں تو مجھے اس سے بہتر بنا دے)",
+   "source": "islamicurdubooks",
+   "sourceUrl": "https://islamicurdubooks.com/hadith/hadith-.php?bookid=19&hadith_number=243",
+   "licensingRisk": true,
+   "iubNumber": "243"
+  },
+  "233": {
+   "text": "حاضر ہوں میں اے اللہ! حاضر ہوں، حاضر ہوں میں، تیرا کوئی شریک نہیں، میں حاضر ہوں، یقیناً تمام تعریفات، اور نعمت تیرے لئے ہیں اور بادشاہت بھی تیرے لئے ہے۔ تیرا کوئی شریک نہیں۔",
+   "source": "islamicurdubooks",
+   "sourceUrl": "https://islamicurdubooks.com/hadith/hadith-.php?bookid=19&hadith_number=244",
+   "licensingRisk": true,
+   "iubNumber": "244"
+  },
+  "234": {
+   "text": "نبی صلی اللہ علیہ وسلم نے اونٹ پر بیٹھ کر بیت اللہ کا طواف کیا، آپ جب بھی حجر اسود کے پاس آتے، تو کسی چیز (یہاں کسی چیز سے مراد خم دار چھڑی ہے۔) سے اس کی طرف اشارہ کرتے اور «اللهُ اَكْبَرُ» کہتے۔",
+   "source": "islamicurdubooks",
+   "sourceUrl": "https://islamicurdubooks.com/hadith/hadith-.php?bookid=19&hadith_number=245",
+   "licensingRisk": true,
+   "iubNumber": "245"
+  },
+  "235": {
+   "text": "اے ہمارے رب! ہمیں دنیا اور آخرت میں بھلائی عطا فرما، اور ہمیں آگ کے عذاب سے بچا۔",
+   "source": "islamicurdubooks",
+   "sourceUrl": "https://islamicurdubooks.com/hadith/hadith-.php?bookid=19&hadith_number=246",
+   "licensingRisk": true,
+   "iubNumber": "246"
+  },
+  "236": {
+   "text": "آپ صلی اللہ علیہ وسلم جب صفا کے قریب آئے تو پڑھا: «إِنَّ الصَّفَا وَالْمَرْوَةَ مِنْ شَعَائِرِ اللَٰهِ اَبْدَأُ بِمَا بَدَأَ اللهُ بِه» ”یقیناً صفا و مروہ اللہ کی نشانیوں میں سے ہیں، میں بھی اسی سے شروع کرتا ہوں جس سے اللہ نے شروع کیا۔“ آپ صلی اللہ علیہ وسلم نے صفا سے شروع کیا، اس پر چڑھ کر بیت اللہ کو دیکھا، پھر قبلہ رو ہو کر اللہ تعالیٰ کی توحید کا اقرار کیا، اور اللہ کی کبریائی بیان کی اور درج ذیل دعا پڑھی: «لَا إِلٰهَ إِلَّا اللهُ وَحْدَهُ لَا شَرِيكَ لَهُ، لَهُ الْمُلْكُ وَلَهُ الْحَمْدُ وَهُوَ عَلىٰ كُلِّ شَيْءٍ قَدِيرٌ، لَا إِلٰهَ إِلَّا اللهُ وَحْدَهُ، أَنْجَزَ وَعْدَهُ، وَنَصَرَ عَبْدَهُ، وَهَزَمَ الْأَحْزَابَ وَحْدَهُ» ”اللہ کے علاوہ کوئی سچا معبود نہیں وہ اکیلا ہے اس کا کوئی شریک نہیں، اس کے لئے بادشاہت ہے اور اسی کے لئے تمام تعریفات اور وہ ہر چیز پر قادر ہے، اس کے علاوہ کوئی سچا معبود نہیں وہ اکیلا ہے، اس نے اپنا وعدہ پورا کر دیا، اپنے بندے کی مدد کی اور اکیلے ہی تمام لشکروں کو شکست دی۔“ آپ صلی اللہ علیہ وسلم اس دوران دعا کرتے رہے، آپ صلی اللہ علیہ وسلم تین مرتبہ کہتے، حدیث میں مروی ہے کہ جیسا (عمل) آپ صلی اللہ علیہ وسلم نے صفا پر کیا اسی طرح آپ نے مروہ پر بھی کیا۔",
+   "source": "islamicurdubooks",
+   "sourceUrl": "https://islamicurdubooks.com/hadith/hadith-.php?bookid=19&hadith_number=247",
+   "licensingRisk": true,
+   "iubNumber": "247"
+  },
+  "237": {
+   "text": "نبی صلی اللہ علیہ وسلم نے فرمایا: تمام دعاؤں سے بہتر عرفہ کے دن کی دعا ہے، اور اس دن سب سے بہتر کلمہ جو میں نے اور مجھ سے پہلے انبیاء نے کہا وہ یہ ہے: ”اللہ کے علاوہ کوئی سچا معبود نہیں وہ اکیلا ہے اس کا کوئی شریک نہیں، اس کے لئے بادشاہت ہے اور اسی کے لئے تمام تعریفات ہیں اور وہ ہر چیز پر قدرت رکھنے والا ہے۔“",
+   "source": "islamicurdubooks",
+   "sourceUrl": "https://islamicurdubooks.com/hadith/hadith-.php?bookid=19&hadith_number=248",
+   "licensingRisk": true,
+   "iubNumber": "248"
+  },
+  "238": {
+   "text": "نبی صلی اللہ علیہ وسلم اپنی اونٹنی پر سوار ہوئے، جب مشعر حرام کے قریب آئے تو قبلہ رخ ہو کر اللہ تعالی سے دعا کی: ”اللہ سب سے بڑا ہے، اللہ کے علاوہ کوئی سچا معبود نہیں۔“ اور اللہ تعالیٰ کی توحید پر مبنی کلمات کہتے رہے۔ آپ صلی اللہ علیہ وسلم اسی جگہ ٹھہرے رہے حتی کہ جب خوب روشنی ہو گئی تو آپ سورج نکلنے سے پہلے وہاں سے چل پڑے۔",
+   "source": "islamicurdubooks",
+   "sourceUrl": "https://islamicurdubooks.com/hadith/hadith-.php?bookid=19&hadith_number=249",
+   "licensingRisk": true,
+   "iubNumber": "249"
+  },
+  "239": {
+   "text": "نبی صلی اللہ علیہ وسلم نے تینوں جمرات کو رمی کرتے ہوئے ہر کنکری پھینکتے وقت «الله اكبر» کہا، پھر تھوڑا سا آگے بڑھے، پہلے اور دوسرے جمرے کو رمی کی، جمرہ عقبہ کو کنکریاں ماریں، ہر کنکری کے ساتھ «الله اكبر» کہتے، پھر وہاں سے ہٹ گئے اور دعائیں کی۔",
+   "source": "islamicurdubooks",
+   "sourceUrl": "https://islamicurdubooks.com/hadith/hadith-.php?bookid=19&hadith_number=250",
+   "licensingRisk": true,
+   "iubNumber": "250"
+  },
+  "240": {
+   "text": "اللہ پاک ہے۔",
+   "source": "islamicurdubooks",
+   "sourceUrl": "https://islamicurdubooks.com/hadith/hadith-.php?bookid=19&hadith_number=251",
+   "licensingRisk": true,
+   "iubNumber": "251"
+  },
+  "241": {
+   "text": "اللہ سب سے بڑا ہے۔",
+   "source": "islamicurdubooks",
+   "sourceUrl": "https://islamicurdubooks.com/hadith/hadith-.php?bookid=19&hadith_number=251",
+   "licensingRisk": true,
+   "iubNumber": "251"
+  },
+  "242": {
+   "text": "نبی صلی اللہ علیہ وسلم کو جب کسی ایسے کام کی خبر ملتی جو آپ کے لئے خوشی کا باعث ہوتا یا آپ کو پسند ہوتا تو آپ اللہ کا شکر ادا کرتے ہوئے سجدہ ریز ہو جاتے۔",
+   "source": "islamicurdubooks",
+   "sourceUrl": "https://islamicurdubooks.com/hadith/hadith-.php?bookid=19&hadith_number=252",
+   "licensingRisk": true,
+   "iubNumber": "252"
+  },
+  "243": {
+   "text": "نبی صلی اللہ علیہ وسلم نے فرمایا: ”جب کوئی شخص جسم کے کسی حصے میں تکلیف محسوس کرے تو اپنا ہاتھ درد والے حصے پر رکھے اور کہے: «بِسْمِ الله» تین مرتبہ، پھر سات مرتبہ یہ دعا پڑھے“ «أَعُوذُ بِاللهِ وَقُدْرَتِهِ مِنْ شَرِّ مَا أَجِدُ وَأُحَاذِرُ» ”میں اللہ اور اس کی قدرت کی پناہ میں آتا ہوں، اس تکلیف کے شر سے جسے میں محسوس کر رہا ہوں اور جس سے میں ڈر رہا ہوں۔“",
+   "source": "islamicurdubooks",
+   "sourceUrl": "https://islamicurdubooks.com/hadith/hadith-.php?bookid=19&hadith_number=253",
+   "licensingRisk": true,
+   "iubNumber": "253"
+  },
+  "244": {
+   "text": "جب تم میں سے کوئی شخص اپنے بھائی یا خود اپنی ذات یا اپنے مال میں ایسا معاملہ دیکھے جو اسے خوش کرنے والا ہو تو برکت کی دعا کرے کیونکہ نظر لگ جانا حق ہے۔",
+   "source": "islamicurdubooks",
+   "sourceUrl": "https://islamicurdubooks.com/hadith/hadith-.php?bookid=19&hadith_number=254",
+   "licensingRisk": true,
+   "iubNumber": "254"
+  },
+  "245": {
+   "text": "اللہ کے علاوہ کوئی سچا معبود نہیں۔",
+   "source": "islamicurdubooks",
+   "sourceUrl": "https://islamicurdubooks.com/hadith/hadith-.php?bookid=19&hadith_number=255",
+   "licensingRisk": true,
+   "iubNumber": "255"
+  },
+  "246": {
+   "text": "اللہ کے نام کے ساتھ اور اللہ سب سے بڑا ہے، (اے اللہ! تیری طرف سے اور تیرے لئے ہی ہے) اے اللہ! تو اس عمل کو میری طرف سے قبول کر۔",
+   "source": "islamicurdubooks",
+   "sourceUrl": "https://islamicurdubooks.com/hadith/hadith-.php?bookid=19&hadith_number=256",
+   "licensingRisk": true,
+   "iubNumber": "256"
+  },
+  "247": {
+   "text": "میں اللہ کے کامل کلمات کے ساتھ جن سے کوئی نیک و بد تجاوز نہیں کر سکتا، پناہ میں آتا ہوں۔ ہر اس چیز کے شر سے جسے اس نے پیدا کیا، بنایا اور پھیلا دیا، اور ہر اس چیز کے شر سے جو آسمان سے نازل ہوتی ہے اور ہر اس چیز کے شر سے جو آسمان میں چڑھتی ہے، اور ہر اس چیز کے شر سے جسے اس نے زمین میں پھیلا دیا، اور ہر اس چیز کے شر سے جو اس سے نکلتی ہے اور رات و دن کے فتنوں سے اور رات کو آنے والے شر سے سوائے وہ رات کو آنے والا جو بھلائی کے ساتھ آتا ہے، اے نہایت رحم کرنے والے۔",
+   "source": "islamicurdubooks",
+   "sourceUrl": "https://islamicurdubooks.com/hadith/hadith-.php?bookid=19&hadith_number=257",
+   "licensingRisk": true,
+   "iubNumber": "257"
+  },
+  "248": {
+   "text": "اللہ کی قسم! بے شک میں اللہ تعالیٰ سے ایک دن میں ستر (70) مرتبہ سے زیادہ معافی مانگتا ہوں اور اس سے توبہ کرتا ہوں۔",
+   "source": "islamicurdubooks",
+   "sourceUrl": "https://islamicurdubooks.com/hadith/hadith-.php?bookid=19&hadith_number=258",
+   "licensingRisk": true,
+   "iubNumber": "258"
+  },
+  "249": {
+   "text": "لوگو! اللہ کی طرف توبہ کرو کیونکہ میں اللہ تعالیٰ سے ایک دن میں سو (100) مرتبہ توبہ کرتا ہوں۔",
+   "source": "islamicurdubooks",
+   "sourceUrl": "https://islamicurdubooks.com/hadith/hadith-.php?bookid=19&hadith_number=259",
+   "licensingRisk": true,
+   "iubNumber": "259"
+  },
+  "250": {
+   "text": "آپ صلی اللہ علیہ وسلم نے فرمایا: جس شخص نے کہا: ”میں اللہ سے بخشش طلب کرتا ہوں جس کے علاوہ کوئی سچا معبود نہیں، وہ ہمیشہ زندہ رہنے والا ہے، قائم رکھنے والا ہے اور میں اسی کی طرف توبہ کرتا ہوں۔ تو اللہ تعالیٰ اسے بخش دیں گے چاہے وہ میدان جہاد سے بھاگا ہو۔“",
+   "source": "islamicurdubooks",
+   "sourceUrl": "https://islamicurdubooks.com/hadith/hadith-.php?bookid=19&hadith_number=260",
+   "licensingRisk": true,
+   "iubNumber": "260"
+  },
+  "251": {
+   "text": "اللہ تعالیٰ بندے کے سب سے زیادہ قریب رات کے آخری پہر میں ہوتا ہے، اگر ان لوگوں میں شامل ہونے کی استطاعت رکھو جو اس وقت اللہ کو یاد کرتے ہیں تو ان میں شامل ہو جاؤ۔",
+   "source": "islamicurdubooks",
+   "sourceUrl": "https://islamicurdubooks.com/hadith/hadith-.php?bookid=19&hadith_number=261",
+   "licensingRisk": true,
+   "iubNumber": "261"
+  },
+  "252": {
+   "text": "بندہ سجدے کی حالت میں اپنے رب کے سب سے زیادہ قریب ہوتا ہے، اس لئے تم سجدہ میں بہت زیادہ دعا کرو۔",
+   "source": "islamicurdubooks",
+   "sourceUrl": "https://islamicurdubooks.com/hadith/hadith-.php?bookid=19&hadith_number=262",
+   "licensingRisk": true,
+   "iubNumber": "262"
+  },
+  "253": {
+   "text": "میرے دل پر کبھی سستی کا پردہ آ جاتا ہے، میں اللہ تعالیٰ سے ایک دن میں سو مرتبہ بخشش طلب کرتا ہوں۔",
+   "source": "islamicurdubooks",
+   "sourceUrl": "https://islamicurdubooks.com/hadith/hadith-.php?bookid=19&hadith_number=263",
+   "licensingRisk": true,
+   "iubNumber": "263"
+  },
+  "254": {
+   "text": "آپ صلی اللہ علیہ وسلم نے فرمایا: ”جس شخص نے دن میں سو مرتبہ «سُبْحَانَ اللَّهِ وَبِحَمْدِهِ» ”اللہ اپنی تعریف کے ساتھ پاک ہے۔“ کہا تو اس کے گناہ معاف کر دیئے جائیں گے اگرچہ سمندر کی جھاگ کے برابر ہوں۔“",
+   "source": "islamicurdubooks",
+   "sourceUrl": "https://islamicurdubooks.com/hadith/hadith-.php?bookid=19&hadith_number=264",
+   "licensingRisk": true,
+   "iubNumber": "264"
+  },
+  "255": {
+   "text": "جس شخص نے دن میں دس مرتبہ کہا: ”اللہ کے علاوہ کوئی سچا معبود نہیں، وہ اکیلا ہے اس کا کوئی شریک نہیں اس کی ہی بادشاہی ہے اور اسی کے لئے تمام تعریفات ہیں اور وہ ہر شے پر قدرت رکھنے والا ہے۔ تو اولاد اسماعیل میں سے چار غلام آزاد کرنے کا ثواب ملے گا۔“",
+   "source": "islamicurdubooks",
+   "sourceUrl": "https://islamicurdubooks.com/hadith/hadith-.php?bookid=19&hadith_number=265",
+   "licensingRisk": true,
+   "iubNumber": "265"
+  },
+  "256": {
+   "text": "آپ صلی اللہ علیہ وسلم نے فرمایا: ”دو کلمے ایسے ہیں جو زبان پر انتہائی ہلکے، میزان میں بہت بھاری اور رحمٰن کے ہاں بہت زیادہ پسندیدہ ہیں۔“، ”اللہ اپنی تعریف کے ساتھ پاک ہے اور اللہ پاک ہے عظمت والا ہے۔“",
+   "source": "islamicurdubooks",
+   "sourceUrl": "https://islamicurdubooks.com/hadith/hadith-.php?bookid=19&hadith_number=266",
+   "licensingRisk": true,
+   "iubNumber": "266"
+  },
+  "257": {
+   "text": "”سُبْحَانَ اللَّهِ وَالْحَمْدُ لِلَّهِ وَلَا إِلَهَ إِلَّا اللَّهُ وَاللَّهُ أَکْبَرُ“ (اللہ پاک ہے، تمام تعریفیں اللہ کی ہیں، اللہ کے علاوہ اور کوئی معبود برحق نہیں اور اللہ ہی سب سے بڑا ہے) کہنا میرے نزدیک ان تمام چیزوں سے بہتر ہے، جن پر سورج نکلتا ہے۔",
+   "source": "hadeethenc",
+   "sourceUrl": "https://hadeethenc.com/ur/browse/hadith/6211",
+   "fullText": "ابو ہریرہ رضی اللہ عنہ سے روایت ہے، وہ کہتے ہیں کہ اللہ کے رسول ﷺ نے فرمایا: ”سُبْحَانَ اللَّهِ وَالْحَمْدُ لِلَّهِ وَلَا إِلَهَ إِلَّا اللَّهُ وَاللَّهُ أَکْبَرُ“ (اللہ پاک ہے، تمام تعریفیں اللہ کی ہیں، اللہ کے علاوہ اور کوئی معبود برحق نہیں اور اللہ ہی سب سے بڑا ہے) کہنا میرے نزدیک ان تمام چیزوں سے بہتر ہے، جن پر سورج نکلتا ہے۔",
+   "licensingRisk": true,
+   "hadeethencId": 6211,
+   "grade": "صحيح",
+   "attribution": "رواه مسلم",
+   "note": "Verbatim excerpt of the dua words; HadeethEnc terms forbid republishing modified/partial text, so show fullText (with attribution) or get permission."
+  },
+  "258": {
+   "text": "آپ صلی اللہ علیہ وسلم نے فرمایا: ”کیا تم میں کوئی شخص روزانہ ایک ہزار نیکیاں حاصل کرنے سے عاجز ہے، ایک آدمی نے کہا: ہم میں سے کوئی شخص ایک ہزار نیکیاں روزانہ کس طرح حاصل کر سکتا ہے؟“ آپ صلی اللہ علیہ وسلم نے فرمایا: ”وہ سو مرتبہ «سُبْحَانَ اللهِ» کہے تو اس کے (نامہ اعمال) میں ایک ہزار نیکیاں لکھ دی جاتی ہیں، یا اس کی ایک ہزار خطائیں مٹا دی جاتی ہیں۔“",
+   "source": "islamicurdubooks",
+   "sourceUrl": "https://islamicurdubooks.com/hadith/hadith-.php?bookid=19&hadith_number=268",
+   "licensingRisk": true,
+   "iubNumber": "268"
+  },
+  "259": {
+   "text": "رسول اللہ صلی اللہ علیہ وسلم نے فرمایا: ”جس شخص نے «سُبْحَانَ اللَّهِ العَظِيمِ وَبِحَمْدِهِ» ”اللہ اپنی تعریف کے ساتھ پاک ہے، عظمت والا“ کہا، اس کے لئے جنت میں کھجور کا ایک درخت لگا دیا جاتا ہے۔“",
+   "source": "islamicurdubooks",
+   "sourceUrl": "https://islamicurdubooks.com/hadith/hadith-.php?bookid=19&hadith_number=269",
+   "licensingRisk": true,
+   "iubNumber": "269"
+  },
+  "260": {
+   "text": "آپ صلی اللہ علیہ وسلم نے فرمایا: ”اے عبد اللہ بن قیس کیا میں تمہاری جنت کے خزانوں میں سے ایک خزانے کے بارے میں رہنمائی نہ کروں؟ میں نے کہا: کیوں نہیں اے اللہ کے رسول!“ آپ صلی اللہ علیہ وسلم نے فرمایا: «لَا حَوْلَ وَلَا قُوَّةَ إِلَّا بِاللهِ» ”اللہ کے توفیق وہ مدد کے بغیر کسی گناہ سے بچنے کی طاقت اور کوئی نیکی کرنے کی قوت نہیں۔“",
+   "source": "islamicurdubooks",
+   "sourceUrl": "https://islamicurdubooks.com/hadith/hadith-.php?bookid=19&hadith_number=270",
+   "licensingRisk": true,
+   "iubNumber": "270"
+  },
+  "261": {
+   "text": "آپ صلی اللہ علیہ وسلم نے فرمایا: ”اللہ تعالیٰ کو چار کلمات بہت زیادہ پیارے ہیں، ان میں سے جس کے ساتھ بھی ابتدا کرو کوئی حرج نہیں۔“، ”اللہ پاک ہے تمام تعریفات اللہ کے لئے ہیں، اللہ کے علاوہ کوئی سچا معبود نہیں اور اللہ سب سے بڑا ہے۔“",
+   "source": "islamicurdubooks",
+   "sourceUrl": "https://islamicurdubooks.com/hadith/hadith-.php?bookid=19&hadith_number=271",
+   "licensingRisk": true,
+   "iubNumber": "271"
+  },
+  "262": {
+   "text": "ایک اعرابی رسول اللہ صلی اللہ علیہ وسلم کی خدمت میں حاضر ہوا اور عرض کیا کہ مجھے ایسا کلام سکھائیے، جسے میں پڑھتا رہوں۔ آپ نے فرمایا: \"یہ کہا کرو: ”لَا إِلَهَ إِلَّا اللَّهُ وَحْدَهُ لَا شَرِيكَ لَهُ، اللَّهُ أَكْبَرُ كَبِيرًا وَالْحَمْدُ لِلَّهِ كَثِيرًا وَسُبْحَانَ اللَّهِ رَبِّ الْعَالَمِينَ وَلَا حَوْلَ وَلَا قُوَّةَ إِلَّا بِاللَّهِ الْعَزِيزِ الْحَكِيمِ۔“ (اللہ کے سوا کوئی حقیقی معبود نہیں، وہ اکیلا ہے، اس کا کوئی شریک نہیں، اللہ بڑائی میں سب سے بڑا ہے اور بے حد و حساب تعریف اللہ کی ہے، اللہ ہر عیب اور نقص سے پاک ہے، جو کہ تمام جہانوں کا رب ہے، گناہ سے بچنے اور نیکی کے کام کرنے کی طاقت اللہ ہی سے مل سکتی ہے، جو غالب حکمت والا ہے) اس شخص نے کہا : ان سب کلمات کا تعلق تو میرے رب سے ہے، میرے لیے کیا ہے؟ آپ صلی اللہ علیہ وسلم نے فرمایا : \"یہ کہو: ”اللَّهُمَّ اغْفِرْ لِي وَارْحَمْنِي وَاهْدِنِي وَارْزُقْنِي“ (اے اللہ! مجھے بخش دے، مجھ پر رحم فرما، مجھے ہدایت دے اور مجھے رزق عطا فرما)",
+   "source": "hadeethenc",
+   "sourceUrl": "https://hadeethenc.com/ur/browse/hadith/6112",
+   "fullText": "سعد رضی اللہ عنہ سے روایت ہے، وہ کہتے ہيں : \"ایک اعرابی رسول اللہ صلی اللہ علیہ وسلم کی خدمت میں حاضر ہوا اور عرض کیا کہ مجھے ایسا کلام سکھائیے، جسے میں پڑھتا رہوں۔ آپ نے فرمایا: \"یہ کہا کرو: ”لَا إِلَهَ إِلَّا اللَّهُ وَحْدَهُ لَا شَرِيكَ لَهُ، اللَّهُ أَكْبَرُ كَبِيرًا وَالْحَمْدُ لِلَّهِ كَثِيرًا وَسُبْحَانَ اللَّهِ رَبِّ الْعَالَمِينَ وَلَا حَوْلَ وَلَا قُوَّةَ إِلَّا بِاللَّهِ الْعَزِيزِ الْحَكِيمِ۔“ (اللہ کے سوا کوئی حقیقی معبود نہیں، وہ اکیلا ہے، اس کا کوئی شریک نہیں، اللہ بڑائی میں سب سے بڑا ہے اور بے حد و حساب تعریف اللہ کی ہے، اللہ ہر عیب اور نقص سے پاک ہے، جو کہ تمام جہانوں کا رب ہے، گناہ سے بچنے اور نیکی کے کام کرنے کی طاقت اللہ ہی سے مل سکتی ہے، جو غالب حکمت والا ہے) اس شخص نے کہا : ان سب کلمات کا تعلق تو میرے رب سے ہے، میرے لیے کیا ہے؟ آپ صلی اللہ علیہ وسلم نے فرمایا : \"یہ کہو: ”اللَّهُمَّ اغْفِرْ لِي وَارْحَمْنِي وَاهْدِنِي وَارْزُقْنِي“ (اے اللہ! مجھے بخش دے، مجھ پر رحم فرما، مجھے ہدایت دے اور مجھے رزق عطا فرما)\"۔",
+   "licensingRisk": true,
+   "hadeethencId": 6112,
+   "grade": "صحيح",
+   "attribution": "رواه مسلم",
+   "note": "Verbatim excerpt of the dua words; HadeethEnc terms forbid republishing modified/partial text, so show fullText (with attribution) or get permission."
+  },
+  "263": null,
+  "264": {
+   "text": "آپ صلی اللہ علیہ وسلم نے فرمایا: ”یقیناً افضل دعا «الحَمْدُ لِلَٰهِ» ہے اور سب سے افضل ذکر «لَا إِلٰهَ إِلَّا اللَٰهُ» ہے۔“",
+   "source": "islamicurdubooks",
+   "sourceUrl": "https://islamicurdubooks.com/hadith/hadith-.php?bookid=19&hadith_number=273",
+   "licensingRisk": true,
+   "iubNumber": "273"
+  },
+  "265": {
+   "text": "باقی رہنے والے نیک اعمال: «سُبْحَانَ اللَٰهِ، وَالْحَمْدُ لِلَٰهِ، وَلَا إِلٰهَ إِلَّا اللَٰهُ، وَاللَٰهُ أَكْبَرُ، وَلَا حَوْلَ وَلَا قُوَّةَ إِلَّا بِاللَٰهِ» ہیں۔",
+   "source": "islamicurdubooks",
+   "sourceUrl": "https://islamicurdubooks.com/hadith/hadith-.php?bookid=19&hadith_number=274",
+   "licensingRisk": true,
+   "iubNumber": "274"
+  },
+  "266": null,
+  "267": {
+   "text": "نبی صلی اللہ علیہ وسلم نے فرمایا: ”جب اندھیرا چھانے لگے، یا فرمایا: جب شام ڈھل جائے تو اپنے بچوں کو (گھروں سے باہر نکلنے سے) روک لو کیونکہ اس وقت شیاطین پھیل جاتے ہیں اور جب کچھ وقت گزر جائے تو انہیں چھوڑ دو اور اللہ کا نام لے کر دروازے بند کر دو، کیونکہ شیطان بند دروازے نہیں کھولتا، اللہ کا نام لے کر اپنے مشکیزے کا منہ بند کر دو اور اپنے برتن کو کسی بھی چیز کے ساتھ اللہ کا نام لے کر ڈھانپ دو اور اپنے چراغ بجھا دو۔“",
+   "source": "islamicurdubooks",
+   "sourceUrl": "https://islamicurdubooks.com/hadith/hadith-.php?bookid=19&hadith_number=276",
+   "licensingRisk": true,
+   "iubNumber": "276"
+  }
+ },
+ "skipped": {
+  "10": "Published Urdu (iub #19) and HadeethEnc 3150 omit the bracketed [bismillah] that the Hisn text/English include.",
+  "22": "iub #31 interleaves Arabic, footnote markers and the next dua; no clean verbatim cut. HadeethEnc only has a longer, differently-scoped hadith.",
+  "62": "Published Urdu omits the clause «في غير ضراء مضرة ولا فتنة مضلة»; no HadeethEnc Urdu.",
+  "98": "iub #108 gives only the virtue hadith, not a translation of the salawat formula; no HadeethEnc match.",
+  "116": "Published Urdu omits «وبارك لي فيما أعطيت»; not in HadeethEnc Urdu.",
+  "197": "No counterpart chapter in the Urdu source; the one-word reply «ولك» is not in HadeethEnc Urdu.",
+  "228": "Published Urdu inserts the author's own formulated wording (it says so) and drops «فإنه رأى شيطانا»; no HadeethEnc Urdu.",
+  "263": "This hadith (Tariq al-Ashja'i) is not in the Urdu Hisn source or in HadeethEnc Urdu.",
+  "266": "Published Urdu names the narrator as Abdullah ibn Umar, the Hisn text says Abdullah ibn Amr."
+ }
+}

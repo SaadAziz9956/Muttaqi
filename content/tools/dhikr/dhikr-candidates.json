@@ -1,0 +1,1021 @@
+{
+  "meta": {
+    "generated": "2026-09-28",
+    "counts": {
+      "verified": 60,
+      "weakOrFabricated": 14,
+      "unverified": 7
+    },
+    "method": "Every 'verified' entry's Arabic (or, for counted sets, the hadith's own count wording) was string-matched (diacritics/punctuation-insensitive) against the fetched source text at sourceUrl/alsoVerifiedAt. Hadith Arabic from fawazahmed0/hadith-api (Unlicense); grades from the parallel eng-* file (replace 'ara-' with 'eng-' in sourceUrl). Quran Arabic from fawazahmed0/quran-api ara-quransimple (Tanzil text). Muslim numbering is Fuad Abd al-Baqi. English translations, transliterations and virtue summaries are original to this file (not copied from sunnah.com/Darussalam/Hisn translations).",
+    "extraKeys": "category, note, sequence (ordered phrases+counts for counted sets), alsoVerifiedAt"
+  },
+  "verified": [
+    {
+      "arabic": "سُبْحَانَ اللَّهِ",
+      "transliteration": "SubhanAllah",
+      "translation": "Glory be to Allah.",
+      "count": 100,
+      "virtue": "Whoever says it 100 times has a thousand good deeds recorded or a thousand sins removed.",
+      "reference": "Sahih Muslim 2698",
+      "grade": "Sahih (Muslim)",
+      "sourceUrl": "https://cdn.jsdelivr.net/gh/fawazahmed0/hadith-api@1/editions/ara-muslim/6852.json",
+      "category": "tasbih"
+    },
+    {
+      "arabic": "الْحَمْدُ لِلَّهِ",
+      "transliteration": "Alhamdulillah",
+      "translation": "All praise is for Allah.",
+      "count": null,
+      "virtue": "It fills the Scale, and it is the best supplication.",
+      "reference": "Sahih Muslim 223; Jami at-Tirmidhi 3383; Sunan Ibn Majah 3800",
+      "grade": "Sahih (Muslim 223); Hasan (al-Albani) for Tirmidhi 3383",
+      "sourceUrl": "https://cdn.jsdelivr.net/gh/fawazahmed0/hadith-api@1/editions/ara-muslim/534.json",
+      "category": "tahmid",
+      "alsoVerifiedAt": [
+        "https://cdn.jsdelivr.net/gh/fawazahmed0/hadith-api@1/editions/ara-tirmidhi/3383.json"
+      ]
+    },
+    {
+      "arabic": "لَا إِلَهَ إِلَّا اللَّهُ",
+      "transliteration": "La ilaha illallah",
+      "translation": "There is no god but Allah.",
+      "count": null,
+      "virtue": "It is the best remembrance; when said sincerely the gates of heaven open for it up to the Throne (as long as major sins are avoided); in Nuh's advice it outweighs the seven heavens and seven earths.",
+      "reference": "Jami at-Tirmidhi 3383, 3590; Sunan Ibn Majah 3800; al-Adab al-Mufrad 548 (Musnad Ahmad 6583)",
+      "grade": "Hasan (al-Albani) for Tirmidhi 3383/3590; Nuh hadith Sahih (al-Albani, al-Sahihah 134; al-Hakim & adh-Dhahabi)",
+      "sourceUrl": "https://cdn.jsdelivr.net/gh/fawazahmed0/hadith-api@1/editions/ara-tirmidhi/3383.json",
+      "category": "tahlil",
+      "alsoVerifiedAt": [
+        "https://cdn.jsdelivr.net/gh/fawazahmed0/hadith-api@1/editions/ara-tirmidhi/3590.json",
+        "https://raw.githubusercontent.com/AhmedBaset/hadith-json/main/db/by_book/other_books/aladab_almufrad.json",
+        "https://islamqa.info/ar/answers/220492"
+      ]
+    },
+    {
+      "arabic": "اللَّهُ أَكْبَرُ",
+      "transliteration": "Allahu Akbar",
+      "translation": "Allah is the Greatest.",
+      "count": null,
+      "virtue": "Every takbir is an act of charity (as is every tasbih, tahmid and tahlil); each \"Allahu akbar\" (like each \"SubhanAllah\" and \"La ilaha illallah\") earns twenty good deeds or removes twenty sins.",
+      "reference": "Sahih Muslim 1006; Musnad Ahmad 8012 / al-Hakim (twenty good deeds)",
+      "grade": "Sahih (Muslim); Ahmad 8012 Sahih (al-Albani, Sahih at-Targhib 1554; Ahmad Shakir; Musnad editors) though Ibn Rajab held it may be Ka'b's own words",
+      "sourceUrl": "https://cdn.jsdelivr.net/gh/fawazahmed0/hadith-api@1/editions/ara-muslim/2329.json",
+      "category": "takbir",
+      "alsoVerifiedAt": [
+        "https://diwan-ahadiths.com/hadith/1349"
+      ]
+    },
+    {
+      "arabic": "سُبْحَانَ اللَّهِ وَبِحَمْدِهِ",
+      "transliteration": "SubhanAllahi wa bihamdihi",
+      "translation": "Glory be to Allah and praise be to Him.",
+      "count": 100,
+      "virtue": "Said 100 times a day, sins are wiped out even if like the foam of the sea; said 100 times morning and evening, no one brings better on the Day of Resurrection; it is the most beloved speech to Allah, and (in Nuh's advice) the prayer of every thing by which creation is provided for.",
+      "reference": "Sahih al-Bukhari 6405; Sahih Muslim 2691, 2692, 2731; al-Adab al-Mufrad 548",
+      "grade": "Agreed upon (Bukhari & Muslim); Adab 548 Sahih (al-Albani, al-Sahihah 134)",
+      "sourceUrl": "https://cdn.jsdelivr.net/gh/fawazahmed0/hadith-api@1/editions/ara-bukhari/6405.json",
+      "category": "tasbih",
+      "alsoVerifiedAt": [
+        "https://cdn.jsdelivr.net/gh/fawazahmed0/hadith-api@1/editions/ara-muslim/6843.json",
+        "https://cdn.jsdelivr.net/gh/fawazahmed0/hadith-api@1/editions/ara-muslim/6925.json",
+        "https://raw.githubusercontent.com/AhmedBaset/hadith-json/main/db/by_book/other_books/aladab_almufrad.json"
+      ]
+    },
+    {
+      "arabic": "سُبْحَانَ اللَّهِ وَبِحَمْدِهِ، سُبْحَانَ اللَّهِ الْعَظِيمِ",
+      "transliteration": "SubhanAllahi wa bihamdihi, SubhanAllahil-'Azim",
+      "translation": "Glory be to Allah and praise be to Him; glory be to Allah the Magnificent.",
+      "count": null,
+      "virtue": "Two words light on the tongue, heavy on the Scale, and beloved to the Most Merciful.",
+      "reference": "Sahih al-Bukhari 6406, 6682, 7563; Sahih Muslim 2694",
+      "grade": "Agreed upon (Bukhari & Muslim)",
+      "sourceUrl": "https://cdn.jsdelivr.net/gh/fawazahmed0/hadith-api@1/editions/ara-muslim/6846.json",
+      "category": "tasbih",
+      "alsoVerifiedAt": [
+        "https://cdn.jsdelivr.net/gh/fawazahmed0/hadith-api@1/editions/ara-bukhari/7563.json"
+      ]
+    },
+    {
+      "arabic": "سُبْحَانَ اللَّهِ الْعَظِيمِ وَبِحَمْدِهِ",
+      "transliteration": "SubhanAllahil-'Azimi wa bihamdihi",
+      "translation": "Glory be to Allah the Magnificent, and praise be to Him.",
+      "count": null,
+      "virtue": "A date palm is planted for the one who says it in Paradise.",
+      "reference": "Jami at-Tirmidhi 3464, 3465",
+      "grade": "Sahih (al-Albani; Ahmad Shakir); Da'if (Zubair Ali Za'i)",
+      "sourceUrl": "https://cdn.jsdelivr.net/gh/fawazahmed0/hadith-api@1/editions/ara-tirmidhi/3464.json",
+      "category": "tasbih"
+    },
+    {
+      "arabic": "سُبْحَانَ اللَّهِ وَبِحَمْدِهِ عَدَدَ خَلْقِهِ وَرِضَا نَفْسِهِ وَزِنَةَ عَرْشِهِ وَمِدَادَ كَلِمَاتِهِ",
+      "transliteration": "SubhanAllahi wa bihamdihi, 'adada khalqihi, wa rida nafsihi, wa zinata 'arshihi, wa midada kalimatihi",
+      "translation": "Glory be to Allah and praise be to Him, as many times as the number of His creation, as much as pleases Him, as much as the weight of His Throne, and as much as the ink of His words.",
+      "count": 3,
+      "virtue": "Said three times, these four phrases outweigh everything Juwayriyah had said from Fajr until mid-morning.",
+      "reference": "Sahih Muslim 2726; Sunan Abi Dawud 1503; Sunan an-Nasa'i 1352; Jami at-Tirmidhi 3555",
+      "grade": "Sahih (Muslim)",
+      "sourceUrl": "https://cdn.jsdelivr.net/gh/fawazahmed0/hadith-api@1/editions/ara-muslim/6913.json",
+      "category": "tasbih"
+    },
+    {
+      "arabic": "سُبْحَانَ اللَّهِ عَدَدَ مَا خَلَقَ، وَسُبْحَانَ اللَّهِ مِلْءَ مَا خَلَقَ، وَسُبْحَانَ اللَّهِ عَدَدَ مَا فِي الْأَرْضِ وَالسَّمَاءِ، وَسُبْحَانَ اللَّهِ مِلْءَ مَا فِي الْأَرْضِ وَالسَّمَاءِ، وَسُبْحَانَ اللَّهِ عَدَدَ مَا أَحْصَى كِتَابُهُ، وَسُبْحَانَ اللَّهِ عَدَدَ كُلِّ شَيْءٍ، وَسُبْحَانَ اللَّهِ مِلْءَ كُلِّ شَيْءٍ",
+      "transliteration": "SubhanAllahi 'adada ma khalaq, wa SubhanAllahi mil'a ma khalaq, wa SubhanAllahi 'adada ma fil-ardi was-sama', wa SubhanAllahi mil'a ma fil-ardi was-sama', wa SubhanAllahi 'adada ma ahsa kitabuh, wa SubhanAllahi 'adada kulli shay', wa SubhanAllahi mil'a kulli shay' (then the same with al-hamdu lillah)",
+      "translation": "Glory be to Allah as many as what He created, glory be to Allah filling what He created, glory be to Allah as many as what is in the earth and the sky, glory be to Allah filling what is in the earth and the sky, glory be to Allah as many as what His Book has recorded, glory be to Allah as many as all things, glory be to Allah filling all things; then say the same with \"al-hamdu lillah\".",
+      "count": null,
+      "virtue": "Taught to Abu Umamah as more (or better) than his remembrance of the whole night and day.",
+      "reference": "Musnad Ahmad 22144; an-Nasa'i al-Kubra 9921; Sahih Ibn Khuzaymah 754; Sahih Ibn Hibban 539",
+      "grade": "Sahih (al-Albani, al-Sahihah 2578; Musnad editors; Ibn Khuzaymah; Ibn Hibban)",
+      "sourceUrl": "https://diwan-ahadiths.com/hadith/594",
+      "category": "tasbih",
+      "note": "Not in the Six Books; verified via Diwan al-Hadith (diwan-ahadiths.com). Do not confuse with the weak pebble-counting hadith (Abu Dawud 1500)."
+    },
+    {
+      "arabic": "سُبْحَانَ اللَّهِ وَالْحَمْدُ لِلَّهِ",
+      "transliteration": "SubhanAllahi walhamdulillah",
+      "translation": "Glory be to Allah, and all praise is for Allah.",
+      "count": null,
+      "virtue": "Together they fill what is between the heavens and the earth.",
+      "reference": "Sahih Muslim 223",
+      "grade": "Sahih (Muslim)",
+      "sourceUrl": "https://cdn.jsdelivr.net/gh/fawazahmed0/hadith-api@1/editions/ara-muslim/534.json",
+      "category": "tasbih"
+    },
+    {
+      "arabic": "سُبْحَانَ اللَّهِ، وَالْحَمْدُ لِلَّهِ، وَلَا إِلَهَ إِلَّا اللَّهُ، وَاللَّهُ أَكْبَرُ",
+      "transliteration": "SubhanAllah, walhamdulillah, wa la ilaha illallah, wallahu akbar",
+      "translation": "Glory be to Allah, all praise is for Allah, there is no god but Allah, and Allah is the Greatest.",
+      "count": null,
+      "virtue": "The four most beloved words to Allah, dearer to the Prophet than everything the sun rises upon; a tree is planted in Paradise for each one; they are a shield from the Fire and \"al-baqiyat as-salihat\".",
+      "reference": "Sahih Muslim 2137, 2695; Sunan Ibn Majah 3807; Jami at-Tirmidhi 3462; al-Hakim / an-Nasa'i al-Kubra (\"khudhu junnatakum\")",
+      "grade": "Sahih (Muslim); Ibn Majah 3807 Sahih (al-Albani); Tirmidhi 3462 Hasan (al-Albani); \"shield\" hadith Sahih (al-Albani, Sahih al-Jami 3214)",
+      "sourceUrl": "https://cdn.jsdelivr.net/gh/fawazahmed0/hadith-api@1/editions/ara-muslim/6847.json",
+      "category": "combined",
+      "alsoVerifiedAt": [
+        "https://cdn.jsdelivr.net/gh/fawazahmed0/hadith-api@1/editions/ara-muslim/5601.json",
+        "https://cdn.jsdelivr.net/gh/fawazahmed0/hadith-api@1/editions/ara-ibnmajah/3807.json",
+        "https://hdith.com/h/xpUvJbWfra"
+      ]
+    },
+    {
+      "arabic": "سُبْحَانَ اللَّهِ، وَالْحَمْدُ لِلَّهِ، وَلَا إِلَهَ إِلَّا اللَّهُ، وَاللَّهُ أَكْبَرُ، وَلَا حَوْلَ وَلَا قُوَّةَ إِلَّا بِاللَّهِ",
+      "transliteration": "SubhanAllah, walhamdulillah, wa la ilaha illallah, wallahu akbar, wa la hawla wa la quwwata illa billah",
+      "translation": "Glory be to Allah, all praise is for Allah, there is no god but Allah, Allah is the Greatest, and there is no might nor power except by Allah.",
+      "count": null,
+      "virtue": "Taught to a man who could not memorise any Quran as what suffices him; described as \"al-baqiyat as-salihat\" (the lasting good deeds).",
+      "reference": "Sunan Abi Dawud 832; Sahih Ibn Hibban & al-Hakim (via HadeethEnc #5477)",
+      "grade": "Hasan (al-Albani) for Abu Dawud 832; 'Sahih bi-shawahidih' (HadeethEnc) for the baqiyat wording",
+      "sourceUrl": "https://cdn.jsdelivr.net/gh/fawazahmed0/hadith-api@1/editions/ara-abudawud/832.json",
+      "category": "combined",
+      "alsoVerifiedAt": [
+        "https://hadeethenc.com/api/v1/hadeeths/one/?language=ar&id=5477"
+      ]
+    },
+    {
+      "arabic": "لَا إِلَهَ إِلَّا اللَّهُ وَحْدَهُ لَا شَرِيكَ لَهُ، لَهُ الْمُلْكُ وَلَهُ الْحَمْدُ، وَهُوَ عَلَى كُلِّ شَيْءٍ قَدِيرٌ",
+      "transliteration": "La ilaha illallahu wahdahu la sharika lah, lahul-mulku wa lahul-hamdu, wa huwa 'ala kulli shay'in qadir",
+      "translation": "There is no god but Allah alone, without partner; His is the dominion and His is the praise, and He has power over all things.",
+      "count": 100,
+      "virtue": "Said 100 times a day: reward of freeing ten slaves, 100 good deeds written, 100 sins erased, and protection from Satan until evening; the best of what the Prophets said.",
+      "reference": "Sahih al-Bukhari 6403; Sahih Muslim 2691; Jami at-Tirmidhi 3585",
+      "grade": "Agreed upon (Bukhari & Muslim); Tirmidhi 3585 Hasan (al-Albani)",
+      "sourceUrl": "https://cdn.jsdelivr.net/gh/fawazahmed0/hadith-api@1/editions/ara-bukhari/6403.json",
+      "category": "tahlil",
+      "alsoVerifiedAt": [
+        "https://cdn.jsdelivr.net/gh/fawazahmed0/hadith-api@1/editions/ara-muslim/6842.json"
+      ]
+    },
+    {
+      "arabic": "لَا إِلَهَ إِلَّا اللَّهُ وَحْدَهُ لَا شَرِيكَ لَهُ، لَهُ الْمُلْكُ وَلَهُ الْحَمْدُ، وَهُوَ عَلَى كُلِّ شَيْءٍ قَدِيرٌ",
+      "transliteration": "La ilaha illallahu wahdahu la sharika lah, lahul-mulku wa lahul-hamdu, wa huwa 'ala kulli shay'in qadir",
+      "translation": "There is no god but Allah alone, without partner; His is the dominion and His is the praise, and He has power over all things.",
+      "count": 10,
+      "virtue": "Said ten times, it is like freeing four souls from the descendants of Isma'il.",
+      "reference": "Sahih al-Bukhari 6404; Sahih Muslim 2693",
+      "grade": "Agreed upon (Bukhari & Muslim)",
+      "sourceUrl": "https://hadeethenc.com/api/v1/hadeeths/one/?language=ar&id=5517",
+      "category": "tahlil",
+      "note": "Muslim 2693 is missing from the hadith-api Arabic edition; verified via HadeethEnc #5517 (Arabic text of the Muslim wording).",
+      "alsoVerifiedAt": [
+        "https://cdn.jsdelivr.net/gh/fawazahmed0/hadith-api@1/editions/ara-bukhari/6404.json"
+      ]
+    },
+    {
+      "arabic": "لَا إِلَهَ إِلَّا اللَّهُ وَاللَّهُ أَكْبَرُ، وَلَا حَوْلَ وَلَا قُوَّةَ إِلَّا بِاللَّهِ",
+      "transliteration": "La ilaha illallahu wallahu akbar, wa la hawla wa la quwwata illa billah",
+      "translation": "There is no god but Allah, Allah is the Greatest, and there is no might nor power except by Allah.",
+      "count": null,
+      "virtue": "No one on earth says it except that his sins are expiated, even if they were like the foam of the sea.",
+      "reference": "Jami at-Tirmidhi 3460",
+      "grade": "Hasan (al-Albani; Ahmad Shakir)",
+      "sourceUrl": "https://cdn.jsdelivr.net/gh/fawazahmed0/hadith-api@1/editions/ara-tirmidhi/3460.json",
+      "category": "tahlil"
+    },
+    {
+      "arabic": "لَا إِلَهَ إِلَّا اللَّهُ وَاللَّهُ أَكْبَرُ",
+      "transliteration": "La ilaha illallahu wallahu akbar",
+      "translation": "There is no god but Allah, and Allah is the Greatest.",
+      "count": null,
+      "virtue": "Allah affirms the one who says it (\"There is no god but Me and I am the Greatest\"); the hadith continues with four further tahlil formulas, and whoever says them in illness and dies, the Fire will not consume him.",
+      "reference": "Jami at-Tirmidhi 3430; Sunan Ibn Majah 3794",
+      "grade": "Sahih (al-Albani; Ahmad Shakir)",
+      "sourceUrl": "https://cdn.jsdelivr.net/gh/fawazahmed0/hadith-api@1/editions/ara-tirmidhi/3430.json",
+      "category": "tahlil",
+      "sequence": [
+        {
+          "arabic": "لَا إِلَهَ إِلَّا اللَّهُ وَاللَّهُ أَكْبَرُ",
+          "count": 1
+        },
+        {
+          "arabic": "لَا إِلَهَ إِلَّا اللَّهُ وَحْدَهُ",
+          "count": 1
+        },
+        {
+          "arabic": "لَا إِلَهَ إِلَّا اللَّهُ وَحْدَهُ لَا شَرِيكَ لَهُ",
+          "count": 1
+        },
+        {
+          "arabic": "لَا إِلَهَ إِلَّا اللَّهُ لَهُ الْمُلْكُ وَلَهُ الْحَمْدُ",
+          "count": 1
+        },
+        {
+          "arabic": "لَا إِلَهَ إِلَّا اللَّهُ وَلَا حَوْلَ وَلَا قُوَّةَ إِلَّا بِاللَّهِ",
+          "count": 1
+        }
+      ]
+    },
+    {
+      "arabic": "لَا إِلَهَ إِلَّا اللَّهُ وَحْدَهُ لَا شَرِيكَ لَهُ، اللَّهُ أَكْبَرُ كَبِيرًا، وَالْحَمْدُ لِلَّهِ كَثِيرًا، سُبْحَانَ اللَّهِ رَبِّ الْعَالَمِينَ، لَا حَوْلَ وَلَا قُوَّةَ إِلَّا بِاللَّهِ الْعَزِيزِ الْحَكِيمِ",
+      "transliteration": "La ilaha illallahu wahdahu la sharika lah, Allahu akbaru kabira, walhamdulillahi kathira, subhanAllahi Rabbil-'alamin, la hawla wa la quwwata illa billahil-'Azizil-Hakim",
+      "translation": "There is no god but Allah alone, without partner; Allah is the Greatest, most great; much praise is for Allah; glory be to Allah, Lord of the worlds; there is no might nor power except by Allah, the Almighty, the Wise.",
+      "count": null,
+      "virtue": "Taught to a Bedouin who asked for words to say (followed by a request for forgiveness, mercy, guidance and provision).",
+      "reference": "Sahih Muslim 2696",
+      "grade": "Sahih (Muslim)",
+      "sourceUrl": "https://cdn.jsdelivr.net/gh/fawazahmed0/hadith-api@1/editions/ara-muslim/6848.json",
+      "category": "combined"
+    },
+    {
+      "arabic": "اللَّهُ أَكْبَرُ كَبِيرًا، وَالْحَمْدُ لِلَّهِ كَثِيرًا، وَسُبْحَانَ اللَّهِ بُكْرَةً وَأَصِيلًا",
+      "transliteration": "Allahu akbaru kabira, walhamdulillahi kathira, wa subhanAllahi bukratan wa asila",
+      "translation": "Allah is the Greatest, most great; much praise is for Allah; and glory be to Allah morning and evening.",
+      "count": null,
+      "virtue": "The Prophet said the gates of heaven were opened for it.",
+      "reference": "Sahih Muslim 601",
+      "grade": "Sahih (Muslim)",
+      "sourceUrl": "https://cdn.jsdelivr.net/gh/fawazahmed0/hadith-api@1/editions/ara-muslim/1358.json",
+      "category": "combined",
+      "note": "Said by a Companion in prayer (opening); Ibn Umar never abandoned it afterwards."
+    },
+    {
+      "arabic": "رَبَّنَا وَلَكَ الْحَمْدُ، حَمْدًا كَثِيرًا طَيِّبًا مُبَارَكًا فِيهِ",
+      "transliteration": "Rabbana wa lakal-hamd, hamdan kathiran tayyiban mubarakan fih",
+      "translation": "Our Lord, and to You belongs praise, abundant, good and blessed praise.",
+      "count": null,
+      "virtue": "The Prophet saw more than thirty angels racing to be first to record it.",
+      "reference": "Sahih al-Bukhari 799",
+      "grade": "Sahih (Bukhari)",
+      "sourceUrl": "https://cdn.jsdelivr.net/gh/fawazahmed0/hadith-api@1/editions/ara-bukhari/799.json",
+      "category": "tahmid",
+      "note": "Said in prayer after rising from ruku'."
+    },
+    {
+      "arabic": "الْحَمْدُ لِلَّهِ عَلَى كُلِّ حَالٍ",
+      "transliteration": "Alhamdulillahi 'ala kulli hal",
+      "translation": "All praise is for Allah in every circumstance.",
+      "count": null,
+      "virtue": "What the Prophet said when he saw something he disliked.",
+      "reference": "Sunan Ibn Majah 3803",
+      "grade": "Hasan (al-Albani); Hasan li-ghayrihi (Shu'ayb al-Arna'ut)",
+      "sourceUrl": "https://cdn.jsdelivr.net/gh/fawazahmed0/hadith-api@1/editions/ara-ibnmajah/3803.json",
+      "category": "tahmid",
+      "note": "Contextual: said on seeing something disliked (for something pleasing he said: al-hamdu lillahilladhi bi-ni'matihi tatimmus-salihat)."
+    },
+    {
+      "arabic": "سُبُّوحٌ قُدُّوسٌ رَبُّ الْمَلَائِكَةِ وَالرُّوحِ",
+      "transliteration": "Subbuhun Quddusun, Rabbul-mala'ikati war-ruh",
+      "translation": "Perfect in glory, Most Holy, Lord of the angels and the Spirit.",
+      "count": null,
+      "virtue": "The Prophet used to say it in his bowing and prostration.",
+      "reference": "Sahih Muslim 487",
+      "grade": "Sahih (Muslim)",
+      "sourceUrl": "https://cdn.jsdelivr.net/gh/fawazahmed0/hadith-api@1/editions/ara-muslim/1091.json",
+      "category": "tasbih",
+      "note": "Prayer-specific in the hadith (ruku' and sujud)."
+    },
+    {
+      "arabic": "سُبْحَانَ الْمَلِكِ الْقُدُّوسِ",
+      "transliteration": "Subhanal-Malikil-Quddus",
+      "translation": "Glory be to the Sovereign, the Most Holy.",
+      "count": 3,
+      "virtue": "The Prophet said it three times after the witr prayer, raising his voice on the third.",
+      "reference": "Sunan Abi Dawud 1430; Sunan an-Nasa'i 1732",
+      "grade": "Sahih (al-Albani)",
+      "sourceUrl": "https://cdn.jsdelivr.net/gh/fawazahmed0/hadith-api@1/editions/ara-nasai/1732.json",
+      "category": "tasbih",
+      "note": "Contextual (after witr). Abu Dawud 1501 (Hasan, al-Albani) also commands taqdis in general and counting on the fingers.",
+      "alsoVerifiedAt": [
+        "https://cdn.jsdelivr.net/gh/fawazahmed0/hadith-api@1/editions/ara-abudawud/1430.json"
+      ]
+    },
+    {
+      "arabic": "يَا ذَا الْجَلَالِ وَالْإِكْرَامِ",
+      "transliteration": "Ya Dhal-Jalali wal-Ikram",
+      "translation": "O Possessor of Majesty and Honour.",
+      "count": null,
+      "virtue": "The Prophet commanded: \"Persist in saying: O Possessor of Majesty and Honour.\"",
+      "reference": "Jami at-Tirmidhi 3525 (also 3524)",
+      "grade": "Sahih (al-Albani; Ahmad Shakir); HadeethEnc #3167: Sahih",
+      "sourceUrl": "https://cdn.jsdelivr.net/gh/fawazahmed0/hadith-api@1/editions/ara-tirmidhi/3525.json",
+      "category": "tahlil",
+      "note": "At-Tirmidhi himself called this chain gharib; it is authenticated through other routes (Ahmad, an-Nasa'i al-Kubra from Rabi'ah b. 'Amir)."
+    },
+    {
+      "arabic": "رَضِيتُ بِاللَّهِ رَبًّا، وَبِالْإِسْلَامِ دِينًا، وَبِمُحَمَّدٍ رَسُولًا",
+      "transliteration": "Raditu billahi Rabba, wa bil-Islami dina, wa bi-Muhammadin rasula",
+      "translation": "I am pleased with Allah as Lord, with Islam as religion, and with Muhammad as Messenger.",
+      "count": null,
+      "virtue": "Paradise becomes due for whoever says it.",
+      "reference": "Sunan Abi Dawud 1529; cf. Sahih Muslim 1884",
+      "grade": "Sahih (al-Albani; Shu'ayb al-Arna'ut)",
+      "sourceUrl": "https://cdn.jsdelivr.net/gh/fawazahmed0/hadith-api@1/editions/ara-abudawud/1529.json",
+      "category": "tahlil",
+      "alsoVerifiedAt": [
+        "https://cdn.jsdelivr.net/gh/fawazahmed0/hadith-api@1/editions/ara-muslim/4879.json"
+      ]
+    },
+    {
+      "arabic": "أَشْهَدُ أَنْ لَا إِلَهَ إِلَّا اللَّهُ، وَأَنَّ مُحَمَّدًا رَسُولُ اللَّهِ",
+      "transliteration": "Ashhadu an la ilaha illallah, wa anna Muhammadan Rasulullah",
+      "translation": "I bear witness that there is no god but Allah, and that Muhammad is the Messenger of Allah.",
+      "count": null,
+      "virtue": "No one testifies to it truthfully from his heart except that Allah makes him forbidden to the Fire.",
+      "reference": "Sahih al-Bukhari 128",
+      "grade": "Sahih (Bukhari)",
+      "sourceUrl": "https://cdn.jsdelivr.net/gh/fawazahmed0/hadith-api@1/editions/ara-bukhari/128.json",
+      "category": "tahlil"
+    },
+    {
+      "arabic": "سُبْحَانَكَ اللَّهُمَّ وَبِحَمْدِكَ، أَشْهَدُ أَنْ لَا إِلَهَ إِلَّا أَنْتَ، أَسْتَغْفِرُكَ وَأَتُوبُ إِلَيْكَ",
+      "transliteration": "Subhanaka Allahumma wa bihamdika, ashhadu an la ilaha illa anta, astaghfiruka wa atubu ilayk",
+      "translation": "Glory be to You, O Allah, and praise; I bear witness that there is no god but You; I seek Your forgiveness and repent to You.",
+      "count": null,
+      "virtue": "Whoever says it before rising from a gathering is forgiven what occurred in that gathering (kaffarat al-majlis).",
+      "reference": "Jami at-Tirmidhi 3433; Sunan Abi Dawud 4859",
+      "grade": "Sahih (al-Albani) for Tirmidhi 3433; Hasan Sahih (al-Albani) for Abu Dawud 4859",
+      "sourceUrl": "https://cdn.jsdelivr.net/gh/fawazahmed0/hadith-api@1/editions/ara-tirmidhi/3433.json",
+      "category": "istighfar",
+      "note": "Contextual: end of a sitting."
+    },
+    {
+      "arabic": "سُبْحَانَ اللَّهِ وَبِحَمْدِهِ، أَسْتَغْفِرُ اللَّهَ وَأَتُوبُ إِلَيْهِ",
+      "transliteration": "SubhanAllahi wa bihamdihi, astaghfirullaha wa atubu ilayh",
+      "translation": "Glory be to Allah and praise be to Him; I seek Allah's forgiveness and repent to Him.",
+      "count": null,
+      "virtue": "The Prophet said it abundantly in his final years, in fulfilment of Surat an-Nasr (\"glorify with the praise of your Lord and seek His forgiveness\").",
+      "reference": "Sahih Muslim 484",
+      "grade": "Sahih (Muslim)",
+      "sourceUrl": "https://cdn.jsdelivr.net/gh/fawazahmed0/hadith-api@1/editions/ara-muslim/1085.json",
+      "category": "istighfar"
+    },
+    {
+      "arabic": "لَا حَوْلَ وَلَا قُوَّةَ إِلَّا بِاللَّهِ",
+      "transliteration": "La hawla wa la quwwata illa billah",
+      "translation": "There is no might nor power except by Allah.",
+      "count": null,
+      "virtue": "A treasure from the treasures of Paradise, and a gate from its gates.",
+      "reference": "Sahih al-Bukhari 6384; Sahih Muslim 2704; Jami at-Tirmidhi 3581",
+      "grade": "Agreed upon (Bukhari & Muslim); Tirmidhi 3581 Sahih (al-Albani)",
+      "sourceUrl": "https://cdn.jsdelivr.net/gh/fawazahmed0/hadith-api@1/editions/ara-bukhari/6384.json",
+      "category": "hawqala",
+      "alsoVerifiedAt": [
+        "https://cdn.jsdelivr.net/gh/fawazahmed0/hadith-api@1/editions/ara-muslim/6862.json",
+        "https://cdn.jsdelivr.net/gh/fawazahmed0/hadith-api@1/editions/ara-tirmidhi/3581.json"
+      ]
+    },
+    {
+      "arabic": "أَسْتَغْفِرُ اللَّهَ",
+      "transliteration": "Astaghfirullah",
+      "translation": "I seek Allah's forgiveness.",
+      "count": 100,
+      "virtue": "The Prophet sought forgiveness 100 times a day, and three times after every prayer; \"glad tidings to whoever finds abundant istighfar in his record\".",
+      "reference": "Sahih Muslim 2702, 591; Sunan Ibn Majah 3818",
+      "grade": "Sahih (Muslim); Ibn Majah 3818 Sahih (al-Albani)",
+      "sourceUrl": "https://cdn.jsdelivr.net/gh/fawazahmed0/hadith-api@1/editions/ara-muslim/6858.json",
+      "category": "istighfar",
+      "alsoVerifiedAt": [
+        "https://cdn.jsdelivr.net/gh/fawazahmed0/hadith-api@1/editions/ara-muslim/1334.json",
+        "https://cdn.jsdelivr.net/gh/fawazahmed0/hadith-api@1/editions/ara-ibnmajah/3818.json"
+      ]
+    },
+    {
+      "arabic": "أَسْتَغْفِرُ اللَّهَ وَأَتُوبُ إِلَيْهِ",
+      "transliteration": "Astaghfirullaha wa atubu ilayh",
+      "translation": "I seek Allah's forgiveness and I repent to Him.",
+      "count": 100,
+      "virtue": "The Prophet sought forgiveness and repented more than seventy times a day (Bukhari), and repented 100 times a day (Muslim).",
+      "reference": "Sahih al-Bukhari 6307; Sahih Muslim 2702",
+      "grade": "Sahih (Bukhari; Muslim)",
+      "sourceUrl": "https://cdn.jsdelivr.net/gh/fawazahmed0/hadith-api@1/editions/ara-bukhari/6307.json",
+      "category": "istighfar",
+      "alsoVerifiedAt": [
+        "https://cdn.jsdelivr.net/gh/fawazahmed0/hadith-api@1/editions/ara-muslim/6858.json"
+      ]
+    },
+    {
+      "arabic": "رَبِّ اغْفِرْ لِي وَتُبْ عَلَيَّ، إِنَّكَ أَنْتَ التَّوَّابُ الرَّحِيمُ",
+      "transliteration": "Rabbighfir li wa tub 'alayya, innaka antat-Tawwabur-Rahim",
+      "translation": "My Lord, forgive me and accept my repentance; You are the Accepter of repentance, the Most Merciful.",
+      "count": 100,
+      "virtue": "The Companions counted the Prophet saying it 100 times in a single sitting.",
+      "reference": "Sunan Abi Dawud 1516; Sunan Ibn Majah 3814; Jami at-Tirmidhi 3434 (ending at-Tawwabul-Ghafur)",
+      "grade": "Sahih (al-Albani; Shu'ayb al-Arna'ut)",
+      "sourceUrl": "https://cdn.jsdelivr.net/gh/fawazahmed0/hadith-api@1/editions/ara-abudawud/1516.json",
+      "category": "istighfar"
+    },
+    {
+      "arabic": "أَسْتَغْفِرُ اللَّهَ الْعَظِيمَ الَّذِي لَا إِلَهَ إِلَّا هُوَ الْحَيَّ الْقَيُّومَ وَأَتُوبُ إِلَيْهِ",
+      "transliteration": "Astaghfirullahal-'Azimalladhi la ilaha illa huwal-Hayyal-Qayyuma wa atubu ilayh",
+      "translation": "I seek forgiveness from Allah the Magnificent, besides whom there is no god, the Ever-Living, the Sustainer, and I repent to Him.",
+      "count": null,
+      "virtue": "Whoever says it is forgiven, even if he had fled from the battlefield.",
+      "reference": "Jami at-Tirmidhi 3577; Sunan Abi Dawud 1517 (without \"al-'Azim\")",
+      "grade": "Sahih (al-Albani); Sahih li-ghayrihi (Shu'ayb al-Arna'ut)",
+      "sourceUrl": "https://cdn.jsdelivr.net/gh/fawazahmed0/hadith-api@1/editions/ara-tirmidhi/3577.json",
+      "category": "istighfar",
+      "alsoVerifiedAt": [
+        "https://cdn.jsdelivr.net/gh/fawazahmed0/hadith-api@1/editions/ara-abudawud/1517.json"
+      ]
+    },
+    {
+      "arabic": "اللَّهُمَّ أَنْتَ رَبِّي، لَا إِلَهَ إِلَّا أَنْتَ، خَلَقْتَنِي وَأَنَا عَبْدُكَ، وَأَنَا عَلَى عَهْدِكَ وَوَعْدِكَ مَا اسْتَطَعْتُ، أَعُوذُ بِكَ مِنْ شَرِّ مَا صَنَعْتُ، أَبُوءُ لَكَ بِنِعْمَتِكَ عَلَيَّ، وَأَبُوءُ لَكَ بِذَنْبِي، فَاغْفِرْ لِي، فَإِنَّهُ لَا يَغْفِرُ الذُّنُوبَ إِلَّا أَنْتَ",
+      "transliteration": "Allahumma anta Rabbi, la ilaha illa anta, khalaqtani wa ana 'abduka, wa ana 'ala 'ahdika wa wa'dika mastata'tu, a'udhu bika min sharri ma sana'tu, abu'u laka bi-ni'matika 'alayya, wa abu'u laka bi-dhanbi, faghfir li, fa innahu la yaghfirudh-dhunuba illa anta",
+      "translation": "O Allah, You are my Lord; there is no god but You. You created me and I am Your servant, and I keep Your covenant and promise as best I can. I seek refuge in You from the evil of what I have done. I acknowledge Your favour upon me and I acknowledge my sin, so forgive me, for none forgives sins but You.",
+      "count": null,
+      "virtue": "Sayyid al-Istighfar: whoever says it with certainty during the day and dies before evening, or at night and dies before morning, is of the people of Paradise.",
+      "reference": "Sahih al-Bukhari 6306, 6323",
+      "grade": "Sahih (Bukhari)",
+      "sourceUrl": "https://cdn.jsdelivr.net/gh/fawazahmed0/hadith-api@1/editions/ara-bukhari/6306.json",
+      "category": "istighfar"
+    },
+    {
+      "arabic": "اللَّهُمَّ إِنِّي ظَلَمْتُ نَفْسِي ظُلْمًا كَثِيرًا، وَلَا يَغْفِرُ الذُّنُوبَ إِلَّا أَنْتَ، فَاغْفِرْ لِي مَغْفِرَةً مِنْ عِنْدِكَ، وَارْحَمْنِي، إِنَّكَ أَنْتَ الْغَفُورُ الرَّحِيمُ",
+      "transliteration": "Allahumma inni zalamtu nafsi zulman kathira, wa la yaghfirudh-dhunuba illa anta, faghfir li maghfiratan min 'indika warhamni, innaka antal-Ghafurur-Rahim",
+      "translation": "O Allah, I have greatly wronged myself, and none forgives sins but You; so grant me forgiveness from Yourself and have mercy on me. You are the Forgiving, the Merciful.",
+      "count": null,
+      "virtue": "Taught by the Prophet to Abu Bakr as-Siddiq when he asked for a supplication to use in his prayer.",
+      "reference": "Sahih al-Bukhari 834, 6326; Sahih Muslim 2705",
+      "grade": "Agreed upon (Bukhari & Muslim)",
+      "sourceUrl": "https://cdn.jsdelivr.net/gh/fawazahmed0/hadith-api@1/editions/ara-bukhari/6326.json",
+      "category": "istighfar",
+      "alsoVerifiedAt": [
+        "https://cdn.jsdelivr.net/gh/fawazahmed0/hadith-api@1/editions/ara-muslim/6869.json"
+      ]
+    },
+    {
+      "arabic": "اللَّهُمَّ إِنَّكَ عَفُوٌّ تُحِبُّ الْعَفْوَ فَاعْفُ عَنِّي",
+      "transliteration": "Allahumma innaka 'Afuwwun tuhibbul-'afwa fa'fu 'anni",
+      "translation": "O Allah, You are the Pardoner and You love to pardon, so pardon me.",
+      "count": null,
+      "virtue": "What the Prophet taught Aishah to say if she found Laylat al-Qadr.",
+      "reference": "Sunan Ibn Majah 3850; Jami at-Tirmidhi 3513",
+      "grade": "Sahih (al-Albani); Hasan Sahih (Shu'ayb al-Arna'ut)",
+      "sourceUrl": "https://cdn.jsdelivr.net/gh/fawazahmed0/hadith-api@1/editions/ara-ibnmajah/3850.json",
+      "category": "istighfar",
+      "note": "The Tirmidhi print adds \"karimun\" (عَفُوٌّ كَرِيمٌ); al-Albani noted the addition is not in the reliable sources, so the Ibn Majah wording is used here.",
+      "alsoVerifiedAt": [
+        "https://cdn.jsdelivr.net/gh/fawazahmed0/hadith-api@1/editions/ara-tirmidhi/3513.json"
+      ]
+    },
+    {
+      "arabic": "اللَّهُمَّ صَلِّ عَلَى مُحَمَّدٍ وَعَلَى آلِ مُحَمَّدٍ، كَمَا صَلَّيْتَ عَلَى إِبْرَاهِيمَ وَعَلَى آلِ إِبْرَاهِيمَ، إِنَّكَ حَمِيدٌ مَجِيدٌ، اللَّهُمَّ بَارِكْ عَلَى مُحَمَّدٍ وَعَلَى آلِ مُحَمَّدٍ، كَمَا بَارَكْتَ عَلَى إِبْرَاهِيمَ وَعَلَى آلِ إِبْرَاهِيمَ، إِنَّكَ حَمِيدٌ مَجِيدٌ",
+      "transliteration": "Allahumma salli 'ala Muhammadin wa 'ala ali Muhammad, kama sallayta 'ala Ibrahima wa 'ala ali Ibrahim, innaka Hamidun Majid. Allahumma barik 'ala Muhammadin wa 'ala ali Muhammad, kama barakta 'ala Ibrahima wa 'ala ali Ibrahim, innaka Hamidun Majid",
+      "translation": "O Allah, send prayers upon Muhammad and the family of Muhammad as You sent prayers upon Ibrahim and the family of Ibrahim; You are Praiseworthy, Glorious. O Allah, bless Muhammad and the family of Muhammad as You blessed Ibrahim and the family of Ibrahim; You are Praiseworthy, Glorious.",
+      "count": null,
+      "virtue": "The wording the Prophet taught when asked how to send prayers upon him (as-Salat al-Ibrahimiyyah).",
+      "reference": "Sahih al-Bukhari 3370, 6357; Sahih Muslim 406",
+      "grade": "Agreed upon (Bukhari & Muslim)",
+      "sourceUrl": "https://cdn.jsdelivr.net/gh/fawazahmed0/hadith-api@1/editions/ara-bukhari/3370.json",
+      "category": "salawat",
+      "alsoVerifiedAt": [
+        "https://cdn.jsdelivr.net/gh/fawazahmed0/hadith-api@1/editions/ara-muslim/908.json"
+      ]
+    },
+    {
+      "arabic": "اللَّهُمَّ صَلِّ عَلَى مُحَمَّدٍ وَأَزْوَاجِهِ وَذُرِّيَّتِهِ، كَمَا صَلَّيْتَ عَلَى آلِ إِبْرَاهِيمَ، وَبَارِكْ عَلَى مُحَمَّدٍ وَأَزْوَاجِهِ وَذُرِّيَّتِهِ، كَمَا بَارَكْتَ عَلَى آلِ إِبْرَاهِيمَ، إِنَّكَ حَمِيدٌ مَجِيدٌ",
+      "transliteration": "Allahumma salli 'ala Muhammadin wa azwajihi wa dhurriyyatihi, kama sallayta 'ala ali Ibrahim, wa barik 'ala Muhammadin wa azwajihi wa dhurriyyatihi, kama barakta 'ala ali Ibrahim, innaka Hamidun Majid",
+      "translation": "O Allah, send prayers upon Muhammad, his wives and his offspring as You sent prayers upon the family of Ibrahim, and bless Muhammad, his wives and his offspring as You blessed the family of Ibrahim; You are Praiseworthy, Glorious.",
+      "count": null,
+      "virtue": "A second wording the Prophet taught for sending prayers upon him (narrated by Abu Humayd as-Sa'idi).",
+      "reference": "Sahih al-Bukhari 3369; Sahih Muslim 407",
+      "grade": "Agreed upon (Bukhari & Muslim)",
+      "sourceUrl": "https://cdn.jsdelivr.net/gh/fawazahmed0/hadith-api@1/editions/ara-bukhari/3369.json",
+      "category": "salawat"
+    },
+    {
+      "arabic": "اللَّهُمَّ صَلِّ عَلَى مُحَمَّدٍ عَبْدِكَ وَرَسُولِكَ، كَمَا صَلَّيْتَ عَلَى إِبْرَاهِيمَ، وَبَارِكْ عَلَى مُحَمَّدٍ وَعَلَى آلِ مُحَمَّدٍ، كَمَا بَارَكْتَ عَلَى إِبْرَاهِيمَ وَآلِ إِبْرَاهِيمَ",
+      "transliteration": "Allahumma salli 'ala Muhammadin 'abdika wa rasulika, kama sallayta 'ala Ibrahim, wa barik 'ala Muhammadin wa 'ala ali Muhammad, kama barakta 'ala Ibrahima wa ali Ibrahim",
+      "translation": "O Allah, send prayers upon Muhammad, Your servant and Messenger, as You sent prayers upon Ibrahim, and bless Muhammad and the family of Muhammad as You blessed Ibrahim and the family of Ibrahim.",
+      "count": null,
+      "virtue": "A third taught wording (narrated by Abu Sa'id al-Khudri); its opening clause is a common short counting salawat.",
+      "reference": "Sahih al-Bukhari 6358",
+      "grade": "Sahih (Bukhari)",
+      "sourceUrl": "https://cdn.jsdelivr.net/gh/fawazahmed0/hadith-api@1/editions/ara-bukhari/6358.json",
+      "category": "salawat"
+    },
+    {
+      "arabic": "اللَّهُمَّ صَلِّ عَلَى مُحَمَّدٍ",
+      "transliteration": "Allahumma salli 'ala Muhammad",
+      "translation": "O Allah, send prayers upon Muhammad.",
+      "count": null,
+      "virtue": "Whoever sends one prayer upon the Prophet, Allah sends ten upon him, erases ten sins and raises him ten degrees; making all one's supplication salawat suffices one's worries.",
+      "reference": "Sahih Muslim 408; Sunan an-Nasa'i 1297; Jami at-Tirmidhi 2457",
+      "grade": "Sahih (Muslim); Nasa'i 1297 Sahih (al-Albani); Tirmidhi 2457 Hasan (al-Albani)",
+      "sourceUrl": "https://cdn.jsdelivr.net/gh/fawazahmed0/hadith-api@1/editions/ara-bukhari/3370.json",
+      "category": "salawat",
+      "note": "Short form = opening clause of the taught wordings (Bukhari 3370); the virtue hadiths do not prescribe a specific short wording. Increasing salawat on Friday: Abu Dawud 1047 (Sahih, al-Albani).",
+      "alsoVerifiedAt": [
+        "https://cdn.jsdelivr.net/gh/fawazahmed0/hadith-api@1/editions/ara-muslim/912.json",
+        "https://cdn.jsdelivr.net/gh/fawazahmed0/hadith-api@1/editions/ara-tirmidhi/2457.json"
+      ]
+    },
+    {
+      "arabic": "لَا إِلَٰهَ إِلَّا أَنْتَ سُبْحَانَكَ إِنِّي كُنْتُ مِنَ الظَّالِمِينَ",
+      "transliteration": "La ilaha illa anta, subhanaka, inni kuntu minaz-zalimin",
+      "translation": "There is no god but You; glory be to You; indeed I have been among the wrongdoers.",
+      "count": null,
+      "virtue": "The supplication of Yunus in the whale; no Muslim supplicates with it for anything except that Allah answers him.",
+      "reference": "Quran 21:87; Jami at-Tirmidhi 3505",
+      "grade": "Quran; Tirmidhi 3505 Sahih (al-Albani; Ahmad Shakir)",
+      "sourceUrl": "https://cdn.jsdelivr.net/gh/fawazahmed0/quran-api@1/editions/ara-quransimple/21/87.json",
+      "category": "quranic",
+      "alsoVerifiedAt": [
+        "https://cdn.jsdelivr.net/gh/fawazahmed0/hadith-api@1/editions/ara-tirmidhi/3505.json"
+      ]
+    },
+    {
+      "arabic": "حَسْبُنَا اللَّهُ وَنِعْمَ الْوَكِيلُ",
+      "transliteration": "Hasbunallahu wa ni'mal-Wakil",
+      "translation": "Allah is sufficient for us, and He is the best Disposer of affairs.",
+      "count": null,
+      "virtue": "Said by Ibrahim when thrown into the fire and by Muhammad when told the enemy had gathered against them.",
+      "reference": "Quran 3:173; Sahih al-Bukhari 4563",
+      "grade": "Quran; Sahih (Bukhari)",
+      "sourceUrl": "https://cdn.jsdelivr.net/gh/fawazahmed0/quran-api@1/editions/ara-quransimple/3/173.json",
+      "category": "quranic",
+      "alsoVerifiedAt": [
+        "https://cdn.jsdelivr.net/gh/fawazahmed0/hadith-api@1/editions/ara-bukhari/4563.json"
+      ]
+    },
+    {
+      "arabic": "حَسْبِيَ اللَّهُ لَا إِلَٰهَ إِلَّا هُوَ ۖ عَلَيْهِ تَوَكَّلْتُ ۖ وَهُوَ رَبُّ الْعَرْشِ الْعَظِيمِ",
+      "transliteration": "Hasbiyallahu la ilaha illa huwa, 'alayhi tawakkaltu, wa huwa Rabbul-'Arshil-'Azim",
+      "translation": "Allah is sufficient for me; there is no god but He. In Him I have put my trust, and He is the Lord of the Mighty Throne.",
+      "count": null,
+      "virtue": "A Quranic declaration of reliance on Allah.",
+      "reference": "Quran 9:129",
+      "grade": "Quran",
+      "sourceUrl": "https://cdn.jsdelivr.net/gh/fawazahmed0/quran-api@1/editions/ara-quransimple/9/129.json",
+      "category": "quranic",
+      "note": "Do NOT attach the \"7 times morning and evening\" virtue: Abu Dawud 5081 is graded Mawdu' (fabricated) as a Prophetic saying by al-Albani (see weak list)."
+    },
+    {
+      "arabic": "سُبْحَانَ رَبِّكَ رَبِّ الْعِزَّةِ عَمَّا يَصِفُونَ، وَسَلَامٌ عَلَى الْمُرْسَلِينَ، وَالْحَمْدُ لِلَّهِ رَبِّ الْعَالَمِينَ",
+      "transliteration": "Subhana Rabbika Rabbil-'izzati 'amma yasifun, wa salamun 'alal-mursalin, walhamdulillahi Rabbil-'alamin",
+      "translation": "Exalted is your Lord, the Lord of Might, above what they describe; and peace be upon the Messengers; and all praise is for Allah, Lord of the worlds.",
+      "count": null,
+      "virtue": "The closing tasbih of Surat as-Saffat.",
+      "reference": "Quran 37:180-182",
+      "grade": "Quran",
+      "sourceUrl": "https://cdn.jsdelivr.net/gh/fawazahmed0/quran-api@1/editions/ara-quransimple/37/180.json",
+      "category": "quranic"
+    },
+    {
+      "arabic": "مَا شَاءَ اللَّهُ لَا قُوَّةَ إِلَّا بِاللَّهِ",
+      "transliteration": "Ma sha' Allah, la quwwata illa billah",
+      "translation": "What Allah wills [comes to pass]; there is no power except by Allah.",
+      "count": null,
+      "virtue": "What the believer told his companion he should have said on entering his garden.",
+      "reference": "Quran 18:39",
+      "grade": "Quran",
+      "sourceUrl": "https://cdn.jsdelivr.net/gh/fawazahmed0/quran-api@1/editions/ara-quransimple/18/39.json",
+      "category": "quranic"
+    },
+    {
+      "arabic": "الْحَمْدُ لِلَّهِ رَبِّ الْعَالَمِينَ",
+      "transliteration": "Alhamdulillahi Rabbil-'alamin",
+      "translation": "All praise is for Allah, Lord of the worlds.",
+      "count": null,
+      "virtue": "The opening praise of al-Fatihah; whoever says it from his heart has thirty good deeds written or thirty sins removed.",
+      "reference": "Quran 1:2; Musnad Ahmad 8012 / al-Hakim",
+      "grade": "Quran; Ahmad 8012 Sahih (al-Albani, Sahih at-Targhib 1554; Ahmad Shakir) though Ibn Rajab held it may be Ka'b's own words",
+      "sourceUrl": "https://cdn.jsdelivr.net/gh/fawazahmed0/quran-api@1/editions/ara-quransimple/1/2.json",
+      "category": "quranic",
+      "alsoVerifiedAt": [
+        "https://diwan-ahadiths.com/hadith/1349"
+      ]
+    },
+    {
+      "arabic": "الْحَمْدُ لِلَّهِ الَّذِي لَمْ يَتَّخِذْ وَلَدًا وَلَمْ يَكُنْ لَهُ شَرِيكٌ فِي الْمُلْكِ وَلَمْ يَكُنْ لَهُ وَلِيٌّ مِنَ الذُّلِّ ۖ وَكَبِّرْهُ تَكْبِيرًا",
+      "transliteration": "Alhamdulillahil-ladhi lam yattakhidh waladan wa lam yakun lahu sharikun fil-mulki wa lam yakun lahu waliyyun minadh-dhulli, wa kabbirhu takbira",
+      "translation": "All praise is for Allah, who has not taken a son, has no partner in dominion, and has no protector out of weakness; and magnify Him greatly.",
+      "count": null,
+      "virtue": "A Quranic command to praise and magnify Allah.",
+      "reference": "Quran 17:111",
+      "grade": "Quran",
+      "sourceUrl": "https://cdn.jsdelivr.net/gh/fawazahmed0/quran-api@1/editions/ara-quransimple/17/111.json",
+      "category": "quranic"
+    },
+    {
+      "arabic": "رَبَّنَا ظَلَمْنَا أَنْفُسَنَا وَإِنْ لَمْ تَغْفِرْ لَنَا وَتَرْحَمْنَا لَنَكُونَنَّ مِنَ الْخَاسِرِينَ",
+      "transliteration": "Rabbana zalamna anfusana wa in lam taghfir lana wa tarhamna lanakunanna minal-khasirin",
+      "translation": "Our Lord, we have wronged ourselves; if You do not forgive us and have mercy on us, we will surely be among the losers.",
+      "count": null,
+      "virtue": "The repentance of Adam and Hawwa.",
+      "reference": "Quran 7:23",
+      "grade": "Quran",
+      "sourceUrl": "https://cdn.jsdelivr.net/gh/fawazahmed0/quran-api@1/editions/ara-quransimple/7/23.json",
+      "category": "quranic"
+    },
+    {
+      "arabic": "رَبِّ إِنِّي ظَلَمْتُ نَفْسِي فَاغْفِرْ لِي",
+      "transliteration": "Rabbi inni zalamtu nafsi faghfir li",
+      "translation": "My Lord, I have wronged myself, so forgive me.",
+      "count": null,
+      "virtue": "The repentance of Musa, after which Allah forgave him.",
+      "reference": "Quran 28:16",
+      "grade": "Quran",
+      "sourceUrl": "https://cdn.jsdelivr.net/gh/fawazahmed0/quran-api@1/editions/ara-quransimple/28/16.json",
+      "category": "quranic"
+    },
+    {
+      "arabic": "رَبِّ اغْفِرْ وَارْحَمْ وَأَنْتَ خَيْرُ الرَّاحِمِينَ",
+      "transliteration": "Rabbighfir warham wa anta khayrur-rahimin",
+      "translation": "My Lord, forgive and have mercy, and You are the best of the merciful.",
+      "count": null,
+      "virtue": "A supplication Allah commands the Prophet to say (closing verse of al-Mu'minun).",
+      "reference": "Quran 23:118",
+      "grade": "Quran",
+      "sourceUrl": "https://cdn.jsdelivr.net/gh/fawazahmed0/quran-api@1/editions/ara-quransimple/23/118.json",
+      "category": "quranic"
+    },
+    {
+      "arabic": "رَبَّنَا آتِنَا فِي الدُّنْيَا حَسَنَةً وَفِي الْآخِرَةِ حَسَنَةً وَقِنَا عَذَابَ النَّارِ",
+      "transliteration": "Rabbana atina fid-dunya hasanatan wa fil-akhirati hasanatan wa qina 'adhaban-nar",
+      "translation": "Our Lord, give us good in this world and good in the Hereafter, and protect us from the punishment of the Fire.",
+      "count": null,
+      "virtue": "The supplication the Prophet made most often.",
+      "reference": "Quran 2:201; Sahih al-Bukhari 6389; Sahih Muslim 2690",
+      "grade": "Quran; Agreed upon (Bukhari & Muslim)",
+      "sourceUrl": "https://cdn.jsdelivr.net/gh/fawazahmed0/quran-api@1/editions/ara-quransimple/2/201.json",
+      "category": "dua",
+      "alsoVerifiedAt": [
+        "https://cdn.jsdelivr.net/gh/fawazahmed0/hadith-api@1/editions/ara-bukhari/6389.json"
+      ]
+    },
+    {
+      "arabic": "يَا مُقَلِّبَ الْقُلُوبِ ثَبِّتْ قَلْبِي عَلَى دِينِكَ",
+      "transliteration": "Ya Muqallibal-qulub, thabbit qalbi 'ala dinik",
+      "translation": "O Turner of hearts, keep my heart firm upon Your religion.",
+      "count": null,
+      "virtue": "The supplication the Prophet said most frequently (per Umm Salamah).",
+      "reference": "Jami at-Tirmidhi 3522, 2140",
+      "grade": "Sahih (al-Albani; Ahmad Shakir)",
+      "sourceUrl": "https://cdn.jsdelivr.net/gh/fawazahmed0/hadith-api@1/editions/ara-tirmidhi/3522.json",
+      "category": "dua"
+    },
+    {
+      "arabic": "اللَّهُمَّ أَعِنِّي عَلَى ذِكْرِكَ وَشُكْرِكَ وَحُسْنِ عِبَادَتِكَ",
+      "transliteration": "Allahumma a'inni 'ala dhikrika wa shukrika wa husni 'ibadatik",
+      "translation": "O Allah, help me to remember You, to thank You, and to worship You well.",
+      "count": null,
+      "virtue": "The Prophet told Mu'adh, out of love for him, never to leave saying it after every prayer.",
+      "reference": "Sunan Abi Dawud 1522; Sunan an-Nasa'i 1303",
+      "grade": "Sahih (al-Albani; Shu'ayb al-Arna'ut)",
+      "sourceUrl": "https://cdn.jsdelivr.net/gh/fawazahmed0/hadith-api@1/editions/ara-abudawud/1522.json",
+      "category": "dua"
+    },
+    {
+      "arabic": "اللَّهُمَّ اغْفِرْ لِي وَارْحَمْنِي وَاهْدِنِي وَعَافِنِي وَارْزُقْنِي",
+      "transliteration": "Allahummaghfir li, warhamni, wahdini, wa 'afini, warzuqni",
+      "translation": "O Allah, forgive me, have mercy on me, guide me, grant me well-being, and provide for me.",
+      "count": null,
+      "virtue": "The Prophet taught it to new Muslims; these words gather for you the good of this world and the Hereafter.",
+      "reference": "Sahih Muslim 2697",
+      "grade": "Sahih (Muslim)",
+      "sourceUrl": "https://cdn.jsdelivr.net/gh/fawazahmed0/hadith-api@1/editions/ara-muslim/6849.json",
+      "category": "dua"
+    },
+    {
+      "arabic": "اللَّهُمَّ إِنِّي أَسْأَلُكَ الْجَنَّةَ وَأَعُوذُ بِكَ مِنَ النَّارِ",
+      "transliteration": "Allahumma inni as'alukal-jannata wa a'udhu bika minan-nar",
+      "translation": "O Allah, I ask You for Paradise and seek refuge in You from the Fire.",
+      "count": 3,
+      "virtue": "Whoever asks Allah for Paradise three times, Paradise says \"O Allah, admit him\"; whoever seeks refuge from the Fire three times, the Fire says \"O Allah, protect him\".",
+      "reference": "Sunan Abi Dawud 792 (wording); Jami at-Tirmidhi 2572; Sunan Ibn Majah 4340 (virtue)",
+      "grade": "Sahih (al-Albani)",
+      "sourceUrl": "https://cdn.jsdelivr.net/gh/fawazahmed0/hadith-api@1/editions/ara-abudawud/792.json",
+      "category": "dua",
+      "alsoVerifiedAt": [
+        "https://cdn.jsdelivr.net/gh/fawazahmed0/hadith-api@1/editions/ara-tirmidhi/2572.json"
+      ]
+    },
+    {
+      "arabic": "سُبْحَانَ اللَّهِ (٣٣) · الْحَمْدُ لِلَّهِ (٣٣) · اللَّهُ أَكْبَرُ (٣٣) · لَا إِلَهَ إِلَّا اللَّهُ وَحْدَهُ لَا شَرِيكَ لَهُ، لَهُ الْمُلْكُ وَلَهُ الْحَمْدُ، وَهُوَ عَلَى كُلِّ شَيْءٍ قَدِيرٌ (١)",
+      "transliteration": "SubhanAllah x33, Alhamdulillah x33, Allahu Akbar x33, then La ilaha illallahu wahdahu la sharika lah, lahul-mulku wa lahul-hamdu wa huwa 'ala kulli shay'in qadir x1",
+      "translation": "Glory be to Allah (33), praise be to Allah (33), Allah is the Greatest (33), then the tahlil once to complete one hundred.",
+      "count": 100,
+      "virtue": "After every prayer: sins are forgiven even if like the foam of the sea.",
+      "reference": "Sahih Muslim 597",
+      "grade": "Sahih (Muslim)",
+      "sourceUrl": "https://cdn.jsdelivr.net/gh/fawazahmed0/hadith-api@1/editions/ara-muslim/1352.json",
+      "category": "after-prayer",
+      "sequence": [
+        {
+          "arabic": "سُبْحَانَ اللَّهِ",
+          "count": 33
+        },
+        {
+          "arabic": "الْحَمْدُ لِلَّهِ",
+          "count": 33
+        },
+        {
+          "arabic": "اللَّهُ أَكْبَرُ",
+          "count": 33
+        },
+        {
+          "arabic": "لَا إِلَهَ إِلَّا اللَّهُ وَحْدَهُ لَا شَرِيكَ لَهُ، لَهُ الْمُلْكُ وَلَهُ الْحَمْدُ، وَهُوَ عَلَى كُلِّ شَيْءٍ قَدِيرٌ",
+          "count": 1
+        }
+      ]
+    },
+    {
+      "arabic": "سُبْحَانَ اللَّهِ (٣٣) · الْحَمْدُ لِلَّهِ (٣٣) · اللَّهُ أَكْبَرُ (٣٤)",
+      "transliteration": "SubhanAllah x33, Alhamdulillah x33, Allahu Akbar x34",
+      "translation": "Glory be to Allah (33), praise be to Allah (33), Allah is the Greatest (34).",
+      "count": 100,
+      "virtue": "The \"mu'aqqibat\" after every obligatory prayer whose sayer is never disappointed.",
+      "reference": "Sahih Muslim 596; cf. Sahih al-Bukhari 843 & Sahih Muslim 595 (33 of each)",
+      "grade": "Sahih (Muslim)",
+      "sourceUrl": "https://cdn.jsdelivr.net/gh/fawazahmed0/hadith-api@1/editions/ara-muslim/1349.json",
+      "category": "after-prayer",
+      "sequence": [
+        {
+          "arabic": "سُبْحَانَ اللَّهِ",
+          "count": 33
+        },
+        {
+          "arabic": "الْحَمْدُ لِلَّهِ",
+          "count": 33
+        },
+        {
+          "arabic": "اللَّهُ أَكْبَرُ",
+          "count": 34
+        }
+      ],
+      "alsoVerifiedAt": [
+        "https://cdn.jsdelivr.net/gh/fawazahmed0/hadith-api@1/editions/ara-bukhari/843.json"
+      ]
+    },
+    {
+      "arabic": "سُبْحَانَ اللَّهِ (١٠) · الْحَمْدُ لِلَّهِ (١٠) · اللَّهُ أَكْبَرُ (١٠)",
+      "transliteration": "SubhanAllah x10, Alhamdulillah x10, Allahu Akbar x10",
+      "translation": "Glory be to Allah (10), praise be to Allah (10), Allah is the Greatest (10) after each prayer.",
+      "count": 30,
+      "virtue": "One of two easy practices that lead to Paradise: 150 on the tongue but 1,500 on the Scale each day (the other is 33/33/34 at bedtime).",
+      "reference": "Sunan Abi Dawud 5065; Jami at-Tirmidhi 3410; Sunan an-Nasa'i 1348",
+      "grade": "Sahih (al-Albani; Ahmad Shakir)",
+      "sourceUrl": "https://cdn.jsdelivr.net/gh/fawazahmed0/hadith-api@1/editions/ara-tirmidhi/3410.json",
+      "category": "after-prayer",
+      "sequence": [
+        {
+          "arabic": "سُبْحَانَ اللَّهِ",
+          "count": 10
+        },
+        {
+          "arabic": "الْحَمْدُ لِلَّهِ",
+          "count": 10
+        },
+        {
+          "arabic": "اللَّهُ أَكْبَرُ",
+          "count": 10
+        }
+      ],
+      "alsoVerifiedAt": [
+        "https://cdn.jsdelivr.net/gh/fawazahmed0/hadith-api@1/editions/ara-abudawud/5065.json"
+      ]
+    },
+    {
+      "arabic": "سُبْحَانَ اللَّهِ (٢٥) · الْحَمْدُ لِلَّهِ (٢٥) · لَا إِلَهَ إِلَّا اللَّهُ (٢٥) · اللَّهُ أَكْبَرُ (٢٥)",
+      "transliteration": "SubhanAllah x25, Alhamdulillah x25, La ilaha illallah x25, Allahu Akbar x25",
+      "translation": "Glory be to Allah, praise be to Allah, there is no god but Allah, Allah is the Greatest: 25 times each after prayer.",
+      "count": 100,
+      "virtue": "An approved alternative to 33/33/34, adding the tahlil; the Prophet said \"Do it\".",
+      "reference": "Sunan an-Nasa'i 1350; Jami at-Tirmidhi 3413",
+      "grade": "Sahih (al-Albani; Abu Ghuddah)",
+      "sourceUrl": "https://cdn.jsdelivr.net/gh/fawazahmed0/hadith-api@1/editions/ara-nasai/1350.json",
+      "category": "after-prayer",
+      "sequence": [
+        {
+          "arabic": "سُبْحَانَ اللَّهِ",
+          "count": 25
+        },
+        {
+          "arabic": "الْحَمْدُ لِلَّهِ",
+          "count": 25
+        },
+        {
+          "arabic": "لَا إِلَهَ إِلَّا اللَّهُ",
+          "count": 25
+        },
+        {
+          "arabic": "اللَّهُ أَكْبَرُ",
+          "count": 25
+        }
+      ]
+    },
+    {
+      "arabic": "سُبْحَانَ اللَّهِ (٣٣) · الْحَمْدُ لِلَّهِ (٣٣) · اللَّهُ أَكْبَرُ (٣٤)",
+      "transliteration": "SubhanAllah x33, Alhamdulillah x33, Allahu Akbar x34 (at bedtime)",
+      "translation": "Glory be to Allah (33), praise be to Allah (33), Allah is the Greatest (34) when going to bed.",
+      "count": 100,
+      "virtue": "Taught to Fatimah and Ali as better for them than a servant.",
+      "reference": "Sahih al-Bukhari 3705, 6318; Sahih Muslim 2727",
+      "grade": "Agreed upon (Bukhari & Muslim)",
+      "sourceUrl": "https://cdn.jsdelivr.net/gh/fawazahmed0/hadith-api@1/editions/ara-bukhari/3705.json",
+      "category": "bedtime",
+      "sequence": [
+        {
+          "arabic": "سُبْحَانَ اللَّهِ",
+          "count": 33
+        },
+        {
+          "arabic": "الْحَمْدُ لِلَّهِ",
+          "count": 33
+        },
+        {
+          "arabic": "اللَّهُ أَكْبَرُ",
+          "count": 34
+        }
+      ],
+      "note": "Contextual (bedtime); included because it is the canonical counted set.",
+      "alsoVerifiedAt": [
+        "https://cdn.jsdelivr.net/gh/fawazahmed0/hadith-api@1/editions/ara-muslim/6915.json"
+      ]
+    },
+    {
+      "arabic": "اللَّهُ أَكْبَرُ (١٠٠) · الْحَمْدُ لِلَّهِ (١٠٠) · سُبْحَانَ اللَّهِ (١٠٠)",
+      "transliteration": "Allahu Akbar x100, Alhamdulillah x100, SubhanAllah x100",
+      "translation": "Allah is the Greatest (100), praise be to Allah (100), glory be to Allah (100).",
+      "count": 300,
+      "virtue": "Better than 100 saddled horses in Allah's cause, 100 sacrificial camels and freeing 100 slaves (taught to the elderly Umm Hani').",
+      "reference": "Sunan Ibn Majah 3810",
+      "grade": "Hasan (al-Albani); Da'if (Shu'ayb al-Arna'ut; Zubair Ali Za'i) -- disputed",
+      "sourceUrl": "https://cdn.jsdelivr.net/gh/fawazahmed0/hadith-api@1/editions/ara-ibnmajah/3810.json",
+      "category": "combined",
+      "sequence": [
+        {
+          "arabic": "اللَّهُ أَكْبَرُ",
+          "count": 100
+        },
+        {
+          "arabic": "الْحَمْدُ لِلَّهِ",
+          "count": 100
+        },
+        {
+          "arabic": "سُبْحَانَ اللَّهِ",
+          "count": 100
+        }
+      ]
+    }
+  ],
+  "weakOrFabricated": [
+    {
+      "claim": "SubhanAllah 100x morning & evening = 100 Hajj; Alhamdulillah 100x = 100 horses in jihad; tahlil 100x = freeing 100 slaves; takbir 100x = no one brings better",
+      "reference": "Jami at-Tirmidhi 3471",
+      "grade": "Da'if (al-Albani); Munkar (Ahmad Shakir)",
+      "sourceUrl": "https://cdn.jsdelivr.net/gh/fawazahmed0/hadith-api@1/editions/ara-tirmidhi/3471.json",
+      "verified": true
+    },
+    {
+      "claim": "\"Ashhadu an la ilaha illallah wahdahu la sharika lah, ilahan wahidan ahadan samadan...\" 10x = 40 million good deeds",
+      "reference": "Jami at-Tirmidhi 3473",
+      "grade": "Da'if (al-Albani; Ahmad Shakir)",
+      "sourceUrl": "https://cdn.jsdelivr.net/gh/fawazahmed0/hadith-api@1/editions/ara-tirmidhi/3473.json",
+      "verified": true
+    },
+    {
+      "claim": "Tahlil with \"yuhyi wa yumit\" 10x after Fajr before speaking: 10 good deeds, 10 degrees, protection all day",
+      "reference": "Jami at-Tirmidhi 3474",
+      "grade": "Da'if (al-Albani; Ahmad Shakir); Hasan Sahih (Bashar Awwad) -- disputed",
+      "sourceUrl": "https://cdn.jsdelivr.net/gh/fawazahmed0/hadith-api@1/editions/ara-tirmidhi/3474.json",
+      "verified": true
+    },
+    {
+      "claim": "\"SubhanAllahi 'adada ma khalaqa fis-sama'...\" taught to a woman counting on date-stones/pebbles",
+      "reference": "Sunan Abi Dawud 1500; Jami at-Tirmidhi 3568",
+      "grade": "Da'if (al-Albani); Hasan li-ghayrihi (Shu'ayb al-Arna'ut) -- disputed",
+      "sourceUrl": "https://cdn.jsdelivr.net/gh/fawazahmed0/hadith-api@1/editions/ara-abudawud/1500.json",
+      "verified": true
+    },
+    {
+      "claim": "Safiyyah counting tasbih on 4,000 date-stones (the phrase \"SubhanAllahi 'adada khalqih\" itself is authentic via Muslim 2726)",
+      "reference": "Jami at-Tirmidhi 3554",
+      "grade": "Da'if (al-Albani); Munkar (Ahmad Shakir)",
+      "sourceUrl": "https://cdn.jsdelivr.net/gh/fawazahmed0/hadith-api@1/editions/ara-tirmidhi/3554.json",
+      "verified": true
+    },
+    {
+      "claim": "\"Whoever keeps to istighfar, Allah gives him a way out of every distress, relief from every worry and provision from where he does not expect\"",
+      "reference": "Sunan Abi Dawud 1518 (also Ibn Majah 3819)",
+      "grade": "Da'if (al-Albani; Shu'ayb al-Arna'ut)",
+      "sourceUrl": "https://cdn.jsdelivr.net/gh/fawazahmed0/hadith-api@1/editions/ara-abudawud/1518.json",
+      "verified": true
+    },
+    {
+      "claim": "\"Hasbiyallahu la ilaha illa huwa...\" 7x morning & evening and Allah suffices him",
+      "reference": "Sunan Abi Dawud 5081",
+      "grade": "Mawdu' (fabricated) as a Prophetic saying (al-Albani); mawquf on Abu ad-Darda'",
+      "sourceUrl": "https://cdn.jsdelivr.net/gh/fawazahmed0/hadith-api@1/editions/ara-abudawud/5081.json",
+      "verified": true
+    },
+    {
+      "claim": "\"Allahumma ajirni minan-nar\" 7x after Maghrib and Fajr",
+      "reference": "Sunan Abi Dawud 5079",
+      "grade": "Da'if (al-Albani; Shu'ayb al-Arna'ut)",
+      "sourceUrl": "https://cdn.jsdelivr.net/gh/fawazahmed0/hadith-api@1/editions/ara-abudawud/5079.json",
+      "verified": true
+    },
+    {
+      "claim": "Istighfar (\"...al-Hayyul-Qayyum wa atubu ilayh\") 3x at bedtime forgives sins like sea foam, tree leaves, sand of 'Alij",
+      "reference": "Jami at-Tirmidhi 3397",
+      "grade": "Da'if (al-Albani; Ahmad Shakir)",
+      "sourceUrl": "https://cdn.jsdelivr.net/gh/fawazahmed0/hadith-api@1/editions/ara-tirmidhi/3397.json",
+      "verified": true
+    },
+    {
+      "claim": "\"Tasbih is half the Scale, alhamdulillah fills it, and la ilaha illallah has no barrier until it reaches Allah\"",
+      "reference": "Jami at-Tirmidhi 3518",
+      "grade": "Da'if (al-Albani; Ahmad Shakir)",
+      "sourceUrl": "https://cdn.jsdelivr.net/gh/fawazahmed0/hadith-api@1/editions/ara-tirmidhi/3518.json",
+      "verified": true
+    },
+    {
+      "claim": "\"Ya Rabbi lakal-hamdu kama yanbaghi li-jalali wajhika wa 'azimi sultanik\" (angels did not know how to record it)",
+      "reference": "Sunan Ibn Majah 3801",
+      "grade": "Da'if (al-Albani; Shu'ayb al-Arna'ut)",
+      "sourceUrl": "https://cdn.jsdelivr.net/gh/fawazahmed0/hadith-api@1/editions/ara-ibnmajah/3801.json",
+      "verified": true
+    },
+    {
+      "claim": "\"The closest people to me on the Day of Resurrection are those who send the most salawat upon me\"",
+      "reference": "Jami at-Tirmidhi 484",
+      "grade": "Da'if (al-Albani; Ahmad Shakir); Hasan (Bashar Awwad) -- disputed",
+      "sourceUrl": "https://cdn.jsdelivr.net/gh/fawazahmed0/hadith-api@1/editions/ara-tirmidhi/484.json",
+      "verified": true
+    },
+    {
+      "claim": "\"Count tasbih on the fingertips, for they will be questioned\" -- Tirmidhi chain",
+      "reference": "Jami at-Tirmidhi 3583",
+      "grade": "Da'if (al-Albani) in Tirmidhi's chain; but the same instruction is Hasan (al-Albani) in Abu Dawud 1501, and the Prophet counting tasbih on his right hand is Sahih (Abu Dawud 1502)",
+      "sourceUrl": "https://cdn.jsdelivr.net/gh/fawazahmed0/hadith-api@1/editions/ara-tirmidhi/3583.json",
+      "verified": true
+    },
+    {
+      "claim": "\"Alhamdulillahi hamdan yuwafi ni'amahu wa yukafi'u mazidah\" as the most complete praise",
+      "reference": "No Prophetic chain (attributed to Adam via Muhammad b. an-Nadr)",
+      "grade": "No known isnad (Ibn al-Qayyim); Mu'dal (Ibn Hajar); Isra'iliyyat",
+      "sourceUrl": "https://hdith.com/?s=%D8%AD%D9%85%D8%AF%D8%A7%20%D9%8A%D9%88%D8%A7%D9%81%D9%8A%20%D9%86%D8%B9%D9%85%D9%87%20%D9%88%D9%8A%D9%83%D8%A7%D9%81%D8%A6%20%D9%85%D8%B2%D9%8A%D8%AF%D9%87",
+      "verified": true
+    }
+  ],
+  "unverified": [
+    {
+      "claim": "Salawat 10x in the morning and 10x in the evening earns the Prophet's intercession (at-Tabarani)",
+      "status": "UNVERIFIED (from memory): grading is disputed/commonly held weak (broken chain). Present in nawafalqari/ayah 'tasabih' with no reference. Exclude or label weak until checked on dorar.net."
+    },
+    {
+      "claim": "80 salawat after 'Asr on Friday forgives 80 years of sins",
+      "status": "UNVERIFIED (from memory): graded weak/fabricated by hadith critics. Exclude."
+    },
+    {
+      "claim": "\"La ilaha illallahul-Malikul-Haqqul-Mubin\" 100x a day = safety from poverty and grave loneliness",
+      "status": "UNVERIFIED (from memory): very weak chains (Abu Nu'aym, al-Khatib). Exclude the virtue."
+    },
+    {
+      "claim": "Salat al-Fatih, as-Salat an-Nariyya/at-Tafrijiyya (often 4,444x), Dala'il al-Khayrat formulas",
+      "status": "UNVERIFIED (from memory): later compositions with no basis in hadith; the fixed counts/virtues attached to them are fabricated. Exclude."
+    },
+    {
+      "claim": "\"Renew your faith ... say La ilaha illallah often\" (Musnad Ahmad 8710)",
+      "status": "UNVERIFIED (from memory): disputed (al-Hakim sahih; Shu'ayb al-Arna'ut da'if). Not needed: Tirmidhi 3383/3590 already cover tahlil."
+    },
+    {
+      "claim": "\"Astaghfirullaha Rabbi min kulli dhanbin wa atubu ilayh\" and \"Allahumma salli wa sallim 'ala nabiyyina Muhammad\"",
+      "status": "UNVERIFIED as specific wordings: popular generic formulas with no specific hadith text; permissible as general istighfar/salawat (Quran 33:56) but should not be shown with a hadith reference or fixed virtue."
+    },
+    {
+      "claim": "Prayer beads (misbaha) as Sunnah",
+      "status": "No authentic hadith; the pebble/date-stone reports are weak (see weakOrFabricated). Counting on the fingers is the Sunnah (Abu Dawud 1501 Hasan, 1502 Sahih per al-Albani)."
+    }
+  ]
+}

@@ -1,0 +1,807 @@
+{
+ "group": "society",
+ "topics": [
+  {
+   "id": "neighbours",
+   "title": "Neighbours",
+   "keywords": [
+    "neighbor",
+    "jaar",
+    "jiran",
+    "padosi",
+    "hamsaya",
+    "huquq al-jar"
+   ],
+   "quran": [
+    {
+     "ref": "4:36",
+     "cut": null,
+     "why": "The core verse: ihsan to the near neighbour, the distant neighbour and the companion at one's side."
+    },
+    {
+     "ref": "41:34",
+     "cut": null,
+     "why": "Repel bad with good so enmity turns to friendship; the Quran's method for friction between people living side by side."
+    },
+    {
+     "ref": "16:90",
+     "cut": null,
+     "why": "Allah commands justice and ihsan and forbids bad conduct and aggression: the two poles of the neighbour hadith (honour him, do not harm him)."
+    }
+   ],
+   "hadith": [
+    {
+     "id": "4965",
+     "why": "Jibril kept enjoining good treatment of the neighbour until the Prophet thought he would be made an heir."
+    },
+    {
+     "id": "5437",
+     "why": "Whoever believes in Allah and the Last Day should honour his neighbour."
+    },
+    {
+     "id": "3709",
+     "why": "The best neighbour in Allah's sight is the one best to his neighbour."
+    },
+    {
+     "id": "5336",
+     "why": "Add water to the broth and look after your neighbours: practical sharing of food."
+    }
+   ],
+   "duas": []
+  },
+  {
+   "id": "guests",
+   "title": "Guests",
+   "keywords": [
+    "hospitality",
+    "mehman",
+    "mehmaan nawazi",
+    "diyafah",
+    "dawat",
+    "host",
+    "invitation"
+   ],
+   "quran": [
+    {
+     "ref": "51:24-26",
+     "cut": null,
+     "why": "The honoured guests of Ibrahim: greeted with peace and served a fat calf; the Quran's model of hospitality."
+    },
+    {
+     "ref": "11:69",
+     "cut": null,
+     "why": "Ibrahim did not delay in bringing his guests a roasted calf: promptness in serving guests."
+    },
+    {
+     "ref": "24:27-28",
+     "cut": null,
+     "why": "Etiquette of the visitor: seek permission and greet before entering, and go back if asked."
+    },
+    {
+     "ref": "33:53",
+     "cut": {
+      "en": "O you who have believed, do not enter the houses of the Prophet except when you are permitted for a meal, without awaiting its readiness. But when you are invited, then enter; and when you have eaten, disperse without seeking to remain for conversation. Indeed, that [behavior] was troubling the Prophet, and he is shy of [dismissing] you. But Allah is not shy of the truth.",
+      "ar": "يَٰٓأَيُّهَا ٱلَّذِينَ ءَامَنُوا۟ لَا تَدْخُلُوا۟ بُيُوتَ ٱلنَّبِىِّ إِلَّآ أَن يُؤْذَنَ لَكُمْ إِلَىٰ طَعَامٍ غَيْرَ نَٰظِرِينَ إِنَىٰهُ وَلَٰكِنْ إِذَا دُعِيتُمْ فَٱدْخُلُوا۟ فَإِذَا طَعِمْتُمْ فَٱنتَشِرُوا۟ وَلَا مُسْتَـْٔنِسِينَ لِحَدِيثٍ ۚ إِنَّ ذَٰلِكُمْ كَانَ يُؤْذِى ٱلنَّبِىَّ فَيَسْتَحْىِۦ مِنكُمْ ۖ وَٱللَّهُ لَا يَسْتَحْىِۦ مِنَ ٱلْحَقِّ",
+      "ur": "مومنو پیغمبر کے گھروں میں نہ جایا کرو مگر اس صورت میں کہ تم کو کھانے کے لئے اجازت دی جائے اور اس کے پکنے کا انتظار بھی نہ کرنا پڑے۔ لیکن جب تمہاری دعوت کی جائے تو جاؤ اور جب کھانا کھاچکو تو چل دو اور باتوں میں جی لگا کر نہ بیٹھ رہو۔ یہ بات پیغمبر کو ایذا دیتی ہے۔ اور وہ تم سے شرم کرتے ہیں (اور کہتے نہیں ہیں) لیکن خدا سچی بات کے کہنے سے شرم نہیں کرتا۔"
+     },
+     "why": "Manners of an invited guest: come when invited, leave after eating, do not linger and burden the host."
+    }
+   ],
+   "hadith": [
+    {
+     "id": "3042",
+     "why": "Honour the guest: his due is a day and a night, hospitality three days, and the guest must not overstay."
+    },
+    {
+     "id": "5911",
+     "why": "The Ansari couple who fed the Prophet's guest while their children slept hungry; Allah was pleased with them."
+    },
+    {
+     "id": "58114",
+     "why": "If invited, accept; if fasting, supplicate for the host."
+    },
+    {
+     "id": "6057",
+     "why": "Food for two suffices for three: share food and make room for more guests."
+    }
+   ],
+   "duas": [
+    {
+     "hisnId": 182,
+     "why": "The guest's supplication for his host."
+    },
+    {
+     "hisnId": 183,
+     "why": "Supplication for the one who gives you food or drink."
+    }
+   ]
+  },
+  {
+   "id": "friendship-brotherhood",
+   "title": "Friendship & Brotherhood",
+   "keywords": [
+    "friends",
+    "ukhuwwah",
+    "dosti",
+    "companionship",
+    "suhbah",
+    "bhai chara",
+    "love for Allah's sake"
+   ],
+   "quran": [
+    {
+     "ref": "49:10",
+     "cut": null,
+     "why": "The believers are but brothers, so make peace between them."
+    },
+    {
+     "ref": "3:103",
+     "cut": null,
+     "why": "Allah joined hearts that were enemies and made them brothers; hold together and do not divide."
+    },
+    {
+     "ref": "9:71",
+     "cut": null,
+     "why": "Believing men and women are allies of one another, enjoining good and forbidding evil."
+    },
+    {
+     "ref": "43:67",
+     "cut": null,
+     "why": "Close friends become enemies on the Day, except the God-fearing: choose friendship built on taqwa."
+    },
+    {
+     "ref": "25:27-29",
+     "cut": null,
+     "why": "The wrongdoer's regret: I wish I had not taken so-and-so as a friend; he led me away from the reminder."
+    },
+    {
+     "ref": "59:10",
+     "cut": null,
+     "why": "Dua for one's brothers in faith and against rancour toward believers."
+    }
+   ],
+   "hadith": [
+    {
+     "id": "4717",
+     "why": "None of you believes until he loves for his brother what he loves for himself."
+    },
+    {
+     "id": "4969",
+     "why": "The believers in their mutual love and mercy are like one body."
+    },
+    {
+     "id": "3122",
+     "why": "A man follows the way of his close friend, so look carefully whom you befriend."
+    },
+    {
+     "id": "3127",
+     "why": "The good companion is like the musk seller, the bad one like the blacksmith's bellows."
+    },
+    {
+     "id": "3369",
+     "why": "Allah will shade those who loved each other for His glory on the Day with no shade but His."
+    }
+   ],
+   "duas": []
+  },
+  {
+   "id": "the-poor",
+   "title": "The Poor",
+   "keywords": [
+    "miskeen",
+    "faqir",
+    "needy",
+    "gharib",
+    "feeding the hungry",
+    "masakeen"
+   ],
+   "quran": [
+    {
+     "ref": "76:8-9",
+     "cut": null,
+     "why": "The righteous feed the needy despite loving the food, seeking only Allah's face."
+    },
+    {
+     "ref": "107:1-3",
+     "cut": null,
+     "why": "Denying the Recompense shows in driving away the orphan and not urging the feeding of the poor."
+    },
+    {
+     "ref": "51:19",
+     "cut": null,
+     "why": "In the wealth of the righteous is a right for the one who asks and the one deprived."
+    },
+    {
+     "ref": "93:10",
+     "cut": null,
+     "why": "Do not repel the one who asks."
+    },
+    {
+     "ref": "2:273",
+     "cut": null,
+     "why": "The dignified poor who do not beg: recognise them and give to them."
+    },
+    {
+     "ref": "17:26",
+     "cut": null,
+     "why": "Give the relative, the poor and the traveller their right."
+    }
+   ],
+   "hadith": [
+    {
+     "id": "3135",
+     "why": "Looking after the widow and the needy is like jihad, or night prayer and daily fasting."
+    },
+    {
+     "id": "3141",
+     "why": "The truly needy is the one who refrains from begging, not the one turned away with a date or two."
+    },
+    {
+     "id": "6103",
+     "why": "Feed the hungry, visit the sick, free the captive."
+    },
+    {
+     "id": "3367",
+     "why": "You are given victory and provision only through your weak ones."
+    }
+   ],
+   "duas": []
+  },
+  {
+   "id": "the-elderly",
+   "title": "The Elderly",
+   "keywords": [
+    "old age",
+    "elders",
+    "budhapa",
+    "buzurg",
+    "grey hair",
+    "senior citizens"
+   ],
+   "quran": [
+    {
+     "ref": "17:23-24",
+     "cut": null,
+     "why": "When parents reach old age: not even 'uff', a noble word, the wing of humility and dua for them."
+    },
+    {
+     "ref": "30:54",
+     "cut": null,
+     "why": "Allah creates weakness, then strength, then weakness and grey hair: old age is part of His plan."
+    },
+    {
+     "ref": "16:70",
+     "cut": null,
+     "why": "Some are returned to the most feeble age, knowing nothing after knowledge: why the elderly need care."
+    },
+    {
+     "ref": "36:68",
+     "cut": null,
+     "why": "Whoever is granted long life is reversed in creation."
+    },
+    {
+     "ref": "19:4",
+     "cut": null,
+     "why": "Zakariya's dua in old age: bones weakened, head white, yet never disappointed in calling on his Lord."
+    }
+   ],
+   "hadith": [
+    {
+     "id": "3083",
+     "why": "He is not of us who does not show mercy to our young and honour our old."
+    },
+    {
+     "id": "3032",
+     "why": "Honouring the grey-haired Muslim is part of glorifying Allah."
+    },
+    {
+     "id": "5352",
+     "why": "The young should greet the old first."
+    },
+    {
+     "id": "3718",
+     "why": "Loss for the one whose parents reach old age with him and he does not earn Paradise."
+    }
+   ],
+   "duas": [
+    {
+     "hisnId": 60,
+     "why": "Seeking refuge from being returned to the worst (most decrepit) stage of life."
+    }
+   ]
+  },
+  {
+   "id": "animals",
+   "title": "Animals",
+   "keywords": [
+    "animal rights",
+    "janwar",
+    "haiwan",
+    "pets",
+    "cats",
+    "birds",
+    "mercy to animals"
+   ],
+   "quran": [
+    {
+     "ref": "6:38",
+     "cut": null,
+     "why": "Every creature and bird is a community like you, and all will be gathered to their Lord."
+    },
+    {
+     "ref": "11:6",
+     "cut": null,
+     "why": "Allah provides for every creature on earth and knows its dwelling."
+    },
+    {
+     "ref": "27:18-19",
+     "cut": null,
+     "why": "The ant fearing Sulayman's army would crush it unawares; Sulayman smiled and thanked Allah."
+    },
+    {
+     "ref": "11:64",
+     "cut": null,
+     "why": "The she-camel of Allah: let her graze and do not touch her with harm, or punishment follows."
+    },
+    {
+     "ref": "16:5-7",
+     "cut": null,
+     "why": "Livestock are Allah's gift: warmth, food, beauty, carrying loads; a reminder they are a trust."
+    }
+   ],
+   "hadith": [
+    {
+     "id": "58193",
+     "why": "A woman entered Hell for locking up a cat without food or water."
+    },
+    {
+     "id": "10100",
+     "why": "A man forgiven for giving water to a thirsty dog: there is reward in every living creature."
+    },
+    {
+     "id": "5935",
+     "why": "Fear Allah regarding these animals that cannot speak; ride them and eat them when they are fit."
+    },
+    {
+     "id": "66521",
+     "why": "Allah has prescribed ihsan in everything: sharpen the blade and spare the animal suffering."
+    }
+   ],
+   "duas": []
+  },
+  {
+   "id": "knowledge",
+   "title": "Knowledge",
+   "keywords": [
+    "ilm",
+    "learning",
+    "education",
+    "scholars",
+    "ulama",
+    "teaching",
+    "talib-e-ilm"
+   ],
+   "quran": [
+    {
+     "ref": "20:114",
+     "cut": {
+      "en": "and say, \"My Lord, increase me in knowledge.\"",
+      "ar": "وَقُل رَّبِّ زِدْنِى عِلْمًۭا",
+      "ur": "اور دعا کرو کہ میرے پروردگار مجھے اور زیادہ علم دے"
+     },
+     "why": "The Quran's dua for knowledge: My Lord, increase me in knowledge."
+    },
+    {
+     "ref": "39:9",
+     "cut": {
+      "en": "Say, \"Are those who know equal to those who do not know?\" Only they will remember [who are] people of understanding.",
+      "ar": "قُلْ هَلْ يَسْتَوِى ٱلَّذِينَ يَعْلَمُونَ وَٱلَّذِينَ لَا يَعْلَمُونَ ۗ إِنَّمَا يَتَذَكَّرُ أُو۟لُوا۟ ٱلْأَلْبَٰبِ",
+      "ur": "کہو بھلا جو لوگ علم رکھتے ہیں اور جو نہیں رکھتے دونوں برابر ہوسکتے ہیں؟ (اور) نصیحت تو وہی پکڑتے ہیں جو عقلمند ہیں"
+     },
+     "why": "Are those who know equal to those who do not know?"
+    },
+    {
+     "ref": "58:11",
+     "cut": {
+      "en": "Allah will raise those who have believed among you and those who were given knowledge, by degrees. And Allah is Acquainted with what you do.",
+      "ar": "يَرْفَعِ ٱللَّهُ ٱلَّذِينَ ءَامَنُوا۟ مِنكُمْ وَٱلَّذِينَ أُوتُوا۟ ٱلْعِلْمَ دَرَجَٰتٍۢ ۚ وَٱللَّهُ بِمَا تَعْمَلُونَ خَبِيرٌۭ",
+      "ur": "جو لوگ تم میں سے ایمان لائے ہیں اور جن کو علم عطا کیا گیا ہے خدا ان کے درجے بلند کرے گا۔ اور خدا تمہارے سب کاموں سے واقف ہے"
+     },
+     "why": "Allah raises the believers and those given knowledge by degrees."
+    },
+    {
+     "ref": "96:3-5",
+     "cut": null,
+     "why": "Allah taught by the pen and taught man what he knew not."
+    },
+    {
+     "ref": "35:28",
+     "cut": {
+      "en": "Only those fear Allah, from among His servants, who have knowledge.",
+      "ar": "إِنَّمَا يَخْشَى ٱللَّهَ مِنْ عِبَادِهِ ٱلْعُلَمَٰٓؤُا۟",
+      "ur": "خدا سے تو اس کے بندوں میں سے وہی ڈرتے ہیں جو صاحب علم ہیں۔"
+     },
+     "why": "Only those with knowledge truly fear Allah."
+    },
+    {
+     "ref": "9:122",
+     "cut": null,
+     "why": "A group should go to gain understanding of the religion and then teach their people: seeking and passing on knowledge."
+    }
+   ],
+   "hadith": [
+    {
+     "id": "6267",
+     "why": "Whoever follows a path seeking knowledge, Allah eases a path to Paradise; scholars are heirs of the prophets."
+    },
+    {
+     "id": "5518",
+     "why": "When Allah wants good for someone, He gives him understanding of the religion."
+    },
+    {
+     "id": "6106",
+     "why": "Allah, the angels and all creation invoke blessings on the one who teaches people good."
+    },
+    {
+     "id": "65566",
+     "why": "Beneficial knowledge is one of three deeds that continue after death."
+    }
+   ],
+   "duas": [
+    {
+     "hisnId": 95,
+     "why": "Asking Allah for beneficial knowledge."
+    }
+   ]
+  },
+  {
+   "id": "work-earning",
+   "title": "Work & Earning",
+   "keywords": [
+    "rizq",
+    "halal income",
+    "kasb",
+    "livelihood",
+    "rozi",
+    "job",
+    "mehnat",
+    "kamai"
+   ],
+   "quran": [
+    {
+     "ref": "62:10",
+     "cut": null,
+     "why": "After prayer, go out and seek Allah's bounty: work is encouraged."
+    },
+    {
+     "ref": "67:15",
+     "cut": null,
+     "why": "Allah made the earth manageable: walk its paths and eat of His provision."
+    },
+    {
+     "ref": "2:168",
+     "cut": null,
+     "why": "Eat what is lawful and good and do not follow Satan's footsteps."
+    },
+    {
+     "ref": "23:51",
+     "cut": null,
+     "why": "Messengers were told to eat of the good and do righteous work."
+    },
+    {
+     "ref": "28:26",
+     "cut": null,
+     "why": "The best one to hire is the strong and the trustworthy: qualities of a good worker."
+    },
+    {
+     "ref": "2:188",
+     "cut": null,
+     "why": "Do not consume each other's wealth unjustly or through bribery."
+    }
+   ],
+   "hadith": [
+    {
+     "id": "3752",
+     "why": "No food is better than what one earns with his own hands; Prophet Dawud ate from his handiwork."
+    },
+    {
+     "id": "3785",
+     "why": "Gathering firewood to sell is better than begging from people."
+    },
+    {
+     "id": "66518",
+     "why": "Allah is Good and accepts only good; the traveller whose food and clothing are unlawful is not answered."
+    },
+    {
+     "id": "66163",
+     "why": "Allah is the opponent of the one who hires a worker, takes full work and does not pay him."
+    }
+   ],
+   "duas": [
+    {
+     "hisnId": 136,
+     "why": "O Allah, suffice me with the lawful against the unlawful: the dua for halal provision."
+    }
+   ]
+  },
+  {
+   "id": "trade",
+   "title": "Trade",
+   "keywords": [
+    "business",
+    "tijarah",
+    "karobar",
+    "buying and selling",
+    "commerce",
+    "tajir",
+    "weights and measures"
+   ],
+   "quran": [
+    {
+     "ref": "4:29",
+     "cut": null,
+     "why": "Wealth may not be consumed unjustly, only through trade by mutual consent."
+    },
+    {
+     "ref": "83:1-3",
+     "cut": null,
+     "why": "Woe to those who give short measure and take in full."
+    },
+    {
+     "ref": "17:35",
+     "cut": null,
+     "why": "Give full measure and weigh with an even balance."
+    },
+    {
+     "ref": "2:275",
+     "cut": {
+      "en": "Allah has permitted trade and has forbidden interest.",
+      "ar": "وَأَحَلَّ ٱللَّهُ ٱلْبَيْعَ وَحَرَّمَ ٱلرِّبَوٰا۟",
+      "ur": "سودے کو خدا نے حلال کیا ہے اور سود کو حرام"
+     },
+     "why": "Allah has permitted trade and forbidden interest."
+    },
+    {
+     "ref": "24:37",
+     "cut": null,
+     "why": "Men whom neither trade nor sale distracts from remembering Allah, prayer and zakah."
+    }
+   ],
+   "hadith": [
+    {
+     "id": "3716",
+     "why": "May Allah have mercy on the one who is easygoing when he sells, buys and asks for repayment."
+    },
+    {
+     "id": "8958",
+     "why": "Beware of swearing much in trade: it sells the goods then wipes out the blessing."
+    },
+    {
+     "id": "3737",
+     "why": "The Prophet told the weigher: weigh, and give a little extra."
+    },
+    {
+     "id": "3119",
+     "why": "Buyer and seller each refused gold found in the land, each saying it belonged to the other: honesty in trade."
+    }
+   ],
+   "duas": [
+    {
+     "hisnId": 209,
+     "why": "The dua on entering the market."
+    }
+   ]
+  },
+  {
+   "id": "debt",
+   "title": "Debt",
+   "keywords": [
+    "qarz",
+    "karz",
+    "dayn",
+    "loan",
+    "borrowing",
+    "repayment",
+    "udhaar"
+   ],
+   "quran": [
+    {
+     "ref": "2:280",
+     "cut": null,
+     "why": "Give a debtor in hardship time until ease; writing it off as charity is better."
+    },
+    {
+     "ref": "2:282",
+     "cut": {
+      "en": "O you who have believed, when you contract a debt for a specified term, write it down. And let a scribe write [it] between you in justice. Let no scribe refuse to write as Allah has taught him. So let him write and let the one who has the obligation dictate. And let him fear Allah, his Lord, and not leave anything out of it.",
+      "ar": "يَٰٓأَيُّهَا ٱلَّذِينَ ءَامَنُوٓا۟ إِذَا تَدَايَنتُم بِدَيْنٍ إِلَىٰٓ أَجَلٍۢ مُّسَمًّۭى فَٱكْتُبُوهُ ۚ وَلْيَكْتُب بَّيْنَكُمْ كَاتِبٌۢ بِٱلْعَدْلِ ۚ وَلَا يَأْبَ كَاتِبٌ أَن يَكْتُبَ كَمَا عَلَّمَهُ ٱللَّهُ ۚ فَلْيَكْتُبْ وَلْيُمْلِلِ ٱلَّذِى عَلَيْهِ ٱلْحَقُّ وَلْيَتَّقِ ٱللَّهَ رَبَّهُۥ وَلَا يَبْخَسْ مِنْهُ شَيْـًۭٔا",
+      "ur": "مومنو! جب تم آپس میں کسی میعاد معین کے لئے قرض کا معاملہ کرنے لگو تو اس کو لکھ لیا کرو اور لکھنے والا تم میں (کسی کا نقصان نہ کرے بلکہ) انصاف سے لکھے نیز لکھنے والا جیسا اسے خدا نے سکھایا ہے لکھنے سے انکار بھی نہ کرے اور دستاویز لکھ دے۔ اور جو شخص قرض لے وہی (دستاویز کا) مضمون بول کر لکھوائے اور خدا سے کہ اس کا مالک ہے خوف کرے اور زر قرض میں سے کچھ کم نہ لکھوائے۔"
+     },
+     "why": "Write down a debt for a fixed term; the debtor dictates, fears Allah and leaves nothing out."
+    },
+    {
+     "ref": "2:283",
+     "cut": {
+      "en": "And if one of you entrusts another, then let him who is entrusted discharge his trust [faithfully] and let him fear Allah, his Lord.",
+      "ar": "فَإِنْ أَمِنَ بَعْضُكُم بَعْضًۭا فَلْيُؤَدِّ ٱلَّذِى ٱؤْتُمِنَ أَمَٰنَتَهُۥ وَلْيَتَّقِ ٱللَّهَ رَبَّهُۥ",
+      "ur": "اور اگر کوئی کسی کو امین سمجھے (یعنی رہن کے بغیر قرض دیدے) تو امانتدار کو چاہیئے کہ صاحب امانت کی امانت ادا کردے اور خدا سے جو اس کا پروردگار ہے ڈرے۔"
+     },
+     "why": "When trusted without security, the borrower must discharge his trust and fear Allah."
+    },
+    {
+     "ref": "5:1",
+     "cut": {
+      "en": "O you who have believed, fulfill [all] contracts.",
+      "ar": "يَٰٓأَيُّهَا ٱلَّذِينَ ءَامَنُوٓا۟ أَوْفُوا۟ بِٱلْعُقُودِ",
+      "ur": "اے ایمان والو! اپنے اقراروں کو پورا کرو۔"
+     },
+     "why": "Fulfil all contracts."
+    }
+   ],
+   "hadith": [
+    {
+     "id": "3589",
+     "why": "Allah forgives the martyr everything except debt."
+    },
+    {
+     "id": "3628",
+     "why": "The best of you are those who repay their debts in the best way."
+    },
+    {
+     "id": "4186",
+     "why": "Whoever gives respite to a struggling debtor or reduces his debt will be shaded by Allah."
+    },
+    {
+     "id": "3753",
+     "why": "A lender who told his servant to overlook debtors in hardship was himself overlooked by Allah."
+    }
+   ],
+   "duas": [
+    {
+     "hisnId": 137,
+     "why": "Refuge from the burden of debt."
+    },
+    {
+     "hisnId": 136,
+     "why": "The dua taught for settling debt: suffice me with the lawful."
+    }
+   ]
+  },
+  {
+   "id": "leadership",
+   "title": "Leadership",
+   "keywords": [
+    "authority",
+    "ruler",
+    "hakim",
+    "amanah",
+    "shura",
+    "governance",
+    "imam"
+   ],
+   "quran": [
+    {
+     "ref": "4:58",
+     "cut": null,
+     "why": "Render trusts to their owners and judge between people with justice."
+    },
+    {
+     "ref": "38:26",
+     "cut": null,
+     "why": "Dawud made a vicegerent: judge in truth and do not follow desire."
+    },
+    {
+     "ref": "3:159",
+     "cut": null,
+     "why": "Leniency, pardon and consultation: the Prophet's leadership."
+    },
+    {
+     "ref": "42:38",
+     "cut": null,
+     "why": "The believers' affairs are decided by consultation."
+    },
+    {
+     "ref": "22:41",
+     "cut": null,
+     "why": "Those given authority establish prayer, give zakah, enjoin good and forbid evil."
+    },
+    {
+     "ref": "26:215",
+     "cut": null,
+     "why": "Lower your wing to the believers who follow you: humility toward those one leads."
+    }
+   ],
+   "hadith": [
+    {
+     "id": "5819",
+     "why": "Each of you is a shepherd and responsible for his flock, from the ruler to the household."
+    },
+    {
+     "id": "5335",
+     "why": "A ruler who dies cheating his people is barred from Paradise."
+    },
+    {
+     "id": "3467",
+     "why": "Leadership is a trust and regret on the Day, except for one who fulfils it rightly."
+    },
+    {
+     "id": "4938",
+     "why": "The Prophet's dua: be harsh on rulers harsh to my Ummah and gentle to those who are gentle."
+    }
+   ],
+   "duas": []
+  },
+  {
+   "id": "oppression",
+   "title": "Oppression",
+   "keywords": [
+    "zulm",
+    "injustice",
+    "zalim",
+    "mazloom",
+    "tyranny",
+    "justice",
+    "adl"
+   ],
+   "quran": [
+    {
+     "ref": "14:42",
+     "cut": null,
+     "why": "Allah is not unaware of what the oppressors do; He only delays them."
+    },
+    {
+     "ref": "42:42",
+     "cut": null,
+     "why": "The blame is on those who wrong people and transgress on earth; for them a painful punishment."
+    },
+    {
+     "ref": "11:113",
+     "cut": null,
+     "why": "Do not lean toward the oppressors, lest the Fire touch you."
+    },
+    {
+     "ref": "4:135",
+     "cut": null,
+     "why": "Stand firm for justice even against yourselves, your parents and relatives."
+    },
+    {
+     "ref": "26:227",
+     "cut": {
+      "en": "And those who have wronged are going to know to what [kind of] return they will be returned.",
+      "ar": "وَسَيَعْلَمُ ٱلَّذِينَ ظَلَمُوٓا۟ أَىَّ مُنقَلَبٍۢ يَنقَلِبُونَ",
+      "ur": "اور ظالم عنقریب جان لیں گے کہ کون سی جگہ لوٹ کر جاتے ہیں"
+     },
+     "why": "The oppressors will come to know to what return they will be turned."
+    }
+   ],
+   "hadith": [
+    {
+     "id": "5787",
+     "why": "Beware of oppression: it will be layers of darkness on the Day of Judgment."
+    },
+    {
+     "id": "4236",
+     "why": "Help your brother, oppressor or oppressed: help the oppressor by stopping him."
+    },
+    {
+     "id": "5811",
+     "why": "Allah gives the oppressor respite, but when He seizes him He does not let go."
+    },
+    {
+     "id": "3045",
+     "why": "Among the best jihad is a word of justice before an oppressive ruler."
+    }
+   ],
+   "duas": [
+    {
+     "hisnId": 17,
+     "why": "Leaving-home dua: refuge from oppressing others or being oppressed."
+    },
+    {
+     "hisnId": 129,
+     "why": "Dua against the oppression of a ruler or powerful person."
+    }
+   ]
+  }
+ ]
+}

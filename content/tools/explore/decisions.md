@@ -1,0 +1,4 @@
+- family/children: dropped Hisn 145 (congratulating new parents): al-Nawawi's recommended wording, not a saying of the Prophet.
+- faith: al-Ikhlas (112:1-4) and al-Falaq (113:1-5) shown whole (verse runs up to 5 allowed).
+- faith/the-grave: 40:46 Urdu cut to start at "آتش (جہنم)"; the published Jalandhry text begins with a broken "یعنی)" (its opening bracket is missing).
+- worship/ramadan: Surat al-Qadr shown whole (97:1-5).

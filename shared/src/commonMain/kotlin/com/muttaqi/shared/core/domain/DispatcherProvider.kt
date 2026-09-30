@@ -1,0 +1,18 @@
+package com.muttaqi.shared.core.domain
+
+import kotlinx.coroutines.CoroutineDispatcher
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.IO
+
+/** Where work runs, passed in rather than hard-coded, so tests can run everything on one test dispatcher */
+interface DispatcherProvider {
+    val main: CoroutineDispatcher
+    val io: CoroutineDispatcher
+    val default: CoroutineDispatcher
+}
+
+object DefaultDispatcherProvider : DispatcherProvider {
+    override val main: CoroutineDispatcher get() = Dispatchers.Main
+    override val io: CoroutineDispatcher get() = Dispatchers.IO
+    override val default: CoroutineDispatcher get() = Dispatchers.Default
+}

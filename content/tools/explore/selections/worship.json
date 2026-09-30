@@ -1,0 +1,1004 @@
+{
+ "group": "worship",
+ "topics": [
+  {
+   "id": "purification",
+   "title": "Purification",
+   "keywords": [
+    "wudu",
+    "wuzu",
+    "ablution",
+    "ghusl",
+    "tahara",
+    "tayammum",
+    "cleanliness",
+    "paaki"
+   ],
+   "quran": [
+    {
+     "ref": "5:6",
+     "cut": null,
+     "why": "The ablution verse: washing for prayer, ghusl from janabah, and tayammum when there is no water."
+    },
+    {
+     "ref": "2:222",
+     "cut": {
+      "ar": "إِنَّ ٱللَّهَ يُحِبُّ ٱلتَّوَّٰبِينَ وَيُحِبُّ ٱلْمُتَطَهِّرِينَ",
+      "en": "Indeed, Allah loves those who are constantly repentant and loves those who purify themselves",
+      "ur": "کچھ شک نہیں کہ خدا توبہ کرنے والوں اور پاک صاف رہنے والوں کو دوست رکھتا ہے"
+     },
+     "why": "Allah loves those who purify themselves (cut to the closing line; the rest is about menstruation)."
+    },
+    {
+     "ref": "74:4",
+     "cut": null,
+     "why": "Command to keep one's clothing pure."
+    },
+    {
+     "ref": "25:48",
+     "cut": null,
+     "why": "Allah sends down pure (purifying) water from the sky."
+    }
+   ],
+   "hadith": [
+    {
+     "id": "66526",
+     "why": "Purity is half of faith (Muslim)."
+    },
+    {
+     "id": "6263",
+     "why": "Ablution done well makes sins leave the body, even from under the nails (Muslim)."
+    },
+    {
+     "id": "3534",
+     "why": "Allah does not accept the prayer of one in minor impurity until he makes wudu (agreed upon)."
+    },
+    {
+     "id": "10032",
+     "why": "How the Prophet performed ghusl from janabah (agreed upon)."
+    },
+    {
+     "id": "3588",
+     "why": "The tooth-stick purifies the mouth and pleases the Lord: everyday cleanliness."
+    }
+   ],
+   "duas": [
+    {
+     "hisnId": 12,
+     "why": "Bismillah before ablution."
+    },
+    {
+     "hisnId": 13,
+     "why": "Testimony upon completing ablution (Muslim)."
+    },
+    {
+     "hisnId": 14,
+     "why": "O Allah, make me of the repentant and of those who purify themselves, after ablution."
+    }
+   ]
+  },
+  {
+   "id": "prayer",
+   "title": "Prayer",
+   "keywords": [
+    "salah",
+    "salat",
+    "namaz",
+    "namaaz",
+    "sajdah",
+    "rakah",
+    "ruku"
+   ],
+   "quran": [
+    {
+     "ref": "2:238",
+     "cut": null,
+     "why": "Guard the prayers, especially the middle prayer."
+    },
+    {
+     "ref": "29:45",
+     "cut": {
+      "ar": "إِنَّ ٱلصَّلَوٰةَ تَنْهَىٰ عَنِ ٱلْفَحْشَآءِ وَٱلْمُنكَرِ",
+      "en": "Indeed, prayer prohibits immorality and wrongdoing",
+      "ur": "کچھ شک نہیں کہ نماز بےحیائی اور بری باتوں سے روکتی ہے"
+     },
+     "why": "Prayer restrains from immorality and wrongdoing (cut to that sentence)."
+    },
+    {
+     "ref": "20:14",
+     "cut": null,
+     "why": "Worship Me and establish prayer for My remembrance."
+    },
+    {
+     "ref": "4:103",
+     "cut": {
+      "ar": "إِنَّ ٱلصَّلَوٰةَ كَانَتْ عَلَى ٱلْمُؤْمِنِينَ كِتَٰبًۭا مَّوْقُوتًۭا",
+      "en": "Indeed, prayer has been decreed upon the believers a decree of specified times.",
+      "ur": "بےشک نماز کا مومنوں پر اوقات (مقررہ) میں ادا کرنا فرض ہے"
+     },
+     "why": "Prayer is prescribed at fixed times (cut; the verse's start is about the prayer of fear)."
+    },
+    {
+     "ref": "23:1-2",
+     "cut": null,
+     "why": "Successful are the believers who are humble in their prayer."
+    },
+    {
+     "ref": "2:45",
+     "cut": null,
+     "why": "Seek help through patience and prayer."
+    }
+   ],
+   "hadith": [
+    {
+     "id": "4968",
+     "why": "The five prayers are like a river at one's door washing away sins (agreed upon)."
+    },
+    {
+     "id": "3365",
+     "why": "The deed dearest to Allah is prayer at its time (agreed upon)."
+    },
+    {
+     "id": "65093",
+     "why": "Abandoning prayer is what stands between a man and shirk and kufr (Muslim)."
+    },
+    {
+     "id": "6254",
+     "why": "A well-performed obligatory prayer expiates the sins before it (Muslim)."
+    }
+   ],
+   "duas": [
+    {
+     "hisnId": 27,
+     "why": "Opening supplication of the prayer (agreed upon)."
+    },
+    {
+     "hisnId": 41,
+     "why": "Glorification in sujood."
+    },
+    {
+     "hisnId": 66,
+     "why": "What to say right after the salam (Muslim)."
+    }
+   ]
+  },
+  {
+   "id": "friday",
+   "title": "Friday",
+   "keywords": [
+    "jumuah",
+    "jumu'ah",
+    "jummah",
+    "juma",
+    "khutbah",
+    "sermon",
+    "jumma mubarak"
+   ],
+   "quran": [
+    {
+     "ref": "62:9",
+     "cut": null,
+     "why": "When the call for Friday prayer is made, hasten to the remembrance of Allah and leave trade."
+    },
+    {
+     "ref": "62:10",
+     "cut": null,
+     "why": "After the Friday prayer, disperse and seek Allah's bounty, remembering Him often."
+    },
+    {
+     "ref": "62:11",
+     "cut": null,
+     "why": "Rebuke for leaving the Friday sermon for trade or amusement; what is with Allah is better."
+    }
+   ],
+   "hadith": [
+    {
+     "id": "3711",
+     "why": "Friday is the best day the sun rises on (Muslim)."
+    },
+    {
+     "id": "5433",
+     "why": "Wudu, attending Jumu'ah and listening silently forgives the sins of ten days (Muslim)."
+    },
+    {
+     "id": "10551",
+     "why": "The angels record the early comers to Friday prayer (agreed upon)."
+    },
+    {
+     "id": "3107",
+     "why": "Even saying 'be quiet' during the khutbah is idle talk (agreed upon)."
+    }
+   ],
+   "duas": []
+  },
+  {
+   "id": "mosque",
+   "title": "Mosque",
+   "keywords": [
+    "masjid",
+    "masajid",
+    "congregation",
+    "jamaat",
+    "house of Allah",
+    "tahiyyat al-masjid"
+   ],
+   "quran": [
+    {
+     "ref": "9:18",
+     "cut": null,
+     "why": "The mosques of Allah are maintained by those who believe, pray and give zakah."
+    },
+    {
+     "ref": "72:18",
+     "cut": null,
+     "why": "The mosques are for Allah alone; invoke no one besides Him."
+    },
+    {
+     "ref": "24:36-38",
+     "cut": null,
+     "why": "Houses Allah ordered raised, where men whom trade does not distract glorify Him."
+    },
+    {
+     "ref": "7:31",
+     "cut": null,
+     "why": "Take your adornment at every masjid."
+    },
+    {
+     "ref": "2:114",
+     "cut": null,
+     "why": "None more unjust than those who prevent Allah's name being mentioned in His mosques."
+    }
+   ],
+   "hadith": [
+    {
+     "id": "4933",
+     "why": "The dearest places to Allah are the mosques (Muslim)."
+    },
+    {
+     "id": "65089",
+     "why": "Whoever builds a mosque for Allah, Allah builds for him the like in Paradise (agreed upon)."
+    },
+    {
+     "id": "5436",
+     "why": "Every trip to the mosque earns an abode prepared in Paradise (agreed upon)."
+    },
+    {
+     "id": "65091",
+     "why": "Pray two rak'ahs on entering the mosque before sitting (agreed upon)."
+    }
+   ],
+   "duas": [
+    {
+     "hisnId": 19,
+     "why": "Dua of light said while going to the mosque."
+    },
+    {
+     "hisnId": 20,
+     "why": "Dua for entering the mosque."
+    },
+    {
+     "hisnId": 21,
+     "why": "Dua for leaving the mosque."
+    }
+   ]
+  },
+  {
+   "id": "night-prayer",
+   "title": "Night Prayer",
+   "keywords": [
+    "tahajjud",
+    "qiyam",
+    "qiyam al-layl",
+    "witr",
+    "last third of the night",
+    "night vigil"
+   ],
+   "quran": [
+    {
+     "ref": "17:79",
+     "cut": null,
+     "why": "Tahajjud as an additional prayer, with the hope of the praised station."
+    },
+    {
+     "ref": "73:2-4",
+     "cut": null,
+     "why": "Stand the night in prayer, half of it or a little less or more, reciting with tartil."
+    },
+    {
+     "ref": "32:16",
+     "cut": null,
+     "why": "They forsake their beds to call on their Lord in fear and hope."
+    },
+    {
+     "ref": "51:17-18",
+     "cut": null,
+     "why": "They slept little of the night and sought forgiveness before dawn."
+    },
+    {
+     "ref": "25:64",
+     "cut": null,
+     "why": "The servants of the Most Merciful spend the night prostrating and standing."
+    },
+    {
+     "ref": "76:26",
+     "cut": null,
+     "why": "Prostrate to Him at night and glorify Him through the long night."
+    }
+   ],
+   "hadith": [
+    {
+     "id": "11261",
+     "why": "The best prayer after the obligatory ones is the night prayer (Muslim)."
+    },
+    {
+     "id": "10412",
+     "why": "Allah descends in the last third of the night: who will call on Me? (agreed upon)."
+    },
+    {
+     "id": "4830",
+     "why": "The Prophet prayed at night until his feet cracked: 'Should I not be a grateful slave?' (agreed upon)."
+    },
+    {
+     "id": "11259",
+     "why": "Night prayer is two by two, ending with witr (agreed upon)."
+    }
+   ],
+   "duas": [
+    {
+     "hisnId": 32,
+     "why": "The Prophet's opening dua when he rose for tahajjud (Bukhari)."
+    },
+    {
+     "hisnId": 117,
+     "why": "Qunut dua in witr."
+    },
+    {
+     "hisnId": 119,
+     "why": "What to say after the witr prayer."
+    }
+   ]
+  },
+  {
+   "id": "fasting",
+   "title": "Fasting",
+   "keywords": [
+    "sawm",
+    "siyam",
+    "roza",
+    "rozah",
+    "suhoor",
+    "sehri",
+    "iftar"
+   ],
+   "quran": [
+    {
+     "ref": "2:183",
+     "cut": null,
+     "why": "Fasting is prescribed for you as it was for those before you, that you may attain taqwa."
+    },
+    {
+     "ref": "2:184",
+     "cut": {
+      "ar": "أَيَّامًۭا مَّعْدُودَٰتٍۢ ۚ فَمَن كَانَ مِنكُم مَّرِيضًا أَوْ عَلَىٰ سَفَرٍۢ فَعِدَّةٌۭ مِّنْ أَيَّامٍ أُخَرَ",
+      "en": "[Fasting for] a limited number of days. So whoever among you is ill or on a journey [during them] - then an equal number of days [are to be made up].",
+      "ur": "(روزوں کے دن) گنتی کے چند روز ہیں تو جو شخص تم میں سے بیمار ہو یا سفر میں ہو تو دوسرے دنوں میں روزوں کا شمار پورا کرلے"
+     },
+     "why": "A set number of days, with the concession for the sick and the traveller (cut before the fidyah clause, which needs legal context)."
+    },
+    {
+     "ref": "2:187",
+     "cut": {
+      "ar": "وَكُلُوا۟ وَٱشْرَبُوا۟ حَتَّىٰ يَتَبَيَّنَ لَكُمُ ٱلْخَيْطُ ٱلْأَبْيَضُ مِنَ ٱلْخَيْطِ ٱلْأَسْوَدِ مِنَ ٱلْفَجْرِ ۖ ثُمَّ أَتِمُّوا۟ ٱلصِّيَامَ إِلَى ٱلَّيْلِ",
+      "en": "And eat and drink until the white thread of dawn becomes distinct to you from the black thread [of night]. Then complete the fast until the sunset.",
+      "ur": "اور کھاؤ پیو یہاں تک کہ صبح کی سفید دھاری (رات کی) سیاہ دھاری سے الگ نظر آنے لگے۔ پھر روزہ (رکھ کر) رات تک پورا کرو"
+     },
+     "why": "Eat and drink until dawn is distinct, then complete the fast until night (cut to that sentence)."
+    },
+    {
+     "ref": "33:35",
+     "cut": null,
+     "why": "The fasting men and women are among those promised forgiveness and a great reward."
+    }
+   ],
+   "hadith": [
+    {
+     "id": "3546",
+     "why": "Fasting is for Me and I reward it; fasting is a shield (hadith qudsi, agreed upon)."
+    },
+    {
+     "id": "3738",
+     "why": "The gate of ar-Rayyan in Paradise is for those who fast (agreed upon)."
+    },
+    {
+     "id": "4498",
+     "why": "Take suhur, for there is blessing in it (agreed upon)."
+    },
+    {
+     "id": "4438",
+     "why": "People remain upon good as long as they hasten to break the fast (agreed upon)."
+    }
+   ],
+   "duas": [
+    {
+     "hisnId": 176,
+     "why": "Dua on breaking the fast."
+    },
+    {
+     "hisnId": 186,
+     "why": "Saying 'I am fasting' when someone is rude (agreed upon)."
+    },
+    {
+     "hisnId": 184,
+     "why": "Dua for the family that hosts your iftar."
+    }
+   ]
+  },
+  {
+   "id": "ramadan",
+   "title": "Ramadan",
+   "keywords": [
+    "ramzan",
+    "ramadhan",
+    "laylat al-qadr",
+    "shab-e-qadr",
+    "night of decree",
+    "last ten nights"
+   ],
+   "quran": [
+    {
+     "ref": "2:185",
+     "cut": null,
+     "why": "Ramadan, the month the Quran was revealed; whoever witnesses it must fast."
+    },
+    {
+     "ref": "97:1-5",
+     "cut": null,
+     "why": "The Quran was sent down on the Night of Decree, better than a thousand months. / Angels and the Spirit descend on that night; it is peace until dawn."
+    },
+    {
+     "ref": "44:3",
+     "cut": null,
+     "why": "The Quran was sent down in a blessed night."
+    }
+   ],
+   "hadith": [
+    {
+     "id": "10107",
+     "why": "When Ramadan comes, Paradise opens, Hell closes, devils are chained (agreed upon)."
+    },
+    {
+     "id": "4196",
+     "why": "Fasting Ramadan with faith and hope of reward forgives past sins (agreed upon)."
+    },
+    {
+     "id": "4202",
+     "why": "Standing the Night of Decree with faith forgives past sins (agreed upon)."
+    },
+    {
+     "id": "4540",
+     "why": "Seek Laylat al-Qadr in the odd nights of the last ten (agreed upon)."
+    }
+   ],
+   "duas": []
+  },
+  {
+   "id": "charity-zakat",
+   "title": "Charity & Zakat",
+   "keywords": [
+    "zakah",
+    "zakaat",
+    "sadaqah",
+    "sadqa",
+    "khairat",
+    "alms",
+    "giving",
+    "infaq"
+   ],
+   "quran": [
+    {
+     "ref": "2:261",
+     "cut": null,
+     "why": "Spending in Allah's way is like a grain that grows seven hundredfold."
+    },
+    {
+     "ref": "2:274",
+     "cut": null,
+     "why": "Those who spend night and day, secretly and openly, have their reward with their Lord."
+    },
+    {
+     "ref": "3:92",
+     "cut": null,
+     "why": "You will not attain righteousness until you spend from what you love."
+    },
+    {
+     "ref": "2:271",
+     "cut": null,
+     "why": "Open charity is good; giving secretly to the poor is better and expiates sins."
+    },
+    {
+     "ref": "9:60",
+     "cut": null,
+     "why": "The eight categories entitled to zakah, an obligation from Allah."
+    },
+    {
+     "ref": "9:103",
+     "cut": null,
+     "why": "Take from their wealth a charity to purify them and make them grow."
+    }
+   ],
+   "hadith": [
+    {
+     "id": "5512",
+     "why": "Charity does not decrease wealth (Muslim)."
+    },
+    {
+     "id": "5862",
+     "why": "Allah accepts even a date's worth of lawful charity and grows it like a mountain (agreed upon)."
+    },
+    {
+     "id": "3379",
+     "why": "Two angels pray daily: O Allah, compensate the one who spends (agreed upon)."
+    },
+    {
+     "id": "66512",
+     "why": "Zakah is one of the five pillars of Islam (agreed upon)."
+    },
+    {
+     "id": "3390",
+     "why": "Zakah is taken from the rich and given to the poor: the Prophet's instruction to Mu'adh (agreed upon)."
+    }
+   ],
+   "duas": []
+  },
+  {
+   "id": "hajj-umrah",
+   "title": "Hajj & Umrah",
+   "keywords": [
+    "pilgrimage",
+    "haj",
+    "umra",
+    "kaaba",
+    "makkah",
+    "talbiyah",
+    "arafah",
+    "ihram"
+   ],
+   "quran": [
+    {
+     "ref": "3:96-97",
+     "cut": null,
+     "why": "The first House at Makkah; pilgrimage to it is due to Allah from whoever is able."
+    },
+    {
+     "ref": "22:27",
+     "cut": null,
+     "why": "Proclaim the Hajj to the people; they will come on foot and on every mount."
+    },
+    {
+     "ref": "2:196",
+     "cut": {
+      "ar": "وَأَتِمُّوا۟ ٱلْحَجَّ وَٱلْعُمْرَةَ لِلَّهِ",
+      "en": "And complete the Hajj and 'umrah for Allah.",
+      "ur": "اور خدا (کی خوشنودی) کے لئے حج اور عمرے کو پورا کرو"
+     },
+     "why": "Complete the Hajj and Umrah for Allah (cut to that sentence; the rest is detailed rulings)."
+    },
+    {
+     "ref": "2:197",
+     "cut": null,
+     "why": "Hajj months; no obscenity, sin or quarrelling; the best provision is taqwa."
+    },
+    {
+     "ref": "2:158",
+     "cut": {
+      "ar": "إِنَّ ٱلصَّفَا وَٱلْمَرْوَةَ مِن شَعَآئِرِ ٱللَّهِ",
+      "en": "Indeed, as-Safa and al-Marwah are among the symbols of Allah.",
+      "ur": "بےشک (کوہ) صفا اور مروہ خدا کی نشانیوں میں سے ہیں"
+     },
+     "why": "Safa and Marwah are among the symbols of Allah (cut; the verse's 'no blame' wording needs its occasion to be understood)."
+    }
+   ],
+   "hadith": [
+    {
+     "id": "2758",
+     "why": "Hajj without obscenity or sin returns one like the day he was born (agreed upon)."
+    },
+    {
+     "id": "2759",
+     "why": "The best jihad (for women) is an accepted Hajj (Bukhari)."
+    },
+    {
+     "id": "8288",
+     "why": "No day frees more people from the Fire than the Day of Arafah (Muslim)."
+    },
+    {
+     "id": "2753",
+     "why": "Umrah in Ramadan equals Hajj (agreed upon)."
+    }
+   ],
+   "duas": [
+    {
+     "hisnId": 233,
+     "why": "The talbiyah."
+    },
+    {
+     "hisnId": 235,
+     "why": "Between the Yemeni Corner and the Black Stone."
+    },
+    {
+     "hisnId": 237,
+     "why": "The best dua is on the Day of Arafah."
+    }
+   ]
+  },
+  {
+   "id": "dhikr",
+   "title": "Dhikr",
+   "keywords": [
+    "zikr",
+    "remembrance",
+    "tasbih",
+    "tasbeeh",
+    "adhkar",
+    "subhanallah",
+    "wazifa"
+   ],
+   "quran": [
+    {
+     "ref": "2:152",
+     "cut": null,
+     "why": "Remember Me; I will remember you."
+    },
+    {
+     "ref": "13:28",
+     "cut": null,
+     "why": "By the remembrance of Allah hearts find rest."
+    },
+    {
+     "ref": "33:41-42",
+     "cut": null,
+     "why": "Remember Allah abundantly and glorify Him morning and evening."
+    },
+    {
+     "ref": "7:205",
+     "cut": null,
+     "why": "Remember your Lord within yourself, humbly, morning and evening; do not be heedless."
+    },
+    {
+     "ref": "3:191",
+     "cut": null,
+     "why": "Those who remember Allah standing, sitting and lying down."
+    },
+    {
+     "ref": "63:9",
+     "cut": null,
+     "why": "Let not wealth and children divert you from the remembrance of Allah."
+    }
+   ],
+   "hadith": [
+    {
+     "id": "4177",
+     "why": "One who remembers his Lord and one who does not are like the living and the dead (agreed upon)."
+    },
+    {
+     "id": "4716",
+     "why": "Keep your tongue moist with the remembrance of Allah."
+    },
+    {
+     "id": "3575",
+     "why": "Dhikr is the best and purest of deeds."
+    },
+    {
+     "id": "5507",
+     "why": "Two phrases light on the tongue, heavy on the Scale (agreed upon)."
+    }
+   ],
+   "duas": [
+    {
+     "hisnId": 254,
+     "why": "SubhanAllahi wa bihamdihi a hundred times wipes away sins."
+    },
+    {
+     "hisnId": 257,
+     "why": "The four phrases are more beloved than all the sun rises over."
+    },
+    {
+     "hisnId": 260,
+     "why": "La hawla wa la quwwata illa billah, a treasure of Paradise."
+    }
+   ]
+  },
+  {
+   "id": "dua",
+   "title": "Dua",
+   "keywords": [
+    "supplication",
+    "duaa",
+    "du'a",
+    "invocation",
+    "munajat",
+    "asking Allah"
+   ],
+   "quran": [
+    {
+     "ref": "2:186",
+     "cut": null,
+     "why": "I am near; I answer the call of the caller when he calls on Me."
+    },
+    {
+     "ref": "40:60",
+     "cut": null,
+     "why": "Call upon Me; I will respond to you."
+    },
+    {
+     "ref": "7:55",
+     "cut": null,
+     "why": "Call on your Lord humbly and privately."
+    },
+    {
+     "ref": "7:56",
+     "cut": {
+      "ar": "وَٱدْعُوهُ خَوْفًۭا وَطَمَعًا ۚ إِنَّ رَحْمَتَ ٱللَّهِ قَرِيبٌۭ مِّنَ ٱلْمُحْسِنِينَ",
+      "en": "And invoke Him in fear and aspiration. Indeed, the mercy of Allah is near to the doers of good.",
+      "ur": "اور خدا سے خوف کرتے ہوئے اور امید رکھ کر دعائیں مانگتے رہنا۔ کچھ شک نہیں کہ خدا کی رحمت نیکی کرنے والوں سے قریب ہے"
+     },
+     "why": "Call on Him in fear and hope; His mercy is near the doers of good (cut to that part)."
+    },
+    {
+     "ref": "27:62",
+     "cut": null,
+     "why": "Who answers the distressed when he calls and removes the evil?"
+    }
+   ],
+   "hadith": [
+    {
+     "id": "5496",
+     "why": "Supplication is worship."
+    },
+    {
+     "id": "5100",
+     "why": "Every dua gets one of three: answered, stored, or evil averted."
+    },
+    {
+     "id": "3232",
+     "why": "Dua is answered as long as one is not impatient (agreed upon)."
+    },
+    {
+     "id": "5499",
+     "why": "Allah is too generous to return raised hands empty (hasan)."
+    }
+   ],
+   "duas": []
+  },
+  {
+   "id": "quran-recitation",
+   "title": "Quran Recitation",
+   "keywords": [
+    "tilawah",
+    "tilawat",
+    "tajweed",
+    "tartil",
+    "qirat",
+    "reciting",
+    "reading"
+   ],
+   "quran": [
+    {
+     "ref": "73:4",
+     "cut": {
+      "ar": "وَرَتِّلِ ٱلْقُرْءَانَ تَرْتِيلًا",
+      "en": "recite the Qur'an with measured recitation.",
+      "ur": "قرآن کو ٹھہر ٹھہر کر پڑھا کرو"
+     },
+     "why": "Recite the Quran with measured recitation (cut to the tartil command)."
+    },
+    {
+     "ref": "35:29-30",
+     "cut": null,
+     "why": "Those who recite Allah's Book expect a trade that never perishes."
+    },
+    {
+     "ref": "16:98",
+     "cut": null,
+     "why": "Seek refuge in Allah from Satan before reciting."
+    },
+    {
+     "ref": "7:204",
+     "cut": null,
+     "why": "When the Quran is recited, listen and be silent."
+    },
+    {
+     "ref": "38:29",
+     "cut": null,
+     "why": "A blessed Book revealed so people reflect on its verses."
+    },
+    {
+     "ref": "54:17",
+     "cut": null,
+     "why": "We have made the Quran easy to remember."
+    }
+   ],
+   "hadith": [
+    {
+     "id": "6275",
+     "why": "Each letter recited earns a good deed multiplied tenfold (hasan)."
+    },
+    {
+     "id": "10113",
+     "why": "The skilled reciter is with the noble angels; the one who struggles gets double reward (agreed upon)."
+    },
+    {
+     "id": "5383",
+     "why": "Recite the Quran; it will intercede for its companions (Muslim)."
+    },
+    {
+     "id": "65054",
+     "why": "Recite and rise: your rank is at the last verse you recite (hasan)."
+    }
+   ],
+   "duas": [
+    {
+     "hisnId": 50,
+     "why": "Dua in the prostration of recitation."
+    },
+    {
+     "hisnId": 51,
+     "why": "Dua in the prostration of recitation, asking it be accepted as from Dawud."
+    }
+   ]
+  },
+  {
+   "id": "eid-sacrifice",
+   "title": "Eid & Sacrifice",
+   "keywords": [
+    "eid al-fitr",
+    "eid al-adha",
+    "qurbani",
+    "udhiyah",
+    "bakra eid",
+    "zakat al-fitr",
+    "fitrana"
+   ],
+   "quran": [
+    {
+     "ref": "108:1-3",
+     "cut": null,
+     "why": "Pray to your Lord and sacrifice (Surat al-Kawthar)."
+    },
+    {
+     "ref": "22:28",
+     "cut": null,
+     "why": "Mention Allah's name over the sacrificial animals on the known days; eat and feed the poor."
+    },
+    {
+     "ref": "22:34",
+     "cut": null,
+     "why": "Every nation was given a rite of sacrifice to mention Allah's name over."
+    },
+    {
+     "ref": "22:36-37",
+     "cut": null,
+     "why": "Sacrificial camels are symbols of Allah; their meat and blood do not reach Him, only your piety."
+    },
+    {
+     "ref": "2:185",
+     "cut": {
+      "ar": "يُرِيدُ ٱللَّهُ بِكُمُ ٱلْيُسْرَ وَلَا يُرِيدُ بِكُمُ ٱلْعُسْرَ وَلِتُكْمِلُوا۟ ٱلْعِدَّةَ وَلِتُكَبِّرُوا۟ ٱللَّهَ عَلَىٰ مَا هَدَىٰكُمْ وَلَعَلَّكُمْ تَشْكُرُونَ",
+      "en": "Allah intends for you ease and does not intend for you hardship and [wants] for you to complete the period and to glorify Allah for that [to] which He has guided you; and perhaps you will be grateful.",
+      "ur": "خدا تمہارے حق میں آسانی چاہتا ہے اور سختی نہیں چاہتا اور (یہ آسانی کا حکم) اس لئے (دیا گیا ہے) کہ تم روزوں کا شمار پورا کرلو اور اس احسان کے بدلے کہ خدا نے تم کو ہدایت بخشی ہے تم اس کو بزرگی سے یاد کر واور اس کا شکر کرو"
+     },
+     "why": "Complete the count of fasting and glorify Allah for His guidance: the takbir that closes Ramadan (cut to the end of the verse)."
+    }
+   ],
+   "hadith": [
+    {
+     "id": "7200",
+     "why": "Everyone, even young girls, was told to come out on the two Eids for the takbir and blessing (agreed upon)."
+    },
+    {
+     "id": "4520",
+     "why": "Zakat al-Fitr, to be paid before the Eid prayer (agreed upon)."
+    },
+    {
+     "id": "2971",
+     "why": "The Prophet sacrificed two rams with his own hand, saying bismillah and takbir (agreed upon)."
+    },
+    {
+     "id": "5400",
+     "why": "The sacrifice comes after the Eid prayer (agreed upon)."
+    }
+   ],
+   "duas": [
+    {
+     "hisnId": 246,
+     "why": "What to say when slaughtering the sacrifice."
+    }
+   ]
+  },
+  {
+   "id": "repentance",
+   "title": "Repentance",
+   "keywords": [
+    "tawbah",
+    "tauba",
+    "istighfar",
+    "forgiveness",
+    "astaghfirullah",
+    "maafi",
+    "sins"
+   ],
+   "quran": [
+    {
+     "ref": "39:53",
+     "cut": null,
+     "why": "Do not despair of Allah's mercy; He forgives all sins."
+    },
+    {
+     "ref": "66:8",
+     "cut": {
+      "ar": "يَٰٓأَيُّهَا ٱلَّذِينَ ءَامَنُوا۟ تُوبُوٓا۟ إِلَى ٱللَّهِ تَوْبَةًۭ نَّصُوحًا عَسَىٰ رَبُّكُمْ أَن يُكَفِّرَ عَنكُمْ سَيِّـَٔاتِكُمْ وَيُدْخِلَكُمْ جَنَّٰتٍۢ تَجْرِى مِن تَحْتِهَا ٱلْأَنْهَٰرُ",
+      "en": "O you who have believed, repent to Allah with sincere repentance. Perhaps your Lord will remove from you your misdeeds and admit you into gardens beneath which rivers flow",
+      "ur": "مومنو! خدا کے آگے صاف دل سے توبہ کرو۔ امید ہے کہ وہ تمہارے گناہ تم سے دور کر دے گا اور تم کو باغہائے بہشت میں جن کے نیچے نہریں بہہ رہی ہیں داخل کرے گا"
+     },
+     "why": "Repent to Allah with sincere repentance (cut before the Day of Judgment scene)."
+    },
+    {
+     "ref": "24:31",
+     "cut": {
+      "ar": "وَتُوبُوٓا۟ إِلَى ٱللَّهِ جَمِيعًا أَيُّهَ ٱلْمُؤْمِنُونَ لَعَلَّكُمْ تُفْلِحُونَ",
+      "en": "And turn to Allah in repentance, all of you, O believers, that you might succeed.",
+      "ur": "اور مومنو! سب خدا کے آگے توبہ کرو تاکہ فلاح پاؤ"
+     },
+     "why": "Turn to Allah in repentance, all of you, O believers (cut to the closing line; the rest is about women's dress)."
+    },
+    {
+     "ref": "3:135-136",
+     "cut": null,
+     "why": "Those who remember Allah after a sin, seek forgiveness and do not persist; their reward is forgiveness and gardens."
+    },
+    {
+     "ref": "25:70",
+     "cut": null,
+     "why": "Allah replaces the evil deeds of those who repent with good."
+    },
+    {
+     "ref": "4:110",
+     "cut": null,
+     "why": "Whoever wrongs himself then seeks forgiveness will find Allah forgiving."
+    }
+   ],
+   "hadith": [
+    {
+     "id": "4318",
+     "why": "Allah extends His hand night and day to accept repentance until the sun rises from the west (Muslim)."
+    },
+    {
+     "id": "4313",
+     "why": "Allah is happier with His servant's repentance than a man who finds his lost camel (agreed upon)."
+    },
+    {
+     "id": "5344",
+     "why": "All humans sin, and the best of sinners are those who repent (hasan)."
+    },
+    {
+     "id": "4809",
+     "why": "Repent to Allah; I repent a hundred times a day (Muslim)."
+    }
+   ],
+   "duas": [
+    {
+     "hisnId": 79,
+     "why": "Sayyid al-istighfar, the master supplication for forgiveness (Bukhari)."
+    },
+    {
+     "hisnId": 250,
+     "why": "Astaghfirullah al-'azim ... wa atubu ilayh."
+    },
+    {
+     "hisnId": 140,
+     "why": "After a sin: wudu, two rak'ahs, and seeking forgiveness."
+    }
+   ]
+  }
+ ]
+}

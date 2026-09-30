@@ -1,0 +1,877 @@
+{
+ "group": "sins",
+ "topics": [
+  {
+   "id": "drugs-alcohol",
+   "title": "Drugs & Alcohol",
+   "keywords": [
+    "khamr",
+    "wine",
+    "sharab",
+    "nasha",
+    "intoxicants",
+    "addiction",
+    "narcotics"
+   ],
+   "quran": [
+    {
+     "ref": "5:90",
+     "cut": null,
+     "why": "The decisive prohibition: intoxicants are defilement from Satan's work, so avoid them."
+    },
+    {
+     "ref": "5:91",
+     "cut": null,
+     "why": "Why: Satan uses intoxicants to sow enmity and keep people from dhikr and prayer; 'will you not desist?'"
+    },
+    {
+     "ref": "2:219",
+     "cut": {
+      "ar": "يَسْـَٔلُونَكَ عَنِ ٱلْخَمْرِ وَٱلْمَيْسِرِ ۖ قُلْ فِيهِمَآ إِثْمٌۭ كَبِيرٌۭ وَمَنَٰفِعُ لِلنَّاسِ وَإِثْمُهُمَآ أَكْبَرُ مِن نَّفْعِهِمَا",
+      "en": "They ask you about wine and gambling. Say, \"In them is great sin and [yet, some] benefit for people. But their sin is greater than their benefit.\"",
+      "ur": "(اے پیغمبر) لوگ تم سے شراب اور جوئے کا حکم دریافت کرتے ہیں۔ کہہ دو کہ ان میں نقصان بڑے ہیں اور لوگوں کے لئے کچھ فائدے بھی ہیں مگر ان کے نقصان فائدوں سے کہیں زیادہ ہیں"
+     },
+     "why": "Their sin is greater than any benefit; cut to the wine/gambling half of the verse."
+    },
+    {
+     "ref": "3:135",
+     "cut": null,
+     "why": "For the one who slips: remember Allah, seek forgiveness and do not persist (speaks to addiction)."
+    },
+    {
+     "ref": "39:53",
+     "cut": null,
+     "why": "Hope for the repentant: do not despair of Allah's mercy, He forgives all sins."
+    }
+   ],
+   "hadith": [
+    {
+     "id": "58259",
+     "why": "Every intoxicant is khamr and haram (covers drugs); the warning is for one who dies addicted without repenting."
+    },
+    {
+     "id": "58263",
+     "why": "Alcohol is not a medicine but a disease: answers the 'medicinal use' excuse."
+    },
+    {
+     "id": "66214",
+     "why": "Mercy toward the drinker: the Prophet forbade cursing a man flogged for drinking, as he loved Allah and His Messenger."
+    }
+   ],
+   "duas": []
+  },
+  {
+   "id": "gambling",
+   "title": "Gambling",
+   "keywords": [
+    "maysir",
+    "qimar",
+    "jua",
+    "betting",
+    "lottery",
+    "casino",
+    "wager"
+   ],
+   "quran": [
+    {
+     "ref": "5:90",
+     "cut": null,
+     "why": "Gambling (maysir) named with intoxicants as defilement from Satan; avoid it."
+    },
+    {
+     "ref": "5:91",
+     "cut": null,
+     "why": "Satan uses gambling to cause enmity and hatred and to turn people from prayer."
+    },
+    {
+     "ref": "2:219",
+     "cut": {
+      "ar": "يَسْـَٔلُونَكَ عَنِ ٱلْخَمْرِ وَٱلْمَيْسِرِ ۖ قُلْ فِيهِمَآ إِثْمٌۭ كَبِيرٌۭ وَمَنَٰفِعُ لِلنَّاسِ وَإِثْمُهُمَآ أَكْبَرُ مِن نَّفْعِهِمَا",
+      "en": "They ask you about wine and gambling. Say, \"In them is great sin and [yet, some] benefit for people. But their sin is greater than their benefit.\"",
+      "ur": "(اے پیغمبر) لوگ تم سے شراب اور جوئے کا حکم دریافت کرتے ہیں۔ کہہ دو کہ ان میں نقصان بڑے ہیں اور لوگوں کے لئے کچھ فائدے بھی ہیں مگر ان کے نقصان فائدوں سے کہیں زیادہ ہیں"
+     },
+     "why": "Its sin is greater than its benefit; cut to the wine/gambling half."
+    },
+    {
+     "ref": "20:82",
+     "cut": null,
+     "why": "Allah is the Perpetual Forgiver of whoever repents, believes and does good."
+    }
+   ],
+   "hadith": [
+    {
+     "id": "6379",
+     "why": "Even inviting someone to gamble calls for charity as expiation: shows how seriously it is taken."
+    }
+   ],
+   "duas": []
+  },
+  {
+   "id": "interest-riba",
+   "title": "Interest (Riba)",
+   "keywords": [
+    "usury",
+    "sood",
+    "sud",
+    "loan",
+    "debt",
+    "bank"
+   ],
+   "quran": [
+    {
+     "ref": "2:275",
+     "cut": null,
+     "why": "Allah permitted trade and forbade riba; whoever desists after the admonition may keep what is past."
+    },
+    {
+     "ref": "2:276",
+     "cut": null,
+     "why": "Allah destroys riba and grows charity."
+    },
+    {
+     "ref": "2:278-279",
+     "cut": null,
+     "why": "Give up remaining riba or face war from Allah and His Messenger; if you repent you keep your principal."
+    },
+    {
+     "ref": "2:280",
+     "cut": null,
+     "why": "The alternative to riba: give the debtor time, or forgive the debt as charity."
+    },
+    {
+     "ref": "30:39",
+     "cut": null,
+     "why": "Riba does not increase with Allah; zakah given for His sake is what multiplies."
+    }
+   ],
+   "hadith": [
+    {
+     "id": "3331",
+     "why": "Consuming riba is one of the seven destructive sins."
+    },
+    {
+     "id": "6033",
+     "why": "'This is riba itself!': the Prophet stops an unequal exchange and shows the lawful way instead."
+    },
+    {
+     "id": "4186",
+     "why": "Reward for giving respite to, or remitting the debt of, someone in hardship (the Sunnah alternative to profiting from debt)."
+    }
+   ],
+   "duas": []
+  },
+  {
+   "id": "adultery",
+   "title": "Adultery",
+   "keywords": [
+    "zina",
+    "fornication",
+    "chastity",
+    "modesty",
+    "haya",
+    "lowering the gaze",
+    "purity"
+   ],
+   "quran": [
+    {
+     "ref": "17:32",
+     "cut": null,
+     "why": "Do not even approach zina: it is an immorality and an evil way."
+    },
+    {
+     "ref": "24:30",
+     "cut": null,
+     "why": "Believing men: lower the gaze and guard the private parts; that is purer."
+    },
+    {
+     "ref": "24:31",
+     "cut": {
+      "ar": "وَقُل لِّلْمُؤْمِنَٰتِ يَغْضُضْنَ مِنْ أَبْصَٰرِهِنَّ وَيَحْفَظْنَ فُرُوجَهُنَّ",
+      "en": "And tell the believing women to reduce [some] of their vision and guard their private parts",
+      "ur": "اور مومن عورتوں سے بھی کہہ دو کہ وہ بھی اپنی نگاہیں نیچی رکھا کریں اور اپنی شرم گاہوں کی حفاظت کیا کریں"
+     },
+     "why": "The same command for believing women; cut to the gaze/chastity clause."
+    },
+    {
+     "ref": "33:35",
+     "cut": {
+      "ar": "وَٱلْحَٰفِظِينَ فُرُوجَهُمْ وَٱلْحَٰفِظَٰتِ وَٱلذَّٰكِرِينَ ٱللَّهَ كَثِيرًۭا وَٱلذَّٰكِرَٰتِ أَعَدَّ ٱللَّهُ لَهُم مَّغْفِرَةًۭ وَأَجْرًا عَظِيمًۭا",
+      "en": "the men who guard their private parts and the women who do so, and the men who remember Allah often and the women who do so - for them Allah has prepared forgiveness and a great reward.",
+      "ur": "اور اپنی شرمگاہوں کی حفاظت کرنے والے مرد اور حفاظت کرنے والی عورتیں اور خدا کو کثرت سے یاد کرنے والے مرد اور کثرت سے یاد کرنے والی عورتیں۔ کچھ شک نہیں کہ ان کے لئے خدا نے بخشش اور اجر عظیم تیار کر رکھا ہے"
+     },
+     "why": "Men and women who guard their chastity are promised forgiveness and a great reward."
+    },
+    {
+     "ref": "25:68-70",
+     "cut": null,
+     "why": "Zina is among the gravest sins, yet whoever repents, believes and does good has his evil deeds replaced with good."
+    }
+   ],
+   "hadith": [
+    {
+     "id": "3475",
+     "why": "Guarding what is between the jaws and the legs is guaranteed Paradise."
+    },
+    {
+     "id": "5863",
+     "why": "Practical guidance: marry if able, otherwise fast; it lowers the gaze and guards chastity."
+    },
+    {
+     "id": "5359",
+     "why": "Zina with a neighbour's wife is listed among the gravest sins."
+    },
+    {
+     "id": "65071",
+     "why": "People guilty of zina and killing asked about expiation; 25:68 and 39:53 were revealed (hope through repentance)."
+    }
+   ],
+   "duas": []
+  },
+  {
+   "id": "theft",
+   "title": "Theft",
+   "keywords": [
+    "stealing",
+    "chori",
+    "sariqah",
+    "robbery",
+    "embezzlement",
+    "usurping"
+   ],
+   "quran": [
+    {
+     "ref": "4:29",
+     "cut": {
+      "ar": "يَٰٓأَيُّهَا ٱلَّذِينَ ءَامَنُوا۟ لَا تَأْكُلُوٓا۟ أَمْوَٰلَكُم بَيْنَكُم بِٱلْبَٰطِلِ إِلَّآ أَن تَكُونَ تِجَٰرَةً عَن تَرَاضٍۢ مِّنكُمْ",
+      "en": "O you who have believed, do not consume one another's wealth unjustly but only [in lawful] business by mutual consent.",
+      "ur": "مومنو! ایک دوسرے کا مال ناحق نہ کھاؤ ہاں اگر آپس کی رضامندی سے تجارت کا لین دین ہو (اور اس سے مالی فائدہ حاصل ہو جائے تو وہ جائز ہے)"
+     },
+     "why": "Do not consume one another's wealth unjustly; cut to the wealth clause."
+    },
+    {
+     "ref": "3:161",
+     "cut": {
+      "ar": "وَمَن يَغْلُلْ يَأْتِ بِمَا غَلَّ يَوْمَ ٱلْقِيَٰمَةِ ۚ ثُمَّ تُوَفَّىٰ كُلُّ نَفْسٍۢ مَّا كَسَبَتْ وَهُمْ لَا يُظْلَمُونَ",
+      "en": "And whoever betrays, [taking unlawfully], will come with what he took on the Day of Resurrection. Then will every soul be [fully] compensated for what it earned, and they will not be wronged.",
+      "ur": "اور خیانت کرنے والوں کو قیامت کے دن خیانت کی ہوئی چیز (خدا کے روبرو) لاحاضر کرنی ہوگی۔ پھر ہر شخص کو اس کے اعمال کا پورا پورا بدلا دیا جائے گا اور بےانصافی نہیں کی جائے گی"
+     },
+     "why": "Whoever takes unlawfully will bring it with him on the Day of Resurrection."
+    },
+    {
+     "ref": "4:10",
+     "cut": null,
+     "why": "Devouring orphans' property unjustly is eating fire."
+    },
+    {
+     "ref": "5:39",
+     "cut": null,
+     "why": "Whoever repents after wrongdoing and reforms, Allah turns to him in forgiveness."
+    }
+   ],
+   "hadith": [
+    {
+     "id": "5843",
+     "why": "Seizing even a handspan of land unjustly: encircled with it down the seven earths."
+    },
+    {
+     "id": "4945",
+     "why": "The Prophet's own servant died in Hellfire over a cloak he stole from the booty."
+    },
+    {
+     "id": "5438",
+     "why": "The way back: return the right or seek pardon today, before deeds are used to settle it."
+    }
+   ],
+   "duas": []
+  },
+  {
+   "id": "murder",
+   "title": "Murder",
+   "keywords": [
+    "killing",
+    "qatl",
+    "homicide",
+    "bloodshed",
+    "sanctity of life",
+    "qisas"
+   ],
+   "quran": [
+    {
+     "ref": "5:32",
+     "cut": {
+      "ar": "كَتَبْنَا عَلَىٰ بَنِىٓ إِسْرَٰٓءِيلَ أَنَّهُۥ مَن قَتَلَ نَفْسًۢا بِغَيْرِ نَفْسٍ أَوْ فَسَادٍۢ فِى ٱلْأَرْضِ فَكَأَنَّمَا قَتَلَ ٱلنَّاسَ جَمِيعًۭا وَمَنْ أَحْيَاهَا فَكَأَنَّمَآ أَحْيَا ٱلنَّاسَ جَمِيعًۭا",
+      "en": "We decreed upon the Children of Israel that whoever kills a soul unless for a soul or for corruption [done] in the land - it is as if he had slain mankind entirely. And whoever saves one - it is as if he had saved mankind entirely.",
+      "ur": "ہم نے بنی اسرائیل پر یہ حکم نازل کیا کہ جو شخص کسی کو (ناحق) قتل کرے گا (یعنی) بغیر اس کے کہ جان کا بدلہ لیا جائے یا ملک میں خرابی کرنے کی سزا دی جائے اُس نے گویا تمام لوگوں کو قتل کیا اور جو اس کی زندگانی کا موجب ہوا تو گویا تمام لوگوں کی زندگانی کا موجب ہوا"
+     },
+     "why": "Killing one soul unjustly is like killing all mankind; saving one is like saving all."
+    },
+    {
+     "ref": "4:93",
+     "cut": null,
+     "why": "The severity of intentionally killing a believer."
+    },
+    {
+     "ref": "17:33",
+     "cut": {
+      "ar": "وَلَا تَقْتُلُوا۟ ٱلنَّفْسَ ٱلَّتِى حَرَّمَ ٱللَّهُ إِلَّا بِٱلْحَقِّ",
+      "en": "And do not kill the soul which Allah has forbidden, except by right.",
+      "ur": "اور جس کا جاندار کا مارنا خدا نے حرام کیا ہے اسے قتل نہ کرنا مگر جائز طور پر (یعنی بفتویٰ شریعت)"
+     },
+     "why": "Do not kill the soul Allah has made sacred except by right; cut to the command."
+    },
+    {
+     "ref": "17:31",
+     "cut": null,
+     "why": "Do not kill your children for fear of poverty; Allah provides."
+    },
+    {
+     "ref": "25:68-70",
+     "cut": null,
+     "why": "Murder is among the gravest sins, yet repentance with faith and good deeds is accepted."
+    }
+   ],
+   "hadith": [
+    {
+     "id": "2962",
+     "why": "Bloodshed is the first matter judged between people on the Day of Judgment."
+    },
+    {
+     "id": "64637",
+     "why": "Killing a non-Muslim under covenant bars one from even the fragrance of Paradise: all innocent life is sacred."
+    },
+    {
+     "id": "4310",
+     "why": "The man who killed a hundred people and was forgiven when he set out in sincere repentance (long, but the key hope text)."
+    }
+   ],
+   "duas": []
+  },
+  {
+   "id": "suicide",
+   "title": "Suicide",
+   "keywords": [
+    "khudkushi",
+    "self-harm",
+    "despair",
+    "hopelessness",
+    "depression",
+    "hope",
+    "mercy"
+   ],
+   "quran": [
+    {
+     "ref": "4:29",
+     "cut": {
+      "ar": "وَلَا تَقْتُلُوٓا۟ أَنفُسَكُمْ ۚ إِنَّ ٱللَّهَ كَانَ بِكُمْ رَحِيمًۭا",
+      "en": "And do not kill yourselves [or one another]. Indeed, Allah is to you ever Merciful.",
+      "ur": "اور اپنے آپ کو ہلاک نہ کرو کچھ شک نہیں کہ خدا تم پر مہربان ہے"
+     },
+     "why": "The clear prohibition, joined to 'Allah is to you ever Merciful'; cut to that clause."
+    },
+    {
+     "ref": "39:53",
+     "cut": null,
+     "why": "Do not despair of the mercy of Allah; He forgives all sins."
+    },
+    {
+     "ref": "12:87",
+     "cut": {
+      "ar": "وَلَا تَا۟يْـَٔسُوا۟ مِن رَّوْحِ ٱللَّهِ",
+      "en": "despair not of relief from Allah",
+      "ur": "اور خدا کی رحمت سے ناامید نہ ہو۔"
+     },
+     "why": "Do not despair of relief from Allah; cut to the command only."
+    },
+    {
+     "ref": "2:286",
+     "cut": {
+      "ar": "لَا يُكَلِّفُ ٱللَّهُ نَفْسًا إِلَّا وُسْعَهَا",
+      "en": "Allah does not charge a soul except [with that within] its capacity.",
+      "ur": "خدا کسی شخص کو اس کی طاقت سے زیادہ تکلیف نہیں دیتا۔"
+     },
+     "why": "Allah never burdens a soul beyond what it can bear; cut to the opening sentence."
+    },
+    {
+     "ref": "94:5-6",
+     "cut": null,
+     "why": "With hardship comes ease (said twice)."
+    },
+    {
+     "ref": "2:153",
+     "cut": null,
+     "why": "Seek help through patience and prayer; Allah is with the patient."
+    }
+   ],
+   "hadith": [
+    {
+     "id": "5652",
+     "why": "Do not wish for death: a longer life only adds good for the believer, or time to repent."
+    },
+    {
+     "id": "3298",
+     "why": "Everything in the believer's life is good for him: gratitude in ease, patience in hardship."
+    },
+    {
+     "id": "3701",
+     "why": "No pain, sorrow or distress is wasted; Allah expiates sins by it."
+    },
+    {
+     "id": "3636",
+     "why": "'I am as My servant thinks of Me': Allah comes running to the one who turns to Him."
+    }
+   ],
+   "duas": [
+    {
+     "hisnId": 120,
+     "why": "The dua for worry and grief, asking that the Quran be a release for sorrow and anxiety."
+    },
+    {
+     "hisnId": 123,
+     "why": "Dua for anguish: 'It is Your mercy I hope for, do not leave me to myself even for a blink of an eye.'"
+    }
+   ]
+  },
+  {
+   "id": "bribery",
+   "title": "Bribery",
+   "keywords": [
+    "rishwat",
+    "rishwah",
+    "corruption",
+    "kickback",
+    "gifts to officials",
+    "justice"
+   ],
+   "quran": [
+    {
+     "ref": "2:188",
+     "cut": null,
+     "why": "The direct text: do not send wealth to rulers to consume others' wealth in sin."
+    },
+    {
+     "ref": "4:58",
+     "cut": null,
+     "why": "Render trusts to their owners and judge with justice: what bribery corrupts."
+    },
+    {
+     "ref": "4:135",
+     "cut": null,
+     "why": "Stand firm for justice even against yourselves; do not follow inclination or distort testimony."
+    },
+    {
+     "ref": "3:161",
+     "cut": {
+      "ar": "وَمَن يَغْلُلْ يَأْتِ بِمَا غَلَّ يَوْمَ ٱلْقِيَٰمَةِ ۚ ثُمَّ تُوَفَّىٰ كُلُّ نَفْسٍۢ مَّا كَسَبَتْ وَهُمْ لَا يُظْلَمُونَ",
+      "en": "And whoever betrays, [taking unlawfully], will come with what he took on the Day of Resurrection. Then will every soul be [fully] compensated for what it earned, and they will not be wronged.",
+      "ur": "اور خیانت کرنے والوں کو قیامت کے دن خیانت کی ہوئی چیز (خدا کے روبرو) لاحاضر کرنی ہوگی۔ پھر ہر شخص کو اس کے اعمال کا پورا پورا بدلا دیا جائے گا اور بےانصافی نہیں کی جائے گی"
+     },
+     "why": "Whoever takes unlawfully will bring it on the Day of Resurrection (echoed in the hadith of gifts to officials)."
+    },
+    {
+     "ref": "4:110",
+     "cut": null,
+     "why": "Whoever does wrong then seeks Allah's forgiveness will find Him Forgiving and Merciful."
+    }
+   ],
+   "hadith": [
+    {
+     "id": "64689",
+     "why": "The Prophet cursed both the giver and the taker of a bribe to influence a judgment."
+    },
+    {
+     "id": "5791",
+     "why": "Ibn al-Lutbiyyah: 'gifts' to an official are not his; he will carry them on the Day of Judgment."
+    }
+   ],
+   "duas": []
+  },
+  {
+   "id": "lying",
+   "title": "Lying",
+   "keywords": [
+    "lies",
+    "jhoot",
+    "kidhb",
+    "honesty",
+    "truthfulness",
+    "sidq",
+    "false testimony"
+   ],
+   "quran": [
+    {
+     "ref": "9:119",
+     "cut": null,
+     "why": "Fear Allah and be with the truthful."
+    },
+    {
+     "ref": "33:70-71",
+     "cut": null,
+     "why": "Speak upright words and Allah will set right your deeds and forgive your sins."
+    },
+    {
+     "ref": "22:30",
+     "cut": {
+      "ar": "فَٱجْتَنِبُوا۟ ٱلرِّجْسَ مِنَ ٱلْأَوْثَٰنِ وَٱجْتَنِبُوا۟ قَوْلَ ٱلزُّورِ",
+      "en": "So avoid the uncleanliness of idols and avoid false statement",
+      "ur": "تو بتوں کی پلیدی سے بچو اور جھوٹی بات سے اجتناب کرو"
+     },
+     "why": "Avoid false statement, joined with avoiding idols; cut to that sentence."
+    },
+    {
+     "ref": "25:72",
+     "cut": null,
+     "why": "The servants of the Most Merciful do not testify to falsehood."
+    },
+    {
+     "ref": "50:18",
+     "cut": null,
+     "why": "Every word is recorded by a watcher."
+    }
+   ],
+   "hadith": [
+    {
+     "id": "5504",
+     "why": "Truthfulness leads to righteousness and Paradise; lying leads to wickedness and the Fire."
+    },
+    {
+     "id": "66537",
+     "why": "Lying is a trait of hypocrisy, held 'until he gives it up'."
+    },
+    {
+     "id": "5804",
+     "why": "A house in the middle of Paradise for one who leaves lying even in jest."
+    },
+    {
+     "id": "2941",
+     "why": "The Prophet sat up and kept repeating 'the false statement' among the gravest sins."
+    }
+   ],
+   "duas": []
+  },
+  {
+   "id": "backbiting-slander",
+   "title": "Backbiting & Slander",
+   "keywords": [
+    "gheebat",
+    "ghibah",
+    "buhtan",
+    "gossip",
+    "chugli",
+    "namimah",
+    "tale-bearing"
+   ],
+   "quran": [
+    {
+     "ref": "49:12",
+     "cut": null,
+     "why": "Do not backbite: like eating a dead brother's flesh; ends with Allah accepting repentance."
+    },
+    {
+     "ref": "24:15-16",
+     "cut": null,
+     "why": "Speaking without knowledge and taking it lightly; say instead 'this is a great slander'."
+    },
+    {
+     "ref": "33:58",
+     "cut": null,
+     "why": "Harming believers with what they did not do is bearing slander and manifest sin."
+    },
+    {
+     "ref": "4:112",
+     "cut": null,
+     "why": "Blaming one's own sin on an innocent person is slander."
+    },
+    {
+     "ref": "49:6",
+     "cut": null,
+     "why": "Verify news before acting on it, lest you harm people out of ignorance."
+    },
+    {
+     "ref": "104:1",
+     "cut": null,
+     "why": "Woe to every scorner and mocker (Urdu: taunting tale-bearer)."
+    }
+   ],
+   "hadith": [
+    {
+     "id": "5326",
+     "why": "Definition: backbiting is saying what he dislikes, even if true; if false it is slander."
+    },
+    {
+     "id": "4229",
+     "why": "Those who ate people's flesh scratching their faces with copper nails."
+    },
+    {
+     "id": "5514",
+     "why": "Whoever defends his brother's honor in his absence, Allah shields his face from the Fire."
+    },
+    {
+     "id": "5438",
+     "why": "Repair: seek pardon today from the one whose honor you wronged."
+    }
+   ],
+   "duas": [
+    {
+     "hisnId": 196,
+     "why": "Kaffarat al-majlis: said at the end of a gathering to expiate slips of the tongue in it."
+    }
+   ]
+  },
+  {
+   "id": "arrogance",
+   "title": "Arrogance",
+   "keywords": [
+    "pride",
+    "kibr",
+    "takabbur",
+    "ghuroor",
+    "humility",
+    "tawadu"
+   ],
+   "quran": [
+    {
+     "ref": "31:18-19",
+     "cut": null,
+     "why": "Luqman's advice: do not turn your cheek in contempt or walk exultantly; be moderate."
+    },
+    {
+     "ref": "17:37",
+     "cut": null,
+     "why": "Do not walk exultantly: you will never tear the earth or reach the mountains."
+    },
+    {
+     "ref": "16:23",
+     "cut": null,
+     "why": "Allah does not like the arrogant."
+    },
+    {
+     "ref": "28:83",
+     "cut": null,
+     "why": "The Hereafter is for those who do not seek exaltedness on earth."
+    },
+    {
+     "ref": "25:63",
+     "cut": null,
+     "why": "The servants of the Most Merciful walk humbly and answer the ignorant with peace."
+    },
+    {
+     "ref": "49:13",
+     "cut": null,
+     "why": "The noblest before Allah is the most righteous, not by lineage."
+    }
+   ],
+   "hadith": [
+    {
+     "id": "6209",
+     "why": "An atom of arrogance bars Paradise; arrogance is rejecting truth and looking down on people (not liking nice clothes)."
+    },
+    {
+     "id": "6107",
+     "why": "Pride is Allah's cloak; whoever contends with Him over it is punished."
+    },
+    {
+     "id": "5512",
+     "why": "No one humbles himself for Allah except that Allah raises him."
+    },
+    {
+     "id": "5497",
+     "why": "Allah revealed: be humble, so no one boasts over or oppresses another."
+    }
+   ],
+   "duas": []
+  },
+  {
+   "id": "envy",
+   "title": "Envy",
+   "keywords": [
+    "hasad",
+    "jealousy",
+    "evil eye",
+    "nazar",
+    "resentment",
+    "hasid"
+   ],
+   "quran": [
+    {
+     "ref": "4:32",
+     "cut": null,
+     "why": "Do not covet what Allah gave others; ask Allah of His bounty instead."
+    },
+    {
+     "ref": "4:54",
+     "cut": {
+      "ar": "أَمْ يَحْسُدُونَ ٱلنَّاسَ عَلَىٰ مَآ ءَاتَىٰهُمُ ٱللَّهُ مِن فَضْلِهِۦ",
+      "en": "Or do they envy people for what Allah has given them of His bounty?",
+      "ur": "یا جو خدا نے لوگوں کو اپنے فضل سے دے رکھا ہے اس کا حسد کرتے ہیں"
+     },
+     "why": "Blame for envying people for what Allah gave them of His bounty; cut to that question."
+    },
+    {
+     "ref": "20:131",
+     "cut": null,
+     "why": "Do not strain your eyes toward others' worldly enjoyment; your Lord's provision is better."
+    },
+    {
+     "ref": "59:10",
+     "cut": {
+      "ar": "رَبَّنَا ٱغْفِرْ لَنَا وَلِإِخْوَٰنِنَا ٱلَّذِينَ سَبَقُونَا بِٱلْإِيمَٰنِ وَلَا تَجْعَلْ فِى قُلُوبِنَا غِلًّۭا لِّلَّذِينَ ءَامَنُوا۟ رَبَّنَآ إِنَّكَ رَءُوفٌۭ رَّحِيمٌ",
+      "en": "\"Our Lord, forgive us and our brothers who preceded us in faith and put not in our hearts [any] resentment toward those who have believed. Our Lord, indeed You are Kind and Merciful.\"",
+      "ur": "اے پروردگار ہمارے اور ہمارے بھائیوں کے جو ہم سے پہلے ایمان لائے ہیں گناہ معاف فرما اور مومنوں کی طرف سے ہمارے دل میں کینہ (وحسد) نہ پیدا ہونے دے۔ اے ہمارے پروردگار تو بڑا شفقت کرنے والا مہربان ہے"
+     },
+     "why": "The believers' dua: put no resentment in our hearts toward the believers (Urdu adds hasad)."
+    }
+   ],
+   "hadith": [
+    {
+     "id": "5332",
+     "why": "Do not envy one another, do not hate one another; be brothers."
+    },
+    {
+     "id": "4717",
+     "why": "The cure: love for your brother what you love for yourself."
+    },
+    {
+     "id": "5341",
+     "why": "Look at those below you, not above you, so as not to belittle Allah's blessings."
+    }
+   ],
+   "duas": [
+    {
+     "hisnId": 244,
+     "why": "When something of another pleases you, ask Allah to bless it instead of envying; the eye is real."
+    }
+   ]
+  },
+  {
+   "id": "showing-off",
+   "title": "Showing Off",
+   "keywords": [
+    "riya",
+    "ikhlas",
+    "sincerity",
+    "dikhawa",
+    "hidden shirk",
+    "intention"
+   ],
+   "quran": [
+    {
+     "ref": "107:4-6",
+     "cut": null,
+     "why": "Woe to those who pray but are heedless and make show of their deeds."
+    },
+    {
+     "ref": "2:264",
+     "cut": null,
+     "why": "Charity spent to be seen by people is washed away like dust off a smooth stone."
+    },
+    {
+     "ref": "4:142",
+     "cut": null,
+     "why": "The hypocrites stand for prayer lazily, showing themselves to people."
+    },
+    {
+     "ref": "18:110",
+     "cut": null,
+     "why": "Whoever hopes to meet his Lord: do good and associate no one in His worship."
+    },
+    {
+     "ref": "76:9",
+     "cut": null,
+     "why": "The sincere: 'We feed you only for the countenance of Allah; we want no reward or thanks.'"
+    }
+   ],
+   "hadith": [
+    {
+     "id": "3342",
+     "why": "Allah discards a deed done for anyone besides Him."
+    },
+    {
+     "id": "3381",
+     "why": "Riya is minor shirk, the thing the Prophet feared most for us."
+    },
+    {
+     "id": "3333",
+     "why": "Hidden shirk: beautifying one's prayer because someone is watching."
+    },
+    {
+     "id": "8900",
+     "why": "Reassurance: being praised for a good deed one did for Allah is 'instant good news', not riya."
+    }
+   ],
+   "duas": [
+    {
+     "hisnId": 203,
+     "why": "Refuge from associating others with Allah knowingly and forgiveness for the unknowing (the dua taught for hidden shirk)."
+    },
+    {
+     "hisnId": 232,
+     "why": "When praised: guards against self-admiration and seeking people's praise."
+    }
+   ]
+  },
+  {
+   "id": "cheating",
+   "title": "Cheating",
+   "keywords": [
+    "fraud",
+    "dhoka",
+    "ghish",
+    "false weights",
+    "short measure",
+    "scam",
+    "honest trade"
+   ],
+   "quran": [
+    {
+     "ref": "83:1-3",
+     "cut": null,
+     "why": "Woe to those who take full measure for themselves but give short."
+    },
+    {
+     "ref": "17:35",
+     "cut": null,
+     "why": "Give full measure and weigh with an even balance."
+    },
+    {
+     "ref": "55:8-9",
+     "cut": null,
+     "why": "Do not transgress in the balance; establish weight in justice."
+    },
+    {
+     "ref": "26:181-183",
+     "cut": null,
+     "why": "Give full measure, weigh evenly, do not deprive people of their due."
+    },
+    {
+     "ref": "3:77",
+     "cut": null,
+     "why": "Selling Allah's covenant and one's oaths for a small price: Allah will not speak to them."
+    },
+    {
+     "ref": "11:90",
+     "cut": null,
+     "why": "Shu'ayb's call to his cheating people: seek forgiveness and repent; my Lord is Merciful."
+    }
+   ],
+   "hadith": [
+    {
+     "id": "2996",
+     "why": "A false oath to take a Muslim's wealth: he meets Allah while He is angry (3:77 revealed)."
+    },
+    {
+     "id": "8958",
+     "why": "Excessive swearing in sales sells the goods but wipes out the blessing."
+    },
+    {
+     "id": "5335",
+     "why": "A person in authority who dies cheating those under him is barred from Paradise."
+    },
+    {
+     "id": "3737",
+     "why": "The Prophet's example: 'Weigh, and add some more.'"
+    }
+   ],
+   "duas": []
+  }
+ ]
+}
