@@ -3,42 +3,39 @@ package com.muttaqi.android.feature.topics
 import androidx.compose.animation.AnimatedContent
 import androidx.compose.animation.EnterTransition
 import androidx.compose.animation.ExitTransition
-import androidx.compose.animation.core.animateDpAsState
 import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
 import androidx.compose.animation.togetherWith
-import androidx.compose.foundation.background
 import androidx.compose.foundation.gestures.animateScrollBy
 import androidx.compose.foundation.gestures.scrollBy
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.BoxWithConstraints
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyListState
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.selection.selectable
 import androidx.compose.foundation.selection.selectableGroup
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.ButtonGroupDefaults
 import androidx.compose.material3.ExperimentalMaterial3ExpressiveApi
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
+import androidx.compose.material3.ToggleButton
+import androidx.compose.material3.ToggleButtonDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
@@ -49,6 +46,8 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.semantics.Role
+import androidx.compose.ui.semantics.role
+import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
@@ -65,7 +64,6 @@ import com.muttaqi.android.designsystem.component.SoftChip
 import com.muttaqi.android.designsystem.component.SoftTopBar
 import com.muttaqi.android.designsystem.component.TranslationText
 import com.muttaqi.android.designsystem.component.softClickable
-import com.muttaqi.android.designsystem.component.softFloat
 import com.muttaqi.android.designsystem.component.softPressScale
 import com.muttaqi.shared.core.share.SharePassage
 import com.muttaqi.shared.core.text.isArabicScript
@@ -186,8 +184,8 @@ private suspend fun LazyListState.scrollToCenter(index: Int, animated: Boolean) 
 }
 
 /**
- * The kinds of text as a segmented control, as iOS draws one: a tinted capsule with the selected segment on a raised
- * thumb that springs across
+ * The kinds of text as Material's connected button group, its expressive segmented control, in the iOS control's
+ * colours: tinted segments, with the one shown lifted out in white
  */
 @OptIn(ExperimentalMaterial3ExpressiveApi::class)
 @Composable
@@ -198,46 +196,33 @@ private fun TopicSectionPicker(
     modifier: Modifier = Modifier,
 ) {
     val soft = MuttaqiTheme.soft
-    val track = if (soft.dark) Color(0x3D767680) else Color(0x1F767680)
-    val thumb = if (soft.dark) Color(0xFF5A5A5E) else Color.White
-    BoxWithConstraints(
-        modifier
-            .fillMaxWidth()
-            .height(32.dp)
-            .clip(CircleShape)
-            .background(track)
-            .padding(2.dp),
+    val colors = ToggleButtonDefaults.colors(
+        containerColor = if (soft.dark) Color(0x3D767680) else Color(0x1F767680),
+        contentColor = soft.textPrimary,
+        checkedContainerColor = if (soft.dark) Color(0xFF5A5A5E) else Color.White,
+        checkedContentColor = soft.textPrimary,
+    )
+    Row(
+        modifier.fillMaxWidth().selectableGroup(),
+        horizontalArrangement = Arrangement.spacedBy(ButtonGroupDefaults.ConnectedSpaceBetween),
     ) {
-        val segment = maxWidth / sections.size
-        val offset by animateDpAsState(
-            segment * sections.indexOf(selected).coerceAtLeast(0),
-            MaterialTheme.motionScheme.fastSpatialSpec(),
-            label = "thumb",
-        )
-        Box(
-            Modifier
-                .offset(x = offset)
-                .width(segment)
-                .fillMaxHeight()
-                .softFloat(CircleShape, elevation = 2.dp)
-                .background(thumb, CircleShape),
-        )
-        Row(Modifier.fillMaxSize().selectableGroup()) {
-            sections.forEach { section ->
-                Box(
-                    Modifier
-                        .weight(1f)
-                        .fillMaxHeight()
-                        .clip(CircleShape)
-                        .selectable(selected = section == selected, role = Role.Tab, onClick = { onSelect(section) }),
-                    contentAlignment = Alignment.Center,
-                ) {
-                    Text(
-                        section.title,
-                        style = TextStyle(fontFamily = FontFamily.Default, fontSize = 13.sp, fontWeight = FontWeight.Medium),
-                        color = soft.textPrimary,
-                    )
-                }
+        sections.forEachIndexed { index, section ->
+            ToggleButton(
+                checked = section == selected,
+                onCheckedChange = { onSelect(section) },
+                modifier = Modifier
+                    .weight(1f)
+                    .height(ButtonDefaults.ExtraSmallContainerHeight)
+                    .semantics { role = Role.RadioButton },
+                shapes = when (index) {
+                    0 -> ButtonGroupDefaults.connectedLeadingButtonShapes()
+                    sections.lastIndex -> ButtonGroupDefaults.connectedTrailingButtonShapes()
+                    else -> ButtonGroupDefaults.connectedMiddleButtonShapes()
+                },
+                colors = colors,
+                contentPadding = ButtonDefaults.ExtraSmallContentPadding,
+            ) {
+                Text(section.title, style = TextStyle(fontFamily = FontFamily.Default, fontSize = 13.sp, fontWeight = FontWeight.Medium))
             }
         }
     }
@@ -281,7 +266,7 @@ private fun PassageCard(passage: TopicPassage, onShare: () -> Unit) {
             Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(4.dp)) {
                 // An Urdu attribution, e.g. "اسے امام بخاری نے روایت کیا ہے", is set in Nastaliq like its translation
                 if (passage.source.isArabicScript()) {
-                    TranslationText(passage.source, Modifier.weight(1f, fill = false), fontSize = 11.sp, color = soft.brandTeal)
+                    TranslationText(passage.source, Modifier.weight(1f, fill = false), fontSize = 11.sp, color = soft.brandTeal, lineSpacing = 6.sp)
                 } else {
                     Text(passage.source, Modifier.weight(1f, fill = false), style = MaterialTheme.typography.labelSmall, color = soft.brandTeal, textAlign = TextAlign.Center)
                 }

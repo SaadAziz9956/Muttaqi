@@ -88,7 +88,7 @@ fun DuaChapterScreen(state: DuaChapterState, onIntent: (DuaChapterIntent) -> Uni
                 item {
                     Column(Modifier.fillMaxWidth().padding(bottom = 12.dp), horizontalAlignment = Alignment.CenterHorizontally) {
                         Text(chapter?.title.orEmpty(), style = MaterialTheme.typography.headlineSmall, color = soft.appPrimary, textAlign = TextAlign.Center)
-                        chapter?.titleArabic?.let { ArabicText(it, fontSize = 18.sp, color = soft.textSecondary) }
+                        chapter?.titleArabic?.let { ArabicText(it, fontSize = 18.sp, color = soft.textSecondary, lineSpacing = 0.sp) }
                     }
                 }
                 items(chapter?.entries.orEmpty(), key = { it.id }) { entry ->
@@ -130,6 +130,7 @@ fun DuaEntryCard(entry: DuaEntry, onShare: () -> Unit, onCopy: () -> Unit) {
                 entry.translation,
                 Modifier.fillMaxWidth().padding(top = 12.dp),
                 textAlign = if (urdu) TextAlign.Right else TextAlign.Left,
+                lineSpacing = 4.sp,
             )
             Row(Modifier.fillMaxWidth().padding(top = 16.dp), verticalAlignment = Alignment.CenterVertically) {
                 Text(entry.source, style = MaterialTheme.typography.labelSmall, color = soft.brandTeal)

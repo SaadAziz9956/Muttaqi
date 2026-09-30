@@ -33,3 +33,6 @@ captures/
 
 # Downloaded sources for the content pipeline (large, and rebuilt from their APIs)
 content/tools/cache/
+
+# Agents' git worktrees
+.claude/worktrees/

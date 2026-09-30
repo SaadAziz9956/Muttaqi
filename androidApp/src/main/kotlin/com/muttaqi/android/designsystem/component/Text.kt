@@ -15,12 +15,13 @@ import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.font.FontFamily
+import androidx.compose.ui.text.style.LineHeightStyle
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextDirection
 import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.TextUnit
+import androidx.compose.ui.unit.isSpecified
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.em
 import androidx.compose.ui.unit.sp
 import com.muttaqi.android.designsystem.MuttaqiTheme
 import com.muttaqi.android.designsystem.NastaliqFont
@@ -34,7 +35,7 @@ import com.muttaqi.shared.core.text.quoted
 
 /**
  * Arabic in the Quran font (KFGQPC Hafs), right to left. Marks the font can't draw (Arabic punctuation and the ornate
- * brackets) are set in the system font, as on iOS
+ * brackets) are set in the system font, as on iOS. `lineSpacing` is the space between lines, as iOS's `lineSpacing`
  */
 @Composable
 fun ArabicText(
@@ -43,10 +44,11 @@ fun ArabicText(
     fontSize: TextUnit = 20.sp,
     color: Color = MuttaqiTheme.soft.textPrimary,
     textAlign: TextAlign = TextAlign.Center,
+    lineSpacing: TextUnit = 10.sp,
 ) {
     val annotated = remember(text) {
         buildAnnotatedString {
-            for (char in text.kfgqpcEncoded()) {
+            for (char in text.kfgqpcEncoded().withRightToLeftGuillemets()) {
                 if (char in arabicMarksOutsideQuranFont) {
                     withStyle(SpanStyle(fontFamily = FontFamily.Default)) { append(char) }
                 } else {
@@ -60,11 +62,21 @@ fun ArabicText(
         modifier = modifier,
         color = color,
         textAlign = textAlign,
-        style = TextStyle(fontFamily = QuranFont, fontSize = fontSize, lineHeight = 1.9.em, textDirection = TextDirection.Rtl),
+        style = TextStyle(
+            fontFamily = QuranFont,
+            fontSize = fontSize,
+            lineHeight = lineHeight(fontSize, QURAN_FONT_LINE_HEIGHT, lineSpacing),
+            lineHeightStyle = SpacingBelowLines,
+            textDirection = TextDirection.Rtl,
+        ),
     )
 }
 
-/** A translation in the font and direction of its script: Urdu in Nastaliq, right to left; English in Reem Kufi */
+/**
+ * A translation in the font and direction of its script: Urdu in Nastaliq, right to left; English in Reem Kufi.
+ * `lineSpacing` is the space between lines, as iOS's `lineSpacing`; unset, it's the app's usual 8 for Urdu and 4 for
+ * English
+ */
 @Composable
 fun TranslationText(
     text: String,
@@ -73,21 +85,63 @@ fun TranslationText(
     color: Color = MuttaqiTheme.soft.textPrimary,
     textAlign: TextAlign = TextAlign.Center,
     maxLines: Int = Int.MAX_VALUE,
+    lineSpacing: TextUnit = TextUnit.Unspecified,
 ) {
     val urdu = text.isArabicScript()
     Text(
-        text,
+        if (urdu) text.withRightToLeftGuillemets() else text,
         modifier = modifier,
         color = color,
         textAlign = textAlign,
         maxLines = maxLines,
         style = if (urdu) {
-            TextStyle(fontFamily = NastaliqFont, fontSize = (fontSize.value + 1).sp, lineHeight = 2.1.em, textDirection = TextDirection.Rtl)
+            // One point larger, as on iOS, since Nastaliq reads small for its size
+            val size = (fontSize.value + 1).sp
+            TextStyle(
+                fontFamily = NastaliqFont,
+                fontSize = size,
+                lineHeight = lineHeight(size, NASTALIQ_LINE_HEIGHT, if (lineSpacing.isSpecified) lineSpacing else 8.sp),
+                lineHeightStyle = SpacingBelowLines,
+                textDirection = TextDirection.Rtl,
+            )
         } else {
-            TextStyle(fontFamily = ReemKufi, fontSize = fontSize, lineHeight = 1.45.em)
+            TextStyle(
+                fontFamily = ReemKufi,
+                fontSize = fontSize,
+                lineHeight = lineHeight(fontSize, REEM_KUFI_LINE_HEIGHT, if (lineSpacing.isSpecified) lineSpacing else 4.sp),
+                lineHeightStyle = SpacingBelowLines,
+            )
         },
     )
 }
+
+/**
+ * « and » facing outwards in right-to-left text, as iOS draws them. Android mirrors brackets there but not these, so
+ * the pair is swapped for display; the words are untouched
+ */
+private fun String.withRightToLeftGuillemets(): String = buildString(length) {
+    for (char in this@withRightToLeftGuillemets) {
+        append(
+            when (char) {
+                '«' -> '»'
+                '»' -> '«'
+                else -> char
+            },
+        )
+    }
+}
+
+// Each font's own line height, in ems (its ascender plus descender), which iOS lays lines out by
+private const val QURAN_FONT_LINE_HEIGHT = 1.758f
+private const val NASTALIQ_LINE_HEIGHT = 2.5f
+private const val REEM_KUFI_LINE_HEIGHT = 1.5f
+
+/** A line as tall as iOS makes it: the font's own line height, then the spacing */
+private fun lineHeight(fontSize: TextUnit, fontLineHeight: Float, lineSpacing: TextUnit): TextUnit =
+    (fontSize.value * fontLineHeight + lineSpacing.value).sp
+
+/** The spacing goes under each line but the last, as on iOS, so the text starts and ends where its glyphs do */
+private val SpacingBelowLines = LineHeightStyle(LineHeightStyle.Alignment.Top, LineHeightStyle.Trim.Both)
 
 /** A page's large title with its quote and source underneath, as at the top of each tab */
 @Composable
@@ -96,7 +150,7 @@ fun PageHeader(title: String, quote: DisplayedQuote?, modifier: Modifier = Modif
     Column(modifier.fillMaxWidth(), horizontalAlignment = Alignment.CenterHorizontally, verticalArrangement = Arrangement.spacedBy(4.dp)) {
         Text(title, style = MaterialTheme.typography.headlineMedium, color = soft.appPrimary)
         if (quote != null) {
-            TranslationText(quote.text.quoted(), Modifier.padding(top = 12.dp))
+            TranslationText(quote.text.quoted(), Modifier.padding(top = 12.dp), lineSpacing = 0.sp)
             Text(quote.source, style = MaterialTheme.typography.labelSmall, color = soft.textSecondary)
         }
     }
