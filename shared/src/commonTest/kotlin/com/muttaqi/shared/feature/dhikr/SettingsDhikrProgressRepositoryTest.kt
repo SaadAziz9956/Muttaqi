@@ -1,7 +1,7 @@
 package com.muttaqi.shared.feature.dhikr
 
+import com.muttaqi.shared.core.preferences.LegacyDataSource
 import com.muttaqi.shared.feature.dhikr.DhikrTestData.today
-import com.muttaqi.shared.feature.dhikr.data.progress.LegacyDhikrProgressSource
 import com.muttaqi.shared.feature.dhikr.data.progress.SettingsDhikrProgressRepository
 import com.muttaqi.shared.feature.dhikr.domain.model.DhikrProgress
 import com.russhwolf.settings.MapSettings
@@ -17,7 +17,7 @@ class SettingsDhikrProgressRepositoryTest {
     private val legacy = mutableMapOf<String, String>()
 
     private fun repository(timeZone: TimeZone = karachi) =
-        SettingsDhikrProgressRepository(settings, LegacyDhikrProgressSource { legacy[it] }, timeZone = { timeZone })
+        SettingsDhikrProgressRepository(settings, LegacyDataSource { legacy[it] }, timeZone = { timeZone })
 
     // What the Swift app saved after 7 taps on 2026-09-30 in Karachi: that day's local midnight, 2026-09-29 19:00 UTC,
     // as seconds since 2001-01-01 UTC

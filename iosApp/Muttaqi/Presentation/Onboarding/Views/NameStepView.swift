@@ -1,8 +1,9 @@
 import SwiftUI
 
 struct NameStepView: View {
-    @State private var name: String = ""
-    let onSave: (String) -> Void
+    @Binding var name: String
+    /// A blank name isn't saved, so the step stays
+    let onSave: () -> Void
     
     var body: some View {
         VStack {
@@ -27,10 +28,7 @@ struct NameStepView: View {
             
             Spacer()
             
-            Button {
-                guard !name.trimmingCharacters(in: .whitespaces).isEmpty else { return }
-                onSave(name)
-            } label: {
+            Button(action: onSave) {
                 Text("Save")
                     .font(.bodySmall)
                     .foregroundStyle(.onPrimaryButton)

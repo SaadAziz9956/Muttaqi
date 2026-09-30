@@ -52,7 +52,7 @@ struct MainTabView: View {
                 .navigationDestination(for: AppRouter.HomeDestination.self) { dest in
                     switch dest {
                     case .qibla:
-                        QiblaView(viewModel: container.makeQiblaViewModel())
+                        QiblaView()
                     case .journal:
                         JournalListView()
                     case .journalEntry(let id):

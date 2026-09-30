@@ -1,3 +1,4 @@
+import Shared
 import SwiftUI
 
 struct HomeView: View {
@@ -31,7 +32,7 @@ struct HomeView: View {
 
                     if let today = viewModel.schedule?.today {
                         // Once Isha has passed, the next prayer is tomorrow's Fajr, so nothing in today's row is picked
-                        let isToday = next.map { Calendar.current.isDate($0.time, inSameDayAs: today.fajr) } ?? false
+                        let isToday = next.map { Calendar.current.isDate($0.date, inSameDayAs: today.date(prayer: .fajr)) } ?? false
                         PrayerTimesStrip(times: today, next: isToday ? next?.prayer : nil)
                             .padding(.top, 28)
                     }

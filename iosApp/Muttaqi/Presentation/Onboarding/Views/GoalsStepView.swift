@@ -1,3 +1,4 @@
+import Shared
 import SwiftUI
 
 struct GoalsStepView: View {
@@ -45,16 +46,17 @@ struct GoalsStepView: View {
             
             Spacer()
             
+            let verse = OnboardingVerses.shared.lovesThePure
             VStack(spacing: 5) {
-                Text("وَاللَّهُ يُحِبُّ الْمُطَّهِّرِينَ")
+                Text(verse.arabic)
                     .font(.arabic(26))
                     .foregroundStyle(.textPrimary)
                 
-                Text("Allah loves those who keep themselves pure.")
+                Text(verse.translation)
                     .font(.bodySmall)
                     .foregroundStyle(.textSecondary)
                 
-                Text("Quran (9:108)")
+                Text(verse.source ?? "")
                     .font(.labelMedium)
                     .foregroundStyle(.textSecondary)
             }

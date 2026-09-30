@@ -29,8 +29,8 @@ final class HomeViewModel {
     /// Turn from the phone's heading to the Kaaba, as a continuous angle so the arrow turns the short way round
     private(set) var qiblaArrowRotation: Double?
 
-    private let location: LocationRepositoryProtocol
-    private let getPrayerSchedule: GetPrayerScheduleUseCase
+    /// Prayer times, the Qibla, the compass and location, from the shared code
+    private let prayer: HomePrayerTimes
     private let fetchAyah: FetchAyahUseCase
     private let getAyahOfTheDay: GetAyahOfTheDayUseCase
     private let getDuaOfTheDay: GetDuaOfTheDayUseCase
@@ -38,8 +38,6 @@ final class HomeViewModel {
     private let pickNameOfTheDay: NameOfTheDay
     private let dhikrSaidToday: DhikrSaidToday
     private let quran: QuranUseCases
-    private let getQiblaDirection: GetQiblaDirectionUseCase
-    private let compass: CompassServiceProtocol
     /// Today's journal entry, from the shared journal
     let journal: SharedViewModel<JournalTodayViewModel, JournalTodayState>
     private let calendar: Calendar
@@ -55,28 +53,22 @@ final class HomeViewModel {
     }()
 
     init(
-        location: LocationRepositoryProtocol,
-        getPrayerSchedule: GetPrayerScheduleUseCase,
         fetchAyah: FetchAyahUseCase,
         getAyahOfTheDay: GetAyahOfTheDayUseCase,
         getDuaOfTheDay: GetDuaOfTheDayUseCase,
         quran: QuranUseCases,
-        getQiblaDirection: GetQiblaDirectionUseCase,
-        compass: CompassServiceProtocol,
         journal: SharedViewModel<JournalTodayViewModel, JournalTodayState>,
+        prayer: HomePrayerTimes = .shared,
         exploreOfTheDay: ExploreOfTheDay = .shared,
         nameOfTheDay: NameOfTheDay = .shared,
         dhikrSaidToday: DhikrSaidToday = .shared,
         calendar: Calendar = .current
     ) {
-        self.location = location
-        self.getPrayerSchedule = getPrayerSchedule
+        self.prayer = prayer
         self.fetchAyah = fetchAyah
         self.getAyahOfTheDay = getAyahOfTheDay
         self.getDuaOfTheDay = getDuaOfTheDay
         self.quran = quran
-        self.getQiblaDirection = getQiblaDirection
-        self.compass = compass
         self.journal = journal
         self.exploreOfTheDay = exploreOfTheDay
         self.pickNameOfTheDay = nameOfTheDay
@@ -94,8 +86,8 @@ final class HomeViewModel {
         journal.viewModel.dispatch(intent: JournalTodayIntentRefresh.shared)
         await loadLastReading()
         await loadPrayerTimes()
-        if let coordinates = location.lastKnownCoordinates() {
-            qibla = getQiblaDirection.execute(from: coordinates)
+        if let coordinates = prayer.lastKnownCoordinates() {
+            qibla = prayer.qibla(coordinates: coordinates)
         }
     }
 
@@ -110,9 +102,9 @@ final class HomeViewModel {
 
     /// Follows the compass for the Qibla tile until the calling task is cancelled
     func trackQibla() async {
-        guard compass.isAvailable else { return }
+        guard prayer.isCompassAvailable else { return }
         var previous: Double?
-        for await update in compass.headings() {
+        for await update in prayer.headings() {
             guard let qibla else { continue }
             let target = qibla.bearing - update.degrees
             if let previous, let current = qiblaArrowRotation {
@@ -144,21 +136,21 @@ final class HomeViewModel {
     }
 
     func requestLocation() async {
-        switch await location.requestAccess() {
+        switch try? await prayer.requestAccess() {
         case .granted: await loadPrayerTimes()
         case .denied: locationState = .denied
-        case .notDetermined: locationState = .needsPermission
+        case .notDetermined, nil: locationState = .needsPermission
         }
     }
 
     func nextPrayer(at date: Date) -> UpcomingPrayer? {
-        schedule?.nextPrayer(after: date)
+        schedule?.nextPrayer(afterDate: date)
     }
 
     /// The Islamic day begins at Maghrib, so after sunset this shows the next Hijri date
     func hijriDate(at date: Date) -> String {
         var day = date
-        if let maghrib = schedule?.today.maghrib, calendar.isDate(maghrib, inSameDayAs: date), date >= maghrib {
+        if let maghrib = schedule?.today.date(prayer: .maghrib), calendar.isDate(maghrib, inSameDayAs: date), date >= maghrib {
             day = calendar.date(byAdding: .day, value: 1, to: date) ?? date
         }
         return Self.hijriFormatter.string(from: day)
@@ -166,13 +158,13 @@ final class HomeViewModel {
 
     private func loadPrayerTimes() async {
         // Saved coordinates give times instantly and offline; a fresh fix then corrects them if the user has moved
-        if let saved = location.lastKnownCoordinates() {
-            schedule = getPrayerSchedule.execute(at: saved)
+        if let saved = prayer.lastKnownCoordinates() {
+            schedule = prayer.schedule(coordinates: saved)
         }
-        switch location.access {
+        switch prayer.access {
         case .granted:
-            if let fresh = await location.refreshCoordinates() {
-                schedule = getPrayerSchedule.execute(at: fresh)
+            if let fresh = try? await prayer.refreshCoordinates() {
+                schedule = prayer.schedule(coordinates: fresh)
             }
             locationState = schedule == nil ? .unknown : .available
         case .denied:

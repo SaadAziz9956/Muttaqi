@@ -2,7 +2,6 @@ package com.muttaqi.shared.feature.dhikr.di
 
 import com.muttaqi.shared.feature.dhikr.data.progress.SettingsDhikrProgressRepository
 import com.muttaqi.shared.feature.dhikr.data.progress.SystemCurrentDay
-import com.muttaqi.shared.feature.dhikr.data.progress.platformLegacyDhikrProgressSource
 import com.muttaqi.shared.feature.dhikr.data.repository.BundledDhikrRepository
 import com.muttaqi.shared.feature.dhikr.domain.repository.CurrentDay
 import com.muttaqi.shared.feature.dhikr.domain.repository.DhikrProgressRepository
@@ -24,7 +23,7 @@ import org.koin.dsl.module
 /** Dikr: the list of dhikr by category and the counter, with today's progress */
 val dhikrModule = module {
     single<DhikrRepository> { BundledDhikrRepository(get(), get()) }
-    single<DhikrProgressRepository> { SettingsDhikrProgressRepository(get<ObservableSettings>(), platformLegacyDhikrProgressSource()) }
+    single<DhikrProgressRepository> { SettingsDhikrProgressRepository(get<ObservableSettings>(), get()) }
     single<CurrentDay> { SystemCurrentDay }
 
     factoryOf(::GetDhikrSections)

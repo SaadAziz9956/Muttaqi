@@ -1,3 +1,4 @@
+import Shared
 import SwiftUI
 
 struct WelcomeStepView: View {
@@ -8,11 +9,11 @@ struct WelcomeStepView: View {
             Spacer()
             
             VStack(spacing: 8) {
-                Text("بِسْمِ اللهِ الرَّحْمٰنِ الرَّحِيْمِ")
+                Text(OnboardingVerses.shared.basmala.arabic)
                     .font(.arabic(32))
                     .foregroundStyle(.textPrimary)
                 
-                Text("In the name of Allah,\nthe most gracious, the most merciful")
+                Text(OnboardingVerses.shared.basmala.translation)
                     .font(.bodyMedium)
                     .foregroundStyle(.onSurfaceVariant)
                     .multilineTextAlignment(.center)

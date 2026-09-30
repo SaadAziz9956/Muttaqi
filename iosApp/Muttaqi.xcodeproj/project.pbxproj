@@ -6,10 +6,6 @@
 	objectVersion = 77;
 	objects = {
 
-/* Begin PBXBuildFile section */
-		AD4A00012F3A5D3F0054BD84 /* Adhan in Frameworks */ = {isa = PBXBuildFile; productRef = AD4A00032F3A5D3F0054BD84 /* Adhan */; };
-/* End PBXBuildFile section */
-
 /* Begin PBXContainerItemProxy section */
 		5592B3722F3A5D3F0054BD84 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -69,7 +65,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				AD4A00012F3A5D3F0054BD84 /* Adhan in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -132,7 +127,6 @@
 			);
 			name = Muttaqi;
 			packageProductDependencies = (
-				AD4A00032F3A5D3F0054BD84 /* Adhan */,
 			);
 			productName = Muttaqi;
 			productReference = 5592B3622F3A5D3F0054BD84 /* Muttaqi.app */;
@@ -217,7 +211,6 @@
 			mainGroup = 5592B3592F3A5D3F0054BD84;
 			minimizedProjectReferenceProxies = 1;
 			packageReferences = (
-				AD4A00022F3A5D3F0054BD84 /* XCRemoteSwiftPackageReference "adhan-swift" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 5592B3632F3A5D3F0054BD84 /* Products */;
@@ -671,25 +664,6 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
-
-/* Begin XCRemoteSwiftPackageReference section */
-		AD4A00022F3A5D3F0054BD84 /* XCRemoteSwiftPackageReference "adhan-swift" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/batoulapps/adhan-swift";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 1.5.0;
-			};
-		};
-/* End XCRemoteSwiftPackageReference section */
-
-/* Begin XCSwiftPackageProductDependency section */
-		AD4A00032F3A5D3F0054BD84 /* Adhan */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = AD4A00022F3A5D3F0054BD84 /* XCRemoteSwiftPackageReference "adhan-swift" */;
-			productName = Adhan;
-		};
-/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 5592B35A2F3A5D3F0054BD84 /* Project object */;
 }
