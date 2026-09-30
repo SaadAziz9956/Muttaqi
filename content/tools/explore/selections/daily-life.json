@@ -1,0 +1,573 @@
+{
+ "group": "daily-life",
+ "topics": [
+  {
+   "id": "dress",
+   "title": "Dress",
+   "keywords": [
+    "clothes",
+    "libas",
+    "hijab",
+    "modesty",
+    "purdah",
+    "awrah",
+    "jilbab",
+    "new clothes"
+   ],
+   "quran": [
+    {
+     "ref": "7:26",
+     "cut": null,
+     "why": "Clothing is Allah's gift to cover and adorn; the clothing of righteousness is best."
+    },
+    {
+     "ref": "7:27",
+     "cut": {
+      "ar": "يَٰبَنِىٓ ءَادَمَ لَا يَفْتِنَنَّكُمُ ٱلشَّيْطَٰنُ كَمَآ أَخْرَجَ أَبَوَيْكُم مِّنَ ٱلْجَنَّةِ يَنزِعُ عَنْهُمَا لِبَاسَهُمَا لِيُرِيَهُمَا سَوْءَٰتِهِمَآ",
+      "en": "O children of Adam, let not Satan tempt you as he removed your parents from Paradise, stripping them of their clothing to show them their private parts.",
+      "ur": "اے نبی آدم (دیکھنا کہیں) شیطان تمہیں بہکا نہ دے جس طرح تمہارے ماں باپ کو (بہکا کر) بہشت سے نکلوا دیا اور ان سے ان کے کپڑے اتروا دیئے تاکہ ان کے ستر ان کو کھول کر دکھا دے۔"
+     },
+     "why": "Warning against Satan stripping modesty, as with Adam and Hawwa."
+    },
+    {
+     "ref": "7:32",
+     "cut": null,
+     "why": "Adornment Allah produced for His servants is not forbidden."
+    },
+    {
+     "ref": "24:31",
+     "cut": {
+      "ar": "وَقُل لِّلْمُؤْمِنَٰتِ يَغْضُضْنَ مِنْ أَبْصَٰرِهِنَّ وَيَحْفَظْنَ فُرُوجَهُنَّ وَلَا يُبْدِينَ زِينَتَهُنَّ إِلَّا مَا ظَهَرَ مِنْهَا ۖ وَلْيَضْرِبْنَ بِخُمُرِهِنَّ عَلَىٰ جُيُوبِهِنَّ",
+      "en": "And tell the believing women to reduce [some] of their vision and guard their private parts and not expose their adornment except that which [necessarily] appears thereof and to wrap [a portion of] their headcovers over their chests",
+      "ur": "اور مومن عورتوں سے بھی کہہ دو کہ وہ بھی اپنی نگاہیں نیچی رکھا کریں اور اپنی شرم گاہوں کی حفاظت کیا کریں اور اپنی آرائش (یعنی زیور کے مقامات) کو ظاہر نہ ہونے دیا کریں مگر جو ان میں سے کھلا رہتا ہو۔ اور اپنے سینوں پر اوڑھنیاں اوڑھے رہا کریں"
+     },
+     "why": "The core hijab verse: believing women guard modesty and draw headcovers over their chests."
+    },
+    {
+     "ref": "33:59",
+     "cut": null,
+     "why": "Believing women to draw their outer garments (jilbab) over themselves."
+    }
+   ],
+   "hadith": [
+    {
+     "id": "6209",
+     "why": "Liking good clothes is not arrogance: Allah is beautiful and loves beauty."
+    },
+    {
+     "id": "5363",
+     "why": "Wear clothes without extravagance or pride."
+    },
+    {
+     "id": "5370",
+     "why": "Allah does not look at one who drags his garment out of conceit."
+    },
+    {
+     "id": "8903",
+     "why": "Women 'dressed yet naked' warned of Hellfire; immodest dress."
+    }
+   ],
+   "duas": [
+    {
+     "hisnId": 5,
+     "why": "Dua when getting dressed."
+    },
+    {
+     "hisnId": 6,
+     "why": "Dua when putting on new clothes."
+    }
+   ]
+  },
+  {
+   "id": "food-drink",
+   "title": "Food & Drink",
+   "keywords": [
+    "halal",
+    "haram food",
+    "eating",
+    "khana",
+    "bismillah",
+    "table manners",
+    "overeating"
+   ],
+   "quran": [
+    {
+     "ref": "2:168",
+     "cut": null,
+     "why": "Eat what is lawful and good on earth; do not follow Satan's footsteps."
+    },
+    {
+     "ref": "2:172",
+     "cut": null,
+     "why": "Eat of the good things provided and be grateful to Allah."
+    },
+    {
+     "ref": "2:173",
+     "cut": null,
+     "why": "The foods Allah has forbidden (carrion, blood, swine, dedicated to other than Allah)."
+    },
+    {
+     "ref": "5:88",
+     "cut": null,
+     "why": "Eat of what Allah has provided, lawful and good, and fear Him."
+    },
+    {
+     "ref": "7:31",
+     "cut": null,
+     "why": "Eat and drink but do not be excessive."
+    }
+   ],
+   "hadith": [
+    {
+     "id": "58120",
+     "why": "Core eating manners: say Bismillah, eat with the right hand, eat from what is nearer."
+    },
+    {
+     "id": "66518",
+     "why": "Allah accepts only what is good; unlawful food blocks the acceptance of dua."
+    },
+    {
+     "id": "4723",
+     "why": "Moderation: one third food, one third drink, one third breath."
+    },
+    {
+     "id": "5798",
+     "why": "Allah is pleased with one who praises Him after eating and drinking."
+    }
+   ],
+   "duas": [
+    {
+     "hisnId": 178,
+     "why": "Bismillah before eating, and what to say if you forgot."
+    },
+    {
+     "hisnId": 180,
+     "why": "Praise after eating."
+    },
+    {
+     "hisnId": 182,
+     "why": "The guest's dua for the host."
+    }
+   ]
+  },
+  {
+   "id": "greeting",
+   "title": "Greeting",
+   "keywords": [
+    "salam",
+    "salaam",
+    "assalamu alaikum",
+    "wa alaikum salam",
+    "handshake",
+    "musafaha"
+   ],
+   "quran": [
+    {
+     "ref": "4:86",
+     "cut": null,
+     "why": "Return a greeting with a better one or at least the same."
+    },
+    {
+     "ref": "24:27",
+     "cut": null,
+     "why": "Seek permission and greet the people of a house before entering."
+    },
+    {
+     "ref": "24:61",
+     "cut": {
+      "ar": "فَإِذَا دَخَلْتُم بُيُوتًۭا فَسَلِّمُوا۟ عَلَىٰٓ أَنفُسِكُمْ تَحِيَّةًۭ مِّنْ عِندِ ٱللَّهِ مُبَٰرَكَةًۭ طَيِّبَةًۭ",
+      "en": "But when you enter houses, give greetings of peace upon each other - a greeting from Allah, blessed and good.",
+      "ur": "اور جب گھروں میں جایا کرو تو اپنے (گھر والوں کو) سلام کیا کرو۔ (یہ) خدا کی طرف سے مبارک اور پاکیزہ تحفہ ہے۔"
+     },
+     "why": "When entering houses, greet one another: a greeting from Allah, blessed and good."
+    },
+    {
+     "ref": "6:54",
+     "cut": null,
+     "why": "The Prophet is told to say 'Peace be upon you' to the believers who come to him."
+    },
+    {
+     "ref": "10:10",
+     "cut": null,
+     "why": "The greeting of the people of Paradise is 'Peace'."
+    }
+   ],
+   "hadith": [
+    {
+     "id": "3361",
+     "why": "Spread salam among yourselves and you will love one another."
+    },
+    {
+     "id": "5808",
+     "why": "Among the best deeds: greeting those you know and those you do not."
+    },
+    {
+     "id": "3587",
+     "why": "Ten, twenty, thirty rewards for the fuller forms of the salam."
+    },
+    {
+     "id": "4243",
+     "why": "Etiquette of who greets whom first."
+    }
+   ],
+   "duas": []
+  },
+  {
+   "id": "travel",
+   "title": "Travel",
+   "keywords": [
+    "safar",
+    "journey",
+    "musafir",
+    "trip",
+    "travel dua",
+    "qasr"
+   ],
+   "quran": [
+    {
+     "ref": "43:12-14",
+     "cut": null,
+     "why": "Rides and ships are Allah's favour; the words of the travel dua 'Subhana alladhi sakhkhara lana hadha'."
+    },
+    {
+     "ref": "29:20",
+     "cut": null,
+     "why": "Travel through the land and observe how Allah began creation."
+    },
+    {
+     "ref": "67:15",
+     "cut": null,
+     "why": "Allah made the earth tame: walk its paths and eat of His provision."
+    },
+    {
+     "ref": "2:197",
+     "cut": {
+      "ar": "وَتَزَوَّدُوا۟ فَإِنَّ خَيْرَ ٱلزَّادِ ٱلتَّقْوَىٰ",
+      "en": "And take provisions, but indeed, the best provision is fear of Allah.",
+      "ur": "اور زاد راہ (یعنی رستے کا خرچ) ساتھ لے جاؤ کیونکہ بہتر (فائدہ) زاد راہ (کا) پرہیزگاری ہے"
+     },
+     "why": "Take provisions for the journey; the best provision is taqwa."
+    },
+    {
+     "ref": "2:185",
+     "cut": {
+      "ar": "فَمَن شَهِدَ مِنكُمُ ٱلشَّهْرَ فَلْيَصُمْهُ ۖ وَمَن كَانَ مَرِيضًا أَوْ عَلَىٰ سَفَرٍۢ فَعِدَّةٌۭ مِّنْ أَيَّامٍ أُخَرَ ۗ يُرِيدُ ٱللَّهُ بِكُمُ ٱلْيُسْرَ وَلَا يُرِيدُ بِكُمُ ٱلْعُسْرَ",
+      "en": "So whoever sights [the new moon of] the month, let him fast it; and whoever is ill or on a journey - then an equal number of other days. Allah intends for you ease and does not intend for you hardship",
+      "ur": "تو جو کوئی تم میں سے اس مہینے میں موجود ہو چاہیئے کہ پورے مہینے کے روزے رکھے اور جو بیمار ہو یا سفر میں ہو تو دوسرے دنوں میں (رکھ کر) ان کا شمار پورا کرلے۔ خدا تمہارے حق میں آسانی چاہتا ہے اور سختی نہیں چاہتا"
+     },
+     "why": "Concession for the traveller in fasting; Allah intends ease, not hardship."
+    }
+   ],
+   "hadith": [
+    {
+     "id": "5404",
+     "why": "Travel is a portion of torment; hasten back to your family once done."
+    },
+    {
+     "id": "6102",
+     "why": "The Prophet's advice to a traveller: taqwa and takbir on every height, and his dua for him."
+    },
+    {
+     "id": "5207",
+     "why": "The Prophet and the caliphs shortened the prayer to two rak'ahs on journeys."
+    },
+    {
+     "id": "5909",
+     "why": "The supplication of the traveller is answered."
+    }
+   ],
+   "duas": [
+    {
+     "hisnId": 207,
+     "why": "The travel dua."
+    },
+    {
+     "hisnId": 211,
+     "why": "The traveller's farewell to those he leaves behind."
+    },
+    {
+     "hisnId": 212,
+     "why": "The resident's farewell dua for the traveller."
+    }
+   ]
+  },
+  {
+   "id": "sleep",
+   "title": "Sleep",
+   "keywords": [
+    "bedtime",
+    "neend",
+    "nawm",
+    "night",
+    "waking up",
+    "bedtime dua",
+    "rest"
+   ],
+   "quran": [
+    {
+     "ref": "78:9-11",
+     "cut": null,
+     "why": "Allah made sleep a rest, the night a covering and the day for livelihood."
+    },
+    {
+     "ref": "30:23",
+     "cut": null,
+     "why": "Your sleep by night and day is among His signs."
+    },
+    {
+     "ref": "39:42",
+     "cut": null,
+     "why": "Allah takes souls in sleep and returns them for a set term."
+    },
+    {
+     "ref": "32:16",
+     "cut": null,
+     "why": "The believers forsake their beds to call on their Lord."
+    },
+    {
+     "ref": "51:17-18",
+     "cut": null,
+     "why": "The righteous slept little of the night and sought forgiveness before dawn."
+    }
+   ],
+   "hadith": [
+    {
+     "id": "65060",
+     "why": "The Prophet's bedtime practice: the three Quls blown into the palms and wiped over the body."
+    },
+    {
+     "id": "6034",
+     "why": "Dust off the bed and the bedtime dua 'Bismika Rabbi wada'tu janbi'."
+    },
+    {
+     "id": "4247",
+     "why": "The Prophet slept early in the night and rose at its end to pray."
+    },
+    {
+     "id": "3731",
+     "why": "The devil's three knots on the sleeper, undone by dhikr, wudu and prayer."
+    }
+   ],
+   "duas": [
+    {
+     "hisnId": 105,
+     "why": "Short bedtime dua: 'Bismika Allahumma amutu wa ahya'."
+    },
+    {
+     "hisnId": 111,
+     "why": "Bedtime dua of submission: 'Allahumma aslamtu nafsi ilayk'."
+    },
+    {
+     "hisnId": 1,
+     "why": "Dua on waking up."
+    }
+   ]
+  },
+  {
+   "id": "health-sickness",
+   "title": "Health & Sickness",
+   "keywords": [
+    "illness",
+    "disease",
+    "shifa",
+    "cure",
+    "bimari",
+    "visiting the sick",
+    "iyadah",
+    "healing"
+   ],
+   "quran": [
+    {
+     "ref": "26:78-80",
+     "cut": null,
+     "why": "Ibrahim: it is Allah who feeds me, and when I am ill it is He who cures me."
+    },
+    {
+     "ref": "21:83-84",
+     "cut": null,
+     "why": "Ayyub's dua in affliction and Allah removing his harm."
+    },
+    {
+     "ref": "17:82",
+     "cut": null,
+     "why": "The Quran is healing and mercy for the believers."
+    },
+    {
+     "ref": "16:68-69",
+     "cut": null,
+     "why": "Honey from the bee, in which there is healing for people."
+    }
+   ],
+   "hadith": [
+    {
+     "id": "3701",
+     "why": "No illness or hardship befalls a Muslim, even a thorn prick, but it expiates sins."
+    },
+    {
+     "id": "3553",
+     "why": "The sick are credited with the good deeds they used to do while healthy."
+    },
+    {
+     "id": "5840",
+     "why": "Waking up healthy, safe and fed is as if given the whole world."
+    },
+    {
+     "id": "5647",
+     "why": "Visiting a sick Muslim: he stays in the fruit garden of Paradise."
+    }
+   ],
+   "duas": [
+    {
+     "hisnId": 147,
+     "why": "What to say when visiting the sick: 'La ba's, tahurun in sha Allah'."
+    },
+    {
+     "hisnId": 148,
+     "why": "Asking Allah seven times to cure the sick person."
+    },
+    {
+     "hisnId": 243,
+     "why": "What to say when feeling pain in the body."
+    }
+   ]
+  },
+  {
+   "id": "wealth-poverty",
+   "title": "Wealth & Poverty",
+   "keywords": [
+    "money",
+    "rich",
+    "poor",
+    "rizq",
+    "provision",
+    "contentment",
+    "qanaah",
+    "debt"
+   ],
+   "quran": [
+    {
+     "ref": "64:15",
+     "cut": null,
+     "why": "Wealth and children are a trial."
+    },
+    {
+     "ref": "89:15-16",
+     "cut": null,
+     "why": "Allah tests man with both plenty and restricted provision; neither is honour or disgrace."
+    },
+    {
+     "ref": "18:46",
+     "cut": null,
+     "why": "Wealth is adornment of this life; lasting good deeds are better."
+    },
+    {
+     "ref": "63:9",
+     "cut": null,
+     "why": "Do not let wealth divert you from the remembrance of Allah."
+    },
+    {
+     "ref": "42:27",
+     "cut": null,
+     "why": "Allah sends provision in measure, knowing that unlimited plenty would lead to tyranny."
+    },
+    {
+     "ref": "2:268",
+     "cut": null,
+     "why": "Satan threatens with poverty; Allah promises forgiveness and bounty."
+    }
+   ],
+   "hadith": [
+    {
+     "id": "3852",
+     "why": "True richness is richness of the soul, not abundance of wealth."
+    },
+    {
+     "id": "3736",
+     "why": "The trial of this Ummah is wealth."
+    },
+    {
+     "id": "5814",
+     "why": "Success is Islam, enough provision and contentment."
+    },
+    {
+     "id": "5341",
+     "why": "Look at those below you, not above you, so you do not belittle Allah's blessing."
+    }
+   ],
+   "duas": [
+    {
+     "hisnId": 136,
+     "why": "Ask Allah for sufficiency through the lawful and freedom from need of others."
+    },
+    {
+     "hisnId": 137,
+     "why": "Refuge from miserliness and the burden of debt."
+    }
+   ]
+  },
+  {
+   "id": "time",
+   "title": "Time",
+   "keywords": [
+    "waqt",
+    "free time",
+    "lifespan",
+    "umr",
+    "zindagi",
+    "asr",
+    "procrastination"
+   ],
+   "quran": [
+    {
+     "ref": "103:1-3",
+     "cut": null,
+     "why": "By time, mankind is in loss except those who believe, do good and counsel truth and patience."
+    },
+    {
+     "ref": "25:62",
+     "cut": null,
+     "why": "Night and day succeed each other for whoever wants to remember or be grateful."
+    },
+    {
+     "ref": "94:7-8",
+     "cut": null,
+     "why": "When you are free, strive in worship and turn to your Lord."
+    },
+    {
+     "ref": "23:112-114",
+     "cut": null,
+     "why": "On the Day of Judgment life on earth will seem a day or part of a day."
+    },
+    {
+     "ref": "35:37",
+     "cut": null,
+     "why": "The regret in Hell: 'Did We not give you life long enough to take heed?'"
+    },
+    {
+     "ref": "63:10",
+     "cut": null,
+     "why": "Spend before death comes and one begs for a little more time."
+    }
+   ],
+   "hadith": [
+    {
+     "id": "5449",
+     "why": "Health and free time: two blessings many people waste."
+    },
+    {
+     "id": "4950",
+     "why": "On the Day of Judgment each is asked how he spent his life."
+    },
+    {
+     "id": "4704",
+     "why": "Be in this world as a stranger; take from your health for sickness and your life for death."
+    },
+    {
+     "id": "3138",
+     "why": "Hasten to good deeds before trials come."
+    }
+   ],
+   "duas": []
+  }
+ ]
+}

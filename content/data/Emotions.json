@@ -1,0 +1,1790 @@
+{
+ "source": "Chosen for each emotion from the Quran (Uthmani Arabic, Saheeh International, Fateh Muhammad Jalandhry; part-verses cut to the same words in all three), hadith graded sahih or hasan in HadeethEnc's published English and Urdu (in full, unmodified), and duas from the bundled Hisn al-Muslim, listed by number.",
+ "header": {
+  "reference": "65:3",
+  "translation": {
+   "en": "And whoever relies upon Allah - then He is sufficient for him.",
+   "ur": "اور جو خدا پر بھروسہ رکھے گا تو وہ اس کو کفایت کرے گا۔"
+  }
+ },
+ "emotions": [
+  {
+   "id": "angry",
+   "title": "Angry",
+   "verses": [
+    {
+     "reference": "3:134",
+     "arabic": "ٱلَّذِينَ يُنفِقُونَ فِى ٱلسَّرَّآءِ وَٱلضَّرَّآءِ وَٱلْكَٰظِمِينَ ٱلْغَيْظَ وَٱلْعَافِينَ عَنِ ٱلنَّاسِ ۗ وَٱللَّهُ يُحِبُّ ٱلْمُحْسِنِينَ",
+     "translation": {
+      "en": "Who spend [in the cause of Allah] during ease and hardship and who restrain anger and who pardon the people - and Allah loves the doers of good;",
+      "ur": "جو آسودگی اور تنگی میں (اپنا مال خدا کی راہ میں) خرچ کرتےہیں اور غصے کو روکتے اور لوگوں کے قصور معاف کرتے ہیں اور خدا نیکو کاروں کو دوست رکھتا ہے"
+     }
+    },
+    {
+     "reference": "42:37",
+     "arabic": "وَٱلَّذِينَ يَجْتَنِبُونَ كَبَٰٓئِرَ ٱلْإِثْمِ وَٱلْفَوَٰحِشَ وَإِذَا مَا غَضِبُوا۟ هُمْ يَغْفِرُونَ",
+     "translation": {
+      "en": "And those who avoid the major sins and immoralities, and when they are angry, they forgive,",
+      "ur": "اور جو بڑے بڑے گناہوں اور بےحیائی کی باتوں سے پرہیز کرتے ہیں۔ اور جب غصہ آتا ہے تو معاف کردیتے ہیں"
+     }
+    },
+    {
+     "reference": "7:199",
+     "arabic": "خُذِ ٱلْعَفْوَ وَأْمُرْ بِٱلْعُرْفِ وَأَعْرِضْ عَنِ ٱلْجَٰهِلِينَ",
+     "translation": {
+      "en": "Take what is given freely, enjoin what is good, and turn away from the ignorant.",
+      "ur": "(اے محمدﷺ) عفو اختیار کرو اور نیک کام کرنے کا حکم دو اور جاہلوں سے کنارہ کرلو"
+     }
+    },
+    {
+     "reference": "7:200",
+     "arabic": "وَإِمَّا يَنزَغَنَّكَ مِنَ ٱلشَّيْطَٰنِ نَزْغٌۭ فَٱسْتَعِذْ بِٱللَّهِ ۚ إِنَّهُۥ سَمِيعٌ عَلِيمٌ",
+     "translation": {
+      "en": "And if an evil suggestion comes to you from Satan, then seek refuge in Allah. Indeed, He is Hearing and Knowing.",
+      "ur": "اور اگر شیطان کی طرف سے تمہارے دل میں کسی طرح کا وسوسہ پیدا ہو تو خدا سے پناہ مانگو۔ بےشک وہ سننے والا (اور) سب کچھ جاننے والا ہے"
+     }
+    }
+   ],
+   "hadith": [
+    {
+     "arabic": "عن أبي هريرة رضي الله عنه: أَنَّ رَجُلًا قَالَ لِلنَّبِيِّ صَلَّى اللهُ عَلَيْهِ وَسَلَّمَ: أَوْصِنِي، قَالَ: «لَا تَغْضَبْ» فَرَدَّدَ مِرَارًا قَالَ: «لَا تَغْضَبْ».",
+     "translation": {
+      "en": "Abu Hurayrah (may Allah be pleased with him) reported: A man came to the Prophet (may Allah's peace and blessings be upon him) and said: \"Advise me.\" He said: \"Do not get angry.\" He repeated that several times, and every time, he would say: \"Do not get angry.\"",
+      "ur": "ابوہریرہ رضی اللہ عنہ سے روایت ہے وہ کہتے ہیں : ایک شخص نے اللہ کے نبی ﷺ سے عرض کیا کہ مجھے کوئی نصیحت کریں، تو آپ ﷺ نے فرمایا: ”غصہ مت کیا کرو“۔ اس نے یہ سوال بار بار دہرایا اور آپ ﷺ ہر بار یہی فرماتے رہے کہ غصہ مت کیا کرو۔"
+     },
+     "attribution": {
+      "en": "Narrated by Al-Bukhāri",
+      "ur": "رواه البخاري"
+     },
+     "grade": {
+      "en": "Authentic",
+      "ur": "صحيح"
+     },
+     "source": "HadeethEnc.com"
+    },
+    {
+     "arabic": "عن أبي هريرة رضي الله عنه أن رسول الله صلى الله عليه وسلم قال: «لَيْسَ الشَّدِيدُ بِالصُّرَعَةِ، إِنَّمَا الشَّدِيدُ الَّذِي يَمْلِكُ نَفْسَهُ عِنْدَ الْغَضَبِ».",
+     "translation": {
+      "en": "Abu Hurayrah (may Allah be pleased with him) reported: The Messenger of Allah (may Allah's peace and blessings be upon him) said: \"The strong man is not the one who can overpower others; rather, the strong man is the one who controls himself when he is angry.\"",
+      "ur": "ابوھریرہ رضی اللہ عنہ سے روایت ہے کہ اللہ کے رسول ﷺ نے فرمایا: ”طاقتور وہ نہیں جو کسی کو پچھاڑ دیتا ہو، بلکہ طاقتور وہ ہے، جو غصّہ کے وقت اپنے آپ پر قابو رکھے“۔"
+     },
+     "attribution": {
+      "en": "Agreed upon",
+      "ur": "متفق عليه"
+     },
+     "grade": {
+      "en": "Authentic",
+      "ur": "صحيح"
+     },
+     "source": "HadeethEnc.com"
+    },
+    {
+     "arabic": "عَنْ سُلَيْمَانَ بْنِ صُرَدٍ رضي الله عنه قَالَ: كُنْتُ جَالِسًا مَعَ النَّبِيِّ صَلَّى اللهُ عَلَيْهِ وَسَلَّمَ وَرَجُلاَنِ يَسْتَبَّانِ، فَأَحَدُهُمَا احْمَرَّ وَجْهُهُ، وَانْتَفَخَتْ أَوْدَاجُهُ، فَقَالَ النَّبِيُّ صَلَّى اللهُ عَلَيْهِ وَسَلَّمَ: «إِنِّي لَأَعْلَمُ كَلِمَةً لَوْ قَالَهَا ذَهَبَ عَنْهُ مَا يَجِدُ، لَوْ قَالَ: أَعُوذُ بِاللَّهِ مِنَ الشَّيْطَانِ، ذَهَبَ عَنْهُ مَا يَجِدُ» فَقَالُوا لَهُ: إِنَّ النَّبِيَّ صَلَّى اللهُ عَلَيْهِ وَسَلَّمَ قَالَ: «تَعَوَّذْ بِاللَّهِ مِنَ الشَّيْطَانِ»، فَقَالَ: وَهَلْ بِي جُنُونٌ؟",
+     "translation": {
+      "en": "Sulaymān ibn Surad (may Allah be pleased with him) reported: I was sitting with the Prophet (may Allah's peace and blessings be upon him) when two men started to insult each other, and the face of one of them turned red and his jugular veins got swollen. The Prophet (may Allah's peace and blessings be upon him) said: \"Verily, I know a word; if he said it, his rage would go away. If he said: I seek refuge with Allah from the devil, his rage would go away.\" They said to him: The Prophet (may Allah's peace and blessings be upon him) said: \"Seek refuge with Allah from the devil.\" Thereupon he said: Am I mad?",
+      "ur": "سلیمان بن صُرَد رضی اللہ عنہ سے روایت ہے، وہ کہتے ہيں: میں اللہ کے نبی ﷺ کے ساتھ بیٹھا ہوا تھا اور (قریب ہی) دو آدمی آپس میں گالی گلوج کر رہے تھے۔ ان میں سے ایک شخص کا چہرہ (مارے غصے کے) سرخ ہو گیا تھا اور اس کی رگیں پھول گئیں تھیں۔ چنانچہ رسول اللہ ﷺ نے فرمایا: \"مجھے ایک ایسا کلمہ معلوم ہے کہ اگر یہ شخص اسے پڑھ لے، تو اس کا غصہ دور ہو جائے\"۔ فرمایا: \"اگر یہ شخص کہے: ”أَعُوذُ بِاللَّهِ مِنَ الشَّيْطَانِ الرجیم“ (میں شیطان مردود سے اللہ کی پناہ میں آتا ہوں) تو اس کا غصہ ختم ہو جائے گا\"۔ چنانچہ لوگوں نے اس سے کہا کہ اللہ کے نبی ﷺ نے فرمایا کہ تم شیطان مردود سے اللہ کی پناہ طلب کرو، تو اس نے کہا: کیا مجھے جنون لاحق ہے؟"
+     },
+     "attribution": {
+      "en": "Agreed upon",
+      "ur": "متفق عليه"
+     },
+     "grade": {
+      "en": "Authentic",
+      "ur": "صحيح"
+     },
+     "source": "HadeethEnc.com"
+    },
+    {
+     "arabic": "عن معاذ بن أنس رضي الله عنه مرفوعًا: «مَن كَظَمَ غَيظًا، وَهُو قادر على أن يُنفِذَه، دَعَاه الله سبحانه وتعالى على رؤوس الخَلاَئِق يوم القيامة حتَّى يُخَيِّره من الحُور العَين مَا شَاء».",
+     "translation": {
+      "en": "Mu‘ādh ibn Anas (may Allah be pleased with him) reported that the Prophet (may Allah's peace and blessings be upon him) said: \"Whoever suppresses his rage while being able to vent it, Allah, Glorified and Exalted, will call him before the entire creation on the Day of Judgment so that he can choose whomever of the houris he wishes to have.”",
+      "ur": "معاذ ابن انس رضی اللہ عنہ سے روایت ہے کہ رسول اللہ ﷺ نے فرمایا: ”جو شخص اپنے غصے کو پورا کرنے کی قدرت ہونے کے باجود اسے دبا لیتا ہے، اسے اللہ سبحانہ و تعالی روز قیامت سب مخلوق کے سامنے بلائیں گے اور اختیار دیں گے کہ جنت کی بڑی آنکھوں والی حوروں میں سے جسے چاہے، چن لے۔"
+     },
+     "attribution": {
+      "en": "Narrated by Ibn Majah - Narrated by At-Termedhy - Narrated by Abu Daoud - Narrated by Ahmad",
+      "ur": "اسے ابنِ ماجہ نے روایت کیا ہے۔ - اسے امام ترمذی نے روایت کیا ہے۔ - اسے امام ابو داؤد نے روایت کیا ہے۔ - اسے امام احمد نے روایت کیا ہے۔"
+     },
+     "grade": {
+      "en": "Hasan/Sound by virtue of corroborating evidence",
+      "ur": "حَسَن لغيره"
+     },
+     "source": "HadeethEnc.com"
+    }
+   ],
+   "duas": [
+    193
+   ]
+  },
+  {
+   "id": "anxious",
+   "title": "Anxious",
+   "verses": [
+    {
+     "reference": "13:28",
+     "arabic": "ٱلَّذِينَ ءَامَنُوا۟ وَتَطْمَئِنُّ قُلُوبُهُم بِذِكْرِ ٱللَّهِ ۗ أَلَا بِذِكْرِ ٱللَّهِ تَطْمَئِنُّ ٱلْقُلُوبُ",
+     "translation": {
+      "en": "Those who have believed and whose hearts are assured by the remembrance of Allah. Unquestionably, by the remembrance of Allah hearts are assured.\"",
+      "ur": "(یعنی) جو لوگ ایمان لاتے اور جن کے دل یادِ خدا سے آرام پاتے ہیں (ان کو) اور سن رکھو کہ خدا کی یاد سے دل آرام پاتے ہیں"
+     }
+    },
+    {
+     "reference": "9:51",
+     "arabic": "قُل لَّن يُصِيبَنَآ إِلَّا مَا كَتَبَ ٱللَّهُ لَنَا هُوَ مَوْلَىٰنَا ۚ وَعَلَى ٱللَّهِ فَلْيَتَوَكَّلِ ٱلْمُؤْمِنُونَ",
+     "translation": {
+      "en": "Say, \"Never will we be struck except by what Allah has decreed for us; He is our protector.\" And upon Allah let the believers rely.",
+      "ur": "کہہ دو کہ ہم کو کوئی مصیبت نہیں پہنچ سکتی بجز اس کے جو خدا نے ہمارے لیے لکھ دی ہو وہی ہمارا کارساز ہے۔ اور مومنوں کو خدا ہی کا بھروسہ رکھنا چاہیئے"
+     }
+    },
+    {
+     "reference": "3:173",
+     "arabic": "ٱلَّذِينَ قَالَ لَهُمُ ٱلنَّاسُ إِنَّ ٱلنَّاسَ قَدْ جَمَعُوا۟ لَكُمْ فَٱخْشَوْهُمْ فَزَادَهُمْ إِيمَٰنًۭا وَقَالُوا۟ حَسْبُنَا ٱللَّهُ وَنِعْمَ ٱلْوَكِيلُ",
+     "translation": {
+      "en": "Those to whom hypocrites said, \"Indeed, the people have gathered against you, so fear them.\" But it [merely] increased them in faith, and they said, \"Sufficient for us is Allah, and [He is] the best Disposer of affairs.\"",
+      "ur": "(جب) ان سے لوگوں نے آکر بیان کیا کہ کفار نے تمہارے (مقابلے کے) لئے لشکر کثیر) جمع کیا ہے تو ان سے ڈرو۔ تو ان کا ایمان اور زیادہ ہوگیا۔ اور کہنے لگے ہم کو خدا کافی ہے اور وہ بہت اچھا کارساز ہے"
+     }
+    },
+    {
+     "reference": "2:286",
+     "arabic": "لَا يُكَلِّفُ ٱللَّهُ نَفْسًا إِلَّا وُسْعَهَا ۚ لَهَا مَا كَسَبَتْ وَعَلَيْهَا مَا ٱكْتَسَبَتْ ۗ رَبَّنَا لَا تُؤَاخِذْنَآ إِن نَّسِينَآ أَوْ أَخْطَأْنَا ۚ رَبَّنَا وَلَا تَحْمِلْ عَلَيْنَآ إِصْرًۭا كَمَا حَمَلْتَهُۥ عَلَى ٱلَّذِينَ مِن قَبْلِنَا ۚ رَبَّنَا وَلَا تُحَمِّلْنَا مَا لَا طَاقَةَ لَنَا بِهِۦ ۖ وَٱعْفُ عَنَّا وَٱغْفِرْ لَنَا وَٱرْحَمْنَآ ۚ أَنتَ مَوْلَىٰنَا فَٱنصُرْنَا عَلَى ٱلْقَوْمِ ٱلْكَٰفِرِينَ",
+     "translation": {
+      "en": "Allah does not charge a soul except [with that within] its capacity. It will have [the consequence of] what [good] it has gained, and it will bear [the consequence of] what [evil] it has earned. \"Our Lord, do not impose blame upon us if we have forgotten or erred. Our Lord, and lay not upon us a burden like that which You laid upon those before us. Our Lord, and burden us not with that which we have no ability to bear. And pardon us; and forgive us; and have mercy upon us. You are our protector, so give us victory over the disbelieving people.\"",
+      "ur": "خدا کسی شخص کو اس کی طاقت سے زیادہ تکلیف نہیں دیتا۔ اچھے کام کرے گا تو اس کو ان کا فائدہ ملے گا برے کرے گا تو اسے ان کا نقصان پہنچے گا۔ اے پروردگار اگر ہم سے بھول یا چوک ہوگئی ہو تو ہم سے مؤاخذہ نہ کیجیو۔ اے پروردگار ہم پر ایسا بوجھ نہ ڈالیو جیسا تو نے ہم سے پہلے لوگوں پر ڈالا تھا۔ اے پروردگار جتنا بوجھ اٹھانے کی ہم میں طاقت نہیں اتنا ہمارے سر پر نہ رکھیو۔ اور (اے پروردگار) ہمارے گناہوں سے درگزر کر اور ہمیں بخش دے۔ اور ہم پر رحم فرما۔ تو ہی ہمارا مالک ہے اور ہم کو کافروں پر غالب فرما"
+     }
+    },
+    {
+     "reference": "64:11",
+     "arabic": "مَآ أَصَابَ مِن مُّصِيبَةٍ إِلَّا بِإِذْنِ ٱللَّهِ ۗ وَمَن يُؤْمِنۢ بِٱللَّهِ يَهْدِ قَلْبَهُۥ ۚ وَٱللَّهُ بِكُلِّ شَىْءٍ عَلِيمٌۭ",
+     "translation": {
+      "en": "No disaster strikes except by permission of Allah. And whoever believes in Allah - He will guide his heart. And Allah is Knowing of all things.",
+      "ur": "کوئی مصیبت نازل نہیں ہوتی مگر خدا کے حکم سے۔ اور جو شخص خدا پر ایمان لاتا ہے وہ اس کے دل کو ہدایت دیتا ہے۔ اور خدا ہر چیز سے باخبر ہے"
+     }
+    }
+   ],
+   "hadith": [
+    {
+     "arabic": "عَنْ عُمَرَ بْنِ الخَطَّابِ رَضِيَ اللَّهُ عَنْهُ عَنِ النَّبِيِّ صَلَّى اللَّهُ عَلَيْهِ وَسَلَّمَ قَالَ: «لَوْ أَنَّكُمْ كُنْتُمْ تَوَكَّلُونَ عَلَى اللهِ حَقَّ تَوَكُّلِهِ لَرَزَقَكُمْ كَمَا يَرْزَقُ الطَّيْرَ تَغْدُو خِمَاصًا وَتَرُوحُ بِطَانًا».",
+     "translation": {
+      "en": "‘Umar ibn al-Khattāb (may Allah be pleased with him) reported that the Prophet (ﷺ) said: \"If only you relied on Allah the way you should, He would provide for you as He provides for birds; they set out hungry in the morning and return satiated in the evening.\"",
+      "ur": "عمر بن خطاب رضی اللہ عنہ سے روایت ہے کہ نبی کریم ﷺ  نے فرمایا: ”اگر تم اللہ تعالیٰ پر ویسا ہی توکّل (بھروسہ) کرو جیسا کہ اس پر توکّل کرنے کا حق ہے، تو وہ تمہیں ایسے رزق دے گا جیسے پرندوں کو دیتا ہے۔ وہ صبح كو خالی پیٹ نکلتے ہیں اور شام کو پیٹ بھر کر لوٹتے ہیں۔“"
+     },
+     "attribution": {
+      "en": "Narrated by Imam Ahmad, At-Tirmidhi, An-Nasā’i, Ibn Mājah, Ibn Hibbān in his Sahih, and Al-Hākim",
+      "ur": "اسے احمد، ترمذی، نسائی، ابن ماجہ، ابن حبان نے اپنی صحیح میں اور حاکم نے روایت کیا ہے۔"
+     },
+     "grade": {
+      "en": "Authentic",
+      "ur": "صحيح"
+     },
+     "source": "HadeethEnc.com"
+    },
+    {
+     "arabic": "عَنْ أَبِي العَبَّاسِ، عَبْدِ الله بْنِ عَبَّاسٍ رَضِيَ اللَّهُ عَنْهُمَا قَالَ: كُنْت خَلْفَ رَسُولِ اللَّهِ صَلَّى اللهُ عَلَيْهِ وَسَلَّمَ يَوْمًا، فَقَالَ: «يَا غُلَامِ! إنِّي أُعَلِّمُك كَلِمَاتٍ: احْفَظِ اللَّهَ يَحْفَظْكَ، احْفَظِ الله تَجِدْهُ تُجَاهَكَ، إذَا سَأَلْتَ فَاسْأَلِ اللهَ، وَإِذَا اسْتَعَنْتَ فَاسْتَعِنْ بِاَللهِ، وَاعْلَمْ أَنَّ الأُمَّةَ لَوْ اجْتَمَعَتْ عَلَى أَنْ يَنْفَعُوكَ بِشَيْءٍ لَمْ يَنْفَعُوكَ إلَّا بِشَيْءٍ قَدْ كَتَبَهُ اللَّهُ لَكَ، وَإِنِ اجْتَمَعُوا عَلَى أَنْ يَضُرُّوكَ بِشَيْءٍ لَمْ يَضُرُّوكَ إلَّا بِشَيْءٍ قَدْ كَتَبَهُ اللَّهُ عَلَيْكَ؛ رُفِعَتِ الأَقْلَامُ، وَجَفَّتِ الصُّحُفُ».\nوَفِي رِوَايَةِ غَيْرِ التِّرْمِذِيِّ: «احْفَظِ اللهَ تَجِدْهُ أَمَامَكَ، تَعَرَّفْ إلَى اللهِ فِي الرَّخَاءِ يَعْرِفْكَ فِي الشِّدَّةِ، وَاعْلَمْ أَنَّ مَا أَخْطَأَكَ لَمْ يَكُنْ لِيُصِيبَكَ، وَمَا أَصَابَك لَمْ يَكُنْ لِيُخْطِئَكَ، وَاعْلَمْ أَنَّ النَّصْرَ مَعَ الصَّبْرِ، وَأَنْ الفَرَجَ مَعَ الكَرْبِ، وَأَنَّ مَعَ العُسْرِ يُسْرًا».",
+     "translation": {
+      "en": "Abu al-‘Abbās, ‘Abdullah ibn ‘Abbās (may Allah be pleased with him and his father) reported: I was riding behind the Messenger of Allah (ﷺ) one day and he said: \"Hey boy, I shall teach you some words: Be mindful of Allah, and Allah will protect you. Be mindful of Allah, and you will find Him at your side. If you ask, ask Allah; if you seek help, seek help from Allah. And know that if the whole people gathered to benefit you with something, they would not benefit you except with what Allah has decreed for you, and if they gathered to harm you with something, they would not harm you except with what Allah has decreed against you. The pens have been lifted, and the scrolls have dried.\" In another version by other than At-Tirmidhi, it reads: \"Be mindful of Allah, you will find Him before you. Recognize Allah at the time of prosperity, and He will recognize you at the time of adversity. And know that what had missed you was not going to befall you, and what had befallen you was not going to miss you. And know that victory comes with patience, relief comes with distress, and ease comes with hardship.\"",
+      "ur": "ابو العباس عبداللہ بن عباس رضی اللہ عنہما سے روایت ہے، وہ کہتے ہيں: ایک دن میں اللہ کے رسول ﷺ کے پیچھے سواری پر بیٹھا تھا کہ آپ نے فرمایا: ”اے لڑکے! میں تجھے چند (اہم) باتیں بتلاتا ہوں (انھیں یاد رکھ): تو اللہ (کے احکام) کی حفاظت کر! وہ تیری حفاظت فرمائے گا۔ تو اللہ (کے حقوق) کا خیال رکھ، تو اسے اپنے سامنے پائے گا۔ جب تو مانگے تو صرف اللہ سے مانگ، اور جب تو مدد طلب کرے تو صرف اللہ سے مدد طلب کر۔ اور یہ بات جان لے کہ اگر ساری امت بھی اکٹھا ہو کر تجھے کچھ نفع پہنچانا چاہے تو اس سے زیادہ کچھ نفع نہیں پہنچا سکتی جو اللہ نے تیرے لیے لکھ دیا ہے، اور اگر وہ تجھے کچھ نقصان پہنچانے کے لیے اکٹھا ہو جائے، تو اس سے زیادہ کچھ نقصان نہیں پہنچا سکتی، جو اللہ نے تیرے لیے لکھ دیا ہے۔ قلم اٹھا لیے گئے ہیں اور صحیفے خشک ہو گئے ہيں۔“ جب کہ ترمذی کے علاوہ ایک دوسری روایت میں ہے: ”تو اللہ (کے حقوق) کا خیال رکھ، تو اسے اپنے سامنے پائے گا۔ تو خوش حالی میں اللہ کو پہچان اور اس کی طرف توجہ رکھ، وہ تجھے سختی اور مصیبت میں پہچانے گا، جان لے کہ جو کچھ تجھ سے چوک گیا وہ تجھے پہنچنے والا نہ تھا، اور جو کچھ تجھے پہنچ گیا وہ تجھ سے چوکنے والا نہیں تھا۔ نیز جان لے کہ (اللہ کی) مدد صبر کے ساتھ ہے‘ کشادگی تکلیف کے ساتھ ہے اور دشواری کے ساتھ آسانی ہے۔“"
+     },
+     "attribution": {
+      "en": "Narrated by At-Tirmidhi and others",
+      "ur": "اسے ترمذی وغیرہ نے روایت کیا ہے۔"
+     },
+     "grade": {
+      "en": "Authentic",
+      "ur": "صحيح"
+     },
+     "source": "HadeethEnc.com"
+    },
+    {
+     "arabic": "عَنِ ابْنِ عَبَّاسٍ رضي الله عنهما: أَنَّ نَبِيَّ اللهِ صَلَّى اللهُ عَلَيْهِ وَسَلَّمَ كَانَ يَقُولُ عِنْدَ الْكَرْبِ: «لَا إِلَهَ إِلَّا اللهُ الْعَظِيمُ الْحَلِيمُ، لَا إِلَهَ إِلَّا اللهُ رَبُّ الْعَرْشِ الْعَظِيمِ، لَا إِلَهَ إِلَّا اللهُ رَبُّ السَّمَاوَاتِ وَرَبُّ الْأَرْضِ وَرَبُّ الْعَرْشِ الْكَرِيمِ».",
+     "translation": {
+      "en": "Ibn ‘Abbās (may Allah be pleased with him and his father) reported: The Prophet of Allah (may Allah's peace and blessings be upon him) used to say during times of distress: \"There is no god but Allah, the Most Great, the Forbearing. There is no god but Allah, the Lord of the Mighty Throne. There is no god but Allah, the Lord of the heavens, the Lord of the earth, and the Lord of the Noble Throne.\"",
+      "ur": "عبداللہ بن عباس رضی اللہ عنہما سے روایت ہے: رسول اللہ ﷺ پریشانی کے وقت یہ دعا پڑھا کرتے تھے: ”لَا إِلَهَ إِلَّا اللَّهُ الْعَظِيمُ الْحَلِيمُ، لَا إِلَهَ إِلَّا اللَّهُ رَبُّ الْعَرْشِ الْعَظِيمِ، لَا إِلَهَ إِلَّا اللَّهُ رَبُّ السَّمَوَاتِ وَرَبُّ الْأَرْضِ، وَرَبُّ الْعَرْشِ الْكَرِيمِ“۔ (اللہ کے سوا کوئی معبودِ برحق نہیں، جو عظمت والا اور بُردْبار ہے۔ اللہ کے سوا کوئی معبودِ برحق نہیں، جو عرش عظیم کا رب ہے۔ اللہ کے سوا کوئی معبودِ برحق نہیں جو آسمانوں کا رب ہے، زمین کا رب ہے اور  مقام وشرف والے عرش کا رب ہے۔)"
+     },
+     "attribution": {
+      "en": "Agreed upon",
+      "ur": "متفق عليه"
+     },
+     "grade": {
+      "en": "Authentic",
+      "ur": "صحيح"
+     },
+     "source": "HadeethEnc.com"
+    }
+   ],
+   "duas": [
+    121,
+    128
+   ]
+  },
+  {
+   "id": "bored",
+   "title": "Bored",
+   "verses": [
+    {
+     "reference": "94:7",
+     "arabic": "فَإِذَا فَرَغْتَ فَٱنصَبْ",
+     "translation": {
+      "en": "So when you have finished [your duties], then stand up [for worship].",
+      "ur": "تو جب فارغ ہوا کرو تو (عبادت میں) محنت کیا کرو"
+     }
+    },
+    {
+     "reference": "94:8",
+     "arabic": "وَإِلَىٰ رَبِّكَ فَٱرْغَب",
+     "translation": {
+      "en": "And to your Lord direct [your] longing.",
+      "ur": "اور اپنے پروردگار کی طرف متوجہ ہو جایا کرو"
+     }
+    },
+    {
+     "reference": "103:1",
+     "arabic": "بِسْمِ ٱللَّهِ ٱلرَّحْمَٰنِ ٱلرَّحِيمِ وَٱلْعَصْرِ",
+     "translation": {
+      "en": "By time,",
+      "ur": "عصر کی قسم"
+     }
+    },
+    {
+     "reference": "103:2",
+     "arabic": "إِنَّ ٱلْإِنسَٰنَ لَفِى خُسْرٍ",
+     "translation": {
+      "en": "Indeed, mankind is in loss,",
+      "ur": "کہ انسان نقصان میں ہے"
+     }
+    },
+    {
+     "reference": "103:3",
+     "arabic": "إِلَّا ٱلَّذِينَ ءَامَنُوا۟ وَعَمِلُوا۟ ٱلصَّٰلِحَٰتِ وَتَوَاصَوْا۟ بِٱلْحَقِّ وَتَوَاصَوْا۟ بِٱلصَّبْرِ",
+     "translation": {
+      "en": "Except for those who have believed and done righteous deeds and advised each other to truth and advised each other to patience.",
+      "ur": "مگر وہ لوگ جو ایمان لائے اور نیک عمل کرتے رہے اور آپس میں حق (بات) کی تلقین اور صبر کی تاکید کرتے رہے"
+     }
+    },
+    {
+     "reference": "23:115",
+     "arabic": "أَفَحَسِبْتُمْ أَنَّمَا خَلَقْنَٰكُمْ عَبَثًۭا وَأَنَّكُمْ إِلَيْنَا لَا تُرْجَعُونَ",
+     "translation": {
+      "en": "Then did you think that We created you uselessly and that to Us you would not be returned?\"",
+      "ur": "کیا تم یہ خیال کرتے ہو کہ ہم نے تم کو بےفائدہ پیدا کیا ہے اور یہ تم ہماری طرف لوٹ کر نہیں آؤ گے؟"
+     }
+    }
+   ],
+   "hadith": [
+    {
+     "arabic": "عَنِ ابْنِ عَبَّاسٍ رَضِيَ اللَّهُ عَنْهُمَا قَالَ: قَالَ النَّبِيُّ صَلَّى اللهُ عَلَيْهِ وَسَلَّمَ: «نِعْمَتَانِ مَغْبُونٌ فِيهِمَا كَثِيرٌ مِنَ النَّاسِ: الصِّحَّةُ وَالفَرَاغُ».",
+     "translation": {
+      "en": "Ibn ‘Abbās (may Allah be pleased with him and his father) reported: The Prophet (may Allah's peace and blessings be upon him) said: \"There are two blessings in which many people incur loss: health and free time.\"",
+      "ur": "عبداللہ بن عباس رضی اللہ عنہما سے روایت ہے، وہ کہتے ہیں کہ اللہ کے رسول صلی اللہ علیہ و سلم نے فرمایا: \"دونعمتیں ایسی ہیں، جن کے بارے میں بہت سارے لوگ (ان کے غلط استعمال کی وجہ سے) خسارے اور گھاٹے میں رہتے ہیں۔ صحت اور فراغت\""
+     },
+     "attribution": {
+      "en": "Narrated by Al-Bukhāri",
+      "ur": "رواه البخاري"
+     },
+     "grade": {
+      "en": "Authentic",
+      "ur": "صحيح"
+     },
+     "source": "HadeethEnc.com"
+    },
+    {
+     "arabic": "عَنْ عَبْدِ اللَّهِ بْنِ عُمَرَ رَضِيَ اللَّهُ عَنْهُمَا قَالَ: أَخَذَ رَسُولُ اللَّهِ صَلَّى اللهُ عَلَيْهِ وَسَلَّمَ بِمَنْكِبِي، فَقَالَ: «كُنْ فِي الدُّنْيَا كَأَنَّكَ غَرِيبٌ أَوْ عَابِرُ سَبِيلٍ»، وَكَانَ ابْنُ عُمَرَ، يَقُولُ: إِذَا أَمْسَيْتَ فَلاَ تَنْتَظِرِ الصَّبَاحَ، وَإِذَا أَصْبَحْتَ فَلاَ تَنْتَظِرِ المَسَاءَ، وَخُذْ مِنْ صِحَّتِكَ لِمَرَضِكَ، وَمِنْ حَيَاتِكَ لِمَوْتِكَ.",
+     "translation": {
+      "en": "‘Abdullah ibn ‘Umar (may Allah be pleased with him and his father) reported: The Messenger of Allah (may Allah's peace and blessings be upon him) took me by the shoulder and said: \"Be in this world as if you are a stranger or a wayfarer.\" Ibn ‘Umar used to say: If you reach the evening, do not wait for the morning, and if you reach the morning, do not wait for the evening. Take from your health for your sickness and from your life for your death.",
+      "ur": "عبد اللہ بن عمر رضی اللہ عنہما بيان کرتے ہيں کہ رسول الله ﷺ نے میرا کندھا پکڑ کر فرمایا : ”دنیا میں ایسے رہو، جیسے ایک اجنبی یا راہ گیر ہو“۔ عبداللہ بن عمر رضی اللہ تعالی عنہما فرمايا کرتے تھے: ”جب تم شام کرو تو صبح کا انتظار نہ کرو اور جب صبح کرو تو شام کا انتظار نہ کرو۔ اپنی صحت وتندرستی کے زمانے ميں بيماری کے ليے اور اپنی زندگی ميں موت کے ليے تيارى كرلو“۔"
+     },
+     "attribution": {
+      "en": "Narrated by Al-Bukhāri",
+      "ur": "رواه البخاري"
+     },
+     "grade": {
+      "en": "Authentic",
+      "ur": "صحيح"
+     },
+     "source": "HadeethEnc.com"
+    }
+   ],
+   "duas": []
+  },
+  {
+   "id": "confident",
+   "title": "Confident",
+   "verses": [
+    {
+     "reference": "31:18",
+     "arabic": "وَلَا تُصَعِّرْ خَدَّكَ لِلنَّاسِ وَلَا تَمْشِ فِى ٱلْأَرْضِ مَرَحًا ۖ إِنَّ ٱللَّهَ لَا يُحِبُّ كُلَّ مُخْتَالٍۢ فَخُورٍۢ",
+     "translation": {
+      "en": "And do not turn your cheek [in contempt] toward people and do not walk through the earth exultantly. Indeed, Allah does not like everyone self-deluded and boastful.",
+      "ur": "اور (ازراہ غرور) لوگوں سے گال نہ پھلانا اور زمین میں اکڑ کر نہ چلنا۔ کہ خدا کسی اترانے والے خود پسند کو پسند نہیں کرتا"
+     }
+    },
+    {
+     "reference": "17:37",
+     "arabic": "وَلَا تَمْشِ فِى ٱلْأَرْضِ مَرَحًا ۖ إِنَّكَ لَن تَخْرِقَ ٱلْأَرْضَ وَلَن تَبْلُغَ ٱلْجِبَالَ طُولًۭا",
+     "translation": {
+      "en": "And do not walk upon the earth exultantly. Indeed, you will never tear the earth [apart], and you will never reach the mountains in height.",
+      "ur": "اور زمین پر اکڑ کر (اور تن کر) مت چل کہ تو زمین کو پھاڑ تو نہیں ڈالے گا اور نہ لمبا ہو کر پہاڑوں (کی چوٹی) تک پہنچ جائے گا"
+     }
+    },
+    {
+     "reference": "53:32",
+     "arabic": "فَلَا تُزَكُّوٓا۟ أَنفُسَكُمْ ۖ هُوَ أَعْلَمُ بِمَنِ ٱتَّقَىٰٓ",
+     "translation": {
+      "en": "So do not claim yourselves to be pure; He is most knowing of who fears Him.",
+      "ur": "تو اپنے آپ کو پاک صاف نہ جتاؤ۔ جو پرہیزگار ہے وہ اس سے خوب واقف ہے"
+     }
+    },
+    {
+     "reference": "18:23",
+     "arabic": "وَلَا تَقُولَنَّ لِشَا۟ىْءٍ إِنِّى فَاعِلٌۭ ذَٰلِكَ غَدًا",
+     "translation": {
+      "en": "And never say of anything, \"Indeed, I will do that tomorrow,\"",
+      "ur": "اور کسی کام کی نسبت نہ کہنا کہ میں اسے کل کردوں گا"
+     }
+    },
+    {
+     "reference": "18:24",
+     "arabic": "إِلَّآ أَن يَشَآءَ ٱللَّهُ ۚ وَٱذْكُر رَّبَّكَ إِذَا نَسِيتَ وَقُلْ عَسَىٰٓ أَن يَهْدِيَنِ رَبِّى لِأَقْرَبَ مِنْ هَٰذَا رَشَدًۭا",
+     "translation": {
+      "en": "Except [when adding], \"If Allah wills.\" And remember your Lord when you forget [it] and say, \"Perhaps my Lord will guide me to what is nearer than this to right conduct.\"",
+      "ur": "مگر (انشاء الله کہہ کر یعنی اگر) خدا چاہے تو (کردوں گا) اور جب خدا کا نام لینا بھول جاؤ تو یاد آنے پر لے لو۔ اور کہہ دو کہ امید ہے کہ میرا پروردگار مجھے اس سے بھی زیادہ ہدایت کی باتیں بتائے"
+     }
+    }
+   ],
+   "hadith": [
+    {
+     "arabic": "عن عبد الله بن مسعود رضي الله عنه عن النبيِّ صلى الله عليه وسلم ، قَالَ: «لا يدخلُ الجنةَ مَن كان في قلبه مِثقال ذرةٍ من كِبر» فقال رجل: إنّ الرجلَ يحب أن يكون ثوبه حسنا، ونَعله حسنة؟ قال: «إنّ الله جميلٌ يحب الجمالَ، الكِبر: بَطَرُ الحق وغَمْطُ الناس».",
+     "translation": {
+      "en": "‘Abdullāh ibn Mas‘ūd (may Allah be pleased with him) reported that the Prophet (may Allah's peace and blessings be upon him) said: \"Anyone has an atom's weight of arrogance in his heart will not enter Paradise.\" A man said:\" What if one likes his clothes and shoes to look good?\" He said: \"Verily, Allah is beautiful and He loves beauty. Arrogance is to reject the truth and look down on people.\"",
+      "ur": "عبد اللہ بن مسعود رضی اللہ عنہ سے روایت ہے کہ نبی ﷺ نے فرمایا: ”وہ شخص جنت میں داخل نہیں ہوگا جس کے دل میں رائی برابر بھی تکبر ہوگا“، ایک شخص نے دریافت کیا کہ: آدمی پسند کرتا ہے کہ اس کے کپڑے اور جوتے عمدہ ہوں۔(کیا یہ بھی تکبر کے زمرے میں آتا ہے)؟۔ آپ ﷺ نے جواب دیا: ”اللہ خوبصورت ہے اور وہ خوبصورتی کو پسند کرتا ہے، تکبر کا مطلب ہے: حق کو ہٹ دھرمی کے ساتھ نہ ماننا اور لوگوں کو حقیر سمجھنا“۔"
+     },
+     "attribution": {
+      "en": "Narrated by Muslim",
+      "ur": "اسے امام مسلم نے روایت کیا ہے۔"
+     },
+     "grade": {
+      "en": "Authentic hadith",
+      "ur": "صحیح"
+     },
+     "source": "HadeethEnc.com"
+    },
+    {
+     "arabic": "عن أبي هريرة رضي الله عنه عن رسول الله صلى الله عليه وسلم قال: «مَا نَقَصَتْ صَدَقَةٌ مِنْ مَالٍ، وَمَا زَادَ اللهُ عَبْدًا بِعَفْوٍ إِلَّا عِزًّا، وَمَا تَوَاضَعَ أَحَدٌ لِلهِ إِلَّا رَفَعَهُ اللهُ».",
+     "translation": {
+      "en": "Abu Hurayrah (may Allah be pleased with him) reported: The Messenger of Allah (may Allah's peace and blessings be upon him) said: \"Charity does not diminish wealth, and Allah does not increase a servant, on account of his forgiveness, except in honor, and no one humbles himself seeking the pleasure of Allah except that Allah will elevate him.\"",
+      "ur": "ابو ہریرہ رضی اللہ عنہ سے روایت ہے کہ اللہ کے رسول صلی اللہ علیہ و سلم نے فرمایا : ”صدقہ مال کو گھٹاتا نہيں ہے، بندہ کے عفو و درگزر سے کام لینے سے اللہ اس کی عزت کو مزید بڑھاتا ہے اور جو آدمی اللہ کے لیے تواضع اختیار کرتا ہے، اللہ تعالی اسے بلندیوں سے نوازتا ہے“۔"
+     },
+     "attribution": {
+      "en": "Narrated by Muslim",
+      "ur": "رواه مسلم"
+     },
+     "grade": {
+      "en": "Authentic",
+      "ur": "صحيح"
+     },
+     "source": "HadeethEnc.com"
+    },
+    {
+     "arabic": "عن أبي هريرة رضي الله عنه مرفوعًا: «بينما رجل يمشي في حُلَّةٍ تُعْجِبُهُ نَفْسُهُ، مُرَجِّلٌ رأسه، يَخْتَالُ في مَشْيَتهِ، إذ خَسَفَ اللهُ به، فهو يَتَجَلْجَلُ في الأرض إلى يوم القيامة\".",
+     "translation": {
+      "en": "Abu Hurayrah (may Allah be pleased with him) reported that the Prophet (may Allah's peace and blessings be upon him) said: \"While a man was walking, dressed in fine clothes and admiring himself, with his hair well-combed and he was walking haughtily, suddenly Allah caused the earth to swallow him, and he continues to sink therein until the Day of Judgment.”",
+      "ur": "ابوہریرہ رضی اللہ عنہ سے روایت ہے کہ رسول اللہ ﷺ نے فرمایا: ”(بنی اسرائیل میں) ایک شخص ایک جوڑا پہن کر کبر و غرور میں سر مست ، سر کے بالوں میں کنگھی کیے ہوئے اکڑ کر اتراتا ہوا جا رہا تھا کہ اللہ تعالیٰ نے اسے زمین میں دھنسا دیا۔ اب وہ قیامت تک اس میں دھنستا رہے گا“۔"
+     },
+     "attribution": {
+      "en": "Narrated by Bukhari & Muslim",
+      "ur": "متفق علیہ"
+     },
+     "grade": {
+      "en": "Authentic hadith",
+      "ur": "صحیح"
+     },
+     "source": "HadeethEnc.com"
+    }
+   ],
+   "duas": [
+    88
+   ]
+  },
+  {
+   "id": "confused",
+   "title": "Confused",
+   "verses": [
+    {
+     "reference": "29:69",
+     "arabic": "وَٱلَّذِينَ جَٰهَدُوا۟ فِينَا لَنَهْدِيَنَّهُمْ سُبُلَنَا ۚ وَإِنَّ ٱللَّهَ لَمَعَ ٱلْمُحْسِنِينَ",
+     "translation": {
+      "en": "And those who strive for Us - We will surely guide them to Our ways. And indeed, Allah is with the doers of good.",
+      "ur": "اور جن لوگوں نے ہمارے لئے کوشش کی ہم اُن کو ضرور اپنے رستے دکھا دیں گے۔ اور خدا تو نیکو کاروں کے ساتھ ہے"
+     }
+    },
+    {
+     "reference": "8:29",
+     "arabic": "يَٰٓأَيُّهَا ٱلَّذِينَ ءَامَنُوٓا۟ إِن تَتَّقُوا۟ ٱللَّهَ يَجْعَل لَّكُمْ فُرْقَانًۭا وَيُكَفِّرْ عَنكُمْ سَيِّـَٔاتِكُمْ وَيَغْفِرْ لَكُمْ ۗ وَٱللَّهُ ذُو ٱلْفَضْلِ ٱلْعَظِيمِ",
+     "translation": {
+      "en": "O you who have believed, if you fear Allah, He will grant you a criterion and will remove from you your misdeeds and forgive you. And Allah is the possessor of great bounty.",
+      "ur": "مومنو! اگر تم خدا سے ڈرو گے تو وہ تمہارے لیے امر فارق پیدا کردے گا (یعنی تم کو ممتاز کردے گا) تو وہ تمہارے گناہ مٹادے گا اور تمہیں بخش دے گا۔ اور خدا بڑا فضل والا ہے"
+     }
+    },
+    {
+     "reference": "20:114",
+     "arabic": "وَقُل رَّبِّ زِدْنِى عِلْمًۭا",
+     "translation": {
+      "en": "and say, \"My Lord, increase me in knowledge.\"",
+      "ur": "اور دعا کرو کہ میرے پروردگار مجھے اور زیادہ علم دے"
+     }
+    },
+    {
+     "reference": "1:6",
+     "arabic": "ٱهْدِنَا ٱلصِّرَٰطَ ٱلْمُسْتَقِيمَ",
+     "translation": {
+      "en": "Guide us to the straight path -",
+      "ur": "ہم کو سیدھے رستے چلا"
+     }
+    },
+    {
+     "reference": "2:257",
+     "arabic": "ٱللَّهُ وَلِىُّ ٱلَّذِينَ ءَامَنُوا۟ يُخْرِجُهُم مِّنَ ٱلظُّلُمَٰتِ إِلَى ٱلنُّورِ",
+     "translation": {
+      "en": "Allah is the ally of those who believe. He brings them out from darknesses into the light.",
+      "ur": "جو لوگ ایمان لائے ہیں ان کا دوست خدا ہے کہ اُن کو اندھیرے سے نکال کر روشنی میں لے جاتا ہے"
+     }
+    }
+   ],
+   "hadith": [
+    {
+     "arabic": "عَنْ أَبِي عَبْدِ اللَّهِ النُّعْمَانِ بْنِ بَشِيرٍ رَضِيَ اللَّهُ عَنْهُ، قَالَ: سَمِعْتُ رَسُولَ اللَّهِ صَلَّى اللَّهُ عَلَيْهِ وَسَلَّم يَقُولُ: «إنَّ الحَلَالَ بَيِّنٌ، وَإِنَّ الحَرَامَ بَيِّنٌ، وَبَيْنَهُمَا مُشْتَبِهَاتٌ لَا يَعْلَمُهُنَّ كَثِيرٌ مِنَ النَّاسِ، فَمَنْ اتَّقَى الشُّبُهَاتِ اسْتَبْرَأَ لِدِينِهِ وَعِرْضِهِ، وَمَنْ وَقَعَ فِي الشُّبُهَاتِ وَقَعَ فِي الحَرَامِ، كَالرَّاعِي يَرْعَى حَوْلَ الحِمَى يُوشِكُ أَنْ يَرْتَعَ فِيهِ، أَلَا وَإِنَّ لِكُلِّ مَلِكٍ حِمًى، أَلَّا وَإِنَّ حِمَى اللَّهِ مَحَارِمُهُ، أَلَّا وَإِنَّ فِي الجَسَدِ مُضْغَةً إذَا صَلَحَتْ صَلَحَ الجَسَدُ كُلُّهُ، وَإذَا فَسَدَتْ فَسَدَ الجَسَدُ كُلُّهُ، أَلَا وَهِيَ القَلْبُ».",
+     "translation": {
+      "en": "Abu ‘Abdullah an-Nu‘mān ibn Bashīr (may Allah be pleased with him) reported: I heard the Messenger of Allah (ﷺ) say: \"Verily, the lawful is clear, and the unlawful is clear, and between them are doubtful matters many people do not know. Whoever avoids doubtful matters clears his liability regarding his religion and his honor, and whoever falls into doubtful matters will fall into the unlawful, just like the shepherd who grazes his animals in the vicinity of a prohibited pasture and is thus likely to graze therein. Verily, every king has a protected area, and the protected area of Allah is His prohibitions. Verily, in the body, there is a piece of flesh; if it is sound, the entire body will be sound, and if it is corrupt, the entire body will be corrupt; verily, that is the heart.\"",
+      "ur": "ابو عبداللہ نعمان بن بشیر رضی اللہ عنہما سے روایت ہے، وہ کہتے ہیں کہ میں نے رسول اللہ ﷺ کو یہ فرماتے ہوئے سنا: ”یقیناً حلال واضح ہے اور حرام بھی واضح ہے اور ان دونوں کے درمیان کچھ چیزیں مشتبہ ہیں، جن کو اکثر لوگ نہیں جانتے۔ چنانچہ جو شخص شبہ والی چیزوں سے بچ گیا، اس نے اپنے دین اور آبرو کو محفوظ کرلیا، اور جو شبہ والی چیزوں میں پڑ گیا، وہ حرام میں پڑ جائےگا۔ اس کی مثال اس چرواہے کی ہے جو کسی محفوظ چراہ گاہ کے اردگرد جانور چراتا ہے۔ ایسے میں اس بات کا امکان رہتا ہے کہ جانور اس چراگاہ میں سے بھی چر لے۔ سنو! ہر بادشاہ کی ایک محفوظ چراہ گاہ ہوتی ہے (جس میں کسی کو داخل ہونے کی اجازت نہیں ہوتی)۔ آگاہ رہو! اللہ کی چراگاہ اس کى حرام کردہ چیزیں ہیں۔ سنو! جسم کے اندر گوشت کا ایک ٹکڑا ہے۔ جب وہ درست ہو جاتا ہے، تو سارا جسم درست رہتا ہے اور جب وہ بگڑ جاتا ہے، تو سارا جسم بگڑ جاتا ہے۔ جان لو! وہ دل ہے۔“"
+     },
+     "attribution": {
+      "en": "Narrated by Al-Bukhāri and Muslim",
+      "ur": "اسے بخاری اور مسلم نے روایت کیا ہے"
+     },
+     "grade": {
+      "en": "Authentic",
+      "ur": "صحيح"
+     },
+     "source": "HadeethEnc.com"
+    },
+    {
+     "arabic": "عَنِ النَّوَّاسِ بْنِ سِمْعَانَ رَضِيَ اللهُ عَنْهُ عَنِ النَّبِيِّ صَلَّى اللهُ عَلَيْهِ وَسَلَّمَ قَالَ: «البِرُّ: حُسْنُ الخُلُقِ، وَالإِثْمُ مَا حَاكَ فِي صَدْرِكَ، وَكَرِهْتَ أَنْ يَطَّلِعَ عَلَيْهِ النَّاسُ».   \nوَعَنْ وَابِصَةَ بْنِ مَعْبَدٍ رَضِيَ اللَّهُ عَنْهُ قَالَ: أَتَيْتُ رَسُولَ اللَّهِ صَلَّى اللهُ عَلَيْهِ وَسَلَّمَ فَقَالَ: «جِئْتَ تَسْأَلُ عَنِ البِرِّ وَالإِثْمِ»، قُلْتُ: نَعَمْ، قَالَ: «اسْتَفْتِ قَلْبَكَ، البِرُّ: مَا اطْمَأَنَّتْ إلَيْهِ النَّفْسُ، وَاطْمَأَنَّ إلَيْهِ القَلْبُ، وَالإِثْمُ: مَا حَاكَ فِي نَفْسِكَ وَتَرَدَّدَ فِي الصَّدْرِ، وَإِنْ أَفْتَاكَ النَّاسُ وَأَفْتَوْكَ».",
+     "translation": {
+      "en": "An-Nawwās ibn Sim‘ān (may Allah be pleased with him) reported that the Prophet (ﷺ) said: \"Righteousness is good character, and sin is what wavers in your heart, and you dislike that people know about it.\" Wābisah ibn Ma‘bad (may Allah be pleased with him) reported: I went to the Messenger of Allah (ﷺ) and he said: \"You have come to inquire about righteousness and sin.\" I said: Yes. He said: \"Ask your heart. Righteousness is that which the soul feels at ease with and the heart feels tranquil about. And sin is that which wavers in your soul and causes uneasiness in your chest, even if people give you legal opinions and give you more opinions (in its favor).\"",
+      "ur": "نواس بن سمعان رضی اللہ عنہ سے روایت ہے کہ نبی ﷺ نے فرمایا: ”نیکی اچھے اخلاق کا نام ہے، اور گناہ وہ ہے جو تمھارے دل میں کھٹکے اور اس پر لوگوں کا مطلع ہونا تمھیں ناگوار ہو۔“ وابصہ بن معبد رضی اللہ عنہ سے روایت ہے کہ میں رسول اللہ ﷺ کی خدمت میں حاضر ہوا تو آپ نے فرمایا: ’’تم نیکی اور گناہ کے بارے میں پوچھنے آئے ہو؟‘‘ میں نے کہا : جی ہاں۔ چناں چہ آپ ﷺ  نے فرمایا: ’’اپنے دل سے پوچھ لو۔ نیکی وہ ہے جس پر نفس مطمئن ہو اور دل میں کوئی کھٹک نہ ہو۔ اور گناہ وہ ہے جو نفس میں کھٹکے اور دل میں اس کی بابت تردد ہو، اگرچہ لوگ تجھے (اس کے جواز کا) فتوی دے دیں اور تجھے جائز بتاتے رہیں۔‘‘"
+     },
+     "attribution": {
+      "en": "The first Hadīth: Narrated by Muslim, and the second Hadīth: Narrated by Ahmad and Ad-Dārimi",
+      "ur": "پہلی حدیث کو مسلم نے اور دوسری حدیث کو احمد اور دارمی نے روایت کیا ہے۔"
+     },
+     "grade": {
+      "en": "Authentic",
+      "ur": "صحيح"
+     },
+     "source": "HadeethEnc.com"
+    },
+    {
+     "arabic": "عَنْ أَبِي مُـحَمَّدٍ الحَسَنِ بْنِ عَلِيِّ بْنِ أَبِي طَالِبٍ - سِبْطِ رَسُولِ اللَّهِ صَلَّى اللَّهُ عَلَيْهِ وَسَلَّمَ وَرَيْحَانَتِهِ-، قَالَ: حَفِظْتُ مِنْ رَسُولِ اللَّهِ صَلَّى اللَّهُ عَلَيْهِ وَسَلَّمَ: «دَعْ مَا يَرِيبُك إلَى مَا لَا يَرِيبُكَ».",
+     "translation": {
+      "en": "Abu Muhammad al-Hasan ibn ‘Ali ibn Abi Tālib—the grandson of the Messenger of Allah (ﷺ) and his beloved— reported: I memorized from the words of the Messenger of Allah (ﷺ): \"Leave what you doubt for what you do not doubt.\"",
+      "ur": "اللہ کے رسول ﷺ کے نواسے اور آپ کے عزیز ابو محمد حسن بن علی بن ابو طالب رضی اللہ عنہما سے روایت ہے، وہ کہتے ہیں کہ میں  نے اللہ کے رسول ﷺ سے یہ بات یاد کی ہے: \"جس چیز میں تمہیں شک ہو، اسے چھوڑ کر وہ چیز اختیار کر لو جس میں تمہیں کوئی شک نہ ہو۔\""
+     },
+     "attribution": {
+      "en": "Narrated by At-Tirmidhi and An-Nasā’i",
+      "ur": "رواه الترمذي والنسائي"
+     },
+     "grade": {
+      "en": "Authentic",
+      "ur": "صحيح"
+     },
+     "source": "HadeethEnc.com"
+    }
+   ],
+   "duas": [
+    30
+   ]
+  },
+  {
+   "id": "content",
+   "title": "Content",
+   "verses": [
+    {
+     "reference": "9:59",
+     "arabic": "وَلَوْ أَنَّهُمْ رَضُوا۟ مَآ ءَاتَىٰهُمُ ٱللَّهُ وَرَسُولُهُۥ وَقَالُوا۟ حَسْبُنَا ٱللَّهُ سَيُؤْتِينَا ٱللَّهُ مِن فَضْلِهِۦ وَرَسُولُهُۥٓ إِنَّآ إِلَى ٱللَّهِ رَٰغِبُونَ",
+     "translation": {
+      "en": "If only they had been satisfied with what Allah and His Messenger gave them and said, \"Sufficient for us is Allah; Allah will give us of His bounty, and [so will] His Messenger; indeed, we are desirous toward Allah,\" [it would have been better for them].",
+      "ur": "اور اگر وہ اس پر خوش رہتے جو خدا اور اس کے رسول نے ان کو دیا تھا۔ اور کہتے کہ ہمیں خدا کافی ہے اور خدا اپنے فضل سے اور اس کے پیغمبر (اپنی مہربانی سے) ہمیں (پھر) دیں گے۔ اور ہمیں تو خدا ہی کی خواہش ہے (تو ان کے حق میں بہتر ہوتا)"
+     }
+    },
+    {
+     "reference": "20:131",
+     "arabic": "وَلَا تَمُدَّنَّ عَيْنَيْكَ إِلَىٰ مَا مَتَّعْنَا بِهِۦٓ أَزْوَٰجًۭا مِّنْهُمْ زَهْرَةَ ٱلْحَيَوٰةِ ٱلدُّنْيَا لِنَفْتِنَهُمْ فِيهِ ۚ وَرِزْقُ رَبِّكَ خَيْرٌۭ وَأَبْقَىٰ",
+     "translation": {
+      "en": "And do not extend your eyes toward that by which We have given enjoyment to [some] categories of them, [its being but] the splendor of worldly life by which We test them. And the provision of your Lord is better and more enduring.",
+      "ur": "اور کئی طرح کے لوگوں کو جو ہم نے دنیا کی زندگی میں آرائش کی چیزوں سے بہرہ مند کیا ہے تاکہ ان کی آزمائش کریں ان پر نگاہ نہ کرنا۔ اور تمہاری پروردگار کی (عطا فرمائی ہوئی) روزی بہت بہتر اور باقی رہنے والی ہے"
+     }
+    },
+    {
+     "reference": "16:97",
+     "arabic": "مَنْ عَمِلَ صَٰلِحًۭا مِّن ذَكَرٍ أَوْ أُنثَىٰ وَهُوَ مُؤْمِنٌۭ فَلَنُحْيِيَنَّهُۥ حَيَوٰةًۭ طَيِّبَةًۭ ۖ وَلَنَجْزِيَنَّهُمْ أَجْرَهُم بِأَحْسَنِ مَا كَانُوا۟ يَعْمَلُونَ",
+     "translation": {
+      "en": "Whoever does righteousness, whether male or female, while he is a believer - We will surely cause him to live a good life, and We will surely give them their reward [in the Hereafter] according to the best of what they used to do.",
+      "ur": "جو شخص نیک اعمال کرے گا مرد ہو یا عورت وہ مومن بھی ہوگا تو ہم اس کو (دنیا میں) پاک (اور آرام کی) زندگی سے زندہ رکھیں گے اور (آخرت میں) اُن کے اعمال کا نہایت اچھا صلہ دیں گے"
+     }
+    },
+    {
+     "reference": "89:27",
+     "arabic": "يَٰٓأَيَّتُهَا ٱلنَّفْسُ ٱلْمُطْمَئِنَّةُ",
+     "translation": {
+      "en": "[To the righteous it will be said], \"O reassured soul,",
+      "ur": "اے اطمینان پانے والی روح!"
+     }
+    },
+    {
+     "reference": "89:28",
+     "arabic": "ٱرْجِعِىٓ إِلَىٰ رَبِّكِ رَاضِيَةًۭ مَّرْضِيَّةًۭ",
+     "translation": {
+      "en": "Return to your Lord, well-pleased and pleasing [to Him],",
+      "ur": "اپنے پروردگار کی طرف لوٹ چل۔ تو اس سے راضی وہ تجھ سے راضی"
+     }
+    }
+   ],
+   "hadith": [
+    {
+     "arabic": "عن أبي هريرة رضي الله عنه عن النبي صلى الله عليه وسلم قال: «ليس الغِنَى عن كَثرَة العَرَض، ولكن الغِنَى غنى النفس».",
+     "translation": {
+      "en": "Abu Hurayrah (may Allah be pleased with him) reported that the Prophet (may Allah's peace and blessings be upon him) said: \"Richness is not the abundance of wealth. Rather, true richness is self-sufficiency.\"",
+      "ur": "ابو ہریرۃ رضی اللہ عنہ سے روایت ہے کہ رسول اللہ ﷺ نے فرمایا: ”امیری سامان کی کثرت سے نہیں ہوتی بلکہ حقیقی امیری تو دل کی امیری کا نام ہے“۔"
+     },
+     "attribution": {
+      "en": "Narrated by Bukhari & Muslim",
+      "ur": "متفق علیہ"
+     },
+     "grade": {
+      "en": "Authentic hadith",
+      "ur": "صحیح"
+     },
+     "source": "HadeethEnc.com"
+    },
+    {
+     "arabic": "عن عبيد الله بن محصن الأنصاري الخطمي رضي الله عنه مرفوعاً: «مَنْ أصْبَحَ مِنْكُمْ آمِنًا في سربِهِ، مُعَافَىً في جَسَدِهِ، عِنْدَهُ قُوتُ يَوْمِهِ، فَكَأنَّمَا حِيزَتْ لَهُ الدُّنْيَا بِحَذَافِيرِهَا».",
+     "translation": {
+      "en": "‘Ubaidullah ibn Mihsan al-Ansāri (may Allah be pleased with him) reported: The Messenger of Allah (may Allah's peace and blessings be upon him) said: \"Whoever among you wakes up in the morning healthy in his body, secure in his dwelling, and has his food for the day, it is as if the whole world has been given to him.\"",
+      "ur": "عبیداللہ بن محصن انصاری خطمی رضی اللہ عنہ سے روایت ہے کہ رسول اللہ ﷺ نے فرمایا: ”تم میں سے جو شخص اس حال میں صبح کرے کہ وہ اپنی جان کی طرف سے بے خوف ہو، جسمانی اعتبار سے صحت مند ہو، ایک دن کی خوراک کا سامان اس کے پاس ہو، تو گویا اس کے لیے ساری دنیا جمع کردی گئی“۔"
+     },
+     "attribution": {
+      "en": "Narrated by At-Tirmidhi and Ibn Mājah",
+      "ur": "اسے ابنِ ماجہ نے روایت کیا ہے۔ - اسے امام ترمذی نے روایت کیا ہے۔"
+     },
+     "grade": {
+      "en": "Hasan",
+      "ur": "حَسَنْ"
+     },
+     "source": "HadeethEnc.com"
+    },
+    {
+     "arabic": "عن أبي هريرة رضي الله عنه عن النبي صلى الله عليه وسلم قال: «انظروا إلى من هو أسفل منكم، ولا تنظروا إلى من هو فوقكم، فهو أجدر أن لا تَزْدَرُوا نعمة الله عليكم».",
+     "translation": {
+      "en": "Abu Hurayrah (may Allah be pleased with him) reported: The Messenger of Allah (may Allah's peace and blessings be upon him) said: \"Look at those who are below you, and do not look at those who are above you, for that is more likely to hold you back from belittling the blessing of Allah upon you.\"",
+      "ur": "ابوہریرہ رضی اللہ عنہ سے روایت ہے کہ رسول اللہ ﷺ نے فرمایا: ”اس کو دیکھو جو تم سے کم تر ہو، اس کو مت دیکھو جو تم سے برتر ہو، اس طرح زیادہ مناسب ہے کہ تم اللہ تعالیٰ کی نعمت کو حقیر نہ جانو گے“۔"
+     },
+     "attribution": {
+      "en": "Agreed upon",
+      "ur": "یہ حدیث متفق علیہ ہے اور الفاظ مسلم کے ہیں۔"
+     },
+     "grade": {
+      "en": "Authentic",
+      "ur": "صحیح"
+     },
+     "source": "HadeethEnc.com"
+    }
+   ],
+   "duas": []
+  },
+  {
+   "id": "depressed",
+   "title": "Depressed",
+   "verses": [
+    {
+     "reference": "93:3",
+     "arabic": "مَا وَدَّعَكَ رَبُّكَ وَمَا قَلَىٰ",
+     "translation": {
+      "en": "Your Lord has not taken leave of you, [O Muhammad], nor has He detested [you].",
+      "ur": "کہ (اے محمدﷺ) تمہارے پروردگار نے نہ تو تم کو چھوڑا اور نہ (تم سے) ناراض ہوا"
+     }
+    },
+    {
+     "reference": "94:5",
+     "arabic": "فَإِنَّ مَعَ ٱلْعُسْرِ يُسْرًا",
+     "translation": {
+      "en": "For indeed, with hardship [will be] ease.",
+      "ur": "ہاں ہاں مشکل کے ساتھ آسانی بھی ہے"
+     }
+    },
+    {
+     "reference": "94:6",
+     "arabic": "إِنَّ مَعَ ٱلْعُسْرِ يُسْرًۭا",
+     "translation": {
+      "en": "Indeed, with hardship [will be] ease.",
+      "ur": "(اور) بے شک مشکل کے ساتھ آسانی ہے"
+     }
+    },
+    {
+     "reference": "12:86",
+     "arabic": "قَالَ إِنَّمَآ أَشْكُوا۟ بَثِّى وَحُزْنِىٓ إِلَى ٱللَّهِ وَأَعْلَمُ مِنَ ٱللَّهِ مَا لَا تَعْلَمُونَ",
+     "translation": {
+      "en": "He said, \"I only complain of my suffering and my grief to Allah, and I know from Allah that which you do not know.",
+      "ur": "انہوں نے کہا کہ میں اپنے غم واندوہ کا اظہار خدا سے کرتا ہوں۔ اور خدا کی طرف سے وہ باتیں جانتا ہوں جو تم نہیں جانتے"
+     }
+    },
+    {
+     "reference": "12:87",
+     "arabic": "وَلَا تَا۟يْـَٔسُوا۟ مِن رَّوْحِ ٱللَّهِ ۖ إِنَّهُۥ لَا يَا۟يْـَٔسُ مِن رَّوْحِ ٱللَّهِ إِلَّا ٱلْقَوْمُ ٱلْكَٰفِرُونَ",
+     "translation": {
+      "en": "and despair not of relief from Allah. Indeed, no one despairs of relief from Allah except the disbelieving people.",
+      "ur": "اور خدا کی رحمت سے ناامید نہ ہو۔ کہ خدا کی رحمت سے بےایمان لوگ ناامید ہوا کرتے ہیں"
+     }
+    },
+    {
+     "reference": "3:139",
+     "arabic": "وَلَا تَهِنُوا۟ وَلَا تَحْزَنُوا۟ وَأَنتُمُ ٱلْأَعْلَوْنَ إِن كُنتُم مُّؤْمِنِينَ",
+     "translation": {
+      "en": "So do not weaken and do not grieve, and you will be superior if you are [true] believers.",
+      "ur": "اور (دیکھو) بے دل نہ ہونا اور نہ کسی طرح کا غم کرنا اگر تم مومن (صادق) ہو تو تم ہی غالب رہو گے"
+     }
+    }
+   ],
+   "hadith": [
+    {
+     "arabic": "عَنْ أَبِي سَعِيدٍ الْخُدْرِيِّ وَعَنْ أَبِي هُرَيْرَةَ رضي الله عنهما عَنِ النَّبِيِّ صلى الله عليه وسلم قَالَ: «مَا يُصِيبُ الْمُسْلِمَ مِنْ نَصَبٍ وَلَا وَصَبٍ وَلَا هَمٍّ وَلَا حُزْنٍ وَلَا أَذًى وَلَا غَمٍّ حَتَّى الشَّوْكَةِ يُشَاكُهَا إِلَّا كَفَّرَ اللهُ بِهَا مِنْ خَطَايَاهُ».",
+     "translation": {
+      "en": "Abu Sa‘īd al-Khudri and Abu Hurayah (may Allah be pleased with both of them) reported that the Prophet (may Allah's peace and blessings be upon him) said: \"No fatigue, disease, sorrow, sadness, harm, or distress befalls a Muslim, even if it were a prick of a thorn, but Allah will expiate some of his sins thereby.\"",
+      "ur": "ابو سعید خدری اور ابو ہریرہ رضی اللہ عنہما سے روایت ہے کہ اللہ کے نبی صلی اللہ علیہ و سلم نے فرمایا : \"ایک مسلمان کو جو بھی تکان، مرض، پريشانی، صدمہ، تکلیف یا غم پہنچتا ہے، حتی کہ اگر كوئی کانٹا بھی چبھتا ہے، تو اللہ تعالی اس کے بدلے میں اس کے گناہ معاف کردیتے ہیں۔\""
+     },
+     "attribution": {
+      "en": "Agreed upon",
+      "ur": "متفق عليه"
+     },
+     "grade": {
+      "en": "Authentic",
+      "ur": "صحيح"
+     },
+     "source": "HadeethEnc.com"
+    },
+    {
+     "arabic": "عن أنس بن مالك رضي الله عنه عن النبي صلى الله عليه وسلم أنه قال: \"إن عِظَمَ الجزاءِ مع عِظَمِ البلاءِ، وإن الله تعالى إذا أحب قوما ابتلاهم، فمن رَضِيَ فله الرِضا، ومن سَخِطَ فله السُّخْطُ\".",
+     "translation": {
+      "en": "Anas ibn Mālik (may Allah be pleased with him) reported that the Prophet (may Allah's peace and blessings be upon him) said: “The greater the tribulation, the greater the reward. When Allah loves people, He tests them. So whoever is content, for him is pleasure; and whoever is discontent, for him is displeasure.”",
+      "ur": "انس بن مالك رضی اللہ عنہ سے روایت ہے کہ نبی ﷺ نے فرمایا: ”آزمائش جتنی بڑی ہوتی ہے اسی حساب سے اس کا بدلہ بھی بڑا ہوتا ہے۔ اور اللہ تعالیٰ جب کسی قوم کو پسند فرماتا ہے تو اس کو آزمائش سے دوچار کرتا ہے۔ پس جو کوئی اس سے راضی و خوش رہے تو وہ اس سے راضی رہتا ہے اور جو کوئی اس سے خفا ہو تو وہ بھی اس سے خفا ہو جاتا ہے“۔"
+     },
+     "attribution": {
+      "en": "Narrated by Ibn Majah - Narrated by At-Termedhy",
+      "ur": "اسے ابنِ ماجہ نے روایت کیا ہے۔ - اسے امام ترمذی نے روایت کیا ہے۔"
+     },
+     "grade": {
+      "en": "Authentic hadith",
+      "ur": "صحیح"
+     },
+     "source": "HadeethEnc.com"
+    },
+    {
+     "arabic": "عَنْ أَبِي هُرَيْرَةَ رضي الله عنه قَالَ: قَالَ رَسُولُ اللهِ صَلَّى اللَّهُ عَلَيْهِ وَسَلَّمَ: «مَا يَزَالُ البَلاَءُ بِالمُؤْمِنِ وَالمُؤْمِنَةِ فِي نَفْسِهِ وَوَلَدِهِ وَمَالِهِ حَتَّى يَلْقَى اللَّهَ وَمَا عَلَيْهِ خَطِيئَةٌ».",
+     "translation": {
+      "en": "Abu Hurayrah (may Allah be pleased with him) reported: The Messenger of Allah (may Allah's peace and blessings be upon him) said: \"The believer, man or woman, will continue to be tested concerning his or her self, children, and property until they meet Allah without any sins in their record.\"",
+      "ur": "ابو ہریرہ رضی اللہ عنہ سے روایت ہے، وہ کہتے ہیں کہ اللہ کے رسول ﷺ نے فرمایا: \"مومن مرد اور مومن عورت پر اس کی جان، اولاد اور مال میں مصائب آتے رہتے ہیں، یہاں تک کہ وہ اس حال میں اللہ سے ملتا ہے کہ اس کا کوئی گناہ باقی نہيں رہ جاتا\"۔"
+     },
+     "attribution": {
+      "en": "Narrated by At-Tirmidhi and Ahmad",
+      "ur": "رواه الترمذي وأحمد"
+     },
+     "grade": {
+      "en": "Hasan",
+      "ur": "حسن"
+     },
+     "source": "HadeethEnc.com"
+    }
+   ],
+   "duas": [
+    120,
+    123,
+    124
+   ]
+  },
+  {
+   "id": "doubtful",
+   "title": "Doubtful",
+   "verses": [
+    {
+     "reference": "2:2",
+     "arabic": "ذَٰلِكَ ٱلْكِتَٰبُ لَا رَيْبَ ۛ فِيهِ ۛ هُدًۭى لِّلْمُتَّقِينَ",
+     "translation": {
+      "en": "This is the Book about which there is no doubt, a guidance for those conscious of Allah -",
+      "ur": "یہ کتاب (قرآن مجید) اس میں کچھ شک نہیں (کہ کلامِ خدا ہے۔ خدا سے) ڈرنے والوں کی رہنما ہے"
+     }
+    },
+    {
+     "reference": "2:147",
+     "arabic": "ٱلْحَقُّ مِن رَّبِّكَ ۖ فَلَا تَكُونَنَّ مِنَ ٱلْمُمْتَرِينَ",
+     "translation": {
+      "en": "The truth is from your Lord, so never be among the doubters.",
+      "ur": "(اے پیغمبر، یہ نیا قبلہ) تمہارے پروردگار کی طرف سے حق ہے تو تم ہرگز شک کرنے والوں میں نہ ہونا"
+     }
+    },
+    {
+     "reference": "49:15",
+     "arabic": "إِنَّمَا ٱلْمُؤْمِنُونَ ٱلَّذِينَ ءَامَنُوا۟ بِٱللَّهِ وَرَسُولِهِۦ ثُمَّ لَمْ يَرْتَابُوا۟ وَجَٰهَدُوا۟ بِأَمْوَٰلِهِمْ وَأَنفُسِهِمْ فِى سَبِيلِ ٱللَّهِ ۚ أُو۟لَٰٓئِكَ هُمُ ٱلصَّٰدِقُونَ",
+     "translation": {
+      "en": "The believers are only the ones who have believed in Allah and His Messenger and then doubt not but strive with their properties and their lives in the cause of Allah. It is those who are the truthful.",
+      "ur": "مومن تو وہ ہیں جو خدا اور اس کے رسول پر ایمان لائے پھر شک میں نہ پڑے اور خدا کی راہ میں مال اور جان سے لڑے۔ یہی لوگ (ایمان کے) سچے ہیں"
+     }
+    },
+    {
+     "reference": "14:10",
+     "arabic": "أَفِى ٱللَّهِ شَكٌّۭ فَاطِرِ ٱلسَّمَٰوَٰتِ وَٱلْأَرْضِ",
+     "translation": {
+      "en": "Can there be doubt about Allah, Creator of the heavens and earth?",
+      "ur": "کیا (تم کو) خدا (کے بارے) میں شک ہے جو آسمانوں اور زمین کا پیدا کرنے والا ہے۔"
+     }
+    },
+    {
+     "reference": "41:53",
+     "arabic": "سَنُرِيهِمْ ءَايَٰتِنَا فِى ٱلْءَافَاقِ وَفِىٓ أَنفُسِهِمْ حَتَّىٰ يَتَبَيَّنَ لَهُمْ أَنَّهُ ٱلْحَقُّ ۗ أَوَلَمْ يَكْفِ بِرَبِّكَ أَنَّهُۥ عَلَىٰ كُلِّ شَىْءٍۢ شَهِيدٌ",
+     "translation": {
+      "en": "We will show them Our signs in the horizons and within themselves until it becomes clear to them that it is the truth. But is it not sufficient concerning your Lord that He is, over all things, a Witness?",
+      "ur": "ہم عنقریب ان کو اطراف (عالم) میں بھی اور خود ان کی ذات میں بھی اپنی نشانیاں دکھائیں گے یہاں تک کہ ان پر ظاہر ہوجائے گا کہ (قرآن) حق ہے۔ کیا تم کو یہ کافی نہیں کہ تمہارا پروردگار ہر چیز سے خبردار ہے"
+     }
+    }
+   ],
+   "hadith": [
+    {
+     "arabic": "عَن أَبِي هُرَيْرَةَ رَضِيَ اللَّهُ عَنْهُ: قَالَ رَسُولُ اللَّهِ صَلَّى اللهُ عَلَيْهِ وَسَلَّمَ: «يَأْتِي الشَّيْطَانُ أَحَدَكُمْ فَيَقُولُ: مَنْ خَلَقَ كَذَا؟ مَنْ خَلَقَ كَذَا؟ حَتَّى يَقُولَ: مَنْ خَلَقَ رَبَّكَ؟ فَإِذَا بَلَغَهُ فَلْيَسْتَعِذْ بِاللهِ وَلْيَنْتَهِ».",
+     "translation": {
+      "en": "Abu Hurayrah (may Allah be pleased with him) reported: The Messenger of Allah (may Allah's peace and blessings be upon him) said: \"Satan comes to one of you and says, 'Who created such and such, and who created such and such', until he says: 'Who created your Lord?' If a person experiences this, he should seek refuge with Allah and desist from that.\"",
+      "ur": "ابو ہریرہ رضی اللہ عنہ سے روایت ہے کہ رسول اللہ ﷺ نے فرمایا: \"شیطان تم میں سے کسی کے پاس آتا ہے اور اس سے کہتا ہے: یہ کس نے پیدا کیا؟ وہ کس نے پیدا کیا؟ حتی کہ سوال کرنے لگتا ہے کہ تیرے رب کو کس نے پیدا کیا؟ لہٰذا جب نوبت یہاں تک آپہنچے تو اسے اللہ تعالیٰ سے پناہ طلب کرنا چاہیے اور اس شیطانی خیال کو ترک کر دینا چاہیے\"۔"
+     },
+     "attribution": {
+      "en": "Agreed upon",
+      "ur": "متفق عليه"
+     },
+     "grade": {
+      "en": "Authentic",
+      "ur": "صحيح"
+     },
+     "source": "HadeethEnc.com"
+    },
+    {
+     "arabic": "عَنْ أَبِي هُرَيْرَةَ رضي الله عنه قال: جَاءَ نَاسٌ مِنْ أَصْحَابِ النَّبِيِّ صَلَّى اللهُ عَلَيْهِ وَسَلَّمَ، فَسَأَلُوهُ: إِنَّا نَجِدُ فِي أَنْفُسِنَا مَا يَتَعَاظَمُ أَحَدُنَا أَنْ يَتَكَلَّمَ بِهِ، قَالَ: «وَقَدْ وَجَدْتُمُوهُ؟» قَالُوا: نَعَمْ، قَالَ: «ذَاكَ صَرِيحُ الْإِيمَانِ».",
+     "translation": {
+      "en": "Abu Hurayrah (may Allah be pleased with him) reported: Some of the Prophet's Companions came to him and said: \"We find within ourselves thoughts that one of us would find too grave to talk about.\" He said: \"Have you experienced that?\" They said: 'Yes'. He said: \"That is the clear faith.\"",
+      "ur": "ابو ہریرہ رضی اللہ عنہ سے مروی ہے، وہ فرماتے ہیں: اللہ کے نبی ﷺ کے چند صحابہ حاضر ہوئے اور آپ سے دریافت کیا: ہم اپنے دلوں میں ایسی چیزیں محسوس کرتے ہیں کہ ہم میں سے کوئی ان کو زبان پر لانا بہت سنگین سمجھتا ہے۔ آپ ﷺ نے پوچھا: ’’کیا تم نے واقعی اپنے دلوں میں ایسا محسوس کیا ہے؟‘‘ انہوں نے عرض کیا: جی ہاں! آپ نے فرمایا: ’’یہی صریح ایمان ہے۔‘‘"
+     },
+     "attribution": {
+      "en": "Narrated by Muslim",
+      "ur": "رواه مسلم"
+     },
+     "grade": {
+      "en": "Authentic",
+      "ur": "صحيح"
+     },
+     "source": "HadeethEnc.com"
+    },
+    {
+     "arabic": "عن ابن عباس رضي الله عنهما قال: جاءَ رجُلُ إلى النبي صلى الله عليه وسلم فقال: يا رسولَ اللهِ، إن أحدنا يجدُ في نفسِهِ -يُعرِّضُ بالشَّيءِ- لأَن يكونَ حُمَمَةً أحَبُّ إليه من أن يتكلَّم بِهِ، فقال: «اللهُ أكبرُ، اللهُ أكبرُ، الحمدُ لله الذي ردَّ كيدَه إلى الوسوسَةِ».",
+     "translation": {
+      "en": "Ibn ‘Abbās (may Allah be pleased with him) reported: A man came to the Prophet (may Allah’s peace and blessings be upon him) and said: \"O Messenger of Allah, one of us may have such thoughts - referring to it indirectly - that he would prefer to turn into charcoal rather than speak about them.\" Thereupon, he said: \"Allah is the Greatest, Allah is the Greatest; praise be to Allah Who reduced his plotting to whispering.\"",
+      "ur": "عبداللہ بن عباس رضی اللہ عنہما سے مروی ہے، وہ فرماتے ہیں: ایک آدمی نبی کریم ﷺ کی خدمت میں آیا اور کہنے لگا: اے اللہ کے رسول! ہمارے دل میں کچھ خیالات آتے ہیں۔ -وہ اشارے کنایے میں بات کر رہا تھا- ان خیالات کو زبان پر لانے کی بجائے کوئلہ ہو جانا اسے زیادہ پسند ہے۔ رسول اللہ ﷺ نے فرمایا: ”ساری تعریف اس اللہ کی، جس نے اس (ابلیس) کے مکر کو وسوسے کی طرف پھیر دیا۔“"
+     },
+     "attribution": {
+      "en": "Narrated by Abu Dāwūd and An-Nasā’i in Al-Kubra",
+      "ur": "رواه أبو داود والنسائي في الكبرى"
+     },
+     "grade": {
+      "en": "Authentic",
+      "ur": "صحيح"
+     },
+     "source": "HadeethEnc.com"
+    }
+   ],
+   "duas": [
+    133,
+    134
+   ]
+  },
+  {
+   "id": "grateful",
+   "title": "Grateful",
+   "verses": [
+    {
+     "reference": "14:7",
+     "arabic": "وَإِذْ تَأَذَّنَ رَبُّكُمْ لَئِن شَكَرْتُمْ لَأَزِيدَنَّكُمْ ۖ وَلَئِن كَفَرْتُمْ إِنَّ عَذَابِى لَشَدِيدٌۭ",
+     "translation": {
+      "en": "And [remember] when your Lord proclaimed, 'If you are grateful, I will surely increase you [in favor]; but if you deny, indeed, My punishment is severe.' \"",
+      "ur": "اور جب تمہارے پروردگار نے (تم کو) آگاہ کیا کہ اگر شکر کرو گے تو میں تمہیں زیادہ دوں گا اور اگر ناشکری کرو گے تو (یاد رکھو کہ) میرا عذاب بھی سخت ہے"
+     }
+    },
+    {
+     "reference": "2:152",
+     "arabic": "فَٱذْكُرُونِىٓ أَذْكُرْكُمْ وَٱشْكُرُوا۟ لِى وَلَا تَكْفُرُونِ",
+     "translation": {
+      "en": "So remember Me; I will remember you. And be grateful to Me and do not deny Me.",
+      "ur": "سو تم مجھے یاد کرو۔ میں تمہیں یاد کیا کروں گا۔ اور میرے احسان مانتے رہنا اور ناشکری نہ کرنا"
+     }
+    },
+    {
+     "reference": "16:18",
+     "arabic": "وَإِن تَعُدُّوا۟ نِعْمَةَ ٱللَّهِ لَا تُحْصُوهَآ ۗ إِنَّ ٱللَّهَ لَغَفُورٌۭ رَّحِيمٌۭ",
+     "translation": {
+      "en": "And if you should count the favors of Allah, you could not enumerate them. Indeed, Allah is Forgiving and Merciful.",
+      "ur": "اور اگر تم خدا کی نعمتوں کو شمار کرنا چاہو تو گن نہ سکو۔ بےشک خدا بخشنے والا مہربان ہے"
+     }
+    },
+    {
+     "reference": "31:12",
+     "arabic": "وَلَقَدْ ءَاتَيْنَا لُقْمَٰنَ ٱلْحِكْمَةَ أَنِ ٱشْكُرْ لِلَّهِ ۚ وَمَن يَشْكُرْ فَإِنَّمَا يَشْكُرُ لِنَفْسِهِۦ ۖ وَمَن كَفَرَ فَإِنَّ ٱللَّهَ غَنِىٌّ حَمِيدٌۭ",
+     "translation": {
+      "en": "And We had certainly given Luqman wisdom [and said], \"Be grateful to Allah.\" And whoever is grateful is grateful for [the benefit of] himself. And whoever denies [His favor] - then indeed, Allah is Free of need and Praiseworthy.",
+      "ur": "اور ہم نے لقمان کو دانائی بخشی۔ کہ خدا کا شکر کرو۔ اور جو شخص شکر کرتا ہے تو اپنے ہی فائدے کے لئے شکر کرتا ہے۔ اور جو ناشکری کرتا ہے تو خدا بھی بےپروا اور سزاوار حمد (وثنا) ہے"
+     }
+    },
+    {
+     "reference": "27:19",
+     "arabic": "رَبِّ أَوْزِعْنِىٓ أَنْ أَشْكُرَ نِعْمَتَكَ ٱلَّتِىٓ أَنْعَمْتَ عَلَىَّ وَعَلَىٰ وَٰلِدَىَّ وَأَنْ أَعْمَلَ صَٰلِحًۭا تَرْضَىٰهُ وَأَدْخِلْنِى بِرَحْمَتِكَ فِى عِبَادِكَ ٱلصَّٰلِحِينَ",
+     "translation": {
+      "en": "My Lord, enable me to be grateful for Your favor which You have bestowed upon me and upon my parents and to do righteousness of which You approve. And admit me by Your mercy into [the ranks of] Your righteous servants.",
+      "ur": "اے پروردگار! مجھے توفیق عطا فرما کہ جو احسان تونے مجھ پر اور میرے ماں باپ پر کئے ہیں ان کا شکر کروں اور ایسے نیک کام کروں کہ تو ان سے خوش ہوجائے اور مجھے اپنی رحمت سے اپنے نیک بندوں میں داخل فرما"
+     }
+    }
+   ],
+   "hadith": [
+    {
+     "arabic": "عن عائشة رضي الله عنها والمغيرة بن شعبة رضي الله عنه : أن النبي صلى الله عليه وسلم كان يقوم من الليل حتى تَتَفَطَّرَ قَدَمَاهُ فقلت له: لم تَصْنَعُ هذا يا رسول الله، وقد غفر اللهُ لك ما تقدم من ذنبك وما تأخر؟ قال: «أَفَلَا أحب أن أكونَ عبدا شَكُورًا».",
+     "translation": {
+      "en": "‘Ā'ishah and Al-Mughīrah ibn Shu‘bah (may Allah be pleased with both of them) reported: The Prophet (may Allah's peace and blessings be upon him) used to stand in prayer at night until the skin of his feet would crack. I (‘Ā'ishah) asked him: \"O Messenger of Allah, why are you doing this while your past and future sins have been forgiven for you?\" He said: \"Should I not like to be a grateful slave (of Allah)?\"",
+      "ur": "عائشہ رضی اللہ عنہا اور مغیرہ بن شعبہ رضی اللہ عنہ سے روایت ہے کہ نبی ﷺ رات کی نماز میں اتنا طویل قیام کرتے کہ آپ ﷺ کے قدم پھٹ جاتے۔ عائشہ رضی اللہ عنہا بیان کرتی ہیں کہ میں نے آپ ﷺ سے پوچھا: آپ ایسا کیوں کرتے ہیں۔ اللہ تعالیٰ نے تو آپ کی اگلی پچھلی سب خطائیں معاف کر دی ہیں؟ آپ ﷺ نے فرمایا: ”کیا پھر میں شکرگزار بندہ بننا پسند نہ کروں؟“"
+     },
+     "attribution": {
+      "en": "Narrated by Bukhari & Muslim",
+      "ur": "متفق علیہ"
+     },
+     "grade": {
+      "en": "Authentic hadith",
+      "ur": "صحیح"
+     },
+     "source": "HadeethEnc.com"
+    },
+    {
+     "arabic": "عن أنس بن مالك رضي الله عنه قال: قال رسول الله صلى الله عليه وسلم: «إِنَّ اللهَ لَيَرْضَى عَنِ الْعَبْدِ أَنْ يَأْكُلَ الْأَكْلَةَ فَيَحْمَدَهُ عَلَيْهَا، أَوْ يَشْرَبَ الشَّرْبَةَ فَيَحْمَدَهُ عَلَيْهَا».",
+     "translation": {
+      "en": "Anas ibn Mālik (may Allah be pleased with him) reported: The Messenger of Allah (may Allah’s peace and blessings be upon him) said: \"Allah is pleased with one who eats some food and praises Him for it, or drinks some drink and praises Him for it.\"",
+      "ur": "انس بن مالک رضی اللہ عنہ سے روایت ہے، وہ کہتے ہیں کہ اللہ کے رسول صلی اللہ علیہ و سلم نے فرمایا : ”اللہ تعالی بندے کی اس بات سے خوش ہوتا ہے کہ وہ کھانا کھائے اور اس پر اللہ کی تعریف کرے یا پانی پیے اور اس پر اللہ کی تعریف کرے“۔"
+     },
+     "attribution": {
+      "en": "Narrated by Muslim",
+      "ur": "رواه مسلم"
+     },
+     "grade": {
+      "en": "Authentic",
+      "ur": "صحيح"
+     },
+     "source": "HadeethEnc.com"
+    },
+    {
+     "arabic": "عَنْ أَبِي هُرَيْرَةَ رَضِيَ اللَّهُ عَنْهُ عَنِ النَّبِيِّ صَلَّى اللهُ عَلَيْهِ وَسَلَّمَ قَالَ: «لَا يَشْكُرُ اللَّهَ مَنْ لَا يَشْكُرُ النَّاسَ»",
+     "translation": {
+      "en": "Abu Hurayrah (may Allah be pleased with him) reported that the Prophet (ﷺ) said: \"He who does not thank people in fact does not thank Allah.\"",
+      "ur": "ابو ہریرہ رضی اللہ عنہ سے روایت ہے کہ اللہ کے نبی ﷺ نے فرمایا: ”جو لوگوں کا شکر ادا نہیں کرتا، وہ اللہ کا بھی شکر ادا نہیں کرتا۔“"
+     },
+     "attribution": {
+      "en": "Narrated by Abu Dāwūd, At-Tirmidhi, and Ahmad",
+      "ur": "رواه أبو داود والترمذي وأحمد"
+     },
+     "grade": {
+      "en": "Authentic",
+      "ur": "صحيح"
+     },
+     "source": "HadeethEnc.com"
+    }
+   ],
+   "duas": [
+    59
+   ]
+  },
+  {
+   "id": "greedy",
+   "title": "Greedy",
+   "verses": [
+    {
+     "reference": "102:1",
+     "arabic": "بِسْمِ ٱللَّهِ ٱلرَّحْمَٰنِ ٱلرَّحِيمِ أَلْهَىٰكُمُ ٱلتَّكَاثُرُ",
+     "translation": {
+      "en": "Competition in [worldly] increase diverts you",
+      "ur": "(لوگو) تم کو (مال کی) بہت سی طلب نے غافل کر دیا"
+     }
+    },
+    {
+     "reference": "102:2",
+     "arabic": "حَتَّىٰ زُرْتُمُ ٱلْمَقَابِرَ",
+     "translation": {
+      "en": "Until you visit the graveyards.",
+      "ur": "یہاں تک کہ تم نے قبریں جا دیکھیں"
+     }
+    },
+    {
+     "reference": "64:16",
+     "arabic": "فَٱتَّقُوا۟ ٱللَّهَ مَا ٱسْتَطَعْتُمْ وَٱسْمَعُوا۟ وَأَطِيعُوا۟ وَأَنفِقُوا۟ خَيْرًۭا لِّأَنفُسِكُمْ ۗ وَمَن يُوقَ شُحَّ نَفْسِهِۦ فَأُو۟لَٰٓئِكَ هُمُ ٱلْمُفْلِحُونَ",
+     "translation": {
+      "en": "So fear Allah as much as you are able and listen and obey and spend [in the way of Allah]; it is better for your selves. And whoever is protected from the stinginess of his soul - it is those who will be the successful.",
+      "ur": "سو جہاں تک ہوسکے خدا سے ڈرو اور (اس کے احکام کو) سنو اور (اس کے) فرمانبردار رہو اور (اس کی راہ میں) خرچ کرو (یہ) تمہارے حق میں بہتر ہے۔ اور جو شخص طبعیت کے بخل سے بچایا گیا تو ایسے ہی لوگ راہ پانے والے ہیں"
+     }
+    },
+    {
+     "reference": "18:46",
+     "arabic": "ٱلْمَالُ وَٱلْبَنُونَ زِينَةُ ٱلْحَيَوٰةِ ٱلدُّنْيَا ۖ وَٱلْبَٰقِيَٰتُ ٱلصَّٰلِحَٰتُ خَيْرٌ عِندَ رَبِّكَ ثَوَابًۭا وَخَيْرٌ أَمَلًۭا",
+     "translation": {
+      "en": "Wealth and children are [but] adornment of the worldly life. But the enduring good deeds are better to your Lord for reward and better for [one's] hope.",
+      "ur": "مال اور بیٹے تو دنیا کی زندگی کی (رونق و) زینت ہیں۔ اور نیکیاں جو باقی رہنے والی ہیں وہ ثواب کے لحاظ سے تمہارے پروردگار کے ہاں بہت اچھی اور امید کے لحاظ سے بہت بہتر ہیں"
+     }
+    },
+    {
+     "reference": "3:180",
+     "arabic": "وَلَا يَحْسَبَنَّ ٱلَّذِينَ يَبْخَلُونَ بِمَآ ءَاتَىٰهُمُ ٱللَّهُ مِن فَضْلِهِۦ هُوَ خَيْرًۭا لَّهُم ۖ بَلْ هُوَ شَرٌّۭ لَّهُمْ ۖ سَيُطَوَّقُونَ مَا بَخِلُوا۟ بِهِۦ يَوْمَ ٱلْقِيَٰمَةِ ۗ وَلِلَّهِ مِيرَٰثُ ٱلسَّمَٰوَٰتِ وَٱلْأَرْضِ ۗ وَٱللَّهُ بِمَا تَعْمَلُونَ خَبِيرٌۭ",
+     "translation": {
+      "en": "And let not those who [greedily] withhold what Allah has given them of His bounty ever think that it is better for them. Rather, it is worse for them. Their necks will be encircled by what they withheld on the Day of Resurrection. And to Allah belongs the heritage of the heavens and the earth. And Allah, with what you do, is [fully] Acquainted.",
+      "ur": "جو لوگ مال میں جو خدا نے اپنے فضل سے ان کو عطا فرمایا ہے بخل کرتے ہیں وہ اس بخل کو اپنے حق میں اچھا نہ سمجھیں۔ (وہ اچھا نہیں) بلکہ ان کے لئے برا ہے وہ جس مال میں بخل کرتے ہیں قیامت کے دن اس کا طوق بنا کر ان کی گردنوں میں ڈالا جائے گا۔ اور آسمانوں اور زمین کا وارث خدا ہی ہے۔ اور جو عمل تم کرتے ہوخدا کو معلوم ہے"
+     }
+    }
+   ],
+   "hadith": [
+    {
+     "arabic": "عن عبد الله بن عباس وأنس بن مالك وعبد الله بن الزبير وأبي موسى الأشعري رضي الله عنهم أن رسول الله صلى الله عليه وسلم قال: «لو أن لابنِ آدمَ واديًا من ذَهَبٍ أَحَبَّ أن يكونَ له واديانِ، ولَنْ يملأَ فَاهُ إلا الترابُ، ويَتُوبُ اللهُ عَلَى مَنْ تَابَ».",
+     "translation": {
+      "en": "Anas (may Allah be pleased with him) reported: The Messenger of Allah (may Allah's peace and blessings be upon him) said: \"If the son of Adam were to possess two valleys full of wealth, he would seek the third. Nothing can fill his belly except dust, and Allah accepts the repentance of whoever repents.\"",
+      "ur": "عبد اللہ بن عباس، انس بن مالک، عبد اللہ بن زبیر اور ابو موسی اشعری رضی اللہ عنہم سے روایت ہے کہ رسول اللہ ﷺ نے فرمایا: ”اگر ابنِ آدم کے پاس سونے کی ایک وادی ہو، تو چاہے گا کہ اس کے پاس دو وادیاں ہوں اور اس کے منہ کو مٹی کے سوا کوئی چیز نہیں بھر سکتی اور اللہ توبہ کرنے والے کی توبہ کو قبول کرتا ہے“۔"
+     },
+     "attribution": {
+      "en": "Agreed upon",
+      "ur": "اسے امام بخاری نے روایت کیا ہے۔ - اسے امام مسلم نے روایت کیا ہے۔ - اس حدیث کی دونوں روایات متفق علیہ ہیں۔"
+     },
+     "grade": {
+      "en": "Authentic",
+      "ur": "صحیح"
+     },
+     "source": "HadeethEnc.com"
+    },
+    {
+     "arabic": "عن حكيم بن حِزَام رضي الله عنه قال: سألت رسول الله صلى الله عليه وسلم فأعطاني، ثم سَألته فأعطاني، ثم سألته فأعطاني، ثم قال: «يا حكيمُ، إن هذا المال خَضِرٌ حُلْوٌ، فمن أخذه بِسَخاوَة نفس بُورِك له فيه، ومن أخذه بإشراف نفس لم يُبَارَك له فيه، وكان كالذي يأكل ولا يَشَبَع، واليدُ العُليا خيرٌ من اليد السُفلى» قال حكيم: فقلت: يا رسول الله، والذي بعثك بالحق لا أرْزَأُ أحدًا بَعدك شيئاً حتى أفارق الدنيا، فكان أبو بكر رضي الله عنه يَدعو حكيماً ليُعطيه العَطَاءَ، فيأبى أن يقبل منه شيئاً، ثم إن عمر رضي الله عنه دعاه ليُعطيه فأبى أن يَقبله. فقال: يا معشر المسلمين، أُشهدكم على حكيم أني أعْرِض عليه حقه الذي قَسَمَه الله له في هذا الفَيْء فيَأبى أن يأخذه. فلم يَرْزَأْ حكيم أحدًا من الناس بعد النبي صلى الله عليه وسلم حتى تُوفي.",
+     "translation": {
+      "en": "Hakīm ibn Hizām (may Allah be pleased with him) reported: I asked the Messenger of Allah (may Allah's peace and blessings be upon him) for some money, and he gave it to me. Then I asked him again, and he gave it to me. Then I asked him again, and he gave it to me, and then he said: \"O Hakīm, this money is like a sweet, fresh fruit; whoever takes it without greediness, he is blessed with it, and whoever takes it with greediness, he is not blessed with it, and he is like a person who eats but is never satiated; and the upper hand is better than the lower hand.\" Hakīm added: I said: O Messenger of Allah, by the One Who sent you with the truth, I shall never accept anything from anyone after you until I depart this world. Then Abu Bakr would call Hakīm in order to give him, and he would refuse to take anything. Then ‘Umar called him to give it to him, but he would refuse to accept it. Upon that, ‘Umar said: O Muslims, I offer Hakīm his share from this booty that Allah entitled him to, and he refuses to take it. So, Hakīm never took anything from anybody after the Prophet (may Allah's peace and blessings be upon him) till he died (may Allah have mercy upon him).",
+      "ur": "حکیم بن حزام رضی اللہ عنہ کہتے ہیں کہ میں نے رسول اللہ ﷺ سے مال مانگا، تو آپ ﷺ نے مجھے دیا، میں نے پھر مانگا تو آپ ﷺ نے پھر دیا، میں نے پھر مانگا تو آپ ﷺ نے پھر دیا، پھر فرمایا: اے حکیم !یہ مال سرسبز اور میٹھا ہے۔ پس جس نے اسے دلی سخاوت کے ساتھ لیا، اس کے لیے اس میں برکت ڈال دی جاتی ہے اور جس نے اسے دل کے لالچ کے ساتھ لیا، اس کے لیے اس میں برکت نہیں ڈالی جاتی اور وہ اس شخص کی مانند ہوتا ہے، جو کھاتا تو ہے، لیکن سیر نہیں ہوتا۔ اور اوپر والا ہاتھ نیچے والے ہاتھ سے بہتر ہے۔\nحکیم رضی اللہ عنہ بیان کرتے ہیں کہ اس پر میں نے کہا کہ یارسول اللہ! اس ذات کی قسم جس نے آپ کو حق دے کربھیجا ہے! میں آپ کے بعد کسی سے کچھ نہیں مانگوں گا، یہاں تک کہ دنیا کو چھوڑ جاؤں ۔ چنانچہ ابوبکر صدیق رضی اللہ عنہ حکیم رضی اللہ عنہ کو کوئی شے دینے کے لیے بلاتے، تو وہ لینے سے انکار کردیتے تھے ۔ بعد ازاں عمر رضی اللہ عنہ نے آپ کو دینے کے لیے بلایا، لیکن انھوں نے قبول کرنے سے انکار کردیا۔ اس پر عمر رضی اللہ عنہ نے کہا : اے مسلمانو ! میں حکیم کے معاملے میں تمھیں گواہ بناتا ہوں کہ اس مال فے میں اللہ کی طرف سے ان کا جو مقررہ حق ہے، میں نے اسے ان کے سامنے پیش کیا، لیکن انھوں نے اسے لینے سے انکار کردیا ۔ تاوقت وفات حکیم رضی اللہ عنہ نے نبی ‎ﷺ کے بعد لوگوں میں سے کسی سے کچھ نہ مانگا۔"
+     },
+     "attribution": {
+      "en": "Agreed upon",
+      "ur": "متفق علیہ"
+     },
+     "grade": {
+      "en": "Authentic",
+      "ur": "صحیح"
+     },
+     "source": "HadeethEnc.com"
+    },
+    {
+     "arabic": "عَنْ جَابِرِ بْنِ عَبْدِ اللهِ رضي الله عنهما أَنَّ رَسُولَ اللهِ صَلَّى اللهُ عَلَيْهِ وَسَلَّمَ قَالَ: «اتَّقُوا الظُّلْمَ، فَإِنَّ الظُّلْمَ ظُلُمَاتٌ يَوْمَ الْقِيَامَةِ، وَاتَّقُوا الشُّحَّ، فَإِنَّ الشُّحَّ أَهْلَكَ مَنْ كَانَ قَبْلَكُمْ، حَمَلَهُمْ عَلَى أَنْ سَفَكُوا دِمَاءَهُمْ وَاسْتَحَلُّوا مَحَارِمَهُمْ».",
+     "translation": {
+      "en": "Jābir ibn ‘Abdullah (may Allah be pleased with him and his father) reported that the Messenger of Allah (may Allah's peace and blessings be upon him) said: \"Beware of oppression, for oppression will be layers of darkness on the Day of Judgment; beware of stinginess, as stinginess ruined those before you. It incited them to shed their blood and regard the unlawful as lawful.\"",
+      "ur": "جابر بن عبد الله رضی اللہ عنہما سے روایت ہے کہ رسول اللہ ﷺ نے ارشاد فرمایا : \"ظلم سے بچو، کیوں کہ ظلم قیامت کے دن تاریکیاں لائے گا۔ بخل و حرص سے بچو، اس لیے کہ اسی بخل و حرص نے تم سے پہلے لوگوں کو ہلاک کردیا۔ اسی بخل و حرص  نے انھیں اس بات پر آمادہ کیا کہ وہ آپس میں خون خرابہ کریں اور حرام کردہ چیزوں کو حلال کرلیں۔"
+     },
+     "attribution": {
+      "en": "Narrated by Muslim",
+      "ur": "رواه مسلم"
+     },
+     "grade": {
+      "en": "Authentic",
+      "ur": "صحيح"
+     },
+     "source": "HadeethEnc.com"
+    }
+   ],
+   "duas": [
+    136,
+    60
+   ]
+  },
+  {
+   "id": "guilty",
+   "title": "Guilty",
+   "verses": [
+    {
+     "reference": "39:53",
+     "arabic": "۞ قُلْ يَٰعِبَادِىَ ٱلَّذِينَ أَسْرَفُوا۟ عَلَىٰٓ أَنفُسِهِمْ لَا تَقْنَطُوا۟ مِن رَّحْمَةِ ٱللَّهِ ۚ إِنَّ ٱللَّهَ يَغْفِرُ ٱلذُّنُوبَ جَمِيعًا ۚ إِنَّهُۥ هُوَ ٱلْغَفُورُ ٱلرَّحِيمُ",
+     "translation": {
+      "en": "Say, \"O My servants who have transgressed against themselves [by sinning], do not despair of the mercy of Allah. Indeed, Allah forgives all sins. Indeed, it is He who is the Forgiving, the Merciful.\"",
+      "ur": "(اے پیغمبر میری طرف سے لوگوں کو) کہہ دو کہ اے میرے بندو جنہوں نے اپنی جانوں پر زیادتی کی ہے خدا کی رحمت سے ناامید نہ ہونا۔ خدا تو سب گناہوں کو بخش دیتا ہے۔ (اور) وہ تو بخشنے والا مہربان ہے"
+     }
+    },
+    {
+     "reference": "3:135",
+     "arabic": "وَٱلَّذِينَ إِذَا فَعَلُوا۟ فَٰحِشَةً أَوْ ظَلَمُوٓا۟ أَنفُسَهُمْ ذَكَرُوا۟ ٱللَّهَ فَٱسْتَغْفَرُوا۟ لِذُنُوبِهِمْ وَمَن يَغْفِرُ ٱلذُّنُوبَ إِلَّا ٱللَّهُ وَلَمْ يُصِرُّوا۟ عَلَىٰ مَا فَعَلُوا۟ وَهُمْ يَعْلَمُونَ",
+     "translation": {
+      "en": "And those who, when they commit an immorality or wrong themselves [by transgression], remember Allah and seek forgiveness for their sins - and who can forgive sins except Allah? - and [who] do not persist in what they have done while they know.",
+      "ur": "اور وہ کہ جب کوئی کھلا گناہ یا اپنے حق میں کوئی اور برائی کر بیٹھتے ہیں تو خدا کو یاد کرتے اور اپنے گناہوں کی بخشش مانگتے ہیں اور خدا کے سوا گناہ بخش بھی کون سکتا ہے؟ اور جان بوجھ کر اپنے افعال پر اڑے نہیں رہتے"
+     }
+    },
+    {
+     "reference": "4:110",
+     "arabic": "وَمَن يَعْمَلْ سُوٓءًا أَوْ يَظْلِمْ نَفْسَهُۥ ثُمَّ يَسْتَغْفِرِ ٱللَّهَ يَجِدِ ٱللَّهَ غَفُورًۭا رَّحِيمًۭا",
+     "translation": {
+      "en": "And whoever does a wrong or wrongs himself but then seeks forgiveness of Allah will find Allah Forgiving and Merciful.",
+      "ur": "اور جو شخص کوئی برا کام کر بیٹھے یا اپنے حق میں ظلم کرلے پھر خدا سے بخشش مانگے تو خدا کو بخشنے والا اور مہربان پائے گا"
+     }
+    },
+    {
+     "reference": "25:70",
+     "arabic": "إِلَّا مَن تَابَ وَءَامَنَ وَعَمِلَ عَمَلًۭا صَٰلِحًۭا فَأُو۟لَٰٓئِكَ يُبَدِّلُ ٱللَّهُ سَيِّـَٔاتِهِمْ حَسَنَٰتٍۢ ۗ وَكَانَ ٱللَّهُ غَفُورًۭا رَّحِيمًۭا",
+     "translation": {
+      "en": "Except for those who repent, believe and do righteous work. For them Allah will replace their evil deeds with good. And ever is Allah Forgiving and Merciful.",
+      "ur": "مگر جس نے توبہ کی اور ایمان لایا اور اچھے کام کئے تو ایسے لوگوں کے گناہوں کو خدا نیکیوں سے بدل دے گا۔ اور خدا تو بخشنے والا مہربان ہے"
+     }
+    },
+    {
+     "reference": "11:114",
+     "arabic": "وَأَقِمِ ٱلصَّلَوٰةَ طَرَفَىِ ٱلنَّهَارِ وَزُلَفًۭا مِّنَ ٱلَّيْلِ ۚ إِنَّ ٱلْحَسَنَٰتِ يُذْهِبْنَ ٱلسَّيِّـَٔاتِ ۚ ذَٰلِكَ ذِكْرَىٰ لِلذَّٰكِرِينَ",
+     "translation": {
+      "en": "And establish prayer at the two ends of the day and at the approach of the night. Indeed, good deeds do away with misdeeds. That is a reminder for those who remember.",
+      "ur": "اور دن کے دونوں سروں (یعنی صبح اور شام کے اوقات میں) اور رات کی چند (پہلی) ساعات میں نماز پڑھا کرو۔ کچھ شک نہیں کہ نیکیاں گناہوں کو دور کر دیتی ہیں۔ یہ ان کے لیے نصیحت ہے جو نصیحت قبول کرنے والے ہیں"
+     }
+    }
+   ],
+   "hadith": [
+    {
+     "arabic": "عن أنس بن مالك رضي الله عنه قال: قال رسول الله صلى الله عليه وسلم : «للَّهُ أَفْرَحُ بِتَوْبَةِ عَبْدِهِ مِنْ أَحَدِكُمْ، سَقَطَ عَلَى بَعِيرِهِ، وَقَدْ أَضَلَّهُ فِي أَرْضِ فَلاَةٍ».\nوفي رواية: «لَلَّهُ أَشَدُّ فَرَحًا بِتَوْبَةِ عَبْدِهِ حِينَ يَتُوبُ إِلَيْهِ، مِنْ أَحَدِكُمْ كَانَ عَلَى رَاحِلَتِهِ بِأَرْضِ فَلَاةٍ، فَانْفَلَتَتْ مِنْهُ وَعَلَيْهَا طَعَامُهُ وَشَرَابُهُ، فَأَيِسَ مِنْهَا، فَأَتَى شَجَرَةً، فَاضْطَجَعَ فِي ظِلِّهَا، وقَدْ أَيِسَ مِنْ رَاحِلَتِهِ، فَبَيْنَا هُوَ كَذَلِكَ إِذَا هُوَ بِهَا، قَائِمَةً عِنْدَهُ، فَأَخَذَ بِخِطَامِهَا، ثُمَّ قَالَ مِنْ شِدَّةِ الْفَرَحِ: اللهُمَّ أَنْتَ عَبْدِي وَأَنَا رَبُّكَ! أَخْطَأَ مِنْ شِدَّةِ الْفَرَح».",
+     "translation": {
+      "en": "Anas ibn Mālik (may Allah be pleased with him) reported that the Prophet (may Allah's peace and blessings be upon him) said: \"Allah is happier with the repentance of His slave than one of you is with finding his riding camel after having lost it in a desert.\"\nAnother narration reads: \"Verily, Allah is happier with the repentance of His slave when he turns in repentance to Him than one of you who was on his camel in a desert and it got lost and was carrying his provision of food and drink. He, having lost all hope (of finding it), lies down in the shade of a tree feeling hopeless; when all of a sudden he finds it (his camel) standing before him. He takes hold of its reins and then out of boundless joy blurts out: 'O Allah, You are my slave and I am Your Lord!' He makes this mistake out of extreme joy.\"",
+      "ur": "انس بن مالک رضی اللہ عنہ سے روایت ہے کہ رسول اللہ ﷺ نے فرمایا: ”اللہ اپنے بندے کی توبہ سے تم میں سے اس شخص سے بھی زیادہ خوش ہوتا ہے جسے اس کا وہ اونٹ اچانک مل جائے جسے وہ بےآب و گیاہ چٹیل میدان میں گم کربیٹھا ہو“۔\nایک اور روایت میں ہے: ”الله اپنے بندے کی توبہ کی وجہ سے تم میں سے اس شخص سے بھی زیادہ خوش ہوتا ہے جو کسی بے آب وگیاہ چٹیل میدان میں اپنی سواری پر سفر کر رہا ہو کہ اس کی سواری اس سے گم ہو جائے اور اس کے کھانے پینے کا سامان بھی اسی پر ہو۔ وہ اس کے ملنے سے مایوس ہو کر ایک درخت کے نیچے آکر اس کے سائے میں لیٹ جائے اور اسے اپنی سواری کے مل جانے کی کوئی امید نہ رہے۔ ایسے میں اچانک اس کی سواری اس کے سامنے آ کھڑی ہو۔ اور وہ اس کی نکیل پکڑ کر فرط مسرت سے یوں کہہ بیٹھے کہ اے اللہ! تو میرا بندہ ہے اور میں تیرا رب! یعنی خوشی کی شدت کی وجہ سے وہ غلطی سے ایسا کہہ دے“۔"
+     },
+     "attribution": {
+      "en": "Narrated by Bukhari & Muslim",
+      "ur": "متفق علیہ"
+     },
+     "grade": {
+      "en": "Authentic hadith",
+      "ur": "صحیح"
+     },
+     "source": "HadeethEnc.com"
+    },
+    {
+     "arabic": "عَنْ أَبِي مُوسَى رضي الله عنه عَنِ النَّبِيِّ صَلَّى اللهُ عَلَيْهِ وَسَلَّمَ قَالَ: «إِنَّ اللهَ عَزَّ وَجَلَّ يَبْسُطُ يَدَهُ بِاللَّيْلِ لِيَتُوبَ مُسِيءُ النَّهَارِ، وَيَبْسُطُ يَدَهُ بِالنَّهَارِ لِيَتُوبَ مُسِيءُ اللَّيْلِ، حَتَّى تَطْلُعَ الشَّمْسُ مِنْ مَغْرِبِهَا».",
+     "translation": {
+      "en": "Abu Mūsa (may Allah be pleased with him) reported that the Prophet (may Allah's peace and blessings be upon him) said: \"Verily, Allah Almighty extends His Hand during the night so the sinner of the day may repent, and He extends His Hand during the day so the sinner of the night may repent until the sun rises from its west.\"",
+      "ur": "ابوموسی رضی اللہ عنہ سے روایت ہے کہ اللہ کے نبی ﷺ نے فرمایا: ’’اللہ عزوجل رات میں اپنا ہاتھ پسارتا ہے، تاکہ دن کا گنہ گار توبہ کر لے اور دن میں اپنا ہاتھ پسارتا ہے، تاکہ رات کا گنہ گار توبہ کرلے، یہاں تک کہ سورج مغرب سے طلوع ہو جا ئے۔\""
+     },
+     "attribution": {
+      "en": "Narrated by Muslim",
+      "ur": "رواه مسلم"
+     },
+     "grade": {
+      "en": "Authentic",
+      "ur": "صحيح"
+     },
+     "source": "HadeethEnc.com"
+    },
+    {
+     "arabic": "عَنْ أَنَسِ بْنِ مَالِكٍ رضي الله عنه قَالَ: سَمِعْتُ رَسُولَ اللهِ صَلَّى اللَّهُ عَلَيْهِ وَسَلَّمَ يَقُولُ: «قَالَ اللَّهُ تَبَارَكَ وَتَعَالَى: يَا ابْنَ آدَمَ إِنَّكَ مَا دَعَوْتَنِي وَرَجَوْتَنِي غَفَرْتُ لَكَ عَلَى مَا كَانَ فِيكَ وَلاَ أُبَالِي، يَا ابْنَ آدَمَ لَوْ بَلَغَتْ ذُنُوبُكَ عَنَانَ السَّمَاءِ ثُمَّ اسْتَغْفَرْتَنِي غَفَرْتُ لَكَ، وَلاَ أُبَالِي، يَا ابْنَ آدَمَ إِنَّكَ لَوْ أَتَيْتَنِي بِقُرَابِ الأَرْضِ خَطَايَا ثُمَّ لَقِيتَنِي لاَ تُشْرِكُ بِي شَيْئًا لأَتَيْتُكَ بِقُرَابِهَا مَغْفِرَةً».",
+     "translation": {
+      "en": "Anas ibn Mālik (may Allah be pleased with him) reported: I heard the Messenger of Allah (may Allah's peace and blessings be upon him) say: \"Allah Almighty said: 'O son of Adam, so long as you call upon Me and ask of Me, I shall forgive you for what you have done, and I shall not mind. O son of Adam, were your sins to reach the clouds of the sky and were you then to ask forgiveness of Me, I shall forgive you. O son of Adam, were you to come to Me with sins nearly as great as the earth and were you then to meet Me, ascribing no partner to Me, I shall bring you forgiveness nearly as great as it is.'\"",
+      "ur": "انس بن مالک رضی اللہ عنہ سے روایت ہے، وہ کہتے ہيں : میں نے اللہ کے رسول صلی اللہ علیہ و سلم کو فرماتے ہوئے سنا : \"اللہ تبارک و تعالی نے فرمایا : اے ابن آدم! جب تک تو مجھے پکارتا رہے گا اور مجھ سے امید رکھے گا، میں تیرے گناہوں کو بخشتا رہوں گا، چاہے وہ جتنے بھی ہوں، میں اس کی پرواہ نہيں کروں گا۔ اے ابن آدم! اگر تیرے گناہ آسمان کے بلندی کے برابر ہو جائيں، پھر تو مجھ سے بخشش طلب کرے، تو میں تجھے بخش دوں گا اور مجھے اس کی کوئی پرواہ نہيں ہے۔ اے ابن آدم! اگر تو میرے پاس زمین کے برابر گناہ لے کر اس حال میں آئے کہ تونے کسی کو میرا شریک نہ ٹھہرایا ہو، تو میں تیرے پاس زمین کے برابر بخشش لے کر آؤں گا۔\""
+     },
+     "attribution": {
+      "en": "Narrated by At-Tirmidhi",
+      "ur": "رواه الترمذي"
+     },
+     "grade": {
+      "en": "Hasan",
+      "ur": "حسن"
+     },
+     "source": "HadeethEnc.com"
+    },
+    {
+     "arabic": "عن أنس بن مالك رضي الله عنه قال: قال رسول الله صلى الله عليه وسلم : «كلُّ بني آدم خَطَّاءٌ، وخيرُ الخَطَّائِينَ التوابون».",
+     "translation": {
+      "en": "Anas ibn Mālik (may Allah be pleased with him) reported that the Prophet (may Allah's peace and blessings be upon him) said: \"All human beings are sinners, and the best of the sinners are the frequent repenters.\"",
+      "ur": "انس بن مالک رضی اللہ عنہ سے روایت ہے کہ اللہ کے رسول ﷺ نے فرمایا: ”تمام بنی آدم خطا کار ہیں اور بہترین خطا کار وہ ہیں، جو کثرت سے توبہ کرتے ہیں“۔"
+     },
+     "attribution": {
+      "en": "Narrated by Ibn Majah - Narrated by At-Termedhy - Narrated by Ahmad - Ad-Daarimi",
+      "ur": "اسے ابنِ ماجہ نے روایت کیا ہے۔ - اسے امام ترمذی نے روایت کیا ہے۔ - اسے امام احمد نے روایت کیا ہے۔ - اسے امام دارمی نے روایت کیا ہے۔"
+     },
+     "grade": {
+      "en": "Good hadith",
+      "ur": "حَسَنْ"
+     },
+     "source": "HadeethEnc.com"
+    }
+   ],
+   "duas": [
+    79,
+    57,
+    140
+   ]
+  },
+  {
+   "id": "happy",
+   "title": "Happy",
+   "verses": [
+    {
+     "reference": "10:58",
+     "arabic": "قُلْ بِفَضْلِ ٱللَّهِ وَبِرَحْمَتِهِۦ فَبِذَٰلِكَ فَلْيَفْرَحُوا۟ هُوَ خَيْرٌۭ مِّمَّا يَجْمَعُونَ",
+     "translation": {
+      "en": "Say, \"In the bounty of Allah and in His mercy - in that let them rejoice; it is better than what they accumulate.\"",
+      "ur": "کہہ دو کہ (یہ کتاب) خدا کے فضل اور اس کی مہربانی سے (نازل ہوئی ہے) تو چاہیئے کہ لوگ اس سے خوش ہوں۔ یہ اس سے کہیں بہتر ہے جو وہ جمع کرتے ہیں"
+     }
+    },
+    {
+     "reference": "93:11",
+     "arabic": "وَأَمَّا بِنِعْمَةِ رَبِّكَ فَحَدِّثْ",
+     "translation": {
+      "en": "But as for the favor of your Lord, report [it].",
+      "ur": "اور اپنے پروردگار کی نعمتوں کا بیان کرتے رہنا"
+     }
+    },
+    {
+     "reference": "27:40",
+     "arabic": "هَٰذَا مِن فَضْلِ رَبِّى لِيَبْلُوَنِىٓ ءَأَشْكُرُ أَمْ أَكْفُرُ ۖ وَمَن شَكَرَ فَإِنَّمَا يَشْكُرُ لِنَفْسِهِۦ ۖ وَمَن كَفَرَ فَإِنَّ رَبِّى غَنِىٌّۭ كَرِيمٌۭ",
+     "translation": {
+      "en": "This is from the favor of my Lord to test me whether I will be grateful or ungrateful. And whoever is grateful - his gratitude is only for [the benefit of] himself. And whoever is ungrateful - then indeed, my Lord is Free of need and Generous.",
+      "ur": "یہ میرے پروردگار کا فضل ہے تاکہ مجھے آزمائے کہ میں شکر کرتا ہوں یا کفران نعمت کرتا ہوں اور جو شکر کرتا ہے تو اپنے ہی فائدے کے لئے شکر کرتا ہے اور جو ناشکری کرتا ہے تو میرا پروردگار بےپروا (اور) کرم کرنے والا ہے"
+     }
+    },
+    {
+     "reference": "57:23",
+     "arabic": "لِّكَيْلَا تَأْسَوْا۟ عَلَىٰ مَا فَاتَكُمْ وَلَا تَفْرَحُوا۟ بِمَآ ءَاتَىٰكُمْ ۗ وَٱللَّهُ لَا يُحِبُّ كُلَّ مُخْتَالٍۢ فَخُورٍ",
+     "translation": {
+      "en": "In order that you not despair over what has eluded you and not exult [in pride] over what He has given you. And Allah does not like everyone self-deluded and boastful -",
+      "ur": "تاکہ جو (مطلب) تم سے فوت ہوگیا ہو اس کا غم نہ کھایا کرو اور جو تم کو اس نے دیا ہو اس پر اترایا نہ کرو۔ اور خدا کسی اترانے اور شیخی بگھارنے والے کو دوست نہیں رکھتا"
+     }
+    }
+   ],
+   "hadith": [
+    {
+     "arabic": "عَنْ صُهَيْبٍ رضي الله عنه قَالَ: قَالَ رَسُولُ اللهِ صَلَّى اللهُ عَلَيْهِ وَسَلَّمَ: «عَجَبًا لِأَمْرِ الْمُؤْمِنِ، إِنَّ أَمْرَهُ كُلَّهُ خَيْرٌ، وَلَيْسَ ذَاكَ لِأَحَدٍ إِلَّا لِلْمُؤْمِنِ، إِنْ أَصَابَتْهُ سَرَّاءُ شَكَرَ، فَكَانَ خَيْرًا لَهُ، وَإِنْ أَصَابَتْهُ ضَرَّاءُ صَبَرَ، فَكَانَ خَيْرًا لَهُ».",
+     "translation": {
+      "en": "Sohaib (may Allah be pleased with him) reported: The Messenger of Allah (may Allah's peace and blessings be upon him) said: \"How astonishing the believer's affair is! Indeed, all of his affairs are good, and this is for none but the believer. If something good happens to him, he is grateful, which is good for him; and if something bad happens to him, he shows patience, which is good for him.\"",
+      "ur": "صہیب رضی اللہ عنہ سے روایت ہے، وہ کہتے ہیں کہ اللہ کے رسول ﷺ نے فرمایا : \"مومن کا معاملہ بھی عجیب ہے۔ اس کے ہر کام میں اس کے لیے خیر ہی خیر ہے۔ جب کہ ایسا مومن کے علاوہ کسی اور کے لیے نہیں ہے۔ اگر اسے آسودہ حالی ملتی ہے اور اس پر وہ شکر کرتا ہے، تو یہ شکر کرنا اس کے لیے باعث خیر ہوتا ہے اور اگر اسے کوئی تنگی لاحق ہوتی ہے اور اس پر صبر کرتا ہے، تو یہ صبر کرنا بھی اس کے لیے باعث خیر ہے۔\""
+     },
+     "attribution": {
+      "en": "Narrated by Muslim",
+      "ur": "رواه مسلم"
+     },
+     "grade": {
+      "en": "Authentic",
+      "ur": "صحيح"
+     },
+     "source": "HadeethEnc.com"
+    },
+    {
+     "arabic": "عن أبي بكرة، عن النبي صلى الله عليه وسلم أنه كان «إذا جاءه أمرُ سرورٍ، أو بُشِّرَ به خَرَّ ساجدًا شاكرًا لله».",
+     "translation": {
+      "en": "Abu Bakrah reported: Whenever the Prophet (may Allah's peace and blessings be upon him) received good news, he would fall down in prostration out of gratitude to Allah.",
+      "ur": "ابو بکرہ رضی اللہ عنہ سے روایت ہے وہ بیان کرتے ہیں کہ نبی ﷺ کو جب کوئی باعثِ مسرت چیز پیش آتی ہے یا پھر کوئی خوش خبری سنائی جاتی تو آپ ﷺ اللہ کے شکر میں سجدہ ریز ہو جاتے۔"
+     },
+     "attribution": {
+      "en": "Narrated by Ibn Majah - Narrated by At-Termedhy - Narrated by Abu Daoud - Narrated by Ahmad",
+      "ur": "اسے ابنِ ماجہ نے روایت کیا ہے۔ - اسے امام ترمذی نے روایت کیا ہے۔ - اسے امام ابو داؤد نے روایت کیا ہے۔ - اسے امام احمد نے روایت کیا ہے۔"
+     },
+     "grade": {
+      "en": "Authentic hadith",
+      "ur": "صحیح"
+     },
+     "source": "HadeethEnc.com"
+    },
+    {
+     "arabic": "عن أبي ذر رضي الله عنه قال: قيل لرسول الله صلى الله عليه وسلم : أرأيت الرَّجل الذي يعمل العمل من الخَير، ويَحمدُه الناس عليه؟ قال: «تلك عاجِل بُشْرَى المؤمن».",
+     "translation": {
+      "en": "Abu Dharr (may Allah be pleased with him) reported: 'It was said to the Messenger of Allah (may Allah’s peace and blessings be upon him): \"What do you think of a man who does a good deed and people praise him for it?\" He said: \"That is instant good news for the believer.\"",
+      "ur": "ابو ذر رضی اللہ عنہ سے روایت ہے کہ رسول اللہ ﷺ سے دریافت کیا گيا کہ اس شخص کے بارے ميں آپ کا کيا خيال ہے جو نيک عمل کرتا ہے اور لوگ اس پر اس کی تعریف کرتے ہیں؟ آپ ﷺ نے فرمایا: ”یہ مومن کے لیے پيشگی خوش خبری ہے“۔"
+     },
+     "attribution": {
+      "en": "Narrated by Muslim",
+      "ur": "اسے امام مسلم نے روایت کیا ہے۔"
+     },
+     "grade": {
+      "en": "Authentic hadith",
+      "ur": "صحیح"
+     },
+     "source": "HadeethEnc.com"
+    }
+   ],
+   "duas": [
+    218
+   ]
+  },
+  {
+   "id": "hurt",
+   "title": "Hurt",
+   "verses": [
+    {
+     "reference": "15:97",
+     "arabic": "وَلَقَدْ نَعْلَمُ أَنَّكَ يَضِيقُ صَدْرُكَ بِمَا يَقُولُونَ",
+     "translation": {
+      "en": "And We already know that your breast is constrained by what they say.",
+      "ur": "اور ہم جانتے ہیں کہ ان باتوں سے تمہارا دل تنگ ہوتا ہے"
+     }
+    },
+    {
+     "reference": "15:98",
+     "arabic": "فَسَبِّحْ بِحَمْدِ رَبِّكَ وَكُن مِّنَ ٱلسَّٰجِدِينَ",
+     "translation": {
+      "en": "So exalt [Allah] with praise of your Lord and be of those who prostrate [to Him].",
+      "ur": "تو تم اپنے پروردگار کی تسبیح کہتے اور (اس کی) خوبیاں بیان کرتے رہو اور سجدہ کرنے والوں میں داخل رہو"
+     }
+    },
+    {
+     "reference": "16:127",
+     "arabic": "وَٱصْبِرْ وَمَا صَبْرُكَ إِلَّا بِٱللَّهِ ۚ وَلَا تَحْزَنْ عَلَيْهِمْ وَلَا تَكُ فِى ضَيْقٍۢ مِّمَّا يَمْكُرُونَ",
+     "translation": {
+      "en": "And be patient, [O Muhammad], and your patience is not but through Allah. And do not grieve over them and do not be in distress over what they conspire.",
+      "ur": "اور صبر ہی کرو اور تمہارا صبر بھی خدا ہی کی مدد سے ہے اور ان کے بارے میں غم نہ کرو اور جو یہ بداندیشی کرتے ہیں اس سے تنگدل نہ ہو"
+     }
+    },
+    {
+     "reference": "41:34",
+     "arabic": "وَلَا تَسْتَوِى ٱلْحَسَنَةُ وَلَا ٱلسَّيِّئَةُ ۚ ٱدْفَعْ بِٱلَّتِى هِىَ أَحْسَنُ فَإِذَا ٱلَّذِى بَيْنَكَ وَبَيْنَهُۥ عَدَٰوَةٌۭ كَأَنَّهُۥ وَلِىٌّ حَمِيمٌۭ",
+     "translation": {
+      "en": "And not equal are the good deed and the bad. Repel [evil] by that [deed] which is better; and thereupon the one whom between you and him is enmity [will become] as though he was a devoted friend.",
+      "ur": "اور بھلائی اور برائی برابر نہیں ہوسکتی۔ تو (سخت کلامی کا) ایسے طریق سے جواب دو جو بہت اچھا ہو (ایسا کرنے سے تم دیکھو گے) کہ جس میں اور تم میں دشمنی تھی گویا وہ تمہارا گرم جوش دوست ہے"
+     }
+    },
+    {
+     "reference": "42:43",
+     "arabic": "وَلَمَن صَبَرَ وَغَفَرَ إِنَّ ذَٰلِكَ لَمِنْ عَزْمِ ٱلْأُمُورِ",
+     "translation": {
+      "en": "And whoever is patient and forgives - indeed, that is of the matters [requiring] determination.",
+      "ur": "اور جو صبر کرے اور قصور معاف کردے تو یہ ہمت کے کام ہیں"
+     }
+    },
+    {
+     "reference": "24:22",
+     "arabic": "وَلَا يَأْتَلِ أُو۟لُوا۟ ٱلْفَضْلِ مِنكُمْ وَٱلسَّعَةِ أَن يُؤْتُوٓا۟ أُو۟لِى ٱلْقُرْبَىٰ وَٱلْمَسَٰكِينَ وَٱلْمُهَٰجِرِينَ فِى سَبِيلِ ٱللَّهِ ۖ وَلْيَعْفُوا۟ وَلْيَصْفَحُوٓا۟ ۗ أَلَا تُحِبُّونَ أَن يَغْفِرَ ٱللَّهُ لَكُمْ ۗ وَٱللَّهُ غَفُورٌۭ رَّحِيمٌ",
+     "translation": {
+      "en": "And let not those of virtue among you and wealth swear not to give [aid] to their relatives and the needy and the emigrants for the cause of Allah, and let them pardon and overlook. Would you not like that Allah should forgive you? And Allah is Forgiving and Merciful.",
+      "ur": "اور جو لوگ تم میں صاحب فضل (اور صاحب) وسعت ہیں، وہ اس بات کی قسم نہ کھائیں کہ رشتہ داروں اور محتاجوں اور وطن چھوڑ جانے والوں کو کچھ خرچ پات نہیں دیں گے۔ ان کو چاہیئے کہ معاف کردیں اور درگزر کریں۔ کیا تم پسند نہیں کرتے کہ خدا تم کو بخش دے؟ اور خدا تو بخشنے والا مہربان ہے"
+     }
+    }
+   ],
+   "hadith": [
+    {
+     "arabic": "عن عبد الله بن مسعود رضي الله عنه قال: لما كان يوم حُنين آثر رسول الله صلى الله عليه وسلم ناسًا في القِسْمَة، فأعطى الأَقْرَع بن حَابِس مئة من الإبل، وأعطى عُيينة بن حِصن مثل ذلك، وأعطى نَاسًا من أشراف العَرب وآثَرَهُم يومئذ في القِسْمَة. فقال رجل: والله إن هذه قِسْمَة ما عُدل فيها، وما أُريد فيها وجه الله، فقلت: والله لأُخبرن رسول الله صلى الله عليه وسلم فأتيته فأخبرته بما قال، فتغير وجهه حتى كان كالصِّرفِ. ثم قال: «فمن يَعْدِل إذا لم يعدل الله ورسوله؟» ثم قال: «يَرحم الله موسى، قد أُوذي بأكثر من هذا فصبر». فقلت: لا جَرم لا أرفع إليه بعدها حديثًا.",
+     "translation": {
+      "en": "‘Abdullāh ibn Mas‘ūd (may Allah be pleased with him) reported: On the day of Hunayn, the Messenger of Allah (may Allah's peace and blessings be upon him) favored some people in the distribution of spoils. He gave Al-Aqra‘ ibn Hābis one hundred camels and gave ‘Uyaynah ibn Hisn the same. On that day, he gave to some of the nobles of the Arabs, favoring them over others in the distribution of spoils. A man said: \"By Allah! This is distribution in which justice is not observed, and it is not intended for pleasing Allah.\" I said to myself: \"By Allah! I will inform the Messenger of Allah (may Allah's peace and blessings be upon him) of this.\" I went to him and informed him of what the man had said. The color of his face changed as if it was dyed in red, and he said: \"Who will observe justice if Allah and His Messenger do not?\" Then he said: \"May Allah have mercy upon Mūsa! He was hurt more than this but he remained patient.\" Having heard this I said to myself: \"Surely, I shall never convey any speech of this kind to him any more.\"",
+      "ur": "عبد اللہ بن مسعود رضی اللہ عنہ روایت کرتے ہوئے بیان کرتے ہیں کہ جب حنین کا معرکہ پیش آیا، تو رسول اللہ ﷺ نے مال غنیمت کی تقسیم میں کچھ لوگوں کو ترجیح دی۔ اقرع بن حابس رضی اللہ عنہ کو سو اونٹ عطا فرمائے اور عیینہ بن حصن رضی اللہ عنہ کو بھی اتنا ہی مال عطا فرمایا۔ آپ نے عرب کے معزز لوگوں کو مال عطا فرمایا اور انھیں اس دن تقسیم میں ترجیح دی، تو ایک آدمی نے کہا: اللہ کی قسم! یہ ایسی تقسیم ہے، جس میں عدل نہیں کیا گیا اور اس تقسیم سے اللہ کی رضا کا قصد نہیں کیا گیا۔ میں نے کہا: اللہ کی قسم! میں یہ بات رسول اللہ ﷺ کی خدمت میں عرض کروں گا۔ میں آپ ﷺ کی خدمت میں حاضر ہوا اور آپ ﷺ کو وہ بات بتائی، جو اس آدمی نے کہی تھی۔ اس پر آپ ﷺ کا چہرہ مبارک متغیر ہوکر سرخ ہوگیا۔ پھر آپ ﷺ نے فرمایا: ”اگر اللہ اور اس کا رسول عدل نہیں کریں گے، تو پھر کون عدل کرے گا؟ پھر فرمایا: اللہ تعالیٰ حضرت موسیٰ علیہ السلام پر رحم فرمائے۔ ان کو اس سے زیادہ تکلیف دی گئی اور انھوں نے صبر کیا! میں نے (اپنے جی میں) کہا: آئندہ میں ایسی بات آپ ﷺ کو نہیں بتایا کروں گا“۔"
+     },
+     "attribution": {
+      "en": "Narrated by Bukhari & Muslim",
+      "ur": "متفق علیہ"
+     },
+     "grade": {
+      "en": "Authentic hadith",
+      "ur": "صحیح"
+     },
+     "source": "HadeethEnc.com"
+    },
+    {
+     "arabic": "عَنْ أَبِي هُرَيْرَةَ رضي الله عنه: أَنَّ رَجُلًا قَالَ: يَا رَسُولَ اللهِ إِنَّ لِي قَرَابَةً أَصِلُهُمْ وَيَقْطَعُونِي، وَأُحْسِنُ إِلَيْهِمْ وَيُسِيئُونَ إِلَيَّ، وَأَحْلُمُ عَنْهُمْ وَيَجْهَلُونَ عَلَيَّ، فَقَالَ: «لَئِنْ كُنْتَ كَمَا قُلْتَ، فَكَأَنَّمَا تُسِفُّهُمُ الْمَلَّ وَلَا يَزَالُ مَعَكَ مِنَ اللهِ ظَهِيرٌ عَلَيْهِمْ مَا دُمْتَ عَلَى ذَلِكَ».",
+     "translation": {
+      "en": "Abu Hurayrah (may Allah be pleased with him) reported: A man said: O Messenger of Allah, I have relatives with whom I maintain kinship ties, but they sever them with me; I treat them kindly, but they mistreat me; I tolerate them, but they are intolerant with me. He said: \"If you are as you say, then it is as if you are feeding them hot ashes, and you will continue to have a supporter against them from Allah as long as you continue to do this.\"",
+      "ur": "ابو ہریرہ رضی اللہ عنہ سے روایت ہے: ایک شخص نے عرض کیا کہ یا رسول اللہ! میرے کچھ رشتہ دار ہیں، جن کے ساتھ میں صلہ رحمی کرتا ہوں اور وہ مجھ سے قطع رحمی کرتے ہیں۔ میں ان کے ساتھ بھلائی کرتا ہوں اور وہ میرے ساتھ برا رویہ رکھتے ہیں۔ میں ان کے ساتھ تحمل سے کام لیتا ہوں اور وہ میرے ساتھ جہالت سے پیش آتے ہیں! آپ صلی اللہ علیہ وسلم نے فرمایا: \"اگر تم ویسے ہی ہو، جیسا تم نے بتایا ہے، تو گویا تم انھیں گرم گرم راکھ کھلا رہے ہو اور جب تک تم اس حالت پر رہو گے، اللہ کی طرف سے تمھارے ساتھ ایک مددگار متعین رہے گا\"۔"
+     },
+     "attribution": {
+      "en": "Narrated by Muslim",
+      "ur": "رواه مسلم"
+     },
+     "grade": {
+      "en": "Authentic",
+      "ur": "صحيح"
+     },
+     "source": "HadeethEnc.com"
+    },
+    {
+     "arabic": "عن عبد الله بن عمر رضي الله عنهما عن النبي صلى الله عليه وسلم قال: «المؤمن الذي يخالط الناس، ويصبر على أذاهم خير من الذي لا يخالط الناس ولا يصبر على أذاهم».",
+     "translation": {
+      "en": "‘Abdullāh ibn ‘Umar (may Allah be pleased with him) reported that the Prophet (may Allah's peace and blessings be upon him) said: “The believer who mixes with people and patiently bears their annoyance is better than the believer who does not mix with people or patiently bear their annoyance.”",
+      "ur": "عبداللہ بن عمر رضی اللہ عنہما سے روایت ہے کہ رسول اللہ ﷺ نے فرمایا: ”وہ مؤمن جو لوگوں سے مل جل کر رہتا ہے اور ان کی ایذا رسانی پر صبر کرتا ہے، اس مؤمن سے بہتر ہے، جو لوگوں سے الگ تھلگ رہتا ہے اور ان کی ایذا رسانی پر صبر نہیں کرتا“۔"
+     },
+     "attribution": {
+      "en": "Narrated by Ibn Majah - Narrated by At-Termedhy - Narrated by Ahmad",
+      "ur": "اسے ابنِ ماجہ نے روایت کیا ہے۔ - اسے امام ترمذی نے روایت کیا ہے۔ - اسے امام احمد نے روایت کیا ہے۔"
+     },
+     "grade": {
+      "en": "Authentic hadith",
+      "ur": "صحیح"
+     },
+     "source": "HadeethEnc.com"
+    }
+   ],
+   "duas": [
+    144
+   ]
+  },
+  {
+   "id": "indecisive",
+   "title": "Indecisive",
+   "verses": [
+    {
+     "reference": "3:159",
+     "arabic": "فَإِذَا عَزَمْتَ فَتَوَكَّلْ عَلَى ٱللَّهِ ۚ إِنَّ ٱللَّهَ يُحِبُّ ٱلْمُتَوَكِّلِينَ",
+     "translation": {
+      "en": "And when you have decided, then rely upon Allah. Indeed, Allah loves those who rely [upon Him].",
+      "ur": "اور جب (کسی کام کا) عزم مصمم کرلو تو خدا پر بھروسا رکھو۔ بےشک خدا بھروسا رکھنے والوں کو دوست رکھتا ہے"
+     }
+    },
+    {
+     "reference": "2:216",
+     "arabic": "وَعَسَىٰٓ أَن تَكْرَهُوا۟ شَيْـًۭٔا وَهُوَ خَيْرٌۭ لَّكُمْ ۖ وَعَسَىٰٓ أَن تُحِبُّوا۟ شَيْـًۭٔا وَهُوَ شَرٌّۭ لَّكُمْ ۗ وَٱللَّهُ يَعْلَمُ وَأَنتُمْ لَا تَعْلَمُونَ",
+     "translation": {
+      "en": "But perhaps you hate a thing and it is good for you; and perhaps you love a thing and it is bad for you. And Allah Knows, while you know not.",
+      "ur": "مگر عجب نہیں کہ ایک چیز تم کو بری لگے اور وہ تمہارے حق میں بھلی ہو اور عجب نہیں کہ ایک چیز تم کو بھلی لگے اور وہ تمہارے لئے مضر ہو۔ اور ان باتوں کو) خدا ہی بہتر جانتا ہے اور تم نہیں جانتے"
+     }
+    },
+    {
+     "reference": "42:38",
+     "arabic": "وَٱلَّذِينَ ٱسْتَجَابُوا۟ لِرَبِّهِمْ وَأَقَامُوا۟ ٱلصَّلَوٰةَ وَأَمْرُهُمْ شُورَىٰ بَيْنَهُمْ وَمِمَّا رَزَقْنَٰهُمْ يُنفِقُونَ",
+     "translation": {
+      "en": "And those who have responded to their lord and established prayer and whose affair is [determined by] consultation among themselves, and from what We have provided them, they spend.",
+      "ur": "اور جو اپنے پروردگار کا فرمان قبول کرتے ہیں اور نماز پڑھتے ہیں۔ اور اپنے کام آپس کے مشورے سے کرتے ہیں۔ اور جو مال ہم نے ان کو عطا فرمایا ہے اس میں سے خرچ کرتے ہیں"
+     }
+    },
+    {
+     "reference": "12:67",
+     "arabic": "وَقَالَ يَٰبَنِىَّ لَا تَدْخُلُوا۟ مِنۢ بَابٍۢ وَٰحِدٍۢ وَٱدْخُلُوا۟ مِنْ أَبْوَٰبٍۢ مُّتَفَرِّقَةٍۢ ۖ وَمَآ أُغْنِى عَنكُم مِّنَ ٱللَّهِ مِن شَىْءٍ ۖ إِنِ ٱلْحُكْمُ إِلَّا لِلَّهِ ۖ عَلَيْهِ تَوَكَّلْتُ ۖ وَعَلَيْهِ فَلْيَتَوَكَّلِ ٱلْمُتَوَكِّلُونَ",
+     "translation": {
+      "en": "And he said, \"O my sons, do not enter from one gate but enter from different gates; and I cannot avail you against [the decree of] Allah at all. The decision is only for Allah; upon Him I have relied, and upon Him let those who would rely [indeed] rely.\"",
+      "ur": "اور ہدایت کی کہ بیٹا ایک ہی دروازے سے داخل نہ ہونا بلکہ جدا جدا دروازوں سے داخل ہونا۔ اور میں خدا کی تقدیر کو تم سے نہیں روک سکتا۔ بےشک حکم اسی کا ہے میں اسی پر بھروسہ رکھتا ہوں۔ اور اہلِ توکل کو اسی پر بھروسہ رکھنا چاہیئے"
+     }
+    }
+   ],
+   "hadith": [
+    {
+     "arabic": "عن جابر بن عبد الله رضي الله عنهما قال: كان رسول الله صلى الله عليه وسلم يُعلمنا الاسْتِخَارَةَ في الأمور كلها كالسورة من القرآن، يقول: «إذا هَمَّ أحدُكم بالأمر، فلْيَرْكَعْ ركعتين من غير الفَرِيضَةِ، ثم لْيَقُلْ: اللهم إني أَسْتَخِيرُكَ بِعِلْمِكَ، وأَسْتَقْدِرُكَ بِقُدْرَتِكَ، وأَسْأَلُكَ من فَضلك العظيم، فإنك تَقْدِرُ ولا أَقْدِرُ، وتعلمُ ولا أعلمُ، وأنت عَلَّامُ الغُيُوبِ. اللهم إن كنتَ تعلم أن هذا الأمر خيرٌ لي في ديني ومَعَاشِي وعَاقِبَةِ أَمْرِي» أو قال: «عَاجِلِ أَمْرِي وآجِلِهِ، فاقْدُرْهُ لي ويَسِّرْهُ لي، ثم بَارِكْ لي فيه. وإن كنت تعلمُ أن هذا الأمر شرٌّ لي في ديني ومَعَاشِي وعَاقِبَةِ أَمْرِي» أو قال: «عَاجِلِ أَمْرِي وآجِلِهِ؛ فاصْرِفْهُ عَنِّي، واصْرِفْنِي عنه، واقْدُرْ لِيَ الخيرَ حيث كان، ثم أَرْضِنِي به» قال: «ويُسَمِّي حَاجَتَهُ».",
+     "translation": {
+      "en": "Jābir ibn ‘Abdullah (may Allah be pleased with him and his father) reported: The Messenger of Allah (may Allah's peace and blessings be upon him) used to teach us Istikhārah (guidance-seeking prayer) in all matters, as he would teach us a Surah from the Qur’an. He would say: \"When one of you intends to do something, let him perform two Rak‘ahs other than the obligatory prayer and then say: Allāhumma inni astakhīruka bi‘ilmika, wa astaqdiruka biqudratika, wa as’aluka min fadlik al-‘azhīm, fa ’innaka taqdiru wa la aqdiru, wa ta‘lamu wa la a‘lamu, wa anta ‘allāmu al-ghuyūb. Allāhumma in kunta ta‘lamu anna hādha al-’amra khayrun li fi dīni wa ma‘āshi wa ‘āqibati amri, (or he said) ‘ājili amri wa ājilihi, faqdurhu li wa yassirhu li, thumma bārik li fīh. Wa in kunta ta‘lamu anna hādha al-’amra sharrun li fi dīni wa ma‘āshi wa ‘āqibati amri, (or he said) wa ‘ājili amri wa ājilihi, fasrifhu ‘anni, wasrifni ‘anhu, waqdur li al-khayra haythu kāna, thumma ardini. (O Allah, I consult You for Your knowledge, and I seek strength from You for Your power, and I ask You of Your great bounty. Indeed, You are capable and I am not, and You know and I do not, and You are the All-Knower of the unseen. O Allah, if You know that this matter is good for me in my religion, my livelihood, and the outcome of my affairs, (or he said), my immediate and future affairs, then decree it for me, make it easy for me, and then bless it for me. And if You know this matter is evil concerning my religion, my livelihood or the outcome of my affairs, (or he said) my immediate and future affairs, then turn it away from me, and turn me away from it, and decree for me what is good wherever it may be, and make me content).'' He said: ''And let him name his need.''",
+      "ur": "جابر رضی اللہ عنہ نے بیان کرتے ہیں کہ رسول اللہ ﷺ ہمیں تمام معاملات میں استخارہ كرنے كى تعليم اس طرح ديا كرتے تھے، جس طرح قرآن مجيد كى سورت كى۔۔ آپ ﷺ فرماتے: ”جب تم میں سے کوئی شخص کسی کام کا ارادہ کرے، تو دو رکعات (نفل) پڑھے۔ اس کے بعد یوں دعا کرے: اے اللہ ! میں تجھ سے بھلائی مانگتا ہوں تیرے علم کے واسطہ سے، تجھ سے قدرت مانگتا ہوں تیری قدرت کے واسطہ سے اور تیرا فضلِ عظیم چاہتا ہوں، کیوں کہ تو قادر مطلق ہے میرے اندر قدرت نہیں، تو علم والا ہے مجھے علم نہیں اور تو تمام پوشیدہ باتوں کو جاننے والا ہے۔ اے اللہ ! اگر تو جانتا ہے کہ یہ کام میرے لیے بہتر ہے؛ میرے دین کے اعتبار سے، میری معاش اور میرے انجام کار کے اعتبار سے -یا دعا میں یہ الفاظ کہے: اِس جہاں اور اُس جہاں میں بہتر ہے- تو اسے میرے لیے مقدر کر دے۔ اور اگر تو جانتا ہے کہ یہ کام میرے لیے برا ہے؛ میرے دین کے لیے ، میری زندگی کے لیے اور میرے انجام کار کے لیے -یا یہ الفاظ فرمائے: اِس جہاں اور اُس جہاں کے لئے برا ہے- تو اسے مجھ سے پھیر دے، مجھے اس سے پھیر دے اور میرے لیے بھلائی مقدر کر دے جہاں کہیں بھی وہ ہو اور پھر مجھے اس سے مطمئن کر دے۔ اور فرمایا: (اس کے بعد) اپنی ضرورت کا بیان کرے“۔"
+     },
+     "attribution": {
+      "en": "Narrated by Al-Bukhāri",
+      "ur": "اسے امام بخاری نے روایت کیا ہے۔"
+     },
+     "grade": {
+      "en": "Authentic",
+      "ur": "صحیح"
+     },
+     "source": "HadeethEnc.com"
+    },
+    {
+     "arabic": "عَنْ أَبِي هُرَيْرَةَ رضي الله عنه قَالَ: قَالَ رَسُولُ اللهِ صَلَّى اللهُ عَلَيْهِ وَسَلَّمَ: «الْمُؤْمِنُ الْقَوِيُّ، خَيْرٌ وَأَحَبُّ إِلَى اللهِ مِنَ الْمُؤْمِنِ الضَّعِيفِ، وَفِي كُلٍّ خَيْرٌ، احْرِصْ عَلَى مَا يَنْفَعُكَ، وَاسْتَعِنْ بِاللهِ وَلَا تَعْجَزْ، وَإِنْ أَصَابَكَ شَيْءٌ، فَلَا تَقُلْ لَوْ أَنِّي فَعَلْتُ كَانَ كَذَا وَكَذَا، وَلَكِنْ قُلْ قَدَرُ اللهِ وَمَا شَاءَ فَعَلَ، فَإِنَّ (لَوْ) تَفْتَحُ عَمَلَ الشَّيْطَانِ».",
+     "translation": {
+      "en": "Abu Hurayrah (may Allah be pleased with him) reported that the Messenger of Allah (may Allah's peace and blessings be upon him) said: \"The strong believer is better and dearer to Allah than the weak believer, and there is good in both. Adhere to whatever brings you benefit, seek the help of Allah, and do not feel helpless. If something befalls you, do not say: 'Had I done such-and-such, it would have been such-and-such;' rather, say: 'Allah has decreed, and whatever He wills, He does.' Indeed, 'if' opens the way before the devil to act.\"",
+      "ur": "ابو ہریرہ رضی اللہ عنہ سے روایت ہے، وہ کہتے ہیں کہ اللہ کے رسول ﷺ نے فرمایا : \"مضبوط مومن اللہ کے نزدیک کمزور مومن سے بہتر اور محبوب ہے۔ تاہم خیر تو دونوں ہی میں ہے۔ جو چیز تمہارے لیے فائدے مند ہو، اس کی حرص رکھو اور اللہ سے مدد مانگو اور عاجز نہ بنو۔ اگر تم پر کوئی مصیبت آ جائے، تو یہ نہ کہو کہ اگر میں ایسا کر لیتا، تو ایسا ہوجاتا۔ بلکہ یہ کہو کہ یہ اللہ کی تقدیر ہے اور وہ جو چاہتا ہے کرتا ہے۔ کیوں کہ ”اگر“ شیطان کے عمل دخل کا دروازہ کھول دیتا ہے“۔"
+     },
+     "attribution": {
+      "en": "Narrated by Muslim",
+      "ur": "رواه مسلم"
+     },
+     "grade": {
+      "en": "Authentic",
+      "ur": "صحيح"
+     },
+     "source": "HadeethEnc.com"
+    }
+   ],
+   "duas": [
+    74,
+    139
+   ]
+  },
+  {
+   "id": "hypocritical",
+   "title": "Hypocritical",
+   "verses": [
+    {
+     "reference": "61:2",
+     "arabic": "يَٰٓأَيُّهَا ٱلَّذِينَ ءَامَنُوا۟ لِمَ تَقُولُونَ مَا لَا تَفْعَلُونَ",
+     "translation": {
+      "en": "O you who have believed, why do you say what you do not do?",
+      "ur": "مومنو! تم ایسی باتیں کیوں کہا کرتے ہو جو کیا نہیں کرتے"
+     }
+    },
+    {
+     "reference": "61:3",
+     "arabic": "كَبُرَ مَقْتًا عِندَ ٱللَّهِ أَن تَقُولُوا۟ مَا لَا تَفْعَلُونَ",
+     "translation": {
+      "en": "Great is hatred in the sight of Allah that you say what you do not do.",
+      "ur": "خدا اس بات سے سخت بیزار ہے کہ ایسی بات کہو جو کرو نہیں"
+     }
+    },
+    {
+     "reference": "2:44",
+     "arabic": "۞ أَتَأْمُرُونَ ٱلنَّاسَ بِٱلْبِرِّ وَتَنسَوْنَ أَنفُسَكُمْ وَأَنتُمْ تَتْلُونَ ٱلْكِتَٰبَ ۚ أَفَلَا تَعْقِلُونَ",
+     "translation": {
+      "en": "Do you order righteousness of the people and forget yourselves while you recite the Scripture? Then will you not reason?",
+      "ur": "(یہ) کیا (عقل کی بات ہے کہ) تم لوگوں کو نیکی کرنے کو کہتے ہو اور اپنے تئیں فراموش کئے دیتے ہو، حالانکہ تم کتاب (خدا) بھی پڑھتے ہو۔ کیا تم سمجھتے نہیں؟"
+     }
+    },
+    {
+     "reference": "4:142",
+     "arabic": "إِنَّ ٱلْمُنَٰفِقِينَ يُخَٰدِعُونَ ٱللَّهَ وَهُوَ خَٰدِعُهُمْ وَإِذَا قَامُوٓا۟ إِلَى ٱلصَّلَوٰةِ قَامُوا۟ كُسَالَىٰ يُرَآءُونَ ٱلنَّاسَ وَلَا يَذْكُرُونَ ٱللَّهَ إِلَّا قَلِيلًۭا",
+     "translation": {
+      "en": "Indeed, the hypocrites [think to] deceive Allah, but He is deceiving them. And when they stand for prayer, they stand lazily, showing [themselves to] the people and not remembering Allah except a little,",
+      "ur": "منافق (ان چالوں سے اپنے نزدیک) خدا کو دھوکا دیتے ہیں (یہ اس کو کیا دھوکا دیں گے) وہ انہیں کو دھوکے میں ڈالنے والا ہے اور جب یہ نماز کو کھڑے ہوتے ہیں تو سست اور کاہل ہو کر (صرف) لوگوں کے دکھانے کو اور خدا کی یاد ہی نہیں کرتے مگر بہت کم"
+     }
+    },
+    {
+     "reference": "4:146",
+     "arabic": "إِلَّا ٱلَّذِينَ تَابُوا۟ وَأَصْلَحُوا۟ وَٱعْتَصَمُوا۟ بِٱللَّهِ وَأَخْلَصُوا۟ دِينَهُمْ لِلَّهِ فَأُو۟لَٰٓئِكَ مَعَ ٱلْمُؤْمِنِينَ ۖ وَسَوْفَ يُؤْتِ ٱللَّهُ ٱلْمُؤْمِنِينَ أَجْرًا عَظِيمًۭا",
+     "translation": {
+      "en": "Except for those who repent, correct themselves, hold fast to Allah, and are sincere in their religion for Allah, for those will be with the believers. And Allah is going to give the believers a great reward.",
+      "ur": "ہاں جنہوں نے توبہ کی اور اپنی حالت کو درست کیا اور خدا (کی رسی) کو مضبوط پکڑا اور خاص خدا کے فرمانبردار ہوگئے تو ایسے لوگ مومنوں کے زمرے میں ہوں گے اور خدا عنقریب مومنوں کو بڑا ثواب دے گا"
+     }
+    }
+   ],
+   "hadith": [
+    {
+     "arabic": "عن أبي ربعي حنظلة بن الربيع الأسيدي الكاتب- رضي الله عنه- أحد كتاب رسول الله صلى الله عليه وسلم قال: لقيني أبو بكر رضي الله عنه فقال: كيف أنت يا حنظلة؟ قلت: نافق حنظلة! قال: سبحان الله ما تقول؟! قلت: نكون عند رسول الله صلى الله عليه وسلم يُذَكِّرُنَا بالجنة والنار كأنا رَأْىَ عَيْنٍ فإذا خرجنا من عند رسول الله صلى الله عليه وسلم عَافَسْنَا الأزواج والأولاد وَالضَّيْعَاتِ نسينا كثيرا، قال أبو بكر رضي الله عنه : فوالله إنا لنلقى مثل هذا، فانطلقت أنا وأبو بكر حتى دخلنا على رسول الله صلى الله عليه وسلم . فقلت: نافق حنظلة يا رسول الله! فقال رسول الله صلى الله عليه وسلم : «وما ذاك؟» قلت: يا رسول الله، نكون عندك تذكرنا بالنار والجنة كأنا رأي العين فإذا خرجنا من عندك عافسنا الأزواج والأولاد والضيعات نسينًا كثيرًا. فقال رسول الله صلى الله عليه وسلم : «والذي نفسي بيده، لو تدومون على ما تكونون عندي، وفي الذِّكْر، لصافحتكم الملائكة على فرشكم وفي طُرُقِكُمْ، لكن يا حنظلة ساعة وساعة» ثلاث مرات.",
+     "translation": {
+      "en": "Abu Rib‘i Hanzhalah ibn Ar-Rabī‘ al-Usaydi, one of the scribes of the Messenger of Allah (may Allah’s peace and blessings be upon him) reported: I met Abu Bakr (may Allah be pleased with him) and he said: 'How are you?' I said: 'Hanzhalah has turned into a hypocrite.' He said: 'Glory be to Allah, what are you saying?' I said: 'When we are in the company of the Messenger of Allah (may Allah's peace and blessings be upon him), he reminds us of Paradise and Hellfire as if we are seeing them with our very eyes, and when we depart from his company, we attend to our wives, children, and business, and we forget much of that.' Abu Bakr said: 'By Allah, we do experience the same.' So I and Abu Bakr went to the Messenger of Allah (may Allah's peace and blessings be upon him) and I said: 'O Messenger of Allah, Hanzhalah has turned into a hypocrite.' Thereupon the Messenger of Allah (may Allah's peace and blessings be upon him) said: 'And how is that?' I said: 'O Messenger of Allah, when we are in your company, you remind us of Hellfire and Paradise as if we are seeing them with our own eyes, then when we depart from you we attend to our wives, children, and business, and we forget much of that.' Thereupon the Messenger of Allah (may Allah's peace and blessings be upon him) said: 'By Him in Whose hand is my soul, if your state of mind remains the same as it is in my presence and you are always busy in remembrance (of Allah), the angels will shake hands with you in your beds and in your paths but, Hanzhalah, time (should be devoted to prayer and meditation) and time (should be devoted to worldly affairs).' He said this thrice.\"",
+      "ur": "ابو ربعی حنظلہ بن ربیع اسیدی رضی اللہ عنہ سے روایت ہے یہ رسول اللہ ﷺ کے کاتبوں میں سے تھے، وہ کہتے ہیں کہ مجھ سے ابوبکر رضی اللہ عنہ کی ملاقات ہوئی تو انہوں نے کہا اے حنظلہ تم کیسے ہو میں نے کہا حنظلہ تو منافق ہوگیا انہوں نے کہا سُبْحَانَ اللَّهِ تم کیا کہہ رہے ہو میں نے کہا ہم رسول اللہ کی خدمت میں ہوتے ہیں اور آپ ﷺ ہمیں جنت و دوزخ کی یاد دلاتے رہتے ہیں گویا کہ ہم انہیں اپنی آنکھوں سے دیکھتے ہیں اور جب ہم رسول اللہ کے پاس سے نکل جاتے ہیں تو ہم بیویوں اور اولاد اور زمینوں وغیرہ کے معاملات میں مشغول ہوجاتے ہیں اور ہم بہت ساری چیزوں کو بھول جاتے ہیں ابوبکر رضی اللہ عنہ نے کہا اللہ کی قسم ہمارے ساتھ بھی اسی طرح معاملہ پیش آتا ہے میں اور ابوبکر چلے یہاں تک کہ ہم رسول اللہ ﷺ کی خدمت میں حاضر ہوئے میں نے عرض کیا اے اللہ کے رسول! حنظلہ تو منافق ہوگیا رسول اللہ ﷺ نے فرمایا کیا وجہ ہے؟ میں نے عرض کیا اے اللہ کے رسول! ہم آپ کی خدمت میں ہوتے ہیں تو آپ ﷺ ہمیں جنت و دوزخ کی یاد دلاتے رہتے ہیں یہاں تک کہ وہ آنکھوں دیکھے ہوجاتے ہیں جب ہم آپ کے پاس سے چلے جاتے ہیں تو ہم اپنی بیویوں اور اولاد اور زمین کے معاملات وغیرہ میں مشغول ہوجانے کی وجہ سے بہت ساری چیزوں کو بھول جاتے ہیں تو رسول اللہ ﷺ نے فرمایا اس ذات کی قسم جس کے ہاتھ میں میری جان ہے اگر تم اسی کیفیت پر ہمیشہ رہو جس حالت میں میرے پاس ہوتے ہو یعنی ذکر میں مشغول ہوتے ہو، تو فرشتے تمہارے بستروں پر تم سے مصافحہ کریں اور راستوں میں بھی لیکن اے حنظلہ! وقت وقت کی بات ہے۔ آپ ﷺ نے یہ تین بار فرمایا۔"
+     },
+     "attribution": {
+      "en": "Narrated by Muslim",
+      "ur": "اسے امام مسلم نے روایت کیا ہے۔"
+     },
+     "grade": {
+      "en": "Authentic hadith",
+      "ur": "صحیح"
+     },
+     "source": "HadeethEnc.com"
+    },
+    {
+     "arabic": "عَنْ مَحْمُودِ بْنِ لَبِيدٍ رضي الله عنه أَنَّ رَسُولَ اللَّهِ صَلَّى اللَّهُ عَلَيْهِ وَسَلَّمَ قَالَ: «إِنَّ أَخْوَفَ مَا أَخَافُ عَلَيْكُمُ الشِّرْكُ الْأَصْغَرُ» قَالُوا: وَمَا الشِّرْكُ الْأَصْغَرُ يَا رَسُولَ اللهِ؟ قَالَ: «الرِّيَاءُ، يَقُولُ اللهُ عز وجل لَهُمْ يَوْمَ الْقِيَامَةِ إِذَا جُزِيَ النَّاسُ بِأَعْمَالِهِمْ: اذْهَبُوا إِلَى الَّذِينَ كُنْتُمْ تُرَاؤُونَ فِي الدُّنْيَا، فَانْظُرُوا هَلْ تَجِدُونَ عِنْدَهُمْ جَزَاءً؟».",
+     "translation": {
+      "en": "Mahmūd ibn Labīd (may Allah be pleased with him) reported that the Messenger of Allah (may Allah's peace and blessings be upon him) said: \"The thing that I fear most for you is minor Shirk (polytheism).' They said: 'What is minor Shirk, O Messenger of Allah?' He said: 'It is Riyā’ (showing off). Allah Almighty will say on the Day of Judgment when He will requite all people for their deeds: \"Go to those before whom you used to show off with your deeds in the worldly life and see whether you find any reward with them?\"",
+      "ur": "محمود بن لبید رضی اللہ عنہ سے روایت ہے کہ اللہ کے رسول صلی اللہ علیہ و سلم  نے فرمایا : \"بلاشبہ مجھے تم پر جس چیز کا خوف سب سے زیادہ ہے، وہ شرک اصغر ہے۔\" صحابہ نے عرض کیا : اے اللہ کے رسول! شرک اصغر کیا ہے؟ آپ نے جواب دیا : \"ریا۔ اللہ عز و جل قیامت کے دن اس طرح کے لوگوں سے کہے گا : ان لوگوں کے پاس جاؤ، جن کو دکھانے کے لیے تم دنیا میں عمل کرتے تھے۔ دیکھو، کیا تم ان کے یہاں بدلہ پاتے ہو؟\""
+     },
+     "attribution": {
+      "en": "Narrated by Ahmad",
+      "ur": "رواه أحمد"
+     },
+     "grade": {
+      "en": "Hasan",
+      "ur": "حسن"
+     },
+     "source": "HadeethEnc.com"
+    },
+    {
+     "arabic": "عَنْ عَبْدِ اللَّهِ بْنِ عَمْرٍو رضي الله عنهما قال: قال رَسولُ اللهِ صَلَّى اللهُ عَلَيْهِ وَسَلَّمَ: «أَرْبَعٌ مَنْ كُنَّ فِيهِ كَانَ مُنَافِقًا، وَإِنْ كَانَتْ خَصْلَةٌ مِنْهُنَّ فِيهِ كَانَتْ فِيهِ خَصْلَةٌ مِنَ النِّفَاقِ حَتَّى يَدَعَهَا: مَنْ إِذَا حَدَّثَ كَذَبَ، وإِذَا وَعَدَ أَخْلَفَ، وإذَا خَاصَمَ فَجَرَ، وَإِذَا عَاهَدَ غَدَرَ».",
+     "translation": {
+      "en": "‘Abdullāh ibn ‘Amr (may Allah be pleased with him) reported: The Messenger of Allah (may Allah's peace and blessings be upon him) said: \"There are four things; whoever has them is a hypocrite, and if one has a trait of them, he has a trait of hypocrisy until he gives it up: when he speaks, he lies; when he makes a promise, he breaks it; when he quarrels, he acts immorally; and when he makes a covenant, he proves treacherous.\"",
+      "ur": "عبداللہ بن عمرو رضی اللہ عنہما سے روایت ہے، وہ کہتے ہیں کہ رسول اللہ ﷺ نے فرمایا: ”چار خصلتیں جس شخص میں ہوں گی وہ (مکمل) منافق ہو گا۔ جس میں ان میں سے کوئی ایک خصلت ہو گی، اس میں نفاق کی ایک خصلت ہو گی، جب تک وہ اسے چھوڑ نہیں دیتا: جب بات کرے تو جھوٹ بولے، جب وعدہ کرے تو وعدہ خلافی کرے، جب جھگڑا کرے تو گالی گلوج کرے اور جب عہد کرے تو بد عہدی کرے۔“"
+     },
+     "attribution": {
+      "en": "Narrated by Al-Bukhāri and Muslim",
+      "ur": "اسے بخاری اور مسلم نے روایت کیا ہے"
+     },
+     "grade": {
+      "en": "Authentic",
+      "ur": "صحيح"
+     },
+     "source": "HadeethEnc.com"
+    }
+   ],
+   "duas": [
+    203
+   ]
+  },
+  {
+   "id": "jealous",
+   "title": "Jealous",
+   "verses": [
+    {
+     "reference": "4:32",
+     "arabic": "وَلَا تَتَمَنَّوْا۟ مَا فَضَّلَ ٱللَّهُ بِهِۦ بَعْضَكُمْ عَلَىٰ بَعْضٍۢ ۚ لِّلرِّجَالِ نَصِيبٌۭ مِّمَّا ٱكْتَسَبُوا۟ ۖ وَلِلنِّسَآءِ نَصِيبٌۭ مِّمَّا ٱكْتَسَبْنَ ۚ وَسْـَٔلُوا۟ ٱللَّهَ مِن فَضْلِهِۦٓ ۗ إِنَّ ٱللَّهَ كَانَ بِكُلِّ شَىْءٍ عَلِيمًۭا",
+     "translation": {
+      "en": "And do not wish for that by which Allah has made some of you exceed others. For men is a share of what they have earned, and for women is a share of what they have earned. And ask Allah of his bounty. Indeed Allah is ever, of all things, Knowing.",
+      "ur": "اور جس چیز میں خدا نے تم میں سے بعض کو بعض پر فضیلت دی ہے اس کی ہوس مت کرو مردوں کو ان کاموں کا ثواب ہے جو انہوں نے کئے اور عورتوں کو ان کاموں کا ثواب ہے جو انہوں نے کئے اور خدا سے اس کا فضل (وکرم) مانگتے رہو کچھ شک نہیں کہ خدا ہر چیز سے واقف ہے"
+     }
+    },
+    {
+     "reference": "4:54",
+     "arabic": "أَمْ يَحْسُدُونَ ٱلنَّاسَ عَلَىٰ مَآ ءَاتَىٰهُمُ ٱللَّهُ مِن فَضْلِهِۦ",
+     "translation": {
+      "en": "Or do they envy people for what Allah has given them of His bounty?",
+      "ur": "یا جو خدا نے لوگوں کو اپنے فضل سے دے رکھا ہے اس کا حسد کرتے ہیں"
+     }
+    },
+    {
+     "reference": "43:32",
+     "arabic": "أَهُمْ يَقْسِمُونَ رَحْمَتَ رَبِّكَ ۚ نَحْنُ قَسَمْنَا بَيْنَهُم مَّعِيشَتَهُمْ فِى ٱلْحَيَوٰةِ ٱلدُّنْيَا ۚ وَرَفَعْنَا بَعْضَهُمْ فَوْقَ بَعْضٍۢ دَرَجَٰتٍۢ لِّيَتَّخِذَ بَعْضُهُم بَعْضًۭا سُخْرِيًّۭا ۗ وَرَحْمَتُ رَبِّكَ خَيْرٌۭ مِّمَّا يَجْمَعُونَ",
+     "translation": {
+      "en": "Do they distribute the mercy of your Lord? It is We who have apportioned among them their livelihood in the life of this world and have raised some of them above others in degrees [of rank] that they may make use of one another for service. But the mercy of your Lord is better than whatever they accumulate.",
+      "ur": "کیا یہ لوگ تمہارے پروردگار کی رحمت کو بانٹتے ہیں؟ ہم نے ان میں ان کی معیشت کو دنیا کی زندگی میں تقسیم کردیا اور ایک کے دوسرے پر درجے بلند کئے تاکہ ایک دوسرے سے خدمت لے اور جو کچھ یہ جمع کرتے ہیں تمہارے پروردگار کی رحمت اس سے کہیں بہتر ہے"
+     }
+    },
+    {
+     "reference": "59:10",
+     "arabic": "وَٱلَّذِينَ جَآءُو مِنۢ بَعْدِهِمْ يَقُولُونَ رَبَّنَا ٱغْفِرْ لَنَا وَلِإِخْوَٰنِنَا ٱلَّذِينَ سَبَقُونَا بِٱلْإِيمَٰنِ وَلَا تَجْعَلْ فِى قُلُوبِنَا غِلًّۭا لِّلَّذِينَ ءَامَنُوا۟ رَبَّنَآ إِنَّكَ رَءُوفٌۭ رَّحِيمٌ",
+     "translation": {
+      "en": "And [there is a share for] those who came after them, saying, \"Our Lord, forgive us and our brothers who preceded us in faith and put not in our hearts [any] resentment toward those who have believed. Our Lord, indeed You are Kind and Merciful.\"",
+      "ur": "اور (ان کے لئے بھی) جو ان (مہاجرین) کے بعد آئے (اور) دعا کرتے ہیں کہ اے پروردگار ہمارے اور ہمارے بھائیوں کے جو ہم سے پہلے ایمان لائے ہیں گناہ معاف فرما اور مومنوں کی طرف سے ہمارے دل میں کینہ (وحسد) نہ پیدا ہونے دے۔ اے ہمارے پروردگار تو بڑا شفقت کرنے والا مہربان ہے"
+     }
+    }
+   ],
+   "hadith": [
+    {
+     "arabic": "عَنْ أَبِي هُرَيْرَةَ رضي الله عنه قَالَ: قَالَ رَسُولُ اللهِ صَلَّى اللهُ عَلَيْهِ وَسَلَّمَ: «لَا تَحَاسَدُوا، وَلَا تَنَاجَشُوا، وَلَا تَبَاغَضُوا، وَلَا تَدَابَرُوا، وَلَا يَبِعْ بَعْضُكُمْ عَلَى بَيْعِ بَعْضٍ، وَكُونُوا عِبَادَ اللهِ إِخْوَانًا الْمُسْلِمُ أَخُو الْمُسْلِمِ، لَا يَظْلِمُهُ وَلَا يَخْذُلُهُ، وَلَا يَحْقِرُهُ التَّقْوَى هَاهُنَا» وَيُشِيرُ إِلَى صَدْرِهِ ثَلَاثَ مَرَّاتٍ «بِحَسْبِ امْرِئٍ مِنَ الشَّرِّ أَنْ يَحْقِرَ أَخَاهُ الْمُسْلِمَ، كُلُّ الْمُسْلِمِ عَلَى الْمُسْلِمِ حَرَامٌ، دَمُهُ، وَمَالُهُ، وَعِرْضُهُ».",
+     "translation": {
+      "en": "Abu Hurayrah (may Allah be pleased with him) reported: The Messenger of Allah (may Allah's peace and blessings be upon him) said: \"Do not envy one another, do not raise prices by overbidding against one another, do not hate one another, do not turn your backs on one another, and do not undercut one another in trade; and be, O slaves of Allah, our brothers. A Muslim is the brother of a Muslim; he does not wrong him, he does not fail him, and he does not despise him. Piety lies here,\" and he pointed to his chest three times. \"It is enough evil for a person to look down upon his Muslim brother. All of a Muslim is inviolable to another Muslim: his blood, his property, and his honor.\"",
+      "ur": "ابو ہریرہ رضی اللہ عنہ سے روایت ہے، وہ کہتے ہیں کہ اللہ کے رسول ﷺ نے فرمایا ہے : ”ایک دوسرے سے حسد نہ کرو، خرید و فروخت کی بولی میں قیمت بڑھا کر ایک دوسرے کو دھوکا نہ دو، آپس میں بغض نہ رکھو، ایک دوسرے سے پیٹھ نہ پھیرو اور تم میں سے کوئی دوسرے کے سودے پر سودا نہ کرے۔ اے اللہ کے بندو! تم بھائی بھائی بن جاؤ۔ مسلمان مسلمان کا بھائی ہے۔ وہ اس پر ظلم نہ کرے، اس کو بے سہارا نہ چھوڑے اور اس کو حقیر نہ سمجھے۔ تقویٰ یہاں ہے۔\" اور آپ ﷺ نے یہ الفاظ اپنے سینے کی طرف اشارہ کرتے ہوئے تین مرتبہ فرمائے۔ \"کسی بھی آدمی کے برا ہونے کے لیے یہی کافی ہے کہ وہ اپنے مسلمان بھائی کو حقیر سمجھے۔ ۔ہر مسلمان کا خون، اس کا مال اور اس کی عزت دوسرے مسلمان پر حرام ہے۔“"
+     },
+     "attribution": {
+      "en": "Narrated by Muslim",
+      "ur": "رواه مسلم"
+     },
+     "grade": {
+      "en": "Authentic",
+      "ur": "صحيح"
+     },
+     "source": "HadeethEnc.com"
+    },
+    {
+     "arabic": "عن ابن مسعود رضي الله عنه قال: قال رسول الله صلى الله عليه وسلم : «لا حَسَدَ إلا في اثنتين: رجل آتاه الله مالا، فسَلَّطَه على هَلَكَتِهِ في الحَقِّ، ورجل آتاه الله حِكْمَة، فهو يقضي بها ويُعَلِّمَها».\nوعن ابن عمر رضي الله عنهما ، عن النبي صلى الله عليه وسلم قال: «لا حسد إلا في اثنتين: رجل آتاه الله القرآن، فهو يقوم به آناء الليل وآناء النهار، ورجل آتاه الله مالا، فهو ينفقه آناء الليل وآناء النهار».",
+     "translation": {
+      "en": "Ibn Mas‘ūd (may Allah be pleased with him) reported that the Prophet (may Allah's peace and blessings be upon him) said: \"There should be no envy except in two (cases): A man whom Allah has given wealth and he spends it in the right way, and a man whom Allah has given wisdom and he judges according to it and teaches it to others.\"\n‘Abdullāh ibn ‘Umar (may Allah be pleased with him) reported that the Prophet (may Allah's peace and blessings be upon him) said: \"There should be no envy except in two (cases): a man whom Allah has given (knowledge of) the Qur'an, and he recites it during the night and day, and a man whom Allah has given wealth, and he spends it during the night and day (in a rightful way).”",
+      "ur": "ابن مسعود رضي الله عنہ سے روایت ہے کہ رسول اللہ ﷺ نے فرمایا : ”حسد صرف دو صورتوں میں جائز ہے۔ ایک تو یہ کہ کسی شخص کو اللہ نے دولت دی ہو اور وہ اسے اس کو راہ حق میں خرچ کرنے پر لگا دیا ہو اور دوسرا یہ کہ کسی شخص کو اللہ نے حکمت ( کی دولت) سے نوازا ہو اور وہ اس کے ساتھ فیصلہ کرتا ہو اور ( لوگوں کو) اس حکمت کی تعلیم دیتا ہو“۔\nابن عمر رضی اللہ عنہما سے روایت ہے کہ رسول اللہ ﷺ نے فرمایا: ”حسد صرف دو صورتوں میں جائز ہے؛ ایک تو یہ کہ کسی آدمی کو اللہ تعالی قرآن سے نوازے اور وہ دن رات اس (کی تلاوت اور تعلیم و تدریس) میں لگا رہے اور دوسرا وہ شخص جس کو اللہ مال عطا کرے اور وہ دن رات اسے (وجوہ خیر میں) خرچ کرتا رہے“۔"
+     },
+     "attribution": {
+      "en": "Al-Bukhari and Muslim with its two versions",
+      "ur": "اس حدیث کی دونوں روایات متفق علیہ ہیں۔"
+     },
+     "grade": {
+      "en": "Authentic hadith",
+      "ur": "صحیح"
+     },
+     "source": "HadeethEnc.com"
+    },
+    {
+     "arabic": "عَنْ أَبِي حَمْزَةَ أَنَسِ بْنِ مَالِكٍ رَضِيَ اللَّهُ عَنْهُ -خَادِمِ رَسُولِ اللَّهِ صَلَّى اللهُ عَلَيْهِ وَسَلَّمَ- عَنْ النَّبِيِّ صَلَّى اللهُ عَلَيْهِ وَسَلَّمَ قَالَ: «لاَ يُؤْمِنُ أَحَدُكُمْ، حَتَّى يُحِبَّ لِأَخِيهِ مَا يُحِبُّ لِنَفْسِهِ»",
+     "translation": {
+      "en": "Abu Hamzah Anas ibn Mālik (may Allah be pleased with him)—the servant of the Messenger of Allah (ﷺ)—reported that the Prophet (ﷺ) said: \"None of you believes until he loves for his brother what he loves for himself.\"",
+      "ur": "اللہ کے رسول ﷺ کے خادم، ابو حمزہ انس بن مالک رضي اللہ عنہ سے روایت ہے کہ اللہ کے نبی ﷺ نے فرمایا: ”تم میں سے کوئی شخص اس وقت تک (کامل) مؤمن نہیں ہو سکتا، جب تک وہ اپنے بھائی کے لیے بھی وہی پسند نہ کرے، جو اپنے لیے کرتا ہے“۔"
+     },
+     "attribution": {
+      "en": "Agreed upon",
+      "ur": "متفق عليه"
+     },
+     "grade": {
+      "en": "Authentic",
+      "ur": "صحيح"
+     },
+     "source": "HadeethEnc.com"
+    }
+   ],
+   "duas": [
+    244
+   ]
+  },
+  {
+   "id": "lazy",
+   "title": "Lazy",
+   "verses": [
+    {
+     "reference": "53:39",
+     "arabic": "وَأَن لَّيْسَ لِلْإِنسَٰنِ إِلَّا مَا سَعَىٰ",
+     "translation": {
+      "en": "And that there is not for man except that [good] for which he strives",
+      "ur": "اور یہ کہ انسان کو وہی ملتا ہے جس کی وہ کوشش کرتا ہے"
+     }
+    },
+    {
+     "reference": "53:40",
+     "arabic": "وَأَنَّ سَعْيَهُۥ سَوْفَ يُرَىٰ",
+     "translation": {
+      "en": "And that his effort is going to be seen -",
+      "ur": "اور یہ کہ اس کی کوشش دیکھی جائے گی"
+     }
+    },
+    {
+     "reference": "3:133",
+     "arabic": "۞ وَسَارِعُوٓا۟ إِلَىٰ مَغْفِرَةٍۢ مِّن رَّبِّكُمْ وَجَنَّةٍ عَرْضُهَا ٱلسَّمَٰوَٰتُ وَٱلْأَرْضُ أُعِدَّتْ لِلْمُتَّقِينَ",
+     "translation": {
+      "en": "And hasten to forgiveness from your Lord and a garden as wide as the heavens and earth, prepared for the righteous",
+      "ur": "اپنے پروردگار کی بخشش اور بہشت کی طرف لپکو جس کا عرض آسمان اور زمین کے برابر ہے اور جو (خدا سے) ڈرنے والوں کے لیے تیار کی گئی ہے"
+     }
+    },
+    {
+     "reference": "57:21",
+     "arabic": "سَابِقُوٓا۟ إِلَىٰ مَغْفِرَةٍۢ مِّن رَّبِّكُمْ وَجَنَّةٍ عَرْضُهَا كَعَرْضِ ٱلسَّمَآءِ وَٱلْأَرْضِ أُعِدَّتْ لِلَّذِينَ ءَامَنُوا۟ بِٱللَّهِ وَرُسُلِهِۦ ۚ ذَٰلِكَ فَضْلُ ٱللَّهِ يُؤْتِيهِ مَن يَشَآءُ ۚ وَٱللَّهُ ذُو ٱلْفَضْلِ ٱلْعَظِيمِ",
+     "translation": {
+      "en": "Race toward forgiveness from your Lord and a Garden whose width is like the width of the heavens and earth, prepared for those who believed in Allah and His messengers. That is the bounty of Allah which He gives to whom He wills, and Allah is the possessor of great bounty.",
+      "ur": "(بندو) اپنے پروردگار کی بخشش کی طرف اور جنت کی (طرف) جس کا عرض آسمان اور زمین کے عرض کا سا ہے۔ اور جو ان لوگوں کے لئے تیار کی گئی ہے جو خدا پر اور اس کے پیغمبروں پر ایمان لائے ہیں لپکو۔ یہ خدا کا فضل ہے جسے چاہے عطا فرمائے۔ اور خدا بڑے فضل کا مالک ہے"
+     }
+    },
+    {
+     "reference": "9:105",
+     "arabic": "وَقُلِ ٱعْمَلُوا۟ فَسَيَرَى ٱللَّهُ عَمَلَكُمْ وَرَسُولُهُۥ وَٱلْمُؤْمِنُونَ ۖ وَسَتُرَدُّونَ إِلَىٰ عَٰلِمِ ٱلْغَيْبِ وَٱلشَّهَٰدَةِ فَيُنَبِّئُكُم بِمَا كُنتُمْ تَعْمَلُونَ",
+     "translation": {
+      "en": "And say, \"Do [as you will], for Allah will see your deeds, and [so, will] His Messenger and the believers. And you will be returned to the Knower of the unseen and the witnessed, and He will inform you of what you used to do.\"",
+      "ur": "اور ان سے کہہ دو کہ عمل کئے جاؤ۔ خدا اور اس کا رسول اور مومن (سب) تمہارے عملوں کو دیکھ لیں گے۔ اور تم غائب وحاضر کے جاننے والے (خدائے واحد) کی طرف لوٹائے جاؤ گے پھر جو کچھ تم کرتے رہے ہو وہ سب تم کو بتا دے گا"
+     }
+    }
+   ],
+   "hadith": [
+    {
+     "arabic": "عَنْ أَبِي هُرَيْرَةَ رَضِيَ اللَّهُ عَنْهُ أَنَّ رَسُولَ اللَّهِ صَلَّى اللهُ عَلَيْهِ وَسَلَّمَ قَالَ: «يَعْقِدُ الشَّيْطَانُ عَلَى قَافِيَةِ رَأْسِ أَحَدِكُمْ إِذَا هُوَ نَامَ ثَلاَثَ عُقَدٍ يَضْرِبُ كُلَّ عُقْدَةٍ عَلَيْكَ لَيْلٌ طَوِيلٌ، فَارْقُدْ، فَإِنِ اسْتَيْقَظَ فَذَكَرَ اللَّهَ، انْحَلَّتْ عُقْدَةٌ، فَإِنْ تَوَضَّأَ انْحَلَّتْ عُقْدَةٌ، فَإِنْ صَلَّى انْحَلَّتْ عُقْدَةٌ، فَأَصْبَحَ نَشِيطًا طَيِّبَ النَّفْسِ، وَإِلَّا أَصْبَحَ خَبِيثَ النَّفْسِ كَسْلاَنَ».",
+     "translation": {
+      "en": "Abu Hurayrah (may Allah be pleased with him) reported that the Messenger of Allah (may Allah's peace and blessings be upon him) said: \"When any of you sleeps, the devil ties three knots at the back of his head, striking each knot: Ahead of you is a long night, so keep sleeping. When he wakes up and remembers Allah, one knot is undone; when he performs ablution, one knot is undone; and when he prays, one knot is undone, and he gets up in the morning active and in good spirits; otherwise, he gets up in the morning low-spirited and sluggish.\"",
+      "ur": "ابوہریرہ رضی اللہ عنہ سے روایت ہے کہ رسول اللہ ﷺ نے فرمایا: ’’شیطان تم میں سے ہر آدمی کے سر کے پیچھے رات میں سوتے وقت تین گرہیں لگا دیتا ہے اور ہر گرہ پر یہ پھونک مارتا ہے کہ سوجا، ابھی رات بہت باقی ہے۔ پھر اگر کوئی بیدار ہو کر اللہ کو یاد کرنے لگے تو ایک گرہ کھُل جاتی ہے۔ پھر اگر وضو کر لے تو ایک اور گرہ کھل جاتی ہے۔ پھر اگر نماز پڑھے تو ایک اور گرہ بھی کھل جاتی ہے۔ اس طرح صبح کے وقت آدمی چاق وچو بند اور خوش مزاج رہتا ہے۔ ورنہ غمگین اور سست رہتا ہے۔\""
+     },
+     "attribution": {
+      "en": "Agreed upon",
+      "ur": "متفق عليه"
+     },
+     "grade": {
+      "en": "Authentic",
+      "ur": "صحيح"
+     },
+     "source": "HadeethEnc.com"
+    },
+    {
+     "arabic": "عن أنس بن مالك رضي الله عنه قال: كان رسول الله صلى الله عليه وسلم يقول: «اللهم إني أعوذ بك من العَجْزِ، والكَسَلِ، وَالجُبْنِ، والهَرَمِ، والبخل، وأعوذ بك من عذاب القبر، وأعوذ بك من فتنة المحيا والممات». \nوفي رواية: «وَضَلَعِ الدَّيْنِ، وَغَلَبَةِ الرِّجَالِ».",
+     "translation": {
+      "en": "Anas ibn Mālik (may Allah be pleased with him) reported: The Messenger of Allah (may Allah's peace and blessings be upon him) used to say: \"O Allah, I seek refuge with You from incapacity, laziness, cowardice, senility, and miserliness. And I seek refuge with You from the torment of the grave. And I seek refuge with You from the trials of life and death.\"\n\nAnother narration adds: \"... and from the burden of heavy debt and the tyranny of men.\"",
+      "ur": "انس بن مالک رضی اللہ عنہ سے روایت ہے کہ رسول اللہ ﷺ سے یہ دعا کرتے تھے:”اللَّهُمَّ إِنِّي أَعُوذُ بِكَ مِنَ الْعَجْزِ وَالْكَسَلِ، وَالْجُبْنِ وَالْهَرَمِ وَالْبُخْلِ، وَأَعُوذُ بِكَ مِنْ عَذَابِ الْقَبْرِ، وَأَعُوذُ بِكَ مِنْ فِتْنَةِ الْمَحْيَا وَالْمَمَاتِ“ اے اللہ! میں عاجز ہونے، سستی، بزدلی، بڑھاپے اور بخل سے تیری پناہ مانگتا ہوں اور میں قبر کے عذاب اور زندگی اور موت کی آزمائشوں سے تیری پناہ میں آتا ہوں۔\nایک روایت میں ہے: ”قرض کے بوجھ اور لوگوں کے قہر اور غلبے سے تیری پناہ مانگتا ہوں“۔"
+     },
+     "attribution": {
+      "en": "Narrated by Bukhari - Narrated by Bukhari & Muslim",
+      "ur": "اسے امام بخاری نے روایت کیا ہے۔ - متفق علیہ"
+     },
+     "grade": {
+      "en": "Authentic hadith",
+      "ur": "صحیح"
+     },
+     "source": "HadeethEnc.com"
+    },
+    {
+     "arabic": "عَنْ أَبِي هُرَيْرَةَ رضي الله عنه أَنَّ رَسُولَ اللهِ صَلَّى اللهُ عَلَيْهِ وَسَلَّمَ قَالَ: «بَادِرُوا بِالْأَعْمَالِ فِتَنًا كَقِطَعِ اللَّيْلِ الْمُظْلِمِ، يُصْبِحُ الرَّجُلُ مُؤْمِنًا وَيُمْسِي كَافِرًا، أَوْ يُمْسِي مُؤْمِنًا وَيُصْبِحُ كَافِرًا، يَبِيعُ دِينَهُ بِعَرَضٍ مِنَ الدُّنْيَا».",
+     "translation": {
+      "en": "Abu Hurayrah (may Allah be pleased with him) reported that the Messenger of Allah (may Allah's peace and blessings be upon him) said: \"Hasten to deeds before being overtaken by tribulations that are like patches of the darkest night; a man would be a believer in the morning and become a disbeliever in the evening, or he would be a believer in the evening and become a disbeliever in the morning. He sells his religion for a worldly gain.\"",
+      "ur": "ابوہریرہ رضی اللہ عنہ سے روایت ہے کہ رسول اللہ ﷺ نے فرمایا: \"نیک اعمال کی طرف تیزی سے بڑھو، ان فتنوں سے پہلے، جو سخت تاریک رات کی طرح ہوں گے؛ (حالت یہ ہوگی کہ) آدمی صبح کے وقت مؤمن ہوگا، تو شام کے وقت کافر اور شام کے وقت مؤمن ہوگا، تو صبح کے وقت کافر۔ دنیاوی ساز و سامان کے بدلے آدمی اپنا دین بیچ دے گا۔\""
+     },
+     "attribution": {
+      "en": "Narrated by Muslim",
+      "ur": "رواه مسلم"
+     },
+     "grade": {
+      "en": "Authentic",
+      "ur": "صحيح"
+     },
+     "source": "HadeethEnc.com"
+    }
+   ],
+   "duas": [
+    121
+   ]
+  },
+  {
+   "id": "lonely",
+   "title": "Lonely",
+   "verses": [
+    {
+     "reference": "2:186",
+     "arabic": "وَإِذَا سَأَلَكَ عِبَادِى عَنِّى فَإِنِّى قَرِيبٌ ۖ أُجِيبُ دَعْوَةَ ٱلدَّاعِ إِذَا دَعَانِ ۖ فَلْيَسْتَجِيبُوا۟ لِى وَلْيُؤْمِنُوا۟ بِى لَعَلَّهُمْ يَرْشُدُونَ",
+     "translation": {
+      "en": "And when My servants ask you, [O Muhammad], concerning Me - indeed I am near. I respond to the invocation of the supplicant when he calls upon Me. So let them respond to Me [by obedience] and believe in Me that they may be [rightly] guided.",
+      "ur": "اور (اے پیغمبر) جب تم سے میرے بندے میرے بارے میں دریافت کریں تو (کہہ دو کہ) میں تو (تمہارے) پاس ہوں جب کوئی پکارنے والا مجھے پکارتا ہے تو میں اس کی دعا قبول کرتا ہوں تو ان کو چاہیئے کہ میرے حکموں کو مانیں اور مجھ پر ایمان لائیں تاکہ نیک رستہ پائیں"
+     }
+    },
+    {
+     "reference": "50:16",
+     "arabic": "وَلَقَدْ خَلَقْنَا ٱلْإِنسَٰنَ وَنَعْلَمُ مَا تُوَسْوِسُ بِهِۦ نَفْسُهُۥ ۖ وَنَحْنُ أَقْرَبُ إِلَيْهِ مِنْ حَبْلِ ٱلْوَرِيدِ",
+     "translation": {
+      "en": "And We have already created man and know what his soul whispers to him, and We are closer to him than [his] jugular vein",
+      "ur": "اور ہم ہی نے انسان کو پیدا کیا ہے اور جو خیالات اس کے دل میں گزرتے ہیں ہم ان کو جانتے ہیں۔ اور ہم اس کی رگ جان سے بھی اس سے زیادہ قریب ہیں"
+     }
+    },
+    {
+     "reference": "57:4",
+     "arabic": "وَهُوَ مَعَكُمْ أَيْنَ مَا كُنتُمْ ۚ وَٱللَّهُ بِمَا تَعْمَلُونَ بَصِيرٌۭ",
+     "translation": {
+      "en": "and He is with you wherever you are. And Allah, of what you do, is Seeing.",
+      "ur": "اور تم جہاں کہیں ہو وہ تمہارے ساتھ ہے۔ اور جو کچھ تم کرتے ہو خدا اس کو دیکھ رہا ہے"
+     }
+    },
+    {
+     "reference": "20:46",
+     "arabic": "قَالَ لَا تَخَافَآ ۖ إِنَّنِى مَعَكُمَآ أَسْمَعُ وَأَرَىٰ",
+     "translation": {
+      "en": "[Allah] said, \"Fear not. Indeed, I am with you both; I hear and I see.",
+      "ur": "خدا نے فرمایا کہ ڈرو مت میں تمہارے ساتھ ہوں (اور) سنتا اور دیکھتا ہوں"
+     }
+    },
+    {
+     "reference": "9:40",
+     "arabic": "إِذْ هُمَا فِى ٱلْغَارِ إِذْ يَقُولُ لِصَٰحِبِهِۦ لَا تَحْزَنْ إِنَّ ٱللَّهَ مَعَنَا",
+     "translation": {
+      "en": "when they were in the cave and he said to his companion, \"Do not grieve; indeed Allah is with us.\"",
+      "ur": "جب وہ دونوں غار (ثور) میں تھے اس وقت پیغمبر اپنے رفیق کو تسلی دیتے تھے کہ غم نہ کرو خدا ہمارے ساتھ ہے"
+     }
+    }
+   ],
+   "hadith": [
+    {
+     "arabic": "عن أبي موسى الأشعري رضي الله عنه قال: كنا مع النبي صلى الله عليه وسلم في سفر، فكنا إذا أشْرَفْنَا على واد هَلَّلْنَا وكبَّرْنَا وارتفعت أصواتنا، فقال النبي صلى الله عليه وسلم : «يا أيها الناس، ارْبَعُوا على أنفسكم، فإنكم لا تدعون أصمَّ ولا غائباً، إنَّه معكم، إنَّه سميع قريب».",
+     "translation": {
+      "en": "Abu Mūsa al-Ash‘ari (may Allah be pleased with him) reported: We were on a journey with the Prophet (may Allah's peace and blessings be upon him) and whenever we ascended from a valley we would say \"there is no god but Allah\" and \"Allah is the Greatest\" and we would raise our voices. So the Prophet (may Allah's peace and blessings be upon him) said: \"O people, do not trouble yourselves too much. He Whom you are calling is not deaf or absent. Verily, He is with you, He is All-Hearing and Ever Near.\"",
+      "ur": "ابو موسی اشعری رضی اللہ عنہ سے روایت ہے کہ ہم ایک سفر میں رسول اللہ ﷺ کے ساتھ تھے۔ جب ہم کسی وادی میں اترتے تو ”لا الہ الا اﷲ اور اﷲ اکبر“ کہتے اور ہماری آواز بلند ہو جاتی اس لیے آپ ﷺ نے فرمایا: ”اے لوگو ! اپنی جانوں پر رحم کھاؤ ، کیونکہ تم کسی بہرے یا غائب کو نہیں پکار رہے ہو ۔ وہ تو تمہارے ساتھ ہی ہے، بے شک وہ بہت سننے والا اور بہت قریب ہے“۔"
+     },
+     "attribution": {
+      "en": "Al-Bukhari and Muslim. This is the wording of Al-Bukhari",
+      "ur": "یہ حدیث متفق علیہ ہے اور الفاظ بخاری کے ہیں۔"
+     },
+     "grade": {
+      "en": "Authentic hadith",
+      "ur": "صحیح"
+     },
+     "source": "HadeethEnc.com"
+    },
+    {
+     "arabic": "عَنْ أَبِي هُرَيْرَةَ رضي الله عنه قَالَ: قَالَ رَسُولُ اللهِ صَلَّى اللهُ عَلَيْهِ وَسَلَّمَ: «يَقُولُ اللهُ عَزَّ وَجَلَّ: أَنَا عِنْدَ ظَنِّ عَبْدِي، وَأَنَا مَعَهُ حِينَ يَذْكُرُنِي، فَإِنْ ذَكَرَنِي فِي نَفْسِهِ ذَكَرْتُهُ فِي نَفْسِي، وَإِنْ ذَكَرَنِي فِي مَلَإٍ ذَكَرْتُهُ فِي مَلَإٍ خَيْرٍ مِنْهُ، وَإِنِ اقْتَرَبَ إِلَيَّ شِبْرًا، تَقَرَّبْتُ إِلَيْهِ ذِرَاعًا، وَإِنِ اقْتَرَبَ إِلَيَّ ذِرَاعًا، اقْتَرَبْتُ إِلَيْهِ بَاعًا، وَإِنْ أَتَانِي يَمْشِي أَتَيْتُهُ هَرْوَلَةً».",
+     "translation": {
+      "en": "Abu Hurayrah (may Allah be pleased with him) reported: The Messenger of Allah (may Allah's peace and blessings be upon him) said: \"Allah, the Exalted and Majestic, says: I am as My slave thinks of Me and I am with him when he remembers Me. If he remembers Me within himself, I remember him within Myself; and if he remembers me in an assembly, I remember him in a better assembly. If he draws near to Me by a handspan, I draw near to him by a cubit; and if he draws near to Me by a cubit, I draw near to him by a fathom, and if he comes to Me walking, I come to him jogging.\"",
+      "ur": "ابو ہریرہ رضی اللہ عنہ سے روایت ہے، وہ فرماتے ہیں: اللہ کے رسول صلی اللہ علیہ و سلم نے فرمایا: ”اللہ عزوجل فرماتا ہے: میں اپنے بندے کے گمان کے مطابق کام کرتا ہوں اور ميں اس کے ساتھ ہوتا ہوں جب بھی وہ مجھے یاد کرتا ہے۔ اگر وہ اپنے جی میں مجھے یاد کرتا ہے تو میں بھی اسے اپنے جی میں یاد کرتا ہوں اور اگر وہ کسی مجلس میں میرا ذکر کرتا ہے تو میں ایسی مجلس میں اس کا ذکر کرتا ہوں جو اس سے بہتر ہوتی ہے۔ جو ایک بالشت میرے قریب آتا ہے میں ایک ہاتھ اُس کے قریب آتا ہوں، جو ایک ہاتھ میرے قریب آتا ہے میں دو ہاتھ اُس کے قریب آتا ہوں، اور جب وہ ميری طرف چلتا ہوا آتا ہے میں اس کی طرف دوڑتا ہوا آتا ہوں“۔"
+     },
+     "attribution": {
+      "en": "Agreed upon",
+      "ur": "متفق عليه"
+     },
+     "grade": {
+      "en": "Authentic",
+      "ur": "صحيح"
+     },
+     "source": "HadeethEnc.com"
+    },
+    {
+     "arabic": "عن أبي بكر الصديق رضي الله عنه قال: نَظَرت إِلى أقدام المشركين ونحن في الغار وهم على رؤُوسِنا، فقلت: يا رسول الله، لَو أنَّ أحَدَهم نظر تحت قدَمَيه لأَبصَرَنا، فقال: «مَا ظَنُّكَ يَا أَبَا بَكرٍ بِاثنَينِ الله ثَالِثُهُمَا».",
+     "translation": {
+      "en": "Abu Bakr as-Siddīq (may Allah be pleased with him) reported: When we were in the cave, I saw the feet of the polytheists as I raised my head, and I said: O Messenger of Allah, if one of them looked below his feet, he would see us. He said: \"O Abu Bakr, what do you think of two persons, the third of whom is Allah?\"",
+      "ur": "ابوبکر صدیق رضی اللہ عنہ بیان کرتے ہیں کہ ہم لوگ غار میں تھے، میں نے مشرکین کے پاؤں کی طرف دیکھا، وہ ہمارے سروں پر تھے، میں نے کہا اے اللہ کے رسول! ان میں سے کوئی اگر اپنے پاؤں کے نیچے دیکھ لے تو ہم انہیں نظر آ جائیں گے۔ آپ ﷺ نے فرمایا:اے ابو بکر! ان دو لوگوں کے بارے میں تمہارا کیا خیال ہے جن کا تیسرا اللہ تعالیٰ ہے۔"
+     },
+     "attribution": {
+      "en": "Agreed upon",
+      "ur": "متفق علیہ"
+     },
+     "grade": {
+      "en": "Authentic",
+      "ur": "صحیح"
+     },
+     "source": "HadeethEnc.com"
+    }
+   ],
+   "duas": [
+    113
+   ]
+  }
+ ]
+}

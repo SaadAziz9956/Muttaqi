@@ -1,0 +1,1007 @@
+{
+ "group": "faith",
+ "topics": [
+  {
+   "id": "oneness-of-allah",
+   "title": "Oneness of Allah",
+   "keywords": [
+    "tawheed",
+    "tawhid",
+    "la ilaha illallah",
+    "monotheism",
+    "ahad",
+    "kalima",
+    "wahdaniyat"
+   ],
+   "quran": [
+    {
+     "ref": "112:1-4",
+     "cut": null,
+     "why": "Surat al-Ikhlas, first half: He is Allah, One, the Eternal Refuge / Surat al-Ikhlas, second half: He neither begets nor is born, none is equal to Him"
+    },
+    {
+     "ref": "2:163",
+     "cut": null,
+     "why": "Your god is one God, no deity but Him"
+    },
+    {
+     "ref": "2:255",
+     "cut": null,
+     "why": "Ayat al-Kursi: no deity but Him, the Ever-Living, the Sustainer"
+    },
+    {
+     "ref": "21:22",
+     "cut": null,
+     "why": "Had there been other gods besides Allah, heavens and earth would be ruined"
+    },
+    {
+     "ref": "21:25",
+     "cut": null,
+     "why": "Every messenger was sent with: no deity but Me, so worship Me"
+    }
+   ],
+   "hadith": [
+    {
+     "id": "65007",
+     "why": "Allah's right upon His servants: worship Him alone and associate nothing with Him"
+    },
+    {
+     "id": "3414",
+     "why": "Happiest with the Prophet's intercession is who says la ilaha illallah sincerely"
+    },
+    {
+     "id": "6468",
+     "why": "The highest branch of faith is the declaration la ilaha illallah"
+    }
+   ],
+   "duas": [
+    {
+     "hisnId": 93,
+     "why": "Daily tahlil: none worthy of worship but Allah alone, without partner"
+    },
+    {
+     "hisnId": 80,
+     "why": "Morning/evening testimony calling creation to witness that Allah is One"
+    }
+   ]
+  },
+  {
+   "id": "names-of-allah",
+   "title": "Names of Allah",
+   "keywords": [
+    "asma ul husna",
+    "99 names",
+    "al-asma al-husna",
+    "attributes of Allah",
+    "sifat",
+    "ism e azam"
+   ],
+   "quran": [
+    {
+     "ref": "7:180",
+     "cut": null,
+     "why": "To Allah belong the best names, so invoke Him by them"
+    },
+    {
+     "ref": "59:22-24",
+     "cut": null,
+     "why": "End of al-Hashr: a sequence of Allah's names; to Him belong the best names"
+    },
+    {
+     "ref": "17:110",
+     "cut": {
+      "ar": "قُلِ ٱدْعُوا۟ ٱللَّهَ أَوِ ٱدْعُوا۟ ٱلرَّحْمَٰنَ ۖ أَيًّۭا مَّا تَدْعُوا۟ فَلَهُ ٱلْأَسْمَآءُ ٱلْحُسْنَىٰ",
+      "en": "Say, \"Call upon Allah or call upon the Most Merciful. Whichever [name] you call - to Him belong the best names.\"",
+      "ur": "کہہ دو کہ تم (خدا کو) الله (کے نام سے) پکارو یا رحمٰن (کے نام سے) جس نام سے پکارو اس کے سب اچھے نام ہیں۔"
+     },
+     "why": "Call upon Allah or ar-Rahman; to Him belong the best names"
+    },
+    {
+     "ref": "57:3",
+     "cut": null,
+     "why": "The First, the Last, the Ascendant, the Intimate"
+    },
+    {
+     "ref": "42:11",
+     "cut": {
+      "ar": "لَيْسَ كَمِثْلِهِۦ شَىْءٌۭ ۖ وَهُوَ ٱلسَّمِيعُ ٱلْبَصِيرُ",
+      "en": "There is nothing like unto Him, and He is the Hearing, the Seeing.",
+      "ur": "اس جیسی کوئی چیز نہیں۔ اور وہ دیکھتا سنتا ہے"
+     },
+     "why": "There is nothing like unto Him; the Hearing, the Seeing"
+    }
+   ],
+   "hadith": [
+    {
+     "id": "64673",
+     "why": "Allah has ninety-nine names; whoever memorizes them enters Paradise"
+    },
+    {
+     "id": "6207",
+     "why": "The One you call is not deaf or absent: All-Hearing, Ever Near"
+    },
+    {
+     "id": "65028",
+     "why": "Allah will roll up the heavens and say: I am the King (al-Malik)"
+    }
+   ],
+   "duas": [
+    {
+     "hisnId": 120,
+     "why": "Asking Allah by every name He has named Himself with"
+    },
+    {
+     "hisnId": 64,
+     "why": "Invoking Him as al-Mannan, Badi' as-Samawat, Dhul-Jalal wal-Ikram, al-Hayy al-Qayyum"
+    },
+    {
+     "hisnId": 63,
+     "why": "Asking by His names al-Wahid, al-Ahad, as-Samad, al-Ghafur, ar-Rahim"
+    }
+   ]
+  },
+  {
+   "id": "angels",
+   "title": "Angels",
+   "keywords": [
+    "malaika",
+    "farishte",
+    "jibreel",
+    "jibril",
+    "gabriel",
+    "kiraman katibin",
+    "angel of death"
+   ],
+   "quran": [
+    {
+     "ref": "2:285",
+     "cut": null,
+     "why": "Believers believe in Allah, His angels, His books and His messengers"
+    },
+    {
+     "ref": "35:1",
+     "cut": null,
+     "why": "Allah made the angels messengers with wings, two, three or four"
+    },
+    {
+     "ref": "16:49-50",
+     "cut": null,
+     "why": "The angels prostrate to Allah, are not arrogant, fear Him and do as commanded"
+    },
+    {
+     "ref": "82:10-12",
+     "cut": null,
+     "why": "Noble recording angels appointed over you who know what you do"
+    },
+    {
+     "ref": "32:11",
+     "cut": null,
+     "why": "The angel of death entrusted with you takes your soul"
+    },
+    {
+     "ref": "40:7",
+     "cut": null,
+     "why": "The throne-bearing angels glorify Allah and ask forgiveness for the believers"
+    }
+   ],
+   "hadith": [
+    {
+     "id": "8264",
+     "why": "Angels were created from light"
+    },
+    {
+     "id": "10419",
+     "why": "The Prophet saw Jibril with six hundred wings"
+    },
+    {
+     "id": "3265",
+     "why": "No space of four fingers in heaven without an angel in prostration"
+    },
+    {
+     "id": "10546",
+     "why": "The size of one of the angels who carry the Throne"
+    }
+   ],
+   "duas": []
+  },
+  {
+   "id": "the-quran",
+   "title": "The Quran",
+   "keywords": [
+    "tilawat",
+    "recitation",
+    "kalam ullah",
+    "mushaf",
+    "hifz",
+    "furqan",
+    "kitab"
+   ],
+   "quran": [
+    {
+     "ref": "2:2",
+     "cut": null,
+     "why": "The Book in which there is no doubt, guidance for the God-conscious"
+    },
+    {
+     "ref": "15:9",
+     "cut": null,
+     "why": "Allah sent down the Quran and will guard it"
+    },
+    {
+     "ref": "17:9",
+     "cut": null,
+     "why": "The Quran guides to what is most upright"
+    },
+    {
+     "ref": "17:88",
+     "cut": null,
+     "why": "Mankind and jinn together could not produce its like"
+    },
+    {
+     "ref": "38:29",
+     "cut": null,
+     "why": "A blessed Book revealed so people reflect on its verses"
+    },
+    {
+     "ref": "54:17",
+     "cut": null,
+     "why": "The Quran has been made easy for remembrance"
+    }
+   ],
+   "hadith": [
+    {
+     "id": "5913",
+     "why": "The best of you are those who learn the Quran and teach it"
+    },
+    {
+     "id": "6275",
+     "why": "Each letter recited earns a good deed multiplied tenfold"
+    },
+    {
+     "id": "10113",
+     "why": "The skilled reciter is with the noble angel-scribes; the one who struggles gets two rewards"
+    },
+    {
+     "id": "5383",
+     "why": "The Quran will come as an intercessor for its companions"
+    }
+   ],
+   "duas": [
+    {
+     "hisnId": 120,
+     "why": "Asking Allah to make the Quran the spring of the heart and light of the chest"
+    }
+   ]
+  },
+  {
+   "id": "prophets",
+   "title": "Prophets",
+   "keywords": [
+    "anbiya",
+    "nabi",
+    "rasul",
+    "rusul",
+    "messengers",
+    "payghambar",
+    "nabuwwat"
+   ],
+   "quran": [
+    {
+     "ref": "2:136",
+     "cut": null,
+     "why": "Believe in what was given to Ibrahim, Musa, Isa and all prophets, without distinction"
+    },
+    {
+     "ref": "16:36",
+     "cut": null,
+     "why": "A messenger was sent to every nation: worship Allah, avoid false gods"
+    },
+    {
+     "ref": "4:163",
+     "cut": null,
+     "why": "Revelation came to Muhammad as it came to Nuh, Ibrahim and the prophets after them"
+    },
+    {
+     "ref": "4:164-165",
+     "cut": null,
+     "why": "Some messengers' stories are told, others not; sent as bringers of good news and warners"
+    },
+    {
+     "ref": "4:152",
+     "cut": null,
+     "why": "Those who believe in all His messengers without discriminating will be rewarded"
+    }
+   ],
+   "hadith": [
+    {
+     "id": "65231",
+     "why": "Every prophet was given signs through which people believed"
+    },
+    {
+     "id": "10858",
+     "why": "Adam was a prophet; the messengers numbered three hundred and fifteen"
+    },
+    {
+     "id": "3594",
+     "why": "A prophet struck by his people wiped his blood and prayed for their forgiveness"
+    },
+    {
+     "id": "6219",
+     "why": "Every prophet Allah sent tended sheep"
+    }
+   ],
+   "duas": []
+  },
+  {
+   "id": "prophet-muhammad",
+   "title": "Prophet Muhammad ﷺ",
+   "keywords": [
+    "rasulullah",
+    "nabi kareem",
+    "sunnah",
+    "seerah",
+    "durood",
+    "salawat",
+    "khatam an-nabiyyin",
+    "mustafa"
+   ],
+   "quran": [
+    {
+     "ref": "33:40",
+     "cut": null,
+     "why": "Muhammad is the Messenger of Allah and the seal of the prophets"
+    },
+    {
+     "ref": "21:107",
+     "cut": null,
+     "why": "Sent only as a mercy to the worlds"
+    },
+    {
+     "ref": "9:128",
+     "cut": null,
+     "why": "A Messenger from among you, grieved by your suffering, kind and merciful"
+    },
+    {
+     "ref": "68:4",
+     "cut": null,
+     "why": "You are of a great moral character"
+    },
+    {
+     "ref": "33:21",
+     "cut": null,
+     "why": "In the Messenger of Allah is an excellent example"
+    },
+    {
+     "ref": "33:56",
+     "cut": null,
+     "why": "Allah and His angels send blessings on the Prophet; believers are told to do the same"
+    }
+   ],
+   "hadith": [
+    {
+     "id": "5953",
+     "why": "No one truly believes until the Prophet is dearer to him than father, children and all people"
+    },
+    {
+     "id": "3406",
+     "why": "Do not exaggerate in praising me; call me the slave of Allah and His Messenger"
+    },
+    {
+     "id": "4947",
+     "why": "Whoever obeys me enters Paradise; whoever disobeys me has refused"
+    },
+    {
+     "id": "5403",
+     "why": "The miser is the one who hears his name and does not send blessings on him"
+    }
+   ],
+   "duas": [
+    {
+     "hisnId": 53,
+     "why": "The Ibrahimic salawat on the Prophet"
+    }
+   ]
+  },
+  {
+   "id": "divine-decree",
+   "title": "Divine Decree",
+   "keywords": [
+    "qadr",
+    "taqdeer",
+    "qada wa qadar",
+    "destiny",
+    "fate",
+    "predestination",
+    "naseeb"
+   ],
+   "quran": [
+    {
+     "ref": "54:49",
+     "cut": null,
+     "why": "Everything was created by decree"
+    },
+    {
+     "ref": "57:22-23",
+     "cut": null,
+     "why": "Every calamity is written before it happens, so do not despair or exult"
+    },
+    {
+     "ref": "9:51",
+     "cut": null,
+     "why": "Nothing will strike us except what Allah has decreed for us"
+    },
+    {
+     "ref": "64:11",
+     "cut": null,
+     "why": "No disaster strikes except by Allah's permission"
+    },
+    {
+     "ref": "6:59",
+     "cut": null,
+     "why": "The keys of the unseen; not a leaf falls but He knows it, all in a clear record"
+    },
+    {
+     "ref": "81:29",
+     "cut": null,
+     "why": "You do not will except that Allah wills"
+    }
+   ],
+   "hadith": [
+    {
+     "id": "65038",
+     "why": "Allah decreed the destinies of creation fifty thousand years before the heavens and earth"
+    },
+    {
+     "id": "65039",
+     "why": "Everything is decreed, even incapacity and capacity"
+    },
+    {
+     "id": "5493",
+     "why": "Do not say 'if only'; say Allah has decreed and what He wills He does"
+    },
+    {
+     "id": "4811",
+     "why": "If the nation gathered to benefit or harm you, only what Allah wrote would happen"
+    }
+   ],
+   "duas": [
+    {
+     "hisnId": 144,
+     "why": "Qaddar Allahu wa ma sha'a fa'al: said when something disliked happens"
+    },
+    {
+     "hisnId": 67,
+     "why": "None can withhold what You give, none can give what You withhold"
+    }
+   ]
+  },
+  {
+   "id": "shirk",
+   "title": "Shirk",
+   "keywords": [
+    "polytheism",
+    "associating partners",
+    "mushrik",
+    "riya",
+    "showing off",
+    "idolatry",
+    "swearing by other than Allah"
+   ],
+   "quran": [
+    {
+     "ref": "4:48",
+     "cut": null,
+     "why": "Allah does not forgive association with Him but forgives what is less"
+    },
+    {
+     "ref": "31:13",
+     "cut": null,
+     "why": "Luqman to his son: do not associate with Allah; shirk is great injustice"
+    },
+    {
+     "ref": "5:72",
+     "cut": {
+      "ar": "إِنَّهُۥ مَن يُشْرِكْ بِٱللَّهِ فَقَدْ حَرَّمَ ٱللَّهُ عَلَيْهِ ٱلْجَنَّةَ وَمَأْوَىٰهُ ٱلنَّارُ ۖ وَمَا لِلظَّٰلِمِينَ مِنْ أَنصَارٍۢ",
+      "en": "Indeed, he who associates others with Allah - Allah has forbidden him Paradise, and his refuge is the Fire. And there are not for the wrongdoers any helpers.",
+      "ur": "جو شخص خدا کے ساتھ شرک کرے گا خدا اس پر بہشت حرام کر دے گا اور اس کا ٹھکانہ دوزخ ہے اور ظالموں کا کوئی مددگار نہیں"
+     },
+     "why": "Whoever associates others with Allah, Paradise is forbidden to him"
+    },
+    {
+     "ref": "39:65",
+     "cut": null,
+     "why": "Revealed to every prophet: if you associate, your deeds become worthless"
+    },
+    {
+     "ref": "22:31",
+     "cut": null,
+     "why": "Whoever associates with Allah is as if he fell from the sky"
+    },
+    {
+     "ref": "10:106",
+     "cut": null,
+     "why": "Do not invoke besides Allah what neither benefits nor harms you"
+    }
+   ],
+   "hadith": [
+    {
+     "id": "5359",
+     "why": "The gravest sin: setting up an equal to Allah while He created you"
+    },
+    {
+     "id": "3418",
+     "why": "Whoever meets Allah associating partners with Him enters Hellfire"
+    },
+    {
+     "id": "3381",
+     "why": "What the Prophet feared most for us: minor shirk, showing off"
+    },
+    {
+     "id": "3359",
+     "why": "Whoever swears by other than Allah has committed shirk"
+    }
+   ],
+   "duas": [
+    {
+     "hisnId": 203,
+     "why": "Refuge from committing shirk knowingly and forgiveness for it unknowingly"
+    },
+    {
+     "hisnId": 85,
+     "why": "Refuge from the evil and shirk of the devil"
+    }
+   ]
+  },
+  {
+   "id": "magic-evil-eye",
+   "title": "Magic & Evil Eye",
+   "keywords": [
+    "sihr",
+    "jadu",
+    "nazar",
+    "hasad",
+    "ruqyah",
+    "sorcery",
+    "fortune teller",
+    "muawwidhatayn"
+   ],
+   "quran": [
+    {
+     "ref": "2:102",
+     "cut": {
+      "ar": "وَمَا هُم بِضَآرِّينَ بِهِۦ مِنْ أَحَدٍ إِلَّا بِإِذْنِ ٱللَّهِ ۚ وَيَتَعَلَّمُونَ مَا يَضُرُّهُمْ وَلَا يَنفَعُهُمْ ۚ وَلَقَدْ عَلِمُوا۟ لَمَنِ ٱشْتَرَىٰهُ مَا لَهُۥ فِى ٱلْءَاخِرَةِ مِنْ خَلَٰقٍۢ",
+      "en": "But they do not harm anyone through it except by permission of Allah. And the people learn what harms them and does not benefit them. But the Children of Israel certainly knew that whoever purchased the magic would not have in the Hereafter any share.",
+      "ur": "اور خدا کے حکم کے سوا وہ اس (جادو) سے کسی کا کچھ بھی نہیں بگاڑ سکتے تھے۔ اور کچھ ایسے (منتر) سیکھتے جو ان کو نقصان ہی پہنچاتے اور فائدہ کچھ نہ دیتے۔ اور وہ جانتے تھے کہ جو شخص ایسی چیزوں (یعنی سحر اور منتر وغیرہ) کا خریدار ہوگا، اس کا آخرت میں کچھ حصہ نہیں۔"
+     },
+     "why": "Magic harms only by Allah's permission, and whoever buys it has no share in the Hereafter"
+    },
+    {
+     "ref": "20:69",
+     "cut": {
+      "ar": "إِنَّمَا صَنَعُوا۟ كَيْدُ سَٰحِرٍۢ ۖ وَلَا يُفْلِحُ ٱلسَّاحِرُ حَيْثُ أَتَىٰ",
+      "en": "What they have crafted is but the trick of a magician, and the magician will not succeed wherever he is.",
+      "ur": "جو کچھ انہوں نے بنایا ہے (یہ تو) جادوگروں کے ہتھکنڈے ہیں اور جادوگر جہاں جائے فلاح نہیں پائے گا"
+     },
+     "why": "What they crafted is a magician's trick; the magician will not succeed"
+    },
+    {
+     "ref": "10:81",
+     "cut": null,
+     "why": "Musa: what you brought is magic; Allah will expose its worthlessness"
+    },
+    {
+     "ref": "113:1-5",
+     "cut": null,
+     "why": "Surat al-Falaq, first half: refuge in the Lord of daybreak from all evil / Surat al-Falaq, second half: refuge from those who blow on knots and from the envier"
+    }
+   ],
+   "hadith": [
+    {
+     "id": "3331",
+     "why": "Magic is one of the seven destructive sins"
+    },
+    {
+     "id": "5981",
+     "why": "Not one of us who practises sorcery or soothsaying or has it done; believing a soothsayer is disbelief"
+    },
+    {
+     "id": "5986",
+     "why": "Whoever goes to a fortune-teller and believes him, his prayer is not accepted for forty nights"
+    },
+    {
+     "id": "6184",
+     "why": "The Prophet sought refuge from the jinn and the evil eye, then used only al-Falaq and an-Nas"
+    },
+    {
+     "id": "5650",
+     "why": "Jibril's ruqyah for the Prophet, including from the envier's eye"
+    }
+   ],
+   "duas": [
+    {
+     "hisnId": 244,
+     "why": "Evil eye is real: ask for blessing when you admire something"
+    },
+    {
+     "hisnId": 146,
+     "why": "The Prophet's protection for al-Hasan and al-Husayn from every evil eye"
+    },
+    {
+     "hisnId": 76,
+     "why": "Al-Ikhlas, al-Falaq and an-Nas three times morning and evening"
+    }
+   ]
+  },
+  {
+   "id": "death",
+   "title": "Death",
+   "keywords": [
+    "maut",
+    "mawt",
+    "dying",
+    "sakarat",
+    "janazah",
+    "funeral",
+    "inna lillahi"
+   ],
+   "quran": [
+    {
+     "ref": "3:185",
+     "cut": null,
+     "why": "Every soul will taste death; full recompense on the Day of Resurrection"
+    },
+    {
+     "ref": "62:8",
+     "cut": null,
+     "why": "The death you flee from will meet you"
+    },
+    {
+     "ref": "4:78",
+     "cut": {
+      "ar": "أَيْنَمَا تَكُونُوا۟ يُدْرِككُّمُ ٱلْمَوْتُ وَلَوْ كُنتُمْ فِى بُرُوجٍۢ مُّشَيَّدَةٍۢ",
+      "en": "Wherever you may be, death will overtake you, even if you should be within towers of lofty construction.",
+      "ur": "تم کہیں رہو موت تو تمہیں آ کر رہے گی خواہ بڑے بڑے محلوں میں رہو"
+     },
+     "why": "Death will overtake you even in lofty towers"
+    },
+    {
+     "ref": "50:19",
+     "cut": null,
+     "why": "The intoxication of death brings the truth"
+    },
+    {
+     "ref": "63:10-11",
+     "cut": null,
+     "why": "Spend before death comes; Allah will not delay a soul when its time comes"
+    },
+    {
+     "ref": "55:26-27",
+     "cut": null,
+     "why": "Everyone on earth perishes; only the Face of your Lord remains"
+    }
+   ],
+   "hadith": [
+    {
+     "id": "4240",
+     "why": "Family, wealth and deeds follow the dead; only deeds remain"
+    },
+    {
+     "id": "8266",
+     "why": "Whoever loves to meet Allah, Allah loves to meet him"
+    },
+    {
+     "id": "65546",
+     "why": "Prompt the dying to say la ilaha illallah"
+    },
+    {
+     "id": "4704",
+     "why": "Be in this world like a stranger; take from your life for your death"
+    }
+   ],
+   "duas": [
+    {
+     "hisnId": 150,
+     "why": "The dying person's dua: forgive me, have mercy on me, join me to the highest companions"
+    },
+    {
+     "hisnId": 153,
+     "why": "Whose last words are la ilaha illallah enters Paradise"
+    },
+    {
+     "hisnId": 154,
+     "why": "Inna lillahi wa inna ilayhi raji'un, said at a loss"
+    }
+   ]
+  },
+  {
+   "id": "the-grave",
+   "title": "The Grave",
+   "keywords": [
+    "qabr",
+    "barzakh",
+    "munkar nakir",
+    "azab al-qabr",
+    "questioning",
+    "qabristan",
+    "burial"
+   ],
+   "quran": [
+    {
+     "ref": "40:46",
+     "cut": {
+      "ar": "ٱلنَّارُ يُعْرَضُونَ عَلَيْهَا غُدُوًّۭا وَعَشِيًّۭا ۖ وَيَوْمَ تَقُومُ ٱلسَّاعَةُ أَدْخِلُوٓا۟ ءَالَ فِرْعَوْنَ أَشَدَّ ٱلْعَذَابِ",
+      "en": "The Fire, they are exposed to it morning and evening. And the Day the Hour appears [it will be said], \"Make the people of Pharaoh enter the severest punishment.\"",
+      "ur": "آتش (جہنم) کہ صبح وشام اس کے سامنے پیش کئے جاتے ہیں۔ اور جس روز قیامت برپا ہوگی (حکم ہوگا کہ) فرعون والوں کو نہایت سخت عذاب میں داخل کرو"
+     },
+     "why": "Pharaoh's people are exposed to the Fire morning and evening before the Hour"
+    },
+    {
+     "ref": "14:27",
+     "cut": null,
+     "why": "Allah keeps the believers firm with the firm word in this life and the Hereafter"
+    },
+    {
+     "ref": "23:99-100",
+     "cut": null,
+     "why": "At death the disbeliever asks to return; behind them is a barrier (barzakh) until resurrection"
+    },
+    {
+     "ref": "80:21-22",
+     "cut": null,
+     "why": "He causes his death and provides him a grave, then resurrects him"
+    },
+    {
+     "ref": "102:1-2",
+     "cut": null,
+     "why": "Competition for increase diverts you until you visit the graves"
+    }
+   ],
+   "hadith": [
+    {
+     "id": "4206",
+     "why": "The Muslim questioned in the grave testifies to the shahadah; the meaning of 14:27"
+    },
+    {
+     "id": "11205",
+     "why": "The grave is the first stage of the Hereafter"
+    },
+    {
+     "id": "11210",
+     "why": "The dead are shown their place in Paradise or Hell morning and evening"
+    },
+    {
+     "id": "3010",
+     "why": "Two people punished in their graves for urine and malicious gossip"
+    }
+   ],
+   "duas": [
+    {
+     "hisnId": 55,
+     "why": "Refuge from the punishment of the grave, said before ending the prayer"
+    },
+    {
+     "hisnId": 164,
+     "why": "After burial: O Allah forgive him, O Allah make him firm"
+    },
+    {
+     "hisnId": 165,
+     "why": "Greeting the people of the graves when visiting"
+    }
+   ]
+  },
+  {
+   "id": "day-of-judgment",
+   "title": "Day of Judgment",
+   "keywords": [
+    "qiyamah",
+    "qayamat",
+    "yawm al-qiyamah",
+    "resurrection",
+    "hisab",
+    "mizan",
+    "akhirah",
+    "reckoning"
+   ],
+   "quran": [
+    {
+     "ref": "22:1-2",
+     "cut": null,
+     "why": "The convulsion of the Hour: nursing mothers forget their infants"
+    },
+    {
+     "ref": "39:68",
+     "cut": null,
+     "why": "The Horn is blown, all fall dead, then it is blown again and they stand"
+    },
+    {
+     "ref": "99:6-8",
+     "cut": null,
+     "why": "People are shown their deeds; an atom's weight of good or evil will be seen"
+    },
+    {
+     "ref": "21:47",
+     "cut": null,
+     "why": "The scales of justice are set up; no soul is wronged"
+    },
+    {
+     "ref": "18:49",
+     "cut": null,
+     "why": "The record leaves nothing small or great"
+    },
+    {
+     "ref": "2:281",
+     "cut": null,
+     "why": "Fear a Day when you return to Allah and every soul is repaid"
+    }
+   ],
+   "hadith": [
+    {
+     "id": "4950",
+     "why": "No one moves until asked about his life, knowledge, wealth and body"
+    },
+    {
+     "id": "5460",
+     "why": "People gathered barefoot, naked and uncircumcised"
+    },
+    {
+     "id": "6615",
+     "why": "Allah will speak to each person with no interpreter between them"
+    },
+    {
+     "id": "5462",
+     "why": "People will stand before the Lord of the worlds, some submerged in sweat to their ears"
+    }
+   ],
+   "duas": [
+    {
+     "hisnId": 104,
+     "why": "O Allah, protect me from Your punishment on the Day You resurrect Your servants"
+    }
+   ]
+  },
+  {
+   "id": "paradise",
+   "title": "Paradise",
+   "keywords": [
+    "jannah",
+    "jannat",
+    "heaven",
+    "firdaus",
+    "bahisht",
+    "garden"
+   ],
+   "quran": [
+    {
+     "ref": "3:133",
+     "cut": null,
+     "why": "Hasten to a garden as wide as the heavens and earth"
+    },
+    {
+     "ref": "9:72",
+     "cut": null,
+     "why": "Gardens with rivers and pleasant dwellings; Allah's approval is greater"
+    },
+    {
+     "ref": "32:17",
+     "cut": null,
+     "why": "No soul knows what comfort of the eyes is hidden for them"
+    },
+    {
+     "ref": "18:107-108",
+     "cut": null,
+     "why": "Gardens of Firdaus as lodging; they will never want to leave"
+    },
+    {
+     "ref": "10:9-10",
+     "cut": null,
+     "why": "Rivers in the Gardens of Pleasure; their call is Subhanaka Allahumma"
+    },
+    {
+     "ref": "39:73",
+     "cut": null,
+     "why": "The righteous are driven to Paradise in groups and greeted with peace"
+    }
+   ],
+   "hadith": [
+    {
+     "id": "10404",
+     "why": "Prepared for the righteous: what no eye has seen and no ear has heard"
+    },
+    {
+     "id": "8341",
+     "why": "The people of Paradise will be healthy, alive, young and at ease forever"
+    },
+    {
+     "id": "8352",
+     "why": "A bow's length in Paradise is better than all the sun rises on"
+    },
+    {
+     "id": "8343",
+     "why": "Allah's pleasure upon the people of Paradise, never to be displeased"
+    }
+   ],
+   "duas": [
+    {
+     "hisnId": 61,
+     "why": "O Allah, I ask You for Paradise and seek refuge in You from the Fire"
+    }
+   ]
+  },
+  {
+   "id": "hellfire",
+   "title": "Hellfire",
+   "keywords": [
+    "jahannam",
+    "jahannum",
+    "dozakh",
+    "hell",
+    "naar",
+    "fire"
+   ],
+   "quran": [
+    {
+     "ref": "66:6",
+     "cut": null,
+     "why": "Protect yourselves and your families from a Fire fuelled by people and stones"
+    },
+    {
+     "ref": "4:56",
+     "cut": null,
+     "why": "Skins roasted through are replaced so they taste the punishment"
+    },
+    {
+     "ref": "18:29",
+     "cut": {
+      "ar": "إِنَّآ أَعْتَدْنَا لِلظَّٰلِمِينَ نَارًا أَحَاطَ بِهِمْ سُرَادِقُهَا ۚ وَإِن يَسْتَغِيثُوا۟ يُغَاثُوا۟ بِمَآءٍۢ كَٱلْمُهْلِ يَشْوِى ٱلْوُجُوهَ ۚ بِئْسَ ٱلشَّرَابُ وَسَآءَتْ مُرْتَفَقًا",
+      "en": "Indeed, We have prepared for the wrongdoers a fire whose walls will surround them. And if they call for relief, they will be relieved with water like murky oil, which scalds [their] faces. Wretched is the drink, and evil is the resting place.",
+      "ur": "ہم نے ظالموں کے لئے دوزخ کی آگ تیار کر رکھی ہے جس کی قناتیں ان کو گھیر رہی ہوں گی۔ اور اگر فریاد کریں گے تو ایسے کھولتے ہوئے پانی سے ان کی دادرسی کی جائے گی (جو) پگھلے ہوئے تانبے کی طرح (گرم ہوگا اور جو) مونہوں کو بھون ڈالے گا (ان کے پینے کا) پانی بھی برا اور آرام گاہ بھی بری"
+     },
+     "why": "A fire whose walls surround them; water like murky oil scalds faces"
+    },
+    {
+     "ref": "67:6-8",
+     "cut": null,
+     "why": "Hell inhales and boils, almost bursting with rage"
+    },
+    {
+     "ref": "35:36",
+     "cut": null,
+     "why": "In Hell they neither die nor is the torment lightened"
+    },
+    {
+     "ref": "25:65-66",
+     "cut": null,
+     "why": "The believers' dua: avert from us the punishment of Hell"
+    }
+   ],
+   "hadith": [
+    {
+     "id": "65036",
+     "why": "Worldly fire is one seventieth of Hellfire"
+    },
+    {
+     "id": "4220",
+     "why": "The least punished in Hell wears sandals of fire that make his brain boil"
+    },
+    {
+     "id": "3370",
+     "why": "A stone thrown into Hell took seventy years to reach its bottom"
+    },
+    {
+     "id": "3702",
+     "why": "Hellfire is surrounded by desires, Paradise by hardships"
+    }
+   ],
+   "duas": [
+    {
+     "hisnId": 235,
+     "why": "Rabbana atina: protect us from the punishment of the Fire"
+    },
+    {
+     "hisnId": 61,
+     "why": "Asking for Paradise and refuge from the Fire"
+    }
+   ]
+  }
+ ]
+}

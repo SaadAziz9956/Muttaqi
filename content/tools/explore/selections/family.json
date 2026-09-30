@@ -1,0 +1,582 @@
+{
+ "group": "family",
+ "topics": [
+  {
+   "id": "marriage",
+   "title": "Marriage",
+   "keywords": [
+    "nikah",
+    "shadi",
+    "wedding",
+    "spouse",
+    "mahr",
+    "dowry",
+    "proposal",
+    "rishta"
+   ],
+   "quran": [
+    {
+     "ref": "30:21",
+     "cut": null,
+     "why": "Spouses as a sign of Allah: tranquillity, affection and mercy between them."
+    },
+    {
+     "ref": "24:32",
+     "cut": null,
+     "why": "Command to help the unmarried marry; Allah will enrich them if poor."
+    },
+    {
+     "ref": "24:33",
+     "cut": {
+      "ar": "وَلْيَسْتَعْفِفِ ٱلَّذِينَ لَا يَجِدُونَ نِكَاحًا حَتَّىٰ يُغْنِيَهُمُ ٱللَّهُ مِن فَضْلِهِۦ",
+      "en": "But let them who find not [the means for] marriage abstain [from sexual relations] until Allah enriches them from His bounty.",
+      "ur": "اور جن کو بیاہ کا مقدور نہ ہو وہ پاک دامنی کو اختیار کئے رہیں یہاں تک کہ خدا ان کو اپنے فضل سے غنی کردے۔"
+     },
+     "why": "Those who cannot yet afford marriage should stay chaste until Allah enriches them."
+    },
+    {
+     "ref": "4:4",
+     "cut": null,
+     "why": "Give women their bridal gift (mahr) graciously."
+    },
+    {
+     "ref": "2:221",
+     "cut": null,
+     "why": "Choose a believing spouse over an attractive polytheist."
+    }
+   ],
+   "hadith": [
+    {
+     "id": "5863",
+     "why": "Whoever can afford marriage should marry; otherwise fast."
+    },
+    {
+     "id": "6078",
+     "why": "Marriage is the Prophet's Sunnah; turning away from it is not his way."
+    },
+    {
+     "id": "5794",
+     "why": "The best enjoyment of this world is a righteous wife."
+    },
+    {
+     "id": "6088",
+     "why": "A woman is not married without her consent."
+    }
+   ],
+   "duas": [
+    {
+     "hisnId": 190,
+     "why": "The dua said to the groom (barakallahu laka)."
+    },
+    {
+     "hisnId": 191,
+     "why": "The groom's dua for the goodness of his bride."
+    }
+   ]
+  },
+  {
+   "id": "husband-wife",
+   "title": "Husband & Wife",
+   "keywords": [
+    "spouse",
+    "zawj",
+    "biwi",
+    "shohar",
+    "mian biwi",
+    "marital rights",
+    "married life"
+   ],
+   "quran": [
+    {
+     "ref": "2:187",
+     "cut": {
+      "ar": "هُنَّ لِبَاسٌۭ لَّكُمْ وَأَنتُمْ لِبَاسٌۭ لَّهُنَّ",
+      "en": "They are clothing for you and you are clothing for them.",
+      "ur": "وہ تمہاری پوشاک ہیں اور تم ان کی پوشاک ہو"
+     },
+     "why": "Spouses are a garment for each other."
+    },
+    {
+     "ref": "2:228",
+     "cut": {
+      "ar": "وَلَهُنَّ مِثْلُ ٱلَّذِى عَلَيْهِنَّ بِٱلْمَعْرُوفِ",
+      "en": "And due to the wives is similar to what is expected of them, according to what is reasonable.",
+      "ur": "اور عورتوں کا حق (مردوں پر) ویسا ہی ہے جیسے دستور کے مطابق (مردوں کا حق) عورتوں پر ہے۔"
+     },
+     "why": "Wives have rights like the duties upon them, according to what is reasonable (cut stops before the 'degree' clause, which needs tafsir)."
+    },
+    {
+     "ref": "4:128",
+     "cut": null,
+     "why": "When a wife fears neglect, settlement between spouses is best; do good and fear Allah."
+    },
+    {
+     "ref": "25:74",
+     "cut": null,
+     "why": "The believers' dua for spouses and children who are a comfort to the eyes."
+    }
+   ],
+   "hadith": [
+    {
+     "id": "6220",
+     "why": "The Prophet served his family at home."
+    },
+    {
+     "id": "3717",
+     "why": "Mercy on the husband and wife who wake each other for night prayer."
+    },
+    {
+     "id": "6460",
+     "why": "What a man spends on his family seeking reward is charity."
+    },
+    {
+     "id": "3328",
+     "why": "Among the worst is the one who divulges the intimate secrets of his spouse."
+    }
+   ],
+   "duas": [
+    {
+     "hisnId": 192,
+     "why": "The dua before intimacy between spouses."
+    }
+   ]
+  },
+  {
+   "id": "divorce",
+   "title": "Divorce",
+   "keywords": [
+    "talaq",
+    "talaaq",
+    "khula",
+    "separation",
+    "reconciliation",
+    "iddah"
+   ],
+   "quran": [
+    {
+     "ref": "2:229",
+     "cut": {
+      "ar": "ٱلطَّلَٰقُ مَرَّتَانِ ۖ فَإِمْسَاكٌۢ بِمَعْرُوفٍ أَوْ تَسْرِيحٌۢ بِإِحْسَٰنٍۢ",
+      "en": "Divorce is twice. Then, either keep [her] in an acceptable manner or release [her] with good treatment.",
+      "ur": "طلاق (صرف) دوبار ہے (یعنی جب دو دفعہ طلاق دے دی جائے تو) پھر (عورتوں کو) یا تو بطریق شائستہ (نکاح میں) رہنے دینا یا بھلائی کے ساتھ چھوڑ دینا۔"
+     },
+     "why": "Either keep her with kindness or release her with good treatment."
+    },
+    {
+     "ref": "2:231",
+     "cut": null,
+     "why": "Do not keep a wife in order to harm her; do not make Allah's verses a jest."
+    },
+    {
+     "ref": "2:241",
+     "cut": null,
+     "why": "Divorced women are owed a fair provision, a duty on the righteous."
+    },
+    {
+     "ref": "4:35",
+     "cut": null,
+     "why": "Send an arbitrator from each family; if they want reconciliation, Allah brings it."
+    },
+    {
+     "ref": "4:130",
+     "cut": null,
+     "why": "If they separate, Allah will enrich each of them from His abundance."
+    },
+    {
+     "ref": "65:2-3",
+     "cut": null,
+     "why": "Retain or part on fair terms; whoever fears Allah, He makes a way out and provides."
+    }
+   ],
+   "hadith": [
+    {
+     "id": "10569",
+     "why": "Satan's greatest delight is separating a man from his wife."
+    },
+    {
+     "id": "3071",
+     "why": "A believer should not hate his wife: if he dislikes one trait he will like another."
+    },
+    {
+     "id": "58133",
+     "why": "The wife of Thabit ibn Qays: a woman may end a marriage fairly by returning the gift (khul')."
+    }
+   ],
+   "duas": []
+  },
+  {
+   "id": "parents",
+   "title": "Parents",
+   "keywords": [
+    "mother",
+    "father",
+    "walidain",
+    "maa baap",
+    "birr al-walidayn",
+    "dutiful",
+    "old age"
+   ],
+   "quran": [
+    {
+     "ref": "17:23-24",
+     "cut": null,
+     "why": "Excellence to parents; not even 'uff'; the dua 'My Lord, have mercy upon them'."
+    },
+    {
+     "ref": "31:14-15",
+     "cut": null,
+     "why": "Gratitude to parents; the mother's hardship; kindness even to non-Muslim parents."
+    },
+    {
+     "ref": "46:15",
+     "cut": null,
+     "why": "Good treatment of parents, the mother's hardship, and the dua of maturity."
+    },
+    {
+     "ref": "2:215",
+     "cut": null,
+     "why": "Spending begins with parents and relatives."
+    },
+    {
+     "ref": "14:41",
+     "cut": null,
+     "why": "Ibrahim's dua: forgive me and my parents."
+    }
+   ],
+   "hadith": [
+    {
+     "id": "4182",
+     "why": "Your mother, then your mother, then your mother, then your father."
+    },
+    {
+     "id": "3365",
+     "why": "Dutifulness to parents is among the deeds dearest to Allah, after prayer on time."
+    },
+    {
+     "id": "3718",
+     "why": "Loss for the one whose parents reach old age and he does not earn Paradise through them."
+    },
+    {
+     "id": "5361",
+     "why": "Allah's pleasure is in the parents' pleasure."
+    }
+   ],
+   "duas": []
+  },
+  {
+   "id": "children",
+   "title": "Children",
+   "keywords": [
+    "aulad",
+    "kids",
+    "offspring",
+    "sons",
+    "daughters",
+    "parenting",
+    "tarbiyah",
+    "bachay"
+   ],
+   "quran": [
+    {
+     "ref": "18:46",
+     "cut": null,
+     "why": "Wealth and children are adornment; lasting good deeds are better."
+    },
+    {
+     "ref": "64:15",
+     "cut": null,
+     "why": "Wealth and children are a trial; with Allah is a great reward."
+    },
+    {
+     "ref": "66:6",
+     "cut": null,
+     "why": "Protect yourselves and your families from the Fire."
+    },
+    {
+     "ref": "17:31",
+     "cut": null,
+     "why": "Do not kill your children for fear of poverty; Allah provides for them and you."
+    },
+    {
+     "ref": "42:49-50",
+     "cut": null,
+     "why": "Allah gives daughters, sons, both, or none, as He wills."
+    },
+    {
+     "ref": "14:40",
+     "cut": null,
+     "why": "Ibrahim's dua that he and his descendants establish prayer."
+    }
+   ],
+   "hadith": [
+    {
+     "id": "5440",
+     "why": "The Prophet kissed his grandson: whoever does not show mercy is not shown mercy."
+    },
+    {
+     "id": "3360",
+     "why": "Whoever raises two girls to maturity will be with the Prophet on the Day of Judgement."
+    },
+    {
+     "id": "6035",
+     "why": "Be just between your children in gifts; the Prophet refused to witness injustice."
+    },
+    {
+     "id": "65566",
+     "why": "A righteous child who prays for a parent is a reward that continues after death."
+    }
+   ],
+   "duas": [
+    {
+     "hisnId": 146,
+     "why": "The Prophet's words seeking Allah's protection for Al-Hasan and Al-Husayn."
+    }
+   ]
+  },
+  {
+   "id": "women",
+   "title": "Women",
+   "keywords": [
+    "aurat",
+    "nisa",
+    "female",
+    "mothers",
+    "daughters",
+    "sisters",
+    "equality"
+   ],
+   "quran": [
+    {
+     "ref": "4:1",
+     "cut": null,
+     "why": "Men and women created from one soul; fear Allah and honour the ties of the womb."
+    },
+    {
+     "ref": "16:97",
+     "cut": null,
+     "why": "Whoever does good, male or female, is given a good life and full reward."
+    },
+    {
+     "ref": "33:35",
+     "cut": null,
+     "why": "Men and women named side by side, each promised forgiveness and a great reward."
+    },
+    {
+     "ref": "4:19",
+     "cut": {
+      "ar": "وَعَاشِرُوهُنَّ بِٱلْمَعْرُوفِ ۚ فَإِن كَرِهْتُمُوهُنَّ فَعَسَىٰٓ أَن تَكْرَهُوا۟ شَيْـًۭٔا وَيَجْعَلَ ٱللَّهُ فِيهِ خَيْرًۭا كَثِيرًۭا",
+      "en": "And live with them in kindness. For if you dislike them - perhaps you dislike a thing and Allah makes therein much good.",
+      "ur": "اور ان کے ساتھ اچھی طرح رہو سہو اگر وہ تم کو ناپسند ہوں تو عجب نہیں کہ تم کسی چیز کو ناپسند کرو اور خدا اس میں بہت سی بھلائی پیدا کردے"
+     },
+     "why": "Live with them in kindness; what you dislike may hold much good."
+    },
+    {
+     "ref": "3:195",
+     "cut": {
+      "ar": "أَنِّى لَآ أُضِيعُ عَمَلَ عَٰمِلٍۢ مِّنكُم مِّن ذَكَرٍ أَوْ أُنثَىٰ ۖ بَعْضُكُم مِّنۢ بَعْضٍۢ",
+      "en": "Never will I allow to be lost the work of [any] worker among you, whether male or female; you are of one another.",
+      "ur": "میں کسی عمل کرنے والے کے عمل کو مرد ہو یا عورت ضائع نہیں کرتا تم ایک دوسرے کی جنس ہو"
+     },
+     "why": "Allah never lets the work of any worker be lost, male or female; you are of one another."
+    }
+   ],
+   "hadith": [
+    {
+     "id": "5792",
+     "why": "The best of you are those who are best to their womenfolk."
+    },
+    {
+     "id": "58188",
+     "why": "The mother's right: your mother, then your mother, then your mother."
+    },
+    {
+     "id": "3468",
+     "why": "The Prophet declared the rights of the woman (and the orphan) inviolable."
+    },
+    {
+     "id": "65416",
+     "why": "Do not prevent the female servants of Allah from the mosques."
+    }
+   ],
+   "duas": []
+  },
+  {
+   "id": "kinship",
+   "title": "Ties of Kinship",
+   "keywords": [
+    "silat al-rahim",
+    "sila rehmi",
+    "relatives",
+    "relations",
+    "rishtedar",
+    "qaraba",
+    "family"
+   ],
+   "quran": [
+    {
+     "ref": "47:22-23",
+     "cut": null,
+     "why": "Those who sever their ties of relationship are cursed by Allah."
+    },
+    {
+     "ref": "16:90",
+     "cut": null,
+     "why": "Allah commands justice, excellence and giving to relatives."
+    },
+    {
+     "ref": "30:38",
+     "cut": null,
+     "why": "Give the relative his right; that is best for those seeking Allah's face."
+    },
+    {
+     "ref": "24:22",
+     "cut": null,
+     "why": "Do not swear to withhold from relatives; pardon and overlook."
+    },
+    {
+     "ref": "4:36",
+     "cut": null,
+     "why": "Worship Allah, and do good to parents, relatives, orphans, neighbours and others."
+    }
+   ],
+   "hadith": [
+    {
+     "id": "5372",
+     "why": "Whoever wants more provision and a longer life should maintain kinship ties."
+    },
+    {
+     "id": "5367",
+     "why": "The one who severs kinship ties will not enter Paradise."
+    },
+    {
+     "id": "3854",
+     "why": "True upholding of ties is keeping them with those who cut you off."
+    },
+    {
+     "id": "3863",
+     "why": "Keep treating relatives well even when they mistreat you; Allah supports you."
+    }
+   ],
+   "duas": []
+  },
+  {
+   "id": "orphans",
+   "title": "Orphans",
+   "keywords": [
+    "yateem",
+    "yatim",
+    "yatama",
+    "fatherless",
+    "kafalah",
+    "sponsorship"
+   ],
+   "quran": [
+    {
+     "ref": "2:220",
+     "cut": {
+      "ar": "وَيَسْـَٔلُونَكَ عَنِ ٱلْيَتَٰمَىٰ ۖ قُلْ إِصْلَاحٌۭ لَّهُمْ خَيْرٌۭ ۖ وَإِن تُخَالِطُوهُمْ فَإِخْوَٰنُكُمْ ۚ وَٱللَّهُ يَعْلَمُ ٱلْمُفْسِدَ مِنَ ٱلْمُصْلِحِ",
+      "en": "And they ask you about orphans. Say, \"Improvement for them is best. And if you mix your affairs with theirs - they are your brothers. And Allah knows the corrupter from the amender.",
+      "ur": "اور تم سے یتیموں کے بارے میں دریافت کرتے ہیں کہہ دو کہ ان کی (حالت کی) اصلاح بہت اچھا کام ہے۔ اور اگر تم ان سے مل جل کر رہنا (یعنی خرچ اکھٹا رکھنا) چاہو تو وہ تمہارے بھائی ہیں اور خدا خوب جانتا ہے کہ خرابی کرنے والا کون ہے اور اصلاح کرنے والا کون۔"
+     },
+     "why": "Improving the orphans' affairs is best; they are your brothers."
+    },
+    {
+     "ref": "4:2",
+     "cut": null,
+     "why": "Give orphans their property; do not swap or consume it."
+    },
+    {
+     "ref": "4:10",
+     "cut": null,
+     "why": "Devouring orphans' property unjustly is eating fire."
+    },
+    {
+     "ref": "93:9",
+     "cut": null,
+     "why": "As for the orphan, do not oppress him."
+    },
+    {
+     "ref": "107:1-2",
+     "cut": null,
+     "why": "The one who denies the Recompense is the one who drives away the orphan."
+    },
+    {
+     "ref": "76:8",
+     "cut": null,
+     "why": "The righteous feed the needy, the orphan and the captive despite loving the food."
+    }
+   ],
+   "hadith": [
+    {
+     "id": "3468",
+     "why": "The Prophet declared the rights of the orphan (and the woman) inviolable."
+    },
+    {
+     "id": "3331",
+     "why": "Devouring an orphan's property is one of the seven destructive sins."
+    }
+   ],
+   "duas": []
+  },
+  {
+   "id": "inheritance",
+   "title": "Inheritance",
+   "keywords": [
+    "mirath",
+    "wirasat",
+    "wasiyyah",
+    "will",
+    "bequest",
+    "heirs",
+    "shares",
+    "tarka"
+   ],
+   "quran": [
+    {
+     "ref": "4:7",
+     "cut": null,
+     "why": "Men and women both have an obligatory share of what parents and relatives leave."
+    },
+    {
+     "ref": "4:11",
+     "cut": {
+      "ar": "ءَابَآؤُكُمْ وَأَبْنَآؤُكُمْ لَا تَدْرُونَ أَيُّهُمْ أَقْرَبُ لَكُمْ نَفْعًۭا ۚ فَرِيضَةًۭ مِّنَ ٱللَّهِ ۗ إِنَّ ٱللَّهَ كَانَ عَلِيمًا حَكِيمًۭا",
+      "en": "Your parents or your children - you know not which of them are nearest to you in benefit. [These shares are] an obligation [imposed] by Allah. Indeed, Allah is ever Knowing and Wise.",
+      "ur": "تم کو معلوم نہیں کہ تمہارے باپ دادؤں اور بیٹوں پوتوں میں سے فائدے کے لحاظ سے کون تم سے زیادہ قریب ہے، یہ حصے خدا کے مقرر کئے ہوئے ہیں اور خدا سب کچھ جاننے والا اور حکمت والا ہے"
+     },
+     "why": "The shares are an obligation from Allah, who knows best who benefits you most (key closing part only)."
+    },
+    {
+     "ref": "4:13-14",
+     "cut": null,
+     "why": "These (inheritance shares) are Allah's limits: obedience leads to Paradise, transgression to the Fire."
+    },
+    {
+     "ref": "4:8",
+     "cut": null,
+     "why": "Give something to relatives, orphans and the needy present at the division, with kind words."
+    },
+    {
+     "ref": "89:19-20",
+     "cut": null,
+     "why": "Rebuke for devouring inheritance and loving wealth excessively."
+    }
+   ],
+   "hadith": [
+    {
+     "id": "5887",
+     "why": "Give the prescribed shares to those entitled to them."
+    },
+    {
+     "id": "5885",
+     "why": "Sa'd's bequest: a third at most, and leaving heirs well-off is better than leaving them poor."
+    },
+    {
+     "id": "5831",
+     "why": "A Muslim with something to bequeath should not let nights pass without his will written."
+    }
+   ],
+   "duas": []
+  }
+ ]
+}

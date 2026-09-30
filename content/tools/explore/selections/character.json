@@ -1,0 +1,1078 @@
+{
+ "group": "character",
+ "topics": [
+  {
+   "id": "sincerity",
+   "title": "Sincerity",
+   "keywords": [
+    "ikhlas",
+    "intention",
+    "niyyah",
+    "niyat",
+    "riya",
+    "showing off"
+   ],
+   "quran": [
+    {
+     "ref": "98:5",
+     "cut": null,
+     "why": "Command to worship Allah 'sincere to Him in religion' (mukhlisin)."
+    },
+    {
+     "ref": "6:162-163",
+     "cut": null,
+     "why": "My prayer, sacrifice, living and dying are for Allah alone: the heart of ikhlas."
+    },
+    {
+     "ref": "18:110",
+     "cut": null,
+     "why": "Whoever hopes to meet his Lord: do righteous work and associate no one in worship."
+    },
+    {
+     "ref": "76:9",
+     "cut": null,
+     "why": "The righteous feed others only for Allah's countenance, wanting no reward or thanks."
+    },
+    {
+     "ref": "2:264",
+     "cut": null,
+     "why": "Charity spent to be seen by people is wiped away like dust off a smooth rock."
+    }
+   ],
+   "hadith": [
+    {
+     "id": "66511",
+     "why": "Deeds are by intentions; each person gets what he intended."
+    },
+    {
+     "id": "4555",
+     "why": "Allah looks at hearts and deeds, not appearance and wealth."
+    },
+    {
+     "id": "3342",
+     "why": "Hadith qudsi: a deed done for someone besides Allah is discarded."
+    },
+    {
+     "id": "3333",
+     "why": "Showing off in prayer is 'hidden shirk', feared more than the Dajjal."
+    }
+   ],
+   "duas": []
+  },
+  {
+   "id": "patience",
+   "title": "Patience",
+   "keywords": [
+    "sabr",
+    "sabar",
+    "perseverance",
+    "hardship",
+    "trials",
+    "musibat"
+   ],
+   "quran": [
+    {
+     "ref": "2:153",
+     "cut": null,
+     "why": "Seek help through patience and prayer; Allah is with the patient."
+    },
+    {
+     "ref": "2:155-157",
+     "cut": null,
+     "why": "Tested with fear, hunger, loss; glad tidings to the patient who say inna lillahi."
+    },
+    {
+     "ref": "39:10",
+     "cut": null,
+     "why": "The patient are given their reward without account."
+    },
+    {
+     "ref": "16:96",
+     "cut": null,
+     "why": "What you have ends, what Allah has lasts; the patient get the best reward."
+    },
+    {
+     "ref": "103:1-3",
+     "cut": null,
+     "why": "Surat al-Asr: mankind is in loss except those who urge one another to patience."
+    }
+   ],
+   "hadith": [
+    {
+     "id": "4967",
+     "why": "Whoever tries to be patient, Allah makes him patient; no gift is better than patience."
+    },
+    {
+     "id": "3298",
+     "why": "The believer's affair is all good: grateful in ease, patient in hardship."
+    },
+    {
+     "id": "3295",
+     "why": "'Patience is at the first shock' - said to the grieving woman at the grave."
+    },
+    {
+     "id": "5492",
+     "why": "The believer who mixes with people and patiently bears their harm is better."
+    }
+   ],
+   "duas": [
+    {
+     "hisnId": 154,
+     "why": "The dua when calamity strikes: inna lillahi... recompense me and replace it with better."
+    }
+   ]
+  },
+  {
+   "id": "gratitude",
+   "title": "Gratitude",
+   "keywords": [
+    "shukr",
+    "shukar",
+    "thankfulness",
+    "alhamdulillah",
+    "blessings",
+    "nimat"
+   ],
+   "quran": [
+    {
+     "ref": "14:7",
+     "cut": null,
+     "why": "If you are grateful, I will surely increase you."
+    },
+    {
+     "ref": "2:152",
+     "cut": null,
+     "why": "Remember Me, I will remember you; be grateful to Me and do not deny Me."
+    },
+    {
+     "ref": "16:18",
+     "cut": null,
+     "why": "If you counted Allah's favours you could not enumerate them."
+    },
+    {
+     "ref": "31:12",
+     "cut": null,
+     "why": "Whoever is grateful is grateful for his own benefit."
+    },
+    {
+     "ref": "2:172",
+     "cut": null,
+     "why": "Eat of the good things We provided and be grateful to Allah."
+    },
+    {
+     "ref": "27:19",
+     "cut": {
+      "ar": "رَبِّ أَوْزِعْنِىٓ أَنْ أَشْكُرَ نِعْمَتَكَ ٱلَّتِىٓ أَنْعَمْتَ عَلَىَّ وَعَلَىٰ وَٰلِدَىَّ وَأَنْ أَعْمَلَ صَٰلِحًۭا تَرْضَىٰهُ",
+      "en": "My Lord, enable me to be grateful for Your favor which You have bestowed upon me and upon my parents and to do righteousness of which You approve.",
+      "ur": "اے پروردگار! مجھے توفیق عطا فرما کہ جو احسان تونے مجھ پر اور میرے ماں باپ پر کئے ہیں ان کا شکر کروں اور ایسے نیک کام کروں کہ تو ان سے خوش ہوجائے"
+     },
+     "why": "Sulayman's dua: My Lord, enable me to be grateful for Your favour."
+    }
+   ],
+   "hadith": [
+    {
+     "id": "4830",
+     "why": "Prayed until his feet cracked: 'Should I not be a grateful slave?'"
+    },
+    {
+     "id": "66255",
+     "why": "Whoever does not thank people does not thank Allah."
+    },
+    {
+     "id": "5798",
+     "why": "Allah is pleased with one who praises Him after eating or drinking."
+    },
+    {
+     "id": "5341",
+     "why": "Look at those below you, so you do not belittle Allah's blessings on you."
+    }
+   ],
+   "duas": [
+    {
+     "hisnId": 81,
+     "why": "Morning/evening: every blessing is from You alone; whoever says it has given the day's thanks."
+    },
+    {
+     "hisnId": 59,
+     "why": "O Allah, help me to remember You, to thank You and worship You well."
+    },
+    {
+     "hisnId": 218,
+     "why": "Alhamdulillah for good news, and 'alhamdulillah in every state' for the unwelcome."
+    }
+   ]
+  },
+  {
+   "id": "trust-in-allah",
+   "title": "Trust in Allah",
+   "keywords": [
+    "tawakkul",
+    "tawakkal",
+    "reliance",
+    "hasbunallah",
+    "bharosa",
+    "rely on Allah"
+   ],
+   "quran": [
+    {
+     "ref": "65:2-3",
+     "cut": {
+      "ar": "وَمَن يَتَّقِ ٱللَّهَ يَجْعَل لَّهُۥ مَخْرَجًۭا وَيَرْزُقْهُ مِنْ حَيْثُ لَا يَحْتَسِبُ ۚ وَمَن يَتَوَكَّلْ عَلَى ٱللَّهِ فَهُوَ حَسْبُهُۥٓ ۚ إِنَّ ٱللَّهَ بَٰلِغُ أَمْرِهِۦ ۚ قَدْ جَعَلَ ٱللَّهُ لِكُلِّ شَىْءٍۢ قَدْرًۭا",
+      "en": "And whoever fears Allah - He will make for him a way out And will provide for him from where he does not expect. And whoever relies upon Allah - then He is sufficient for him. Indeed, Allah will accomplish His purpose. Allah has already set for everything a [decreed] extent.",
+      "ur": "اور جو کوئی خدا سے ڈرے گا وہ اس کے لئے (رنج ومحن سے) مخلصی (کی صورت) پیدا کرے گا اور اس کو ایسی جگہ سے رزق دے گا جہاں سے (وہم و) گمان بھی نہ ہو۔ اور جو خدا پر بھروسہ رکھے گا تو وہ اس کو کفایت کرے گا۔ خدا اپنے کام کو (جو وہ کرنا چاہتا ہے) پورا کردیتا ہے۔ خدا نے ہر چیز کا اندازہ مقرر کر رکھا ہے"
+     },
+     "why": "Whoever fears Allah, He makes a way out; whoever relies on Allah, He is sufficient for him."
+    },
+    {
+     "ref": "3:173",
+     "cut": null,
+     "why": "Told the enemy had gathered, they said: Hasbunallahu wa ni'mal wakil."
+    },
+    {
+     "ref": "9:51",
+     "cut": null,
+     "why": "Nothing strikes us except what Allah decreed; upon Allah let the believers rely."
+    },
+    {
+     "ref": "25:58",
+     "cut": null,
+     "why": "Rely upon the Ever-Living who does not die."
+    },
+    {
+     "ref": "11:123",
+     "cut": null,
+     "why": "To Him the whole matter returns, so worship Him and rely upon Him."
+    }
+   ],
+   "hadith": [
+    {
+     "id": "66538",
+     "why": "If you relied on Allah as you should, He would provide for you as He provides for birds."
+    },
+    {
+     "id": "3504",
+     "why": "Saying 'I rely on Allah' on leaving home: you are guided, sufficed and protected."
+    },
+    {
+     "id": "66522",
+     "why": "Ibn Abbas: if all people gathered to benefit or harm you, only what Allah decreed would reach you."
+    }
+   ],
+   "duas": [
+    {
+     "hisnId": 128,
+     "why": "Hasbunallahu wa ni'mal wakil, said when facing an adversary."
+    },
+    {
+     "hisnId": 111,
+     "why": "Before sleep: I entrust my affair to You and totally rely on You."
+    }
+   ]
+  },
+  {
+   "id": "honesty",
+   "title": "Honesty",
+   "keywords": [
+    "truthfulness",
+    "sidq",
+    "sach",
+    "lying",
+    "jhoot",
+    "sadiq"
+   ],
+   "quran": [
+    {
+     "ref": "9:119",
+     "cut": null,
+     "why": "Fear Allah and be with those who are truthful."
+    },
+    {
+     "ref": "33:70-71",
+     "cut": null,
+     "why": "Fear Allah and speak upright words; He will amend your deeds and forgive you."
+    },
+    {
+     "ref": "5:119",
+     "cut": null,
+     "why": "The Day when the truthful will benefit from their truthfulness."
+    },
+    {
+     "ref": "2:42",
+     "cut": null,
+     "why": "Do not mix truth with falsehood or conceal the truth knowingly."
+    },
+    {
+     "ref": "25:72",
+     "cut": null,
+     "why": "The servants of the Most Merciful do not testify to falsehood."
+    }
+   ],
+   "hadith": [
+    {
+     "id": "5504",
+     "why": "Truthfulness leads to righteousness and Paradise; lying leads to wickedness and Hell."
+    },
+    {
+     "id": "4564",
+     "why": "Leave what makes you doubt; truthfulness is tranquillity, lying is doubt."
+    },
+    {
+     "id": "5519",
+     "why": "Woe to the one who lies to make people laugh."
+    }
+   ],
+   "duas": []
+  },
+  {
+   "id": "humility",
+   "title": "Humility",
+   "keywords": [
+    "tawadu",
+    "aajizi",
+    "arrogance",
+    "pride",
+    "kibr",
+    "takabbur"
+   ],
+   "quran": [
+    {
+     "ref": "25:63",
+     "cut": null,
+     "why": "The servants of the Most Merciful walk on the earth humbly and answer the ignorant with peace."
+    },
+    {
+     "ref": "31:18-19",
+     "cut": null,
+     "why": "Luqman: do not turn your cheek in contempt or walk exultantly; be moderate, lower your voice."
+    },
+    {
+     "ref": "17:37",
+     "cut": null,
+     "why": "Do not walk exultantly; you will never tear the earth or reach the mountains' height."
+    },
+    {
+     "ref": "28:83",
+     "cut": null,
+     "why": "The Hereafter is for those who do not seek exaltedness on earth."
+    },
+    {
+     "ref": "49:13",
+     "cut": null,
+     "why": "The most noble of you before Allah is the most righteous, not by lineage."
+    },
+    {
+     "ref": "53:32",
+     "cut": {
+      "ar": "فَلَا تُزَكُّوٓا۟ أَنفُسَكُمْ ۖ هُوَ أَعْلَمُ بِمَنِ ٱتَّقَىٰٓ",
+      "en": "So do not claim yourselves to be pure; He is most knowing of who fears Him.",
+      "ur": "تو اپنے آپ کو پاک صاف نہ جتاؤ۔ جو پرہیزگار ہے وہ اس سے خوب واقف ہے"
+     },
+     "why": "Do not claim yourselves to be pure; He knows best who fears Him."
+    }
+   ],
+   "hadith": [
+    {
+     "id": "5512",
+     "why": "No one humbles himself for Allah except that Allah raises him."
+    },
+    {
+     "id": "5497",
+     "why": "Allah revealed: be humble, so no one boasts over or oppresses another."
+    },
+    {
+     "id": "6209",
+     "why": "An atom's weight of arrogance bars Paradise; arrogance is rejecting truth and looking down on people."
+    },
+    {
+     "id": "6220",
+     "why": "At home the Prophet served his family."
+    }
+   ],
+   "duas": []
+  },
+  {
+   "id": "kindness",
+   "title": "Kindness",
+   "keywords": [
+    "gentleness",
+    "rifq",
+    "ihsan",
+    "narmi",
+    "good treatment",
+    "husn sulook"
+   ],
+   "quran": [
+    {
+     "ref": "3:159",
+     "cut": null,
+     "why": "By Allah's mercy the Prophet was gentle; had he been harsh, people would have left him."
+    },
+    {
+     "ref": "4:36",
+     "cut": null,
+     "why": "Do good to parents, relatives, orphans, the needy, neighbours near and far, companions and travellers."
+    },
+    {
+     "ref": "20:43-44",
+     "cut": null,
+     "why": "Even to Pharaoh: speak to him with gentle speech."
+    },
+    {
+     "ref": "2:195",
+     "cut": {
+      "ar": "وَأَحْسِنُوٓا۟ ۛ إِنَّ ٱللَّهَ يُحِبُّ ٱلْمُحْسِنِينَ",
+      "en": "And do good; indeed, Allah loves the doers of good.",
+      "ur": "اور نیکی کرو بےشک خدا نیکی کرنے والوں کو دوست رکھتا ہے"
+     },
+     "why": "Do good; Allah loves the doers of good."
+    },
+    {
+     "ref": "28:77",
+     "cut": {
+      "ar": "وَأَحْسِن كَمَآ أَحْسَنَ ٱللَّهُ إِلَيْكَ",
+      "en": "And do good as Allah has done good to you.",
+      "ur": "اور جیسی خدا نے تم سے بھلائی کی ہے (ویسی) تم بھی (لوگوں سے) بھلائی کرو۔"
+     },
+     "why": "Do good as Allah has done good to you."
+    }
+   ],
+   "hadith": [
+    {
+     "id": "5797",
+     "why": "Allah is gentle and loves gentleness, and gives for it what He does not give for harshness."
+    },
+    {
+     "id": "5796",
+     "why": "Gentleness adorns everything it is in; its removal disfigures."
+    },
+    {
+     "id": "4939",
+     "why": "Whoever is deprived of gentleness is deprived of all good."
+    },
+    {
+     "id": "5348",
+     "why": "Do not belittle any good deed, even meeting your brother with a cheerful face."
+    }
+   ],
+   "duas": []
+  },
+  {
+   "id": "mercy",
+   "title": "Mercy",
+   "keywords": [
+    "rahmah",
+    "rahm",
+    "compassion",
+    "raham",
+    "animals",
+    "shafqat"
+   ],
+   "quran": [
+    {
+     "ref": "21:107",
+     "cut": null,
+     "why": "The Prophet was sent only as a mercy to the worlds."
+    },
+    {
+     "ref": "9:128",
+     "cut": null,
+     "why": "The Messenger is grieved by your suffering and is kind and merciful to the believers."
+    },
+    {
+     "ref": "90:17",
+     "cut": null,
+     "why": "Among those who believed and urged one another to patience and to compassion."
+    },
+    {
+     "ref": "7:156",
+     "cut": {
+      "ar": "قَالَ عَذَابِىٓ أُصِيبُ بِهِۦ مَنْ أَشَآءُ ۖ وَرَحْمَتِى وَسِعَتْ كُلَّ شَىْءٍۢ",
+      "en": "[Allah] said, \"My punishment - I afflict with it whom I will, but My mercy encompasses all things.\"",
+      "ur": "فرمایا کہ جو میرا عذاب ہے اسے تو جس پر چاہتا ہوں نازل کرتا ہوں اور جو میری رحمت ہے وہ ہر چیز کو شامل ہے۔"
+     },
+     "why": "My mercy encompasses all things."
+    },
+    {
+     "ref": "6:54",
+     "cut": null,
+     "why": "Your Lord has decreed mercy upon Himself for whoever repents and reforms."
+    }
+   ],
+   "hadith": [
+    {
+     "id": "8289",
+     "why": "The merciful are shown mercy by the Most Merciful; be merciful to those on earth."
+    },
+    {
+     "id": "5440",
+     "why": "The Prophet kissed al-Hasan: whoever does not show mercy will not be shown mercy."
+    },
+    {
+     "id": "6405",
+     "why": "His tears for his dying grandson: mercy Allah places in the hearts of His slaves."
+    },
+    {
+     "id": "3083",
+     "why": "Not one of us who does not show mercy to our young and honour our old."
+    },
+    {
+     "id": "58193",
+     "why": "A woman entered Hell for starving a cat: mercy to animals."
+    }
+   ],
+   "duas": []
+  },
+  {
+   "id": "forgiveness",
+   "title": "Forgiveness",
+   "keywords": [
+    "pardon",
+    "afw",
+    "maaf",
+    "darguzar",
+    "reconciliation",
+    "letting go"
+   ],
+   "quran": [
+    {
+     "ref": "24:22",
+     "cut": null,
+     "why": "Let them pardon and overlook. Would you not like Allah to forgive you?"
+    },
+    {
+     "ref": "42:40",
+     "cut": null,
+     "why": "Whoever pardons and makes reconciliation, his reward is with Allah."
+    },
+    {
+     "ref": "42:43",
+     "cut": null,
+     "why": "Whoever is patient and forgives, that is of the matters of resolve."
+    },
+    {
+     "ref": "41:34-35",
+     "cut": null,
+     "why": "Repel evil with what is better, and an enemy becomes a devoted friend."
+    },
+    {
+     "ref": "64:14",
+     "cut": {
+      "ar": "وَإِن تَعْفُوا۟ وَتَصْفَحُوا۟ وَتَغْفِرُوا۟ فَإِنَّ ٱللَّهَ غَفُورٌۭ رَّحِيمٌ",
+      "en": "But if you pardon and overlook and forgive - then indeed, Allah is Forgiving and Merciful.",
+      "ur": "اور اگر معاف کردو اور درگزر کرو اور بخش دو تو خدا بھی بخشنے والا مہربان ہے"
+     },
+     "why": "If you pardon, overlook and forgive, Allah is Forgiving and Merciful."
+    }
+   ],
+   "hadith": [
+    {
+     "id": "3594",
+     "why": "A prophet struck and bloodied by his people said: O Allah, forgive my people."
+    },
+    {
+     "id": "10974",
+     "why": "Aishah: he did not repay evil with evil, but would pardon and forgive."
+    },
+    {
+     "id": "5365",
+     "why": "Do not shun a Muslim more than three nights; the better one greets first."
+    },
+    {
+     "id": "3753",
+     "why": "A man who overlooked his debtors' debts; Allah overlooked his sins."
+    }
+   ],
+   "duas": []
+  },
+  {
+   "id": "modesty",
+   "title": "Modesty",
+   "keywords": [
+    "haya",
+    "sharm",
+    "shyness",
+    "bashfulness",
+    "lowering the gaze",
+    "nazar neechi"
+   ],
+   "quran": [
+    {
+     "ref": "24:30",
+     "cut": null,
+     "why": "Believing men are told to lower their gaze and guard their chastity."
+    },
+    {
+     "ref": "24:31",
+     "cut": {
+      "ar": "وَقُل لِّلْمُؤْمِنَٰتِ يَغْضُضْنَ مِنْ أَبْصَٰرِهِنَّ وَيَحْفَظْنَ فُرُوجَهُنَّ",
+      "en": "And tell the believing women to reduce [some] of their vision and guard their private parts",
+      "ur": "اور مومن عورتوں سے بھی کہہ دو کہ وہ بھی اپنی نگاہیں نیچی رکھا کریں اور اپنی شرم گاہوں کی حفاظت کیا کریں"
+     },
+     "why": "Believing women likewise told to lower their gaze and guard their chastity."
+    },
+    {
+     "ref": "7:26",
+     "cut": null,
+     "why": "Clothing covers and adorns, but the clothing of righteousness is best."
+    },
+    {
+     "ref": "28:25",
+     "cut": {
+      "ar": "فَجَآءَتْهُ إِحْدَىٰهُمَا تَمْشِى عَلَى ٱسْتِحْيَآءٍۢ",
+      "en": "Then one of the two women came to him walking with shyness.",
+      "ur": "(تھوڑی دیر کے بعد) ان میں سے ایک عورت جو شرماتی اور لجاتی چلی آتی تھی۔"
+     },
+     "why": "The woman of Madyan came to Musa walking with shyness."
+    }
+   ],
+   "hadith": [
+    {
+     "id": "3055",
+     "why": "Modesty brings nothing but good."
+    },
+    {
+     "id": "5478",
+     "why": "Modesty is part of faith."
+    },
+    {
+     "id": "4559",
+     "why": "From the words of earlier prophets: if you feel no shame, do as you wish."
+    },
+    {
+     "id": "3153",
+     "why": "The Prophet was more bashful than a virgin in her seclusion."
+    }
+   ],
+   "duas": []
+  },
+  {
+   "id": "justice",
+   "title": "Justice",
+   "keywords": [
+    "adl",
+    "insaf",
+    "fairness",
+    "qist",
+    "oppression",
+    "zulm"
+   ],
+   "quran": [
+    {
+     "ref": "4:135",
+     "cut": null,
+     "why": "Stand firm for justice even against yourselves, parents and relatives."
+    },
+    {
+     "ref": "5:8",
+     "cut": null,
+     "why": "Do not let hatred of a people stop you being just; justice is nearer to piety."
+    },
+    {
+     "ref": "16:90",
+     "cut": null,
+     "why": "Allah orders justice and good conduct and forbids oppression."
+    },
+    {
+     "ref": "6:152",
+     "cut": {
+      "ar": "وَإِذَا قُلْتُمْ فَٱعْدِلُوا۟ وَلَوْ كَانَ ذَا قُرْبَىٰ",
+      "en": "And when you testify, be just, even if [it concerns] a near relative.",
+      "ur": "اور جب (کسی کی نسبت) کوئی بات کہو تو انصاف سے کہو گو وہ (تمہارا) رشتہ دار ہی ہو"
+     },
+     "why": "When you speak, be just, even about a relative."
+    },
+    {
+     "ref": "83:1-3",
+     "cut": null,
+     "why": "Woe to those who take full measure for themselves but give others less."
+    }
+   ],
+   "hadith": [
+    {
+     "id": "4935",
+     "why": "The just will be on pulpits of light: just in judgment, with family and those in their charge."
+    },
+    {
+     "id": "5787",
+     "why": "Beware of oppression: it will be layers of darkness on the Day of Judgment."
+    },
+    {
+     "id": "4236",
+     "why": "Help your brother, oppressor or oppressed: help the oppressor by stopping him."
+    },
+    {
+     "id": "6035",
+     "why": "Unequal gifts to children: 'I do not bear witness to injustice.'"
+    }
+   ],
+   "duas": []
+  },
+  {
+   "id": "trustworthiness",
+   "title": "Trustworthiness",
+   "keywords": [
+    "amanah",
+    "amanat",
+    "ameen",
+    "betrayal",
+    "khayanat",
+    "responsibility"
+   ],
+   "quran": [
+    {
+     "ref": "4:58",
+     "cut": null,
+     "why": "Allah commands you to render trusts to those they are due."
+    },
+    {
+     "ref": "8:27",
+     "cut": null,
+     "why": "Do not betray Allah and the Messenger or betray your trusts."
+    },
+    {
+     "ref": "23:8",
+     "cut": null,
+     "why": "Believers are attentive to their trusts and promises."
+    },
+    {
+     "ref": "2:283",
+     "cut": {
+      "ar": "فَإِنْ أَمِنَ بَعْضُكُم بَعْضًۭا فَلْيُؤَدِّ ٱلَّذِى ٱؤْتُمِنَ أَمَٰنَتَهُۥ وَلْيَتَّقِ ٱللَّهَ رَبَّهُۥ",
+      "en": "And if one of you entrusts another, then let him who is entrusted discharge his trust [faithfully] and let him fear Allah, his Lord.",
+      "ur": "اور اگر کوئی کسی کو امین سمجھے (یعنی رہن کے بغیر قرض دیدے) تو امانتدار کو چاہیئے کہ صاحب امانت کی امانت ادا کردے اور خدا سے جو اس کا پروردگار ہے ڈرے۔"
+     },
+     "why": "Let the one who is entrusted discharge his trust and fear Allah."
+    },
+    {
+     "ref": "28:26",
+     "cut": null,
+     "why": "The best one to hire is the strong and the trustworthy."
+    }
+   ],
+   "hadith": [
+    {
+     "id": "3467",
+     "why": "Authority is a trust: disgrace and regret, except for one who fulfils it rightly."
+    },
+    {
+     "id": "3125",
+     "why": "The trustworthy storekeeper who pays out faithfully shares the reward of charity."
+    },
+    {
+     "id": "2936",
+     "why": "On the Day of Judgment a banner is raised for every betrayer."
+    }
+   ],
+   "duas": []
+  },
+  {
+   "id": "keeping-promises",
+   "title": "Keeping Promises",
+   "keywords": [
+    "wada",
+    "ahd",
+    "covenant",
+    "commitment",
+    "oath",
+    "wafa"
+   ],
+   "quran": [
+    {
+     "ref": "17:34",
+     "cut": {
+      "ar": "وَأَوْفُوا۟ بِٱلْعَهْدِ ۖ إِنَّ ٱلْعَهْدَ كَانَ مَسْـُٔولًۭا",
+      "en": "And fulfill [every] commitment. Indeed, the commitment is ever [that about which one will be] questioned.",
+      "ur": "اور عہد کو پورا کرو کہ عہد کے بارے میں ضرور پرسش ہوگی"
+     },
+     "why": "Fulfil every commitment; you will be questioned about it."
+    },
+    {
+     "ref": "5:1",
+     "cut": {
+      "ar": "يَٰٓأَيُّهَا ٱلَّذِينَ ءَامَنُوٓا۟ أَوْفُوا۟ بِٱلْعُقُودِ",
+      "en": "O you who have believed, fulfill [all] contracts.",
+      "ur": "اے ایمان والو! اپنے اقراروں کو پورا کرو۔"
+     },
+     "why": "O believers, fulfil your contracts."
+    },
+    {
+     "ref": "16:91",
+     "cut": null,
+     "why": "Fulfil Allah's covenant and do not break oaths after confirming them."
+    },
+    {
+     "ref": "61:2-3",
+     "cut": null,
+     "why": "Why do you say what you do not do? Most hateful to Allah."
+    },
+    {
+     "ref": "19:54",
+     "cut": null,
+     "why": "Ismail was true to his promise."
+    }
+   ],
+   "hadith": [
+    {
+     "id": "66537",
+     "why": "Four traits of a hypocrite, including breaking promises and betraying covenants."
+    },
+    {
+     "id": "66163",
+     "why": "Hadith qudsi: Allah is the adversary of one who gives his word in His name and breaks it."
+    },
+    {
+     "id": "3123",
+     "why": "Abu Bakr fulfilled a promise the Prophet had made to Jabir, after his death."
+    }
+   ],
+   "duas": []
+  },
+  {
+   "id": "generosity",
+   "title": "Generosity",
+   "keywords": [
+    "sakhawat",
+    "infaq",
+    "spending",
+    "giving",
+    "stinginess",
+    "bukhl"
+   ],
+   "quran": [
+    {
+     "ref": "3:92",
+     "cut": null,
+     "why": "You will not attain righteousness until you spend from what you love."
+    },
+    {
+     "ref": "59:9",
+     "cut": null,
+     "why": "The Ansar preferred others over themselves despite their own need; saved from the soul's stinginess."
+    },
+    {
+     "ref": "76:8",
+     "cut": null,
+     "why": "They give food, despite loving it, to the needy, the orphan and the captive."
+    },
+    {
+     "ref": "34:39",
+     "cut": null,
+     "why": "Whatever you spend, He will replace it; He is the best of providers."
+    },
+    {
+     "ref": "17:29",
+     "cut": null,
+     "why": "Neither tight-fisted nor spending everything: balanced generosity."
+    }
+   ],
+   "hadith": [
+    {
+     "id": "6179",
+     "why": "The Prophet was the most generous of people, more generous than the blowing wind."
+    },
+    {
+     "id": "5805",
+     "why": "Hadith qudsi: O son of Adam, spend and I will spend on you."
+    },
+    {
+     "id": "3379",
+     "why": "Every day two angels pray: O Allah, give the spender replacement and the withholder loss."
+    },
+    {
+     "id": "5834",
+     "why": "Parable of the generous and the miser in iron cloaks."
+    }
+   ],
+   "duas": []
+  },
+  {
+   "id": "good-speech",
+   "title": "Good Speech",
+   "keywords": [
+    "tongue",
+    "zuban",
+    "backbiting",
+    "ghibah",
+    "gheebat",
+    "slander",
+    "silence"
+   ],
+   "quran": [
+    {
+     "ref": "2:83",
+     "cut": {
+      "ar": "وَقُولُوا۟ لِلنَّاسِ حُسْنًۭا",
+      "en": "And speak to people good [words]",
+      "ur": "اور لوگوں سے اچھی باتیں کہنا"
+     },
+     "why": "Part of the covenant: speak good to people."
+    },
+    {
+     "ref": "17:53",
+     "cut": null,
+     "why": "Tell My servants to say what is best; Satan sows discord between them."
+    },
+    {
+     "ref": "49:11",
+     "cut": null,
+     "why": "Do not ridicule, insult or call one another by offensive nicknames."
+    },
+    {
+     "ref": "49:12",
+     "cut": null,
+     "why": "Avoid suspicion, do not spy or backbite: like eating a dead brother's flesh."
+    },
+    {
+     "ref": "50:18",
+     "cut": null,
+     "why": "No word is uttered except that a watcher is ready to record it."
+    }
+   ],
+   "hadith": [
+    {
+     "id": "5437",
+     "why": "Whoever believes in Allah and the Last Day should say good or keep silent."
+    },
+    {
+     "id": "3479",
+     "why": "One careless word can drop a person into Hellfire."
+    },
+    {
+     "id": "10101",
+     "why": "A Muslim is one from whose tongue and hand Muslims are safe."
+    },
+    {
+     "id": "5326",
+     "why": "Backbiting defined: saying about your brother what he dislikes, even if true."
+    }
+   ],
+   "duas": []
+  },
+  {
+   "id": "contentment",
+   "title": "Contentment",
+   "keywords": [
+    "qanaah",
+    "qanaat",
+    "self-sufficiency",
+    "greed",
+    "rizq",
+    "worldly life"
+   ],
+   "quran": [
+    {
+     "ref": "20:131",
+     "cut": null,
+     "why": "Do not stretch your eyes toward others' worldly enjoyment; your Lord's provision is better."
+    },
+    {
+     "ref": "4:32",
+     "cut": null,
+     "why": "Do not covet what Allah has given others over you; ask Allah of His bounty."
+    },
+    {
+     "ref": "57:22-23",
+     "cut": null,
+     "why": "All is decreed, so do not despair over what you missed or exult over what you got."
+    },
+    {
+     "ref": "102:1-2",
+     "cut": null,
+     "why": "Competition for more distracts you until you reach the graves."
+    },
+    {
+     "ref": "18:46",
+     "cut": null,
+     "why": "Wealth and children are adornment; lasting good deeds are better."
+    }
+   ],
+   "hadith": [
+    {
+     "id": "3852",
+     "why": "True richness is not abundant wealth but richness of the soul."
+    },
+    {
+     "id": "5814",
+     "why": "Successful is the one given enough and made content by Allah."
+    },
+    {
+     "id": "5840",
+     "why": "Whoever wakes healthy, safe and with his day's food has been given the world."
+    },
+    {
+     "id": "4963",
+     "why": "The son of Adam with two valleys of wealth would want a third."
+    }
+   ],
+   "duas": []
+  },
+  {
+   "id": "self-control",
+   "title": "Self-Control",
+   "keywords": [
+    "anger",
+    "ghussa",
+    "desires",
+    "nafs",
+    "temper",
+    "lust",
+    "hawa"
+   ],
+   "quran": [
+    {
+     "ref": "3:133-134",
+     "cut": null,
+     "why": "Paradise prepared for those who restrain anger and pardon people."
+    },
+    {
+     "ref": "42:37",
+     "cut": null,
+     "why": "The believers, when angry, forgive."
+    },
+    {
+     "ref": "79:40-41",
+     "cut": null,
+     "why": "Whoever restrained the soul from its desires: Paradise is his refuge."
+    },
+    {
+     "ref": "7:200-201",
+     "cut": null,
+     "why": "When Satan provokes you, seek refuge in Allah; the God-fearing remember and see clearly."
+    },
+    {
+     "ref": "12:53",
+     "cut": {
+      "ar": "إِنَّ ٱلنَّفْسَ لَأَمَّارَةٌۢ بِٱلسُّوٓءِ إِلَّا مَا رَحِمَ رَبِّىٓ",
+      "en": "Indeed, the soul is a persistent enjoiner of evil, except those upon which my Lord has mercy.",
+      "ur": "کیونکہ نفس امارہ (انسان کو) برائی سکھاتا رہتا ہے۔ مگر یہ کہ میرا پروردگار رحم کرے گا۔"
+     },
+     "why": "The soul constantly urges evil, except whom my Lord has mercy on."
+    }
+   ],
+   "hadith": [
+    {
+     "id": "5351",
+     "why": "The strong man is the one who controls himself when angry."
+    },
+    {
+     "id": "4709",
+     "why": "'Do not get angry', repeated as the Prophet's advice."
+    },
+    {
+     "id": "3287",
+     "why": "Whoever suppresses rage when able to act on it is honoured before all creation."
+    },
+    {
+     "id": "3702",
+     "why": "Hellfire is surrounded by desires and Paradise by hardships."
+    }
+   ],
+   "duas": [
+    {
+     "hisnId": 193,
+     "why": "Seeking refuge from Satan, the Prophet's remedy for anger."
+    }
+   ]
+  }
+ ]
+}
