@@ -4,13 +4,17 @@ import com.muttaqi.shared.core.domain.Outcome
 import com.muttaqi.shared.core.model.Language
 import com.muttaqi.shared.core.text.SearchTextFolder
 import com.muttaqi.shared.feature.quran.data.repository.RoomReadingProgressRepository
+import com.muttaqi.shared.feature.quran.domain.model.Ayah
 import com.muttaqi.shared.feature.quran.domain.model.Revelation
 import com.muttaqi.shared.feature.quran.domain.model.StoredReadingProgress
 import com.muttaqi.shared.feature.quran.domain.model.SurahReading
+import com.muttaqi.shared.feature.quran.domain.repository.AyahRepository
 import com.muttaqi.shared.feature.quran.domain.repository.StoredProgressImportMarker
+import com.muttaqi.shared.feature.quran.domain.repository.SurahRepository
 import com.muttaqi.shared.feature.quran.domain.usecase.ChangeTranslation
 import com.muttaqi.shared.feature.quran.domain.usecase.FilterSurahs
 import com.muttaqi.shared.feature.quran.domain.usecase.GetAyah
+import com.muttaqi.shared.feature.quran.domain.usecase.GetAyahOfTheDay
 import com.muttaqi.shared.feature.quran.domain.usecase.GetLastReading
 import com.muttaqi.shared.feature.quran.domain.usecase.GetQuranCompletion
 import com.muttaqi.shared.feature.quran.domain.usecase.ImportStoredReadingProgress
@@ -19,6 +23,7 @@ import com.muttaqi.shared.feature.quran.domain.usecase.RecordReading
 import com.muttaqi.shared.feature.quran.domain.usecase.SyncQuran
 import com.muttaqi.shared.testing.FakeSelectedLanguage
 import kotlinx.coroutines.test.runTest
+import kotlinx.datetime.LocalDate
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertFalse
@@ -121,6 +126,31 @@ class QuranUseCasesTest {
         assertEquals(QuranTestData.ayahs.first { it.surah == 2 && it.numberInSurah == 3 }.urdu, ayah.ayah.translation)
         assertNull(GetAyah(library, library)(2, 200, Language.Urdu))
         assertNull(GetAyah(FakeQuranLibrary(textStored = false), FakeQuranLibrary(textStored = false))(2, 3, Language.Urdu))
+    }
+
+    @Test
+    fun theAyahOfTheDayIsTheOneTheSwiftAppPicked() = runTest {
+        // Swift picked curatedAyahs[ordinality of the day in the era % 39]: 30 September 2026 is day 739,889
+        val asked = mutableListOf<String>()
+        val anySurah = object : SurahRepository {
+            override suspend fun surahs() = testSurahs
+            override suspend fun surah(number: Int) = testSurah(2).copy(number = number)
+        }
+        val recording = object : AyahRepository {
+            override suspend fun ayahs(surahNumber: Int, language: Language) = emptyList<Ayah>()
+            override suspend fun ayah(surahNumber: Int, numberInSurah: Int, language: Language): Ayah? {
+                asked += "$surahNumber:$numberInSurah"
+                return testAyahs(2).first().copy(surahNumber = surahNumber, numberInSurah = numberInSurah)
+            }
+        }
+        val pick = GetAyahOfTheDay(GetAyah(anySurah, recording))
+        assertEquals("16:128", pick(LocalDate(2026, 9, 30), Language.English)?.reference)
+        assertEquals("16:128", pick(LocalDate(2026, 9, 30), Language.Urdu)?.reference)
+        assertEquals("21:35", pick(LocalDate(2026, 10, 1), Language.English)?.reference)
+        // The list repeats every 39 days
+        assertEquals("16:128", pick(LocalDate(2026, 11, 8), Language.English)?.reference)
+        assertEquals(listOf("16:128", "16:128", "21:35", "16:128"), asked)
+        assertNull(GetAyahOfTheDay(GetAyah(FakeQuranLibrary(textStored = false), recording))(LocalDate(2026, 9, 30), Language.English))
     }
 
     @Test

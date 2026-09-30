@@ -9,6 +9,7 @@ import com.muttaqi.shared.feature.prayer.domain.repository.Compass
 import com.muttaqi.shared.feature.prayer.domain.repository.LocationRepository
 import com.muttaqi.shared.feature.prayer.domain.repository.PrayerTimesRepository
 import com.muttaqi.shared.feature.prayer.domain.repository.QiblaRepository
+import com.muttaqi.shared.feature.prayer.domain.usecase.FollowHeading
 import com.muttaqi.shared.feature.prayer.domain.usecase.GetLocationAccess
 import com.muttaqi.shared.feature.prayer.domain.usecase.GetPrayerSchedule
 import com.muttaqi.shared.feature.prayer.domain.usecase.GetQiblaDirection
@@ -36,6 +37,7 @@ val prayerModule = module {
     factoryOf(::LocateReader)
     factoryOf(::GetLocationAccess)
     factoryOf(::RequestLocationAccess)
+    factoryOf(::FollowHeading)
 
     viewModelOf(::QiblaViewModel)
 }

@@ -2,7 +2,7 @@ import Shared
 import SwiftUI
 
 struct TafsirView: View {
-    let surah: Shared.Surah?
+    let surah: Surah?
     let screen: SharedViewModel<TafsirViewModel, TafsirState>
     /// Opens scrolled to the commentary covering this ayah, e.g. from the ayah's own Explanation button
     var startAyah: Int32? = nil

@@ -77,7 +77,7 @@ struct TopicPageView: View {
         .task {
             for await effect in screen.viewModel.effects {
                 switch onEnum(of: effect) {
-                case .openShare(let share): router.push(SharePassage(share.passage))
+                case .openShare(let share): router.push(share.passage)
                 }
             }
         }

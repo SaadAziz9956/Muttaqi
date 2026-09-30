@@ -24,6 +24,7 @@ import com.muttaqi.shared.feature.quran.domain.usecase.ChangeReadingMode
 import com.muttaqi.shared.feature.quran.domain.usecase.ChangeTranslation
 import com.muttaqi.shared.feature.quran.domain.usecase.FilterSurahs
 import com.muttaqi.shared.feature.quran.domain.usecase.GetAyah
+import com.muttaqi.shared.feature.quran.domain.usecase.GetAyahOfTheDay
 import com.muttaqi.shared.feature.quran.domain.usecase.GetLastReading
 import com.muttaqi.shared.feature.quran.domain.usecase.GetQuranCompletion
 import com.muttaqi.shared.feature.quran.domain.usecase.GetSurah
@@ -79,6 +80,7 @@ val quranModule = module {
     factoryOf(::GetSurah)
     factoryOf(::ReadSurah)
     factoryOf(::GetAyah)
+    factoryOf(::GetAyahOfTheDay)
     factoryOf(::FilterSurahs)
     factoryOf(::IsQuranStored)
     // One instance, so a second sync waits for the first rather than downloading the same editions again

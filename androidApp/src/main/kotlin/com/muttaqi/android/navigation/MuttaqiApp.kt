@@ -3,6 +3,7 @@ package com.muttaqi.android.navigation
 import androidx.annotation.DrawableRes
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.WindowInsets
+import androidx.compose.foundation.layout.consumeWindowInsets
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
@@ -106,7 +107,9 @@ fun MuttaqiApp() {
                 }
             },
         ) { padding ->
-            Box(Modifier.fillMaxSize().padding(bottom = padding.calculateBottomPadding())) {
+            // The tab bar's room counts as the bottom inset it takes up, so a screen giving itself the navigation bar's
+            // inset (Home) gets none above the tab bar, and all of it where the bar is hidden
+            Box(Modifier.fillMaxSize().padding(bottom = padding.calculateBottomPadding()).consumeWindowInsets(padding)) {
                 NavHost(navController, startDestination = HomeTab) {
                     navigation<HomeTab>(startDestination = HomeRoute) {
                         homeDestinations(navController)

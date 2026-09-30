@@ -18,7 +18,7 @@ struct DuaChapterView: View {
         }
     }
 
-    private func content(_ chapter: Shared.DuaChapter) -> some View {
+    private func content(_ chapter: DuaChapter) -> some View {
         ScrollView {
             LazyVStack(spacing: 16) {
                 VStack(spacing: 6) {
@@ -63,7 +63,7 @@ struct DuaChapterView: View {
         .task {
             for await effect in screen.viewModel.effects {
                 switch onEnum(of: effect) {
-                case .openShare(let share): router.push(SharePassage(share.passage))
+                case .openShare(let share): router.push(share.passage)
                 case .copy(let copy): UIPasteboard.general.string = copy.text
                 }
             }

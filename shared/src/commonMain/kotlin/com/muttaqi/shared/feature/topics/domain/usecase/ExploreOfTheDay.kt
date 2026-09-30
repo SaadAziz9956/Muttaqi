@@ -1,5 +1,6 @@
 package com.muttaqi.shared.feature.topics.domain.usecase
 
+import com.muttaqi.shared.core.domain.dayOfEra
 import com.muttaqi.shared.core.model.Language
 import com.muttaqi.shared.feature.topics.domain.model.ExploreTopic
 import com.muttaqi.shared.feature.topics.domain.model.HadithPassage
@@ -11,7 +12,7 @@ class GetTopicOfTheDay(private val repository: ExploreRepository) {
     suspend operator fun invoke(date: LocalDate, language: Language): ExploreTopic? {
         val topics = repository.groups(language).flatMap { it.topics }
         if (topics.isEmpty()) return null
-        return topics[(date.dayNumber * 7).mod(topics.size)]
+        return topics[(date.dayOfEra * 7).mod(topics.size)]
     }
 }
 
@@ -26,7 +27,7 @@ class GetHadithOfTheDay(private val repository: ExploreRepository) {
             .flatMap { it.hadith }
             .filter { it.translation.characterCount() <= MAX_LENGTH }
         if (hadith.isEmpty()) return null
-        return hadith[(date.dayNumber * 13).mod(hadith.size)]
+        return hadith[(date.dayOfEra * 13).mod(hadith.size)]
     }
 
     private companion object {
@@ -34,14 +35,6 @@ class GetHadithOfTheDay(private val repository: ExploreRepository) {
         const val MAX_LENGTH = 420
     }
 }
-
-/**
- * The day's number counted from 1 January of year 1, as the iOS app has always numbered its days (Foundation's
- * `ordinality(of: .day, in: .era)`), so each day's picks stay the same
- */
-private val LocalDate.dayNumber: Long get() = toEpochDays() + DAYS_BEFORE_1970
-
-private const val DAYS_BEFORE_1970 = 719_163L
 
 /**
  * Length in characters as a reader counts them, and as Swift counted it: a mark on a letter, such as a haraka, isn't

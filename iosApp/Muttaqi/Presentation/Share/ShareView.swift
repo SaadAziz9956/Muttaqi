@@ -8,10 +8,10 @@ struct ShareView: View {
     @Environment(\.dismiss) private var dismiss
 
     init(passage: SharePassage) {
-        _screen = State(initialValue: SharedViewModel(ShareViewModels.shared.share(passage: Shared.SharePassage(passage))) { $0.state })
+        _screen = State(initialValue: SharedViewModel(ShareViewModels.shared.share(passage: passage)) { $0.state })
     }
 
-    private var passage: Shared.SharePassage { screen.state.passage }
+    private var passage: SharePassage { screen.state.passage }
 
     var body: some View {
         ScrollView {
@@ -77,27 +77,5 @@ struct ShareView: View {
         .padding(.vertical, 16)
         .frame(maxWidth: .infinity)
         .background(Color.shareCard)
-    }
-}
-
-/// Opens the Share page for a passage; used on every card and page that shows one
-struct ShareButton: View {
-    let passage: SharePassage
-    var size: CGFloat = 18
-    var color: Color = .textSecondary
-    /// Enlarges the tap area around a small icon; none in a toolbar, which has its own
-    var padding: CGFloat = 6
-
-    var body: some View {
-        NavigationLink(value: passage) {
-            Image("export-arrow-01-linear")
-                .resizable()
-                .frame(width: size, height: size)
-                .foregroundStyle(color)
-                .padding(padding)
-                .contentShape(.rect)
-        }
-        .buttonStyle(SoftPressStyle())
-        .accessibilityLabel("Share")
     }
 }

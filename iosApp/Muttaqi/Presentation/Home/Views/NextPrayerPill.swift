@@ -3,20 +3,21 @@ import SwiftUI
 
 struct NextPrayerPill: View {
     let upcoming: UpcomingPrayer?
-    let locationState: HomeViewModel.LocationState
+    /// Without a location there are no times to show, so the pill becomes the way to set one
+    let asksForLocation: Bool
     let onSetLocation: () -> Void
 
     var body: some View {
         if let upcoming {
+            let date = Date(upcoming.time)
             HStack(spacing: 10) {
                 Text(upcoming.prayer.displayName)
-                Text(upcoming.date, format: .dateTime.hour().minute())
+                Text(date, format: .dateTime.hour().minute())
             }
             .pillStyle()
             .accessibilityElement(children: .combine)
-            .accessibilityLabel("Next prayer, \(upcoming.prayer.displayName) at \(upcoming.date.formatted(date: .omitted, time: .shortened))")
-        } else if locationState == .needsPermission || locationState == .denied {
-            // Without a location there are no times to show, so the pill becomes the way to set one
+            .accessibilityLabel("Next prayer, \(upcoming.prayer.displayName) at \(date.formatted(date: .omitted, time: .shortened))")
+        } else if asksForLocation {
             Button("Set location", action: onSetLocation)
                 .pillStyle()
                 .accessibilityHint("Prayer times need your location")

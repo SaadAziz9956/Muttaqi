@@ -19,7 +19,6 @@ import com.muttaqi.shared.feature.journal.domain.usecase.ObserveTodaysJournalEnt
 import com.muttaqi.shared.feature.journal.domain.usecase.SaveJournalEntry
 import com.muttaqi.shared.feature.journal.presentation.entry.JournalEntryViewModel
 import com.muttaqi.shared.feature.journal.presentation.list.JournalListViewModel
-import com.muttaqi.shared.feature.journal.presentation.today.JournalTodayViewModel
 import com.russhwolf.settings.ObservableSettings
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.SupervisorJob
@@ -56,7 +55,6 @@ val journalModule = module {
 
     viewModelOf(::JournalListViewModel)
     viewModel { (entryId: String?) -> JournalEntryViewModel(entryId, get(), get(), get(), get(), Clock.System) }
-    viewModelOf(::JournalTodayViewModel)
 }
 
 /** The database file's builder, in each platform's place for app data */

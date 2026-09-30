@@ -1,5 +1,6 @@
 package com.muttaqi.shared.feature.dua.domain.usecase
 
+import com.muttaqi.shared.core.domain.dayOfEra
 import com.muttaqi.shared.core.model.Language
 import com.muttaqi.shared.feature.dua.domain.model.DuaCategory
 import com.muttaqi.shared.feature.dua.domain.model.DuaChapter
@@ -35,11 +36,12 @@ class GetDuaEntriesById(private val repository: DuaCategoryRepository) {
         repository.categories(language).flatMap { it.chapters }.flatMap { it.entries }.associateBy { it.id }
 }
 
-/** The same Quranic dua all day, moving to the next at midnight */
+/** The same Quranic dua all day, moving to the next at midnight, e.g. for Home's Dua of the Day */
 class GetDuaOfTheDay(private val repository: QuranicDuaRepository) {
     suspend operator fun invoke(date: LocalDate, language: Language): QuranicDua? {
         val duas = repository.quranicDuas(language)
         if (duas.isEmpty()) return null
-        return duas[date.toEpochDays().toInt().mod(duas.size)]
+        // Counted by the day of the era, as the iOS app picked it, so the day's dua doesn't change with the move
+        return duas[date.dayOfEra.mod(duas.size.toLong()).toInt()]
     }
 }

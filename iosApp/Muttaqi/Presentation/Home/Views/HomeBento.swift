@@ -4,11 +4,12 @@ import SwiftUI
 /// The Home features as floating tiles that each show something live: the Qibla, today's dhikr, a Name of Allah,
 /// the journal, a way into Emotions and an Explore topic
 struct HomeBento: View {
-    let viewModel: HomeViewModel
-    @Environment(AppRouter.self) private var router
+    let screen: SharedViewModel<HomeViewModel, HomeState>
 
     private let spacing: CGFloat = 14
     private let tileHeight: CGFloat = 132
+
+    private var state: HomeState { screen.state }
 
     var body: some View {
         VStack(spacing: spacing) {
@@ -35,15 +36,15 @@ struct HomeBento: View {
 
     private var qibla: some View {
         tile(artwork: .forest, label: "Qibla", icon: "home-qibla", tint: .white) {
-            router.pushHome(.qibla)
+            dispatch(HomeIntentQiblaTapped.shared)
         } content: {
             VStack(alignment: .leading, spacing: 0) {
                 Spacer(minLength: 0)
-                QiblaPointer(viewModel: viewModel)
+                QiblaPointer(viewModel: screen.viewModel, bearing: state.qibla?.bearing)
                 .frame(width: 112, height: 112)
                 .frame(maxWidth: .infinity)
                 Spacer(minLength: 0)
-                if let qibla = viewModel.qibla {
+                if let qibla = state.qibla {
                     Text("\(Int(qibla.bearing.rounded()))°")
                         .font(.custom("ReemKufi-Medium", size: 30, relativeTo: .title))
                     Text("Makkah · \(qibla.distanceInKilometers.formatted(.number.precision(.fractionLength(0)))) km")
@@ -55,18 +56,17 @@ struct HomeBento: View {
                 }
             }
         }
-        .accessibilityLabel(viewModel.qibla.map { "Qibla, \(Int($0.bearing.rounded())) degrees" } ?? "Qibla")
-        .task { await viewModel.trackQibla() }
+        .accessibilityLabel(state.qibla.map { "Qibla, \(Int($0.bearing.rounded())) degrees" } ?? "Qibla")
     }
 
     private var dhikr: some View {
         tile(label: "Dikr", icon: "repeat-circle-linear") {
-            router.pushHome(.dhikrList)
+            dispatch(HomeIntentDhikrTapped.shared)
         } content: {
             VStack(alignment: .leading, spacing: 2) {
                 Spacer(minLength: 0)
-                if viewModel.dhikrToday > 0 {
-                    Text(viewModel.dhikrToday, format: .number)
+                if state.dhikrToday > 0 {
+                    Text(Int(state.dhikrToday), format: .number)
                         .font(.custom("ReemKufi-Medium", size: 30, relativeTo: .title))
                         .foregroundStyle(.appPrimary)
                         .contentTransition(.numericText())
@@ -84,9 +84,9 @@ struct HomeBento: View {
 
     private var name: some View {
         tile(artwork: .dawn, label: "Name of the day", icon: nil) {
-            router.pushHome(.names)
+            dispatch(HomeIntentNameTapped.shared)
         } content: {
-            if let name = viewModel.nameOfTheDay {
+            if let name = state.nameOfTheDay {
                 VStack(alignment: .leading, spacing: 0) {
                     Spacer(minLength: 0)
                     Text(AttributedString.arabic(name.arabic, size: 26))
@@ -102,10 +102,11 @@ struct HomeBento: View {
         }
     }
 
+    // The tile opens the journal's entries; its round button starts today's entry, or opens it once written
     private var journal: some View {
-        let entry = viewModel.journalToday
+        let entry = state.journalToday
         return Button {
-            router.pushHome(.journalEntry(id: entry?.id))
+            dispatch(HomeIntentJournalTapped.shared)
         } label: {
             HStack(spacing: 14) {
                 VStack(alignment: .leading, spacing: 8) {
@@ -117,23 +118,30 @@ struct HomeBento: View {
                         .multilineTextAlignment(.leading)
                 }
                 Spacer(minLength: 0)
-                SoftCircle(size: 44, filled: true) {
-                    Image(entry == nil ? "add-linear" : "arrow-right-01-linear")
-                        .resizable()
-                        .frame(width: 20, height: 20)
+                Button {
+                    dispatch(HomeIntentTodaysEntryTapped.shared)
+                } label: {
+                    SoftCircle(size: 44, filled: true) {
+                        Image(entry == nil ? "add-linear" : "arrow-right-01-linear")
+                            .resizable()
+                            .frame(width: 20, height: 20)
+                    }
                 }
+                .buttonStyle(SoftPressStyle())
+                .accessibilityLabel(entry == nil ? "New entry" : "Today's entry")
+                .accessibilityHint(entry == nil ? "Starts today's entry" : "Opens today's entry")
             }
             .padding(18)
             .frame(maxWidth: .infinity, alignment: .leading)
             .softCard(glass: true)
         }
         .buttonStyle(SoftPressStyle())
-        .accessibilityHint(entry == nil ? "Starts today's entry" : "Opens today's entry")
+        .accessibilityHint("Opens your journal")
     }
 
     private var emotions: some View {
         tile(artwork: .lagoon, label: "Emotions", icon: "happyemoji-linear") {
-            router.pushHome(.emotions)
+            dispatch(HomeIntentEmotionsTapped.shared)
         } content: {
             VStack(alignment: .leading) {
                 Spacer(minLength: 0)
@@ -146,9 +154,9 @@ struct HomeBento: View {
 
     private var explore: some View {
         tile(label: "Topic of the day", icon: nil) {
-            if let topic = viewModel.topicOfTheDay { router.openInExplore(topicID: topic.id) }
+            dispatch(HomeIntentTopicTapped.shared)
         } content: {
-            if let topic = viewModel.topicOfTheDay {
+            if let topic = state.topicOfTheDay {
                 VStack(alignment: .leading, spacing: 0) {
                     Spacer(minLength: 0)
                     Image(topic.icon)
@@ -169,6 +177,10 @@ struct HomeBento: View {
     }
 
     // MARK: - Building blocks
+
+    private func dispatch(_ intent: HomeIntent) {
+        screen.viewModel.dispatch(intent: intent)
+    }
 
     /// A tile with a label and a small arrow button along the top, on a plain floating card or on blurred artwork
     private func tile<Content: View>(
@@ -232,7 +244,7 @@ struct PrayerTimesStrip: View {
                     Text(prayer.displayName)
                         .font(.custom("ReemKufi-Regular", size: 12, relativeTo: .caption))
                         .foregroundStyle(isNext ? Color.white.opacity(0.85) : Color.textSecondary)
-                    Text(times.date(prayer: prayer), format: .dateTime.hour(.defaultDigits(amPM: .omitted)).minute())
+                    Text(Date(times.time(prayer: prayer)), format: .dateTime.hour(.defaultDigits(amPM: .omitted)).minute())
                         .font(.custom("ReemKufi-Medium", size: 15, relativeTo: .subheadline))
                         .foregroundStyle(isNext ? Color.white : Color.appPrimary)
                         .monospacedDigit()
@@ -293,10 +305,14 @@ struct SurahShortcut: View {
     }
 }
 
-/// A pointer in a dial: towards the Kaaba as the phone turns, or its bearing from north without a compass. It reads
-/// the compass in its own body, so each reading redraws only the pointer, not every tile
+/// A pointer in a dial: towards the Kaaba as the phone turns, or its bearing from north without a compass. It follows
+/// the compass in its own state, so each reading redraws only the pointer, not every tile
 private struct QiblaPointer: View {
     let viewModel: HomeViewModel
+    /// The Qibla from north, for before the compass reports or without one
+    let bearing: Double?
+    /// The turn from the phone's heading to the Kaaba, from the shared view model's own flow
+    @State private var arrow: Double?
 
     var body: some View {
         ZStack {
@@ -309,9 +325,15 @@ private struct QiblaPointer: View {
             Image("send-2-bold")
                 .resizable()
                 .frame(width: 42, height: 42)
-                .rotationEffect(.degrees((viewModel.qiblaArrowRotation ?? viewModel.qibla?.bearing ?? 0) - 45))
-                .animation(.smooth(duration: 0.25), value: viewModel.qiblaArrowRotation)
+                .rotationEffect(.degrees((arrow ?? bearing ?? 0) - 45))
+                .animation(.smooth(duration: 0.25), value: arrow)
                 .shadow(color: .black.opacity(0.2), radius: 6, y: 3)
+        }
+        // The compass runs only while this follows it, so it stops when Home goes away
+        .task {
+            for await next in viewModel.qiblaArrow {
+                arrow = next?.doubleValue
+            }
         }
     }
 }

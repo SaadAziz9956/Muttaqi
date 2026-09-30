@@ -73,7 +73,7 @@ struct DhikrCounterView: View {
             for await effect in screen.viewModel.effects {
                 switch onEnum(of: effect) {
                 case .counted(let counted): tap = CounterTap(sequence: tap.sequence + 1, milestone: counted.milestone)
-                case .openShare(let share): router.push(SharePassage(share.passage))
+                case .openShare(let share): router.push(share.passage)
                 }
             }
         }
