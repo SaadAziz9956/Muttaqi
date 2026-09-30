@@ -18,20 +18,20 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.navigationBars
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.statusBars
 import androidx.compose.foundation.layout.statusBarsPadding
-import androidx.compose.foundation.verticalScroll
 import androidx.compose.foundation.layout.widthIn
 import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.platform.ClipEntry
 import androidx.compose.ui.platform.LocalClipboard
 import androidx.compose.ui.platform.LocalContext
@@ -42,6 +42,7 @@ import androidx.lifecycle.compose.LifecycleResumeEffect
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.muttaqi.android.designsystem.MuttaqiTheme
 import com.muttaqi.android.designsystem.component.SoftBackdrop
+import com.muttaqi.android.designsystem.component.StatusBarFade
 import com.muttaqi.android.designsystem.component.TranslationText
 import com.muttaqi.android.feature.prayer.NextPrayerPill
 import com.muttaqi.android.feature.prayer.PrayerTimesStrip
@@ -51,9 +52,9 @@ import com.muttaqi.shared.feature.home.presentation.HomeEffect
 import com.muttaqi.shared.feature.home.presentation.HomeIntent
 import com.muttaqi.shared.feature.home.presentation.HomeState
 import com.muttaqi.shared.feature.home.presentation.HomeViewModel
+import java.time.ZoneId
 import kotlinx.coroutines.launch
 import org.koin.compose.viewmodel.koinViewModel
-import java.time.ZoneId
 
 /**
  * Home, wired to its shared view model. It refreshes each time it comes back into view, e.g. from the Dikr counter or
@@ -118,6 +119,7 @@ fun HomeScreen(
 ) {
     val soft = MuttaqiTheme.soft
     val bottomInset = WindowInsets.navigationBars.asPaddingValues().calculateBottomPadding()
+    val scrolled by remember(scrollState) { derivedStateOf { scrollState.value > 0 } }
     Box(Modifier.fillMaxSize()) {
         SoftBackdrop()
         Column(
@@ -165,14 +167,8 @@ fun HomeScreen(
                 state.duaOfTheDay?.let { DuaOfTheDayCard(it, onIntent) }
             }
         }
-        // A soft fade under the status bar, so scrolled content doesn't collide with the clock
-        val fadeHeight = WindowInsets.statusBars.asPaddingValues().calculateTopPadding() + 8.dp
-        Box(
-            Modifier
-                .fillMaxWidth()
-                .height(fadeHeight)
-                .background(Brush.verticalGradient(listOf(soft.canvas, soft.canvas.copy(alpha = 0f)))),
-        )
+        // The page fades out under the status bar once scrolled, so text never runs behind the clock
+        StatusBarFade(visible = scrolled)
     }
 }
 
