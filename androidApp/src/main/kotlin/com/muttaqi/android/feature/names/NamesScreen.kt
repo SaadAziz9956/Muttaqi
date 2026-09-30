@@ -173,7 +173,7 @@ fun NamesScreen(
                                 horizontalAlignment = Alignment.CenterHorizontally,
                                 verticalArrangement = Arrangement.spacedBy(6.dp),
                             ) {
-                                TranslationText(hadith.text, color = soft.textSecondary, textAlign = TextAlign.Center)
+                                TranslationText(hadith.text, color = soft.textSecondary, textAlign = TextAlign.Center, lineSpacing = 0.sp)
                                 Text(hadith.source, style = MaterialTheme.typography.labelSmall, color = soft.brandTeal)
                             }
                         }

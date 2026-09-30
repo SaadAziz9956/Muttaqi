@@ -30,6 +30,10 @@ its structure, naming and patterns for every feature.
   icons, using `designsystem/component/` (SoftCard, SoftBackdrop, SoftChip, SoftIconButton, SoftSearchField,
   SoftTopBar, ArabicText, TranslationText, PageHeader). Add a component there only if it's generic; otherwise keep it in
   your feature. Arabic and Urdu align with `TextAlign.Right` (in right-to-left text `End` is the left edge).
+  `ArabicText` and `TranslationText` take `lineSpacing` (SwiftUI's `.lineSpacing`: pass what the iOS view sets, `0.sp`
+  where it sets none) and `maxLines` (cut off with an ellipsis, as iOS's `.lineLimit`). A segmented control is
+  Material's connected button group (`ToggleButton` with `ButtonGroupDefaults.connected…ButtonShapes()`), as on the
+  topic page.
 - **Stored data carries over.** Use the same keys and formats as the Swift code (`NSUserDefaults.standardUserDefaults`
   on iOS through multiplatform-settings), so nothing a user saved is lost. If stored data can't be read in place
   (SwiftData), migrate it once on first launch, and say how in the PR.

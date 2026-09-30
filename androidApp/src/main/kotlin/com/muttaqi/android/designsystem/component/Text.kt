@@ -18,6 +18,7 @@ import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.style.LineHeightStyle
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextDirection
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.isSpecified
@@ -35,7 +36,8 @@ import com.muttaqi.shared.core.text.quoted
 
 /**
  * Arabic in the Quran font (KFGQPC Hafs), right to left. Marks the font can't draw (Arabic punctuation and the ornate
- * brackets) are set in the system font, as on iOS. `lineSpacing` is the space between lines, as iOS's `lineSpacing`
+ * brackets) are set in the system font, as on iOS. `lineSpacing` is the space between lines, as iOS's `lineSpacing`;
+ * text cut off at `maxLines` ends in an ellipsis
  */
 @Composable
 fun ArabicText(
@@ -45,6 +47,7 @@ fun ArabicText(
     color: Color = MuttaqiTheme.soft.textPrimary,
     textAlign: TextAlign = TextAlign.Center,
     lineSpacing: TextUnit = 10.sp,
+    maxLines: Int = Int.MAX_VALUE,
 ) {
     val annotated = remember(text) {
         buildAnnotatedString {
@@ -62,6 +65,8 @@ fun ArabicText(
         modifier = modifier,
         color = color,
         textAlign = textAlign,
+        maxLines = maxLines,
+        overflow = TextOverflow.Ellipsis,
         style = TextStyle(
             fontFamily = QuranFont,
             fontSize = fontSize,
@@ -75,7 +80,7 @@ fun ArabicText(
 /**
  * A translation in the font and direction of its script: Urdu in Nastaliq, right to left; English in Reem Kufi.
  * `lineSpacing` is the space between lines, as iOS's `lineSpacing`; unset, it's the app's usual 8 for Urdu and 4 for
- * English
+ * English. Text cut off at `maxLines` ends in an ellipsis
  */
 @Composable
 fun TranslationText(
@@ -94,6 +99,7 @@ fun TranslationText(
         color = color,
         textAlign = textAlign,
         maxLines = maxLines,
+        overflow = TextOverflow.Ellipsis,
         style = if (urdu) {
             // One point larger, as on iOS, since Nastaliq reads small for its size
             val size = (fontSize.value + 1).sp

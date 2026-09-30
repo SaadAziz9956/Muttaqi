@@ -29,6 +29,7 @@ import com.muttaqi.android.designsystem.component.ArabicText
 import com.muttaqi.android.designsystem.component.SoftArtwork
 import com.muttaqi.android.designsystem.component.SoftCard
 import com.muttaqi.android.designsystem.component.TranslationText
+import com.muttaqi.shared.core.text.isArabicScript
 import com.muttaqi.shared.core.text.sentenceCased
 import com.muttaqi.shared.feature.names.domain.model.AllahName
 
@@ -57,14 +58,18 @@ fun NameCard(name: AllahName, modifier: Modifier = Modifier, minHeight: Dp = 300
                 style = TextStyle(fontFamily = ReemKufi, fontSize = 90.sp),
             )
             Column(Modifier.padding(horizontal = 20.dp, vertical = 48.dp), horizontalAlignment = Alignment.CenterHorizontally) {
-                ArabicText(name.arabic, fontSize = 40.sp)
+                ArabicText(name.arabic, fontSize = 40.sp, lineSpacing = 0.sp)
                 Text(
                     name.transliteration,
                     Modifier.padding(top = 12.dp),
                     style = MaterialTheme.typography.titleMedium.copy(fontWeight = FontWeight.Medium),
                     color = soft.appPrimary,
                 )
-                TranslationText(name.meaning.sentenceCased(), Modifier.padding(top = 10.dp))
+                TranslationText(
+                    name.meaning.sentenceCased(),
+                    Modifier.padding(top = 10.dp),
+                    lineSpacing = if (name.meaning.isArabicScript()) 6.sp else 2.sp,
+                )
             }
             Box(
                 Modifier

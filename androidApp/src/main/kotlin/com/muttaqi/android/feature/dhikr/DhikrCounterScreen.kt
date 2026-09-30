@@ -211,7 +211,7 @@ private fun DhikrText(dhikr: Dhikr, state: DhikrCounterState) {
                         Row(verticalAlignment = Alignment.CenterVertically) {
                             Text("${step.count}×", style = MaterialTheme.typography.labelLarge.copy(fontSize = 13.sp), color = soft.brandTeal)
                             Spacer(Modifier.width(12.dp))
-                            ArabicText(step.arabic, Modifier.weight(1f), fontSize = 22.sp, textAlign = TextAlign.Right)
+                            ArabicText(step.arabic, Modifier.weight(1f), fontSize = 22.sp, textAlign = TextAlign.Right, lineSpacing = 0.sp)
                         }
                         Text(step.transliteration, style = MaterialTheme.typography.bodyMedium.copy(fontSize = 14.sp), color = soft.appPrimary)
                         step.translation?.let { Translated(it.sentenceCased(), 13, soft.textSecondary) }
@@ -248,7 +248,7 @@ private fun Phrase(dhikr: Dhikr, modifier: Modifier = Modifier) {
     SoftCard(modifier, cornerRadius = 26.dp) {
         SelectionContainer {
             Column(Modifier.fillMaxWidth().padding(20.dp)) {
-                ArabicText(dhikr.arabic, Modifier.fillMaxWidth(), fontSize = 28.sp, textAlign = TextAlign.Right)
+                ArabicText(dhikr.arabic, Modifier.fillMaxWidth(), fontSize = 28.sp, textAlign = TextAlign.Right, lineSpacing = 12.sp)
                 Text(dhikr.transliteration, Modifier.padding(top = 20.dp), style = MaterialTheme.typography.bodyMedium, color = soft.appPrimary)
                 dhikr.translation?.let { Box(Modifier.padding(top = 10.dp)) { Translated(it.sentenceCased(), 15, soft.textPrimary) } }
             }
