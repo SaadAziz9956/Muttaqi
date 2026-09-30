@@ -1,31 +1,29 @@
+import Shared
 import SwiftUI
 
 struct JournalListView: View {
-    @State private var viewModel: JournalListViewModel
+    @State private var screen = SharedViewModel(JournalViewModels.shared.list()) { $0.state }
     @State private var titleBottom: CGFloat = .infinity
     @Environment(AppRouter.self) private var router
     @Environment(\.dismiss) private var dismiss
 
     private static let rowInsets = EdgeInsets(top: 0, leading: 24, bottom: 0, trailing: 24)
 
-    init(viewModel: JournalListViewModel) {
-        self._viewModel = State(initialValue: viewModel)
-    }
+    private var state: JournalListState { screen.state }
 
     var body: some View {
-        // Filtered once per update rather than once per row
-        let entries = viewModel.entries
+        let entries = state.shownEntries
 
         List {
-            if !viewModel.isSearching {
+            if !state.isSearching {
                 header
                     .listRowInsets(Self.rowInsets)
                     .listRowSeparator(.hidden)
             }
 
-            ForEach(entries) { entry in
+            ForEach(entries, id: \.id) { entry in
                 Button {
-                    router.pushHome(.journalEntry(entry))
+                    dispatch(JournalListIntentEntryTapped(entryId: entry.id))
                 } label: {
                     JournalEntryRow(entry: entry)
                 }
@@ -48,7 +46,8 @@ struct JournalListView: View {
         }
         .listStyle(.plain)
         .scrollDismissesKeyboard(.immediately)
-        .searchable(text: $viewModel.query, prompt: "Search")
+        // Read from the view model as it is this instant, so fast typing can't be redrawn with an older query
+        .searchable(text: Binding(get: { screen.viewModel.state.value.query }, set: { dispatch(JournalListIntentQueryChanged(query: $0)) }), prompt: "Search")
         .navigationBarTitleDisplayMode(.inline)
         .collapsingBarTitle("Journal", titleBottom: titleBottom)
         .navigationBarBackButtonHidden(true)
@@ -70,7 +69,7 @@ struct JournalListView: View {
             ToolbarSpacer(.fixed, placement: .bottomBar)
             ToolbarItem(placement: .bottomBar) {
                 Button {
-                    router.pushHome(.journalEntry(viewModel.newEntry()))
+                    dispatch(JournalListIntentNewEntryTapped.shared)
                 } label: {
                     Image("add-linear")
                         .resizable()
@@ -80,7 +79,17 @@ struct JournalListView: View {
                 .accessibilityLabel("New entry")
             }
         }
-        .task { await viewModel.load() }
+        .task {
+            for await effect in screen.viewModel.effects {
+                switch onEnum(of: effect) {
+                case .openEntry(let open): router.pushHome(.journalEntry(id: open.entryId))
+                }
+            }
+        }
+    }
+
+    private func dispatch(_ intent: JournalListIntent) {
+        screen.viewModel.dispatch(intent: intent)
     }
 
     private var header: some View {
@@ -91,22 +100,20 @@ struct JournalListView: View {
                 .onGeometryChange(for: CGFloat.self) { $0.frame(in: .global).maxY } action: { titleBottom = $0 }
                 .padding(.top, 24)
 
-            if let quote = viewModel.quote, let translation = quote.ayah.translation {
-                // 68:1's sentence runs on into 68:2, so its translation ends in a comma
-                let excerpt = translation.trimmingCharacters(in: CharacterSet(charactersIn: ",;").union(.whitespaces))
-                Text(excerpt.quoted)
-                    .font(TranslationStyle(for: translation, size: 14).font)
+            if let quote = state.header {
+                Text(quote.text.quoted)
+                    .font(TranslationStyle(for: quote.text, size: 14).font)
                     .foregroundStyle(.textPrimary)
                     .multilineTextAlignment(.center)
                     .padding(.top, 16)
 
-                Text("Quran (\(quote.reference))")
+                Text(quote.source)
                     .font(.labelSmall)
                     .foregroundStyle(.textSecondary)
                     .padding(.top, 4)
             }
 
-            if viewModel.hasEntries {
+            if state.hasEntries {
                 Text("Notes")
                     .font(.custom("ReemKufi-Regular", size: 12))
                     .foregroundStyle(.textPrimary)
@@ -120,9 +127,9 @@ struct JournalListView: View {
 
     @ViewBuilder
     private var emptyState: some View {
-        if viewModel.isSearching, viewModel.entries.isEmpty {
-            ContentUnavailableView.search(text: viewModel.query)
-        } else if viewModel.hasLoaded, !viewModel.hasEntries {
+        if state.isSearching, state.shownEntries.isEmpty {
+            ContentUnavailableView.search(text: state.query)
+        } else if !state.isLoading, !state.hasEntries {
             ContentUnavailableView {
                 Label {
                     Text("No entries yet")
@@ -142,7 +149,7 @@ struct JournalListView: View {
 
     private func deleteButton(for entry: JournalEntry) -> some View {
         Button(role: .destructive) {
-            viewModel.delete(entry)
+            dispatch(JournalListIntentDeleteTapped(entryId: entry.id))
         } label: {
             Label("Delete", image: "trash-linear")
         }

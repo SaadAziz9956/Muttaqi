@@ -12,8 +12,8 @@ final class AppRouter {
     enum HomeDestination: Hashable {
         case qibla
         case journal
-        /// A journal entry to read or edit; a blank one for a new entry
-        case journalEntry(JournalEntry)
+        /// A journal entry to read or edit, by id; nil for a new entry
+        case journalEntry(id: String?)
         case dhikrList
         case names
         case emotions

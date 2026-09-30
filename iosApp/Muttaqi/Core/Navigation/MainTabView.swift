@@ -54,9 +54,9 @@ struct MainTabView: View {
                     case .qibla:
                         QiblaView(viewModel: container.makeQiblaViewModel())
                     case .journal:
-                        JournalListView(viewModel: container.makeJournalListViewModel())
-                    case .journalEntry(let entry):
-                        JournalEntryView(viewModel: container.makeJournalEntryViewModel(entry: entry))
+                        JournalListView()
+                    case .journalEntry(let id):
+                        JournalEntryView(entryId: id)
                     case .dhikrList:
                         DhikrListView()
                     case .names:

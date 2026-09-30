@@ -1,0 +1,63 @@
+package com.muttaqi.shared.feature.journal.presentation.list
+
+import androidx.lifecycle.viewModelScope
+import com.muttaqi.shared.core.mvi.MviViewModel
+import com.muttaqi.shared.core.preferences.SelectedLanguage
+import com.muttaqi.shared.core.quote.DisplayedQuote
+import com.muttaqi.shared.core.quote.PageQuotes
+import com.muttaqi.shared.core.quote.displayed
+import com.muttaqi.shared.feature.journal.domain.usecase.BuildJournalSearchIndex
+import com.muttaqi.shared.feature.journal.domain.usecase.DeleteJournalEntry
+import com.muttaqi.shared.feature.journal.domain.usecase.JournalSearchIndex
+import com.muttaqi.shared.feature.journal.domain.usecase.ObserveJournalEntries
+import kotlinx.coroutines.flow.catch
+import kotlinx.coroutines.launch
+
+class JournalListViewModel(
+    observeEntries: ObserveJournalEntries,
+    private val buildSearchIndex: BuildJournalSearchIndex,
+    private val deleteEntry: DeleteJournalEntry,
+    selectedLanguage: SelectedLanguage,
+) : MviViewModel<JournalListState, JournalListIntent, JournalListMutation, JournalListEffect>(JournalListState(), JournalListReducer) {
+
+    private var searchIndex: JournalSearchIndex? = null
+
+    /** Entries deleted here that the database hasn't confirmed gone yet, kept out of the list meanwhile */
+    private val removing = mutableSetOf<String>()
+
+    init {
+        viewModelScope.launch {
+            selectedLanguage.changes.collect { language ->
+                mutate(JournalListMutation.HeaderLoaded(PageQuotes.byThePen.displayed(language).withoutRunOn()))
+            }
+        }
+        // Follows the database, so an entry saved or deleted anywhere shows here straight away, keeping any search
+        viewModelScope.launch {
+            observeEntries()
+                .catch { emit(emptyList()) }
+                .collect { stored ->
+                    removing.retainAll { id -> stored.any { it.id == id } }
+                    val entries = stored.filterNot { it.id in removing }
+                    val index = buildSearchIndex(entries).also { searchIndex = it }
+                    mutate(JournalListMutation.EntriesLoaded(entries, index.search(state.value.query)))
+                }
+        }
+    }
+
+    override fun handle(intent: JournalListIntent) {
+        when (intent) {
+            is JournalListIntent.QueryChanged ->
+                mutate(JournalListMutation.SearchUpdated(intent.query, searchIndex?.search(intent.query).orEmpty()))
+            is JournalListIntent.EntryTapped -> emit(JournalListEffect.OpenEntry(intent.entryId))
+            JournalListIntent.NewEntryTapped -> emit(JournalListEffect.OpenEntry(null))
+            is JournalListIntent.DeleteTapped -> {
+                removing += intent.entryId
+                mutate(JournalListMutation.EntryRemoved(intent.entryId))
+                viewModelScope.launch { deleteEntry(intent.entryId) }
+            }
+        }
+    }
+}
+
+/** 68:1's sentence runs on into 68:2, so its translation ends in a comma, which the page leaves off */
+internal fun DisplayedQuote.withoutRunOn() = copy(text = text.trim { it == ',' || it == ';' || it.isWhitespace() })

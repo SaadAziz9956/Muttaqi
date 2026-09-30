@@ -1,3 +1,4 @@
+import Shared
 import SwiftUI
 
 struct JournalEntryRow: View {
@@ -7,7 +8,7 @@ struct JournalEntryRow: View {
     var body: some View {
         HStack(spacing: 0) {
             VStack(spacing: 2) {
-                Text(entry.createdAt, format: .dateTime.day().month(.abbreviated))
+                Text(entry.createdDate, format: .dateTime.day().month(.abbreviated))
                     .font(.custom("ReemKufi-Regular", size: 22, relativeTo: .title2))
                     .foregroundStyle(.brandTeal)
                 Text(weekday)
@@ -42,8 +43,9 @@ struct JournalEntryRow: View {
 
     /// The weekday, plus the year for entries from another year, since the date above shows only day and month
     private var weekday: String {
-        let weekday = entry.createdAt.formatted(.dateTime.weekday(.wide))
-        guard !Calendar.current.isDate(entry.createdAt, equalTo: .now, toGranularity: .year) else { return weekday }
-        return "\(weekday) · \(entry.createdAt.formatted(.dateTime.year()))"
+        let createdAt = entry.createdDate
+        let weekday = createdAt.formatted(.dateTime.weekday(.wide))
+        guard !Calendar.current.isDate(createdAt, equalTo: .now, toGranularity: .year) else { return weekday }
+        return "\(weekday) · \(createdAt.formatted(.dateTime.year()))"
     }
 }
