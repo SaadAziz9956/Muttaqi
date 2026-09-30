@@ -53,7 +53,8 @@ class NamesViewModel(
             is NamesIntent.QueryChanged -> mutate(
                 NamesMutation.SearchUpdated(intent.query, searchIndex?.search(intent.query, state.value.searchMode).orEmpty()),
             )
-            is NamesIntent.SearchModeChanged -> mutate(NamesMutation.SearchModeChanged(intent.mode))
+            // Picking the mode already shown keeps the query, as a segmented control does
+            is NamesIntent.SearchModeChanged -> if (intent.mode != state.value.searchMode) mutate(NamesMutation.SearchModeChanged(intent.mode))
             NamesIntent.ClearQuery -> mutate(NamesMutation.SearchUpdated("", emptyList()))
             is NamesIntent.ResultTapped -> {
                 mutablePosition.value = intent.number

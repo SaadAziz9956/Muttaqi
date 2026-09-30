@@ -90,6 +90,14 @@ class NamesViewModelTest {
     }
 
     @Test
+    fun pickingTheModeAlreadyShownKeepsTheQuery() = runTest {
+        val viewModel = viewModel()
+        viewModel.dispatch(NamesIntent.QueryChanged("2"))
+        viewModel.dispatch(NamesIntent.SearchModeChanged(NameSearchMode.ByNumber))
+        assertEquals("2", viewModel.state.value.query)
+    }
+
+    @Test
     fun pickingAResultTurnsThePageToIt() = runTest {
         val viewModel = viewModel()
         viewModel.effects.test {
