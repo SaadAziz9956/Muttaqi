@@ -9,6 +9,11 @@ plugins {
 }
 
 kotlin {
+    compilerOptions {
+        // Room generates an expect object with an actual per platform for each database's constructor
+        freeCompilerArgs.add("-Xexpect-actual-classes")
+    }
+
     android {
         namespace = "com.muttaqi.shared"
         compileSdk = libs.versions.android.compileSdk.get().toInt()
