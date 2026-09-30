@@ -1,4 +1,5 @@
 import Foundation
+import Shared
 
 @Observable
 @MainActor
@@ -11,16 +12,16 @@ final class AppViewModel {
     
     private(set) var state: AppState = .splash
     
-    private let userPreferences: UserPreferencesProtocol
-    
-    init(userPreferences: UserPreferencesProtocol) {
-        self.userPreferences = userPreferences
+    private let isOnboardingComplete: () -> Bool
+
+    init(isOnboardingComplete: @escaping () -> Bool = { OnboardingStatus.shared.isComplete() }) {
+        self.isOnboardingComplete = isOnboardingComplete
     }
     
     func initialize() async {
         try? await Task.sleep(for: .seconds(2))
         
-        if userPreferences.isOnboardingComplete() {
+        if isOnboardingComplete() {
             state = .home
         } else {
             state = .onboarding

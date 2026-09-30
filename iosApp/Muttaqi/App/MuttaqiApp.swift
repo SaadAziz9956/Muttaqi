@@ -8,39 +8,36 @@ struct MuttaqiApp: App {
     private let container: DependencyContainer
 
     init() {
-        // The shared (Kotlin) code's dependency injection, before any shared view model is made
-        IosKoinKt.doInitKoinIos()
         let container = DependencyContainer()
+        // The shared (Kotlin) code's dependency injection, before any shared view model is made, with the services
+        // that stay in Swift: Core Location, the compass, notifications and the Quran download
+        IosKoinKt.doInitKoinIos(
+            location: LocationService(),
+            compass: CompassService(),
+            notifications: NotificationService(),
+            firstLaunchSetup: container.makeFirstLaunchSetup()
+        )
         self.container = container
-        self._appViewModel = State(initialValue: AppViewModel(userPreferences: container.userPreferences))
+        self._appViewModel = State(initialValue: AppViewModel())
     }
 
     var body: some Scene {
         WindowGroup {
             switch appViewModel.state {
             case .splash:
-                SplashView(isOnboardingComplete: container.userPreferences.isOnboardingComplete())
+                SplashView(isOnboardingComplete: OnboardingStatus.shared.isComplete())
                     .task {
                         // The Quran moved to shared code: bring over what SwiftData kept before Home reads it
                         await container.prepareQuran()
                         await appViewModel.initialize()
                     }
             case .onboarding:
-                makeOnboardingView()
+                OnboardingView { appViewModel.onboardingCompleted() }
             case .home:
                 MainTabView()
                     .environment(\.container, container)
             }
         }
         .modelContainer(container.modelContainer)
-    }
-
-
-    private func makeOnboardingView() -> OnboardingView {
-        let viewModel = container.makeOnboardingViewModel()
-        viewModel.onOnboardingComplete = {
-            appViewModel.onboardingCompleted()
-        }
-        return OnboardingView(viewModel: viewModel)
     }
 }

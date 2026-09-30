@@ -229,10 +229,10 @@ struct PrayerTimesStrip: View {
             ForEach(Prayer.allCases, id: \.self) { prayer in
                 let isNext = prayer == next
                 VStack(spacing: 3) {
-                    Text(prayer.name)
+                    Text(prayer.displayName)
                         .font(.custom("ReemKufi-Regular", size: 12, relativeTo: .caption))
                         .foregroundStyle(isNext ? Color.white.opacity(0.85) : Color.textSecondary)
-                    Text(times.time(of: prayer), format: .dateTime.hour(.defaultDigits(amPM: .omitted)).minute())
+                    Text(times.date(prayer: prayer), format: .dateTime.hour(.defaultDigits(amPM: .omitted)).minute())
                         .font(.custom("ReemKufi-Medium", size: 15, relativeTo: .subheadline))
                         .foregroundStyle(isNext ? Color.white : Color.appPrimary)
                         .monospacedDigit()

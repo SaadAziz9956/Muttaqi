@@ -1,16 +1,13 @@
+import Shared
 import UserNotifications
 
-protocol NotificationServiceProtocol: Sendable {
-    func requestPermission() async -> Bool
-}
-
-final class NotificationService: NotificationServiceProtocol {
-    func requestPermission() async -> Bool {
-        do {
-            return try await UNUserNotificationCenter.current()
-                .requestAuthorization(options: [.alert, .badge, .sound])
-        } catch {
-            return false
+/// Notification permission for the shared code, on UserNotifications
+nonisolated final class NotificationService: NSObject, NotificationPermission {
+    func request(onResult: @escaping (KotlinBoolean) -> Void) {
+        Task {
+            let granted = (try? await UNUserNotificationCenter.current()
+                .requestAuthorization(options: [.alert, .badge, .sound])) ?? false
+            onResult(KotlinBoolean(bool: granted))
         }
     }
 }

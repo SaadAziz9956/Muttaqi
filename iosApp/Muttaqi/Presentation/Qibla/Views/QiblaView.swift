@@ -1,12 +1,15 @@
+import Shared
 import SwiftUI
 
 struct QiblaView: View {
-    @State private var viewModel: QiblaViewModel
+    @State private var screen = SharedViewModel(PrayerViewModels.shared.qibla()) { $0.state }
+    /// The compass, from its own flow, as it changes many times a second
+    @State private var reading: QiblaCompass?
+    /// Goes up each time the phone comes round to face the Qibla, for its haptic
+    @State private var timesFacingQibla = 0
     @Environment(\.openURL) private var openURL
 
-    init(viewModel: QiblaViewModel) {
-        self._viewModel = State(initialValue: viewModel)
-    }
+    private var state: QiblaState { screen.state }
 
     var body: some View {
         // A ZStack rather than a Group: modifiers on a Group attach to each branch, so switching from loading
@@ -14,16 +17,14 @@ struct QiblaView: View {
         ZStack {
             SoftBackdrop()
 
-            switch viewModel.state {
+            switch onEnum(of: state.phase) {
             case .locating:
                 ProgressView()
                     .tint(.appPrimary)
-            case .needsLocation(let access):
-                locationNeeded(access)
-            case .ready:
-                if let qibla = viewModel.qibla {
-                    compass(qibla)
-                }
+            case .needsLocation(let needs):
+                locationNeeded(needs.access)
+            case .ready(let ready):
+                compass(ready.qibla)
             }
         }
         .navigationBarTitleDisplayMode(.inline)
@@ -35,11 +36,23 @@ struct QiblaView: View {
             }
         }
         .toolbar(.hidden, for: .tabBar)
-        .task { await viewModel.locate() }
-        .task(id: viewModel.qibla != nil) {
-            if viewModel.qibla != nil { await viewModel.trackHeading() }
+        .task {
+            for await effect in screen.viewModel.effects {
+                switch onEnum(of: effect) {
+                case .facingQibla:
+                    timesFacingQibla += 1
+                case .openSettings:
+                    if let settings = URL(string: UIApplication.openSettingsURLString) { openURL(settings) }
+                }
+            }
         }
-        .sensoryFeedback(.success, trigger: viewModel.isAligned) { _, aligned in aligned }
+        // The compass runs only while this follows it, so it stops when the screen goes away
+        .task(id: state.qibla != nil) {
+            if state.qibla != nil {
+                for await next in screen.viewModel.compass { reading = next }
+            }
+        }
+        .sensoryFeedback(.success, trigger: timesFacingQibla)
     }
 
     private func compass(_ qibla: QiblaDirection) -> some View {
@@ -48,12 +61,12 @@ struct QiblaView: View {
 
             QiblaCompassDial(
                 qiblaBearing: qibla.bearing,
-                rotation: viewModel.dialRotation,
-                isAligned: viewModel.isAligned
+                rotation: dialRotation,
+                isAligned: isAligned
             )
             .frame(width: 300, height: 300)
-            .animation(.easeOut(duration: 0.25), value: viewModel.dialRotation)
-            .animation(.snappy, value: viewModel.isAligned)
+            .animation(.easeOut(duration: 0.25), value: dialRotation)
+            .animation(.snappy, value: isAligned)
 
             Text(instruction(for: qibla))
                 .font(.custom("ReemKufi-Medium", size: 24))
@@ -88,13 +101,17 @@ struct QiblaView: View {
         .accessibilityElement(children: .combine)
     }
 
+    private var dialRotation: Double { reading?.dialRotation ?? 0 }
+
+    private var isAligned: Bool { reading?.isAligned ?? false }
+
     /// Why the compass can't guide the reader right now, if it can't
     private var note: String? {
-        guard let qibla = viewModel.qibla else { return nil }
-        if !viewModel.isCompassAvailable {
+        guard let qibla = state.qibla else { return nil }
+        if !state.isCompassAvailable {
             return "This device has no compass. Use one to face \(Int(qibla.bearing.rounded()))° from North."
         }
-        if viewModel.needsCalibration {
+        if reading?.needsCalibration ?? false {
             return "Move your phone in a figure-eight to calibrate the compass."
         }
         return nil
@@ -118,10 +135,10 @@ struct QiblaView: View {
     }
 
     private func instruction(for qibla: QiblaDirection) -> String {
-        guard let turn = viewModel.turnAngle else {
+        guard let turn = reading?.turnAngle else {
             return "Face \(Int(qibla.bearing.rounded()))° from North"
         }
-        if viewModel.isAligned { return "You're facing the Qibla" }
+        if isAligned { return "You're facing the Qibla" }
         return "Turn \(turn > 0 ? "right" : "left") \(Int(abs(turn).rounded()))°"
     }
 
@@ -139,12 +156,9 @@ struct QiblaView: View {
         } description: {
             Text("Muttaqi uses your location to find the direction of the Kaaba.")
         } actions: {
+            // Asks for access, or opens the settings once it's been refused
             Button(access == .denied ? "Open Settings" : "Allow Location") {
-                if access == .denied, let settings = URL(string: UIApplication.openSettingsURLString) {
-                    openURL(settings)
-                } else {
-                    Task { await viewModel.requestLocation() }
-                }
+                screen.viewModel.dispatch(intent: QiblaIntentLocationButtonTapped.shared)
             }
             .buttonStyle(.glassProminent)
             .tint(.shareCard)
