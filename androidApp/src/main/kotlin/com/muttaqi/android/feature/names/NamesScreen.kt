@@ -15,6 +15,7 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.heightIn
+import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.pager.HorizontalPager
@@ -53,9 +54,9 @@ import com.muttaqi.shared.feature.names.presentation.NamesEffect
 import com.muttaqi.shared.feature.names.presentation.NamesIntent
 import com.muttaqi.shared.feature.names.presentation.NamesState
 import com.muttaqi.shared.feature.names.presentation.NamesViewModel
-import kotlinx.coroutines.flow.drop
 import kotlin.math.absoluteValue
 import kotlin.math.max
+import kotlinx.coroutines.flow.drop
 
 /** The 99 Names page; [viewModel] is shared with its search, so a picked result turns the page */
 @Composable
@@ -122,7 +123,8 @@ fun NamesScreen(
                 // 300dp on a large phone, in proportion on bigger and smaller screens, as on iOS
                 val cardHeight = max(260f, maxHeight.value * 0.415f).dp
                 Column(
-                    Modifier.verticalScroll(rememberScrollState()).heightIn(min = maxHeight).fillMaxWidth(),
+                    // Clear of the system bar, which the page's backdrop runs under
+                    Modifier.verticalScroll(rememberScrollState()).heightIn(min = maxHeight).fillMaxWidth().navigationBarsPadding(),
                     horizontalAlignment = Alignment.CenterHorizontally,
                     verticalArrangement = Arrangement.SpaceBetween,
                 ) {
@@ -134,10 +136,13 @@ fun NamesScreen(
                             contentPadding = PaddingValues(horizontal = 38.dp),
                             pageSpacing = 12.dp,
                             beyondViewportPageCount = 1,
-                            key = { state.names[it].number },
+                            // The page count follows the latest state while this lambda may still hold an earlier one, e.g.
+                            // the empty list before the names load, so a page it has no name for gets a key of its own
+                            key = { page -> state.names.getOrNull(page)?.number ?: -(page + 1) },
                         ) { page ->
+                            val name = state.names.getOrNull(page) ?: return@HorizontalPager
                             NameCard(
-                                state.names[page],
+                                name,
                                 // Room for the card's float shadow
                                 Modifier.padding(vertical = 18.dp).graphicsLayer {
                                     val offset = pager.currentPage - page + pager.currentPageOffsetFraction
