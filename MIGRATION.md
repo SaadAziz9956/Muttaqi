@@ -66,6 +66,9 @@ screen.viewModel.dispatch(intent: DuaListIntentQueryChanged(query: text))
 ```
 
 A view model with an argument is made in `init`: `_screen = State(initialValue: SharedViewModel(…(id: id)) { $0.state })`.
+A control that edits state (a text field, picker or toggle) reads the view model's value as it is now, not the last
+one drawn, or fast typing is lost and a cleared field can refill:
+`TextField("Search", text: Binding(get: { screen.viewModel.state.value.query }, set: { … dispatch … }))`.
 Kotlin types that share a name with a Swift type are `Shared.X` until the Swift one is deleted.
 
 **Android**: each screen is a stateful `XRoute(…)` (gets the view model with `koinViewModel`, collects `state` with
