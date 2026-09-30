@@ -3,8 +3,8 @@ import SwiftUI
 
 // Shown after the last ayah, where a reader who has finished the surah naturally moves on
 struct SurahEndNavigationView: View {
-    let previousSurah: Shared.Surah?
-    let nextSurah: Shared.Surah?
+    let previousSurah: Surah?
+    let nextSurah: Surah?
     let onPrevious: () -> Void
     let onNext: () -> Void
 
@@ -24,7 +24,7 @@ struct SurahEndNavigationView: View {
         }
     }
 
-    private func card(_ neighbour: Shared.Surah, isNext: Bool, action: @escaping () -> Void) -> some View {
+    private func card(_ neighbour: Surah, isNext: Bool, action: @escaping () -> Void) -> some View {
         Button(action: action) {
             VStack(alignment: isNext ? .trailing : .leading, spacing: 4) {
                 Text(isNext ? "Next" : "Previous")

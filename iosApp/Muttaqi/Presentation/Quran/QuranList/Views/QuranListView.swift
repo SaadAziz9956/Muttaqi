@@ -27,10 +27,10 @@ struct QuranListView: View {
                 switch onEnum(of: effect) {
                 case .openSurah(let open):
                     guard let surah = surah(open.surahNumber) else { continue }
-                    router.push(AppRouter.QuranDestination.surahDetail(surah: Surah(surah)))
+                    router.push(AppRouter.QuranDestination.surahDetail(surah: surah))
                 case .continueReading(let next):
                     guard let surah = surah(next.surahNumber) else { continue }
-                    router.push(AppRouter.QuranDestination.surahDetail(surah: Surah(surah), startAyah: Int(next.ayahNumber)))
+                    router.push(AppRouter.QuranDestination.surahDetail(surah: surah, startAyah: Int(next.ayahNumber)))
                 }
             }
         }
@@ -40,7 +40,7 @@ struct QuranListView: View {
         screen.viewModel.dispatch(intent: intent)
     }
 
-    private func surah(_ number: Int32) -> Shared.Surah? {
+    private func surah(_ number: Int32) -> Surah? {
         state.surahs.first { $0.number == number }
     }
 

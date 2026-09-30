@@ -3,7 +3,7 @@ import SwiftUI
 
 /// The card on the Share page, and the image that's shared: the text on the brand green with the app's name behind it
 struct ShareCard: View {
-    let passage: Shared.SharePassage
+    let passage: SharePassage
 
     var body: some View {
         let translationStyle = TranslationStyle(for: passage.translation, size: 14)
@@ -53,7 +53,7 @@ struct ShareCard: View {
 extension ShareCard {
     /// The card as an image to share, with a margin of the same green so it reads as one picture
     @MainActor
-    static func image(of passage: Shared.SharePassage) -> UIImage? {
+    static func image(of passage: SharePassage) -> UIImage? {
         let width: CGFloat = 390
         let renderer = ImageRenderer(
             content: ShareCard(passage: passage)

@@ -4,7 +4,6 @@ import com.muttaqi.shared.feature.journal.domain.model.JournalEntry
 import com.muttaqi.shared.feature.journal.domain.usecase.ImportJournalEntries
 import com.muttaqi.shared.feature.journal.presentation.entry.JournalEntryViewModel
 import com.muttaqi.shared.feature.journal.presentation.list.JournalListViewModel
-import com.muttaqi.shared.feature.journal.presentation.today.JournalTodayViewModel
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.get
 import org.koin.core.parameter.parametersOf
@@ -20,9 +19,6 @@ object JournalViewModels : KoinComponent {
 
     /** The editor on an entry, or on a new, blank one when [id] is null */
     fun entry(id: String?): JournalEntryViewModel = get { parametersOf(id) }
-
-    /** Today's entry, for the Journal tile on Home */
-    fun today(): JournalTodayViewModel = get()
 }
 
 /**

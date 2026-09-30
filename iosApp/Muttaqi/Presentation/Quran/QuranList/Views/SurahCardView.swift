@@ -2,7 +2,7 @@ import Shared
 import SwiftUI
 
 struct SurahCardView: View {
-    let surah: Shared.Surah
+    let surah: Surah
 
     var body: some View {
         VStack(alignment: .leading, spacing: 0) {

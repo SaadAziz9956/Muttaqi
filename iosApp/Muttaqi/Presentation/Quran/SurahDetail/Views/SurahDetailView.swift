@@ -3,7 +3,7 @@ import SwiftUI
 
 struct SurahDetailView: View {
     /// The surah opened, shown in the header until the reader has loaded
-    private let surah: Shared.Surah
+    private let surah: Surah
     @State private var screen: SharedViewModel<SurahReaderViewModel, SurahReaderState>
     @State private var readingPosition: SharedValue<String>
     // Made with the reader, so a translation still downloading when the sheet closes carries on, and the explanation
@@ -21,14 +21,14 @@ struct SurahDetailView: View {
 
     /// `startAyah` is the ayah (number within the surah) to open at, e.g. when continuing where the reader left off
     init(surah: Surah, startAyah: Int? = nil) {
-        self.surah = Shared.Surah(surah)
-        let viewModel = QuranViewModels.shared.reader(surahNumber: Int32(surah.number), startAyah: Int32(startAyah ?? 0))
+        self.surah = surah
+        let viewModel = QuranViewModels.shared.reader(surahNumber: surah.number, startAyah: Int32(startAyah ?? 0))
         _screen = State(initialValue: SharedViewModel(viewModel) { $0.state })
         _readingPosition = State(initialValue: SharedValue(viewModel.readingPosition))
     }
 
     private var state: SurahReaderState { screen.state }
-    private var headerSurah: Shared.Surah { state.headerSurah ?? surah }
+    private var headerSurah: Surah { state.headerSurah ?? surah }
 
     var body: some View {
         VStack(spacing: 0) {
@@ -117,7 +117,7 @@ struct SurahDetailView: View {
                 case .openTafsir(let open):
                     tafsirRequest = TafsirRequest(startAyah: open.startAyah?.int32Value)
                 case .openShare(let share):
-                    router.push(SharePassage(share.passage))
+                    router.push(share.passage)
                 case .copy(let copy):
                     UIPasteboard.general.string = copy.text
                 }

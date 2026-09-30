@@ -2,7 +2,7 @@ import Shared
 import SwiftUI
 
 struct DuaEntryCard: View {
-    let entry: Shared.DuaEntry
+    let entry: DuaEntry
     let onShare: () -> Void
     let onCopy: () -> Void
 

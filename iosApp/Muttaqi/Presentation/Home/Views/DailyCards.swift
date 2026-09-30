@@ -3,17 +3,10 @@ import SwiftUI
 
 struct AyahOfTheDayCard: View {
     let dailyAyah: DailyAyah
-    let onOpen: () -> Void
-    @Environment(AppRouter.self) private var router
-
-    private var shareText: String {
-        [dailyAyah.ayah.arabicText, dailyAyah.ayah.translation, "Quran (\(dailyAyah.reference))"]
-            .compactMap { $0 }
-            .joined(separator: "\n\n")
-    }
+    let dispatch: (HomeIntent) -> Void
 
     var body: some View {
-        Button(action: onOpen) {
+        Button { dispatch(HomeIntentAyahOfTheDayTapped.shared) } label: {
             VStack(spacing: 0) {
                 cardTitle("Ayah of the Day")
 
@@ -44,29 +37,17 @@ struct AyahOfTheDayCard: View {
         }
         .buttonStyle(SoftPressStyle())
         .overlay(alignment: .topTrailing) {
-            ShareButton(passage: SharePassage(ayah: dailyAyah.ayah))
+            ShareButton { dispatch(HomeIntentShareTapped(card: .ayah)) }
                 .padding(10)
         }
-        .contextMenu {
-            Button("Copy", systemImage: "doc.on.doc") { UIPasteboard.general.string = shareText }
-            Button("Share", systemImage: "square.and.arrow.up") { router.push(SharePassage(ayah: dailyAyah.ayah)) }
-        }
+        .contextMenu { cardMenu(.ayah, dispatch: dispatch) }
         .accessibilityHint("Opens the ayah in the Quran")
     }
 }
 
 struct DuaOfTheDayCard: View {
-    let dua: Dua
-    @Environment(AppRouter.self) private var router
-
-    private var sharePassage: SharePassage {
-        SharePassage(arabic: dua.arabic, transliteration: dua.transliteration, translation: dua.translation,
-                     reference: "Quran (\(dua.id))")
-    }
-
-    private var shareText: String {
-        [dua.arabic, dua.transliteration, dua.translation, "Quran (\(dua.id))"].joined(separator: "\n\n")
-    }
+    let dua: QuranicDua
+    let dispatch: (HomeIntent) -> Void
 
     var body: some View {
         let translationStyle = TranslationStyle(for: dua.translation, size: 14)
@@ -95,7 +76,7 @@ struct DuaOfTheDayCard: View {
                 .lineSpacing(4)
                 .padding(.top, 12)
 
-            Text("Quran (\(dua.id))")
+            Text("Quran (\(dua.reference))")
                 .font(.labelSmall)
                 .foregroundStyle(.brandTeal)
                 .frame(maxWidth: .infinity)
@@ -103,24 +84,21 @@ struct DuaOfTheDayCard: View {
         }
         .dailyCard()
         .overlay(alignment: .topTrailing) {
-            ShareButton(passage: sharePassage)
+            ShareButton { dispatch(HomeIntentShareTapped(card: .dua)) }
                 .padding(10)
         }
-        .contextMenu {
-            Button("Copy", systemImage: "doc.on.doc") { UIPasteboard.general.string = shareText }
-            Button("Share", systemImage: "square.and.arrow.up") { router.push(sharePassage) }
-        }
+        .contextMenu { cardMenu(.dua, dispatch: dispatch) }
     }
 }
 
 /// A short authentic hadith from Explore, in full as HadeethEnc publishes it
 struct HadithOfTheDayCard: View {
     let hadith: HadithPassage
-    @Environment(AppRouter.self) private var router
+    let dispatch: (HomeIntent) -> Void
 
     var body: some View {
         let style = TranslationStyle(for: hadith.translation, size: 14)
-        let source = "\(hadith.attribution) · \(hadith.grade)"
+        let source = hadith.source
 
         VStack(spacing: 0) {
             cardTitle("Hadith of the Day")
@@ -149,16 +127,35 @@ struct HadithOfTheDayCard: View {
         .frame(maxWidth: .infinity)
         .dailyCard()
         .overlay(alignment: .topTrailing) {
-            ShareButton(passage: SharePassage(hadith: hadith))
+            ShareButton { dispatch(HomeIntentShareTapped(card: .hadith)) }
                 .padding(10)
         }
-        .contextMenu {
-            Button("Copy", systemImage: "doc.on.doc") {
-                UIPasteboard.general.string = [hadith.arabic, hadith.translation, source].joined(separator: "\n\n")
-            }
-            Button("Share", systemImage: "square.and.arrow.up") { router.push(SharePassage(hadith: hadith)) }
-        }
+        .contextMenu { cardMenu(.hadith, dispatch: dispatch) }
     }
+}
+
+/// Opens the Share page for the card it sits on
+private struct ShareButton: View {
+    let action: () -> Void
+
+    var body: some View {
+        Button(action: action) {
+            Image("export-arrow-01-linear")
+                .resizable()
+                .frame(width: 18, height: 18)
+                .foregroundStyle(.textSecondary)
+                .padding(6)
+                .contentShape(.rect)
+        }
+        .buttonStyle(SoftPressStyle())
+        .accessibilityLabel("Share")
+    }
+}
+
+@ViewBuilder
+private func cardMenu(_ card: DailyCard, dispatch: @escaping (HomeIntent) -> Void) -> some View {
+    Button("Copy", systemImage: "doc.on.doc") { dispatch(HomeIntentCopyTapped(card: card)) }
+    Button("Share", systemImage: "square.and.arrow.up") { dispatch(HomeIntentShareTapped(card: card)) }
 }
 
 private extension View {

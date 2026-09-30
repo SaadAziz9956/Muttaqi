@@ -1,15 +1,10 @@
+import Shared
 import SwiftUI
 
 struct MainTabView: View {
     @State private var router = AppRouter()
-    @Environment(\.container) private var _container
-
-    private var container: DependencyContainer {
-        guard let _container else {
-            fatalError("DependencyContainer not set in environment — inject via .environment(\\.container, container)")
-        }
-        return _container
-    }
+    /// Home's shared view model, kept here as the tabs redraw, since making it starts its loading and location
+    @State private var home = SharedViewModel(HomeViewModels.shared.home()) { $0.state }
 
     init() {
         Self.configureTabBarAppearance()
@@ -48,7 +43,7 @@ struct MainTabView: View {
     private func tabContent(for tab: AppTab) -> some View {
         switch tab {
         case .home:
-            HomeView(viewModel: container.makeHomeViewModel())
+            HomeView(screen: home)
                 .navigationDestination(for: AppRouter.HomeDestination.self) { dest in
                     switch dest {
                     case .qibla:

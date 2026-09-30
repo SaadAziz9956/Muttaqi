@@ -2,9 +2,9 @@ import Shared
 import SwiftUI
 
 struct AyahCardView: View {
-    let ayah: Shared.Ayah
+    let ayah: Ayah
     let fontSize: FontSize
-    let language: Shared.Language
+    let language: Language
     /// Opens the explanation at this ayah
     let onExplanation: () -> Void
     let onCopy: () -> Void

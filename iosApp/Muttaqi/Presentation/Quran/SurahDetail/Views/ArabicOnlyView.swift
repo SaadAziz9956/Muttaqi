@@ -46,7 +46,7 @@ struct ArabicOnlyView: View {
 /// UIKit text view, because SwiftUI `Text` can't justify. A text view rather than a label: UILabel puts a
 /// justified paragraph's last line on the left even for right-to-left text, while TextKit keeps it flush right.
 private struct MushafPageText: UIViewRepresentable {
-    let ayahs: [Shared.Ayah]
+    let ayahs: [Ayah]
     let fontSize: CGFloat
 
     func makeUIView(context: Context) -> UITextView {

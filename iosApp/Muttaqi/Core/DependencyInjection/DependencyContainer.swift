@@ -1,19 +1,12 @@
 import Foundation
 import Shared
 import SwiftData
-import SwiftUI
 
+/// What's left of the Swift app's own storage: the SwiftData store from before the move to shared code, which the
+/// journal and reading-progress imports read at launch
 @MainActor
 final class DependencyContainer {
     let modelContainer: ModelContainer
-    let readingPreferences: ReadingPreferencesStore
-
-    // MARK: - Repositories
-    private lazy var duaRepo: DuaRepositoryProtocol = BundledDuaRepository()
-
-    // MARK: - Use Cases
-    // The Quran is shared code now; this reads one ayah from it for Home's verses
-    private lazy var fetchAyahUseCase = FetchAyahUseCase()
 
     init() {
         do {
@@ -21,23 +14,9 @@ final class DependencyContainer {
         } catch {
             fatalError("Failed to create ModelContainer: \(error)")
         }
-        self.readingPreferences = ReadingPreferencesStore(
-            storage: UserDefaultsStorage()
-        )
         // The journal now lives in the shared database; entries written before are brought over from SwiftData once
         let modelContainer = self.modelContainer
         Task { await SwiftDataJournalImport.run(from: modelContainer) }
-    }
-
-    // MARK: - Factories
-    func makeHomeViewModel() -> HomeViewModel {
-        HomeViewModel(
-            fetchAyah: fetchAyahUseCase,
-            getAyahOfTheDay: GetAyahOfTheDayUseCase(fetchAyah: fetchAyahUseCase),
-            getDuaOfTheDay: GetDuaOfTheDayUseCase(repository: duaRepo, languagePreferences: readingPreferences),
-            quran: QuranUseCases.shared,
-            journal: SharedViewModel(JournalViewModels.shared.today()) { $0.state }
-        )
     }
 
     // MARK: - Quran
@@ -59,14 +38,3 @@ final class DependencyContainer {
     }
 }
 
-// MARK: - Environment Key
-private struct DependencyContainerKey: EnvironmentKey {
-    static let defaultValue: DependencyContainer? = nil
-}
-
-extension EnvironmentValues {
-    var container: DependencyContainer? {
-        get { self[DependencyContainerKey.self] }
-        set { self[DependencyContainerKey.self] = newValue }
-    }
-}

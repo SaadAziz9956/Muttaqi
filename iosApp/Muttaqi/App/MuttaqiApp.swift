@@ -1,5 +1,4 @@
 import Shared
-import SwiftData
 import SwiftUI
 
 @main
@@ -30,9 +29,7 @@ struct MuttaqiApp: App {
                 OnboardingView { appViewModel.onboardingCompleted() }
             case .home:
                 MainTabView()
-                    .environment(\.container, container)
             }
         }
-        .modelContainer(container.modelContainer)
     }
 }

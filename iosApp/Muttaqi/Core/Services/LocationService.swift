@@ -28,7 +28,7 @@ nonisolated final class LocationService: NSObject, LocationProvider, CLLocationM
         }
     }
 
-    func currentLocation(onResult: @escaping (Shared.Coordinates?) -> Void) -> LocationRequest {
+    func currentLocation(onResult: @escaping (Coordinates?) -> Void) -> LocationRequest {
         // The shared code gives up after its timeout and cancels the search
         LocationFix(task: Task {
             do {
