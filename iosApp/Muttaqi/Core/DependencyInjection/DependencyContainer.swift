@@ -42,8 +42,6 @@ final class DependencyContainer {
     private lazy var dhikrRepo: DhikrRepositoryProtocol = BundledDhikrRepository()
     private lazy var dhikrProgress: DhikrProgressStoring = DhikrProgressStore()
     private lazy var namesRepo: NamesRepositoryProtocol = BundledNamesRepository()
-    private lazy var emotionsRepo: EmotionsRepositoryProtocol = BundledEmotionsRepository(duaRepository: duaRepo)
-    private lazy var exploreRepo: ExploreRepositoryProtocol = BundledExploreRepository(duaRepository: duaRepo)
 
     // MARK: - Shared State
     // One store for the journal list and the entry screen, so an edit shows in the list straight away
@@ -54,14 +52,6 @@ final class DependencyContainer {
     )
 
     // MARK: - Use Cases
-    private lazy var getEmotionsUseCase = GetEmotionsUseCase(
-        repository: emotionsRepo,
-        languagePreferences: readingPreferences
-    )
-    private lazy var getExploreUseCase = GetExploreUseCase(
-        repository: exploreRepo,
-        languagePreferences: readingPreferences
-    )
     private lazy var syncQuranDataUseCase = SyncQuranDataUseCase(
         syncRepository: syncRepo,
         preferences: readingPreferences
@@ -117,7 +107,6 @@ final class DependencyContainer {
             fetchAyah: fetchAyahUseCase,
             getAyahOfTheDay: GetAyahOfTheDayUseCase(fetchAyah: fetchAyahUseCase),
             getDuaOfTheDay: GetDuaOfTheDayUseCase(repository: duaRepo, languagePreferences: readingPreferences),
-            getExplore: getExploreUseCase,
             getNames: GetAllahNamesUseCase(repository: namesRepo, languagePreferences: readingPreferences),
             getDhikrSections: GetDhikrSectionsUseCase(repository: dhikrRepo, languagePreferences: readingPreferences),
             dhikrProgress: dhikrProgress,
@@ -161,28 +150,6 @@ final class DependencyContainer {
             getNames: GetAllahNamesUseCase(repository: namesRepo, languagePreferences: readingPreferences),
             languagePreferences: readingPreferences
         )
-    }
-
-    func makeEmotionsViewModel() -> EmotionsViewModel {
-        EmotionsViewModel(getEmotions: getEmotionsUseCase)
-    }
-
-    /// One emotion's page, with tabs for all the emotions
-    func makeEmotionPageViewModel(selectedID: String) -> TopicPageViewModel<Emotion> {
-        let getEmotions = getEmotionsUseCase
-        return TopicPageViewModel(selectedID: selectedID) { try getEmotions.execute().emotions }
-    }
-
-    func makeExploreViewModel() -> ExploreViewModel {
-        ExploreViewModel(getExplore: getExploreUseCase)
-    }
-
-    /// One Explore topic's page, with tabs for the other topics in its group
-    func makeExploreTopicViewModel(selectedID: String) -> TopicPageViewModel<ExploreTopic> {
-        let getExplore = getExploreUseCase
-        return TopicPageViewModel(selectedID: selectedID) {
-            try getExplore.execute().groups.first { $0.topics.contains { $0.id == selectedID } }?.topics ?? []
-        }
     }
 
     func makeQuranListViewModel() -> QuranListViewModel {

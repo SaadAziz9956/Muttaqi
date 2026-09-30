@@ -17,16 +17,8 @@ extension SharePassage {
         self.init(arabic: passage.arabic, transliteration: passage.transliteration, translation: passage.translation, reference: passage.reference)
     }
 
-    init(verse: QuranPassage) {
-        self.init(arabic: verse.arabic, translation: verse.translation, reference: "Quran (\(verse.reference))")
-    }
-
     init(hadith: HadithPassage) {
         self.init(arabic: hadith.arabic, translation: hadith.translation, reference: "\(hadith.attribution) · \(hadith.grade)")
-    }
-
-    init(dua: DuaEntry) {
-        self.init(arabic: dua.arabic, transliteration: dua.transliteration, translation: dua.translation, reference: dua.source)
     }
 
     init(ayah: Ayah) {

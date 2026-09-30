@@ -1,15 +1,14 @@
+import Shared
 import SwiftUI
 
 /// Topics in groups, e.g. Worship › Fasting; each opens its Quran verses, hadith and duas
 struct ExploreView: View {
-    @State private var viewModel: ExploreViewModel
+    @State private var screen = SharedViewModel(TopicsViewModels.shared.explore()) { $0.state }
     @State private var titleBottom: CGFloat = .infinity
     @FocusState private var isSearchFocused: Bool
     @Environment(AppRouter.self) private var router
 
-    init(viewModel: ExploreViewModel) {
-        self._viewModel = State(initialValue: viewModel)
-    }
+    private var state: ExploreState { screen.state }
 
     var body: some View {
         ScrollView {
@@ -20,7 +19,7 @@ struct ExploreView: View {
                 searchField
                     .padding(.top, 36)
 
-                if viewModel.isSearching {
+                if state.isSearching {
                     searchResults
                         .padding(.top, 20)
                 } else {
@@ -35,7 +34,17 @@ struct ExploreView: View {
         .background { SoftBackdrop() }
         .navigationBarTitleDisplayMode(.inline)
         .collapsingBarTitle("Explore", titleBottom: titleBottom)
-        .onAppear { viewModel.load() }
+        .task {
+            for await effect in screen.viewModel.effects {
+                switch onEnum(of: effect) {
+                case .openTopic(let open): router.pushExplore(.topic(id: open.topicId))
+                }
+            }
+        }
+    }
+
+    private func dispatch(_ intent: ExploreIntent) {
+        screen.viewModel.dispatch(intent: intent)
     }
 
     private var header: some View {
@@ -45,14 +54,14 @@ struct ExploreView: View {
                 .foregroundStyle(.appPrimary)
                 .onGeometryChange(for: CGFloat.self) { $0.frame(in: .global).maxY } action: { titleBottom = $0 }
 
-            if let header = viewModel.header {
-                Text(header.translation.quoted)
-                    .font(TranslationStyle(for: header.translation, size: 14).font)
+            if let quote = state.header {
+                Text(quote.text.quoted)
+                    .font(TranslationStyle(for: quote.text, size: 14).font)
                     .foregroundStyle(.textPrimary)
                     .multilineTextAlignment(.center)
                     .padding(.top, 16)
 
-                Text("Quran (\(header.reference))")
+                Text(quote.source)
                     .font(.labelSmall)
                     .foregroundStyle(.textSecondary)
                     .padding(.top, 4)
@@ -68,7 +77,9 @@ struct ExploreView: View {
                 .foregroundStyle(.textSecondary)
                 .accessibilityHidden(true)
 
-            TextField("Search", text: $viewModel.query)
+            // Reads the view model's query as it is now rather than the last one drawn: clearing unfocuses the field in
+            // the same moment, and a field still showing the old text would send it back as it lets go
+            TextField("Search", text: Binding(get: { screen.viewModel.state.value.query }, set: { dispatch(ExploreIntentQueryChanged(query: $0)) }))
                 .font(.bodyMedium)
                 .foregroundStyle(.textPrimary)
                 .submitLabel(.search)
@@ -76,9 +87,9 @@ struct ExploreView: View {
                 .autocorrectionDisabled()
                 .focused($isSearchFocused)
 
-            if viewModel.isSearching {
+            if state.isSearching {
                 Button {
-                    viewModel.query = ""
+                    dispatch(ExploreIntentClearQuery.shared)
                     isSearchFocused = false
                 } label: {
                     Image("close-circle-bold")
@@ -97,7 +108,7 @@ struct ExploreView: View {
 
     private var topicGroups: some View {
         LazyVStack(alignment: .leading, spacing: 0) {
-            ForEach(viewModel.groups) { group in
+            ForEach(state.groups, id: \.id) { group in
                 Text(group.title)
                     .font(.titleSmall)
                     .foregroundStyle(.appPrimary)
@@ -106,9 +117,9 @@ struct ExploreView: View {
                     .padding(.bottom, 12)
 
                 LazyVGrid(columns: [GridItem(.flexible(), spacing: 14), GridItem(.flexible(), spacing: 14)], spacing: 14) {
-                    ForEach(group.topics) { topic in
+                    ForEach(group.topics, id: \.id) { topic in
                         Button {
-                            router.pushExplore(.topic(id: topic.id))
+                            dispatch(ExploreIntentTopicTapped(topicId: topic.id))
                         } label: {
                             TopicTile(topic: topic)
                         }
@@ -121,15 +132,15 @@ struct ExploreView: View {
 
     @ViewBuilder
     private var searchResults: some View {
-        let results = viewModel.searchResults
+        let results = state.results
         if results.isEmpty {
-            ContentUnavailableView.search(text: viewModel.query)
+            ContentUnavailableView.search(text: state.query)
                 .padding(.top, 20)
         } else {
             LazyVStack(spacing: 0) {
-                ForEach(results) { result in
+                ForEach(results, id: \.topic.id) { result in
                     Button {
-                        router.pushExplore(.topic(id: result.topic.id))
+                        dispatch(ExploreIntentTopicTapped(topicId: result.topic.id))
                     } label: {
                         HStack(spacing: 14) {
                             Image(result.topic.icon)
