@@ -28,7 +28,8 @@ kotlin {
         commonMain.dependencies {
             implementation(libs.kotlinx.coroutines.core)
             implementation(libs.kotlinx.serialization.json)
-            implementation(libs.kotlinx.datetime)
+            // api: the domain's models use its dates (e.g. a dhikr's progress is for a LocalDate), so the apps see them
+            api(libs.kotlinx.datetime)
             api(libs.androidx.lifecycle.viewmodel)
             api(libs.koin.core)
             api(libs.koin.core.viewmodel)
