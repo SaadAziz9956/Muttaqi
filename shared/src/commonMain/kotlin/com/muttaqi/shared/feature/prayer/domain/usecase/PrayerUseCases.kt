@@ -1,13 +1,16 @@
 package com.muttaqi.shared.feature.prayer.domain.usecase
 
+import com.muttaqi.shared.feature.prayer.domain.model.CompassHeading
 import com.muttaqi.shared.feature.prayer.domain.model.Coordinates
 import com.muttaqi.shared.feature.prayer.domain.model.LocationAccess
 import com.muttaqi.shared.feature.prayer.domain.model.PrayerSchedule
 import com.muttaqi.shared.feature.prayer.domain.model.QiblaDirection
+import com.muttaqi.shared.feature.prayer.domain.repository.Compass
 import com.muttaqi.shared.feature.prayer.domain.repository.LocationRepository
 import com.muttaqi.shared.feature.prayer.domain.repository.PrayerTimesRepository
 import com.muttaqi.shared.feature.prayer.domain.repository.QiblaRepository
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.emptyFlow
 import kotlinx.coroutines.flow.flow
 import kotlinx.datetime.DateTimeUnit
 import kotlinx.datetime.TimeZone
@@ -50,4 +53,14 @@ class GetLocationAccess(private val location: LocationRepository) {
 /** Shows the system's request for location access while it's undecided, then gives the access there is */
 class RequestLocationAccess(private val location: LocationRepository) {
     suspend operator fun invoke(): LocationAccess = location.requestAccess()
+}
+
+/**
+ * The phone's heading as it turns, e.g. for Home's Qibla tile; nothing on a device without a compass. The compass runs
+ * only while the flow is collected
+ */
+class FollowHeading(private val compass: Compass) {
+    val isAvailable: Boolean get() = compass.isAvailable
+
+    operator fun invoke(): Flow<CompassHeading> = if (compass.isAvailable) compass.headings() else emptyFlow()
 }
