@@ -30,7 +30,7 @@ struct MainTabView: View {
             tabContent(for: tab)
                 // Any card or page in any tab can open the Share page
                 .navigationDestination(for: SharePassage.self) { passage in
-                    ShareView(passage: passage, language: container.readingPreferences.getSelectedLanguage().code)
+                    ShareView(passage: passage)
                 }
         }
         .tag(tab)

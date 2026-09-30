@@ -30,3 +30,10 @@ extension SharePassage {
         )
     }
 }
+
+extension Shared.SharePassage {
+    /// The passage a card or page opened the Share page with, for the Share page's view model
+    convenience init(_ passage: SharePassage) {
+        self.init(arabic: passage.arabic, transliteration: passage.transliteration, translation: passage.translation, reference: passage.reference)
+    }
+}

@@ -4,7 +4,6 @@ import androidx.navigation.NavController
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.compose.composable
 import androidx.navigation.toRoute
-import com.muttaqi.android.designsystem.component.FeaturePlaceholder
 import com.muttaqi.shared.core.share.SharePassage
 import kotlinx.serialization.Serializable
 
@@ -19,7 +18,6 @@ data class ShareRoute(val arabic: String, val transliteration: String?, val tran
 /** Registered once, outside the tabs, since every feature can share */
 fun NavGraphBuilder.shareDestinations(navController: NavController) {
     composable<ShareRoute> { entry ->
-        val route = entry.toRoute<ShareRoute>()
-        FeaturePlaceholder("Share: ${route.reference}", onBack = navController::popBackStack)
+        ShareRoute(passage = entry.toRoute<ShareRoute>().passage, onBack = navController::popBackStack)
     }
 }
