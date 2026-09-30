@@ -39,6 +39,7 @@ import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardCapitalization
+import androidx.compose.ui.text.style.LineHeightStyle
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.Lifecycle
@@ -116,7 +117,13 @@ fun JournalEntryScreen(state: JournalEntryState, onIntent: (JournalEntryIntent) 
             // An existing entry is read from the database first, which takes a moment; a new one is ready at once
             if (entry != null) {
                 val titleStyle = MaterialTheme.typography.headlineMedium.copy(fontSize = 34.sp, color = soft.appPrimary)
-                val bodyStyle = MaterialTheme.typography.bodyMedium.copy(fontSize = 14.sp, lineHeight = 25.sp, color = soft.textPrimary)
+                // As on iOS: Reem Kufi's own line height (1.5 em) plus the field's lineSpacing(4), under each line but the last
+                val bodyStyle = MaterialTheme.typography.bodyMedium.copy(
+                    fontSize = 14.sp,
+                    lineHeight = (14 * 1.5f + 4).sp,
+                    lineHeightStyle = LineHeightStyle(LineHeightStyle.Alignment.Top, LineHeightStyle.Trim.Both),
+                    color = soft.textPrimary,
+                )
                 Column(
                     Modifier
                         .fillMaxSize()

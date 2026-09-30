@@ -4,7 +4,10 @@ import android.app.Application
 import androidx.compose.ui.test.junit4.createComposeRule
 import com.muttaqi.android.testing.PHONE
 import com.muttaqi.android.testing.captureLightAndDark
+import com.muttaqi.shared.core.model.Language
 import com.muttaqi.shared.core.quote.DisplayedQuote
+import com.muttaqi.shared.core.quote.PageQuotes
+import com.muttaqi.shared.core.quote.displayed
 import com.muttaqi.shared.feature.journal.domain.model.JournalEntry
 import com.muttaqi.shared.feature.journal.presentation.entry.JournalEntryState
 import com.muttaqi.shared.feature.journal.presentation.list.JournalListState
@@ -43,6 +46,15 @@ class JournalScreenshotTest {
     }
 
     @Test
+    fun listUrdu() = compose.captureLightAndDark("journal_list_urdu") {
+        JournalListScreen(
+            JournalListState(isLoading = false, header = PageQuotes.byThePen.displayed(Language.Urdu), entries = listOf(walk)),
+            onIntent = {},
+            onBack = {},
+        )
+    }
+
+    @Test
     fun listEmpty() = compose.captureLightAndDark("journal_list_empty") {
         JournalListScreen(JournalListState(isLoading = false, header = quote), onIntent = {}, onBack = {})
     }
@@ -58,7 +70,9 @@ class JournalScreenshotTest {
 
     @Test
     fun entry() = compose.captureLightAndDark("journal_entry") {
-        JournalEntryScreen(JournalEntryState(entry = walk), onIntent = {}, onBack = {})
+        // Long enough to wrap, so the body's line spacing shows
+        val body = walk.body + " We talked for an hour and laughed about old times at home. Then we planned a visit for the winter holidays."
+        JournalEntryScreen(JournalEntryState(entry = walk.copy(body = body)), onIntent = {}, onBack = {})
     }
 
     @Test
