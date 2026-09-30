@@ -34,7 +34,8 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.ModalBottomSheet
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
-import androidx.compose.material3.rememberModalBottomSheetState
+import androidx.compose.material3.SheetValue
+import androidx.compose.material3.rememberBottomSheetState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.LaunchedEffect
@@ -55,6 +56,7 @@ import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.LineHeightStyle
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextDirection
 import androidx.compose.ui.text.style.TextOverflow
@@ -161,7 +163,8 @@ fun SurahReaderRoute(surahNumber: Int, startAyah: Int, onShare: (SharePassage) -
     tafsirStart?.let { start ->
         ModalBottomSheet(
             onDismissRequest = { tafsirStart = null },
-            sheetState = rememberModalBottomSheetState(skipPartiallyExpanded = true),
+            // Opens straight to full height, like the iOS sheet's large detent
+            sheetState = rememberBottomSheetState(SheetValue.Hidden, setOf(SheetValue.Hidden, SheetValue.Expanded)),
             containerColor = MuttaqiTheme.soft.canvas,
         ) {
             TafsirContent(
@@ -332,7 +335,7 @@ private fun SurahHeader(surah: Surah?, previous: Surah?, next: Surah?, onIntent:
     val soft = MuttaqiTheme.soft
     Column(Modifier.fillMaxWidth().padding(top = 20.dp), horizontalAlignment = Alignment.CenterHorizontally) {
         if (surah != null) {
-            ArabicText(surah.name, fontSize = 40.sp)
+            ArabicText(surah.name, fontSize = 40.sp, lineSpacing = 0.sp)
         }
         Text(
             surah?.englishName.orEmpty(),
@@ -380,13 +383,14 @@ private fun Bismillah(text: String, translation: String) {
     val soft = MuttaqiTheme.soft
     val english = !translation.isArabicScript() && translation.none { it.code in 0x0900..0x097F }
     Column(Modifier.fillMaxWidth(), horizontalAlignment = Alignment.CenterHorizontally) {
-        ArabicText(text, Modifier.padding(top = 44.dp), fontSize = 18.sp)
+        ArabicText(text, Modifier.padding(top = 44.dp), fontSize = 18.sp, lineSpacing = 0.sp)
         TranslationText(
             translation,
             Modifier.padding(top = 18.dp, bottom = 20.dp).padding(horizontal = if (english) 60.dp else 16.dp),
             fontSize = if (english) 12.sp else 13.sp,
             color = soft.textSecondary,
             maxLines = if (english) Int.MAX_VALUE else 1,
+            lineSpacing = 0.sp,
         )
     }
 }
@@ -416,23 +420,33 @@ fun AyahCard(
         Column(Modifier.fillMaxWidth().padding(18.dp)) {
             AyahArabic(ayah, fontSize)
             ayah.transliteration?.takeIf { it.isNotEmpty() }?.let {
-                Text(
+                TranslationText(
                     it,
-                    Modifier.padding(top = 12.dp),
-                    style = MaterialTheme.typography.bodyLarge.copy(fontSize = fontSize.transliterationSize.sp, lineHeight = 1.4.em),
+                    Modifier.fillMaxWidth().padding(top = 12.dp),
+                    fontSize = fontSize.transliterationSize.sp,
                     color = soft.appPrimary,
+                    textAlign = TextAlign.Left,
+                    lineSpacing = 0.sp,
                 )
             }
             ayah.translation?.takeIf { it.isNotEmpty() }?.let { translation ->
                 if (language == Language.Urdu) {
                     // Right, not End: in a right-to-left paragraph End is the left edge
-                    TranslationText(translation, Modifier.fillMaxWidth().padding(top = 8.dp), fontSize = (fontSize.translationSize - 1).sp, textAlign = TextAlign.Right)
+                    // Nastaliq at the translation size itself, as on iOS, where TranslationText would add a point
+                    TranslationText(
+                        translation,
+                        Modifier.fillMaxWidth().padding(top = 8.dp),
+                        fontSize = (fontSize.translationSize - 1).sp,
+                        textAlign = TextAlign.Right,
+                        lineSpacing = 0.sp,
+                    )
                 } else {
-                    Text(
+                    TranslationText(
                         "${ayah.numberInSurah}.  $translation",
-                        Modifier.padding(top = 8.dp),
-                        style = MaterialTheme.typography.bodyLarge.copy(fontSize = fontSize.translationSize.sp, lineHeight = 1.4.em),
-                        color = soft.textPrimary,
+                        Modifier.fillMaxWidth().padding(top = 8.dp),
+                        fontSize = fontSize.translationSize.sp,
+                        textAlign = TextAlign.Left,
+                        lineSpacing = 0.sp,
                     )
                 }
             }
@@ -479,7 +493,7 @@ private fun AyahArabic(ayah: Ayah, fontSize: FontSize) {
         Modifier.fillMaxWidth().padding(top = 6.dp),
         color = soft.textPrimary,
         textAlign = TextAlign.Right,
-        style = TextStyle(fontFamily = QuranFont, fontSize = fontSize.arabicSize.sp, lineHeight = 1.9.em, textDirection = TextDirection.Rtl),
+        style = TextStyle(fontFamily = QuranFont, fontSize = fontSize.arabicSize.sp, textDirection = TextDirection.Rtl),
     )
 }
 
@@ -511,7 +525,9 @@ fun MushafPageCard(page: MushafPage, fontSize: FontSize) {
                 style = TextStyle(
                     fontFamily = QuranFont,
                     fontSize = fontSize.arabicSize.sp,
-                    lineHeight = 2.2.em,
+                    // The font's own line height and then, as iOS spaces the page, 0.6 of the font size
+                    lineHeight = (QURAN_FONT_LINE_HEIGHT + MUSHAF_LINE_SPACING).em,
+                    lineHeightStyle = LineHeightStyle(LineHeightStyle.Alignment.Top, LineHeightStyle.Trim.Both),
                     textAlign = TextAlign.Justify,
                     textDirection = TextDirection.Rtl,
                 ),
@@ -529,6 +545,10 @@ fun MushafPageCard(page: MushafPage, fontSize: FontSize) {
 internal fun Hairline(modifier: Modifier = Modifier) {
     Box(modifier.height(1.dp).background(if (MuttaqiTheme.soft.dark) Color(0xFF2C2C2E) else Color(0xFFE5E5EA)))
 }
+
+// The Quran font's line height in ems (its ascender plus descender), as the design system's ArabicText lays it out
+private const val QURAN_FONT_LINE_HEIGHT = 1.758f
+private const val MUSHAF_LINE_SPACING = 0.6f
 
 private fun arabicIndicDigits(number: Int): String = number.toString().map { (0x0660 + (it - '0')).toChar() }.joinToString("")
 

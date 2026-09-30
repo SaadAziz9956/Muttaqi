@@ -106,11 +106,11 @@ private fun ReadingModeCard(
         ) {
             when (mode) {
                 ReadingMode.WithTranslation -> Column(horizontalAlignment = Alignment.CenterHorizontally, verticalArrangement = Arrangement.spacedBy(4.dp)) {
-                    ArabicText("بِسْمِ ٱللَّهِ", fontSize = 12.sp)
+                    ArabicText("بِسْمِ ٱللَّهِ", fontSize = 12.sp, lineSpacing = 0.sp)
                     Text("Bismillaahir", fontSize = 8.sp, fontFamily = FontFamily.Default, color = soft.appPrimary)
                     Text("In the Name of Allah", fontSize = 7.sp, fontFamily = FontFamily.Default, color = soft.textSecondary)
                     Box(Modifier.padding(horizontal = 12.dp).fillMaxWidth().height(0.5.dp).background(systemGray4()))
-                    ArabicText("ٱلْحَمْدُ لِلَّهِ", fontSize = 12.sp)
+                    ArabicText("ٱلْحَمْدُ لِلَّهِ", fontSize = 12.sp, lineSpacing = 0.sp)
                     Text("Alhamdu lillaahi", fontSize = 8.sp, fontFamily = FontFamily.Default, color = soft.appPrimary)
                 }
                 ReadingMode.ArabicOnly -> ArabicText(
@@ -118,6 +118,7 @@ private fun ReadingModeCard(
                     Modifier.padding(horizontal = 8.dp),
                     fontSize = 11.sp,
                     textAlign = TextAlign.Right,
+                    lineSpacing = 0.sp,
                 )
             }
         }

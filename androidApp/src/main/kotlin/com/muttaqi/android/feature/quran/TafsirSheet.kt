@@ -17,20 +17,16 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.SpanStyle
-import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.text.style.TextDirection
 import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.em
 import androidx.compose.ui.unit.sp
 import com.muttaqi.android.designsystem.MuttaqiTheme
-import com.muttaqi.android.designsystem.NastaliqFont
-import com.muttaqi.android.designsystem.QuranFont
+import com.muttaqi.android.designsystem.component.ArabicText
+import com.muttaqi.android.designsystem.component.TranslationText
 import com.muttaqi.shared.core.model.Language
-import com.muttaqi.shared.core.text.kfgqpcEncoded
 import com.muttaqi.shared.feature.quran.domain.model.Surah
 import com.muttaqi.shared.feature.quran.domain.model.TafsirEntry
 import com.muttaqi.shared.feature.quran.presentation.tafsir.TafsirState
@@ -106,28 +102,16 @@ private fun TafsirEntries(entries: List<TafsirEntry>, language: Language, start:
 private fun TafsirParagraph(paragraph: String, language: Language) {
     val soft = MuttaqiTheme.soft
     when {
-        language == Language.Urdu -> Text(
-            paragraph,
-            Modifier.fillMaxWidth(),
-            color = soft.textPrimary,
-            textAlign = TextAlign.Right,
-            style = TextStyle(fontFamily = NastaliqFont, fontSize = 17.sp, lineHeight = 2.1.em, textDirection = TextDirection.Rtl),
-        )
-        startsWithArabic(paragraph) -> {
-            // The Quran font draws Arabic punctuation as a dotted circle, so those marks use the system font
-            val text = remember(paragraph) { restyled(paragraph.kfgqpcEncoded(), setOf('،', '؟', '؛'), SpanStyle(fontFamily = FontFamily.Default, fontSize = 17.sp)) }
-            Text(
-                text,
-                Modifier.fillMaxWidth(),
-                color = soft.textPrimary,
-                textAlign = TextAlign.Right,
-                style = TextStyle(fontFamily = QuranFont, fontSize = 20.sp, lineHeight = 1.9.em, textDirection = TextDirection.Rtl),
-            )
-        }
+        // Nastaliq at 17, as on iOS, where TranslationText would add a point
+        language == Language.Urdu ->
+            TranslationText(paragraph, Modifier.fillMaxWidth(), fontSize = 16.sp, textAlign = TextAlign.Right, lineSpacing = 0.sp)
+        // ArabicText sets the Arabic punctuation the Quran font can't draw in the system font
+        startsWithArabic(paragraph) ->
+            ArabicText(paragraph, Modifier.fillMaxWidth(), fontSize = 20.sp, textAlign = TextAlign.Right, lineSpacing = 0.sp)
         else -> {
             // ﷺ is taller than a line of body text and would overlap the lines around it, so it's drawn smaller
             val text = remember(paragraph) { restyled(paragraph, setOf('ﷺ'), SpanStyle(fontFamily = FontFamily.Default, fontSize = 9.sp)) }
-            Text(text, style = MaterialTheme.typography.bodySmall.copy(lineHeight = 1.45.em), color = soft.textPrimary)
+            Text(text, style = MaterialTheme.typography.bodySmall, color = soft.textPrimary)
         }
     }
 }

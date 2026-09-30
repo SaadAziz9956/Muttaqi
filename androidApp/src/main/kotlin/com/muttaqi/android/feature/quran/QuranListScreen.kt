@@ -166,7 +166,7 @@ private fun ContinueReadingCard(progress: ReadingProgress, onContinue: () -> Uni
                     Text("Ayah ${progress.lastAyahNumber}", style = MaterialTheme.typography.bodySmall, color = Color.White.copy(alpha = 0.8f))
                 }
                 Spacer(Modifier.width(8.dp))
-                ArabicText(progress.surahName, fontSize = 30.sp, color = Color.White)
+                ArabicText(progress.surahName, fontSize = 30.sp, color = Color.White, lineSpacing = 0.sp, maxLines = 1)
             }
             SoftPillSurface(Modifier.padding(top = 16.dp).height(38.dp), fill = Color.White, rim = false) {
                 Text(
@@ -191,7 +191,7 @@ fun SurahCard(surah: Surah, modifier: Modifier = Modifier, onClick: () -> Unit) 
                     Text("${surah.number}", style = MaterialTheme.typography.labelLarge.copy(fontSize = 13.sp), color = soft.appPrimary)
                 }
                 Spacer(Modifier.weight(1f).width(6.dp))
-                ArabicText(surah.name, fontSize = 18.sp, textAlign = TextAlign.Right)
+                ArabicText(surah.name, fontSize = 18.sp, textAlign = TextAlign.Right, lineSpacing = 0.sp, maxLines = 1)
             }
             Text(
                 surah.englishName,
