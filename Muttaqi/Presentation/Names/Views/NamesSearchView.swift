@@ -24,7 +24,7 @@ struct NamesSearchView: View {
                     .submitLabel(.search)
                     .focused($isFieldFocused)
                     .frame(height: 50)
-                    .background(.textField, in: .rect(cornerRadius: 12))
+                    .softGlass(in: Capsule())
                     .padding(.top, 36)
 
                 Picker("Search by", selection: $viewModel.searchMode) {
@@ -47,6 +47,7 @@ struct NamesSearchView: View {
             .padding(.bottom, 24)
         }
         .scrollDismissesKeyboard(.interactively)
+        .background { SoftBackdrop() }
         .navigationBarTitleDisplayMode(.inline)
         .navigationBarBackButtonHidden(true)
         .toolbar(.hidden, for: .tabBar)
@@ -78,7 +79,7 @@ struct NamesSearchView: View {
                     } label: {
                         NameCard(name: name)
                     }
-                    .buttonStyle(.plain)
+                    .buttonStyle(SoftPressStyle())
                     .accessibilityHint("Shows this name on the 99 Names page")
                 }
             }

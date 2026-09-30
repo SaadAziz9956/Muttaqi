@@ -31,6 +31,7 @@ struct ArabicOnlyView: View {
         // drawn, which sent "Continue reading" several pages past the saved one
         VStack(spacing: 0) {
             ForEach(pages) { page in
+                // Each page floats as a sheet of paper
                 VStack(spacing: 20) {
                     MushafPageText(ayahs: page.ayahs, fontSize: fontSize.arabicSize)
 
@@ -43,7 +44,9 @@ struct ArabicOnlyView: View {
                         hairline
                     }
                 }
-                .padding(.vertical, 16)
+                .padding(18)
+                .softCard(cornerRadius: 26)
+                .padding(.vertical, 8)
             }
         }
         .scrollTargetLayout()

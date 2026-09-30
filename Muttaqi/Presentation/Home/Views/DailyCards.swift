@@ -3,6 +3,7 @@ import SwiftUI
 struct AyahOfTheDayCard: View {
     let dailyAyah: DailyAyah
     let onOpen: () -> Void
+    @Environment(AppRouter.self) private var router
 
     private var shareText: String {
         [dailyAyah.ayah.arabicText, dailyAyah.ayah.translation, "Quran (\(dailyAyah.reference))"]
@@ -38,12 +39,16 @@ struct AyahOfTheDayCard: View {
                     .padding(.top, 12)
             }
             .frame(maxWidth: .infinity)
-            .cardStyle()
+            .dailyCard()
         }
-        .buttonStyle(.plain)
+        .buttonStyle(SoftPressStyle())
+        .overlay(alignment: .topTrailing) {
+            ShareButton(passage: SharePassage(ayah: dailyAyah.ayah))
+                .padding(10)
+        }
         .contextMenu {
             Button("Copy", systemImage: "doc.on.doc") { UIPasteboard.general.string = shareText }
-            ShareLink(item: shareText)
+            Button("Share", systemImage: "square.and.arrow.up") { router.push(SharePassage(ayah: dailyAyah.ayah)) }
         }
         .accessibilityHint("Opens the ayah in the Quran")
     }
@@ -51,6 +56,12 @@ struct AyahOfTheDayCard: View {
 
 struct DuaOfTheDayCard: View {
     let dua: Dua
+    @Environment(AppRouter.self) private var router
+
+    private var sharePassage: SharePassage {
+        SharePassage(arabic: dua.arabic, transliteration: dua.transliteration, translation: dua.translation,
+                     reference: "Quran (\(dua.id))")
+    }
 
     private var shareText: String {
         [dua.arabic, dua.transliteration, dua.translation, "Quran (\(dua.id))"].joined(separator: "\n\n")
@@ -89,11 +100,73 @@ struct DuaOfTheDayCard: View {
                 .frame(maxWidth: .infinity)
                 .padding(.top, 14)
         }
-        .cardStyle()
+        .dailyCard()
+        .overlay(alignment: .topTrailing) {
+            ShareButton(passage: sharePassage)
+                .padding(10)
+        }
         .contextMenu {
             Button("Copy", systemImage: "doc.on.doc") { UIPasteboard.general.string = shareText }
-            ShareLink(item: shareText)
+            Button("Share", systemImage: "square.and.arrow.up") { router.push(sharePassage) }
         }
+    }
+}
+
+/// A short authentic hadith from Explore, in full as HadeethEnc publishes it
+struct HadithOfTheDayCard: View {
+    let hadith: HadithPassage
+    @Environment(AppRouter.self) private var router
+
+    var body: some View {
+        let style = TranslationStyle(for: hadith.translation, size: 14)
+        let source = "\(hadith.attribution) · \(hadith.grade)"
+
+        VStack(spacing: 0) {
+            cardTitle("Hadith of the Day")
+
+            if !hadith.arabic.isEmpty {
+                Text(AttributedString.arabic(hadith.arabic, size: 19))
+                    .lineSpacing(9)
+                    .foregroundStyle(.textPrimary)
+                    .multilineTextAlignment(.center)
+                    .padding(.top, 22)
+            }
+
+            Text(hadith.translation)
+                .font(style.font)
+                .foregroundStyle(.textPrimary)
+                .multilineTextAlignment(.center)
+                .lineSpacing(style.isRightToLeft ? 8 : 4)
+                .padding(.top, 12)
+
+            Text(source)
+                .font(TranslationStyle.isArabicScript(source) ? TranslationStyle(for: source, size: 11).font : .labelSmall)
+                .foregroundStyle(.brandTeal)
+                .multilineTextAlignment(.center)
+                .padding(.top, 12)
+        }
+        .frame(maxWidth: .infinity)
+        .dailyCard()
+        .overlay(alignment: .topTrailing) {
+            ShareButton(passage: SharePassage(hadith: hadith))
+                .padding(10)
+        }
+        .contextMenu {
+            Button("Copy", systemImage: "doc.on.doc") {
+                UIPasteboard.general.string = [hadith.arabic, hadith.translation, source].joined(separator: "\n\n")
+            }
+            Button("Share", systemImage: "square.and.arrow.up") { router.push(SharePassage(hadith: hadith)) }
+        }
+    }
+}
+
+private extension View {
+    /// The daily cards float on the Home page like its tiles
+    func dailyCard() -> some View {
+        padding(.horizontal, 22)
+            .padding(.top, 18)
+            .padding(.bottom, 22)
+            .softCard()
     }
 }
 

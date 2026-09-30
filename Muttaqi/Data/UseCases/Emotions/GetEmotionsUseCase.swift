@@ -9,7 +9,7 @@ struct GetEmotionsUseCase: Sendable {
         self.languagePreferences = languagePreferences
     }
 
-    func execute() throws -> (header: EmotionsHeader, emotions: [Emotion]) {
+    func execute() throws -> (header: PageQuote, emotions: [Emotion]) {
         let language = languagePreferences.getSelectedLanguage().code
         return (try repository.header(language: language), try repository.emotions(language: language))
     }

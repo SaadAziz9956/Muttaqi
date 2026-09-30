@@ -15,12 +15,33 @@ final class HomeViewModel {
     private(set) var quote: DailyAyah?
     private(set) var ayahOfTheDay: DailyAyah?
     private(set) var duaOfTheDay: Dua?
+    private(set) var hadithOfTheDay: HadithPassage?
+    private(set) var nameOfTheDay: AllahName?
+    private(set) var topicOfTheDay: ExploreTopic?
+    /// Where the reader left off in the Quran, and that surah, to open it again
+    private(set) var lastReading: (progress: ReadingProgress, surah: Surah)?
+    /// Surah al-Kahf, suggested on Fridays
+    private(set) var kahf: Surah?
+    /// Every dhikr said today, all counters together
+    private(set) var dhikrToday = 0
+    private(set) var qibla: QiblaDirection?
+    /// Turn from the phone's heading to the Kaaba, as a continuous angle so the arrow turns the short way round
+    private(set) var qiblaArrowRotation: Double?
 
     private let location: LocationRepositoryProtocol
     private let getPrayerSchedule: GetPrayerScheduleUseCase
     private let fetchAyah: FetchAyahUseCase
     private let getAyahOfTheDay: GetAyahOfTheDayUseCase
     private let getDuaOfTheDay: GetDuaOfTheDayUseCase
+    private let getExplore: GetExploreUseCase
+    private let getNames: GetAllahNamesUseCase
+    private let getDhikrSections: GetDhikrSectionsUseCase
+    private let dhikrProgress: DhikrProgressStoring
+    private let getLastReading: GetLastReadingUseCase
+    private let fetchSurahs: FetchSurahsUseCase
+    private let getQiblaDirection: GetQiblaDirectionUseCase
+    private let compass: CompassServiceProtocol
+    let journal: JournalStore
     private let calendar: Calendar
 
     private static let hijriFormatter: DateFormatter = {
@@ -39,6 +60,15 @@ final class HomeViewModel {
         fetchAyah: FetchAyahUseCase,
         getAyahOfTheDay: GetAyahOfTheDayUseCase,
         getDuaOfTheDay: GetDuaOfTheDayUseCase,
+        getExplore: GetExploreUseCase,
+        getNames: GetAllahNamesUseCase,
+        getDhikrSections: GetDhikrSectionsUseCase,
+        dhikrProgress: DhikrProgressStoring,
+        getLastReading: GetLastReadingUseCase,
+        fetchSurahs: FetchSurahsUseCase,
+        getQiblaDirection: GetQiblaDirectionUseCase,
+        compass: CompassServiceProtocol,
+        journal: JournalStore,
         calendar: Calendar = .current
     ) {
         self.location = location
@@ -46,6 +76,15 @@ final class HomeViewModel {
         self.fetchAyah = fetchAyah
         self.getAyahOfTheDay = getAyahOfTheDay
         self.getDuaOfTheDay = getDuaOfTheDay
+        self.getExplore = getExplore
+        self.getNames = getNames
+        self.getDhikrSections = getDhikrSections
+        self.dhikrProgress = dhikrProgress
+        self.getLastReading = getLastReading
+        self.fetchSurahs = fetchSurahs
+        self.getQiblaDirection = getQiblaDirection
+        self.compass = compass
+        self.journal = journal
         self.calendar = calendar
     }
 
@@ -54,7 +93,78 @@ final class HomeViewModel {
         quote = try? await fetchAyah.execute(surahNumber: 3, ayahNumber: 139)
         ayahOfTheDay = try? await getAyahOfTheDay.execute()
         duaOfTheDay = try? getDuaOfTheDay.execute()
+        loadDailyPicks()
+        dhikrToday = countDhikrToday()
+        await journal.load()
+        await loadLastReading()
         await loadPrayerTimes()
+        if let coordinates = location.lastKnownCoordinates() {
+            qibla = getQiblaDirection.execute(from: coordinates)
+        }
+    }
+
+    /// Today's journal entry, if one has been written
+    var journalToday: JournalEntry? {
+        journal.entries.first { calendar.isDateInToday($0.createdAt) }
+    }
+
+    func isFriday(_ date: Date) -> Bool {
+        calendar.component(.weekday, from: date) == 6
+    }
+
+    /// Follows the compass for the Qibla tile until the calling task is cancelled
+    func trackQibla() async {
+        guard compass.isAvailable else { return }
+        var previous: Double?
+        for await update in compass.headings() {
+            guard let qibla else { continue }
+            let target = qibla.bearing - update.degrees
+            if let previous, let current = qiblaArrowRotation {
+                var step = (target - previous).truncatingRemainder(dividingBy: 360)
+                if step > 180 { step -= 360 } else if step < -180 { step += 360 }
+                qiblaArrowRotation = current + step
+            } else {
+                qiblaArrowRotation = target
+            }
+            previous = target
+        }
+    }
+
+    // One of each, changing at midnight: a Name of Allah, an Explore topic and an authentic hadith from Explore
+    private func loadDailyPicks() {
+        let day = calendar.ordinality(of: .day, in: .era, for: .now) ?? 0
+        if let names = try? getNames.execute(), !names.isEmpty {
+            nameOfTheDay = names[day % names.count]
+        }
+        if let groups = try? getExplore.execute().groups {
+            let topics = groups.flatMap(\.topics)
+            if !topics.isEmpty { topicOfTheDay = topics[(day * 7) % topics.count] }
+            // HadeethEnc's texts are shown in full, so Home picks from the ones short enough for a card, and from the
+            // topics everyone meets day to day rather than rulings for particular situations
+            let everyday: Set = ["faith", "worship", "character", "society", "daily-life"]
+            let hadith = groups.filter { everyday.contains($0.id) }
+                .flatMap(\.topics)
+                .flatMap(\.hadith)
+                .filter { $0.translation.count <= 420 }
+            if !hadith.isEmpty { hadithOfTheDay = hadith[(day * 13) % hadith.count] }
+        }
+    }
+
+    private func countDhikrToday() -> Int {
+        guard let sections = try? getDhikrSections.execute() else { return 0 }
+        return sections.flatMap(\.dhikr).reduce(0) { total, dhikr in
+            let progress = dhikrProgress.progress(for: dhikr.id)
+            return total + progress.count + progress.rounds * (dhikr.target ?? 0)
+        }
+    }
+
+    private func loadLastReading() async {
+        guard let surahs = try? await fetchSurahs.execute() else { return }
+        kahf = surahs.first { $0.number == 18 }
+        if let progress = try? await getLastReading.execute(),
+           let surah = surahs.first(where: { $0.number == progress.surahNumber }) {
+            lastReading = (progress, surah)
+        }
     }
 
     func requestLocation() async {

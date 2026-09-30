@@ -15,13 +15,13 @@ struct NameCard: View {
                 .foregroundStyle(.textPrimary)
 
             Text(name.transliteration)
-                .font(.custom("ReemKufi-Regular", size: 18, relativeTo: .headline))
-                .foregroundStyle(.textSecondary)
+                .font(.custom("ReemKufi-Medium", size: 18, relativeTo: .headline))
+                .foregroundStyle(.appPrimary)
                 .padding(.top, 12)
 
             Text(name.meaning.sentenceCased)
                 .font(meaningStyle.font)
-                .foregroundStyle(.textSecondary)
+                .foregroundStyle(.textPrimary)
                 .lineSpacing(meaningStyle.isRightToLeft ? 6 : 2)
                 .padding(.top, 10)
         }
@@ -32,13 +32,16 @@ struct NameCard: View {
         .background { watermark }
         .overlay(alignment: .topLeading) {
             Text("\(name.number)")
-                .font(.custom("ReemKufi-Regular", size: 18, relativeTo: .headline))
-                .foregroundStyle(.textPrimary)
-                .padding(.leading, 18)
-                .padding(.top, 14)
+                .font(.custom("ReemKufi-Medium", size: 14, relativeTo: .subheadline))
+                .foregroundStyle(.appPrimary)
+                .frame(width: 36, height: 36)
+                .background(Color.softSurface, in: .circle)
+                .overlay { Circle().strokeBorder(Color.softRim, lineWidth: 1.5) }
+                .padding(.leading, 16)
+                .padding(.top, 16)
         }
-        .background(.tintedSurface, in: .rect(cornerRadius: 15))
-        .shadow(color: Color.brandTeal.opacity(0.25), radius: 2, y: 1)
+        // Floats on the soft mint-and-gold artwork, like the Name of the day on Home
+        .softCard(cornerRadius: 30, rim: 3, artwork: .dawn)
         .accessibilityElement(children: .combine)
     }
 

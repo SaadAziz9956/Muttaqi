@@ -2,32 +2,44 @@ import SwiftUI
 
 struct SurahCardView: View {
     let surah: Surah
-    
+
     var body: some View {
-        VStack(spacing: 0) {
+        VStack(alignment: .leading, spacing: 0) {
+            HStack(alignment: .top) {
+                Text(surah.number, format: .number)
+                    .font(.custom("ReemKufi-Medium", size: 13))
+                    .foregroundStyle(.appPrimary)
+                    .frame(width: 32, height: 32)
+                    .background(.tintedSurface, in: .circle)
+                Spacer(minLength: 6)
+                Text(surah.name)
+                    .font(.arabic(18))
+                    .foregroundStyle(.textPrimary)
+                    .lineLimit(1)
+                    .minimumScaleFactor(0.7)
+            }
+
             Text(surah.englishName)
-                .font(.bodyMedium)
-                .foregroundStyle(.textPrimary)
-                .frame(maxWidth: .infinity, alignment: .leading)
-            
+                .font(.custom("ReemKufi-Medium", size: 16))
+                .foregroundStyle(.appPrimary)
+                .lineLimit(1)
+                .minimumScaleFactor(0.8)
+                .padding(.top, 16)
+
             Text(surah.englishNameTranslation)
                 .font(.labelSmall)
                 .foregroundStyle(.textSecondary)
-                .frame(maxWidth: .infinity, alignment: .leading)
-            
-            Text(surah.name)
-                .font(.arabic(18))
-                .foregroundStyle(.textPrimary)
-                .padding(.top, 16)
-            
-            Text("1 - \(surah.numberOfAyahs)")
-                .font(.labelSmall)
-                .foregroundStyle(.textSecondary)
-                .padding(.top, 18)
+                .lineLimit(1)
+                .minimumScaleFactor(0.85)
+
+            Text("\(surah.numberOfAyahs) ayahs · \(surah.revelationType)")
+                .font(.custom("ReemKufi-Regular", size: 11))
+                .foregroundStyle(.brandTeal)
+                .padding(.top, 10)
         }
-        .padding(15)
-        .frame(maxWidth: .infinity)
-        .background(.surahContainer)
-        .clipShape(RoundedRectangle(cornerRadius: 12))
+        .padding(16)
+        .frame(maxWidth: .infinity, alignment: .leading)
+        .softCard(cornerRadius: 24)
+        .accessibilityElement(children: .combine)
     }
 }

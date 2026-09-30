@@ -35,9 +35,10 @@ struct DuaChapterView: View {
                     .multilineTextAlignment(.center)
                     .padding(.top, 8)
             }
-            .padding(.horizontal, 22)
+            .padding(.horizontal, 20)
             .padding(.bottom, 32)
         }
+        .background { SoftBackdrop() }
         .navigationBarTitleDisplayMode(.inline)
         .collapsingBarTitle(chapter.title, titleBottom: titleBottom)
         .toolbar(.hidden, for: .tabBar)

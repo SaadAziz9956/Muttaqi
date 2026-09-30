@@ -50,6 +50,11 @@ struct SurahDetailView: View {
             .id(coordinator.navigator.currentSurah.value)
             .transition(SurahSlideTransition(navigator: coordinator.navigator, width: contentWidth))
         }
+        .background { SoftBackdrop() }
+        .overlay(alignment: .bottom) {
+            ReadingPositionPill(coordinator: coordinator)
+                .padding(.bottom, 8)
+        }
         .onDisappear {
             coordinator.saveProgressNow()
         }
@@ -90,7 +95,8 @@ struct SurahDetailView: View {
             TafsirView(
                 surah: coordinator.headerSurah,
                 viewModel: coordinator.tafsirViewModel,
-                language: coordinator.settingsViewModel.selectedLanguage
+                language: coordinator.settingsViewModel.selectedLanguage,
+                startAyah: coordinator.tafsirStartAyah
             )
             .presentationDetents([.large])
             .presentationDragIndicator(.visible)
@@ -144,7 +150,8 @@ struct SurahDetailView: View {
                 AyahCardView(
                     ayah: ayah,
                     fontSize: coordinator.settingsViewModel.fontSize,
-                    language: coordinator.settingsViewModel.selectedLanguage
+                    language: coordinator.settingsViewModel.selectedLanguage,
+                    onExplanation: { coordinator.openTafsir(at: ayah.numberInSurah) }
                 )
             }
         case .arabicOnly:
@@ -162,7 +169,8 @@ struct SurahDetailView: View {
             onNext: goToNextSurah
         )
         .padding(.top, 24)
-        .padding(.bottom, 32)
+        // Room for the reading position pill, so it never covers the last cards
+        .padding(.bottom, 72)
     }
 
     private func goToPreviousSurah() {
@@ -225,5 +233,26 @@ private struct SurahSlideTransition: Transition {
         // Forward: the new surah enters from the trailing edge and the old one leaves by the leading edge
         let sign: CGFloat = navigator.navigationDirection == .forward ? 1 : -1
         content.offset(x: -phase.value * sign * width)
+    }
+}
+
+/// Where the reader is, floating at the foot of the screen. It reads the position in its own body, so scrolling
+/// redraws only the pill, not the ayahs.
+private struct ReadingPositionPill: View {
+    let coordinator: SurahDetailCoordinator
+
+    var body: some View {
+        if let position = coordinator.readingPosition {
+            Text(position)
+                .font(.custom("ReemKufi-Medium", size: 13))
+                .foregroundStyle(.appPrimary)
+                .contentTransition(.numericText())
+                .animation(.snappy, value: position)
+                .padding(.horizontal, 16)
+                .frame(height: 36)
+                // Glass, since it floats over the ayahs as they scroll beneath it
+                .glassEffect(.regular, in: .capsule)
+                .transition(.opacity)
+        }
     }
 }

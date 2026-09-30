@@ -10,7 +10,7 @@ struct NamesView: View {
     }
 
     var body: some View {
-        let hadith = HadithQuote.ninetyNineNames.text(language: viewModel.language)
+        let hadith = PublishedQuote.ninetyNineNames.text(language: viewModel.language)
 
         GeometryReader { screen in
             ScrollView {
@@ -22,17 +22,26 @@ struct NamesView: View {
 
                     // 300pt on an iPhone Pro, in proportion on bigger and smaller screens
                     carousel(cardHeight: max(260, screen.size.height * 0.415))
-                        .padding(.top, 36)
+                        .padding(.top, 28)
 
                     // The hadith sits at the foot of the screen, as in the design; the page only scrolls when a
                     // long card leaves no room for it there
                     Spacer(minLength: 32)
 
+                    // Which name is showing, as the cards are swiped
+                    Text("\(viewModel.currentNumber ?? 1) of \(max(viewModel.names.count, 99))")
+                        .font(.custom("ReemKufi-Medium", size: 13))
+                        .foregroundStyle(.appPrimary)
+                        .contentTransition(.numericText())
+                        .animation(.snappy, value: viewModel.currentNumber)
+                        .softPill()
+                        .padding(.bottom, 22)
+
                     VStack(spacing: 6) {
                         Text(hadith)
                             .font(TranslationStyle(for: hadith, size: 14).font)
                             .foregroundStyle(.textSecondary)
-                        Text(HadithQuote.ninetyNineNames.source)
+                        Text(PublishedQuote.ninetyNineNames.source)
                             .font(.labelSmall)
                             .foregroundStyle(.brandTeal)
                     }
@@ -44,6 +53,7 @@ struct NamesView: View {
             }
             .scrollBounceBehavior(.basedOnSize)
         }
+        .background { SoftBackdrop() }
         .navigationBarTitleDisplayMode(.inline)
         .navigationBarBackButtonHidden(true)
         .background(SwipeBackEnabler())
@@ -57,6 +67,11 @@ struct NamesView: View {
                         .foregroundStyle(.textPrimary)
                 }
                 .accessibilityLabel("Back")
+            }
+            if let name = viewModel.names.first(where: { $0.number == viewModel.currentNumber }) {
+                ToolbarItem(placement: .navigationBarTrailing) {
+                    ShareButton(passage: SharePassage(name: name), size: 22, color: .textPrimary, padding: 0)
+                }
             }
             ToolbarItem(placement: .navigationBarTrailing) {
                 Button { isSearchOpen = true } label: {
@@ -87,7 +102,8 @@ struct NamesView: View {
             LazyHStack(alignment: .top, spacing: 12) {
                 ForEach(viewModel.names) { name in
                     NameCard(name: name, minHeight: cardHeight)
-                        .padding(.vertical, 6)
+                        // Room for the card's float shadow, which the scroll view would otherwise clip
+                        .padding(.vertical, 18)
                         .containerRelativeFrame(.horizontal)
                         .scrollTransition(axis: .horizontal) { card, phase in
                             card
@@ -100,6 +116,7 @@ struct NamesView: View {
             .scrollTargetLayout()
         }
         .contentMargins(.horizontal, 38, for: .scrollContent)
+        .scrollClipDisabled()
         .scrollTargetBehavior(.viewAligned)
         .scrollPosition(id: $viewModel.currentNumber)
         .scrollIndicators(.hidden)

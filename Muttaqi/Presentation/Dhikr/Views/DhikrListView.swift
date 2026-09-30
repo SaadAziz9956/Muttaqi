@@ -17,16 +17,19 @@ struct DhikrListView: View {
             header
                 .listRowInsets(Self.rowInsets)
                 .listRowSeparator(.hidden)
+                .listRowBackground(Color.clear)
 
             if let section = viewModel.selectedSection {
                 categoryTabs(selected: section.id)
                     .listRowSeparator(.hidden)
+                    .listRowBackground(Color.clear)
 
                 Text(section.subtitle)
                     .font(.labelSmall)
                     .foregroundStyle(.textSecondary)
-                    .listRowInsets(EdgeInsets(top: 4, leading: 20, bottom: 0, trailing: 20))
+                    .listRowInsets(EdgeInsets(top: 4, leading: 24, bottom: 6, trailing: 20))
                     .listRowSeparator(.hidden)
+                    .listRowBackground(Color.clear)
 
                 ForEach(section.dhikr) { dhikr in
                     Button {
@@ -34,11 +37,16 @@ struct DhikrListView: View {
                     } label: {
                         DhikrRow(dhikr: dhikr)
                     }
-                    .listRowInsets(Self.rowInsets)
+                    .buttonStyle(SoftPressStyle())
+                    .listRowInsets(EdgeInsets(top: 7, leading: 20, bottom: 7, trailing: 20))
+                    .listRowSeparator(.hidden)
+                    .listRowBackground(Color.clear)
                 }
             }
         }
         .listStyle(.plain)
+        .scrollContentBackground(.hidden)
+        .background { SoftBackdrop() }
         // Lets the one-line caption under the tabs be only as tall as its text
         .environment(\.defaultMinListRowHeight, 0)
         .navigationBarTitleDisplayMode(.inline)
@@ -61,7 +69,7 @@ struct DhikrListView: View {
     }
 
     private var header: some View {
-        let quote = HadithQuote.rememberingAllah.text(language: viewModel.language)
+        let quote = PublishedQuote.rememberingAllah.text(language: viewModel.language)
         let quoteStyle = TranslationStyle(for: quote, size: 14)
 
         return VStack(spacing: 0) {
@@ -77,7 +85,7 @@ struct DhikrListView: View {
                 .multilineTextAlignment(.center)
                 .padding(.top, 16)
 
-            Text(HadithQuote.rememberingAllah.source)
+            Text(PublishedQuote.rememberingAllah.source)
                 .font(.labelSmall)
                 .foregroundStyle(.textSecondary)
                 .padding(.top, 4)
@@ -89,29 +97,33 @@ struct DhikrListView: View {
     private func categoryTabs(selected: DhikrSection.ID) -> some View {
         ScrollViewReader { proxy in
             ScrollView(.horizontal) {
-                HStack(spacing: 8) {
-                    ForEach(viewModel.sections) { section in
-                        let isSelected = section.id == selected
-                        Button {
-                            viewModel.selectedSectionID = section.id
-                        } label: {
-                            Text(section.title)
-                                .font(.custom("ReemKufi-Regular", size: 14, relativeTo: .subheadline))
-                                .foregroundStyle(isSelected ? Color.onPrimary : Color.brandTeal)
-                                .padding(.horizontal, 16)
-                                .frame(minHeight: 36)
-                                .background(isSelected ? Color.appPrimary : Color.tintedSurface, in: .capsule)
-                                .contentShape(.capsule)
+                // Native glass rendered as one group, which is cheaper than each on its own
+                GlassEffectContainer(spacing: 4) {
+                    HStack(spacing: 8) {
+                        ForEach(viewModel.sections) { section in
+                            let isSelected = section.id == selected
+                            Button {
+                                viewModel.selectedSectionID = section.id
+                            } label: {
+                                Text(section.title)
+                                    .font(.custom("ReemKufi-Medium", size: 13, relativeTo: .subheadline))
+                                    .foregroundStyle(isSelected ? Color.white : Color.appPrimary)
+                                    .padding(.horizontal, 18)
+                                    .frame(minHeight: 36)
+                                    .softGlass(in: Capsule(), fill: isSelected ? .shareCard : .softSurface, rim: !isSelected)
+                            }
+                            .buttonStyle(SoftPressStyle())
+                            .id(section.id)
+                            .accessibilityAddTraits(isSelected ? .isSelected : [])
                         }
-                        .buttonStyle(.plain)
-                        .id(section.id)
-                        .accessibilityAddTraits(isSelected ? .isSelected : [])
                     }
                 }
                 .padding(.horizontal, 20)
-                .padding(.vertical, 10)
+                // Room for the chips' float shadow, which a scroll view would otherwise clip
+                .padding(.vertical, 14)
             }
             .scrollIndicators(.hidden)
+            .scrollClipDisabled()
             // Brings the picked tab into view, e.g. one partly off the edge
             .onChange(of: selected) { _, id in
                 withAnimation(.snappy) { proxy.scrollTo(id, anchor: .center) }
@@ -132,23 +144,31 @@ private struct DhikrRow: View {
             ?? dhikr.transliteration
         let captionStyle = TranslationStyle(for: caption, size: 12)
 
-        VStack(alignment: .leading, spacing: 10) {
-            Text(AttributedString.arabic(dhikr.arabic, size: 20))
-                .foregroundStyle(.brandTeal)
+        VStack(alignment: .leading, spacing: 12) {
+            Text(AttributedString.arabic(dhikr.arabic, size: 21))
+                .foregroundStyle(.textPrimary)
                 .lineLimit(1)
                 .frame(maxWidth: .infinity, alignment: .trailing)
 
-            Text(caption)
-                .font(captionStyle.font)
-                .foregroundStyle(.textPrimary)
-                .lineLimit(1)
-                .frame(maxWidth: .infinity, alignment: captionStyle.isRightToLeft ? .trailing : .leading)
+            HStack(spacing: 10) {
+                Text(caption)
+                    .font(captionStyle.font)
+                    .foregroundStyle(.appPrimary)
+                    .lineLimit(1)
+                    .frame(maxWidth: .infinity, alignment: captionStyle.isRightToLeft ? .trailing : .leading)
+
+                if let count = dhikr.target {
+                    Text("\(count)×")
+                        .font(.custom("ReemKufi-Medium", size: 12))
+                        .foregroundStyle(.brandTeal)
+                        .padding(.horizontal, 10)
+                        .frame(height: 24)
+                        .background(.tintedSurface, in: .capsule)
+                }
+            }
         }
-        .padding(.vertical, 18)
-        .contentShape(.rect)
-        // The divider spans the row's full width, with the same margin on both sides
-        .alignmentGuide(.listRowSeparatorLeading) { _ in 0 }
-        .alignmentGuide(.listRowSeparatorTrailing) { $0[.trailing] }
+        .padding(18)
+        .softCard(cornerRadius: 24)
         .accessibilityElement(children: .ignore)
         .accessibilityLabel(dhikr.title ?? dhikr.transliteration)
         .accessibilityValue(dhikr.translation ?? "")

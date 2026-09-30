@@ -14,63 +14,79 @@ struct HomeView: View {
         ScrollView {
             // Re-evaluated every minute, so the next prayer and the Hijri date (which turns at Maghrib) stay current
             TimelineView(.everyMinute) { context in
-                VStack(spacing: 0) {
-                    VStack(alignment: .trailing, spacing: 7) {
-                        NextPrayerPill(
-                            upcoming: viewModel.nextPrayer(at: context.date),
-                            locationState: viewModel.locationState,
-                            onSetLocation: setLocation
-                        )
+                let next = viewModel.nextPrayer(at: context.date)
 
+                VStack(spacing: 0) {
+                    HStack {
                         Text(viewModel.hijriDate(at: context.date))
-                            .font(.custom("ReemKufi-Regular", size: 12))
+                            .font(.custom("ReemKufi-Regular", size: 13))
                             .foregroundStyle(.appPrimary)
+                        Spacer(minLength: 8)
+                        NextPrayerPill(upcoming: next, locationState: viewModel.locationState, onSetLocation: setLocation)
                     }
-                    .frame(maxWidth: .infinity, alignment: .trailing)
                     .padding(.top, 6)
 
                     greeting
-                        .padding(.top, 34)
+                        .padding(.top, 30)
 
-                    QuickActionsRow { action in
-                        switch action {
-                        case .qibla: router.pushHome(.qibla)
-                        case .journal: router.pushHome(.journal)
-                        case .dikr: router.pushHome(.dhikrList)
-                        case .names: router.pushHome(.names)
-                        case .emotions: router.pushHome(.emotions)
+                    if let today = viewModel.schedule?.today {
+                        // Once Isha has passed, the next prayer is tomorrow's Fajr, so nothing in today's row is picked
+                        let isToday = next.map { Calendar.current.isDate($0.time, inSameDayAs: today.fajr) } ?? false
+                        PrayerTimesStrip(times: today, next: isToday ? next?.prayer : nil)
+                            .padding(.top, 28)
+                    }
+
+                    HomeBento(viewModel: viewModel)
+                        .padding(.top, 18)
+
+                    VStack(spacing: 14) {
+                        if let reading = viewModel.lastReading {
+                            SurahShortcut(
+                                surah: reading.surah,
+                                title: "Continue \(reading.surah.englishName)",
+                                subtitle: "Ayah \(reading.progress.lastAyahNumber)"
+                            ) {
+                                router.openInQuran(surah: reading.surah, ayah: reading.progress.lastAyahNumber)
+                            }
+                        }
+                        // Reading al-Kahf on Friday is a sunnah, so on Fridays it's a tap away
+                        if viewModel.isFriday(context.date), let kahf = viewModel.kahf,
+                           viewModel.lastReading?.surah.number != kahf.number {
+                            SurahShortcut(surah: kahf, title: "Surah \(kahf.englishName)", subtitle: "Friday") {
+                                router.openInQuran(surah: kahf, ayah: 1)
+                            }
                         }
                     }
-                    .padding(.top, 40)
+                    .padding(.top, 14)
 
-                    if let ayah = viewModel.ayahOfTheDay {
-                        AyahOfTheDayCard(dailyAyah: ayah) {
-                            router.openInQuran(surah: ayah.surah, ayah: ayah.ayah.numberInSurah)
+                    VStack(spacing: 18) {
+                        if let ayah = viewModel.ayahOfTheDay {
+                            AyahOfTheDayCard(dailyAyah: ayah) {
+                                router.openInQuran(surah: ayah.surah, ayah: ayah.ayah.numberInSurah)
+                            }
                         }
-                        .padding(.top, 40)
+                        if let hadith = viewModel.hadithOfTheDay {
+                            HadithOfTheDayCard(hadith: hadith)
+                        }
+                        if let dua = viewModel.duaOfTheDay {
+                            DuaOfTheDayCard(dua: dua)
+                        }
                     }
-
-                    if let dua = viewModel.duaOfTheDay {
-                        DuaOfTheDayCard(dua: dua)
-                            .padding(.top, 24)
-                    }
+                    .padding(.top, 28)
                 }
-                .padding(.horizontal, 22)
+                .padding(.horizontal, 20)
                 .padding(.bottom, 32)
             }
         }
+        .background { SoftBackdrop() }
         // Home has no title of its own, so its empty bar is hidden and the page starts under the status bar
         .toolbar(.hidden, for: .navigationBar)
         // Soft fade under the status bar so scrolled content doesn't collide with the clock
         .overlay(alignment: .top) {
-            LinearGradient(
-                colors: [Color(.systemBackground), Color(.systemBackground).opacity(0)],
-                startPoint: .top,
-                endPoint: .bottom
-            )
-            .frame(height: 70)
-            .ignoresSafeArea(edges: .top)
-            .allowsHitTesting(false)
+            LinearGradient(colors: [Color.softCanvas, Color.softCanvas.opacity(0)], startPoint: .top, endPoint: .bottom)
+                .frame(height: 70)
+                .ignoresSafeArea(edges: .top)
+                .allowsHitTesting(false)
         }
         .task {
             await viewModel.refresh()

@@ -41,6 +41,7 @@ struct DhikrCounterView: View {
                 .padding(.horizontal, 20)
                 .padding(.bottom, 24)
             }
+            .background { SoftBackdrop() }
             .safeAreaInset(edge: .bottom, spacing: 0) {
                 counter
             }
@@ -63,6 +64,9 @@ struct DhikrCounterView: View {
                         .foregroundStyle(.textPrimary)
                 }
                 .accessibilityLabel("Back")
+            }
+            ToolbarItem(placement: .navigationBarTrailing) {
+                ShareButton(passage: SharePassage(dhikr: viewModel.dhikr), size: 22, color: .textPrimary, padding: 0)
             }
             ToolbarItem(placement: .navigationBarTrailing) {
                 Button { isConfirmingReset = true } label: {
@@ -94,7 +98,6 @@ struct DhikrCounterView: View {
                 .foregroundStyle(.textPrimary)
                 .multilineTextAlignment(.trailing)
                 .frame(maxWidth: .infinity, alignment: .trailing)
-                .padding(.top, 16)
 
             Text(dhikr.transliteration)
                 .font(.custom("ReemKufi-Regular", size: 15, relativeTo: .body))
@@ -106,6 +109,9 @@ struct DhikrCounterView: View {
                     .padding(.top, 10)
             }
         }
+        .padding(20)
+        .softCard(cornerRadius: 26)
+        .padding(.top, 16)
         .textSelection(.enabled)
     }
 
@@ -113,7 +119,7 @@ struct DhikrCounterView: View {
     private var steps: some View {
         let current = viewModel.currentStep?.index ?? 0
 
-        return VStack(spacing: 10) {
+        return VStack(spacing: 12) {
             ForEach(Array(dhikr.steps.enumerated()), id: \.offset) { index, step in
                 VStack(alignment: .leading, spacing: 6) {
                     HStack(alignment: .firstTextBaseline) {
@@ -132,9 +138,14 @@ struct DhikrCounterView: View {
                         translated(translation.sentenceCased, size: 13, color: .textSecondary)
                     }
                 }
-                .padding(14)
+                .padding(16)
                 .frame(maxWidth: .infinity, alignment: .leading)
-                .background(index == current ? Color.tintedSurface : .clear, in: .rect(cornerRadius: 14))
+                .softCard(cornerRadius: 22)
+                .overlay {
+                    RoundedRectangle(cornerRadius: 22, style: .continuous)
+                        .strokeBorder(Color.shareCard, lineWidth: 2)
+                        .opacity(index == current ? 1 : 0)
+                }
                 .opacity(index < current ? 0.45 : 1)
                 .id(index)
                 .accessibilityElement(children: .combine)
@@ -153,8 +164,8 @@ struct DhikrCounterView: View {
             translated(hadith, size: 15, color: .textPrimary)
         }
         .frame(maxWidth: .infinity, alignment: .leading)
-        .padding(16)
-        .background(.tintedSurface, in: .rect(cornerRadius: 16))
+        .padding(18)
+        .softCard(cornerRadius: 24)
     }
 
     /// Translation text in the font and direction of its script, so Urdu is set in Nastaliq and right to left
@@ -202,26 +213,27 @@ struct DhikrCounterView: View {
             } label: {
                 ZStack {
                     Circle()
-                        .fill(.tintedSurface)
-                    Circle()
-                        .stroke(Color.brandTeal.opacity(0.2), lineWidth: 8)
+                        .stroke(Color.brandTeal.opacity(0.18), lineWidth: 8)
+                        .padding(10)
                     Circle()
                         .trim(from: 0, to: viewModel.roundProgress)
-                        .stroke(Color.brandTeal, style: StrokeStyle(lineWidth: 8, lineCap: .round))
+                        .stroke(Color.shareCard, style: StrokeStyle(lineWidth: 8, lineCap: .round))
                         .rotationEffect(.degrees(-90))
+                        .padding(10)
 
                     VStack(spacing: 0) {
                         Text("\(viewModel.count)")
                             .font(.custom("ReemKufi-Medium", size: 46, relativeTo: .largeTitle))
-                            .foregroundStyle(.appPrimary)
+                            .foregroundStyle(viewModel.isRoundComplete ? Color.white : Color.appPrimary)
                             .contentTransition(.numericText())
                         Text(counterCaption)
                             .font(.labelSmall)
-                            .foregroundStyle(.textSecondary)
+                            .foregroundStyle(viewModel.isRoundComplete ? Color.white.opacity(0.85) : Color.textSecondary)
                     }
                 }
                 .frame(width: counterSize, height: counterSize)
-                .contentShape(.circle)
+                // Native glass, so every count gets the system's press; it turns green once the round is complete
+                .softGlass(in: Circle(), fill: viewModel.isRoundComplete ? .shareCard : .softSurface, rim: !viewModel.isRoundComplete)
             }
             .buttonStyle(CounterButtonStyle())
             .sensoryFeedback(trigger: viewModel.count) { _, count in
@@ -245,13 +257,20 @@ struct DhikrCounterView: View {
         .padding(.top, 14)
         .padding(.bottom, 6)
         .frame(maxWidth: .infinity)
-        .background(Color(.systemBackground).ignoresSafeArea(edges: .bottom))
-        // Fades the text out just above the counter instead of cutting it off
-        .overlay(alignment: .top) {
-            LinearGradient(colors: [Color(.systemBackground).opacity(0), Color(.systemBackground)], startPoint: .top, endPoint: .bottom)
-                .frame(height: 24)
-                .offset(y: -24)
-                .allowsHitTesting(false)
+        // Fades the text out behind the counter, so the orb floats over the page rather than on a bar
+        .background {
+            LinearGradient(
+                stops: [
+                    .init(color: Color.softCanvas.opacity(0), location: 0),
+                    .init(color: Color.softCanvas.opacity(0.92), location: 0.3),
+                    .init(color: Color.softCanvas, location: 1),
+                ],
+                startPoint: .top,
+                endPoint: .bottom
+            )
+            .padding(.top, -30)
+            .ignoresSafeArea(edges: .bottom)
+            .allowsHitTesting(false)
         }
     }
 

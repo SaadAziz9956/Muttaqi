@@ -24,7 +24,8 @@ final class AppRouter {
     }
     
     enum ExploreDestination: Hashable {
-        case placeholder // Remove this when adding real destinations
+        /// One topic's page, opened at that topic's tab
+        case topic(id: String)
     }
     
     enum QuranDestination: Hashable {
@@ -56,6 +57,13 @@ final class AppRouter {
         selectedTab = .quran
     }
     
+    /// Switches to the Explore tab and opens the topic, e.g. from the topic of the day on Home
+    func openInExplore(topicID: String) {
+        explorePath = NavigationPath()
+        explorePath.append(ExploreDestination.topic(id: topicID))
+        selectedTab = .explore
+    }
+
     func pushDua(_ destination: DuaDestination) {
         duaPath.append(destination)
     }

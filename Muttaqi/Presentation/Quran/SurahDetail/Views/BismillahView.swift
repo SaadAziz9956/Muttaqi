@@ -10,7 +10,7 @@ struct BismillahView: View {
                 .font(.arabic(18))
                 .foregroundStyle(.textPrimary)
                 .multilineTextAlignment(.center)
-                .padding(.top, 35)
+                .padding(.top, 44)
 
             Text(translation)
                 .font(translationFont)
@@ -21,7 +21,7 @@ struct BismillahView: View {
                 .minimumScaleFactor(isEnglish ? 1 : 0.8)
                 .padding(.top, 18)
                 .padding(.horizontal, isEnglish ? 60 : 16)
-                .padding(.bottom, 40)
+                .padding(.bottom, 20)
         }
     }
 

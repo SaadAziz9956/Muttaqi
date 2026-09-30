@@ -40,12 +40,11 @@ struct SurahEndNavigationView: View {
                 .font(.bodyMedium)
                 .foregroundStyle(.textPrimary)
             }
-            .padding(15)
+            .padding(16)
             .frame(maxWidth: .infinity, alignment: isNext ? .trailing : .leading)
-            .background(.surahContainer)
-            .clipShape(RoundedRectangle(cornerRadius: 12))
+            .softCard(cornerRadius: 24, glass: true)
         }
-        .buttonStyle(.plain)
+        .buttonStyle(SoftPressStyle())
         .accessibilityLabel("\(isNext ? "Next" : "Previous") surah, \(neighbour.englishName)")
     }
 

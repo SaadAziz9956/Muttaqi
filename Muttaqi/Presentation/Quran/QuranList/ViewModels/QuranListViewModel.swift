@@ -17,9 +17,20 @@ final class QuranListViewModel {
         case continueTapped
     }
 
+    /// Where a surah was revealed, to narrow the list
+    enum Revelation: String, CaseIterable, Identifiable {
+        case all = "All"
+        case meccan = "Meccan"
+        case medinan = "Medinan"
+
+        var id: Self { self }
+    }
+
     private(set) var state: ViewState = .idle
     private(set) var surahs: [Surah] = []
     private(set) var readingProgress: ReadingProgress?
+    var query = ""
+    var revelation: Revelation = .all
 
     var onSurahSelected: ((Surah) -> Void)?
     var onContinueReading: ((Surah, Int) -> Void)?
@@ -36,6 +47,28 @@ final class QuranListViewModel {
         self.fetchSurahsUseCase = fetchSurahsUseCase
         self.getLastReadingUseCase = getLastReadingUseCase
         self.languagePreferences = languagePreferences
+    }
+
+    /// The surahs to show: those revealed where chosen, matching the search by number or by name. Names match without
+    /// their hyphens, apostrophes and accents, so "alkahf", "Al Kahf" and "kahf" all find Al-Kahf
+    var visibleSurahs: [Surah] {
+        let byPlace = revelation == .all ? surahs : surahs.filter { $0.revelationType == revelation.rawValue }
+        let words = Self.searchKey(query)
+        guard !words.isEmpty else { return byPlace }
+        if let number = Int(words) {
+            return byPlace.filter { String($0.number).hasPrefix(String(number)) }
+        }
+        return byPlace.filter { surah in
+            [surah.englishName, surah.englishNameTranslation, surah.name].contains { Self.searchKey($0).contains(words) }
+        }
+    }
+
+    var isSearching: Bool {
+        !query.trimmingCharacters(in: .whitespaces).isEmpty
+    }
+
+    private static func searchKey(_ text: String) -> String {
+        String(text.searchFolded.unicodeScalars.filter { CharacterSet.alphanumerics.contains($0) })
     }
 
     /// The reader's translation language, for the page's hadith

@@ -3,6 +3,7 @@ import SwiftUI
 struct QuranListView: View {
     @State private var viewModel: QuranListViewModel
     @State private var titleBottom: CGFloat = .infinity
+    @FocusState private var isSearchFocused: Bool
     @Environment(AppRouter.self) private var router
 
     init(viewModel: QuranListViewModel) {
@@ -50,10 +51,16 @@ struct QuranListView: View {
                 if viewModel.readingProgress != nil {
                     continueReadingCard
                 }
+                searchField
+                revelationChips
+                    .padding(.top, 14)
                 surahGrid
+                    .padding(.top, 18)
             }
-            .padding(.horizontal, 16)
+            .padding(.horizontal, 20)
         }
+        .scrollDismissesKeyboard(.immediately)
+        .background { SoftBackdrop() }
         .navigationBarTitleDisplayMode(.inline)
         .collapsingBarTitle("The Quran", titleBottom: titleBottom)
     }
@@ -61,7 +68,7 @@ struct QuranListView: View {
     // MARK: - Header
 
     private var headerSection: some View {
-        let quote = HadithQuote.learnAndTeachQuran.text(language: viewModel.language)
+        let quote = PublishedQuote.learnAndTeachQuran.text(language: viewModel.language)
 
         return VStack(spacing: 0) {
             Text(quote.quoted)
@@ -70,7 +77,7 @@ struct QuranListView: View {
                 .multilineTextAlignment(.center)
                 .padding(.top, 8)
 
-            Text(HadithQuote.learnAndTeachQuran.source)
+            Text(PublishedQuote.learnAndTeachQuran.source)
                 .font(.labelSmall)
                 .foregroundStyle(.textSecondary)
                 .padding(.top, 4)
@@ -87,54 +94,134 @@ struct QuranListView: View {
             Button {
                 viewModel.send(.continueTapped)
             } label: {
-                HStack {
-                    VStack(alignment: .leading, spacing: 2) {
-                        Text("Surah \(progress.surahEnglishName)")
-                            .font(.bodyLarge)
-                            .foregroundStyle(.brandTeal)
-                        Text("Ayah: \(progress.lastAyahNumber)")
-                            .font(.labelSmall)
-                            .foregroundStyle(.textSecondary)
-                    }
+                VStack(alignment: .leading, spacing: 0) {
+                    Text("Continue reading")
+                        .font(.custom("ReemKufi-Regular", size: 13))
+                        .foregroundStyle(.white.opacity(0.8))
 
-                    Spacer()
+                    HStack(alignment: .bottom) {
+                        VStack(alignment: .leading, spacing: 2) {
+                            Text(progress.surahEnglishName)
+                                .font(.custom("ReemKufi-Medium", size: 26, relativeTo: .title))
+                            Text("Ayah \(progress.lastAyahNumber)")
+                                .font(.custom("ReemKufi-Regular", size: 13))
+                                .foregroundStyle(.white.opacity(0.8))
+                        }
+                        Spacer(minLength: 8)
+                        Text(progress.surahName)
+                            .font(.arabic(30))
+                    }
+                    .padding(.top, 10)
 
                     Text("Continue")
-                        .font(.bodySmall)
-                        .foregroundStyle(.brandTeal)
-                        .padding(.horizontal, 20)
-                        .padding(.vertical, 8)
-                        .background(Color(.systemBackground), in: .rect(cornerRadius: 8))
+                        .font(.custom("ReemKufi-Medium", size: 14))
+                        .foregroundStyle(Color.shareCard)
+                        .padding(.horizontal, 22)
+                        .frame(height: 38)
+                        .softGlass(in: Capsule(), fill: .white, rim: false)
+                        .padding(.top, 16)
                 }
+                .foregroundStyle(.white)
                 .padding(20)
-                .background(Color.brandTeal.opacity(0.12), in: .rect(cornerRadius: 16))
+                .frame(maxWidth: .infinity, alignment: .leading)
+                .softCard(rim: 3, artwork: .forest)
             }
-            .buttonStyle(.plain)
+            .buttonStyle(SoftPressStyle())
             .accessibilityElement(children: .ignore)
             .accessibilityLabel("Continue reading Surah \(progress.surahEnglishName), ayah \(progress.lastAyahNumber)")
             .accessibilityAddTraits(.isButton)
-            .padding(.bottom, 24)
+            .padding(.bottom, 16)
             .transition(.opacity)
+        }
+    }
+
+    // MARK: - Search and filters
+
+    private var searchField: some View {
+        HStack(spacing: 10) {
+            Image("search-normal-linear")
+                .resizable()
+                .frame(width: 18, height: 18)
+                .foregroundStyle(.textSecondary)
+                .accessibilityHidden(true)
+
+            TextField("Search surah or number", text: $viewModel.query)
+                .font(.bodyMedium)
+                .foregroundStyle(.textPrimary)
+                .submitLabel(.search)
+                .textInputAutocapitalization(.never)
+                .autocorrectionDisabled()
+                .focused($isSearchFocused)
+
+            if viewModel.isSearching {
+                Button {
+                    viewModel.query = ""
+                    isSearchFocused = false
+                } label: {
+                    Image("close-circle-bold")
+                        .resizable()
+                        .frame(width: 18, height: 18)
+                        .foregroundStyle(.textSecondary)
+                }
+                .accessibilityLabel("Clear search")
+            }
+        }
+        .padding(.horizontal, 18)
+        .frame(height: 50)
+        .softGlass(in: Capsule())
+        .onTapGesture { isSearchFocused = true }
+    }
+
+    private var revelationChips: some View {
+        // Native glass rendered as one group, which is cheaper than each on its own
+        GlassEffectContainer(spacing: 4) {
+            HStack(spacing: 8) {
+                ForEach(QuranListViewModel.Revelation.allCases) { place in
+                    let isSelected = viewModel.revelation == place
+                    Button {
+                        withAnimation(.snappy) { viewModel.revelation = place }
+                    } label: {
+                        Text(place.rawValue)
+                            .font(.custom("ReemKufi-Medium", size: 13))
+                            .foregroundStyle(isSelected ? Color.white : Color.appPrimary)
+                            .padding(.horizontal, 18)
+                            .frame(height: 36)
+                            .softGlass(in: Capsule(), fill: isSelected ? .shareCard : .softSurface, rim: !isSelected)
+                    }
+                    .buttonStyle(SoftPressStyle())
+                    .accessibilityAddTraits(isSelected ? .isSelected : [])
+                }
+                Spacer(minLength: 0)
+            }
         }
     }
 
     // MARK: - Surah Grid
 
+    @ViewBuilder
     private var surahGrid: some View {
-        let columns = [
-            GridItem(.flexible(), spacing: 12),
-            GridItem(.flexible(), spacing: 12)
-        ]
+        let surahs = viewModel.visibleSurahs
+        if surahs.isEmpty {
+            ContentUnavailableView.search(text: viewModel.query)
+                .padding(.top, 20)
+        } else {
+            let columns = [
+                GridItem(.flexible(), spacing: 14),
+                GridItem(.flexible(), spacing: 14)
+            ]
 
-        return LazyVGrid(columns: columns, spacing: 12) {
-            ForEach(viewModel.surahs) { surah in
-                SurahCardView(surah: surah)
-                    .onTapGesture {
+            LazyVGrid(columns: columns, spacing: 14) {
+                ForEach(surahs) { surah in
+                    Button {
                         viewModel.send(.surahTapped(surah))
+                    } label: {
+                        SurahCardView(surah: surah)
                     }
+                    .buttonStyle(SoftPressStyle())
+                }
             }
+            .padding(.bottom, 32)
         }
-        .padding(.bottom, 24)
     }
 
     // MARK: - Error

@@ -2,6 +2,7 @@ import SwiftUI
 
 struct DuaEntryCard: View {
     let entry: DuaEntry
+    @Environment(AppRouter.self) private var router
 
     private var arabicText: AttributedString {
         .arabic(entry.arabic, size: 20)
@@ -46,6 +47,8 @@ struct DuaEntryCard: View {
 
                 Spacer(minLength: 8)
 
+                ShareButton(passage: SharePassage(dua: entry))
+
                 if entry.repeatCount > 1 {
                     Text("\(entry.repeatCount)×")
                         .font(.custom("ReemKufi-Medium", size: 12))
@@ -69,10 +72,13 @@ struct DuaEntryCard: View {
                     .padding(.top, 6)
             }
         }
-        .cardStyle()
+        .padding(.horizontal, 20)
+        .padding(.top, 18)
+        .padding(.bottom, 18)
+        .softCard(cornerRadius: 26)
         .contextMenu {
             Button("Copy", systemImage: "doc.on.doc") { UIPasteboard.general.string = shareText }
-            ShareLink(item: shareText)
+            Button("Share", systemImage: "square.and.arrow.up") { router.push(SharePassage(dua: entry)) }
         }
     }
 }

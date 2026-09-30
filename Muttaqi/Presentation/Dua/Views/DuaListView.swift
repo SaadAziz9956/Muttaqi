@@ -31,6 +31,7 @@ struct DuaListView: View {
             .padding(.bottom, 32)
         }
         .scrollDismissesKeyboard(.immediately)
+        .background { SoftBackdrop() }
         .navigationBarTitleDisplayMode(.inline)
         .collapsingBarTitle("Dua", titleBottom: titleBottom)
         .task { await viewModel.load() }
@@ -87,31 +88,35 @@ struct DuaListView: View {
                 .accessibilityLabel("Clear search")
             }
         }
-        .padding(.horizontal, 16)
-        .frame(height: 52)
-        .background(.textField, in: .rect(cornerRadius: 16))
-        .contentShape(.rect)
+        .padding(.horizontal, 18)
+        .frame(height: 50)
+        .softGlass(in: Capsule())
         .onTapGesture { isSearchFocused = true }
     }
 
     private var categoryGrid: some View {
-        LazyVGrid(columns: [GridItem(.flexible(), spacing: 12), GridItem(.flexible(), spacing: 12)], spacing: 12) {
+        LazyVGrid(columns: [GridItem(.flexible(), spacing: 14), GridItem(.flexible(), spacing: 14)], spacing: 14) {
             ForEach(viewModel.categories) { category in
                 Button {
                     open(category)
                 } label: {
-                    Text(category.title)
-                        .font(.custom("ReemKufi-Regular", size: 14))
-                        .foregroundStyle(.brandTeal)
-                        .multilineTextAlignment(.center)
-                        .lineLimit(2)
-                        .minimumScaleFactor(0.85)
-                        .padding(.horizontal, 10)
-                        .frame(maxWidth: .infinity, minHeight: 60)
-                        .background(.tintedSurface, in: .rect(cornerRadius: 12))
-                        .contentShape(.rect(cornerRadius: 12))
+                    VStack(alignment: .leading, spacing: 6) {
+                        Text(category.title)
+                            .font(.custom("ReemKufi-Medium", size: 15))
+                            .foregroundStyle(.appPrimary)
+                            .multilineTextAlignment(.leading)
+                            .lineLimit(2)
+                            .minimumScaleFactor(0.85)
+                        Spacer(minLength: 0)
+                        Text(category.entryCount == 1 ? "1 dua" : "\(category.entryCount) duas")
+                            .font(.custom("ReemKufi-Regular", size: 12))
+                            .foregroundStyle(.brandTeal)
+                    }
+                    .padding(16)
+                    .frame(maxWidth: .infinity, minHeight: 96, alignment: .leading)
+                    .softCard(cornerRadius: 24)
                 }
-                .buttonStyle(.plain)
+                .buttonStyle(SoftPressStyle())
                 .accessibilityHint("\(category.entryCount) duas")
             }
         }
@@ -145,12 +150,11 @@ struct DuaListView: View {
                                 .frame(width: 16, height: 16)
                                 .foregroundStyle(.textSecondary)
                         }
-                        .padding(.vertical, 12)
-                        .contentShape(.rect)
+                        .padding(16)
+                        .softCard(cornerRadius: 22)
                     }
-                    .buttonStyle(.plain)
-
-                    Divider()
+                    .buttonStyle(SoftPressStyle())
+                    .padding(.bottom, 12)
                 }
             }
         }

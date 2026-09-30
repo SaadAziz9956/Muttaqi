@@ -32,26 +32,38 @@ struct EmotionsListView: View {
                         .padding(.top, 4)
                 }
 
-                LazyVGrid(columns: [GridItem(.flexible(), spacing: 20), GridItem(.flexible(), spacing: 20)], spacing: 12) {
+                LazyVGrid(columns: [GridItem(.flexible(), spacing: 14), GridItem(.flexible(), spacing: 14)], spacing: 14) {
                     ForEach(viewModel.emotions) { emotion in
                         Button {
                             router.pushHome(.emotion(id: emotion.id))
                         } label: {
-                            Text(emotion.title)
-                                .font(.custom("ReemKufi-Regular", size: 12, relativeTo: .footnote))
-                                .foregroundStyle(.brandTeal)
-                                .frame(maxWidth: .infinity, minHeight: 53)
-                                .background(.tintedSurface, in: .rect(cornerRadius: 12))
-                                .contentShape(.rect(cornerRadius: 12))
+                            HStack(spacing: 8) {
+                                Text(emotion.title)
+                                    .font(.custom("ReemKufi-Medium", size: 15, relativeTo: .subheadline))
+                                    .foregroundStyle(.appPrimary)
+                                    .lineLimit(1)
+                                    .minimumScaleFactor(0.85)
+                                Spacer(minLength: 0)
+                                Image("arrow-right-01-linear")
+                                    .resizable()
+                                    .frame(width: 14, height: 14)
+                                    .rotationEffect(.degrees(-45))
+                                    .foregroundStyle(.brandTeal)
+                                    .accessibilityHidden(true)
+                            }
+                            .padding(.horizontal, 18)
+                            .frame(maxWidth: .infinity, minHeight: 60)
+                            .softCard(cornerRadius: 22)
                         }
-                        .buttonStyle(.plain)
+                        .buttonStyle(SoftPressStyle())
                     }
                 }
-                .padding(.top, 48)
+                .padding(.top, 36)
             }
-            .padding(.horizontal, 24)
+            .padding(.horizontal, 20)
             .padding(.bottom, 32)
         }
+        .background { SoftBackdrop() }
         .navigationBarTitleDisplayMode(.inline)
         .collapsingBarTitle("Emotions", titleBottom: titleBottom)
         .navigationBarBackButtonHidden(true)

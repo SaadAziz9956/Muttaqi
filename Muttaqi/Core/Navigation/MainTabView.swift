@@ -28,6 +28,10 @@ struct MainTabView: View {
     private func tabView(for tab: AppTab) -> some View {
         NavigationStack(path: pathBinding(for: tab)) {
             tabContent(for: tab)
+                // Any card or page in any tab can open the Share page
+                .navigationDestination(for: SharePassage.self) { passage in
+                    ShareView(passage: passage, language: container.readingPreferences.getSelectedLanguage().code)
+                }
         }
         .tag(tab)
         .tabItem {
@@ -60,12 +64,19 @@ struct MainTabView: View {
                     case .emotions:
                         EmotionsListView(viewModel: container.makeEmotionsViewModel())
                     case .emotion(let id):
-                        EmotionDetailView(viewModel: container.makeEmotionsViewModel(selectedID: id))
+                        TopicPageView(title: "Emotions", viewModel: container.makeEmotionPageViewModel(selectedID: id))
                     case .dhikr(let dhikr):
                         DhikrCounterView(viewModel: container.makeDhikrCounterViewModel(dhikr: dhikr))
                     }
                 }
-        case .explore: Text("Explore")
+        case .explore:
+            ExploreView(viewModel: container.makeExploreViewModel())
+                .navigationDestination(for: AppRouter.ExploreDestination.self) { dest in
+                    switch dest {
+                    case .topic(let id):
+                        TopicPageView(title: "Explore", viewModel: container.makeExploreTopicViewModel(selectedID: id))
+                    }
+                }
         case .quran:
             QuranListView(viewModel: container.makeQuranListViewModel())
                 .navigationDestination(for: AppRouter.QuranDestination.self) { dest in

@@ -25,10 +25,8 @@ struct NextPrayerPill: View {
 
 private extension View {
     func pillStyle() -> some View {
-        font(.custom("ReemKufi-Regular", size: 12))
-            .foregroundStyle(.brandTeal)
-            .padding(.horizontal, 12)
-            .frame(height: 28)
-            .background(.tintedSurface, in: .rect(cornerRadius: 8))
+        font(.custom("ReemKufi-Medium", size: 13))
+            .foregroundStyle(.appPrimary)
+            .softPill()
     }
 }

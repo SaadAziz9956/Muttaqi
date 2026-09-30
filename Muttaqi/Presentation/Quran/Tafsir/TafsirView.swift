@@ -4,6 +4,8 @@ struct TafsirView: View {
     let surah: Surah?
     let viewModel: TafsirViewModel
     let language: Language
+    /// Opens scrolled to the commentary covering this ayah, e.g. from the ayah's own Explanation button
+    var startAyah: Int? = nil
 
     private var isUrdu: Bool { language == .urdu }
     private var isHindi: Bool { language == .hindi }
@@ -27,13 +29,22 @@ struct TafsirView: View {
                 Spacer()
 
             case .loaded(let ayahs):
-                ScrollView {
-                    LazyVStack(alignment: .leading, spacing: 0) {
-                        ForEach(ayahs) { ayah in
-                            ayahRow(ayah)
+                ScrollViewReader { proxy in
+                    ScrollView {
+                        LazyVStack(alignment: .leading, spacing: 0) {
+                            ForEach(ayahs) { ayah in
+                                ayahRow(ayah)
+                            }
                         }
+                        .padding(.horizontal, 16)
                     }
-                    .padding(.horizontal, 16)
+                    .onAppear {
+                        // Commentary often covers a group of ayahs, so this finds the group the ayah is in
+                        guard let startAyah,
+                              let entry = ayahs.first(where: { $0.ayahNumber <= startAyah && startAyah <= $0.lastAyahNumber })
+                        else { return }
+                        proxy.scrollTo(entry.id, anchor: .top)
+                    }
                 }
 
             case .error(let message):

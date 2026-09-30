@@ -15,6 +15,8 @@ final class SurahDetailCoordinator {
     private(set) var tafsirViewModel: TafsirViewModel
     /// Ayah (number within the surah) to scroll to once the surah loads; cleared after the view has scrolled there
     private(set) var pendingStartAyah: Int?
+    /// The ayah whose explanation was asked for, so the explanation opens at it; nil opens at the start
+    private(set) var tafsirStartAyah: Int?
 
     private let syncQuranData: SyncQuranDataUseCase
     private let fetchTafsirUseCase: FetchTafsirUseCase
@@ -23,7 +25,7 @@ final class SurahDetailCoordinator {
     /// Ayahs of the current surah that have been on screen since it was opened
     private var sessionReadAyahs: Set<Int> = []
     /// The scroll-target IDs on screen now, kept even while jumping so they can be counted once it lands
-    private var currentVisibleIDs: [Int] = []
+    private(set) var currentVisibleIDs: [Int] = []
     private var saveProgressTask: Task<Void, Never>?
 
     init(
@@ -164,7 +166,26 @@ final class SurahDetailCoordinator {
     }
 
     func toggleTafsir() {
+        tafsirStartAyah = nil
         showTafsir.toggle()
+    }
+
+    /// Opens the explanation at the ayah, e.g. from its card
+    func openTafsir(at ayahNumber: Int) {
+        tafsirStartAyah = ayahNumber
+        showTafsir = true
+    }
+
+    /// Where the reader is in the surah: the first ayah on screen, or the Mushaf page in Arabic Only mode
+    var readingPosition: String? {
+        guard case .loaded(let content) = contentViewModel.state,
+              let first = content.displayAyahs.filter({ currentVisibleIDs.contains($0.id) })
+                .min(by: { $0.numberInSurah < $1.numberInSurah })
+        else { return nil }
+        switch settingsViewModel.readingMode {
+        case .withTranslation: return "Ayah \(first.numberInSurah) of \(content.surah.numberOfAyahs)"
+        case .arabicOnly: return "Page \(first.page)"
+        }
     }
 
     func selectLanguage(_ language: Language) async {
