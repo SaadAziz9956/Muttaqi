@@ -58,15 +58,15 @@ struct MainTabView: View {
                     case .journalEntry(let entry):
                         JournalEntryView(viewModel: container.makeJournalEntryViewModel(entry: entry))
                     case .dhikrList:
-                        DhikrListView(viewModel: container.makeDhikrListViewModel())
+                        DhikrListView()
                     case .names:
-                        NamesView(viewModel: container.makeNamesViewModel())
+                        NamesView()
                     case .emotions:
                         EmotionsListView()
                     case .emotion(let id):
                         TopicPageView(emotionId: id)
-                    case .dhikr(let dhikr):
-                        DhikrCounterView(viewModel: container.makeDhikrCounterViewModel(dhikr: dhikr))
+                    case .dhikr(let id):
+                        DhikrCounterView(dhikrId: id)
                     }
                 }
         case .explore:

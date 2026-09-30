@@ -22,26 +22,6 @@ extension PublishedQuote {
         ],
         source: "Sahih Bukhari (5027)"
     )
-
-    /// Sahih al-Bukhari 7392, at the foot of the 99 Names page
-    static let ninetyNineNames = PublishedQuote(
-        // HadeethEnc.com #64673 (English v1.25.0, Urdu v1.36.0)
-        translations: [
-            "en": "Verily, Allah has ninety-nine names, one-hundred minus one. Whoever memorizes them all will enter Paradise.",
-            "ur": "اللہ کے ننانوے یعنی ایک کم ایک سو نام ہیں، جو ان کی حفاظت کرے گا، وہ جنت میں داخل ہوگا",
-        ],
-        source: "Sahih al-Bukhari 7392"
-    )
-
-    /// Sahih al-Bukhari 6407, under the Dikr page's title
-    static let rememberingAllah = PublishedQuote(
-        // HadeethEnc.com #4177
-        translations: [
-            "en": "The example of the one who remembers his Lord and the one who does not remember His Lord is like the example of the living and the dead person.",
-            "ur": "اس شخص کی مثال جو اپنے رب کو یاد کرتا ہے اور جو اسے یاد نہیں کرتا، زندہ اور مردہ کی سی ہے",
-        ],
-        source: "Sahih al-Bukhari 6407"
-    )
 }
 
 extension PublishedQuote {

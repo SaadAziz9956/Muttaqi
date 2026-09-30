@@ -1,18 +1,19 @@
+import Shared
 import SwiftUI
 
 struct NamesView: View {
-    @State private var viewModel: NamesViewModel
+    // Shared with the search, so picking a result turns the page to that name
+    @State private var screen = SharedViewModel(NamesViewModels.shared.names()) { $0.state }
+    /// The name on screen, as its number; bound to the swiper's scroll position
+    @State private var currentNumber: Int32? = 1
     @State private var isSearchOpen = false
+    @Environment(AppRouter.self) private var router
     @Environment(\.dismiss) private var dismiss
 
-    init(viewModel: NamesViewModel) {
-        self._viewModel = State(initialValue: viewModel)
-    }
+    private var state: NamesState { screen.state }
 
     var body: some View {
-        let hadith = PublishedQuote.ninetyNineNames.text(language: viewModel.language)
-
-        GeometryReader { screen in
+        GeometryReader { geometry in
             ScrollView {
                 VStack(spacing: 0) {
                     Text("99 Names")
@@ -21,7 +22,7 @@ struct NamesView: View {
                         .padding(.top, 8)
 
                     // 300pt on an iPhone Pro, in proportion on bigger and smaller screens
-                    carousel(cardHeight: max(260, screen.size.height * 0.415))
+                    carousel(cardHeight: max(260, geometry.size.height * 0.415))
                         .padding(.top, 28)
 
                     // The hadith sits at the foot of the screen, as in the design; the page only scrolls when a
@@ -29,27 +30,29 @@ struct NamesView: View {
                     Spacer(minLength: 32)
 
                     // Which name is showing, as the cards are swiped
-                    Text("\(viewModel.currentNumber ?? 1) of \(max(viewModel.names.count, 99))")
+                    Text("\(currentNumber ?? 1) of \(max(state.names.count, 99))")
                         .font(.custom("ReemKufi-Medium", size: 13))
                         .foregroundStyle(.appPrimary)
                         .contentTransition(.numericText())
-                        .animation(.snappy, value: viewModel.currentNumber)
+                        .animation(.snappy, value: currentNumber)
                         .softPill()
                         .padding(.bottom, 22)
 
-                    VStack(spacing: 6) {
-                        Text(hadith)
-                            .font(TranslationStyle(for: hadith, size: 14).font)
-                            .foregroundStyle(.textSecondary)
-                        Text(PublishedQuote.ninetyNineNames.source)
-                            .font(.labelSmall)
-                            .foregroundStyle(.brandTeal)
+                    if let hadith = state.hadith {
+                        VStack(spacing: 6) {
+                            Text(hadith.text)
+                                .font(TranslationStyle(for: hadith.text, size: 14).font)
+                                .foregroundStyle(.textSecondary)
+                            Text(hadith.source)
+                                .font(.labelSmall)
+                                .foregroundStyle(.brandTeal)
+                        }
+                        .multilineTextAlignment(.center)
+                        .padding(.horizontal, 24)
+                        .padding(.bottom, 12)
                     }
-                    .multilineTextAlignment(.center)
-                    .padding(.horizontal, 24)
-                    .padding(.bottom, 12)
                 }
-                .frame(minHeight: screen.size.height)
+                .frame(minHeight: geometry.size.height)
             }
             .scrollBounceBehavior(.basedOnSize)
         }
@@ -68,9 +71,17 @@ struct NamesView: View {
                 }
                 .accessibilityLabel("Back")
             }
-            if let name = viewModel.names.first(where: { $0.number == viewModel.currentNumber }) {
+            if state.names.contains(where: { $0.number == currentNumber }) {
                 ToolbarItem(placement: .navigationBarTrailing) {
-                    ShareButton(passage: SharePassage(name: name), size: 22, color: .textPrimary, padding: 0)
+                    Button { dispatch(NamesIntentShareTapped.shared) } label: {
+                        Image("export-arrow-01-linear")
+                            .resizable()
+                            .frame(width: 22, height: 22)
+                            .foregroundStyle(.textPrimary)
+                            .contentShape(.rect)
+                    }
+                    .buttonStyle(SoftPressStyle())
+                    .accessibilityLabel("Share")
                 }
             }
             ToolbarItem(placement: .navigationBarTrailing) {
@@ -84,15 +95,27 @@ struct NamesView: View {
             }
         }
         .navigationDestination(isPresented: $isSearchOpen) {
-            NamesSearchView(viewModel: viewModel) { name in
+            NamesSearchView(screen: screen) { number in
                 // Picking a result turns the page to that name
-                viewModel.currentNumber = name.number
+                currentNumber = number
                 isSearchOpen = false
             }
         }
-        .onAppear {
-            if viewModel.names.isEmpty { viewModel.load() }
+        .onChange(of: currentNumber) { _, number in
+            if let number { dispatch(NamesIntentNameShown(number: number)) }
         }
+        .task {
+            for await effect in screen.viewModel.effects {
+                switch onEnum(of: effect) {
+                case .openShare(let share): router.push(SharePassage(share.passage))
+                case .showName(let show): currentNumber = show.number
+                }
+            }
+        }
+    }
+
+    private func dispatch(_ intent: NamesIntent) {
+        screen.viewModel.dispatch(intent: intent)
     }
 
     /// One name at a time, with the next and previous peeking in at the edges, smaller and faded. As a card is
@@ -100,7 +123,7 @@ struct NamesView: View {
     private func carousel(cardHeight: CGFloat) -> some View {
         ScrollView(.horizontal) {
             LazyHStack(alignment: .top, spacing: 12) {
-                ForEach(viewModel.names) { name in
+                ForEach(state.names, id: \.number) { name in
                     NameCard(name: name, minHeight: cardHeight)
                         // Room for the card's float shadow, which the scroll view would otherwise clip
                         .padding(.vertical, 18)
@@ -118,8 +141,8 @@ struct NamesView: View {
         .contentMargins(.horizontal, 38, for: .scrollContent)
         .scrollClipDisabled()
         .scrollTargetBehavior(.viewAligned)
-        .scrollPosition(id: $viewModel.currentNumber)
+        .scrollPosition(id: $currentNumber)
         .scrollIndicators(.hidden)
-        .sensoryFeedback(.selection, trigger: viewModel.currentNumber)
+        .sensoryFeedback(.selection, trigger: currentNumber)
     }
 }

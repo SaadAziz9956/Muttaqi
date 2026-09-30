@@ -1,10 +1,15 @@
+import Shared
 import SwiftUI
 
 struct NamesSearchView: View {
-    @Bindable var viewModel: NamesViewModel
-    let onSelect: (AllahName) -> Void
+    /// The 99 Names page's own view model, so a picked result turns its page
+    let screen: SharedViewModel<NamesViewModel, NamesState>
+    /// Called with the number of the name picked
+    let onSelect: (Int32) -> Void
     @FocusState private var isFieldFocused: Bool
     @Environment(\.dismiss) private var dismiss
+
+    private var state: NamesState { screen.state }
 
     var body: some View {
         ScrollView {
@@ -14,11 +19,11 @@ struct NamesSearchView: View {
                     .foregroundStyle(.appPrimary)
                     .padding(.top, 8)
 
-                TextField("Type here", text: $viewModel.query)
+                TextField("Type here", text: Binding(get: { state.query }, set: { dispatch(NamesIntentQueryChanged(query: $0)) }))
                     .font(.custom("ReemKufi-Regular", size: 16, relativeTo: .body))
                     .foregroundStyle(.textPrimary)
                     .multilineTextAlignment(.center)
-                    .keyboardType(viewModel.searchMode == .number ? .numberPad : .default)
+                    .keyboardType(state.searchMode == .byNumber ? .numberPad : .default)
                     .textInputAutocapitalization(.never)
                     .autocorrectionDisabled()
                     .submitLabel(.search)
@@ -27,15 +32,15 @@ struct NamesSearchView: View {
                     .softGlass(in: Capsule())
                     .padding(.top, 36)
 
-                Picker("Search by", selection: $viewModel.searchMode) {
-                    Text("by Number").tag(NamesViewModel.SearchMode.number)
-                    Text("by Name (eng)").tag(NamesViewModel.SearchMode.name)
+                Picker("Search by", selection: Binding(get: { state.searchMode }, set: { dispatch(NamesIntentSearchModeChanged(mode: $0)) })) {
+                    Text("by Number").tag(NameSearchMode.byNumber)
+                    Text("by Name (eng)").tag(NameSearchMode.byName)
                 }
                 .pickerStyle(.segmented)
                 .padding(.top, 20)
-                // A new mode needs its own keyboard, e.g. the number pad, which only appears on refocusing
-                .onChange(of: viewModel.searchMode) {
-                    viewModel.query = ""
+                // A new mode starts the query again and needs its own keyboard, e.g. the number pad, which only
+                // appears on refocusing
+                .onChange(of: state.searchMode) {
                     isFieldFocused = false
                     Task { isFieldFocused = true }
                 }
@@ -63,19 +68,31 @@ struct NamesSearchView: View {
             }
         }
         .onAppear { isFieldFocused = true }
-        .onDisappear { viewModel.query = "" }
+        .onDisappear { dispatch(NamesIntentClearQuery.shared) }
+        .task {
+            for await effect in screen.viewModel.effects {
+                switch onEnum(of: effect) {
+                case .showName(let show): onSelect(show.number)
+                case .openShare: break
+                }
+            }
+        }
+    }
+
+    private func dispatch(_ intent: NamesIntent) {
+        screen.viewModel.dispatch(intent: intent)
     }
 
     @ViewBuilder
     private var results: some View {
-        let results = viewModel.results
-        if viewModel.isSearching, results.isEmpty {
-            ContentUnavailableView.search(text: viewModel.query)
+        let results = state.results
+        if state.isSearching, results.isEmpty {
+            ContentUnavailableView.search(text: state.query)
         } else {
             LazyVStack(spacing: 16) {
-                ForEach(results) { name in
+                ForEach(results, id: \.number) { name in
                     Button {
-                        onSelect(name)
+                        dispatch(NamesIntentResultTapped(number: name.number))
                     } label: {
                         NameCard(name: name)
                     }

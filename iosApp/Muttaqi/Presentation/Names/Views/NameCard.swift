@@ -1,3 +1,4 @@
+import Shared
 import SwiftUI
 
 /// One name: its number, Arabic, transliteration and meaning, over a large faint copy of the Arabic
