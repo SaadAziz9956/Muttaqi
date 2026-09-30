@@ -1,0 +1,83 @@
+package com.muttaqi.shared.feature.topics
+
+import com.muttaqi.shared.core.model.Language
+import com.muttaqi.shared.core.text.SearchTextFolder
+import com.muttaqi.shared.feature.topics.domain.model.TopicChips
+import com.muttaqi.shared.feature.topics.domain.usecase.BuildExploreSearchIndex
+import com.muttaqi.shared.feature.topics.domain.usecase.GetHadithOfTheDay
+import com.muttaqi.shared.feature.topics.domain.usecase.GetTopicOfTheDay
+import com.muttaqi.shared.feature.topics.domain.usecase.GetTopicPageTopics
+import kotlinx.coroutines.test.StandardTestDispatcher
+import kotlinx.coroutines.test.TestScope
+import kotlinx.coroutines.test.runTest
+import kotlinx.datetime.LocalDate
+import kotlin.test.Test
+import kotlin.test.assertEquals
+import kotlin.test.assertNotEquals
+import kotlin.test.assertTrue
+
+class TopicUseCasesTest {
+    private fun TestScope.explore() = TopicsTestData.exploreRepository(StandardTestDispatcher(testScheduler))
+
+    private suspend fun TestScope.search(query: String): List<String> {
+        val index = BuildExploreSearchIndex(SearchTextFolder)(explore().groups(Language.English))
+        return index.search(query).map { it.topic.id }
+    }
+
+    @Test
+    fun topicsWhoseNamesMatchComeBeforeThoseWhoseTextsDo() = runTest {
+        // "Prayer" is a title; Charity & Zakat only mentions prayer in its verse, and comes first in the file
+        assertEquals(listOf("prayer", "charity-zakat"), search("prayer"))
+    }
+
+    @Test
+    fun keywordsAndGroupNamesMatchAsNames() = runTest {
+        assertEquals(listOf("charity-zakat"), search("ZAKAH"))
+        assertEquals(listOf("lying"), search("sins"))
+        assertEquals(listOf("fasting"), search("roza"))
+    }
+
+    @Test
+    fun everyWordMustMatchInTheNamesOrTheTexts() = runTest {
+        // "zakah" is a keyword and "establish" is in the verse
+        assertEquals(listOf("charity-zakat"), search("zakah establish"))
+        assertEquals(emptyList(), search("zakah ramadan"))
+        assertEquals(emptyList(), search("   "))
+    }
+
+    @Test
+    fun duasAreSearchedByTranslationAndTransliteration() = runTest {
+        // Dua 3, on the Fasting page: "Subhaanal-lathee", "How perfect He is"
+        assertEquals(listOf("fasting"), search("subhaanal"))
+        assertEquals(listOf("fasting"), search("how perfect"))
+    }
+
+    @Test
+    fun theTopicPageMovesBetweenEveryEmotionOrOneExploreGroup() = runTest {
+        val dispatcher = StandardTestDispatcher(testScheduler)
+        val topics = GetTopicPageTopics(TopicsTestData.emotionRepository(dispatcher), TopicsTestData.exploreRepository(dispatcher))
+        assertEquals(listOf("angry", "bored", "happy"), topics(TopicChips.Emotions, "bored", Language.English).map { it.id })
+        assertEquals(listOf("fasting", "charity-zakat", "prayer"), topics(TopicChips.ExploreGroup, "prayer", Language.English).map { it.id })
+        assertEquals(listOf("lying"), topics(TopicChips.ExploreGroup, "lying", Language.English).map { it.id })
+        assertTrue(topics(TopicChips.ExploreGroup, "missing", Language.English).isEmpty())
+    }
+
+    @Test
+    fun theTopicOfTheDayStaysAllDayAndMovesAtMidnight() = runTest {
+        val pick = GetTopicOfTheDay(explore())
+        val today = LocalDate(2026, 9, 30)
+        // Day 739,889 of the era, as iOS counts it: (739,889 × 7) mod 4 topics
+        assertEquals("lying", pick(today, Language.English)?.id)
+        assertEquals("lying", pick(today, Language.Urdu)?.id)
+        assertEquals("prayer", pick(LocalDate(2026, 10, 1), Language.English)?.id)
+    }
+
+    @Test
+    fun theHadithOfTheDayIsShortAndFromEverydayTopics() = runTest {
+        val pick = GetHadithOfTheDay(explore())
+        val picks = (0 until 10).map { pick(LocalDate(2026, 9, 1 + it), Language.English)?.translation }.toSet()
+        // Neither the one too long for the card nor the one from Sins to Avoid, while 420 marked letters fit
+        assertEquals(setOf("Whoever fasts Ramadan", "بَ".repeat(420)), picks)
+        assertNotEquals(pick(LocalDate(2026, 9, 30), Language.English), pick(LocalDate(2026, 10, 1), Language.English))
+    }
+}

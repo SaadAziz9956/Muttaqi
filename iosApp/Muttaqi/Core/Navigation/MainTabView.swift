@@ -62,19 +62,19 @@ struct MainTabView: View {
                     case .names:
                         NamesView(viewModel: container.makeNamesViewModel())
                     case .emotions:
-                        EmotionsListView(viewModel: container.makeEmotionsViewModel())
+                        EmotionsListView()
                     case .emotion(let id):
-                        TopicPageView(title: "Emotions", viewModel: container.makeEmotionPageViewModel(selectedID: id))
+                        TopicPageView(emotionId: id)
                     case .dhikr(let dhikr):
                         DhikrCounterView(viewModel: container.makeDhikrCounterViewModel(dhikr: dhikr))
                     }
                 }
         case .explore:
-            ExploreView(viewModel: container.makeExploreViewModel())
+            ExploreView()
                 .navigationDestination(for: AppRouter.ExploreDestination.self) { dest in
                     switch dest {
                     case .topic(let id):
-                        TopicPageView(title: "Explore", viewModel: container.makeExploreTopicViewModel(selectedID: id))
+                        TopicPageView(exploreTopicId: id)
                     }
                 }
         case .quran:

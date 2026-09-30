@@ -1,3 +1,4 @@
+import Shared
 import SwiftUI
 
 /// The Home features as floating tiles that each show something live: the Qibla, today's dhikr, a Name of Allah,

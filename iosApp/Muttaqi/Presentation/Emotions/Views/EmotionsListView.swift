@@ -1,14 +1,11 @@
+import Shared
 import SwiftUI
 
 struct EmotionsListView: View {
-    @State private var viewModel: EmotionsViewModel
+    @State private var screen = SharedViewModel(TopicsViewModels.shared.emotions()) { $0.state }
     @State private var titleBottom: CGFloat = .infinity
     @Environment(AppRouter.self) private var router
     @Environment(\.dismiss) private var dismiss
-
-    init(viewModel: EmotionsViewModel) {
-        self._viewModel = State(initialValue: viewModel)
-    }
 
     var body: some View {
         ScrollView {
@@ -19,23 +16,23 @@ struct EmotionsListView: View {
                     .onGeometryChange(for: CGFloat.self) { $0.frame(in: .global).maxY } action: { titleBottom = $0 }
                     .padding(.top, 24)
 
-                if let header = viewModel.header {
-                    Text(header.translation.quoted)
-                        .font(TranslationStyle(for: header.translation, size: 14).font)
+                if let header = screen.state.header {
+                    Text(header.text.quoted)
+                        .font(TranslationStyle(for: header.text, size: 14).font)
                         .foregroundStyle(.textPrimary)
                         .multilineTextAlignment(.center)
                         .padding(.top, 16)
 
-                    Text("Quran (\(header.reference))")
+                    Text(header.source)
                         .font(.labelSmall)
                         .foregroundStyle(.textSecondary)
                         .padding(.top, 4)
                 }
 
                 LazyVGrid(columns: [GridItem(.flexible(), spacing: 14), GridItem(.flexible(), spacing: 14)], spacing: 14) {
-                    ForEach(viewModel.emotions) { emotion in
+                    ForEach(screen.state.emotions, id: \.id) { emotion in
                         Button {
-                            router.pushHome(.emotion(id: emotion.id))
+                            screen.viewModel.dispatch(intent: EmotionsIntentEmotionTapped(emotionId: emotion.id))
                         } label: {
                             HStack(spacing: 8) {
                                 Text(emotion.title)
@@ -80,6 +77,12 @@ struct EmotionsListView: View {
                 .accessibilityLabel("Back")
             }
         }
-        .onAppear { viewModel.load() }
+        .task {
+            for await effect in screen.viewModel.effects {
+                switch onEnum(of: effect) {
+                case .openEmotion(let open): router.pushHome(.emotion(id: open.emotionId))
+                }
+            }
+        }
     }
 }
