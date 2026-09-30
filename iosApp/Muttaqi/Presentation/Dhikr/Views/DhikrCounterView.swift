@@ -1,54 +1,28 @@
+import Shared
 import SwiftUI
 
 /// One dhikr in full, with a counter pinned at the bottom within reach of the thumb
 struct DhikrCounterView: View {
-    @State private var viewModel: DhikrCounterViewModel
+    @State private var screen: SharedViewModel<DhikrCounterViewModel, DhikrCounterState>
     @State private var isConfirmingReset = false
+    /// The last repetition counted, for its haptic
+    @State private var tap = CounterTap()
+    @Environment(AppRouter.self) private var router
     @Environment(\.dismiss) private var dismiss
     @ScaledMetric(relativeTo: .largeTitle) private var counterSize: CGFloat = 164
 
-    init(viewModel: DhikrCounterViewModel) {
-        self._viewModel = State(initialValue: viewModel)
+    init(dhikrId: String) {
+        _screen = State(initialValue: SharedViewModel(DhikrViewModels.shared.counter(id: dhikrId)) { $0.state })
     }
 
-    private var dhikr: Dhikr { viewModel.dhikr }
+    private var state: DhikrCounterState { screen.state }
 
     var body: some View {
-        ScrollViewReader { proxy in
-            ScrollView {
-                VStack(alignment: .leading, spacing: 0) {
-                    if let title = dhikr.title {
-                        Text(title)
-                            .font(.labelMedium)
-                            .foregroundStyle(.brandTeal)
-                            .padding(.top, 8)
-                    }
-
-                    if dhikr.steps.isEmpty {
-                        phrase
-                    } else {
-                        steps
-                    }
-
-                    if let hadith = dhikr.hadith {
-                        hadithCard(hadith)
-                            .padding(.top, 28)
-                    }
-
-                    source
-                        .padding(.top, 16)
-                }
-                .padding(.horizontal, 20)
-                .padding(.bottom, 24)
-            }
-            .background { SoftBackdrop() }
-            .safeAreaInset(edge: .bottom, spacing: 0) {
-                counter
-            }
-            // Keeps the phrase to say now in view as a set moves on to the next one
-            .onChange(of: viewModel.currentStep?.index) { _, index in
-                guard let index else { return }
-                withAnimation(.snappy) { proxy.scrollTo(index, anchor: .center) }
+        Group {
+            if let dhikr = state.dhikr {
+                content(dhikr)
+            } else {
+                Color.clear.background { SoftBackdrop() }
             }
         }
         .navigationBarTitleDisplayMode(.inline)
@@ -66,7 +40,15 @@ struct DhikrCounterView: View {
                 .accessibilityLabel("Back")
             }
             ToolbarItem(placement: .navigationBarTrailing) {
-                ShareButton(passage: SharePassage(dhikr: viewModel.dhikr), size: 22, color: .textPrimary, padding: 0)
+                Button { dispatch(DhikrCounterIntentShareTapped.shared) } label: {
+                    Image("export-arrow-01-linear")
+                        .resizable()
+                        .frame(width: 22, height: 22)
+                        .foregroundStyle(.textPrimary)
+                        .contentShape(.rect)
+                }
+                .buttonStyle(SoftPressStyle())
+                .accessibilityLabel("Share")
             }
             ToolbarItem(placement: .navigationBarTrailing) {
                 Button { isConfirmingReset = true } label: {
@@ -75,11 +57,11 @@ struct DhikrCounterView: View {
                         .frame(width: 22, height: 22)
                         .foregroundStyle(.textPrimary)
                 }
-                .disabled(!viewModel.hasProgress)
+                .disabled(!state.hasProgress)
                 .accessibilityLabel("Reset count")
                 .confirmationDialog("Reset today's count?", isPresented: $isConfirmingReset, titleVisibility: .visible) {
                     Button("Reset", role: .destructive) {
-                        withAnimation(.snappy) { viewModel.reset() }
+                        dispatch(DhikrCounterIntentResetConfirmed.shared)
                     }
                 }
             }
@@ -87,11 +69,65 @@ struct DhikrCounterView: View {
         // Counting a long set shouldn't be interrupted by the screen locking
         .onAppear { UIApplication.shared.isIdleTimerDisabled = true }
         .onDisappear { UIApplication.shared.isIdleTimerDisabled = false }
+        .task {
+            for await effect in screen.viewModel.effects {
+                switch onEnum(of: effect) {
+                case .counted(let counted): tap = CounterTap(sequence: tap.sequence + 1, milestone: counted.milestone)
+                case .openShare(let share): router.push(SharePassage(share.passage))
+                }
+            }
+        }
+    }
+
+    private func dispatch(_ intent: DhikrCounterIntent) {
+        screen.viewModel.dispatch(intent: intent)
+    }
+
+    private func content(_ dhikr: Dhikr) -> some View {
+        ScrollViewReader { proxy in
+            ScrollView {
+                VStack(alignment: .leading, spacing: 0) {
+                    if let title = dhikr.title {
+                        Text(title)
+                            .font(.labelMedium)
+                            .foregroundStyle(.brandTeal)
+                            .padding(.top, 8)
+                    }
+
+                    if dhikr.steps.isEmpty {
+                        phrase(dhikr)
+                    } else {
+                        steps(dhikr)
+                    }
+
+                    if let hadith = dhikr.hadith {
+                        hadithCard(hadith)
+                            .padding(.top, 28)
+                    }
+
+                    source(dhikr)
+                        .padding(.top, 16)
+                }
+                .padding(.horizontal, 20)
+                .padding(.bottom, 24)
+            }
+            .background { SoftBackdrop() }
+            .safeAreaInset(edge: .bottom, spacing: 0) {
+                counter(dhikr)
+            }
+            // Keeps the phrase to say now in view as a set moves on to the next one
+            .onChange(of: state.currentStep?.index) { _, index in
+                guard let index else { return }
+                withAnimation(.snappy) { proxy.scrollTo(Int(index), anchor: .center) }
+            }
+        }
+        // Each count springs in quickly; a reset settles back more gently
+        .animation(state.hasProgress ? .snappy(duration: 0.2) : .snappy, value: state.progress)
     }
 
     // MARK: - Text
 
-    private var phrase: some View {
+    private func phrase(_ dhikr: Dhikr) -> some View {
         VStack(alignment: .leading, spacing: 0) {
             Text(AttributedString.arabic(dhikr.arabic, size: 28))
                 .lineSpacing(12)
@@ -116,8 +152,8 @@ struct DhikrCounterView: View {
     }
 
     /// Each phrase of a set with its count; the one to say now is highlighted and the finished ones fade
-    private var steps: some View {
-        let current = viewModel.currentStep?.index ?? 0
+    private func steps(_ dhikr: Dhikr) -> some View {
+        let current = Int(state.currentStep?.index ?? 0)
 
         return VStack(spacing: 12) {
             ForEach(Array(dhikr.steps.enumerated()), id: \.offset) { index, step in
@@ -179,7 +215,7 @@ struct DhikrCounterView: View {
             .frame(maxWidth: .infinity, alignment: style.isRightToLeft ? .trailing : .leading)
     }
 
-    private var source: some View {
+    private func source(_ dhikr: Dhikr) -> some View {
         VStack(alignment: .leading, spacing: 4) {
             Text(dhikr.reference)
                 .font(.labelSmall)
@@ -198,10 +234,10 @@ struct DhikrCounterView: View {
 
     // MARK: - Counter
 
-    private var counter: some View {
+    private func counter(_ dhikr: Dhikr) -> some View {
         VStack(spacing: 10) {
-            if let step = viewModel.currentStep {
-                let phrase = dhikr.steps[step.index]
+            if let step = state.currentStep {
+                let phrase = dhikr.steps[Int(step.index)]
                 Text("\(phrase.transliteration) · \(step.said) of \(phrase.count)")
                     .font(.labelLarge)
                     .foregroundStyle(.appPrimary)
@@ -209,36 +245,36 @@ struct DhikrCounterView: View {
             }
 
             Button {
-                withAnimation(.snappy(duration: 0.2)) { viewModel.increment() }
+                dispatch(DhikrCounterIntentCounted.shared)
             } label: {
                 ZStack {
                     Circle()
                         .stroke(Color.brandTeal.opacity(0.18), lineWidth: 8)
                         .padding(10)
                     Circle()
-                        .trim(from: 0, to: viewModel.roundProgress)
+                        .trim(from: 0, to: state.roundProgress)
                         .stroke(Color.shareCard, style: StrokeStyle(lineWidth: 8, lineCap: .round))
                         .rotationEffect(.degrees(-90))
                         .padding(10)
 
                     VStack(spacing: 0) {
-                        Text("\(viewModel.count)")
+                        Text("\(state.count)")
                             .font(.custom("ReemKufi-Medium", size: 46, relativeTo: .largeTitle))
-                            .foregroundStyle(viewModel.isRoundComplete ? Color.white : Color.appPrimary)
+                            .foregroundStyle(state.isRoundComplete ? Color.white : Color.appPrimary)
                             .contentTransition(.numericText())
                         Text(counterCaption)
                             .font(.labelSmall)
-                            .foregroundStyle(viewModel.isRoundComplete ? Color.white.opacity(0.85) : Color.textSecondary)
+                            .foregroundStyle(state.isRoundComplete ? Color.white.opacity(0.85) : Color.textSecondary)
                     }
                 }
                 .frame(width: counterSize, height: counterSize)
                 // Native glass, so every count gets the system's press; it turns green once the round is complete
-                .softGlass(in: Circle(), fill: viewModel.isRoundComplete ? .shareCard : .softSurface, rim: !viewModel.isRoundComplete)
+                .softGlass(in: Circle(), fill: state.isRoundComplete ? .shareCard : .softSurface, rim: !state.isRoundComplete)
             }
             .buttonStyle(CounterButtonStyle())
-            .sensoryFeedback(trigger: viewModel.count) { _, count in
-                guard count > 0 else { return nil }
-                switch viewModel.milestone(at: count) {
+            .sensoryFeedback(trigger: tap) { _, tap in
+                guard tap.sequence > 0 else { return nil }
+                switch tap.milestone {
                 case .repetition: return .impact(weight: .light)
                 case .phraseFinished: return .impact(weight: .heavy)
                 case .roundFinished: return .success
@@ -248,11 +284,11 @@ struct DhikrCounterView: View {
             .accessibilityValue(counterAccessibilityValue)
             .accessibilityHint("Double-tap to count one")
 
-            Text(viewModel.rounds == 1 ? "Completed once today" : "Completed \(viewModel.rounds) times today")
+            Text(state.rounds == 1 ? "Completed once today" : "Completed \(state.rounds) times today")
                 .font(.labelSmall)
                 .foregroundStyle(.brandTeal)
-                .opacity(viewModel.rounds > 0 ? 1 : 0)
-                .accessibilityHidden(viewModel.rounds == 0)
+                .opacity(state.rounds > 0 ? 1 : 0)
+                .accessibilityHidden(state.rounds == 0)
         }
         .padding(.top, 14)
         .padding(.bottom, 6)
@@ -275,16 +311,22 @@ struct DhikrCounterView: View {
     }
 
     private var counterCaption: String {
-        guard let target = viewModel.target else {
-            return viewModel.count == 0 ? "Tap to count" : "times"
+        guard let target = state.target else {
+            return state.count == 0 ? "Tap to count" : "times"
         }
-        return viewModel.isRoundComplete ? "Complete" : "of \(target)"
+        return state.isRoundComplete ? "Complete" : "of \(target.intValue)"
     }
 
     private var counterAccessibilityValue: String {
-        guard let target = viewModel.target else { return "\(viewModel.count)" }
-        return "\(viewModel.count) of \(target)"
+        guard let target = state.target else { return "\(state.count)" }
+        return "\(state.count) of \(target.intValue)"
     }
+}
+
+/// One counted repetition and what it completed; a new value for every tap, so each one plays its haptic
+private struct CounterTap: Equatable {
+    var sequence = 0
+    var milestone: DhikrMilestone = .repetition
 }
 
 /// Presses in slightly, like a physical counter

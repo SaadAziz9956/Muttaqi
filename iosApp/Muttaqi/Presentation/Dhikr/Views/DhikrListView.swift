@@ -1,16 +1,15 @@
+import Shared
 import SwiftUI
 
 struct DhikrListView: View {
-    @State private var viewModel: DhikrListViewModel
+    @State private var screen = SharedViewModel(DhikrViewModels.shared.list()) { $0.state }
     @State private var titleBottom: CGFloat = .infinity
     @Environment(AppRouter.self) private var router
     @Environment(\.dismiss) private var dismiss
 
     private static let rowInsets = EdgeInsets(top: 0, leading: 20, bottom: 0, trailing: 20)
 
-    init(viewModel: DhikrListViewModel) {
-        self._viewModel = State(initialValue: viewModel)
-    }
+    private var state: DhikrListState { screen.state }
 
     var body: some View {
         List {
@@ -19,7 +18,7 @@ struct DhikrListView: View {
                 .listRowSeparator(.hidden)
                 .listRowBackground(Color.clear)
 
-            if let section = viewModel.selectedSection {
+            if let section = state.selectedSection {
                 categoryTabs(selected: section.id)
                     .listRowSeparator(.hidden)
                     .listRowBackground(Color.clear)
@@ -31,9 +30,9 @@ struct DhikrListView: View {
                     .listRowSeparator(.hidden)
                     .listRowBackground(Color.clear)
 
-                ForEach(section.dhikr) { dhikr in
+                ForEach(section.dhikr, id: \.id) { dhikr in
                     Button {
-                        router.pushHome(.dhikr(dhikr))
+                        dispatch(DhikrListIntentDhikrTapped(dhikrId: dhikr.id))
                     } label: {
                         DhikrRow(dhikr: dhikr)
                     }
@@ -65,45 +64,54 @@ struct DhikrListView: View {
                 .accessibilityLabel("Back")
             }
         }
-        .onAppear { viewModel.load() }
+        .task {
+            for await effect in screen.viewModel.effects {
+                switch onEnum(of: effect) {
+                case .openCounter(let open): router.pushHome(.dhikr(id: open.dhikrId))
+                }
+            }
+        }
+    }
+
+    private func dispatch(_ intent: DhikrListIntent) {
+        screen.viewModel.dispatch(intent: intent)
     }
 
     private var header: some View {
-        let quote = PublishedQuote.rememberingAllah.text(language: viewModel.language)
-        let quoteStyle = TranslationStyle(for: quote, size: 14)
-
-        return VStack(spacing: 0) {
+        VStack(spacing: 0) {
             Text("Zikr o Azkar")
                 .font(.custom("ReemKufi-Regular", size: 28))
                 .foregroundStyle(.appPrimary)
                 .onGeometryChange(for: CGFloat.self) { $0.frame(in: .global).maxY } action: { titleBottom = $0 }
                 .padding(.top, 24)
 
-            Text(quote.quoted)
-                .font(quoteStyle.font)
-                .foregroundStyle(.textPrimary)
-                .multilineTextAlignment(.center)
-                .padding(.top, 16)
+            if let quote = state.header {
+                Text(quote.text.quoted)
+                    .font(TranslationStyle(for: quote.text, size: 14).font)
+                    .foregroundStyle(.textPrimary)
+                    .multilineTextAlignment(.center)
+                    .padding(.top, 16)
 
-            Text(PublishedQuote.rememberingAllah.source)
-                .font(.labelSmall)
-                .foregroundStyle(.textSecondary)
-                .padding(.top, 4)
-                .padding(.bottom, 16)
+                Text(quote.source)
+                    .font(.labelSmall)
+                    .foregroundStyle(.textSecondary)
+                    .padding(.top, 4)
+                    .padding(.bottom, 16)
+            }
         }
         .frame(maxWidth: .infinity)
     }
 
-    private func categoryTabs(selected: DhikrSection.ID) -> some View {
+    private func categoryTabs(selected: String) -> some View {
         ScrollViewReader { proxy in
             ScrollView(.horizontal) {
                 // Native glass rendered as one group, which is cheaper than each on its own
                 GlassEffectContainer(spacing: 4) {
                     HStack(spacing: 8) {
-                        ForEach(viewModel.sections) { section in
+                        ForEach(state.sections, id: \.id) { section in
                             let isSelected = section.id == selected
                             Button {
-                                viewModel.selectedSectionID = section.id
+                                dispatch(DhikrListIntentSectionTapped(sectionId: section.id))
                             } label: {
                                 Text(section.title)
                                     .font(.custom("ReemKufi-Medium", size: 13, relativeTo: .subheadline))
@@ -158,7 +166,7 @@ private struct DhikrRow: View {
                     .frame(maxWidth: .infinity, alignment: captionStyle.isRightToLeft ? .trailing : .leading)
 
                 if let count = dhikr.target {
-                    Text("\(count)×")
+                    Text("\(count.intValue)×")
                         .font(.custom("ReemKufi-Medium", size: 12))
                         .foregroundStyle(.brandTeal)
                         .padding(.horizontal, 10)

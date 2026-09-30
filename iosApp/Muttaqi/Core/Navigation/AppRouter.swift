@@ -20,7 +20,7 @@ final class AppRouter {
         /// One emotion's page, opened at that emotion's tab
         case emotion(id: String)
         /// One dhikr with its counter
-        case dhikr(Dhikr)
+        case dhikr(id: String)
     }
     
     enum ExploreDestination: Hashable {

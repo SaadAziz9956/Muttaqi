@@ -29,22 +29,4 @@ extension SharePassage {
             reference: "Quran (\(ayah.surahNumber):\(ayah.numberInSurah))"
         )
     }
-
-    init(dhikr: Dhikr) {
-        self.init(
-            arabic: dhikr.arabic,
-            transliteration: dhikr.transliteration,
-            translation: dhikr.translation ?? dhikr.steps.compactMap(\.translation).joined(separator: "\n"),
-            reference: dhikr.reference
-        )
-    }
-
-    init(name: AllahName) {
-        self.init(
-            arabic: name.arabic,
-            transliteration: name.transliteration,
-            translation: name.meaning,
-            reference: "The Names of Allah (\(name.number) of 99)"
-        )
-    }
 }

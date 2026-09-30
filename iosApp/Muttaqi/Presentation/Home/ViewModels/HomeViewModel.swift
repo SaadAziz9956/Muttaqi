@@ -35,9 +35,8 @@ final class HomeViewModel {
     private let getAyahOfTheDay: GetAyahOfTheDayUseCase
     private let getDuaOfTheDay: GetDuaOfTheDayUseCase
     private let exploreOfTheDay: ExploreOfTheDay
-    private let getNames: GetAllahNamesUseCase
-    private let getDhikrSections: GetDhikrSectionsUseCase
-    private let dhikrProgress: DhikrProgressStoring
+    private let pickNameOfTheDay: NameOfTheDay
+    private let dhikrSaidToday: DhikrSaidToday
     private let getLastReading: GetLastReadingUseCase
     private let fetchSurahs: FetchSurahsUseCase
     private let getQiblaDirection: GetQiblaDirectionUseCase
@@ -61,15 +60,14 @@ final class HomeViewModel {
         fetchAyah: FetchAyahUseCase,
         getAyahOfTheDay: GetAyahOfTheDayUseCase,
         getDuaOfTheDay: GetDuaOfTheDayUseCase,
-        getNames: GetAllahNamesUseCase,
-        getDhikrSections: GetDhikrSectionsUseCase,
-        dhikrProgress: DhikrProgressStoring,
         getLastReading: GetLastReadingUseCase,
         fetchSurahs: FetchSurahsUseCase,
         getQiblaDirection: GetQiblaDirectionUseCase,
         compass: CompassServiceProtocol,
         journal: JournalStore,
         exploreOfTheDay: ExploreOfTheDay = .shared,
+        nameOfTheDay: NameOfTheDay = .shared,
+        dhikrSaidToday: DhikrSaidToday = .shared,
         calendar: Calendar = .current
     ) {
         self.location = location
@@ -77,15 +75,14 @@ final class HomeViewModel {
         self.fetchAyah = fetchAyah
         self.getAyahOfTheDay = getAyahOfTheDay
         self.getDuaOfTheDay = getDuaOfTheDay
-        self.getNames = getNames
-        self.getDhikrSections = getDhikrSections
-        self.dhikrProgress = dhikrProgress
         self.getLastReading = getLastReading
         self.fetchSurahs = fetchSurahs
         self.getQiblaDirection = getQiblaDirection
         self.compass = compass
         self.journal = journal
         self.exploreOfTheDay = exploreOfTheDay
+        self.pickNameOfTheDay = nameOfTheDay
+        self.dhikrSaidToday = dhikrSaidToday
         self.calendar = calendar
     }
 
@@ -95,7 +92,7 @@ final class HomeViewModel {
         ayahOfTheDay = try? await getAyahOfTheDay.execute()
         duaOfTheDay = try? getDuaOfTheDay.execute()
         await loadDailyPicks()
-        dhikrToday = countDhikrToday()
+        dhikrToday = (try? await dhikrSaidToday.count().intValue) ?? 0
         await journal.load()
         await loadLastReading()
         await loadPrayerTimes()
@@ -131,23 +128,12 @@ final class HomeViewModel {
         }
     }
 
-    // One of each, changing at midnight: a Name of Allah, an Explore topic and an authentic hadith from Explore
+    // One of each, changing at midnight: a Name of Allah, an Explore topic and an authentic hadith from Explore, all
+    // picked by the shared code as the iOS app always has
     private func loadDailyPicks() async {
-        let day = calendar.ordinality(of: .day, in: .era, for: .now) ?? 0
-        if let names = try? getNames.execute(), !names.isEmpty {
-            nameOfTheDay = names[day % names.count]
-        }
-        // The Explore topic and hadith, picked by the shared code in the same way
+        if let name = try? await pickNameOfTheDay.name() { nameOfTheDay = name }
         if let topic = try? await exploreOfTheDay.topic() { topicOfTheDay = topic }
         if let hadith = try? await exploreOfTheDay.hadith() { hadithOfTheDay = hadith }
-    }
-
-    private func countDhikrToday() -> Int {
-        guard let sections = try? getDhikrSections.execute() else { return 0 }
-        return sections.flatMap(\.dhikr).reduce(0) { total, dhikr in
-            let progress = dhikrProgress.progress(for: dhikr.id)
-            return total + progress.count + progress.rounds * (dhikr.target ?? 0)
-        }
     }
 
     private func loadLastReading() async {
