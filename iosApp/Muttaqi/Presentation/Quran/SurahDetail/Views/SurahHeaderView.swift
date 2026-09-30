@@ -1,11 +1,12 @@
+import Shared
 import SwiftUI
 
 /// The surah's name in large calligraphy straight on the page, with its Explanation and a way to the neighbouring
 /// surahs; the brand green is kept for the Explanation button alone
 struct SurahHeaderView: View {
-    let surah: Surah?
-    let previousSurah: Surah?
-    let nextSurah: Surah?
+    let surah: Shared.Surah?
+    let previousSurah: Shared.Surah?
+    let nextSurah: Shared.Surah?
     let onPrevious: () -> Void
     let onNext: () -> Void
     let onExplanation: () -> Void
@@ -66,7 +67,7 @@ struct SurahHeaderView: View {
         return "\(surah.englishNameTranslation) · \(surah.revelationType) · \(surah.numberOfAyahs) ayahs"
     }
 
-    private func neighbourButton(_ neighbour: Surah, isNext: Bool, action: @escaping () -> Void) -> some View {
+    private func neighbourButton(_ neighbour: Shared.Surah, isNext: Bool, action: @escaping () -> Void) -> some View {
         Button(action: action) {
             HStack(spacing: 4) {
                 if !isNext { chevron("arrow-left-02-linear") }

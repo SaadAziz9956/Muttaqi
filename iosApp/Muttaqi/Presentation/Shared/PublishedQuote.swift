@@ -12,19 +12,6 @@ struct PublishedQuote {
 }
 
 extension PublishedQuote {
-    /// Sahih al-Bukhari 5027, under the Quran tab's title
-    static let learnAndTeachQuran = PublishedQuote(
-        translations: [
-            // Muhsin Khan's translation (sunnah.com)
-            "en": "The best among you [Muslims] are those who learn the Quran and teach it.",
-            // HadeethEnc.com #5913
-            "ur": "تم میں سب سے بہتر شخص وہ ہے جو قرآن سیکھے اور اسے سکھائے",
-        ],
-        source: "Sahih Bukhari (5027)"
-    )
-}
-
-extension PublishedQuote {
     /// Quran 16:125, its first sentence, at the foot of the Share page
     static let inviteWithWisdom = PublishedQuote(
         translations: [

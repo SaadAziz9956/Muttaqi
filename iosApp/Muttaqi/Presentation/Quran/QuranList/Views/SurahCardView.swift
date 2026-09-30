@@ -1,12 +1,13 @@
+import Shared
 import SwiftUI
 
 struct SurahCardView: View {
-    let surah: Surah
+    let surah: Shared.Surah
 
     var body: some View {
         VStack(alignment: .leading, spacing: 0) {
             HStack(alignment: .top) {
-                Text(surah.number, format: .number)
+                Text(Int(surah.number), format: .number)
                     .font(.custom("ReemKufi-Medium", size: 13))
                     .foregroundStyle(.appPrimary)
                     .frame(width: 32, height: 32)

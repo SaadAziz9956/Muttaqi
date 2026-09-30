@@ -21,6 +21,8 @@ struct MuttaqiApp: App {
             case .splash:
                 SplashView(isOnboardingComplete: container.userPreferences.isOnboardingComplete())
                     .task {
+                        // The Quran moved to shared code: bring over what SwiftData kept before Home reads it
+                        await container.prepareQuran()
                         await appViewModel.initialize()
                     }
             case .onboarding:

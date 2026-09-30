@@ -37,8 +37,7 @@ final class HomeViewModel {
     private let exploreOfTheDay: ExploreOfTheDay
     private let pickNameOfTheDay: NameOfTheDay
     private let dhikrSaidToday: DhikrSaidToday
-    private let getLastReading: GetLastReadingUseCase
-    private let fetchSurahs: FetchSurahsUseCase
+    private let quran: QuranUseCases
     private let getQiblaDirection: GetQiblaDirectionUseCase
     private let compass: CompassServiceProtocol
     /// Today's journal entry, from the shared journal
@@ -61,8 +60,7 @@ final class HomeViewModel {
         fetchAyah: FetchAyahUseCase,
         getAyahOfTheDay: GetAyahOfTheDayUseCase,
         getDuaOfTheDay: GetDuaOfTheDayUseCase,
-        getLastReading: GetLastReadingUseCase,
-        fetchSurahs: FetchSurahsUseCase,
+        quran: QuranUseCases,
         getQiblaDirection: GetQiblaDirectionUseCase,
         compass: CompassServiceProtocol,
         journal: SharedViewModel<JournalTodayViewModel, JournalTodayState>,
@@ -76,8 +74,7 @@ final class HomeViewModel {
         self.fetchAyah = fetchAyah
         self.getAyahOfTheDay = getAyahOfTheDay
         self.getDuaOfTheDay = getDuaOfTheDay
-        self.getLastReading = getLastReading
-        self.fetchSurahs = fetchSurahs
+        self.quran = quran
         self.getQiblaDirection = getQiblaDirection
         self.compass = compass
         self.journal = journal
@@ -138,9 +135,9 @@ final class HomeViewModel {
     }
 
     private func loadLastReading() async {
-        guard let surahs = try? await fetchSurahs.execute() else { return }
+        guard let surahs = try? await quran.surahs().map(Surah.init) else { return }
         kahf = surahs.first { $0.number == 18 }
-        if let progress = try? await getLastReading.execute(),
+        if let progress = try? await quran.lastReading().map(ReadingProgress.init),
            let surah = surahs.first(where: { $0.number == progress.surahNumber }) {
             lastReading = (progress, surah)
         }

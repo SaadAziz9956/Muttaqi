@@ -1,22 +1,21 @@
+import Shared
 import SwiftUI
 
 struct AyahCardView: View {
-    let ayah: Ayah
+    let ayah: Shared.Ayah
     let fontSize: FontSize
-    let language: Language
+    let language: Shared.Language
     /// Opens the explanation at this ayah
     let onExplanation: () -> Void
-    @Environment(AppRouter.self) private var router
+    let onCopy: () -> Void
+    let onShare: () -> Void
     @State private var didCopy = false
 
     private var isUrdu: Bool { language == .urdu }
     private var isHindi: Bool { language == .hindi }
 
     private var cleanArabicText: String {
-        ayah.arabicText
-            .replacingOccurrences(of: "\u{06DD}", with: "")
-            .trimmingCharacters(in: .whitespaces)
-            .kfgqpcEncoded
+        ayah.arabicWithoutEndSign().kfgqpcEncoded
     }
 
     private var attributedAyah: AttributedString {
@@ -28,7 +27,7 @@ struct AyahCardView: View {
         openParen.font = .arabic(10)
         openParen.foregroundColor = .appPrimary
 
-        var num = AttributedString("\(ayah.numberInSurah.arabicNumeral)")
+        var num = AttributedString("\(Int(ayah.numberInSurah).arabicNumeral)")
         num.font = .arabic(14)
         num.foregroundColor = .appPrimary
 
@@ -86,13 +85,13 @@ struct AyahCardView: View {
         .contextMenu {
             Button("Copy", systemImage: "doc.on.doc", action: copy)
             Button("Explanation", systemImage: "book", action: onExplanation)
-            Button("Share", systemImage: "square.and.arrow.up") { router.push(SharePassage(ayah: ayah)) }
+            Button("Share", systemImage: "square.and.arrow.up", action: onShare)
         }
         .sensoryFeedback(.success, trigger: didCopy) { _, copied in copied }
     }
 
     private var reference: String {
-        "\(ayah.surahNumber):\(ayah.numberInSurah)"
+        ayah.reference
     }
 
     private var actions: some View {
@@ -111,11 +110,7 @@ struct AyahCardView: View {
 
                 actionButton("book-linear", label: "Explanation", action: onExplanation)
                 actionButton(didCopy ? "tick-circle-linear" : "copy-linear", label: didCopy ? "Copied" : "Copy", action: copy)
-                NavigationLink(value: SharePassage(ayah: ayah)) {
-                    actionFace("export-arrow-01-linear")
-                }
-                .buttonStyle(SoftPressStyle())
-                .accessibilityLabel("Share")
+                actionButton("export-arrow-01-linear", label: "Share", action: onShare)
             }
         }
     }
@@ -134,10 +129,9 @@ struct AyahCardView: View {
         }
     }
 
+    // The shared view model puts the text on the clipboard; the tick and haptic are this card's own
     private func copy() {
-        UIPasteboard.general.string = [ayah.arabicText, ayah.translation, "Quran (\(reference))"]
-            .compactMap { $0 }
-            .joined(separator: "\n\n")
+        onCopy()
         didCopy = true
         Task {
             try? await Task.sleep(for: .seconds(1.5))

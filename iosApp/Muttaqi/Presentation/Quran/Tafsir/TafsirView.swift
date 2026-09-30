@@ -1,69 +1,63 @@
+import Shared
 import SwiftUI
 
 struct TafsirView: View {
-    let surah: Surah?
-    let viewModel: TafsirViewModel
-    let language: Language
+    let surah: Shared.Surah?
+    let screen: SharedViewModel<TafsirViewModel, TafsirState>
     /// Opens scrolled to the commentary covering this ayah, e.g. from the ayah's own Explanation button
-    var startAyah: Int? = nil
+    var startAyah: Int32? = nil
 
-    private var isUrdu: Bool { language == .urdu }
-    private var isHindi: Bool { language == .hindi }
+    private var state: TafsirState { screen.state }
+    private var isUrdu: Bool { state.language == .urdu }
 
     var body: some View {
         VStack(spacing: 0) {
             header
 
-            switch viewModel.state {
+            switch onEnum(of: state.status) {
             case .idle, .loading:
                 Spacer()
                 ProgressView()
                     .tint(.appPrimary)
                 Spacer()
 
-            case .loaded(let ayahs) where ayahs.isEmpty:
+            case .loaded(let loaded) where loaded.entries.isEmpty:
                 Spacer()
                 Text("No tafseer available for this surah")
                     .font(.bodySmall)
                     .foregroundStyle(.textSecondary)
                 Spacer()
 
-            case .loaded(let ayahs):
+            case .loaded(let loaded):
                 ScrollViewReader { proxy in
                     ScrollView {
                         LazyVStack(alignment: .leading, spacing: 0) {
-                            ForEach(ayahs) { ayah in
-                                ayahRow(ayah)
+                            ForEach(loaded.entries, id: \.ayahNumber) { entry in
+                                ayahRow(entry)
                             }
                         }
                         .padding(.horizontal, 16)
                     }
                     .onAppear {
                         // Commentary often covers a group of ayahs, so this finds the group the ayah is in
-                        guard let startAyah,
-                              let entry = ayahs.first(where: { $0.ayahNumber <= startAyah && startAyah <= $0.lastAyahNumber })
-                        else { return }
-                        proxy.scrollTo(entry.id, anchor: .top)
+                        guard let startAyah, let entry = state.entryCovering(ayah: startAyah) else { return }
+                        proxy.scrollTo(entry.ayahNumber, anchor: .top)
                     }
                 }
 
-            case .error(let message):
+            case .failed(let failed):
                 Spacer()
                 VStack(spacing: 12) {
                     Text("Failed to load tafseer")
                         .font(.titleSmall)
                         .foregroundStyle(.textPrimary)
-                    Text(message)
+                    Text(failed.message)
                         .font(.bodySmall)
                         .foregroundStyle(.textSecondary)
                         .multilineTextAlignment(.center)
                         .padding(.horizontal, 32)
                     Button {
-                        Task {
-                            if let surah {
-                                await viewModel.load(surahNumber: surah.number, language: language)
-                            }
-                        }
+                        screen.viewModel.dispatch(intent: TafsirIntentRetry.shared)
                     } label: {
                         Text("Retry")
                             .font(.titleSmall)
@@ -77,8 +71,9 @@ struct TafsirView: View {
             }
         }
         .task {
-            if case .idle = viewModel.state, let surah {
-                await viewModel.load(surahNumber: surah.number, language: language)
+            // Loads the first time it opens for this surah and language, and keeps what's loaded after
+            if let surah {
+                screen.viewModel.dispatch(intent: TafsirIntentOpened(surahNumber: surah.number))
             }
         }
     }
@@ -94,7 +89,7 @@ struct TafsirView: View {
                 .foregroundStyle(.textSecondary)
 
             // There's no Hindi tafseer source, so the repository serves English for Hindi readers
-            if isHindi {
+            if state.showsEnglishInstead {
                 Text("Hindi tafseer isn't available yet — showing English")
                     .font(.bodySmall)
                     .foregroundStyle(.textSecondary)
@@ -106,15 +101,15 @@ struct TafsirView: View {
         .padding(.bottom, 16)
     }
 
-    private func ayahRow(_ ayah: TafsirAyah) -> some View {
+    private func ayahRow(_ entry: TafsirEntry) -> some View {
         VStack(alignment: .leading, spacing: 8) {
-            Text(ayahLabel(ayah))
+            Text(ayahLabel(entry))
                 .font(.labelLarge)
                 .foregroundStyle(.appPrimary)
 
             // One entry can run past 40k characters, so it's laid out a paragraph at a time
             VStack(alignment: .leading, spacing: 12) {
-                ForEach(Array(ayah.text.components(separatedBy: "\n\n").enumerated()), id: \.offset) { _, paragraph in
+                ForEach(Array(entry.paragraphs.enumerated()), id: \.offset) { _, paragraph in
                     paragraphText(paragraph)
                 }
             }
@@ -179,9 +174,9 @@ struct TafsirView: View {
         }
     }
 
-    private func ayahLabel(_ ayah: TafsirAyah) -> String {
-        ayah.lastAyahNumber > ayah.ayahNumber
-            ? "Ayah \(ayah.ayahNumber)–\(ayah.lastAyahNumber)"
-            : "Ayah \(ayah.ayahNumber)"
+    private func ayahLabel(_ entry: TafsirEntry) -> String {
+        entry.lastAyahNumber > entry.ayahNumber
+            ? "Ayah \(entry.ayahNumber)–\(entry.lastAyahNumber)"
+            : "Ayah \(entry.ayahNumber)"
     }
 }

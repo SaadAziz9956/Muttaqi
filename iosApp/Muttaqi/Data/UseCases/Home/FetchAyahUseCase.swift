@@ -1,20 +1,10 @@
 import Foundation
+import Shared
 
-/// Fetches one ayah, with its surah, in the reader's translation language
+/// Fetches one ayah, with its surah, in the reader's translation language, from the shared Quran, for Home's verse
+/// under the greeting and its Ayah of the Day
 struct FetchAyahUseCase: Sendable {
-    private let repository: QuranRepositoryProtocol
-    private let languagePreferences: LanguagePreferences
-
-    init(repository: QuranRepositoryProtocol, languagePreferences: LanguagePreferences) {
-        self.repository = repository
-        self.languagePreferences = languagePreferences
-    }
-
     func execute(surahNumber: Int, ayahNumber: Int) async throws -> DailyAyah? {
-        let language = languagePreferences.getSelectedLanguage().code
-        guard let surah = try await repository.getSurah(number: surahNumber),
-              let ayah = try await repository.getAyah(surahNumber: surahNumber, numberInSurah: ayahNumber, language: language)
-        else { return nil }
-        return DailyAyah(surah: surah, ayah: ayah)
+        try await QuranUseCases.shared.ayah(surahNumber: Int32(surahNumber), ayahNumber: Int32(ayahNumber)).map(DailyAyah.init)
     }
 }
