@@ -46,7 +46,6 @@ struct DhikrListView: View {
         .listStyle(.plain)
         .scrollContentBackground(.hidden)
         .background { SoftBackdrop() }
-        // Lets the one-line caption under the tabs be only as tall as its text
         .environment(\.defaultMinListRowHeight, 0)
         .navigationBarTitleDisplayMode(.inline)
         .collapsingBarTitle("Zikr o Azkar", titleBottom: titleBottom)
@@ -105,7 +104,6 @@ struct DhikrListView: View {
     private func categoryTabs(selected: String) -> some View {
         ScrollViewReader { proxy in
             ScrollView(.horizontal) {
-                // Native glass rendered as one group, which is cheaper than each on its own
                 GlassEffectContainer(spacing: 4) {
                     HStack(spacing: 8) {
                         ForEach(state.sections, id: \.id) { section in
@@ -127,12 +125,10 @@ struct DhikrListView: View {
                     }
                 }
                 .padding(.horizontal, 20)
-                // Room for the chips' float shadow, which a scroll view would otherwise clip
                 .padding(.vertical, 14)
             }
             .scrollIndicators(.hidden)
             .scrollClipDisabled()
-            // Brings the picked tab into view, e.g. one partly off the edge
             .onChange(of: selected) { _, id in
                 withAnimation(.snappy) { proxy.scrollTo(id, anchor: .center) }
             }
@@ -145,8 +141,6 @@ private struct DhikrRow: View {
     let dhikr: Dhikr
 
     var body: some View {
-        // A set of phrases is named by when it's said; a single phrase shows its meaning, or how it's said where no
-        // published translation exists
         let caption = dhikr.title
             ?? dhikr.translation.map { $0.sentenceCased.quoted }
             ?? dhikr.transliteration

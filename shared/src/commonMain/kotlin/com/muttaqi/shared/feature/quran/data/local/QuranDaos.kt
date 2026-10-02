@@ -54,14 +54,12 @@ internal abstract class QuranTextDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     protected abstract suspend fun insertTranslations(translations: List<AyahTranslationEntity>)
 
-    /** The surahs and their ayahs, all at once so a failed download never leaves part of the Quran stored */
     @Transaction
     open suspend fun storeText(surahs: List<SurahEntity>, ayahs: List<AyahEntity>) {
         upsertSurahs(surahs)
         upsertAyahs(ayahs)
     }
 
-    /** A language's translation in place of the one stored */
     @Transaction
     open suspend fun replaceTranslation(language: String, translations: List<AyahTranslationEntity>) {
         deleteTranslations(language)

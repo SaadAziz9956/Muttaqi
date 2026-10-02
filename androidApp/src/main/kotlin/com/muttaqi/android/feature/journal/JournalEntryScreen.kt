@@ -66,7 +66,6 @@ fun JournalEntryRoute(entryId: String?, onBack: () -> Unit) {
             }
         }
     }
-    // Anything not yet saved is written as the reader leaves the screen, or the app
     LifecycleEventEffect(Lifecycle.Event.ON_STOP) { viewModel.dispatch(JournalEntryIntent.SaveNow) }
     DisposableEffect(viewModel) {
         onDispose { viewModel.dispatch(JournalEntryIntent.SaveNow) }
@@ -74,10 +73,6 @@ fun JournalEntryRoute(entryId: String?, onBack: () -> Unit) {
     JournalEntryScreen(state, viewModel::dispatch, onBack)
 }
 
-/**
- * One entry as a page: its date, a large title and the body. There's no Save button; the view model saves a moment
- * after typing stops. A new entry opens with the keyboard on its title, and Return there moves on to the body
- */
 @Composable
 fun JournalEntryScreen(state: JournalEntryState, onIntent: (JournalEntryIntent) -> Unit, onBack: () -> Unit) {
     val soft = MuttaqiTheme.soft
@@ -90,7 +85,6 @@ fun JournalEntryScreen(state: JournalEntryState, onIntent: (JournalEntryIntent) 
     var wasEditing by remember { mutableStateOf(false) }
     val entry = state.entry
 
-    // Putting the keyboard away saves, as leaving does
     LaunchedEffect(editing) {
         if (wasEditing && !editing) onIntent(JournalEntryIntent.SaveNow)
         wasEditing = editing
@@ -114,10 +108,8 @@ fun JournalEntryScreen(state: JournalEntryState, onIntent: (JournalEntryIntent) 
                 }
             },
         ) { padding ->
-            // An existing entry is read from the database first, which takes a moment; a new one is ready at once
             if (entry != null) {
                 val titleStyle = MaterialTheme.typography.headlineMedium.copy(fontSize = 34.sp, color = soft.appPrimary)
-                // As on iOS: Reem Kufi's own line height (1.5 em) plus the field's lineSpacing(4), under each line but the last
                 val bodyStyle = MaterialTheme.typography.bodyMedium.copy(
                     fontSize = 14.sp,
                     lineHeight = (14 * 1.5f + 4).sp,
@@ -138,7 +130,6 @@ fun JournalEntryScreen(state: JournalEntryState, onIntent: (JournalEntryIntent) 
                         value = state.title,
                         onValueChange = { title ->
                             onIntent(JournalEntryIntent.TitleChanged(title))
-                            // The view model keeps a title to one line; a Return typed into it moves on to the body
                             if (title.contains('\n')) bodyFocus.requestFocus()
                         },
                         modifier = Modifier
@@ -173,7 +164,6 @@ fun JournalEntryScreen(state: JournalEntryState, onIntent: (JournalEntryIntent) 
                         },
                     )
 
-                    // Tapping below the text carries on writing, as on a page
                     Spacer(
                         Modifier
                             .fillMaxWidth()

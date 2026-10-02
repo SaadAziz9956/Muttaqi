@@ -10,7 +10,6 @@ struct OnboardingView: View {
 
     var body: some View {
         VStack(spacing: 0) {
-            // Shared by every step so it stays still while the step content changes; setup centres its own
             if state.step != .setup {
                 Text("متقي")
                     .font(.custom("ReemKufi-Regular", size: 60))
@@ -26,6 +25,7 @@ struct OnboardingView: View {
             }
             .frame(maxWidth: .infinity, maxHeight: .infinity)
         }
+        .background { SoftBackdrop() }
         .animation(.smooth(duration: 0.45), value: state.step)
         .task {
             for await effect in screen.viewModel.effects {
@@ -36,7 +36,6 @@ struct OnboardingView: View {
         }
     }
 
-    // Steps advance like a navigation push; with Reduce Motion on they cross-fade instead
     private var stepTransition: AnyTransition {
         reduceMotion ? .opacity : .push(from: .trailing)
     }
@@ -53,7 +52,6 @@ struct OnboardingView: View {
                 dispatch(OnboardingIntentBegin.shared)
             }
         case .name:
-            // Read from the view model itself, as the drawn state can lag a fast typist
             NameStepView(
                 name: Binding(
                     get: { screen.viewModel.state.value.name },
@@ -66,17 +64,26 @@ struct OnboardingView: View {
                 dispatch(OnboardingIntentNext.shared)
             }
         case .notification:
-            NotificationStepView(
-                onEnable: { dispatch(OnboardingIntentRequestNotification.shared) },
+            PermissionStepView(
+                icon: "clock-linear",
+                title: "Enable Notification",
+                detail: "Enable Notification so you don't miss daily Quran ayah and Azkar and Namaz Alarms.",
+                question: "Would you like to turn on Notifications?",
+                action: "Turn on",
+                onAction: { dispatch(OnboardingIntentRequestNotification.shared) },
                 onSkip: { dispatch(OnboardingIntentSkipNotification.shared) }
             )
         case .location:
-            LocationStepView(
-                onFind: { dispatch(OnboardingIntentRequestLocation.shared) },
+            PermissionStepView(
+                icon: "home-qibla",
+                title: "Select Location",
+                detail: "Select your current location to get latest Namaz timing",
+                question: "Find your City",
+                action: "Find",
+                onAction: { dispatch(OnboardingIntentRequestLocation.shared) },
                 onSkip: { dispatch(OnboardingIntentSkipLocation.shared) }
             )
         case .setup:
-            // The shared view model starts the download as this step opens
             SetupStepView(
                 errorMessage: state.setupError,
                 onRetry: { dispatch(OnboardingIntentRetrySetup.shared) }

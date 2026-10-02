@@ -4,7 +4,6 @@ E = {e: json.load(open(f"editions/{e}.json"))["data"]["surahs"] for e in
 def text(ed, s, a): return E[ed][s-1]["ayahs"][a-1]["text"]
 def bare(w): return "".join(c for c in unicodedata.normalize("NFD", w) if unicodedata.category(c) != "Mn" and c != "ـ")
 
-# (surah, ayah, occurrence of the "Lord" word where the dua starts: 1 = first; 0 = whole ayah)
 DUAS = [(2,127,1),(2,128,1),(2,201,1),(2,250,1),(2,286,1),(3,8,0),(3,16,1),(3,38,2),(3,53,0),(3,147,1),
         (3,191,1),(3,192,0),(3,193,0),(3,194,0),(5,83,1),(7,23,1),(7,47,1),(7,126,1),(10,85,1),(14,40,0),
         (14,41,0),(17,24,1),(18,10,1),(20,114,1),(21,89,2),(23,109,1),(23,118,1),(25,65,1),(25,74,1),

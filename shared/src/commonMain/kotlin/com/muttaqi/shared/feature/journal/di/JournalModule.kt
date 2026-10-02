@@ -30,7 +30,6 @@ import org.koin.dsl.binds
 import org.koin.dsl.module
 import kotlin.time.Clock
 
-/** The gratitude journal: entries stored in its own Room database */
 val journalModule = module {
     single {
         journalDatabaseBuilder()
@@ -39,7 +38,6 @@ val journalModule = module {
             .build()
     }
     single {
-        // Writes outlive the screens that ask for them, so they get a scope of their own for the app's lifetime
         RoomJournalRepository(get<JournalDatabase>().journalDao(), CoroutineScope(SupervisorJob() + get<DispatcherProvider>().io))
     } binds arrayOf(JournalReadRepository::class, JournalWriteRepository::class)
     single<JournalImportStatus> { SettingsJournalImportStatus(get<ObservableSettings>()) }
@@ -57,5 +55,4 @@ val journalModule = module {
     viewModel { (entryId: String?) -> JournalEntryViewModel(entryId, get(), get(), get(), get(), Clock.System) }
 }
 
-/** The database file's builder, in each platform's place for app data */
 internal expect fun Scope.journalDatabaseBuilder(): RoomDatabase.Builder<JournalDatabase>

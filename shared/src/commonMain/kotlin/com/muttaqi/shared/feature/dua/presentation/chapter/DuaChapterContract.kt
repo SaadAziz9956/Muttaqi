@@ -7,7 +7,6 @@ import com.muttaqi.shared.core.mvi.UiState
 import com.muttaqi.shared.core.share.SharePassage
 import com.muttaqi.shared.feature.dua.domain.model.DuaChapter
 
-/** One chapter's duas, and the translations it shows, credited as their publishers ask */
 data class DuaChapterState(
     val isLoading: Boolean = true,
     val chapter: DuaChapter? = null,
@@ -25,6 +24,5 @@ sealed interface DuaChapterMutation : UiMutation {
 
 sealed interface DuaChapterEffect : UiEffect {
     data class OpenShare(val passage: SharePassage) : DuaChapterEffect
-    /** The platform puts the text on the clipboard */
     data class Copy(val text: String) : DuaChapterEffect
 }

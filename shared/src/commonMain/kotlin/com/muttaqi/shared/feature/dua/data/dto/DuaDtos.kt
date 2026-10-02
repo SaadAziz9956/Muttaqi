@@ -3,7 +3,6 @@ package com.muttaqi.shared.feature.dua.data.dto
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
-/** Duas.json: Quranic duas, each the dua portion of an ayah, cut from the app's Quran editions */
 @Serializable
 internal data class QuranicDuaDto(
     val surah: Int,
@@ -13,7 +12,6 @@ internal data class QuranicDuaDto(
     val translations: Map<String, String>,
 )
 
-/** HisnAlMuslim.json: Hisn al-Muslim by Sa'id al-Qahtani, grouped into categories */
 @Serializable
 internal data class HisnBookDto(val categories: List<Category>) {
     @Serializable
@@ -28,7 +26,6 @@ internal data class HisnBookDto(val categories: List<Category>) {
         val arabic: String,
         val transliteration: String,
         val translation: String,
-        /** The published Urdu, where there is one, and whose it is */
         val translationUrdu: String? = null,
         val translationUrduCredit: String? = null,
         @SerialName("repeat") val repeatCount: Int,

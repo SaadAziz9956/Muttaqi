@@ -113,11 +113,9 @@ class EmotionsAndExploreViewModelTest {
         language.switchTo(Language.Urdu)
         val state = viewModel.state.value
         assertEquals("fasting", state.query)
-        // Found by its title; its texts are now in Urdu
         assertEquals(listOf("fasting"), state.results.map { it.topic.id })
         assertEquals("تم پر روزے فرض کئے گئے ہیں", state.results.single().topic.verses.single().translation)
         assertTrue(state.header!!.text.startsWith("اور جن لوگوں"))
-        // Urdu texts are searched once they're shown
         viewModel.dispatch(ExploreIntent.QueryChanged("روزے"))
         assertEquals(listOf("fasting"), viewModel.state.value.results.map { it.topic.id })
     }

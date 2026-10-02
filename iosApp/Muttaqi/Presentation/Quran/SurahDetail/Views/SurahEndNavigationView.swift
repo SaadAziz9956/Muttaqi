@@ -1,7 +1,6 @@
 import Shared
 import SwiftUI
 
-// Shown after the last ayah, where a reader who has finished the surah naturally moves on
 struct SurahEndNavigationView: View {
     let previousSurah: Surah?
     let nextSurah: Surah?

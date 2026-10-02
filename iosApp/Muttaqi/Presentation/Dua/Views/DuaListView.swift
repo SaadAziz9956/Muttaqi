@@ -77,8 +77,6 @@ struct DuaListView: View {
                 .foregroundStyle(.textSecondary)
                 .accessibilityHidden(true)
 
-            // Reads the view model's query as it is now rather than the last one drawn: clearing unfocuses the field in
-            // the same moment, and a field still showing the old text would send it back as it lets go
             TextField("Search", text: Binding(get: { screen.viewModel.state.value.query }, set: { dispatch(DuaListIntentQueryChanged(query: $0)) }))
                 .font(.bodyMedium)
                 .foregroundStyle(.textPrimary)

@@ -12,13 +12,6 @@ import kotlin.test.assertNull
 import kotlin.test.assertTrue
 import kotlin.time.Instant
 
-/**
- * The shared times against the Swift app's, to the minute. The expected values were computed by the Swift app's own
- * code (AdhanPrayerTimesRepository on adhan-swift 1.5.0, the version the app resolves: `.karachi` with `.hanafi`, and
- * its Kaaba distance from `CLLocation.distance(from:)`), for places from the equator to the Arctic across the solstices
- * and equinoxes. London, Oslo and Reykjavik in June have no true dawn or dusk at 18°, so they check the high-latitude
- * rule; Tromsø in midsummer and midwinter has no sunrise or sunset, where Swift gave no times at all.
- */
 class AdhanPrayerTimesTest {
     private data class SwiftDay(val city: String, val date: LocalDate, val times: List<String>?)
     private data class SwiftQibla(val city: String, val bearing: Double, val meters: Double)
@@ -35,7 +28,6 @@ class AdhanPrayerTimesTest {
         "Sydney" to Coordinates(-33.8688, 151.2093),
     )
 
-    /** Fajr, sunrise, Dhuhr, Asr, Maghrib and Isha in UTC, or null where Swift's Adhan gave no times */
     private val swiftTimes = listOf(
         SwiftDay("Karachi", LocalDate(2026, 9, 30), listOf("2026-09-30T00:08:00Z", "2026-09-30T01:24:00Z", "2026-09-30T07:23:00Z", "2026-09-30T11:40:00Z", "2026-09-30T13:20:00Z", "2026-09-30T14:36:00Z")),
         SwiftDay("Karachi", LocalDate(2026, 6, 21), listOf("2026-06-20T23:14:00Z", "2026-06-21T00:43:00Z", "2026-06-21T07:35:00Z", "2026-06-21T12:17:00Z", "2026-06-21T14:24:00Z", "2026-06-21T15:53:00Z")),
@@ -75,7 +67,6 @@ class AdhanPrayerTimesTest {
         SwiftDay("Sydney", LocalDate(2026, 3, 20), listOf("2026-03-19T18:34:00Z", "2026-03-19T19:58:00Z", "2026-03-20T02:04:00Z", "2026-03-20T06:23:00Z", "2026-03-20T08:07:00Z", "2026-03-20T09:30:00Z")),
     )
 
-    /** Adhan's bearing, and Core Location's distance to the Kaaba in metres */
     private val swiftQibla = listOf(
         SwiftQibla("Karachi", 267.741059701161, 2804339.954313),
         SwiftQibla("Lahore", 260.365857592788, 3602988.763861),
@@ -113,9 +104,7 @@ class AdhanPrayerTimesTest {
     fun theQiblaBearingIsSwiftsAndTheDistanceCoreLocations() {
         for (expected in swiftQibla) {
             val shared = qibla.qiblaDirection(cities.getValue(expected.city))
-            // Floating point differs in the last digits between platforms; the screens show whole degrees
             assertTrue(abs(shared.bearing - expected.bearing) < 1e-6, "${expected.city} bearing ${shared.bearing}")
-            // Core Location's distance to the millimetre, so the kilometres shown always round the same way
             assertTrue(abs(shared.distanceInKilometers * 1000 - expected.meters) < 0.01, "${expected.city} ${shared.distanceInKilometers} km")
             assertEquals((expected.meters / 1000).roundToLong(), shared.distanceInKilometers.roundToLong())
         }

@@ -4,7 +4,6 @@ import com.muttaqi.shared.core.mvi.Reducer
 
 internal object SurahReaderReducer : Reducer<SurahReaderState, SurahReaderMutation> {
     override fun reduce(state: SurahReaderState, mutation: SurahReaderMutation): SurahReaderState = when (mutation) {
-        // The header keeps the surah it shows until the new one has loaded
         is SurahReaderMutation.Moved -> state.copy(
             surahNumber = mutation.surahNumber,
             direction = mutation.direction,

@@ -9,7 +9,6 @@ import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertNull
 
-/** Reading what the Swift app saved as data from real user defaults */
 class UserDefaultsLegacyDataSourceTest {
     private val suite = "com.muttaqi.shared.tests.legacy"
     private val defaults = NSUserDefaults(suiteName = suite)
@@ -34,7 +33,6 @@ class UserDefaultsLegacyDataSourceTest {
 
     @Test
     fun textIsLeftToSettings() {
-        // Once a feature has saved the value again it's text, which settings reads itself
         defaults.setObject("""{"longitude":67.0011,"latitude":24.8607}""", forKey = "last_known_coordinates")
         assertNull(source.text("last_known_coordinates"))
     }

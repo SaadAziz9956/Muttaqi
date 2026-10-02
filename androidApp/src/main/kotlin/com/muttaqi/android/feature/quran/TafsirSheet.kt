@@ -25,6 +25,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.muttaqi.android.designsystem.MuttaqiTheme
 import com.muttaqi.android.designsystem.component.ArabicText
+import com.muttaqi.android.designsystem.component.FadeBetween
 import com.muttaqi.android.designsystem.component.TranslationText
 import com.muttaqi.shared.core.model.Language
 import com.muttaqi.shared.feature.quran.domain.model.Surah
@@ -32,10 +33,6 @@ import com.muttaqi.shared.feature.quran.domain.model.TafsirEntry
 import com.muttaqi.shared.feature.quran.presentation.tafsir.TafsirState
 import com.muttaqi.shared.feature.quran.presentation.tafsir.TafsirStatus
 
-/**
- * Tafsir Ibn Kathir for the surah being read, opened at the passage covering [startAyah] when there is one.
- * Commentary often covers a group of ayahs, so each passage is headed with the ayahs it explains
- */
 @Composable
 fun TafsirContent(surah: Surah?, state: TafsirState, startAyah: Int?, onRetry: () -> Unit) {
     val soft = MuttaqiTheme.soft
@@ -43,7 +40,6 @@ fun TafsirContent(surah: Surah?, state: TafsirState, startAyah: Int?, onRetry: (
         Column(Modifier.fillMaxWidth().padding(top = 8.dp, bottom = 16.dp), horizontalAlignment = Alignment.CenterHorizontally, verticalArrangement = Arrangement.spacedBy(4.dp)) {
             Text(surah?.englishName ?: "Tafseer", style = MaterialTheme.typography.titleMedium, color = soft.textPrimary)
             Text("Tafseer Ibn Kathir", style = MaterialTheme.typography.bodySmall, color = soft.textSecondary)
-            // There's no Hindi tafseer source, so the repository serves English for Hindi readers
             if (state.showsEnglishInstead) {
                 Text(
                     "Hindi tafseer isn't available yet — showing English",
@@ -53,20 +49,22 @@ fun TafsirContent(surah: Surah?, state: TafsirState, startAyah: Int?, onRetry: (
                 )
             }
         }
-        when (val status = state.status) {
-            TafsirStatus.Idle, TafsirStatus.Loading -> Loading(Modifier.fillMaxSize())
-            is TafsirStatus.Loaded -> if (status.entries.isEmpty()) {
-                Text(
-                    "No tafseer available for this surah",
-                    Modifier.fillMaxWidth().padding(top = 120.dp),
-                    style = MaterialTheme.typography.bodySmall,
-                    color = soft.textSecondary,
-                    textAlign = TextAlign.Center,
-                )
-            } else {
-                TafsirEntries(status.entries, state.language, state.entryCovering(startAyah ?: 0))
+        FadeBetween(state.status, key = { it is TafsirStatus.Loaded || it is TafsirStatus.Failed }, Modifier.fillMaxSize()) { status ->
+            when (status) {
+                TafsirStatus.Idle, TafsirStatus.Loading -> Loading(Modifier.fillMaxSize())
+                is TafsirStatus.Loaded -> if (status.entries.isEmpty()) {
+                    Text(
+                        "No tafseer available for this surah",
+                        Modifier.fillMaxWidth().padding(top = 120.dp),
+                        style = MaterialTheme.typography.bodySmall,
+                        color = soft.textSecondary,
+                        textAlign = TextAlign.Center,
+                    )
+                } else {
+                    TafsirEntries(status.entries, state.language, state.entryCovering(startAyah ?: 0))
+                }
+                is TafsirStatus.Failed -> LoadFailed(status.message, onRetry, title = "Failed to load tafseer")
             }
-            is TafsirStatus.Failed -> LoadFailed(status.message, onRetry, title = "Failed to load tafseer")
         }
     }
 }
@@ -87,7 +85,6 @@ private fun TafsirEntries(entries: List<TafsirEntry>, language: Language, start:
                     style = MaterialTheme.typography.labelLarge,
                     color = soft.appPrimary,
                 )
-                // One entry can run past 40,000 characters, so it's laid out a paragraph at a time
                 Column(verticalArrangement = Arrangement.spacedBy(12.dp)) {
                     entry.paragraphs.forEach { TafsirParagraph(it, language) }
                 }
@@ -97,19 +94,15 @@ private fun TafsirEntries(entries: List<TafsirEntry>, language: Language, start:
     }
 }
 
-// English commentary quotes hadith and ayahs as their own Arabic paragraphs; those get the Quran font, right-aligned
 @Composable
 private fun TafsirParagraph(paragraph: String, language: Language) {
     val soft = MuttaqiTheme.soft
     when {
-        // Nastaliq at 17, as on iOS, where TranslationText would add a point
         language == Language.Urdu ->
             TranslationText(paragraph, Modifier.fillMaxWidth(), fontSize = 16.sp, textAlign = TextAlign.Right, lineSpacing = 0.sp)
-        // ArabicText sets the Arabic punctuation the Quran font can't draw in the system font
         startsWithArabic(paragraph) ->
             ArabicText(paragraph, Modifier.fillMaxWidth(), fontSize = 20.sp, textAlign = TextAlign.Right, lineSpacing = 0.sp)
         else -> {
-            // ﷺ is taller than a line of body text and would overlap the lines around it, so it's drawn smaller
             val text = remember(paragraph) { restyled(paragraph, setOf('ﷺ'), SpanStyle(fontFamily = FontFamily.Default, fontSize = 9.sp)) }
             Text(text, style = MaterialTheme.typography.bodySmall, color = soft.textPrimary)
         }

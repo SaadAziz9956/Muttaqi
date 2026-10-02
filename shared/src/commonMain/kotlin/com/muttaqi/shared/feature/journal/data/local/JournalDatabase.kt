@@ -15,7 +15,6 @@ import androidx.room.RoomDatabaseConstructor
 import androidx.room.Upsert
 import kotlinx.coroutines.flow.Flow
 
-/** The journal's own database, `journal.db`, on both platforms */
 @Database(entities = [JournalEntryEntity::class], version = 1)
 @ConstructedBy(JournalDatabaseConstructor::class)
 internal abstract class JournalDatabase : RoomDatabase() {
@@ -26,13 +25,11 @@ internal abstract class JournalDatabase : RoomDatabase() {
     }
 }
 
-// Room generates the actual for each platform
 @Suppress("KotlinNoActualForExpect")
 internal expect object JournalDatabaseConstructor : RoomDatabaseConstructor<JournalDatabase> {
     override fun initialize(): JournalDatabase
 }
 
-/** One entry as stored; times are milliseconds since 1970 (UTC) */
 @Entity(tableName = "journal_entries", indices = [Index("created_at")])
 internal data class JournalEntryEntity(
     @PrimaryKey val id: String,
@@ -56,7 +53,6 @@ internal interface JournalDao {
     @Query("DELETE FROM journal_entries WHERE id = :id")
     suspend fun delete(id: String)
 
-    /** Skips any entry whose id is already stored */
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     suspend fun insertMissing(entries: List<JournalEntryEntity>)
 }

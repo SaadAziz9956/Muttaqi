@@ -20,7 +20,6 @@ import org.koin.core.module.dsl.viewModel
 import org.koin.core.module.dsl.viewModelOf
 import org.koin.dsl.module
 
-/** Dikr: the list of dhikr by category and the counter, with today's progress */
 val dhikrModule = module {
     single<DhikrRepository> { BundledDhikrRepository(get(), get()) }
     single<DhikrProgressRepository> { SettingsDhikrProgressRepository(get<ObservableSettings>(), get()) }

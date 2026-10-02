@@ -1,7 +1,6 @@
 import Shared
 import SwiftUI
 
-/// The chapters in one category, e.g. every chapter under "Prayer & Purification"
 struct DuaCategoryView: View {
     @State private var screen: SharedViewModel<DuaCategoryViewModel, DuaCategoryState>
     @State private var titleBottom: CGFloat = .infinity

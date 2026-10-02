@@ -12,10 +12,6 @@ import org.koin.core.module.dsl.factoryOf
 import org.koin.core.module.dsl.viewModelOf
 import org.koin.dsl.module
 
-/**
- * Onboarding: the reader's name, notification and location permission, and the first-launch Quran download. Each app
- * supplies NotificationPermission: iOS through `initKoinIos`, Android through its own module
- */
 val onboardingModule = module {
     single<OnboardingRepository> { SettingsOnboardingRepository(get<ObservableSettings>()) }
 

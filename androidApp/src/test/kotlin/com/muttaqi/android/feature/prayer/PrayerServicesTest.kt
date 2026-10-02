@@ -28,7 +28,6 @@ import org.robolectric.RuntimeEnvironment
 import org.robolectric.Shadows.shadowOf
 import org.robolectric.annotation.Config
 
-/** The shared prayer and onboarding code wired to Android's own services, started as the app starts them */
 @RunWith(RobolectricTestRunner::class)
 @Config(application = Application::class, sdk = [35])
 class PrayerServicesTest {
@@ -50,7 +49,6 @@ class PrayerServicesTest {
         assertNotNull(get<QiblaViewModel>(QiblaViewModel::class.java))
         assertNotNull(get<OnboardingViewModel>(OnboardingViewModel::class.java))
         assertFalse(get<IsOnboardingComplete>(IsOnboardingComplete::class.java)())
-        // Robolectric's phone has no rotation-vector sensor, so there's no compass to follow
         assertFalse(get<HeadingProvider>(HeadingProvider::class.java).isAvailable)
     }
 
@@ -58,7 +56,6 @@ class PrayerServicesTest {
     fun locationAccessFollowsThePermission() {
         val location = get<LocationProvider>(LocationProvider::class.java)
         assertEquals(LocationAccess.NotDetermined, location.access)
-        // Approximate location is enough
         shadowOf(application).grantPermissions(Manifest.permission.ACCESS_COARSE_LOCATION)
         assertEquals(LocationAccess.Granted, location.access)
     }

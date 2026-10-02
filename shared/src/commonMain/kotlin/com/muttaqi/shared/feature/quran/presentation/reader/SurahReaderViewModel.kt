@@ -22,12 +22,6 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import kotlin.time.Duration.Companion.seconds
 
-/**
- * Reads a surah, moves to the surahs either side, and records the reading progress: every ayah that comes on screen
- * counts as read, and the first one on screen is where the reader is
- *
- * @param startAyah the ayah (number within the surah) to open at, e.g. when continuing; null opens at the start
- */
 class SurahReaderViewModel(
     surahNumber: Int,
     startAyah: Int?,
@@ -40,14 +34,9 @@ class SurahReaderViewModel(
 ) {
     private val position = MutableStateFlow<String?>(null)
 
-    /**
-     * Where the reader is, e.g. "Ayah 12 of 286", or the Mushaf page in Arabic Only mode; null until something is on
-     * screen. Its own flow, since it changes with every scroll and only the pill that shows it needs to redraw
-     */
     val readingPosition: StateFlow<String?> = position.asStateFlow()
 
     private var visibleIds: Set<Int> = emptySet()
-    /** Ayahs of the current surah that have been on screen since it was opened */
     private val sessionReadAyahs = mutableSetOf<Int>()
     private var pendingProgress: PendingProgress? = null
     private var saveJob: Job? = null
@@ -56,8 +45,7 @@ class SurahReaderViewModel(
     private data class PendingProgress(val surahNumber: Int, val lastAyahNumber: Int, val readAyahs: Set<Int>, val totalAyahs: Int)
 
     init {
-        // A new translation language reloads the surah in it; the mode and font size just redraw
-        viewModelScope.launch {
+        launchNow {
             var language = state.value.settings.language
             observeSettings().collect { settings ->
                 mutate(SurahReaderMutation.SettingsChanged(settings))
@@ -80,7 +68,6 @@ class SurahReaderViewModel(
             }
             SurahReaderIntent.ReachedStart -> {
                 mutate(SurahReaderMutation.StartReached)
-                // The screen the jump lands on only reports what's visible once the reader scrolls, so count it now
                 recordVisible()
             }
             SurahReaderIntent.NextTapped -> if (state.value.canGoNext) move(state.value.surahNumber + 1, SurahDirection.Forward)
@@ -113,7 +100,7 @@ class SurahReaderViewModel(
         val surahNumber = state.value.surahNumber
         val language = state.value.settings.language
         mutate(SurahReaderMutation.Loading)
-        loadJob = viewModelScope.launch {
+        loadJob = launchNow {
             try {
                 val reading = readSurah(surahNumber, language)
                 if (reading == null) {
@@ -149,13 +136,11 @@ class SurahReaderViewModel(
 
     private fun recordVisible() {
         val state = state.value
-        // What scrolls past while jumping to the saved position is ignored, or it would overwrite that position
         if (state.pendingStartAyah != null) return
         val reading = state.reading ?: return
         val visible = reading.displayAyahs.filter { it.number in visibleIds }
         val first = visible.minByOrNull { it.numberInSurah } ?: return
 
-        // In Arabic Only mode a visible page shows all of its ayahs
         val onScreen = when (state.settings.mode) {
             ReadingMode.WithTranslation -> visible.map { it.numberInSurah }.toMutableSet()
             ReadingMode.ArabicOnly -> {
@@ -163,12 +148,10 @@ class SurahReaderViewModel(
                 reading.displayAyahs.filter { it.page in pages }.map { it.numberInSurah }.toMutableSet()
             }
         }
-        // Al-Fatiha's first ayah is the Bismillah, shown above the list rather than as its own card
         if (reading.surah.number == 1 && first.numberInSurah <= 3) onScreen += 1
         sessionReadAyahs += onScreen
 
         pendingProgress = PendingProgress(reading.surah.number, first.numberInSurah, sessionReadAyahs.toSet(), reading.surah.numberOfAyahs)
-        // Saved once scrolling settles rather than on every frame
         saveJob?.cancel()
         saveJob = viewModelScope.launch {
             delay(1.seconds)
@@ -180,14 +163,11 @@ class SurahReaderViewModel(
         saveJob?.cancel()
         val progress = pendingProgress ?: return
         pendingProgress = null
-        // Started at once and not cancelled with the screen, so leaving it, even as it's cleared, still saves where
-        // the reader was
         viewModelScope.launch(start = CoroutineStart.UNDISPATCHED) {
             withContext(NonCancellable) {
                 try {
                     recordReading(progress.surahNumber, progress.lastAyahNumber, progress.readAyahs, progress.totalAyahs)
                 } catch (_: Exception) {
-                    // A failed write loses one position; the next scroll records it again
                 }
             }
         }

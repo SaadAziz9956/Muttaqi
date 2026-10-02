@@ -6,7 +6,6 @@ import platform.Foundation.NSUTF8StringEncoding
 import platform.Foundation.NSUserDefaults
 import platform.Foundation.create
 
-/** What the Swift app wrote with `UserDefaults.set(Data, forKey:)`, which it always encoded as UTF-8 JSON */
 class UserDefaultsLegacyDataSource(
     private val defaults: NSUserDefaults = NSUserDefaults.standardUserDefaults,
 ) : LegacyDataSource {

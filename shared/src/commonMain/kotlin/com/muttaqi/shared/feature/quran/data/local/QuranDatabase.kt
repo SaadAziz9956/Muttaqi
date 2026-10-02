@@ -5,10 +5,6 @@ import androidx.room.Database
 import androidx.room.RoomDatabase
 import androidx.room.RoomDatabaseConstructor
 
-/**
- * The Quran's own database: the text and translations synced from the Quran API, reading progress and the tafsir
- * downloaded so far. On iOS it replaces the SwiftData store the Swift code kept these in
- */
 @Database(
     entities = [
         SurahEntity::class,
@@ -30,7 +26,6 @@ internal abstract class QuranDatabase : RoomDatabase() {
     }
 }
 
-// Room generates the actual constructor for each platform
 @Suppress("KotlinNoActualForExpect")
 internal expect object QuranDatabaseConstructor : RoomDatabaseConstructor<QuranDatabase> {
     override fun initialize(): QuranDatabase

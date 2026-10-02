@@ -22,11 +22,6 @@ import kotlin.test.assertNull
 import kotlin.time.Duration.Companion.minutes
 import kotlin.time.Instant
 
-/**
- * The Quran's Room database itself, in memory, with the SQLite driver the apps use, so its queries are checked as
- * written. It runs in the iOS simulator tests: the Android host tests' JVM has no build of the bundled SQLite for the
- * computer it runs on
- */
 class RoomQuranDatabaseTest {
     private val database = Room.inMemoryDatabaseBuilder<QuranDatabase>()
         .setDriver(BundledSQLiteDriver())
@@ -49,7 +44,6 @@ class RoomQuranDatabaseTest {
         val baqara = quran.ayahs(2, Language.Urdu)
         assertEquals((1..8).toList(), baqara.map { it.numberInSurah })
         assertEquals(QuranTestData.ayahs.filter { it.surah == 2 }.map { it.urdu }, baqara.map { it.translation })
-        // Another language's translation isn't stored, so the ayahs come without one rather than not at all
         assertEquals(List(8) { null }, quran.ayahs(2, Language.English).map { it.translation })
         assertEquals(QuranTestData.ayahs.first { it.surah == 18 }.transliteration, quran.ayah(18, 1, Language.Urdu)?.transliteration)
         assertNull(quran.ayah(18, 2, Language.Urdu))

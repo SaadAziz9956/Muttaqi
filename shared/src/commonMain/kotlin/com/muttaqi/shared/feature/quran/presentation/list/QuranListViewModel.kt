@@ -1,6 +1,5 @@
 package com.muttaqi.shared.feature.quran.presentation.list
 
-import androidx.lifecycle.viewModelScope
 import com.muttaqi.shared.core.domain.Outcome
 import com.muttaqi.shared.core.mvi.MviViewModel
 import com.muttaqi.shared.core.preferences.SelectedLanguage
@@ -13,7 +12,6 @@ import com.muttaqi.shared.feature.quran.domain.usecase.SyncQuran
 import com.muttaqi.shared.feature.quran.presentation.QuranMessages
 import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.Job
-import kotlinx.coroutines.launch
 
 class QuranListViewModel(
     private val syncQuran: SyncQuran,
@@ -22,7 +20,6 @@ class QuranListViewModel(
     private val filterSurahs: FilterSurahs,
     private val selectedLanguage: SelectedLanguage,
 ) : MviViewModel<QuranListState, QuranListIntent, QuranListMutation, QuranListEffect>(
-    // The hadith is there from the first frame, so the page never reflows as it arrives
     QuranListState(header = PageQuotes.learnAndTeachQuran.displayed(selectedLanguage.current)),
     QuranListReducer,
 ) {
@@ -30,8 +27,7 @@ class QuranListViewModel(
     private var loading: Job? = null
 
     init {
-        // The hadith under the title follows the translation language
-        viewModelScope.launch {
+        launchNow {
             selectedLanguage.changes.collect { language ->
                 mutate(QuranListMutation.HeaderChanged(PageQuotes.learnAndTeachQuran.displayed(language)))
             }
@@ -41,7 +37,6 @@ class QuranListViewModel(
 
     override fun handle(intent: QuranListIntent) {
         when (intent) {
-            // Back from a surah: the list is already loaded, only the reading position has moved
             QuranListIntent.Appeared -> if (!state.value.isLoading && state.value.error == null) refreshProgress()
             QuranListIntent.Retry -> load()
             is QuranListIntent.QueryChanged -> filter(intent.query, state.value.filter)
@@ -56,16 +51,15 @@ class QuranListViewModel(
         }
     }
 
-    // Downloads the Quran first if it isn't stored, e.g. the first time after the move to shared code
     private fun load() {
         if (loading?.isActive == true) return
         mutate(QuranListMutation.Loading)
-        loading = viewModelScope.launch {
+        loading = launchNow {
             val language = selectedLanguage.current
             try {
                 if (syncQuran(language) is Outcome.Failure) {
                     mutate(QuranListMutation.LoadFailed(QuranMessages.downloadFailed(language)))
-                    return@launch
+                    return@launchNow
                 }
                 val surahs = getSurahs()
                 val visible = filterSurahs(surahs, state.value.query, state.value.filter.revelation)
@@ -79,7 +73,7 @@ class QuranListViewModel(
     }
 
     private fun refreshProgress() {
-        viewModelScope.launch {
+        launchNow {
             val progress = getLastReading()
             if (progress != state.value.readingProgress) mutate(QuranListMutation.ProgressChanged(progress))
         }

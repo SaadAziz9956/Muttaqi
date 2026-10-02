@@ -50,7 +50,6 @@ class ReadingProgressRepositoryTest {
 
     @Test
     fun aCountFromBeforeReadAyahsWereKeptIsNotLost() = runTest {
-        // Records from before the app kept which ayahs were read have a count but no list
         repository.merge(listOf(SurahProgress(3, 40, emptySet(), completedAyahs = 40, totalAyahs = 200, lastReadAt = start)))
         assertEquals(40, repository.progress(3)!!.completedAyahs)
     }

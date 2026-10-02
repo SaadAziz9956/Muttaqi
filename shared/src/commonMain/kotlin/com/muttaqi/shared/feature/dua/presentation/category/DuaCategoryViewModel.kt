@@ -1,11 +1,9 @@
 package com.muttaqi.shared.feature.dua.presentation.category
 
-import androidx.lifecycle.viewModelScope
 import com.muttaqi.shared.core.mvi.MviViewModel
 import com.muttaqi.shared.core.mvi.Reducer
 import com.muttaqi.shared.core.preferences.SelectedLanguage
 import com.muttaqi.shared.feature.dua.domain.usecase.GetDuaCategory
-import kotlinx.coroutines.launch
 
 internal object DuaCategoryReducer : Reducer<DuaCategoryState, DuaCategoryMutation> {
     override fun reduce(state: DuaCategoryState, mutation: DuaCategoryMutation) = when (mutation) {
@@ -22,7 +20,7 @@ class DuaCategoryViewModel(
     DuaCategoryReducer,
 ) {
     init {
-        viewModelScope.launch {
+        launchNow {
             selectedLanguage.changes.collect { language -> mutate(DuaCategoryMutation.Loaded(getCategory(categoryId, language))) }
         }
     }

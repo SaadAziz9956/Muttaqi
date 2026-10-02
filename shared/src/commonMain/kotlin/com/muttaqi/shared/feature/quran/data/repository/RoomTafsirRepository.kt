@@ -15,7 +15,6 @@ import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.withContext
 import kotlinx.io.IOException
 
-/** Tafsir Ibn Kathir from quran.com, downloaded a surah at a time and kept in the Room database, as plain text */
 internal class RoomTafsirRepository(
     private val tafsirDao: TafsirDao,
     private val textDao: QuranTextDao,
@@ -43,7 +42,6 @@ internal class RoomTafsirRepository(
         val source = TafsirSource.forLanguage(language)
         val entries = withContext(dispatchers.io) {
             api.tafsirByChapter(source.id, surahNumber).tafsirs.mapNotNull { dto ->
-                // When commentary covers several ayahs, the API puts it on the first one and leaves the rest empty
                 val text = dto.text.strippingHtml()
                 if (text.isEmpty()) return@mapNotNull null
                 TafsirEntity(
@@ -61,7 +59,6 @@ internal class RoomTafsirRepository(
     private suspend fun stored(surahNumber: Int, language: Language): List<TafsirEntry> {
         val rows = tafsirDao.tafsir(surahNumber, language.code)
         val last = rows.lastOrNull() ?: return emptyList()
-        // Each entry covers every ayah up to where the next starts; the final one runs to the end of the surah
         val surahEnd = textDao.surah(surahNumber)?.numberOfAyahs ?: last.ayahNumber
         return rows.mapIndexed { index, row ->
             val nextStart = rows.getOrNull(index + 1)?.ayahNumber ?: (surahEnd + 1)
@@ -80,9 +77,7 @@ private val blockBoundary = Regex("</?(p|div|h[1-6])(\\s[^>]*)?>", RegexOption.I
 private val anyTag = Regex("<[^>]+>")
 private val blankLines = Regex("[ \\t]*\\n(\\s*\\n)+[ \\t]*")
 
-/** The commentary's HTML as plain text, its paragraphs and headings kept apart by blank lines */
 internal fun String.strippingHtml(): String = this
-    // Block boundaries become blank lines before the tags are dropped, so paragraphs and headings stay separate
     .replace(lineBreak, "\n")
     .replace(blockBoundary, "\n\n")
     .replace(anyTag, "")

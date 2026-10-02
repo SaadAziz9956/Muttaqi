@@ -3,30 +3,37 @@ import SwiftUI
 
 struct QiblaView: View {
     @State private var screen = SharedViewModel(PrayerViewModels.shared.qibla()) { $0.state }
-    /// The compass, from its own flow, as it changes many times a second
     @State private var reading: QiblaCompass?
-    /// Goes up each time the phone comes round to face the Qibla, for its haptic
     @State private var timesFacingQibla = 0
     @Environment(\.openURL) private var openURL
 
     private var state: QiblaState { screen.state }
 
+    private var phase: Int {
+        switch onEnum(of: state.phase) {
+        case .locating: 0
+        case .needsLocation: 1
+        case .ready: 2
+        }
+    }
+
     var body: some View {
-        // A ZStack rather than a Group: modifiers on a Group attach to each branch, so switching from loading
-        // to the compass would restart the tasks below
         ZStack {
             SoftBackdrop()
 
             switch onEnum(of: state.phase) {
             case .locating:
-                ProgressView()
-                    .tint(.appPrimary)
+                SoftLoadingIndicator()
+                    .transition(.opacity)
             case .needsLocation(let needs):
                 locationNeeded(needs.access)
+                    .transition(.opacity)
             case .ready(let ready):
                 compass(ready.qibla)
+                    .transition(.opacity)
             }
         }
+        .animation(.easeInOut(duration: 0.22), value: phase)
         .navigationBarTitleDisplayMode(.inline)
         .toolbar {
             ToolbarItem(placement: .principal) {
@@ -46,7 +53,6 @@ struct QiblaView: View {
                 }
             }
         }
-        // The compass runs only while this follows it, so it stops when the screen goes away
         .task(id: state.qibla != nil) {
             if state.qibla != nil {
                 for await next in screen.viewModel.compass { reading = next }
@@ -105,7 +111,6 @@ struct QiblaView: View {
 
     private var isAligned: Bool { reading?.isAligned ?? false }
 
-    /// Why the compass can't guide the reader right now, if it can't
     private var note: String? {
         guard let qibla = state.qibla else { return nil }
         if !state.isCompassAvailable {
@@ -156,7 +161,6 @@ struct QiblaView: View {
         } description: {
             Text("Muttaqi uses your location to find the direction of the Kaaba.")
         } actions: {
-            // Asks for access, or opens the settings once it's been refused
             Button(access == .denied ? "Open Settings" : "Allow Location") {
                 screen.viewModel.dispatch(intent: QiblaIntentLocationButtonTapped.shared)
             }
@@ -166,8 +170,6 @@ struct QiblaView: View {
     }
 }
 
-/// Compass card that turns with the phone so north stays north; the Kaaba marker sits at the Qibla bearing,
-/// and the phone is facing the Qibla when the marker reaches the pointer at the top
 private struct QiblaCompassDial: View {
     let qiblaBearing: Double
     let rotation: Double
@@ -178,14 +180,12 @@ private struct QiblaCompassDial: View {
             let radius = min(geometry.size.width, geometry.size.height) / 2
 
             ZStack {
-                // The floating disc
                 Circle()
                     .fill(Color.softSurface)
                     .overlay { Circle().strokeBorder(Color.softRim, lineWidth: 2) }
                     .shadow(color: .softShadow, radius: 26, y: 14)
                     .shadow(color: .softShadow.opacity(0.5), radius: 2, y: 1)
 
-                // Lights up green when the phone faces the Qibla
                 Circle()
                     .strokeBorder(Color.shareCard, lineWidth: 3)
                     .shadow(color: Color.shareCard.opacity(0.45), radius: 16)
@@ -209,7 +209,6 @@ private struct QiblaCompassDial: View {
                         Text(letter)
                             .font(.custom("ReemKufi-Medium", size: 16))
                             .foregroundStyle(letter == "N" ? Color.appPrimary : Color.textSecondary)
-                            // Counter-rotated so the letters stay upright as the dial turns
                             .rotationEffect(.degrees(rotation - Double(index) * 90))
                             .offset(y: -radius + 44)
                             .rotationEffect(.degrees(Double(index) * 90))
@@ -221,7 +220,6 @@ private struct QiblaCompassDial: View {
                         .offset(y: -(radius - 82) / 2)
                         .rotationEffect(.degrees(qiblaBearing))
 
-                    // The Kaaba, on a small green badge
                     Image("home-qibla")
                         .resizable()
                         .renderingMode(.template)
@@ -240,7 +238,6 @@ private struct QiblaCompassDial: View {
                 }
                 .rotationEffect(.degrees(-rotation))
 
-                // Fixed pointer: the direction the phone is facing
                 Capsule()
                     .fill(isAligned ? Color.shareCard : Color.textSecondary)
                     .frame(width: 4, height: 18)

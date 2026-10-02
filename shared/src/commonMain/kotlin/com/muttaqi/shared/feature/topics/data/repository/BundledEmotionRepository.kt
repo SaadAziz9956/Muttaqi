@@ -10,11 +10,6 @@ import com.muttaqi.shared.feature.topics.data.dto.EmotionsBookDto
 import com.muttaqi.shared.feature.topics.domain.model.Emotion
 import com.muttaqi.shared.feature.topics.domain.repository.EmotionRepository
 
-/**
- * Emotions.json: the Quran verses (Uthmani Arabic, Saheeh International, Jalandhry), HadeethEnc's authentic hadith
- * and the Hisn al-Muslim duas chosen for each emotion. The duas are listed by number and joined to the Dua feature's
- * entries, so they show as they do there. The file is decoded once and kept.
- */
 class BundledEmotionRepository(
     content: BundledContentSource,
     dispatchers: DispatcherProvider,

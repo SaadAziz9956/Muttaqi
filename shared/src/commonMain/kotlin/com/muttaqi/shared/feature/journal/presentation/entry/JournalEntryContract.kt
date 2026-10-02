@@ -7,11 +7,8 @@ import com.muttaqi.shared.core.mvi.UiState
 import com.muttaqi.shared.feature.journal.domain.model.JournalEntry
 import kotlin.time.Instant
 
-/** One entry being written or read. There's no Save button: it saves a moment after typing stops, like Notes */
 data class JournalEntryState(
-    /** The entry as edited so far; null until it's loaded */
     val entry: JournalEntry? = null,
-    /** Opened blank, e.g. from the new-entry button, so the title gets the keyboard straight away */
     val startedEmpty: Boolean = false,
     val isConfirmingDelete: Boolean = false,
 ) : UiState {
@@ -25,7 +22,6 @@ data class JournalEntryState(
 sealed interface JournalEntryIntent : UiIntent {
     data class TitleChanged(val title: String) : JournalEntryIntent
     data class BodyChanged(val body: String) : JournalEntryIntent
-    /** Writes any pending change now, e.g. when the reader leaves the screen or the app, or puts the keyboard away */
     data object SaveNow : JournalEntryIntent
     data object DeleteTapped : JournalEntryIntent
     data object DeleteConfirmed : JournalEntryIntent
@@ -40,6 +36,5 @@ sealed interface JournalEntryMutation : UiMutation {
 }
 
 sealed interface JournalEntryEffect : UiEffect {
-    /** The entry is gone, so the screen closes */
     data object Close : JournalEntryEffect
 }

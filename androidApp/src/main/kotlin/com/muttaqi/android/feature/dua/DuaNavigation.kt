@@ -16,7 +16,6 @@ data class DuaCategoryRoute(val categoryId: String)
 @Serializable
 data class DuaChapterRoute(val chapterId: String)
 
-/** The Dua tab: the categories, a category's chapters, and a chapter's duas */
 fun NavGraphBuilder.duaDestinations(navController: NavController) {
     composable<DuaListRoute> {
         DuaListRoute(

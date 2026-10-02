@@ -15,7 +15,6 @@ data object NamesRoute
 @Serializable
 data object NamesSearchRoute
 
-/** The 99 Names page and its search. Registered in their tab's graph by MuttaqiApp */
 fun NavGraphBuilder.namesDestinations(navController: NavController) {
     composable<NamesRoute> {
         NamesRoute(
@@ -26,7 +25,6 @@ fun NavGraphBuilder.namesDestinations(navController: NavController) {
         )
     }
     composable<NamesSearchRoute> { entry ->
-        // The page's own view model, kept by the page's back stack entry, so picking a result turns its page
         val page = remember(entry) { navController.getBackStackEntry<NamesRoute>() }
         NamesSearchRoute(viewModel = koinViewModel<NamesViewModel>(viewModelStoreOwner = page), onBack = navController::popBackStack)
     }

@@ -9,7 +9,6 @@ import platform.Foundation.NSApplicationSupportDirectory
 import platform.Foundation.NSFileManager
 import platform.Foundation.NSUserDomainMask
 
-/** In Application Support, beside the SwiftData store it replaces; not in Documents, which the reader can browse */
 @OptIn(ExperimentalForeignApi::class)
 internal actual fun Scope.journalDatabaseBuilder(): RoomDatabase.Builder<JournalDatabase> {
     val directory = NSFileManager.defaultManager.URLForDirectory(

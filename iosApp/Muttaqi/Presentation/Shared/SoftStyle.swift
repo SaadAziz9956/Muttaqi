@@ -1,8 +1,5 @@
 import SwiftUI
 
-// The soft, floating look of the Home page: large continuous corners, a bright rim, layered shadows tinted with the
-// brand green, and blurred gradient artwork in the brand's greens and teals. Everything adapts to dark mode.
-
 extension Color {
     fileprivate static func dynamic(light: UIColor, dark: UIColor) -> Color {
         Color(uiColor: UIColor { $0.userInterfaceStyle == .dark ? dark : light })
@@ -12,11 +9,8 @@ extension Color {
         self.init(uiColor: UIColor(hex: hex, alpha: alpha))
     }
 
-    /// The page behind floating cards: a faint mint grey, near black in dark mode
     static let softCanvas = dynamic(light: UIColor(hex: 0xF3F7F5), dark: UIColor(hex: 0x0A1210))
-    /// A floating card's fill
     static let softSurface = dynamic(light: UIColor(white: 1, alpha: 0.82), dark: UIColor(hex: 0x14201C, alpha: 0.92))
-    /// The bright edge around a floating card
     static let softRim = dynamic(light: UIColor(white: 1, alpha: 0.95), dark: UIColor(white: 1, alpha: 0.07))
     static let softShadow = dynamic(light: UIColor(hex: 0x114538, alpha: 0.10), dark: UIColor(white: 0, alpha: 0.45))
 }
@@ -32,8 +26,6 @@ extension UIColor {
     }
 }
 
-// MARK: - Surfaces
-
 private struct SoftCard: ViewModifier {
     let cornerRadius: CGFloat
     let rim: CGFloat
@@ -43,12 +35,9 @@ private struct SoftCard: ViewModifier {
     func body(content: Content) -> some View {
         let shape = RoundedRectangle(cornerRadius: cornerRadius, style: .continuous)
         let card = content
-            // The fill, artwork and shadows are drawn behind the content from the card's shape alone. A shadow cast
-            // from the whole card, text and all, is rendered off screen on every frame, which made long lists stutter
             .background {
                 ZStack {
                     shape.fill(Color.softSurface)
-                        // A wide, faint shadow for the float and a tight one to seat the card
                         .shadow(color: .softShadow, radius: 22, y: 12)
                         .shadow(color: .softShadow.opacity(0.5), radius: 2, y: 1)
                     if let artwork {
@@ -59,8 +48,6 @@ private struct SoftCard: ViewModifier {
             .overlay { shape.strokeBorder(Color.softRim, lineWidth: rim) }
             .contentShape(shape)
         if glass {
-            // The same card on native Liquid Glass, so it flexes and catches the light under a finger like the
-            // system's own controls; tinted with the card's fill so it looks unchanged at rest
             card.glassEffect(.regular.tint(.softSurface).interactive(), in: shape)
         } else {
             card
@@ -69,8 +56,6 @@ private struct SoftCard: ViewModifier {
 }
 
 extension View {
-    /// A floating card with a bright rim and soft shadow, on `artwork` if given. `glass` puts a card that's tapped on
-    /// interactive Liquid Glass; keep it for a few cards on a page, as each one renders live while scrolling
     func softCard(
         cornerRadius: CGFloat = 28,
         rim: CGFloat = 1.5,
@@ -80,17 +65,14 @@ extension View {
         modifier(SoftCard(cornerRadius: cornerRadius, rim: rim, glass: glass, artwork: artwork))
     }
 
-    /// A floating capsule, e.g. the next prayer, on interactive glass tinted with the card fill
     func softPill() -> some View {
         padding(.horizontal, 14)
             .frame(height: 34)
             .softGlass(in: .capsule)
     }
 
-    /// Interactive Liquid Glass that keeps the soft look: tinted with `fill`, with the bright rim and the float shadow
     func softGlass<S: InsettableShape>(in shape: S, fill: Color = .softSurface, rim: Bool = true) -> some View {
         background {
-            // The shadow comes from the shape alone, not the label, so it's cheap to draw while scrolling
             shape.fill(fill).shadow(color: .softShadow, radius: 10, y: 5)
         }
         .overlay { if rim { shape.strokeBorder(Color.softRim, lineWidth: 1.5) } }
@@ -99,7 +81,6 @@ extension View {
     }
 }
 
-/// A round button face on interactive glass, e.g. the arrow on a tile; filled is the brand green for the main action
 struct SoftCircle<Label: View>: View {
     var size: CGFloat = 36
     var filled = false
@@ -113,7 +94,64 @@ struct SoftCircle<Label: View>: View {
     }
 }
 
-/// Presses a floating card down with a spring and a soft tap, like touching glass
+struct SoftButton: View {
+    enum Kind {
+        case primary
+        case secondary
+    }
+
+    let title: String
+    var kind: Kind = .primary
+    let action: () -> Void
+
+    var body: some View {
+        let primary = kind == .primary
+        Button(action: action) {
+            Text(title)
+                .font(.custom("ReemKufi-Medium", size: primary ? 16 : 14, relativeTo: .headline))
+                .foregroundStyle(primary ? Color.white : Color.appPrimary)
+                .padding(.horizontal, primary ? 36 : 24)
+                .frame(minWidth: primary ? 200 : 0, minHeight: primary ? 52 : 42)
+                .softGlass(in: Capsule(), fill: primary ? .shareCard : .softSurface, rim: !primary)
+        }
+        .buttonStyle(SoftPressStyle())
+    }
+}
+
+struct SoftTextField: View {
+    let placeholder: String
+    @Binding var text: String
+    var onSubmit: () -> Void = {}
+
+    var body: some View {
+        TextField("", text: $text, prompt: Text(placeholder).foregroundStyle(Color.textSecondary))
+            .font(.custom("ReemKufi-Regular", size: 17, relativeTo: .body))
+            .foregroundStyle(.textPrimary)
+            .multilineTextAlignment(.center)
+            .textInputAutocapitalization(.words)
+            .submitLabel(.done)
+            .onSubmit(onSubmit)
+            .padding(.horizontal, 22)
+            .frame(height: 52)
+            .softGlass(in: Capsule())
+    }
+}
+
+struct SoftLoadingIndicator: View {
+    var delay: Duration = .milliseconds(250)
+    @State private var isShown = false
+
+    var body: some View {
+        ProgressView()
+            .tint(.appPrimary)
+            .opacity(isShown ? 1 : 0)
+            .task {
+                guard (try? await Task.sleep(for: delay)) != nil else { return }
+                withAnimation(.easeIn(duration: 0.2)) { isShown = true }
+            }
+    }
+}
+
 struct SoftPressStyle: ButtonStyle {
     func makeBody(configuration: Configuration) -> some View {
         configuration.label
@@ -124,17 +162,10 @@ struct SoftPressStyle: ButtonStyle {
     }
 }
 
-// MARK: - Artwork
-
-/// Soft colour in the brand palette, like light through frosted glass, behind a tile's content. A mesh gradient is
-/// already smooth, so it needs no blur, which would be redrawn on every frame of a scroll
 struct SoftArtwork: View {
     enum Palette {
-        /// Deep green into teal, for the Qibla
         case forest
-        /// Mint and pale gold
         case dawn
-        /// Teal and sky
         case lagoon
     }
 
@@ -173,7 +204,6 @@ struct SoftArtwork: View {
     }
 }
 
-/// The page behind the Home cards: a faint canvas with soft blooms of the brand colours, like the light behind glass
 struct SoftBackdrop: View {
     @Environment(\.colorScheme) private var colorScheme
 
@@ -192,8 +222,6 @@ struct SoftBackdrop: View {
             .ignoresSafeArea()
     }
 
-    // A radial gradient looks like a heavily blurred circle but costs nothing to draw, where a blur this large was
-    // redrawn under every frame of a scroll
     private func bloom(_ hex: UInt32, size: CGFloat) -> some View {
         let color = Color(hex: hex).opacity(colorScheme == .dark ? 0.55 : 0.9)
         return RadialGradient(colors: [color, color.opacity(0)], center: .center, startRadius: size * 0.1, endRadius: size * 0.78)

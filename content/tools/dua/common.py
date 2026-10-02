@@ -30,7 +30,6 @@ def iub_plain(h):
     t=re.sub(r' *\n *','\n',t)
     return t.strip()
 def iub_extract(h):
-    """Return the Urdu translation portion: text before first reference/note, trimmed to the quoted part."""
     cut=len(h)
     for pat in ['<span class = "reference','<span class="reference','نوٹ:-','نوٹ :-']:
         k=h.find(pat)
@@ -40,7 +39,6 @@ def iub_extract(h):
     return t
 
 def quote_span(t):
-    """Return (text, npairs, outside) : span from first ” to last “."""
     a=t.find('”'); b=t.rfind('“')
     if a==-1 or b==-1 or b<a: return t.strip(),0,''
     n=t.count('”')

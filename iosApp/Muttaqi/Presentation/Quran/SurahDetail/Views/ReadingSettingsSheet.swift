@@ -1,7 +1,6 @@
 import Shared
 import SwiftUI
 
-/// The reader's settings: the reading mode, the font size and the translation
 struct ReadingSettingsSheet: View {
     let screen: SharedViewModel<ReadingSettingsViewModel, ReadingSettingsState>
 

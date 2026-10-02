@@ -36,7 +36,6 @@ class OnboardingViewModel(
             is OnboardingIntent.NameChanged -> mutate(OnboardingMutation.NameChanged(intent.name))
             OnboardingIntent.SaveName -> if (saveUserName(state.value.name)) moveTo(OnboardingStep.Goals)
             OnboardingIntent.Next -> moveTo(OnboardingStep.Notification)
-            // Whatever the reader answers, onboarding carries on; each feature asks again where it needs to
             OnboardingIntent.RequestNotification -> viewModelScope.launch {
                 requestNotificationPermission()
                 moveTo(OnboardingStep.Location)
@@ -53,7 +52,6 @@ class OnboardingViewModel(
 
     private fun moveTo(step: OnboardingStep) {
         mutate(OnboardingMutation.MovedTo(step))
-        // The setup step starts the download as it opens
         if (step == OnboardingStep.Setup) setUp()
     }
 

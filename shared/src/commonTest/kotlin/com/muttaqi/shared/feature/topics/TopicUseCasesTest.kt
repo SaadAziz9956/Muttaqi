@@ -26,7 +26,6 @@ class TopicUseCasesTest {
 
     @Test
     fun topicsWhoseNamesMatchComeBeforeThoseWhoseTextsDo() = runTest {
-        // "Prayer" is a title; Charity & Zakat only mentions prayer in its verse, and comes first in the file
         assertEquals(listOf("prayer", "charity-zakat"), search("prayer"))
     }
 
@@ -39,7 +38,6 @@ class TopicUseCasesTest {
 
     @Test
     fun everyWordMustMatchInTheNamesOrTheTexts() = runTest {
-        // "zakah" is a keyword and "establish" is in the verse
         assertEquals(listOf("charity-zakat"), search("zakah establish"))
         assertEquals(emptyList(), search("zakah ramadan"))
         assertEquals(emptyList(), search("   "))
@@ -47,7 +45,6 @@ class TopicUseCasesTest {
 
     @Test
     fun duasAreSearchedByTranslationAndTransliteration() = runTest {
-        // Dua 3, on the Fasting page: "Subhaanal-lathee", "How perfect He is"
         assertEquals(listOf("fasting"), search("subhaanal"))
         assertEquals(listOf("fasting"), search("how perfect"))
     }
@@ -66,7 +63,6 @@ class TopicUseCasesTest {
     fun theTopicOfTheDayStaysAllDayAndMovesAtMidnight() = runTest {
         val pick = GetTopicOfTheDay(explore())
         val today = LocalDate(2026, 9, 30)
-        // Day 739,889 of the era, as iOS counts it: (739,889 × 7) mod 4 topics
         assertEquals("lying", pick(today, Language.English)?.id)
         assertEquals("lying", pick(today, Language.Urdu)?.id)
         assertEquals("prayer", pick(LocalDate(2026, 10, 1), Language.English)?.id)
@@ -76,7 +72,6 @@ class TopicUseCasesTest {
     fun theHadithOfTheDayIsShortAndFromEverydayTopics() = runTest {
         val pick = GetHadithOfTheDay(explore())
         val picks = (0 until 10).map { pick(LocalDate(2026, 9, 1 + it), Language.English)?.translation }.toSet()
-        // Neither the one too long for the card nor the one from Sins to Avoid, while 420 marked letters fit
         assertEquals(setOf("Whoever fasts Ramadan", "بَ".repeat(420)), picks)
         assertNotEquals(pick(LocalDate(2026, 9, 30), Language.English), pick(LocalDate(2026, 10, 1), Language.English))
     }

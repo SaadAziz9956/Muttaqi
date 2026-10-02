@@ -35,7 +35,6 @@ class BundledDuaRepositoryTest {
     fun quranicCreditFollowsTheTranslationShown() = runTest {
         val rabbana = repository(StandardTestDispatcher(testScheduler)).categories(Language.Urdu).first().chapters.single().entries
         assertEquals("Fateh Muhammad Jalandhry", rabbana[0].translationCredit)
-        // No published Urdu for 3:8, so it shows (and credits) the English
         assertEquals("Our Lord, let not our hearts deviate", rabbana[1].translation)
         assertEquals("Saheeh International", rabbana[1].translationCredit)
     }

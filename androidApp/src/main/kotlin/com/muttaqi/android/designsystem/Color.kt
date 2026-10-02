@@ -6,7 +6,6 @@ import androidx.compose.runtime.Immutable
 import androidx.compose.runtime.staticCompositionLocalOf
 import androidx.compose.ui.graphics.Color
 
-// The brand palette, the same values as the iOS asset catalogue (and SoftStyle.swift for the soft tokens)
 internal object BrandColors {
     val green = Color(0xFF114538)
     val greenLight = Color(0xFF7CC4A8)
@@ -22,17 +21,12 @@ internal object BrandColors {
     val textSecondaryDark = Color(0xFF98989D)
 }
 
-/** The soft floating style's colours, beyond Material's scheme */
 @Immutable
 data class SoftColors(
-    /** The page behind floating cards */
     val canvas: Color,
-    /** A floating card's fill */
     val surface: Color,
-    /** The bright edge around a floating card */
     val rim: Color,
     val shadow: Color,
-    /** The brand green in both modes: share cards, selected chips, main actions */
     val brandGreen: Color,
     val tintedSurface: Color,
     val appPrimary: Color,
@@ -72,7 +66,6 @@ internal val DarkSoftColors = SoftColors(
 
 internal val LocalSoftColors = staticCompositionLocalOf { LightSoftColors }
 
-// Brand colours rather than the wallpaper's dynamic colours, so the app looks the same on every phone and on iOS
 internal val LightColors = lightColorScheme(
     primary = BrandColors.green,
     onPrimary = Color.White,

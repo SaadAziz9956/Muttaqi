@@ -47,7 +47,6 @@ def hadith(hid, why, note=None):
 
 hisn = json.load(open(HISN))
 HISN_BY_ID = {x["id"]: x for c in hisn["categories"] for ch in c["chapters"] for x in ch["duas"]}
-# Arabic phrase that must appear in each dua we use (checks we picked the right id).
 DUA_CHECK = {
     193: "أَعُوذُ بِاللَّهِ مِنَ الشَّيْطَانِ الرَّجِيمِ",
     121: "الْهَمِّ وَالْحَزَنِ، وَالْعَجْزِ وَالْكَسَلِ",
@@ -436,7 +435,6 @@ E.append({"id": "lonely", "title": "Lonely",
   ],
   "duas": [dua(113, "Hisn chapter 'afraid to go to sleep or feel lonely and depressed' (Abu Dawud 3893, Tirmidhi 3528; Albani hasan). The hadith itself is about fear at night.")]})
 
-# add part notes
 for e in E:
     for v in e["quran"]:
         if v["part"]:

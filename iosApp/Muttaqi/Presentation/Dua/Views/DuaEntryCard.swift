@@ -66,7 +66,6 @@ struct DuaEntryCard: View {
             }
             .padding(.top, 16)
 
-            // The book's own reference, e.g. volume and page in Bukhari with Fath al-Bari
             if !entry.reference.isEmpty {
                 Text(entry.reference)
                     .font(.system(size: 11))

@@ -1,4 +1,3 @@
-"""Assemble dhikr-published.json: every text is a verbatim substring of a fetched published translation."""
 import json, sys, re
 sys.path.insert(0, '.')
 import lk
@@ -65,7 +64,6 @@ def _norm_map(t):
             out.append(ch.translate(VAR)); idx.append(i)
     return ''.join(out), idx
 def locate(full, text):
-    """Return the exact source slice matching `text` (ignoring Arabic harakat/RLM/whitespace differences)."""
     if text in full:
         return text
     nf, idx = _norm_map(full); nt, _ = _norm_map(text)
@@ -87,13 +85,12 @@ def cut(src, text):
     o = {'text': text, 'source': source, 'sourceUrl': url}
     if risk: o['licensingRisk'] = True
     if source.startswith('HadeethEnc') and text != full:
-        o['fullText'] = full   # HadeethEnc terms: republish without modification/deletion -> keep the unabridged text available
+        o['fullText'] = full
     return o
 
 def whole(src):
     return cut(src, src[0])
 
-# Common step phrases (HadeethEnc)
 S_SUB = 'سُبْحَانَ اللَّهِ'; S_HAM = 'الْحَمْدُ لِلَّهِ'; S_AKB = 'اللَّهُ أَكْبَرُ'; S_TAH = 'لَا إِلَهَ إِلَّا اللَّهُ'
 S_TAHLIL100 = 'لَا إِلَهَ إِلَّا اللَّهُ وَحْدَهُ لَا شَرِيكَ لَهُ، لَهُ الْمُلْكُ وَلَهُ الْحَمْدُ، وَهُوَ عَلَى كُلِّ شَيْءٍ قَدِيرٌ'
 def STEP(a):
@@ -114,10 +111,9 @@ def STEP(a):
 def P(en=None, ur=None): return {'en': en, 'ur': ur}
 
 E = {}
-N = {}   # notes
-ALT = {} # published alternatives where the chosen text is defective
+N = {}
+ALT = {}
 
-# ---------------- TASBIH ----------------
 E['subhanallahi-wa-bihamdihi'] = dict(
     phrase=P(cut(he(5516, 'en'), 'glory be to Allah, and praise be to Him'), cut(he(5402, 'ur'), 'اللہ پاک ہے اپنی تعریفوں کے ساتھ')),
     hadith=P(cut(he(5516, 'en'), 'Whoever says ‘subhān Allah wa bihamdih (glory be to Allah, and praise be to Him)’ one hundred times a day, his sins will be erased, even if they were as much as the foam of the sea.'),
@@ -169,7 +165,6 @@ E['subhanal-malikil-quddus'] = dict(
              cut(ha('nasai', 1732, 'urd'), 'اور جب سلام پھیرتے تھے، تو «سبحان الملك القدوس» تین بار کہتے، اور تیسری بار اپنی آواز بلند کرتے۔')))
 N['subhanal-malikil-quddus'] = ['Not in HadeethEnc. phrase.ur null: the only Urdu found (hadith-api Nasa\'i 1732 / Abu Dawud 1430) leaves the words in Arabic. The Hisn English contains the source typo "angles" (for angels).']
 
-# ---------------- TAHMID ----------------
 E['alhamdulillah'] = dict(
     phrase=P(cut(he(65004, 'en'), 'praise be to Allah'), cut(he(5475, 'ur'), 'ساری تعریف اللہ کی ہے')),
     hadith=P(cut(he(65004, 'en'), 'al-hamdulillāh (praise be to Allah) fills the Scale'), cut(he(65004, 'ur'), 'الحمد لله ترازو کو بھر دیتا ہے')))
@@ -185,7 +180,6 @@ E['alhamdulillahi-ala-kulli-hal'] = dict(
     hadith=P(cut(hisn(106, 218), "And if something happened that displeased him, he used to say:((Alhamdulillaahi 'alaa kulli haal)).Praise is to Allah in all circumstances."),
              cut(ha('ibnmajah', 3803, 'urd'), 'اور جب کوئی ناپسندیدہ بات دیکھتے تو فرماتے: «الحمد لله على كل حال» ہر حال میں اللہ کا شکر ہے ۔')))
 
-# ---------------- TAHLIL & TAKBIR ----------------
 E['la-ilaha-illallah'] = dict(
     phrase=P(cut(he(3567, 'en'), 'there is no god but Allah'), cut(he(5475, 'ur'), 'اللہ کے علاوہ کوئی معبود برحق نہيں ہے')),
     hadith=P(cut(he(3567, 'en'), 'The best dhikr is lā ilāha illa Allah (there is no god but Allah), and the best supplication is Alhamdulillah (praise be to Allah).'),
@@ -240,7 +234,6 @@ E['ashhadu-an-la-ilaha-illallah-wa'] = dict(
 N['ashhadu-an-la-ilaha-illallah-wa'] = ['Both phrase texts are third person ("bears witness"), because no source has a first-person translation of this exact wording. HadeethEnc English adds "His slave and", which is not in the Arabic (وَأَنَّ مُحَمَّدًا رَسُولُ اللَّهِ); see alternative.']
 ALT['ashhadu-an-la-ilaha-illallah-wa'] = {'phrase.en': cut(ha('bukhari', 128, 'eng'), 'none has the right to be worshipped but Allah and Muhammad is his Apostle')}
 
-# ---------------- COMBINED ----------------
 E['subhanallah-walhamdulillah-wa-la-ilaha-illallah'] = dict(
     phrase=P(cut(he(6211, 'en'), 'Glory be to Allah, praise be to Allah, there is no god but Allah, and Allah is the Most Great'),
              cut(he(6211, 'ur'), 'اللہ پاک ہے، تمام تعریفیں اللہ کی ہیں، اللہ کے علاوہ اور کوئی معبود برحق نہیں اور اللہ ہی سب سے بڑا ہے')),
@@ -282,7 +275,6 @@ E['100-each-as-taught-to-umm'] = dict(
     steps=True)
 N['100-each-as-taught-to-umm'] = ['Whole-entry phrase null (it is three separate phrases); see steps. hadith is hadith-api only (Ibn Majah 3810).']
 
-# ---------------- ISTIGHFAR ----------------
 E['allahumma-anta-rabbi-la-ilaha-illa'] = dict(
     phrase=P(cut(he(5503, 'en'), 'O Allah, You are my Lord. You created me, and I am Your slave. I will remain faithful to Your covenant and promise as much as possible. I seek refuge with You from the evil of what I have done. I acknowledge Your favor upon me, and I admit my sin. So, forgive me. Indeed, none can forgive sins but You'),
              cut(he(5503, 'ur'), 'اے اللہ ! تو میرا رب ہے، تیرے سوا کوئی معبود برحق نہیں۔ تو نے مجھے پیدا کیا اور میں تیرا بندہ ہوں۔ میں اپنی طاقت کے مطابق تجھ سے کیے ہوئے عہد اور وعدے پر قائم ہوں۔ میں اپنے کیے ہوئے اعمال کے شر سے تیری پناہ مانگتا ہوں۔ میں تیرے حضور تیری جانب سے ملنے والی نعمتوں کا اقرار کرتا ہوں۔ ایسے ہی اپنے گناہوں کا بھی اعتراف کرتا ہوں۔ لہذا میرى مغرفت فرما، کیوں کہ تیرے سوا کوئی گناہوں کى مغفرت کرنے والا نہیں ہے۔')),
@@ -346,7 +338,6 @@ E['subhanaka-allahumma-wa-bihamdika-ashhadu-an'] = dict(
              cut(ha('tirmidhi', 3433, 'urd'), 'جو شخص کسی مجلس میں بیٹھے اور اس سے بہت سی لغو اور بیہودہ باتیں ہو جائیں، اور وہ اپنی مجلس سے اٹھ جانے سے پہلے پڑھ لے: «سبحانك اللهم وبحمدك أشهد أن لا إله إلا أنت أستغفرك وأتوب إليك» ”پاک ہے تو اے اللہ! اور سب تعریف تیرے لیے ہے، میں گواہی دیتا ہوں کہ تیرے سوا کوئی معبود برحق نہیں، میں تجھ سے مغفرت چاہتا ہوں اور تیری طرف رجوع کرتا ہوں“، تو اس کی اس مجلس میں اس سے ہونے والی لغزشیں معاف کر دی جاتی ہیں')))
 N['subhanaka-allahumma-wa-bihamdika-ashhadu-an'] = ['Not in HadeethEnc. phrase.en is Hisn al-Muslim; the rest is hadith-api (Tirmidhi 3433).']
 
-# ---------------- SALAWAT ----------------
 E['allahumma-salli-ala-muhammad'] = dict(
     phrase=P(cut(he(5377, 'en'), 'O Allah, bestow Your grace upon Muhammad'), cut(he(5377, 'ur'), 'اے اللہ ! محمد (ﷺ) پر اپنی رحمت نازل کر')),
     hadith=P(cut(he(65087, 'en'), "whoever invokes Allah's blessings upon me once, Allah will bestow His blessings upon him ten times"),
@@ -374,7 +365,6 @@ E['allahumma-salli-ala-muhammadin-abdika-wa'] = dict(
              cut(ha('bukhari', 6358, 'urd'), 'ہم نے کہا: اے اللہ کے رسول! آپ کو سلام اس طرح کیا جاتا ہے، لیکن آپ پر درود کس طرح بھیجا جاتا ہے؟')))
 N['allahumma-salli-ala-muhammadin-abdika-wa'] = ['phrase.en null: the only published English found (Muhsin Khan, Bukhari 6358) transliterates the wording without translating it; the entry is not in HadeethEnc or Hisn al-Muslim.']
 
-# ---------------- AFTER PRAYER & SLEEP ----------------
 E['after-every-prayer-33-33-33'] = dict(
     phrase=P(None, None), steps=True,
     hadith=P(cut(he(10948, 'en'), 'Whoever glorifies Allah directly after each prayer thirty-three times, praises Allah thirty-three times, and proclaims the greatness of Allah thirty-three times, these are ninety-nine, and completes one hundred by saying: La ilāha illallāh wahdahu la sharīka lah, lahu al-mulku wa lahu al-hamdu wa huwa ‘ala kulli shay’in qadīr (There is no god except Allah. He is One and has no partner with Him. To Him belongs sovereignty and to Him belongs praise, and He is Omnipotent over everything), his sins will be forgiven even if they are like the sea foam.'),
@@ -402,7 +392,6 @@ E['before-sleep-33-33-and-34'] = dict(
     hadith=P(cut(he(6076, 'en'), "Let me guide you to something better than what you asked for. When you go to bed, say ‘Subhān Allah' (glory be to Allah) thirty-three times, ‘Alhamdulillāh' (praise be to Allah) thirty-three times, and ‘Allāhu Akbar' (Allah is the Most Great) thirty-four times. This is better for you than a servant."),
              cut(he(6076, 'ur'), 'کیا میں تمھیں جو کچھ تم نے مانگا ہے، اس سے بہتر چیز نہ بتاؤں؟ جب تم دونوں اپنے بستر پر جاؤ، یا فرمایا کہ جب تم سونے کے لیے جاؤ، تو تینتیس مرتبہ (33) سبحان اللہ، تینتیس مرتبہ (33) الحمد للہ اور چونتیس مرتبہ (34) اللہ اکبر پڑھ لینا۔ یہ تمھارے لیے خادم سے بہتر ہے۔')))
 
-# ---------------- QURAN ----------------
 def Q(s, v, en, ur):
     return P(cut(qr(s, v, 'en'), en) if en else None, cut(qr(s, v, 'ur'), ur) if ur else None)
 
@@ -441,7 +430,6 @@ E['rabbi-inni-zalamtu-nafsi-faghfir-li'] = dict(phrase=Q(28, 16, 'My Lord, indee
 E['rabbighfir-warham-wa-anta-khayrur-rahimin'] = dict(
     phrase=Q(23, 118, 'My Lord, forgive and have mercy, and You are the best of the merciful.', 'میرے پروردگار مجھے بخش دے اور (مجھ پر) رحم کر اور تو سب سے بہتر رحم کرنے والا ہے'), hadith=None)
 
-# ---------------- SUPPLICATIONS ----------------
 E['rabbana-atina-fid-dunya-hasanatan-wa'] = dict(
     phrase=Q(2, 201, 'Our Lord, give us in this world [that which is] good and in the Hereafter [that which is] good and protect us from the punishment of the Fire.',
              'پروردگار ہم کو دنیا میں بھی نعمت عطا فرما اور آخرت میں بھی نعمت بخشیو اور دوزخ کے عذاب سے محفوظ رکھیو'),

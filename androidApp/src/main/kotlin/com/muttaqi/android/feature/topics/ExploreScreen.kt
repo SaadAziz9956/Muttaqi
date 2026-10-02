@@ -52,7 +52,6 @@ import com.muttaqi.shared.feature.topics.presentation.explore.ExploreState
 import com.muttaqi.shared.feature.topics.presentation.explore.ExploreViewModel
 import org.koin.compose.viewmodel.koinViewModel
 
-/** The Explore tab's first screen, wired to its shared view model */
 @Composable
 fun ExploreRoute(onOpenTopic: (String) -> Unit) {
     val viewModel = koinViewModel<ExploreViewModel>()
@@ -67,7 +66,6 @@ fun ExploreRoute(onOpenTopic: (String) -> Unit) {
     ExploreScreen(state, viewModel::dispatch)
 }
 
-/** Topics in groups, e.g. Worship › Fasting, under the title and search; search results replace them while there's a query */
 @Composable
 fun ExploreScreen(state: ExploreState, onIntent: (ExploreIntent) -> Unit) {
     val soft = MuttaqiTheme.soft
@@ -125,7 +123,6 @@ fun ExploreScreen(state: ExploreState, onIntent: (ExploreIntent) -> Unit) {
     }
 }
 
-/** A topic's icon in a tinted circle and its title */
 @Composable
 private fun TopicTile(topic: ExploreTopic, onClick: () -> Unit) {
     val soft = MuttaqiTheme.soft
@@ -149,7 +146,6 @@ private fun TopicTile(topic: ExploreTopic, onClick: () -> Unit) {
     }
 }
 
-/** As iOS shows an empty search: the search icon, what found nothing and what to try */
 @Composable
 private fun NoResults(query: String) {
     val soft = MuttaqiTheme.soft
@@ -172,10 +168,6 @@ private fun NoResults(query: String) {
     }
 }
 
-/**
- * An Explore topic's Iconsax icon, e.g. "drop-linear" as `ic_drop_linear`: the names come from Explore.json, and the
- * drawables from the iOS asset catalogue (tools/sync-android-icons.sh), so it's looked up by name
- */
 @SuppressLint("DiscouragedApi")
 @DrawableRes
 @Composable

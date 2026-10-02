@@ -49,7 +49,6 @@ class SurahReaderViewModelTest {
         ObserveReadingSettings(preferences),
     )
 
-    /** The ids on screen for ayahs of a surah, by number within it */
     private fun ids(surahNumber: Int, vararg numbersInSurah: Int) =
         numbersInSurah.map { n -> QuranTestData.ayahs.first { it.surah == surahNumber && it.numberInSurah == n }.number }
 
@@ -109,7 +108,6 @@ class SurahReaderViewModelTest {
     fun inArabicOnlyEveryAyahOnAVisiblePageIsRead() = runTest {
         preferences.setMode(ReadingMode.ArabicOnly)
         val viewModel = viewModel()
-        // Mushaf pages are identified by their first ayah
         viewModel.dispatch(SurahReaderIntent.VisibleAyahsChanged(ids(2, 1)))
         assertEquals("Page 2", viewModel.readingPosition.value)
         settle()
@@ -133,7 +131,6 @@ class SurahReaderViewModelTest {
     @Test
     fun inArabicOnlyContinuingOpensAtTheAyahsPage() = runTest {
         preferences.setMode(ReadingMode.ArabicOnly)
-        // 2:7 is on the page that starts at 2:6
         assertEquals(ids(2, 6).single(), viewModel(startAyah = 7).state.value.startScrollTarget)
     }
 
@@ -196,7 +193,6 @@ class SurahReaderViewModelTest {
     fun switchingTranslationReloadsTheSurahInIt() = runTest {
         val viewModel = viewModel()
         language.switchTo(Language.Urdu)
-        // The settings combine the mode, font size and language, which takes a turn of the scheduler
         runCurrent()
         val first = viewModel.state.value.reading!!.displayAyahs.first()
         assertEquals(QuranTestData.ayahs.first { it.surah == 2 }.urdu, first.translation)

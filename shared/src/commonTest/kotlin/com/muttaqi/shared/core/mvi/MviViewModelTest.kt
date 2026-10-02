@@ -15,7 +15,6 @@ import kotlin.test.assertEquals
 @OptIn(ExperimentalCoroutinesApi::class)
 class MviViewModelTest {
 
-    // A counter, the smallest screen that has all four parts
     private data class CounterState(val count: Int = 0) : UiState
     private sealed interface CounterIntent : UiIntent {
         data object Tap : CounterIntent

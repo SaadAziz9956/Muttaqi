@@ -91,7 +91,6 @@ struct DuaOfTheDayCard: View {
     }
 }
 
-/// A short authentic hadith from Explore, in full as HadeethEnc publishes it
 struct HadithOfTheDayCard: View {
     let hadith: HadithPassage
     let dispatch: (HomeIntent) -> Void
@@ -134,7 +133,6 @@ struct HadithOfTheDayCard: View {
     }
 }
 
-/// Opens the Share page for the card it sits on
 private struct ShareButton: View {
     let action: () -> Void
 
@@ -159,7 +157,6 @@ private func cardMenu(_ card: DailyCard, dispatch: @escaping (HomeIntent) -> Voi
 }
 
 private extension View {
-    /// The daily cards float on the Home page like its tiles
     func dailyCard() -> some View {
         padding(.horizontal, 22)
             .padding(.top, 18)

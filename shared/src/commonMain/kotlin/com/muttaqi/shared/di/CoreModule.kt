@@ -12,7 +12,6 @@ import com.muttaqi.shared.core.text.TextFolder
 import org.koin.dsl.binds
 import org.koin.dsl.module
 
-/** What every feature can depend on. The platform module supplies ObservableSettings and BundledContentSource */
 internal val coreModule = module {
     single<DispatcherProvider> { DefaultDispatcherProvider }
     single<TextFolder> { SearchTextFolder }

@@ -27,7 +27,6 @@ import kotlin.test.assertTrue
 import kotlin.time.Duration.Companion.milliseconds
 import kotlin.time.Duration.Companion.minutes
 
-/** Runs on a test scheduler, so the autosave's delay passes only when a test moves time on */
 @OptIn(ExperimentalCoroutinesApi::class)
 class JournalEntryViewModelTest {
     private val repository = FakeJournalRepository(walk)
@@ -51,7 +50,6 @@ class JournalEntryViewModelTest {
     @Test
     fun aNewEntryIsReadyAtOnceAndAsksForTheKeyboard() = runTest {
         val viewModel = JournalEntryViewModel(null, GetJournalEntry(repository), NewJournalEntry(clock, newId = { "new" }), SaveJournalEntry(repository), DeleteJournalEntry(repository), clock)
-        // Before any coroutine runs
         val state = viewModel.state.value
         assertFalse(state.isLoading)
         assertTrue(state.startedEmpty)
@@ -72,7 +70,6 @@ class JournalEntryViewModelTest {
         viewModel.dispatch(JournalEntryIntent.TitleChanged("Morning"))
         advanceTimeBy(300.milliseconds)
         viewModel.dispatch(JournalEntryIntent.BodyChanged("Quiet"))
-        // 300 ms after the title the timer was restarted by the body, so nothing is written yet
         advanceTimeBy(499.milliseconds)
         assertTrue(repository.writes.isEmpty())
         advanceTimeBy(2.milliseconds)
@@ -98,7 +95,6 @@ class JournalEntryViewModelTest {
         viewModel.dispatch(JournalEntryIntent.SaveNow)
         runCurrent()
         assertEquals(listOf("save walk: Morning light|Written"), repository.writes)
-        // The pending autosave was dropped, and saving again with nothing new writes nothing
         advanceTimeBy(1_000.milliseconds)
         viewModel.dispatch(JournalEntryIntent.SaveNow)
         runCurrent()
@@ -123,7 +119,6 @@ class JournalEntryViewModelTest {
         viewModel.dispatch(JournalEntryIntent.SaveNow)
         runCurrent()
         assertEquals(listOf("delete walk"), repository.writes)
-        // Written in again, it's saved again
         viewModel.dispatch(JournalEntryIntent.BodyChanged("Back"))
         viewModel.dispatch(JournalEntryIntent.SaveNow)
         runCurrent()
@@ -175,7 +170,6 @@ class JournalEntryViewModelTest {
         viewModel.dispatch(JournalEntryIntent.BodyChanged("Typed, then deleted"))
         viewModel.dispatch(JournalEntryIntent.DeleteTapped)
         viewModel.dispatch(JournalEntryIntent.DeleteConfirmed)
-        // Leaving after the delete, and the autosave that was pending, both do nothing
         viewModel.dispatch(JournalEntryIntent.SaveNow)
         advanceTimeBy(1_000.milliseconds)
         assertEquals(listOf("delete walk"), repository.writes)

@@ -4,6 +4,11 @@ import android.content.ClipData
 import android.content.Intent
 import android.net.Uri
 import android.provider.Settings
+import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.animation.expandVertically
+import androidx.compose.animation.fadeIn
+import androidx.compose.animation.fadeOut
+import androidx.compose.animation.shrinkVertically
 import androidx.compose.foundation.ScrollState
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -56,10 +61,6 @@ import java.time.ZoneId
 import kotlinx.coroutines.launch
 import org.koin.compose.viewmodel.koinViewModel
 
-/**
- * Home, wired to its shared view model. It refreshes each time it comes back into view, e.g. from the Dikr counter or
- * the background, and the compass follows the phone only while Home is on screen
- */
 @Composable
 fun HomeRoute(
     onOpenQibla: () -> Unit,
@@ -101,14 +102,9 @@ fun HomeRoute(
             }
         }
     }
-    // The arrow is read inside the Qibla tile only, so each compass reading redraws the pointer and nothing else
     HomeScreen(state, qiblaArrow = { qiblaArrow.value }, onIntent = viewModel::dispatch)
 }
 
-/**
- * The Hijri date and the next prayer, the greeting and its verse, today's prayer times, the bento tiles, the ways back
- * into the Quran and the day's ayah, hadith and dua, as on iOS
- */
 @Composable
 fun HomeScreen(
     state: HomeState,
@@ -142,9 +138,9 @@ fun HomeScreen(
 
             Greeting(state, Modifier.padding(top = 30.dp))
 
-            state.schedule?.today?.let { today ->
-                // Once Isha has passed, the next prayer is tomorrow's Fajr, so nothing in today's row is picked
-                PrayerTimesStrip(today, next = state.nextPrayerToday, modifier = Modifier.padding(top = 28.dp), zone = zone)
+            val today = state.schedule?.today
+            AnimatedVisibility(today != null, enter = fadeIn() + expandVertically(), exit = fadeOut() + shrinkVertically()) {
+                if (today != null) PrayerTimesStrip(today, next = state.nextPrayerToday, modifier = Modifier.padding(top = 28.dp), zone = zone)
             }
 
             HomeBento(state, qiblaArrow, onIntent, Modifier.padding(top = 18.dp))
@@ -155,7 +151,6 @@ fun HomeScreen(
                         onIntent(HomeIntent.ContinueReadingTapped)
                     }
                 }
-                // Reading al-Kahf on Friday is a sunnah, so on Fridays it's a tap away
                 state.fridayKahf?.let { kahf ->
                     SurahShortcut(kahf.number, "Surah ${kahf.englishName}", "Friday") { onIntent(HomeIntent.KahfTapped) }
                 }
@@ -167,7 +162,6 @@ fun HomeScreen(
                 state.duaOfTheDay?.let { DuaOfTheDayCard(it, onIntent) }
             }
         }
-        // The page fades out under the status bar once scrolled, so text never runs behind the clock
         StatusBarFade(visible = scrolled)
     }
 }
@@ -179,15 +173,19 @@ private fun Greeting(state: HomeState, modifier: Modifier = Modifier) {
         Text("Assalam - o - Alaikum", style = MaterialTheme.typography.headlineMedium, color = soft.appPrimary)
         val quote = state.greeting
         val translation = quote?.ayah?.translation
-        if (quote != null && translation != null) {
-            TranslationText(translation.quoted(), Modifier.padding(top = 20.dp), fontSize = 14.sp, lineSpacing = 0.sp)
-            Text(
-                "Quran (${quote.reference})",
-                Modifier.padding(top = 4.dp),
-                style = MaterialTheme.typography.labelSmall,
-                color = soft.textSecondary,
-                textAlign = TextAlign.Center,
-            )
+        AnimatedVisibility(quote != null && translation != null, enter = fadeIn() + expandVertically()) {
+            if (quote != null && translation != null) {
+                Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                    TranslationText(translation.quoted(), Modifier.padding(top = 20.dp), fontSize = 14.sp, lineSpacing = 0.sp)
+                    Text(
+                        "Quran (${quote.reference})",
+                        Modifier.padding(top = 4.dp),
+                        style = MaterialTheme.typography.labelSmall,
+                        color = soft.textSecondary,
+                        textAlign = TextAlign.Center,
+                    )
+                }
+            }
         }
     }
 }

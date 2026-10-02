@@ -11,7 +11,6 @@ import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertTrue
 
-/** Decodes the real bundled file, so a change to its shape is caught here rather than in the apps */
 class BundledDhikrContentTest {
     private val content = BundledContentSource { File("../content/data/$it").readText() }
 
@@ -24,7 +23,6 @@ class BundledDhikrContentTest {
         val all = sections.flatMap { it.dhikr }
         assertTrue(all.size > 50)
         assertEquals(all.size, all.map { it.id }.toSet().size, "every dhikr has its own id, which its progress is saved under")
-        // Every text shown is there in the reader's language or the English
         assertTrue(all.all { it.arabic.isNotBlank() && it.transliteration.isNotBlank() && it.reference.isNotBlank() })
         assertTrue(all.flatMap { it.steps }.all { it.translation != null && it.count > 0 })
     }

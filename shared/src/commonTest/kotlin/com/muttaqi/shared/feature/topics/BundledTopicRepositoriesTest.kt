@@ -11,7 +11,6 @@ class BundledTopicRepositoriesTest {
     fun emotionsKeepTheirOrderAndJoinTheirDuasByNumber() = runTest {
         val emotions = TopicsTestData.emotionRepository(StandardTestDispatcher(testScheduler)).emotions(Language.English)
         assertEquals(listOf("angry", "bored", "happy"), emotions.map { it.id })
-        // Dua 99 isn't in the book, so it's left out
         assertEquals(listOf("hisn-1"), emotions.first().duas.map { it.id })
         assertEquals("Praise is to Allah", emotions.first().duas.single().translation)
     }
@@ -21,13 +20,11 @@ class BundledTopicRepositoriesTest {
         val angry = TopicsTestData.emotionRepository(StandardTestDispatcher(testScheduler)).emotions(Language.Urdu).first()
         assertEquals("اور غصے کو روکتے", angry.verses[0].translation)
         assertEquals("Fateh Muhammad Jalandhry", angry.verses[0].credit)
-        // No published Urdu for 7:199, so it shows (and credits) the English
         assertEquals("Take what is given freely", angry.verses[1].translation)
         assertEquals("Saheeh International", angry.verses[1].credit)
         assertEquals("غصہ مت کیا کرو", angry.hadith.single().translation)
         assertEquals("رواه البخاري · صحيح", angry.hadith.single().source)
         assertEquals("HadeethEnc.com", angry.hadith.single().credit)
-        // The dua in the Urdu the Dua feature shows
         assertEquals("سب تعریف اللہ کے لیے", angry.duas.single().translation)
     }
 

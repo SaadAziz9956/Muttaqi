@@ -9,12 +9,10 @@ import com.muttaqi.shared.feature.quran.domain.model.FontSize
 import com.muttaqi.shared.feature.quran.domain.model.ReadingMode
 import com.muttaqi.shared.feature.quran.domain.model.ReadingSettings
 
-/** The reader's settings sheet: the reading mode, the font size and the translation, which may need downloading */
 data class ReadingSettingsState(
     val mode: ReadingMode = ReadingMode.WithTranslation,
     val fontSize: FontSize = FontSize(),
     val language: Language = Language.English,
-    /** The translations the reader can choose */
     val languages: List<Language> = Language.entries,
     val isDownloadingLanguage: Boolean = false,
 ) : UiState {
@@ -36,6 +34,5 @@ sealed interface ReadingSettingsMutation : UiMutation {
 }
 
 sealed interface ReadingSettingsEffect : UiEffect {
-    /** The translation couldn't be downloaded, so the language stays as it was */
     data class DownloadFailed(val message: String) : ReadingSettingsEffect
 }

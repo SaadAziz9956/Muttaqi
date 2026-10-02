@@ -13,6 +13,7 @@ import kotlinx.coroutines.IO
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.test.TestScope
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.runCurrent
 import kotlinx.coroutines.test.runTest
 import kotlin.test.AfterTest
@@ -22,10 +23,6 @@ import kotlin.test.assertNull
 import kotlin.time.Duration.Companion.hours
 import kotlin.time.Instant
 
-/**
- * The journal's Room database itself, in memory, with the SQLite driver the apps use. It runs in the iOS simulator
- * tests: the Android host tests' JVM has no build of the bundled SQLite for the computer it runs on
- */
 class RoomJournalRepositoryTest {
     private val database = Room.inMemoryDatabaseBuilder<JournalDatabase>()
         .setDriver(BundledSQLiteDriver())
@@ -86,6 +83,7 @@ class RoomJournalRepositoryTest {
         assertEquals("Written again", repository.entry("walk")?.body)
     }
 
+    @OptIn(ExperimentalCoroutinesApi::class)
     @Test
     fun aWriteFinishesEvenIfTheScreenThatAskedIsGone() = runTest {
         val repository = repository()

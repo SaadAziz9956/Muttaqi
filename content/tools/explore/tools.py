@@ -1,26 +1,8 @@
 #!/usr/bin/env python3
-"""Local lookup tools for curating Explore content. Everything reads published texts from local copies:
-Quran (quran-uthmani, en.sahih, ur.jalandhry from api.alquran.cloud), HadeethEnc (English + Urdu, scholar-reviewed),
-and the app's bundled Hisn al-Muslim.
 
-  python3 tools.py ayah 2:274 3:92          Arabic / English / Urdu of each ayah
-  python3 tools.py qsearch charity spend    ayahs whose Saheeh English contains every word (case-insensitive)
-  python3 tools.py qsearch-ur زکوٰة         ayahs whose Jalandhry Urdu contains every word
-  python3 tools.py hsearch wine intoxicant  hadith whose English text/title contains every word
-  python3 tools.py hsearch-ar الخمر         hadith whose Arabic contains every word (diacritics ignored)
-  python3 tools.py hadith 5913 4709         full Arabic / English / Urdu / attribution / grade
-  python3 tools.py cats                     HadeethEnc categories with ids
-  python3 tools.py cat 94                   hadith in a category (and its subcategories)
-  python3 tools.py hisn sleep               Hisn al-Muslim duas whose English/chapter contains every word
-  python3 tools.py hisnid 99                one Hisn al-Muslim dua in full
-
-A hadith is usable only if `usable: yes` (graded sahih or hasan and has both English and Urdu).
-"""
 import json, os, re, sys
 
 HERE = os.path.dirname(os.path.abspath(__file__))
-# Downloaded sources (not committed): cache/editions/*.json from api.alquran.cloud and cache/he/{ar,en,ur}/*.json from
-# the HadeethEnc API; see ../README.md
 SCRATCH = os.path.join(os.path.dirname(HERE), "cache")
 REPO = os.path.abspath(os.path.join(HERE, "..", "..", ".."))
 PROJECT = os.path.join(REPO, "content", "data")

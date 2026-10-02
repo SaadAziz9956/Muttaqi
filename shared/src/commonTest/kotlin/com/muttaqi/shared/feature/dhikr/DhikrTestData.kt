@@ -26,13 +26,10 @@ internal object DhikrTestData {
 
     val files = mapOf("Dhikr.json" to book)
 
-    /** SubhanAllah 3 times */
     val single = Dhikr("subhanallah", null, "سُبْحَانَ اللَّهِ", "SubhanAllah", "glory be to Allah", emptyList(), 3, null, "Sahih Muslim 2695", "Sahih", null)
 
-    /** Remembrance with no number */
     val openEnded = single.copy(id = "open-ended", count = null)
 
-    /** A set of 2, 2 and 1 */
     val set = single.copy(
         id = "set",
         title = "After every prayer · 2, 2 and 1",
@@ -48,7 +45,6 @@ internal object DhikrTestData {
     val today = LocalDate(2026, 9, 30)
 }
 
-/** A day that tests move forward by hand, e.g. past midnight */
 internal class FakeCurrentDay(var day: LocalDate = DhikrTestData.today) : CurrentDay {
     override fun today(): LocalDate = day
 }

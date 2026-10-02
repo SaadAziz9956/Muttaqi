@@ -15,7 +15,6 @@ import org.koin.core.context.startKoin
 import org.koin.core.module.Module
 import org.koin.dsl.KoinAppDeclaration
 
-/** Every feature's module. A feature adds its bindings to its own module file, never here */
 internal val featureModules: List<Module> = listOf(
     duaModule,
     dhikrModule,
@@ -29,7 +28,6 @@ internal val featureModules: List<Module> = listOf(
     shareModule,
 )
 
-/** Starts dependency injection once, at launch, with the platform's own implementations */
 fun initKoin(platformModule: Module, appDeclaration: KoinAppDeclaration = {}): KoinApplication = startKoin {
     appDeclaration()
     modules(listOf(coreModule, platformModule) + featureModules)

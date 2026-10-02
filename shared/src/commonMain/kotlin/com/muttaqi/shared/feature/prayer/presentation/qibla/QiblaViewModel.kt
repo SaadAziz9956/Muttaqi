@@ -43,15 +43,10 @@ class QiblaViewModel(
 
     private val qiblaBearing = state.map { it.qibla?.bearing }.distinctUntilChanged()
 
-    /**
-     * The compass once the Qibla is known, or null before then or without a compass. The compass runs only while this
-     * is collected, so it stops when the screen goes away or the app goes to the background
-     */
     @OptIn(ExperimentalCoroutinesApi::class)
     val compass: StateFlow<QiblaCompass?> = qiblaBearing
         .map { it != null && deviceCompass.isAvailable }
         .distinctUntilChanged()
-        // Following the heading carries on when a fresh fix moves the Qibla, so the dial doesn't jump
         .flatMapLatest { located -> if (located) dialReadings() else flowOf(null) }
         .combine(qiblaBearing) { reading, bearing -> if (reading != null && bearing != null) reading.toCompass(bearing) else null }
         .onEach { compass ->
@@ -62,7 +57,7 @@ class QiblaViewModel(
         .stateIn(viewModelScope, SharingStarted.WhileSubscribed(), null)
 
     init {
-        viewModelScope.launch { locate() }
+        launchNow { locate() }
     }
 
     override fun handle(intent: QiblaIntent) {
@@ -81,7 +76,6 @@ class QiblaViewModel(
         }
     }
 
-    /** The saved location shows the Qibla at once; a fresh fix then corrects it */
     private suspend fun locate() {
         var located = false
         locateReader().collect { coordinates ->

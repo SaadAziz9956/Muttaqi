@@ -39,8 +39,6 @@ import kotlinx.serialization.json.putJsonObject
 import kotlin.time.Clock
 import kotlin.time.Instant
 
-// The test data as the app's own types
-
 internal fun testSurah(number: Int): Surah = QuranTestData.surahs.first { it.number == number }.let {
     Surah(it.number, it.name, it.englishName, it.englishNameTranslation, it.revelationType, it.numberOfAyahs)
 }
@@ -57,8 +55,6 @@ internal fun testAyahs(surahNumber: Int, language: Language = Language.English):
     QuranTestData.ayahs.filter { it.surah == surahNumber }.map {
         Ayah(it.number, it.numberInSurah, it.surah, it.arabic, it.transliteration, it.translation(language), it.juz, it.page, it.hizbQuarter)
     }
-
-// The Quran API's responses for the test data
 
 internal fun fullQuranJson(edition: String): String {
     fun text(ayah: QuranTestData.AyahText): String = when (edition) {
@@ -115,7 +111,6 @@ internal fun fullQuranJson(edition: String): String {
     return envelope(data)
 }
 
-/** The Quran API's `{"code": 200, "status": "OK", "data": …}` around [data] */
 internal fun envelope(data: JsonElement): String = buildJsonObject {
     put("code", 200)
     put("status", "OK")
@@ -125,7 +120,6 @@ internal fun envelope(data: JsonElement): String = buildJsonObject {
 internal fun MockRequestHandleScope.respondJson(body: String, status: HttpStatusCode = HttpStatusCode.OK): HttpResponseData =
     respond(body, status, headersOf(HttpHeaders.ContentType, "application/json"))
 
-/** A client that answers from [handler] and records each request, configured as the app's is */
 internal class MockHttp(handler: suspend MockRequestHandleScope.(HttpRequestData) -> HttpResponseData) {
     val requests = mutableListOf<HttpRequestData>()
     val client = HttpClient(
@@ -135,8 +129,6 @@ internal class MockHttp(handler: suspend MockRequestHandleScope.(HttpRequestData
         },
     ) { quranClientDefaults() }
 }
-
-// In-memory stand-ins for the Room DAOs
 
 internal class FakeQuranTextDao : QuranTextDao() {
     val surahRows = mutableMapOf<Int, SurahEntity>()
@@ -186,9 +178,6 @@ internal class FakeTafsirDao : TafsirDao {
     }
 }
 
-// Domain stand-ins
-
-/** The test surahs, stored or not, with downloads that can be made to fail */
 internal class FakeQuranLibrary(
     textStored: Boolean = true,
     translations: Set<Language> = setOf(Language.English, Language.Urdu),
@@ -229,7 +218,6 @@ internal class FakeDownloadRecord : QuranDownloadRecord {
     override fun markLanguageDownloaded(language: Language) { if (language !in languages) languages += language }
 }
 
-/** Switches the fake language, as choosing a translation does */
 internal fun FakeSelectedLanguage.selector() = LanguageSelector { switchTo(it) }
 
 internal class FixedClock(var now: Instant = Instant.fromEpochMilliseconds(1_790_000_000_000)) : Clock {

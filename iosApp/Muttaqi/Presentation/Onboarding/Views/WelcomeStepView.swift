@@ -3,34 +3,34 @@ import SwiftUI
 
 struct WelcomeStepView: View {
     let onBegin: () -> Void
-    
+
     var body: some View {
-        VStack {
+        let verse = OnboardingVerses.shared.basmala
+
+        VStack(spacing: 0) {
             Spacer()
-            
-            VStack(spacing: 8) {
-                Text(OnboardingVerses.shared.basmala.arabic)
+
+            VStack(spacing: 14) {
+                Text(verse.arabic)
                     .font(.arabic(32))
                     .foregroundStyle(.textPrimary)
-                
-                Text(OnboardingVerses.shared.basmala.translation)
-                    .font(.bodyMedium)
-                    .foregroundStyle(.onSurfaceVariant)
+
+                Text(verse.translation)
+                    .font(.custom("ReemKufi-Regular", size: 15, relativeTo: .subheadline))
+                    .foregroundStyle(.textPrimary)
                     .multilineTextAlignment(.center)
+                    .lineSpacing(4)
             }
-            .offset(y: -60)
-            
+            .padding(.horizontal, 24)
+            .padding(.vertical, 36)
+            .frame(maxWidth: .infinity)
+            .softCard(artwork: .dawn)
+            .padding(.horizontal, 20)
+
             Spacer()
-            
-            Button(action: onBegin) {
-                Text("Begin")
-                    .font(.bodySmall)
-                    .foregroundStyle(.onPrimaryButton)
-                    .frame(width: 140, height: 47)
-                    .background(.primaryButton)
-                    .clipShape(RoundedRectangle(cornerRadius: 12))
-            }
-            .padding(.bottom, 35)
+
+            SoftButton(title: "Begin", action: onBegin)
+                .padding(.bottom, 40)
         }
     }
 }

@@ -1,7 +1,6 @@
 import CoreLocation
 import Shared
 
-/// The device's location for the shared code, on Core Location
 nonisolated final class LocationService: NSObject, LocationProvider, CLLocationManagerDelegate {
     private let manager = CLLocationManager()
     private var pendingAccess: ((LocationAccess) -> Void)?
@@ -21,7 +20,6 @@ nonisolated final class LocationService: NSObject, LocationProvider, CLLocationM
 
     func requestAccess(onResult: @escaping (LocationAccess) -> Void) {
         onMain { [self] in
-            // The system only asks once; after that there's no authorization change to wait on
             guard manager.authorizationStatus == .notDetermined else { return onResult(access) }
             pendingAccess = onResult
             manager.requestWhenInUseAuthorization()
@@ -29,7 +27,6 @@ nonisolated final class LocationService: NSObject, LocationProvider, CLLocationM
     }
 
     func currentLocation(onResult: @escaping (Coordinates?) -> Void) -> LocationRequest {
-        // The shared code gives up after its timeout and cancels the search
         LocationFix(task: Task {
             do {
                 for try await update in CLLocationUpdate.liveUpdates() {
@@ -50,7 +47,6 @@ nonisolated final class LocationService: NSObject, LocationProvider, CLLocationM
     }
 }
 
-/// A search for one fix, cancelled by the shared code once it has waited long enough
 private nonisolated final class LocationFix: NSObject, LocationRequest {
     private let task: Task<Void, Never>
 
@@ -63,7 +59,6 @@ private nonisolated final class LocationFix: NSObject, LocationRequest {
     }
 }
 
-/// Core Location's managers want the main thread, and the shared code can call from any
 nonisolated func onMain(_ work: @escaping @MainActor () -> Void) {
     if Thread.isMainThread {
         MainActor.assumeIsolated(work)

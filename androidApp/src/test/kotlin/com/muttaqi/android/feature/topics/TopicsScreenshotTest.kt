@@ -37,7 +37,6 @@ import org.robolectric.annotation.Config
 import org.robolectric.annotation.GraphicsMode
 import java.io.File
 
-/** The screens with the real bundled texts, in the view models' own states, to compare with the iOS screenshots */
 @RunWith(RobolectricTestRunner::class)
 @GraphicsMode(GraphicsMode.Mode.NATIVE)
 @Config(application = Application::class, sdk = [35], qualifiers = PHONE)
@@ -47,7 +46,6 @@ class TopicsScreenshotTest {
 
     private val content = BundledContentSource { File("../content/data/$it").readText() }
 
-    // Everything runs where it's called, so each view model has loaded by the time it's made
     private val dispatchers = object : DispatcherProvider {
         override val main: CoroutineDispatcher = Dispatchers.Unconfined
         override val io: CoroutineDispatcher = Dispatchers.Unconfined

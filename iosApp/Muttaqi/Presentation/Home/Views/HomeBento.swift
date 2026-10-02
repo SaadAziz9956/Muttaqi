@@ -1,8 +1,6 @@
 import Shared
 import SwiftUI
 
-/// The Home features as floating tiles that each show something live: the Qibla, today's dhikr, a Name of Allah,
-/// the journal, a way into Emotions and an Explore topic
 struct HomeBento: View {
     let screen: SharedViewModel<HomeViewModel, HomeState>
 
@@ -31,8 +29,6 @@ struct HomeBento: View {
             }
         }
     }
-
-    // MARK: - Tiles
 
     private var qibla: some View {
         tile(artwork: .forest, label: "Qibla", icon: "home-qibla", tint: .white) {
@@ -102,7 +98,6 @@ struct HomeBento: View {
         }
     }
 
-    // The tile opens the journal's entries; its round button starts today's entry, or opens it once written
     private var journal: some View {
         let entry = state.journalToday
         return Button {
@@ -176,13 +171,10 @@ struct HomeBento: View {
         }
     }
 
-    // MARK: - Building blocks
-
     private func dispatch(_ intent: HomeIntent) {
         screen.viewModel.dispatch(intent: intent)
     }
 
-    /// A tile with a label and a small arrow button along the top, on a plain floating card or on blurred artwork
     private func tile<Content: View>(
         artwork: SoftArtwork.Palette? = nil,
         label: String,
@@ -231,7 +223,6 @@ struct HomeBento: View {
     }
 }
 
-/// Today's five prayers, the next one picked out in a green capsule
 struct PrayerTimesStrip: View {
     let times: DailyPrayerTimes
     let next: Prayer?
@@ -265,7 +256,6 @@ struct PrayerTimesStrip: View {
     }
 }
 
-/// A wide floating row that opens a surah, e.g. where the reader left off
 struct SurahShortcut: View {
     let surah: Surah
     let title: String
@@ -305,13 +295,9 @@ struct SurahShortcut: View {
     }
 }
 
-/// A pointer in a dial: towards the Kaaba as the phone turns, or its bearing from north without a compass. It follows
-/// the compass in its own state, so each reading redraws only the pointer, not every tile
 private struct QiblaPointer: View {
     let viewModel: HomeViewModel
-    /// The Qibla from north, for before the compass reports or without one
     let bearing: Double?
-    /// The turn from the phone's heading to the Kaaba, from the shared view model's own flow
     @State private var arrow: Double?
 
     var body: some View {
@@ -321,7 +307,6 @@ private struct QiblaPointer: View {
             Circle()
                 .fill(.white.opacity(0.12))
                 .padding(10)
-            // The icon's tip points up and to the right, so it's turned back 45° to point up at zero
             Image("send-2-bold")
                 .resizable()
                 .frame(width: 42, height: 42)
@@ -329,7 +314,6 @@ private struct QiblaPointer: View {
                 .animation(.smooth(duration: 0.25), value: arrow)
                 .shadow(color: .black.opacity(0.2), radius: 6, y: 3)
         }
-        // The compass runs only while this follows it, so it stops when Home goes away
         .task {
             for await next in viewModel.qiblaArrow {
                 arrow = next?.doubleValue

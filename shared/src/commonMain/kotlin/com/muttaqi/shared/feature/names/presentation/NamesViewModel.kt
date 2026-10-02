@@ -1,6 +1,5 @@
 package com.muttaqi.shared.feature.names.presentation
 
-import androidx.lifecycle.viewModelScope
 import com.muttaqi.shared.core.mvi.MviViewModel
 import com.muttaqi.shared.core.preferences.SelectedLanguage
 import com.muttaqi.shared.core.quote.PageQuotes
@@ -14,7 +13,6 @@ import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
-import kotlinx.coroutines.launch
 
 class NamesViewModel(
     private val getNames: GetAllahNames,
@@ -25,12 +23,10 @@ class NamesViewModel(
     private var searchIndex: NamesSearchIndex? = null
 
     private val mutablePosition = MutableStateFlow(1)
-    /** The number of the name on screen, which changes with every swipe; the page starts at the first */
     val position: StateFlow<Int> = mutablePosition.asStateFlow()
 
     init {
-        // Reloads in the new language whenever the reader switches it, keeping the page and any search in progress
-        viewModelScope.launch {
+        launchNow {
             selectedLanguage.changes.collect { language ->
                 try {
                     val names = getNames(language)
@@ -53,7 +49,6 @@ class NamesViewModel(
             is NamesIntent.QueryChanged -> mutate(
                 NamesMutation.SearchUpdated(intent.query, searchIndex?.search(intent.query, state.value.searchMode).orEmpty()),
             )
-            // Picking the mode already shown keeps the query, as a segmented control does
             is NamesIntent.SearchModeChanged -> if (intent.mode != state.value.searchMode) mutate(NamesMutation.SearchModeChanged(intent.mode))
             NamesIntent.ClearQuery -> mutate(NamesMutation.SearchUpdated("", emptyList()))
             is NamesIntent.ResultTapped -> {
@@ -66,7 +61,6 @@ class NamesViewModel(
     private fun name(number: Int): AllahName? = state.value.names.firstOrNull { it.number == number }
 }
 
-/** A Name of Allah as a share card */
 fun AllahName.toSharePassage() = SharePassage(
     arabic = arabic,
     transliteration = transliteration,

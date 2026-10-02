@@ -1,10 +1,5 @@
 #!/usr/bin/env python3
-"""Builds Muttaqi/Resources/Data/Explore.json from the curated group files, copying every text verbatim from the
-published sources (Quran editions, HadeethEnc, Hisn al-Muslim), and adds HadeethEnc's Arabic to Emotions.json's hadith.
 
-  python3 build_explore.py            build both
-  python3 build_explore.py emotions   only add Arabic to Emotions.json
-"""
 import json, os, re, sys
 from tools import quran, corpus, usable, hisn, PROJECT
 from check import verse_texts
@@ -32,7 +27,6 @@ def verse_entry(v, q):
         for l in ("ar", "en", "ur"):
             assert cut[l] in texts[l], (v["ref"], l)
         texts = {l: cut[l] for l in ("ar", "en", "ur")}
-        # A cut from mid-sentence starts with a capital, as the app does for other part-verses; the words are unchanged
         texts["en"] = texts["en"][:1].upper() + texts["en"][1:]
     return {"reference": v["ref"].replace("-", "–"), "arabic": texts["ar"].strip(),
             "translation": {"en": texts["en"].strip(), "ur": texts["ur"].strip()}}
@@ -81,7 +75,6 @@ def add_arabic_to_emotions():
             r = by_en.get(h["translation"]["en"].strip())
             if not r:
                 missing += 1; print("no match:", e["id"], h["translation"]["en"][:80]); continue
-            # Keep the key order: arabic first
             new = {"arabic": r["arabic"].strip()}
             new.update({k: v for k, v in h.items() if k != "arabic"})
             h.clear(); h.update(new)

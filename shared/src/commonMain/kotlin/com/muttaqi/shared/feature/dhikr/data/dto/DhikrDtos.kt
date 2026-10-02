@@ -8,10 +8,8 @@ import kotlinx.serialization.descriptors.SerialDescriptor
 import kotlinx.serialization.encoding.Decoder
 import kotlinx.serialization.encoding.Encoder
 
-/** Published translations by language code, e.g. {"en": …, "ur": …} */
 internal typealias Translations = Map<String, String>
 
-/** Dhikr.json: general remembrance from the Quran and the hadith collections, grouped into sections */
 @Serializable
 internal data class DhikrBookDto(val sections: List<Section>) {
     @Serializable
@@ -36,10 +34,6 @@ internal data class DhikrBookDto(val sections: List<Section>) {
     data class Step(val arabic: String, val transliteration: String, val translation: Translations, val count: Int)
 }
 
-/**
- * One dhikr's progress as the Swift app has always stored it: Foundation's JSONEncoder output, with the day as
- * seconds since 2001-01-01 UTC (JSONEncoder's default for a Date), e.g. {"count":7,"rounds":0,"day":812401200}
- */
 @Serializable
 internal data class DhikrProgressDto(
     val count: Int,
@@ -47,7 +41,6 @@ internal data class DhikrProgressDto(
     @Serializable(with = WholeSecondsSerializer::class) val day: Double,
 )
 
-/** Reads any JSON number, and writes whole seconds without a fraction or exponent, as JSONEncoder does */
 internal object WholeSecondsSerializer : KSerializer<Double> {
     override val descriptor: SerialDescriptor = PrimitiveSerialDescriptor("WholeSeconds", PrimitiveKind.DOUBLE)
 

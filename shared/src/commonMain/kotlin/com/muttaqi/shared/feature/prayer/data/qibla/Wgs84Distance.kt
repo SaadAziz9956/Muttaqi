@@ -10,11 +10,6 @@ import kotlin.math.sin
 import kotlin.math.sqrt
 import kotlin.math.tan
 
-/**
- * The distance along the Earth's surface in metres, on the WGS-84 ellipsoid by Vincenty's inverse formula. It's what
- * Core Location's `CLLocation.distance(from:)` gives, to the millimetre, so the distance to Makkah reads as it did in
- * the Swift app
- */
 internal object Wgs84Distance {
     private const val A = 6_378_137.0
     private const val F = 1 / 298.257223563
@@ -40,12 +35,11 @@ internal object Wgs84Distance {
             val sinLambda = sin(lambda)
             val cosLambda = cos(lambda)
             sinSigma = sqrt((cosU2 * sinLambda).squared + (cosU1 * sinU2 - sinU1 * cosU2 * cosLambda).squared)
-            if (sinSigma == 0.0) return 0.0 // the same point
+            if (sinSigma == 0.0) return 0.0
             cosSigma = sinU1 * sinU2 + cosU1 * cosU2 * cosLambda
             sigma = atan2(sinSigma, cosSigma)
             val sinAlpha = cosU1 * cosU2 * sinLambda / sinSigma
             cos2Alpha = 1 - sinAlpha * sinAlpha
-            // On the equator there's no latitude to reduce
             cos2SigmaM = if (cos2Alpha != 0.0) cosSigma - 2 * sinU1 * sinU2 / cos2Alpha else 0.0
             val c = F / 16 * cos2Alpha * (4 + F * (4 - 3 * cos2Alpha))
             val previous = lambda

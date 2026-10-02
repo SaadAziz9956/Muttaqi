@@ -9,7 +9,6 @@ import com.muttaqi.shared.testing.FakeContentSource
 import com.muttaqi.shared.testing.TestDispatchers
 import kotlinx.coroutines.CoroutineDispatcher
 
-/** Small Emotions.json and Explore.json, with Hisn al-Muslim duas 1–3 from the Dua tests */
 internal object TopicsTestData {
     val emotions = """
         {"source":"test","header":{"reference":"65:3","translation":{"en":"And whoever relies upon Allah - then He is sufficient for him.","ur":"اور جو خدا پر بھروسہ رکھے گا تو وہ اس کو کفایت کرے گا۔"}},
@@ -47,9 +46,7 @@ internal object TopicsTestData {
              "hadith":[{"arabic":"","translation":{"en":"Truthfulness leads to righteousness"},"attribution":{"en":"Agreed upon"},"grade":{"en":"Authentic"},"source":"HadeethEnc.com"}],
              "duas":[]}]}]}
     """.trimIndent()
-        // Too long for Home's card
         .replace("%LONG%", "a".repeat(421))
-        // 420 letters, each with a mark on it, which don't count towards the length
         .replace("%MARKED%", "بَ".repeat(420))
 
     val files = DuaTestData.files + mapOf("Emotions.json" to emotions, "Explore.json" to explore)

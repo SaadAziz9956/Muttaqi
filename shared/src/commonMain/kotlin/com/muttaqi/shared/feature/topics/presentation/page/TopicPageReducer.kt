@@ -11,10 +11,6 @@ internal object TopicPageReducer : Reducer<TopicPageState, TopicPageMutation> {
         TopicPageMutation.LoadFailed -> state.copy(isLoading = false)
     }
 
-    /**
-     * Shows [topicId], or the first topic if there's no such topic. Stays on the same kind of text when moving to
-     * another topic, unless that topic has none of it
-     */
     private fun TopicPageState.showing(topicId: String, section: TopicSection): TopicPageState {
         val topic = topics.firstOrNull { it.id == topicId } ?: topics.firstOrNull()
             ?: return copy(sections = emptyList(), passages = emptyList(), translationCredits = emptyList())

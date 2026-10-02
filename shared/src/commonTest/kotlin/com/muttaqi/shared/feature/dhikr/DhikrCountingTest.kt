@@ -61,7 +61,6 @@ class DhikrCountingTest {
         assertEquals(DhikrStepPosition(0, 1), set.stepPosition(1))
         assertEquals(DhikrStepPosition(1, 0), set.stepPosition(2))
         assertEquals(DhikrStepPosition(2, 0), set.stepPosition(4))
-        // A finished set rests on its last phrase, fully said
         assertEquals(DhikrStepPosition(2, 1), set.stepPosition(5))
         assertNull(single.stepPosition(1))
     }

@@ -4,11 +4,17 @@ import SwiftUI
 struct TafsirView: View {
     let surah: Surah?
     let screen: SharedViewModel<TafsirViewModel, TafsirState>
-    /// Opens scrolled to the commentary covering this ayah, e.g. from the ayah's own Explanation button
     var startAyah: Int32? = nil
 
     private var state: TafsirState { screen.state }
     private var isUrdu: Bool { state.language == .urdu }
+
+    private var isSettled: Bool {
+        switch onEnum(of: state.status) {
+        case .idle, .loading: false
+        case .loaded, .failed: true
+        }
+    }
 
     var body: some View {
         VStack(spacing: 0) {
@@ -17,8 +23,7 @@ struct TafsirView: View {
             switch onEnum(of: state.status) {
             case .idle, .loading:
                 Spacer()
-                ProgressView()
-                    .tint(.appPrimary)
+                SoftLoadingIndicator()
                 Spacer()
 
             case .loaded(let loaded) where loaded.entries.isEmpty:
@@ -39,11 +44,11 @@ struct TafsirView: View {
                         .padding(.horizontal, 16)
                     }
                     .onAppear {
-                        // Commentary often covers a group of ayahs, so this finds the group the ayah is in
                         guard let startAyah, let entry = state.entryCovering(ayah: startAyah) else { return }
                         proxy.scrollTo(entry.ayahNumber, anchor: .top)
                     }
                 }
+                .transition(.opacity)
 
             case .failed(let failed):
                 Spacer()
@@ -70,8 +75,8 @@ struct TafsirView: View {
                 Spacer()
             }
         }
+        .animation(.easeInOut(duration: 0.22), value: isSettled)
         .task {
-            // Loads the first time it opens for this surah and language, and keeps what's loaded after
             if let surah {
                 screen.viewModel.dispatch(intent: TafsirIntentOpened(surahNumber: surah.number))
             }
@@ -88,7 +93,6 @@ struct TafsirView: View {
                 .font(.bodySmall)
                 .foregroundStyle(.textSecondary)
 
-            // There's no Hindi tafseer source, so the repository serves English for Hindi readers
             if state.showsEnglishInstead {
                 Text("Hindi tafseer isn't available yet — showing English")
                     .font(.bodySmall)
@@ -107,7 +111,6 @@ struct TafsirView: View {
                 .font(.labelLarge)
                 .foregroundStyle(.appPrimary)
 
-            // One entry can run past 40k characters, so it's laid out a paragraph at a time
             VStack(alignment: .leading, spacing: 12) {
                 ForEach(Array(entry.paragraphs.enumerated()), id: \.offset) { _, paragraph in
                     paragraphText(paragraph)
@@ -122,7 +125,6 @@ struct TafsirView: View {
         .padding(.vertical, 12)
     }
 
-    // English commentary quotes hadith and ayahs as their own Arabic paragraphs; those get the Arabic font, right-aligned
     @ViewBuilder
     private func paragraphText(_ paragraph: String) -> some View {
         if isUrdu {
@@ -133,14 +135,12 @@ struct TafsirView: View {
                 .frame(maxWidth: .infinity, alignment: .trailing)
                 .fixedSize(horizontal: false, vertical: true)
         } else if Self.startsWithArabic(paragraph) {
-            // The Uthmanic font draws Arabic punctuation (، ؟ ؛) as a dotted circle, so those marks use the system font
             Text(restyling(["،", "؟", "؛"], in: paragraph.kfgqpcEncoded, base: .arabic(20), mark: .system(size: 17)))
                 .foregroundStyle(.textPrimary)
                 .multilineTextAlignment(.trailing)
                 .frame(maxWidth: .infinity, alignment: .trailing)
                 .fixedSize(horizontal: false, vertical: true)
         } else {
-            // ﷺ is taller than a line of body text and would overlap the lines around it, so it's drawn smaller
             Text(restyling(["ﷺ"], in: paragraph, base: .bodySmall, mark: .system(size: 9)))
                 .foregroundStyle(.textPrimary)
                 .fixedSize(horizontal: false, vertical: true)

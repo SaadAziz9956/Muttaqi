@@ -9,7 +9,6 @@ import platform.Foundation.NSApplicationSupportDirectory
 import platform.Foundation.NSFileManager
 import platform.Foundation.NSUserDomainMask
 
-/** In Application Support, beside the SwiftData store it replaces */
 @OptIn(ExperimentalForeignApi::class)
 internal actual fun Scope.quranDatabaseBuilder(): RoomDatabase.Builder<QuranDatabase> {
     val directory = NSFileManager.defaultManager.URLForDirectory(

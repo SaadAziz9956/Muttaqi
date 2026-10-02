@@ -18,7 +18,6 @@ import kotlinx.datetime.plus
 import kotlinx.datetime.toLocalDateTime
 import kotlin.time.Instant
 
-/** Today's and tomorrow's prayer times where the reader is, the days counted in their time zone */
 class GetPrayerSchedule(private val repository: PrayerTimesRepository) {
     operator fun invoke(coordinates: Coordinates, now: Instant, timeZone: TimeZone): PrayerSchedule? {
         val today = now.toLocalDateTime(timeZone).date
@@ -33,10 +32,6 @@ class GetQiblaDirection(private val repository: QiblaRepository) {
     operator fun invoke(coordinates: Coordinates): QiblaDirection = repository.qiblaDirection(coordinates)
 }
 
-/**
- * Where the reader is: the saved coordinates straight away, which work offline, then a fresh fix when there's access,
- * which corrects them if the reader has moved
- */
 class LocateReader(private val location: LocationRepository) {
     operator fun invoke(): Flow<Coordinates> = flow {
         location.lastKnownCoordinates()?.let { emit(it) }
@@ -50,15 +45,10 @@ class GetLocationAccess(private val location: LocationRepository) {
     operator fun invoke(): LocationAccess = location.access
 }
 
-/** Shows the system's request for location access while it's undecided, then gives the access there is */
 class RequestLocationAccess(private val location: LocationRepository) {
     suspend operator fun invoke(): LocationAccess = location.requestAccess()
 }
 
-/**
- * The phone's heading as it turns, e.g. for Home's Qibla tile; nothing on a device without a compass. The compass runs
- * only while the flow is collected
- */
 class FollowHeading(private val compass: Compass) {
     val isAvailable: Boolean get() = compass.isAvailable
 

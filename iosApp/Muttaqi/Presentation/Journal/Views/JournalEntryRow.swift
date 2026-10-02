@@ -35,13 +35,11 @@ struct JournalEntryRow: View {
         }
         .padding(.vertical, 20)
         .contentShape(.rect)
-        // The divider spans the row's full width, under the date too, with the same margin on both sides
         .alignmentGuide(.listRowSeparatorLeading) { _ in 0 }
         .alignmentGuide(.listRowSeparatorTrailing) { $0[.trailing] }
         .accessibilityElement(children: .combine)
     }
 
-    /// The weekday, plus the year for entries from another year, since the date above shows only day and month
     private var weekday: String {
         let createdAt = entry.createdDate
         let weekday = createdAt.formatted(.dateTime.weekday(.wide))

@@ -1,20 +1,16 @@
 import Shared
 import SwiftUI
 
-/// One topic's Quran verses, hadith and duas, with tabs to move to its neighbours, e.g. an emotion or an Explore topic
 struct TopicPageView: View {
-    /// Shown in the bar, e.g. "Emotions"
     let title: String
     @State private var screen: SharedViewModel<TopicPageViewModel, TopicPageState>
     @Environment(AppRouter.self) private var router
     @Environment(\.dismiss) private var dismiss
 
-    /// One emotion's page, with a tab for every emotion
     init(emotionId: String) {
         self.init(title: "Emotions", chips: .emotions, topicId: emotionId)
     }
 
-    /// One Explore topic's page, with a tab for each topic in its group
     init(exploreTopicId: String) {
         self.init(title: "Explore", chips: .exploreGroup, topicId: exploreTopicId)
     }
@@ -32,7 +28,6 @@ struct TopicPageView: View {
                 topicTabs
 
                 if state.sections.count > 1 {
-                    // The view model's section as it is now, so the control never shows the last one drawn after a tap
                     Picker("Show", selection: Binding(get: { screen.viewModel.state.value.section }, set: { dispatch(TopicPageIntentSectionTapped(section: $0)) })) {
                         ForEach(state.sections, id: \.self) { section in
                             Text(section.title).tag(section)
@@ -50,7 +45,6 @@ struct TopicPageView: View {
                 }
             }
             .padding(.bottom, 32)
-            // Moving to another topic animates, as a tap on its tab did; switching the kind of text doesn't
             .animation(.snappy, value: state.selectedId)
         }
         .background { SoftBackdrop() }
@@ -87,12 +81,9 @@ struct TopicPageView: View {
         screen.viewModel.dispatch(intent: intent)
     }
 
-    // MARK: - Tabs
-
     private var topicTabs: some View {
         ScrollViewReader { proxy in
             ScrollView(.horizontal) {
-                // Native glass rendered as one group, which is cheaper than each on its own
                 GlassEffectContainer(spacing: 4) {
                     HStack(spacing: 8) {
                         ForEach(state.topics, id: \.id) { topic in
@@ -115,12 +106,10 @@ struct TopicPageView: View {
                     }
                 }
                 .padding(.horizontal, 20)
-                // Room for the chips' float shadow, which a scroll view would otherwise clip
                 .padding(.vertical, 14)
             }
             .scrollIndicators(.hidden)
             .scrollClipDisabled()
-            // Once the topics have loaded, so a topic far along the row starts in view
             .onChange(of: state.topics.isEmpty, initial: true) { _, isEmpty in
                 if !isEmpty { proxy.scrollTo(state.selectedId, anchor: .center) }
             }
@@ -130,15 +119,12 @@ struct TopicPageView: View {
         }
     }
 
-    // MARK: - Content
-
     private var content: some View {
         VStack(spacing: 16) {
             ForEach(state.passages, id: \.id) { passage in
                 card(for: passage)
             }
 
-            // Names whose translations are shown, as their publishers ask
             if !state.translationCredits.isEmpty {
                 Text("Translation: \(state.translationCredits.joined(separator: ", "))")
                     .font(.system(size: 11))
@@ -164,7 +150,6 @@ struct TopicPageView: View {
                 .foregroundStyle(.textPrimary)
                 .lineSpacing(style.isRightToLeft ? 8 : 4)
             HStack(spacing: 4) {
-                // An Urdu attribution, e.g. "اسے امام بخاری نے روایت کیا ہے", is set in Nastaliq like its translation
                 if TranslationStyle.isArabicScript(passage.source) {
                     Text(passage.source)
                         .font(TranslationStyle(for: passage.source, size: 11).font)

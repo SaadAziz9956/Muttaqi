@@ -33,10 +33,6 @@ import com.muttaqi.shared.core.text.isArabicScript
 import com.muttaqi.shared.core.text.sentenceCased
 import com.muttaqi.shared.feature.names.domain.model.AllahName
 
-/**
- * One name: its number, Arabic, transliteration and meaning, over a large faint copy of the Arabic, on the soft
- * mint-and-gold artwork like the Name of the day on Home
- */
 @Composable
 fun NameCard(name: AllahName, modifier: Modifier = Modifier, minHeight: Dp = 300.dp, onClick: (() -> Unit)? = null) {
     val soft = MuttaqiTheme.soft
@@ -47,7 +43,6 @@ fun NameCard(name: AllahName, modifier: Modifier = Modifier, minHeight: Dp = 300
         onClick = onClick,
     ) {
         Box(Modifier.fillMaxWidth().heightIn(min = minHeight), contentAlignment = Alignment.Center) {
-            // The design's faint Kufic copy of the name; fainter in dark mode, where the lighter teal stands out more
             Text(
                 name.arabic,
                 Modifier.padding(horizontal = 12.dp).offset(y = 24.dp),

@@ -11,7 +11,6 @@ import kotlin.time.Clock
 import kotlin.time.Instant
 
 internal object JournalTestData {
-    /** 30 September 2026, 10:00 UTC */
     val now: Instant = Instant.parse("2026-09-30T10:00:00Z")
 
     val walk = entry("walk", "Morning light", "Grateful for the quiet walk before Fajr", "2026-09-30T05:10:00Z")
@@ -22,7 +21,6 @@ internal object JournalTestData {
         Instant.parse(createdAt).let { JournalEntry(id, title, body, it, it) }
 }
 
-/** The journal in memory, recording every write in order */
 internal class FakeJournalRepository(vararg initial: JournalEntry) : JournalReadRepository, JournalWriteRepository {
     val stored = MutableStateFlow(initial.toList())
     val writes = mutableListOf<String>()

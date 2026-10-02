@@ -19,7 +19,6 @@ internal fun QuranicDuaDto.toQuranicDua(language: Language) = QuranicDua(
     translation = translations.inLanguage(language),
 )
 
-/** The Quranic duas as the first category, "Rabbana Duas", in one chapter */
 internal fun List<QuranicDuaDto>.toRabbanaCategory(language: Language): DuaCategory {
     val entries = map { dua ->
         DuaEntry(
@@ -44,7 +43,6 @@ internal fun List<QuranicDuaDto>.toRabbanaCategory(language: Language): DuaCateg
     )
 }
 
-/** Hisn al-Muslim's categories; Urdu where a published translation exists, otherwise the English */
 internal fun HisnBookDto.toCategories(language: Language): List<DuaCategory> = categories.map { category ->
     DuaCategory(
         id = category.id,

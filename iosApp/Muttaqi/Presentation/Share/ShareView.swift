@@ -1,10 +1,10 @@
 import Shared
 import SwiftUI
 
-/// A preview of the card to share; the send button opens the share sheet with the card as an image
 struct ShareView: View {
     @State private var screen: SharedViewModel<ShareViewModel, ShareState>
     @State private var image: UIImage?
+    @State private var titleBottom: CGFloat = .infinity
     @Environment(\.dismiss) private var dismiss
 
     init(passage: SharePassage) {
@@ -14,68 +14,62 @@ struct ShareView: View {
     private var passage: SharePassage { screen.state.passage }
 
     var body: some View {
+        let verse = screen.state.verse
+
         ScrollView {
             VStack(spacing: 0) {
                 Text("Share")
                     .font(.custom("ReemKufi-Regular", size: 28))
-                    .foregroundStyle(.white)
-                    .padding(.top, 8)
+                    .foregroundStyle(.appPrimary)
+                    .onGeometryChange(for: CGFloat.self) { $0.frame(in: .global).maxY } action: { titleBottom = $0 }
+                    .padding(.top, 24)
+
+                Text(verse.text.quoted)
+                    .font(TranslationStyle(for: verse.text, size: 14).font)
+                    .foregroundStyle(.textPrimary)
+                    .multilineTextAlignment(.center)
+                    .padding(.top, 16)
+
+                Text(verse.source)
+                    .font(.labelSmall)
+                    .foregroundStyle(.textSecondary)
+                    .padding(.top, 4)
 
                 ShareCard(passage: passage)
-                    .padding(.horizontal, 21)
-                    .padding(.top, 28)
+                    .padding(.top, 32)
             }
+            .padding(.horizontal, 20)
             .padding(.bottom, 32)
         }
-        .safeAreaInset(edge: .bottom) { footer }
-        .background(Color.shareCard.ignoresSafeArea())
+        .background { SoftBackdrop() }
         .navigationBarTitleDisplayMode(.inline)
+        .collapsingBarTitle("Share", titleBottom: titleBottom)
         .navigationBarBackButtonHidden(true)
         .background(SwipeBackEnabler())
         .toolbar(.hidden, for: .tabBar)
-        .toolbarColorScheme(.dark, for: .navigationBar)
         .toolbar {
             ToolbarItem(placement: .navigationBarLeading) {
                 Button { dismiss() } label: {
                     Image("arrow-left-02-linear")
                         .resizable()
                         .frame(width: 24, height: 24)
-                        .foregroundStyle(.white)
+                        .foregroundStyle(.textPrimary)
                 }
                 .accessibilityLabel("Back")
             }
             ToolbarItem(placement: .navigationBarTrailing) {
-                // The share sheet's own Save Image saves the card to Photos, so there's no separate save button
                 if let image {
                     let picture = Image(uiImage: image)
                     ShareLink(item: picture, preview: SharePreview(passage.reference, image: picture)) {
                         Image("send-2-linear")
                             .resizable()
-                            .frame(width: 24, height: 24)
-                            .foregroundStyle(.white)
+                            .frame(width: 22, height: 22)
+                            .foregroundStyle(.textPrimary)
                     }
                     .accessibilityLabel("Share")
                 }
             }
         }
         .task { image = ShareCard.image(of: passage) }
-    }
-
-    private var footer: some View {
-        let verse = screen.state.verse
-
-        return VStack(spacing: 4) {
-            Text(verse.text)
-                .font(TranslationStyle(for: verse.text, size: 14).font)
-                .foregroundStyle(.white.opacity(0.85))
-                .multilineTextAlignment(.center)
-            Text(verse.source)
-                .font(.labelSmall)
-                .foregroundStyle(.white.opacity(0.85))
-        }
-        .padding(.horizontal, 24)
-        .padding(.vertical, 16)
-        .frame(maxWidth: .infinity)
-        .background(Color.shareCard)
     }
 }

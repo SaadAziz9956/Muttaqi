@@ -16,17 +16,14 @@ object PrayerTestData {
     val lahore = Coordinates(31.5204, 74.3587)
 }
 
-/** The device's location services, answering at once unless [holdFix] */
 class FakeLocationProvider(
     override var access: LocationAccess = LocationAccess.NotDetermined,
-    /** What the system prompt answers */
     var answer: LocationAccess = LocationAccess.Granted,
     var fix: Coordinates? = PrayerTestData.karachi,
 ) : LocationProvider {
     var accessRequests = 0
     var fixRequests = 0
     var cancelledRequests = 0
-    /** Never reports a fix, like a phone indoors */
     var holdFix = false
 
     override fun requestAccess(onResult: (LocationAccess) -> Unit) {
@@ -46,7 +43,6 @@ class FakeLocationProvider(
     }
 }
 
-/** A compass the test turns by hand with [turnTo] */
 class FakeHeadingProvider(override val isAvailable: Boolean = true) : HeadingProvider {
     private val listeners = mutableListOf<(CompassHeading) -> Unit>()
     val isRunning: Boolean get() = listeners.isNotEmpty()

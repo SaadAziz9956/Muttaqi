@@ -8,8 +8,6 @@ import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 
-/** Shared test doubles for every feature's tests */
-
 class FakeSelectedLanguage(initial: Language = Language.English) : SelectedLanguage {
     private val flow = MutableStateFlow(initial)
     override val current: Language get() = flow.value

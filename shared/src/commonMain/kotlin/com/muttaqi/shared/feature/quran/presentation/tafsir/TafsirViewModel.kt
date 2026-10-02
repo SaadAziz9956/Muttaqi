@@ -1,6 +1,5 @@
 package com.muttaqi.shared.feature.quran.presentation.tafsir
 
-import androidx.lifecycle.viewModelScope
 import com.muttaqi.shared.core.domain.Outcome
 import com.muttaqi.shared.core.mvi.MviViewModel
 import com.muttaqi.shared.core.mvi.Reducer
@@ -8,11 +7,9 @@ import com.muttaqi.shared.core.preferences.SelectedLanguage
 import com.muttaqi.shared.feature.quran.domain.usecase.GetTafsir
 import com.muttaqi.shared.feature.quran.presentation.QuranMessages
 import kotlinx.coroutines.Job
-import kotlinx.coroutines.launch
 
 internal object TafsirReducer : Reducer<TafsirState, TafsirMutation> {
     override fun reduce(state: TafsirState, mutation: TafsirMutation) = when (mutation) {
-        // The tafsir loaded for the old language is dropped; it loads again in the new one when next opened
         is TafsirMutation.LanguageChanged -> state.copy(language = mutation.language, status = TafsirStatus.Idle)
         is TafsirMutation.Loading -> state.copy(surahNumber = mutation.surahNumber, status = TafsirStatus.Loading)
         is TafsirMutation.Loaded -> state.copy(status = TafsirStatus.Loaded(mutation.entries))
@@ -20,10 +17,6 @@ internal object TafsirReducer : Reducer<TafsirState, TafsirMutation> {
     }
 }
 
-/**
- * The explanation for the surah being read. Made with the reader and loaded only when the sheet first opens, so
- * reading a surah never downloads its tafsir unasked; reopening the sheet shows what was loaded straight away
- */
 class TafsirViewModel(
     private val getTafsir: GetTafsir,
     selectedLanguage: SelectedLanguage,
@@ -34,7 +27,7 @@ class TafsirViewModel(
     private var loading: Job? = null
 
     init {
-        viewModelScope.launch {
+        launchNow {
             selectedLanguage.changes.collect { language ->
                 if (language == state.value.language) return@collect
                 loading?.cancel()
@@ -59,7 +52,7 @@ class TafsirViewModel(
         loading?.cancel()
         mutate(TafsirMutation.Loading(surahNumber))
         val language = state.value.language
-        loading = viewModelScope.launch {
+        loading = launchNow {
             when (val outcome = getTafsir(surahNumber, language)) {
                 is Outcome.Success -> mutate(TafsirMutation.Loaded(outcome.value))
                 is Outcome.Failure -> mutate(TafsirMutation.LoadFailed(QuranMessages.tafsirFailed(outcome.error)))

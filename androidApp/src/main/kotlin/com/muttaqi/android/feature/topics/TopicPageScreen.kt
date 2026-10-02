@@ -91,17 +91,12 @@ fun TopicPageRoute(chips: TopicChips, topicId: String, onShare: (SharePassage) -
     TopicPageScreen(chips.title, state, viewModel::dispatch, onBack)
 }
 
-/** Shown in the bar */
 internal val TopicChips.title: String
     get() = when (this) {
         TopicChips.Emotions -> "Emotions"
         TopicChips.ExploreGroup -> "Explore"
     }
 
-/**
- * One topic's verses, hadith or duas, with chips to move to its neighbours and a segmented control for the kinds of
- * text it has
- */
 @Composable
 fun TopicPageScreen(title: String, state: TopicPageState, onIntent: (TopicPageIntent) -> Unit, onBack: () -> Unit) {
     Box {
@@ -128,7 +123,6 @@ fun TopicPageScreen(title: String, state: TopicPageState, onIntent: (TopicPageIn
                 }
 
                 if (state.topics.isNotEmpty()) {
-                    // Moving to another topic fades, as on iOS; switching the kind of text doesn't
                     AnimatedContent(
                         targetState = state,
                         contentKey = { it.selectedId to it.section },
@@ -149,19 +143,16 @@ fun TopicPageScreen(title: String, state: TopicPageState, onIntent: (TopicPageIn
     }
 }
 
-/** The topics as chips; the one shown is scrolled to the middle of the row */
 @Composable
 private fun TopicChipRow(state: TopicPageState, onIntent: (TopicPageIntent) -> Unit) {
     val row = rememberLazyListState()
     val selectedIndex = state.topics.indexOfFirst { it.id == state.selectedId }
-    // Straight there once the topics load, then with a spring as other chips are tapped
     val loaded = state.topics.isNotEmpty()
     LaunchedEffect(loaded) { if (loaded && selectedIndex >= 0) row.scrollToCenter(selectedIndex, animated = false) }
     LaunchedEffect(state.selectedId) { if (loaded && selectedIndex >= 0) row.scrollToCenter(selectedIndex, animated = true) }
 
     LazyRow(
         state = row,
-        // Room for the chips' float shadow
         contentPadding = PaddingValues(horizontal = 20.dp, vertical = 14.dp),
         horizontalArrangement = Arrangement.spacedBy(8.dp),
     ) {
@@ -183,10 +174,6 @@ private suspend fun LazyListState.scrollToCenter(index: Int, animated: Boolean) 
     if (animated) animateScrollBy(distance) else scrollBy(distance)
 }
 
-/**
- * The kinds of text as Material's connected button group, its expressive segmented control, in the iOS control's
- * colours: tinted segments, with the one shown lifted out in white
- */
 @OptIn(ExperimentalMaterial3ExpressiveApi::class)
 @Composable
 private fun TopicSectionPicker(
@@ -196,7 +183,7 @@ private fun TopicSectionPicker(
     modifier: Modifier = Modifier,
 ) {
     val soft = MuttaqiTheme.soft
-    val colors = ToggleButtonDefaults.colors(
+    val colors = ToggleButtonDefaults.toggleButtonColors(
         containerColor = if (soft.dark) Color(0x3D767680) else Color(0x1F767680),
         contentColor = soft.textPrimary,
         checkedContainerColor = if (soft.dark) Color(0xFF5A5A5E) else Color.White,
@@ -228,7 +215,6 @@ private fun TopicSectionPicker(
     }
 }
 
-/** The shown topic's texts of the selected kind, each on a card, and the translations credited */
 @Composable
 private fun TopicPassages(state: TopicPageState, onIntent: (TopicPageIntent) -> Unit, modifier: Modifier = Modifier) {
     val soft = MuttaqiTheme.soft
@@ -236,7 +222,6 @@ private fun TopicPassages(state: TopicPageState, onIntent: (TopicPageIntent) -> 
         state.passages.forEach { passage ->
             PassageCard(passage, onShare = { onIntent(TopicPageIntent.ShareTapped(passage.id)) })
         }
-        // Names whose translations are shown, as their publishers ask
         if (state.translationCredits.isNotEmpty()) {
             Text(
                 "Translation: " + state.translationCredits.joinToString(", "),
@@ -249,7 +234,6 @@ private fun TopicPassages(state: TopicPageState, onIntent: (TopicPageIntent) -> 
     }
 }
 
-/** A verse, hadith or dua: its Arabic, translation and where it's from, centred, with a share button */
 @Composable
 private fun PassageCard(passage: TopicPassage, onShare: () -> Unit) {
     val soft = MuttaqiTheme.soft
@@ -264,7 +248,6 @@ private fun PassageCard(passage: TopicPassage, onShare: () -> Unit) {
             }
             TranslationText(passage.translation, Modifier.fillMaxWidth())
             Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(4.dp)) {
-                // An Urdu attribution, e.g. "اسے امام بخاری نے روایت کیا ہے", is set in Nastaliq like its translation
                 if (passage.source.isArabicScript()) {
                     TranslationText(passage.source, Modifier.weight(1f, fill = false), fontSize = 11.sp, color = soft.brandTeal, lineSpacing = 6.sp)
                 } else {
@@ -276,7 +259,6 @@ private fun PassageCard(passage: TopicPassage, onShare: () -> Unit) {
     }
 }
 
-/** A plain share icon with the soft press, as on the topic page's cards on iOS */
 @Composable
 private fun ShareIcon(onClick: () -> Unit) {
     val interaction = remember { MutableInteractionSource() }

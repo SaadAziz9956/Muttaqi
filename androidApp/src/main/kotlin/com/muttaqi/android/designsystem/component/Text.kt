@@ -36,12 +36,6 @@ import com.muttaqi.shared.core.text.isArabicScript
 import com.muttaqi.shared.core.text.kfgqpcEncoded
 import com.muttaqi.shared.core.text.quoted
 
-/**
- * Arabic in the Quran font (KFGQPC Hafs), right to left. Marks the font can't draw are set as iOS sets them, a little
- * smaller: Arabic punctuation in the system font, and the ornate brackets in Nastaliq, whose flowered ones are iOS's
- * look where Android's own are plain. `lineSpacing` is the space between lines, as iOS's `lineSpacing`;
- * text cut off at `maxLines` ends in an ellipsis
- */
 @Composable
 fun ArabicText(
     text: String,
@@ -83,11 +77,6 @@ fun ArabicText(
     )
 }
 
-/**
- * A translation in the font and direction of its script: Urdu in Nastaliq, right to left; English in Reem Kufi.
- * `lineSpacing` is the space between lines, as iOS's `lineSpacing`; unset, it's the app's usual 8 for Urdu and 4 for
- * English. Text cut off at `maxLines` ends in an ellipsis
- */
 @Composable
 fun TranslationText(
     text: String,
@@ -107,7 +96,6 @@ fun TranslationText(
         maxLines = maxLines,
         overflow = TextOverflow.Ellipsis,
         style = if (urdu) {
-            // One point larger, as on iOS, since Nastaliq reads small for its size
             val size = (fontSize.value + 1).sp
             TextStyle(
                 fontFamily = NastaliqFont,
@@ -129,10 +117,6 @@ fun TranslationText(
     )
 }
 
-/**
- * « and » facing outwards in right-to-left text, as iOS draws them. Android mirrors brackets there but not these, so
- * the pair is swapped for display; the words are untouched
- */
 private fun String.withRightToLeftGuillemets(): String = buildString(length) {
     for (char in this@withRightToLeftGuillemets) {
         append(
@@ -145,24 +129,17 @@ private fun String.withRightToLeftGuillemets(): String = buildString(length) {
     }
 }
 
-// Each font's own line height, in ems (its ascender plus descender), which iOS lays lines out by
 private const val QURAN_FONT_LINE_HEIGHT = 1.758f
 private const val NASTALIQ_LINE_HEIGHT = 2.5f
 private const val REEM_KUFI_LINE_HEIGHT = 1.5f
 
-/** Drawn in Nastaliq wherever Arabic sets them, e.g. around an ayah's number or a verse quoted in a dua */
 internal val OrnateBrackets = setOf('﴾', '﴿')
 
-/** A line as tall as iOS makes it: the font's own line height, then the spacing */
 private fun lineHeight(fontSize: TextUnit, fontLineHeight: Float, lineSpacing: TextUnit): TextUnit =
     (fontSize.value * fontLineHeight + lineSpacing.value).sp
 
-// Lines are broken for the paragraph as a whole, as iOS does, which keeps a lone word off the last line
-
-/** The spacing goes under each line but the last, as on iOS, so the text starts and ends where its glyphs do */
 private val SpacingBelowLines = LineHeightStyle(LineHeightStyle.Alignment.Top, LineHeightStyle.Trim.Both)
 
-/** A page's large title with its quote and source underneath, as at the top of each tab */
 @Composable
 fun PageHeader(title: String, quote: DisplayedQuote?, modifier: Modifier = Modifier) {
     val soft = MuttaqiTheme.soft

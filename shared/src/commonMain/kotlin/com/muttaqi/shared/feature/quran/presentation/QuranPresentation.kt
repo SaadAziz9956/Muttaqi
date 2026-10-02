@@ -5,9 +5,7 @@ import com.muttaqi.shared.core.model.Language
 import com.muttaqi.shared.core.share.SharePassage
 import com.muttaqi.shared.feature.quran.domain.model.Ayah
 
-/** What the Quran screens say when something goes wrong, the same words on both platforms */
 object QuranMessages {
-    /** Downloading the Quran or a translation failed, e.g. during onboarding's setup */
     fun downloadFailed(language: Language): String =
         "Failed to download ${language.displayName} translation. Please check your connection."
 
@@ -28,7 +26,6 @@ object QuranMessages {
     }
 }
 
-/** An ayah as a share card: without the end-of-ayah sign, which the card doesn't number */
 fun Ayah.toSharePassage() = SharePassage(
     arabic = arabicText.replace(END_OF_AYAH, "").trim(),
     transliteration = null,
@@ -36,10 +33,8 @@ fun Ayah.toSharePassage() = SharePassage(
     reference = "Quran ($reference)",
 )
 
-/** An ayah as plain text, as copied */
 fun Ayah.copyText(): String = listOfNotNull(arabicText, translation, "Quran ($reference)").joinToString("\n\n")
 
-/** The Arabic without the end-of-ayah sign, which the screens draw as their own ornament or medallion */
 fun Ayah.arabicWithoutEndSign(): String = arabicText.replace(END_OF_AYAH, "").trim()
 
 private const val END_OF_AYAH = "۝"

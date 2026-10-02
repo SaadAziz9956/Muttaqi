@@ -21,9 +21,7 @@ import org.koin.core.module.dsl.viewModel
 import org.koin.core.module.dsl.viewModelOf
 import org.koin.dsl.module
 
-/** Emotions and Explore, which share the topic page of verses, hadith and duas */
 val topicsModule = module {
-    // The duas come from the Dua feature's entries (GetDuaEntriesById, in duaModule)
     single<EmotionRepository> { BundledEmotionRepository(get(), get(), get()) }
     single<ExploreRepository> { BundledExploreRepository(get(), get(), get()) }
 
@@ -33,7 +31,6 @@ val topicsModule = module {
     factoryOf(::GetExploreHeader)
     factoryOf(::GetTopicPageTopics)
     factoryOf(::BuildExploreSearchIndex)
-    // Home's picks from Explore
     factoryOf(::GetTopicOfTheDay)
     factoryOf(::GetHadithOfTheDay)
 

@@ -10,20 +10,13 @@ import io.ktor.client.request.get
 import io.ktor.client.request.parameter
 import io.ktor.serialization.kotlinx.json.json
 
-/**
- * The Quran text and translations, from the same API (and editions) the iOS app has always synced from: an
- * alquran.cloud-compatible gateway whose Uthmani text leaves the Bismillah out of each surah's first ayah
- */
 internal class QuranApi(private val client: HttpClient) {
 
-    /** All 114 surahs' details */
     suspend fun surahList(): List<SurahDto> = client.get("$BASE_URL/surah").body<ApiResponse<List<SurahDto>>>().data
 
-    /** The whole Quran in one edition, e.g. [QuranEdition.ARABIC_UTHMANI] */
     suspend fun fullQuran(edition: String): FullQuranDto =
         client.get("$BASE_URL/quran/$edition").body<ApiResponse<FullQuranDto>>().data
 
-    /** One surah with its ayahs in one edition */
     suspend fun surah(number: Int, edition: String): SurahDetailDto =
         client.get("$BASE_URL/surah/$number/$edition").body<ApiResponse<SurahDetailDto>>().data
 
@@ -32,12 +25,10 @@ internal class QuranApi(private val client: HttpClient) {
     }
 }
 
-/** The editions the app reads */
 internal object QuranEdition {
     const val ARABIC_UTHMANI = "quran-uthmani"
     const val TRANSLITERATION = "en.transliteration"
 
-    /** Saheeh International, Fateh Muhammad Jalandhry and the Hindi of the Quran API */
     fun translation(language: Language): String = when (language) {
         Language.English -> "en.sahih"
         Language.Urdu -> "ur.jalandhry"
@@ -45,12 +36,10 @@ internal object QuranEdition {
     }
 }
 
-/** Tafsir Ibn Kathir from quran.com, which pages ten ayahs at a time unless asked for more */
 internal class TafsirApi(private val client: HttpClient) {
 
     suspend fun tafsirByChapter(tafsirId: Int, chapterNumber: Int): TafsirResponseDto =
         client.get("$BASE_URL/tafsirs/$tafsirId/by_chapter/$chapterNumber") {
-            // The longest surah has 286 ayahs, so one page of 300 covers any surah
             parameter("per_page", PER_PAGE)
         }.body()
 
@@ -60,22 +49,18 @@ internal class TafsirApi(private val client: HttpClient) {
     }
 }
 
-/** Which of quran.com's tafsirs a language reads */
 internal enum class TafsirSource(val id: Int, val title: String) {
     IbnKathirAbridged(169, "Ibn Kathir (Abridged)"),
     IbnKathirUrdu(160, "Tafsir Ibn Kathir");
 
     companion object {
-        // quran.com has no Hindi tafsir, so Hindi readers get the English one
         fun forLanguage(language: Language): TafsirSource = if (language == Language.Urdu) IbnKathirUrdu else IbnKathirAbridged
     }
 }
 
-/** JSON as both APIs send it, failing on an error status so it's reported rather than decoded */
 internal fun HttpClientConfig<*>.quranClientDefaults() {
     expectSuccess = true
     install(ContentNegotiation) { json(ContentJson) }
 }
 
-/** The app's client, on the platform's engine (OkHttp on Android, NSURLSession on iOS) */
 internal fun quranHttpClient(): HttpClient = HttpClient { quranClientDefaults() }

@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 import json, re, html, unicodedata
 D = '/private/tmp/claude-501/-Users-vyro-Projects-IOS-Projects-Muttaqi/58111274-270b-439e-81ca-c9cc28a6407b/scratchpad/'
 
@@ -8,10 +7,8 @@ def page_text(path):
     t = html.unescape(re.sub(r'<[^>]+>', '\n', t))
     return re.sub(r'\s+', ' ', t)
 
-# ---------- sunnah.com (Arabic + Darussalam English) ----------
 st = page_text('sunnah_t3507_2026.html')
 
-# Arabic (located by letters only, output uses the source's own strings)
 def bare(w):
     w = re.sub(r'[\u064B-\u0652\u0670\u0640\u200f\u200e]', '', w)
     for a, b in (('أ', 'ا'), ('إ', 'ا'), ('آ', 'ا'), ('ى', 'ي'), ('ؤ', 'ء'), ('ة', 'ه')):
@@ -33,10 +30,9 @@ while True:
         break
     toks.append(w)
     i += 1
-# end token may carry the closing mark; stop at the token 'الصبور'
 endi = [bare(t) for t in toks].index('الصبور')
 toks = toks[:endi + 1]
-ar_names = [words[start + 1]]  # اللَّهُ as printed
+ar_names = [words[start + 1]]
 j = 0
 while j < len(toks):
     b = bare(toks[j])
@@ -48,12 +44,11 @@ while j < len(toks):
         ar_names.append(toks[j]); j += 1
 arabic_block = ' '.join(words[start:start + 7] + toks)
 
-# English
 ei = st.find('He is Allah, the one whom')
-ej = st.find('”', ei)  # closing quote
+ej = st.find('”', ei)
 eng_block = st[ei:ej].strip()
 assert eng_block.endswith('.'), eng_block[-20:]
-eng_body = eng_block[:-1]  # drop the sentence-final period only
+eng_body = eng_block[:-1]
 segs = re.split(r'(?<=\)),\s+', eng_body)
 en = []
 for s in segs:
@@ -62,13 +57,11 @@ for s in segs:
     meaning, translit = m.group(1).strip(), m.group(2).strip()
     en.append((meaning, translit))
 
-# ---------- islamicurdubooks (al-Faryiwa'i Urdu) ----------
 ut = page_text('iub_t3507.html')
 ui = ut.find('ڈاکٹر عبدالرحمٰن فریوائی')
 ui = ut.find('«الله»', ui)
 uj = ut.find('امام ترمذی کہتے ہیں', ui)
 ur_block = ut[ui:uj]
-# split into entries at each «...»
 parts = re.split(r'(«[^»]+»)', ur_block)
 ur = []
 k = 1
@@ -82,7 +75,6 @@ while k < len(parts):
     if m:
         meaning = m.group(1).strip()
     elif head == 'الله':
-        # printed without quotation marks
         meaning = re.sub(r'\s*،\s*$', '', body).strip()
     elif body in ('،', '', '۔'):
         meaning = None
@@ -90,7 +82,6 @@ while k < len(parts):
         raise SystemExit('unparsed Urdu entry: %r %r' % (head, body))
     ur.append((head, meaning))
 
-# ---------- alignment checks ----------
 def norm(s):
     s = re.sub(r'[ً-ْٰـ]', '', s)
     for a, b in (('أ', 'ا'), ('إ', 'ا'), ('آ', 'ا'), ('ى', 'ي'), ('ؤ', 'ء'), ('ة', 'ه')):
@@ -112,7 +103,6 @@ for i in range(99):
         'meaning': {'en': en[i][0], 'ur': ur[i][1]},
     })
 
-# ---------- hadith (HadeethEnc 64673) ----------
 he_en = json.load(open(D + 'hadeethenc_64673_en.json', encoding='utf-8'))
 he_ur = json.load(open(D + 'hadeethenc_64673_ur.json', encoding='utf-8'))
 q_en = re.search(r'"(.+)"', he_en['hadeeth']).group(1)

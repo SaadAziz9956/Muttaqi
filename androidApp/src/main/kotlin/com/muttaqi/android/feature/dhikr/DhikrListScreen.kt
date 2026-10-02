@@ -62,7 +62,6 @@ fun DhikrListRoute(onOpenCounter: (String) -> Unit, onBack: () -> Unit) {
     DhikrListScreen(state, viewModel::dispatch, onBack)
 }
 
-/** The hadith under the title, a chip for each section, and the picked section's dhikr as floating rows */
 @Composable
 fun DhikrListScreen(state: DhikrListState, onIntent: (DhikrListIntent) -> Unit, onBack: () -> Unit) {
     val soft = MuttaqiTheme.soft
@@ -102,21 +101,18 @@ fun DhikrListScreen(state: DhikrListState, onIntent: (DhikrListIntent) -> Unit, 
     }
 }
 
-/** The sections as chips in a row that scrolls, keeping the picked one in view */
 @Composable
 private fun SectionChips(state: DhikrListState, selectedId: String, onIntent: (DhikrListIntent) -> Unit) {
     val row = rememberLazyListState()
     val selectedIndex = state.sections.indexOfFirst { it.id == selectedId }
     LaunchedEffect(selectedIndex) {
         if (selectedIndex < 0) return@LaunchedEffect
-        // Centred, as on iOS; the row's width is only known once it's laid out
         val viewport = row.layoutInfo.viewportSize.width
         val chip = row.layoutInfo.visibleItemsInfo.firstOrNull { it.index == selectedIndex }?.size ?: 0
         row.animateScrollToItem(selectedIndex, scrollOffset = -(viewport - chip) / 2)
     }
     LazyRow(
         state = row,
-        // Room for the chips' float shadow
         contentPadding = PaddingValues(horizontal = 20.dp, vertical = 14.dp),
         horizontalArrangement = Arrangement.spacedBy(8.dp),
     ) {
@@ -126,12 +122,9 @@ private fun SectionChips(state: DhikrListState, selectedId: String, onIntent: (D
     }
 }
 
-/** One dhikr: its Arabic on one line, and what it's called or means, with how many times to say it */
 @Composable
 private fun DhikrRow(dhikr: Dhikr, onClick: () -> Unit, modifier: Modifier = Modifier) {
     val soft = MuttaqiTheme.soft
-    // A set of phrases is named by when it's said; a single phrase shows its meaning, or how it's said where no
-    // published translation exists
     val caption = dhikr.title ?: dhikr.translation?.sentenceCased()?.quoted() ?: dhikr.transliteration
     SoftCard(
         modifier.clearAndSetSemantics {
@@ -159,7 +152,6 @@ private fun DhikrRow(dhikr: Dhikr, onClick: () -> Unit, modifier: Modifier = Mod
     }
 }
 
-/** How many times to say it, in a tinted capsule */
 @Composable
 internal fun CountPill(text: String) {
     val soft = MuttaqiTheme.soft

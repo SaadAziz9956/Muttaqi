@@ -31,7 +31,6 @@ import androidx.compose.material3.CenterAlignedTopAppBar
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.ExperimentalMaterial3ExpressiveApi
 import androidx.compose.material3.Icon
-import androidx.compose.material3.LoadingIndicator
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
@@ -68,10 +67,12 @@ import androidx.compose.ui.unit.sp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.muttaqi.android.R
 import com.muttaqi.android.designsystem.MuttaqiTheme
+import com.muttaqi.android.designsystem.component.FadeBetween
 import com.muttaqi.android.designsystem.component.SoftArtwork
 import com.muttaqi.android.designsystem.component.SoftBackdrop
 import com.muttaqi.android.designsystem.component.SoftCard
 import com.muttaqi.android.designsystem.component.SoftIconButton
+import com.muttaqi.android.designsystem.component.SoftLoadingIndicator
 import com.muttaqi.android.designsystem.component.brush
 import com.muttaqi.android.designsystem.component.softFloat
 import com.muttaqi.shared.feature.prayer.domain.model.LocationAccess
@@ -89,7 +90,6 @@ import kotlin.math.cos
 import kotlin.math.roundToInt
 import kotlin.math.sin
 
-/** The Qibla; the compass follows the phone only while this is on screen */
 @Composable
 fun QiblaRoute(viewModel: QiblaViewModel, onBack: () -> Unit) {
     val state by viewModel.state.collectAsStateWithLifecycle()
@@ -109,10 +109,6 @@ fun QiblaRoute(viewModel: QiblaViewModel, onBack: () -> Unit) {
     QiblaScreen(state, compass, viewModel::dispatch, onBack)
 }
 
-/**
- * A compass card that turns with the phone so north stays north, with the Kaaba at the Qibla's bearing; the phone
- * faces the Qibla when the Kaaba reaches the pointer at the top. Without a location, the way to give one
- */
 @OptIn(ExperimentalMaterial3ExpressiveApi::class)
 @Composable
 fun QiblaScreen(state: QiblaState, compass: QiblaCompass?, onIntent: (QiblaIntent) -> Unit, onBack: () -> Unit) {
@@ -121,10 +117,12 @@ fun QiblaScreen(state: QiblaState, compass: QiblaCompass?, onIntent: (QiblaInten
         SoftBackdrop()
         Scaffold(containerColor = Color.Transparent, topBar = { QiblaTopBar(onBack) }) { padding ->
             Box(Modifier.fillMaxSize().padding(padding), contentAlignment = Alignment.Center) {
-                when (val phase = state.phase) {
-                    QiblaPhase.Locating -> LoadingIndicator(color = soft.appPrimary)
-                    is QiblaPhase.NeedsLocation -> LocationNeeded(phase.access) { onIntent(QiblaIntent.LocationButtonTapped) }
-                    is QiblaPhase.Ready -> Compass(phase.qibla, compass, state.isCompassAvailable)
+                FadeBetween(state.phase, key = { it::class }, contentAlignment = Alignment.Center) { phase ->
+                    when (phase) {
+                        QiblaPhase.Locating -> SoftLoadingIndicator()
+                        is QiblaPhase.NeedsLocation -> LocationNeeded(phase.access) { onIntent(QiblaIntent.LocationButtonTapped) }
+                        is QiblaPhase.Ready -> Compass(phase.qibla, compass, state.isCompassAvailable)
+                    }
                 }
             }
         }
@@ -139,7 +137,7 @@ private fun QiblaTopBar(onBack: () -> Unit) {
         navigationIcon = {
             SoftIconButton(R.drawable.ic_arrow_left_02_linear, "Back", onBack, Modifier.padding(start = 12.dp), size = 44.dp, iconSize = 22.dp)
         },
-        colors = TopAppBarDefaults.centerAlignedTopAppBarColors(containerColor = Color.Transparent, scrolledContainerColor = Color.Transparent),
+        colors = TopAppBarDefaults.topAppBarColors(containerColor = Color.Transparent, scrolledContainerColor = Color.Transparent),
     )
 }
 
@@ -201,13 +199,8 @@ private fun Stat(label: String, value: String, detail: String, modifier: Modifie
     }
 }
 
-/** iOS's ease-out, for the dial following the heading */
 private val EaseOut = CubicBezierEasing(0f, 0f, 0.58f, 1f)
 
-/**
- * The compass card, as on iOS: the disc and its ticks and letters turn by the heading so north stays north, the
- * letters and the Kaaba stay upright, and the pointer at the top is the way the phone faces
- */
 @Composable
 fun QiblaDial(qiblaBearing: Double, rotation: Double, isAligned: Boolean, modifier: Modifier = Modifier) {
     val soft = MuttaqiTheme.soft
@@ -219,9 +212,7 @@ fun QiblaDial(qiblaBearing: Double, rotation: Double, isAligned: Boolean, modifi
     val letters = listOf("N", "E", "S", "W")
 
     Box(modifier.clearAndSetSemantics {}, contentAlignment = Alignment.Center) {
-        // The floating disc
         Box(Modifier.fillMaxSize().softFloat(CircleShape, elevation = 16.dp).background(soft.surface, CircleShape).border(2.dp, soft.rim, CircleShape))
-        // Lights up green when the phone faces the Qibla
         Box(
             Modifier.fillMaxSize().alpha(alignedAlpha)
                 .shadow(12.dp, CircleShape, clip = false, ambientColor = green.copy(alpha = 0.45f), spotColor = green.copy(alpha = 0.45f))
@@ -254,7 +245,6 @@ fun QiblaDial(qiblaBearing: Double, rotation: Double, isAligned: Boolean, modifi
                     color = if (letter == "N") soft.appPrimary else soft.textSecondary,
                 )
             }
-            // The Kaaba, on a small green badge
             Box(
                 Modifier.polar(qiblaBearing, fromCentre = 150.dp - 82.dp)
                     .graphicsLayer { rotationZ = turned }
@@ -270,7 +260,6 @@ fun QiblaDial(qiblaBearing: Double, rotation: Double, isAligned: Boolean, modifi
 
         Canvas(Modifier.fillMaxSize()) {
             val radius = size.minDimension / 2
-            // Fixed pointer: the way the phone is facing
             capsule(pointer, 4.dp.toPx(), 18.dp.toPx(), centreAbove = radius + 16.dp.toPx())
             drawCircle(accent, 7.dp.toPx())
             drawCircle(soft.rim, 6.dp.toPx(), style = Stroke(2.dp.toPx()))
@@ -278,7 +267,6 @@ fun QiblaDial(qiblaBearing: Double, rotation: Double, isAligned: Boolean, modifi
     }
 }
 
-/** A capsule standing upright with its centre [centreAbove] above the middle, in the current rotation */
 private fun DrawScope.capsule(color: Color, width: Float, height: Float, centreAbove: Float) {
     drawRoundRect(
         color,
@@ -288,18 +276,15 @@ private fun DrawScope.capsule(color: Color, width: Float, height: Float, centreA
     )
 }
 
-/** Moves a centred child [fromCentre] out from the middle at [degrees] clockwise from the top */
 private fun Modifier.polar(degrees: Double, fromCentre: Dp): Modifier = offset {
     val distance = fromCentre.toPx()
     val radians = degrees * PI / 180
     IntOffset((sin(radians) * distance).roundToInt(), (-cos(radians) * distance).roundToInt())
 }
 
-/** Muttaqi needs a location to find the Qibla: the button asks for it, or opens the settings once it's refused */
 @Composable
 private fun LocationNeeded(access: LocationAccess, onButton: () -> Unit) {
     val soft = MuttaqiTheme.soft
-    // iOS's own label colours, as its empty-state view draws them
     val title = if (soft.dark) Color.White else Color.Black
     val description = if (soft.dark) Color(0x99EBEBF5) else Color(0x993C3C43)
     Column(

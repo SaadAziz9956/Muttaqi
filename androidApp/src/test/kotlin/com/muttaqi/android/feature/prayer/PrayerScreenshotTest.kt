@@ -31,10 +31,6 @@ import org.robolectric.annotation.Config
 import org.robolectric.annotation.GraphicsMode
 import java.time.ZoneId
 
-/**
- * The Qibla and the prayer times for Karachi, as the iOS screenshots were taken there, on an iPhone 17 Pro Max-sized
- * screen (440 × 956 points at 3×) to compare with them pixel for pixel
- */
 @RunWith(RobolectricTestRunner::class)
 @GraphicsMode(GraphicsMode.Mode.NATIVE)
 @Config(application = Application::class, sdk = [35], qualifiers = PRO_MAX)
@@ -101,5 +97,4 @@ class PrayerScreenshotTest {
     }
 }
 
-/** An iPhone 17 Pro Max-sized screen, the simulator the iOS screenshots for prayer and onboarding were taken on */
 const val PRO_MAX = "w440dp-h956dp-xxhdpi"

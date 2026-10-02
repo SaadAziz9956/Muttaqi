@@ -34,10 +34,6 @@ import java.time.format.DateTimeFormatter
 import java.time.format.FormatStyle
 import kotlin.time.Instant as KotlinInstant
 
-/**
- * The next prayer and its time, at the top of Home; without a location there are no times, so it becomes the way to
- * set one
- */
 @Composable
 fun NextPrayerPill(
     upcoming: UpcomingPrayer?,
@@ -66,11 +62,9 @@ fun NextPrayerPill(
     }
 }
 
-/** Today's five prayers, the next one picked out in a green capsule */
 @Composable
 fun PrayerTimesStrip(times: DailyPrayerTimes, next: Prayer?, modifier: Modifier = Modifier, zone: ZoneId = ZoneId.systemDefault()) {
     val soft = MuttaqiTheme.soft
-    // The hour and minute without AM or PM, as iOS draws them: two digits, in 12 or 24 hours as the phone is set
     val format = DateTimeFormatter.ofPattern(if (DateFormat.is24HourFormat(LocalContext.current)) "HH:mm" else "hh:mm")
     SoftCard(modifier, cornerRadius = 30.dp) {
         Row(Modifier.padding(6.dp)) {
@@ -91,7 +85,6 @@ fun PrayerTimesStrip(times: DailyPrayerTimes, next: Prayer?, modifier: Modifier 
                     )
                     Text(
                         times.time(prayer).format(format, zone),
-                        // Figures of one width, so the times line up as they change
                         style = MaterialTheme.typography.labelLarge.copy(fontSize = 15.sp, fontFeatureSettings = "tnum"),
                         color = if (isNext) Color.White else soft.appPrimary,
                     )

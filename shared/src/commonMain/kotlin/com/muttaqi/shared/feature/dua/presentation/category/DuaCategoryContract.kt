@@ -6,7 +6,6 @@ import com.muttaqi.shared.core.mvi.UiMutation
 import com.muttaqi.shared.core.mvi.UiState
 import com.muttaqi.shared.feature.dua.domain.model.DuaCategory
 
-/** One category's chapters, e.g. every chapter under "Prayer & Purification" */
 data class DuaCategoryState(
     val isLoading: Boolean = true,
     val category: DuaCategory? = null,

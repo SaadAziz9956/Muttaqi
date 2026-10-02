@@ -57,7 +57,6 @@ fun EmotionsRoute(onOpenEmotion: (String) -> Unit, onBack: () -> Unit) {
     EmotionsScreen(state, viewModel::dispatch, onBack)
 }
 
-/** The emotions as tiles under the title and its verse; each opens its topic page */
 @Composable
 fun EmotionsScreen(state: EmotionsState, onIntent: (EmotionsIntent) -> Unit, onBack: () -> Unit) {
     val soft = MuttaqiTheme.soft

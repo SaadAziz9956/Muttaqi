@@ -1,11 +1,9 @@
 import Shared
 import SwiftUI
 
-/// One dhikr in full, with a counter pinned at the bottom within reach of the thumb
 struct DhikrCounterView: View {
     @State private var screen: SharedViewModel<DhikrCounterViewModel, DhikrCounterState>
     @State private var isConfirmingReset = false
-    /// The last repetition counted, for its haptic
     @State private var tap = CounterTap()
     @Environment(AppRouter.self) private var router
     @Environment(\.dismiss) private var dismiss
@@ -66,7 +64,6 @@ struct DhikrCounterView: View {
                 }
             }
         }
-        // Counting a long set shouldn't be interrupted by the screen locking
         .onAppear { UIApplication.shared.isIdleTimerDisabled = true }
         .onDisappear { UIApplication.shared.isIdleTimerDisabled = false }
         .task {
@@ -115,17 +112,13 @@ struct DhikrCounterView: View {
             .safeAreaInset(edge: .bottom, spacing: 0) {
                 counter(dhikr)
             }
-            // Keeps the phrase to say now in view as a set moves on to the next one
             .onChange(of: state.currentStep?.index) { _, index in
                 guard let index else { return }
                 withAnimation(.snappy) { proxy.scrollTo(Int(index), anchor: .center) }
             }
         }
-        // Each count springs in quickly; a reset settles back more gently
         .animation(state.hasProgress ? .snappy(duration: 0.2) : .snappy, value: state.progress)
     }
-
-    // MARK: - Text
 
     private func phrase(_ dhikr: Dhikr) -> some View {
         VStack(alignment: .leading, spacing: 0) {
@@ -151,7 +144,6 @@ struct DhikrCounterView: View {
         .textSelection(.enabled)
     }
 
-    /// Each phrase of a set with its count; the one to say now is highlighted and the finished ones fade
     private func steps(_ dhikr: Dhikr) -> some View {
         let current = Int(state.currentStep?.index ?? 0)
 
@@ -191,7 +183,6 @@ struct DhikrCounterView: View {
         .animation(.snappy, value: current)
     }
 
-    /// The hadith that gives the dhikr's virtue, in its published translation
     private func hadithCard(_ hadith: String) -> some View {
         VStack(alignment: .leading, spacing: 6) {
             Text("Hadith")
@@ -204,7 +195,6 @@ struct DhikrCounterView: View {
         .softCard(cornerRadius: 24)
     }
 
-    /// Translation text in the font and direction of its script, so Urdu is set in Nastaliq and right to left
     private func translated(_ text: String, size: CGFloat, color: Color) -> some View {
         let style = TranslationStyle(for: text, size: size)
         return Text(text)
@@ -231,8 +221,6 @@ struct DhikrCounterView: View {
         }
         .accessibilityElement(children: .combine)
     }
-
-    // MARK: - Counter
 
     private func counter(_ dhikr: Dhikr) -> some View {
         VStack(spacing: 10) {
@@ -268,7 +256,6 @@ struct DhikrCounterView: View {
                     }
                 }
                 .frame(width: counterSize, height: counterSize)
-                // Native glass, so every count gets the system's press; it turns green once the round is complete
                 .softGlass(in: Circle(), fill: state.isRoundComplete ? .shareCard : .softSurface, rim: !state.isRoundComplete)
             }
             .buttonStyle(CounterButtonStyle())
@@ -293,7 +280,6 @@ struct DhikrCounterView: View {
         .padding(.top, 14)
         .padding(.bottom, 6)
         .frame(maxWidth: .infinity)
-        // Fades the text out behind the counter, so the orb floats over the page rather than on a bar
         .background {
             LinearGradient(
                 stops: [
@@ -323,13 +309,11 @@ struct DhikrCounterView: View {
     }
 }
 
-/// One counted repetition and what it completed; a new value for every tap, so each one plays its haptic
 private struct CounterTap: Equatable {
     var sequence = 0
     var milestone: DhikrMilestone = .repetition
 }
 
-/// Presses in slightly, like a physical counter
 private struct CounterButtonStyle: ButtonStyle {
     func makeBody(configuration: Configuration) -> some View {
         configuration.label

@@ -2,7 +2,6 @@ import Shared
 import SwiftUI
 
 struct HomeView: View {
-    /// Made once by the tab bar, so it isn't made again each time the tabs redraw
     let screen: SharedViewModel<HomeViewModel, HomeState>
     @Environment(AppRouter.self) private var router
     @Environment(\.scenePhase) private var scenePhase
@@ -12,7 +11,6 @@ struct HomeView: View {
 
     var body: some View {
         ScrollView {
-            // The next prayer and the Hijri date (which turns at Maghrib) move on each minute in the shared state
             VStack(spacing: 0) {
                 HStack {
                     Text(state.hijriDate)
@@ -29,9 +27,9 @@ struct HomeView: View {
                     .padding(.top, 30)
 
                 if let today = state.schedule?.today {
-                    // Once Isha has passed, the next prayer is tomorrow's Fajr, so nothing in today's row is picked
                     PrayerTimesStrip(times: today, next: state.nextPrayerToday)
                         .padding(.top, 28)
+                        .transition(.opacity)
                 }
 
                 HomeBento(screen: screen)
@@ -47,7 +45,6 @@ struct HomeView: View {
                             dispatch(HomeIntentContinueReadingTapped.shared)
                         }
                     }
-                    // Reading al-Kahf on Friday is a sunnah, so on Fridays it's a tap away
                     if let kahf = state.fridayKahf {
                         SurahShortcut(surah: kahf, title: "Surah \(kahf.englishName)", subtitle: "Friday") {
                             dispatch(HomeIntentKahfTapped.shared)
@@ -71,11 +68,11 @@ struct HomeView: View {
             }
             .padding(.horizontal, 20)
             .padding(.bottom, 32)
+            .animation(.smooth(duration: 0.3), value: state.schedule?.today == nil)
+            .animation(.smooth(duration: 0.3), value: state.greeting == nil)
         }
         .background { SoftBackdrop() }
-        // Home has no title of its own, so its empty bar is hidden and the page starts under the status bar
         .toolbar(.hidden, for: .navigationBar)
-        // Soft fade under the status bar so scrolled content doesn't collide with the clock
         .overlay(alignment: .top) {
             LinearGradient(colors: [Color.softCanvas, Color.softCanvas.opacity(0)], startPoint: .top, endPoint: .bottom)
                 .frame(height: 70)
@@ -83,8 +80,6 @@ struct HomeView: View {
                 .allowsHitTesting(false)
         }
         .task {
-            // Each time Home comes back into view, e.g. from the Dikr counter, its counts and the day's content are
-            // read again
             dispatch(HomeIntentRefresh.shared)
             for await effect in screen.viewModel.effects {
                 handle(effect)
@@ -105,16 +100,19 @@ struct HomeView: View {
 
             if let quote = state.greeting, let translation = quote.ayah.translation {
                 let style = TranslationStyle(for: translation, size: 14)
-                Text(translation.quoted)
-                    .font(style.font)
-                    .foregroundStyle(.textPrimary)
-                    .multilineTextAlignment(.center)
-                    .padding(.top, 20)
+                VStack(spacing: 0) {
+                    Text(translation.quoted)
+                        .font(style.font)
+                        .foregroundStyle(.textPrimary)
+                        .multilineTextAlignment(.center)
+                        .padding(.top, 20)
 
-                Text("Quran (\(quote.reference))")
-                    .font(.labelSmall)
-                    .foregroundStyle(.textSecondary)
-                    .padding(.top, 4)
+                    Text("Quran (\(quote.reference))")
+                        .font(.labelSmall)
+                        .foregroundStyle(.textSecondary)
+                        .padding(.top, 4)
+                }
+                .transition(.opacity)
             }
         }
     }

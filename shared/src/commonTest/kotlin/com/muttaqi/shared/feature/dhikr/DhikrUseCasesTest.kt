@@ -38,7 +38,6 @@ class DhikrUseCasesTest {
         assertEquals(listOf("tasbih", "after-prayer"), sections.map { it.id })
         val subhanallah = sections[0].dhikr[0]
         assertEquals("اللہ پاک ہے", subhanallah.translation)
-        // No published Urdu for the hadith, so it's the English
         assertEquals("Whoever says it…", subhanallah.hadith)
         val steps = sections[1].dhikr.single().steps
         assertEquals(listOf("اللہ پاک ہے", "praise be to Allah", "Allah is the Most Great"), steps.map { it.translation })
@@ -73,9 +72,9 @@ class DhikrUseCasesTest {
 
     @Test
     fun saidTodayAddsUpEveryCounterAndSkipsOtherDays() = runTest {
-        progress.save("subhanallah", DhikrProgress(3, 1, today)) // a round of 3 just finished
+        progress.save("subhanallah", DhikrProgress(3, 1, today))
         progress.save("open-ended", DhikrProgress(10, 0, today))
-        progress.save("set", DhikrProgress(2, 2, LocalDate(2026, 9, 29))) // yesterday's
+        progress.save("set", DhikrProgress(2, 2, LocalDate(2026, 9, 29)))
         assertEquals(13, GetDhikrSaidToday(repository(), getProgress)())
     }
 }

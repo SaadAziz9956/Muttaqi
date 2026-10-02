@@ -1,13 +1,11 @@
 package com.muttaqi.shared.feature.dhikr.presentation.list
 
-import androidx.lifecycle.viewModelScope
 import com.muttaqi.shared.core.mvi.MviViewModel
 import com.muttaqi.shared.core.preferences.SelectedLanguage
 import com.muttaqi.shared.core.quote.PageQuotes
 import com.muttaqi.shared.core.quote.displayed
 import com.muttaqi.shared.feature.dhikr.domain.usecase.GetDhikrSections
 import kotlinx.coroutines.CancellationException
-import kotlinx.coroutines.launch
 
 class DhikrListViewModel(
     private val getSections: GetDhikrSections,
@@ -15,8 +13,7 @@ class DhikrListViewModel(
 ) : MviViewModel<DhikrListState, DhikrListIntent, DhikrListMutation, DhikrListEffect>(DhikrListState(), DhikrListReducer) {
 
     init {
-        // Reloads in the new language whenever the reader switches it, keeping the picked tab
-        viewModelScope.launch {
+        launchNow {
             selectedLanguage.changes.collect { language ->
                 try {
                     mutate(DhikrListMutation.Loaded(PageQuotes.rememberingAllah.displayed(language), getSections(language)))

@@ -89,7 +89,6 @@ class QuranUseCasesTest {
     fun aSurahComesWithItsNeighbours() = runTest {
         val reading = ReadSurah(library, library)(2, Language.English)!!
         assertEquals(1, reading.previousSurah?.number)
-        // The test data skips from 2 to 9
         assertNull(reading.nextSurah)
         assertNull(ReadSurah(library, library)(3, Language.English))
     }
@@ -130,7 +129,6 @@ class QuranUseCasesTest {
 
     @Test
     fun theAyahOfTheDayIsTheOneTheSwiftAppPicked() = runTest {
-        // Swift picked curatedAyahs[ordinality of the day in the era % 39]: 30 September 2026 is day 739,889
         val asked = mutableListOf<String>()
         val anySurah = object : SurahRepository {
             override suspend fun surahs() = testSurahs
@@ -147,7 +145,6 @@ class QuranUseCasesTest {
         assertEquals("16:128", pick(LocalDate(2026, 9, 30), Language.English)?.reference)
         assertEquals("16:128", pick(LocalDate(2026, 9, 30), Language.Urdu)?.reference)
         assertEquals("21:35", pick(LocalDate(2026, 10, 1), Language.English)?.reference)
-        // The list repeats every 39 days
         assertEquals("16:128", pick(LocalDate(2026, 11, 8), Language.English)?.reference)
         assertEquals(listOf("16:128", "16:128", "21:35", "16:128"), asked)
         assertNull(GetAyahOfTheDay(GetAyah(FakeQuranLibrary(textStored = false), recording))(LocalDate(2026, 9, 30), Language.English))

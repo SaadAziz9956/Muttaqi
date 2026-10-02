@@ -14,10 +14,6 @@ import com.muttaqi.shared.feature.prayer.domain.model.LocationAccess
 import com.muttaqi.shared.feature.prayer.domain.platform.LocationProvider
 import com.muttaqi.shared.feature.prayer.domain.platform.LocationRequest
 
-/**
- * The device's location for the shared code, from the platform's LocationManager. Approximate location is enough for
- * prayer times and the Qibla, so the reader may choose it in the system's dialog
- */
 class AndroidLocationProvider(private val context: Context, private val permissions: ActivityPermissions) : LocationProvider {
     private val manager = context.getSystemService(LocationManager::class.java)
 
@@ -33,7 +29,7 @@ class AndroidLocationProvider(private val context: Context, private val permissi
         permissions.request(arrayOf(FINE, COARSE)) { onResult(access) }
     }
 
-    @SuppressLint("MissingPermission") // only asked for once access is granted
+    @SuppressLint("MissingPermission")
     override fun currentLocation(onResult: (Coordinates?) -> Unit): LocationRequest {
         val provider = provider()
         if (access != LocationAccess.Granted || provider == null) {
@@ -49,7 +45,6 @@ class AndroidLocationProvider(private val context: Context, private val permissi
         }
     }
 
-    /** The fused provider where there is one, as it's quickest to a fix; then the network, then GPS */
     private fun provider(): String? = when {
         Build.VERSION.SDK_INT >= Build.VERSION_CODES.S && manager.hasProvider(LocationManager.FUSED_PROVIDER) -> LocationManager.FUSED_PROVIDER
         manager.isProviderEnabled(LocationManager.NETWORK_PROVIDER) -> LocationManager.NETWORK_PROVIDER

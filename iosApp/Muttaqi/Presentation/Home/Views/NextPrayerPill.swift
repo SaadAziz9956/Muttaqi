@@ -3,7 +3,6 @@ import SwiftUI
 
 struct NextPrayerPill: View {
     let upcoming: UpcomingPrayer?
-    /// Without a location there are no times to show, so the pill becomes the way to set one
     let asksForLocation: Bool
     let onSetLocation: () -> Void
 

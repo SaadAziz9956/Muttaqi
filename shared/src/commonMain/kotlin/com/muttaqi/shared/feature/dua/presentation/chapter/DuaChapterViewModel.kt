@@ -1,13 +1,11 @@
 package com.muttaqi.shared.feature.dua.presentation.chapter
 
-import androidx.lifecycle.viewModelScope
 import com.muttaqi.shared.core.mvi.MviViewModel
 import com.muttaqi.shared.core.mvi.Reducer
 import com.muttaqi.shared.core.preferences.SelectedLanguage
 import com.muttaqi.shared.core.share.SharePassage
 import com.muttaqi.shared.feature.dua.domain.model.DuaEntry
 import com.muttaqi.shared.feature.dua.domain.usecase.GetDuaChapter
-import kotlinx.coroutines.launch
 
 internal object DuaChapterReducer : Reducer<DuaChapterState, DuaChapterMutation> {
     override fun reduce(state: DuaChapterState, mutation: DuaChapterMutation) = when (mutation) {
@@ -28,7 +26,7 @@ class DuaChapterViewModel(
     DuaChapterReducer,
 ) {
     init {
-        viewModelScope.launch {
+        launchNow {
             selectedLanguage.changes.collect { language -> mutate(DuaChapterMutation.Loaded(getChapter(chapterId, language))) }
         }
     }
@@ -43,8 +41,6 @@ class DuaChapterViewModel(
     private fun entry(id: String): DuaEntry? = state.value.chapter?.entries?.firstOrNull { it.id == id }
 }
 
-/** A dua as a share card */
 fun DuaEntry.toSharePassage() = SharePassage(arabic, transliteration.ifBlank { null }, translation, source)
 
-/** A dua as plain text, as copied */
 fun DuaEntry.copyText(): String = listOf(arabic, transliteration, translation, source).filter { it.isNotBlank() }.joinToString("\n\n")

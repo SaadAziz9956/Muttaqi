@@ -2,9 +2,7 @@ import Shared
 import SwiftUI
 
 struct NamesView: View {
-    // Shared with the search, so picking a result turns the page to that name
     @State private var screen = SharedViewModel(NamesViewModels.shared.names()) { $0.state }
-    /// The name on screen, as its number; bound to the swiper's scroll position
     @State private var currentNumber: Int32? = 1
     @State private var isSearchOpen = false
     @Environment(AppRouter.self) private var router
@@ -21,15 +19,11 @@ struct NamesView: View {
                         .foregroundStyle(.appPrimary)
                         .padding(.top, 8)
 
-                    // 300pt on an iPhone Pro, in proportion on bigger and smaller screens
                     carousel(cardHeight: max(260, geometry.size.height * 0.415))
                         .padding(.top, 28)
 
-                    // The hadith sits at the foot of the screen, as in the design; the page only scrolls when a
-                    // long card leaves no room for it there
                     Spacer(minLength: 32)
 
-                    // Which name is showing, as the cards are swiped
                     Text("\(currentNumber ?? 1) of \(max(state.names.count, 99))")
                         .font(.custom("ReemKufi-Medium", size: 13))
                         .foregroundStyle(.appPrimary)
@@ -96,7 +90,6 @@ struct NamesView: View {
         }
         .navigationDestination(isPresented: $isSearchOpen) {
             NamesSearchView(screen: screen) { number in
-                // Picking a result turns the page to that name
                 currentNumber = number
                 isSearchOpen = false
             }
@@ -118,19 +111,15 @@ struct NamesView: View {
         screen.viewModel.dispatch(intent: intent)
     }
 
-    /// One name at a time, with the next and previous peeking in at the edges, smaller and faded. As a card is
-    /// swiped in it grows to full size while the one leaving shrinks back.
     private func carousel(cardHeight: CGFloat) -> some View {
         ScrollView(.horizontal) {
             LazyHStack(alignment: .top, spacing: 12) {
                 ForEach(state.names, id: \.number) { name in
                     NameCard(name: name, minHeight: cardHeight)
-                        // Room for the card's float shadow, which the scroll view would otherwise clip
                         .padding(.vertical, 18)
                         .containerRelativeFrame(.horizontal)
                         .scrollTransition(axis: .horizontal) { card, phase in
                             card
-                                // Shrinks toward the middle card, so the peeking edge stays in view
                                 .scaleEffect(phase.isIdentity ? 1 : 0.88, anchor: phase.value < 0 ? .trailing : .leading)
                                 .opacity(phase.isIdentity ? 1 : 0.6)
                         }

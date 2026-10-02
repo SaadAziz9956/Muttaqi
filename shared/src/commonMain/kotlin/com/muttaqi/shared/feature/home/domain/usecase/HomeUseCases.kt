@@ -19,6 +19,7 @@ import com.muttaqi.shared.feature.quran.domain.usecase.GetSurahs
 import com.muttaqi.shared.feature.topics.domain.usecase.GetHadithOfTheDay
 import com.muttaqi.shared.feature.topics.domain.usecase.GetTopicOfTheDay
 import kotlinx.coroutines.CancellationException
+import kotlinx.coroutines.CoroutineStart
 import kotlinx.coroutines.async
 import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.flow.Flow
@@ -30,11 +31,6 @@ import kotlinx.datetime.plus
 import kotlinx.datetime.toLocalDateTime
 import kotlin.time.Instant
 
-/**
- * The day's texts from the other features: the verse under the greeting, and the ayah, hadith, dua, Name and Explore
- * topic of the day, each picked as the iOS app always has. One that can't be read is left out rather than keeping the
- * rest off Home
- */
 class GetDailyContent(
     private val getAyah: GetAyah,
     private val getAyahOfTheDay: GetAyahOfTheDay,
@@ -44,22 +40,20 @@ class GetDailyContent(
     private val getTopicOfTheDay: GetTopicOfTheDay,
 ) {
     suspend operator fun invoke(date: LocalDate, language: Language): DailyContent = coroutineScope {
-        val greeting = async { orNull { getAyah(GREETING.first, GREETING.second, language) } }
-        val ayah = async { orNull { getAyahOfTheDay(date, language) } }
-        val hadith = async { orNull { getHadithOfTheDay(date, language) } }
-        val dua = async { orNull { getDuaOfTheDay(date, language) } }
-        val name = async { orNull { getNameOfTheDay(date, language) } }
-        val topic = async { orNull { getTopicOfTheDay(date, language) } }
+        val greeting = async(start = CoroutineStart.UNDISPATCHED) { orNull { getAyah(GREETING.first, GREETING.second, language) } }
+        val ayah = async(start = CoroutineStart.UNDISPATCHED) { orNull { getAyahOfTheDay(date, language) } }
+        val hadith = async(start = CoroutineStart.UNDISPATCHED) { orNull { getHadithOfTheDay(date, language) } }
+        val dua = async(start = CoroutineStart.UNDISPATCHED) { orNull { getDuaOfTheDay(date, language) } }
+        val name = async(start = CoroutineStart.UNDISPATCHED) { orNull { getNameOfTheDay(date, language) } }
+        val topic = async(start = CoroutineStart.UNDISPATCHED) { orNull { getTopicOfTheDay(date, language) } }
         DailyContent(greeting.await(), ayah.await(), hadith.await(), dua.await(), name.await(), topic.await())
     }
 
     private companion object {
-        /** "So do not weaken and do not grieve…" */
         val GREETING = 3 to 139
     }
 }
 
-/** Where the reader left off in the Quran, and Surah al-Kahf, from the stored surahs; none before they're downloaded */
 class GetQuranShortcuts(
     private val getSurahs: GetSurahs,
     private val getLastReading: GetLastReading,
@@ -80,10 +74,6 @@ class GetQuranShortcuts(
     }
 }
 
-/**
- * The prayer times and the Qibla where the reader is: from the saved location straight away, which works offline,
- * then again from a fresh fix when there's access, in case they've moved
- */
 class LocatePrayerTimes(
     private val locateReader: LocateReader,
     private val getPrayerSchedule: GetPrayerSchedule,
@@ -95,7 +85,6 @@ class LocatePrayerTimes(
     }
 }
 
-/** Today's Hijri date where the reader is. The Islamic day begins at Maghrib, so after sunset it's the next one's */
 class GetHijriDate(private val calendar: HijriCalendar) {
     operator fun invoke(now: Instant, maghrib: Instant?, timeZone: TimeZone): String {
         val today = now.toLocalDateTime(timeZone).date

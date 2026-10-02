@@ -1,5 +1,4 @@
 #!/usr/bin/env python3
-"""Checks an Explore group file against the published sources. Usage: python3 check.py faith.json"""
 import json, re, sys
 from tools import quran, corpus, usable, hisn
 

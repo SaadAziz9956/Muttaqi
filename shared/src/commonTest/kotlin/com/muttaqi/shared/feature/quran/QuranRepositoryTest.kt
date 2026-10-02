@@ -53,7 +53,6 @@ class QuranRepositoryTest {
         assertEquals(first.arabic, baqara.first().arabicText)
         assertEquals(first.transliteration, baqara.first().transliteration)
         assertEquals(first.page, baqara.first().page)
-        // No translation until one is downloaded
         assertNull(baqara.first().translation)
     }
 
@@ -77,7 +76,6 @@ class QuranRepositoryTest {
     fun theTextCountsAsStoredOnlyWithEverySurah() = runTest {
         val repository = repository()
         repository.downloadText()
-        // The test data has five surahs, not 114
         assertFalse(repository.hasText())
     }
 

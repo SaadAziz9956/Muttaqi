@@ -1,8 +1,6 @@
 import Shared
 import SwiftUI
 
-/// The surah's name in large calligraphy straight on the page, with its Explanation and a way to the neighbouring
-/// surahs; the brand green is kept for the Explanation button alone
 struct SurahHeaderView: View {
     let surah: Surah?
     let previousSurah: Surah?
@@ -10,7 +8,6 @@ struct SurahHeaderView: View {
     let onPrevious: () -> Void
     let onNext: () -> Void
     let onExplanation: () -> Void
-    /// Reports the title's bottom edge in global coordinates as the header scrolls
     var onTitleBottomChange: (CGFloat) -> Void = { _ in }
 
     var body: some View {
@@ -25,7 +22,6 @@ struct SurahHeaderView: View {
                 .font(.custom("ReemKufi-Medium", size: 26))
                 .foregroundStyle(.appPrimary)
                 .onGeometryChange(for: CGFloat.self) { $0.frame(in: .global).maxY } action: { onTitleBottomChange($0) }
-                // Jumping to an ayah far down unloads the header without a last geometry update, so report it gone
                 .onDisappear { onTitleBottomChange(-.infinity) }
                 .padding(.top, 6)
 
@@ -34,8 +30,6 @@ struct SurahHeaderView: View {
                 .foregroundStyle(.textSecondary)
                 .padding(.top, 2)
 
-            // Surah switching is labelled with the neighbour's name so it can't be mistaken for the back button above
-            // Native glass rendered as one group, which is cheaper than each on its own
             GlassEffectContainer(spacing: 4) {
                 HStack(spacing: 8) {
                     if let previousSurah {

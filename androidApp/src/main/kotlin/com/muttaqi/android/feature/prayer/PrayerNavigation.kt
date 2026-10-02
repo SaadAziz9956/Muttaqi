@@ -10,7 +10,6 @@ import org.koin.compose.viewmodel.koinViewModel
 @Serializable
 data object QiblaRoute
 
-/** The Qibla screens. Registered in their tab's graph by MuttaqiApp */
 fun NavGraphBuilder.prayerDestinations(navController: NavController) {
     composable<QiblaRoute> { QiblaRoute(viewModel = koinViewModel<QiblaViewModel>(), onBack = navController::popBackStack) }
 }

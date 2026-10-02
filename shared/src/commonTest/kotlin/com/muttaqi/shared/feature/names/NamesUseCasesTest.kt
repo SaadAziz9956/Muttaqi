@@ -68,7 +68,6 @@ class NamesUseCasesTest {
 
     @Test
     fun theNameOfTheDayIsTheOneTheSwiftAppShowed() = runTest {
-        // Swift picked names[ordinality of the day in the era % count]; 2026-09-30 is day 739,889, so #63 of 99
         val ninetyNine = NamesRepository { List(99) { AllahName(it + 1, "", "", "") } }
         val pick = GetNameOfTheDay(ninetyNine)
         assertEquals(63, pick(LocalDate(2026, 9, 30), Language.English)?.number)

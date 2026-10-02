@@ -10,7 +10,6 @@ import kotlin.coroutines.resume
 import kotlin.time.Duration
 import kotlin.time.Duration.Companion.seconds
 
-/** The device's location from the platform's [provider], with the last fix kept for next time */
 class DeviceLocationRepository(
     private val provider: LocationProvider,
     private val saved: SavedCoordinates,

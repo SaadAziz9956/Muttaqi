@@ -5,7 +5,6 @@ import kotlinx.datetime.LocalDate
 import kotlin.test.Test
 import kotlin.test.assertEquals
 
-/** The dates the Swift app's own formatter wrote on the same days, on Foundation's Umm al-Qura calendar */
 class FoundationHijriCalendarTest {
     private val calendar = FoundationHijriCalendar()
 

@@ -7,7 +7,6 @@ import com.muttaqi.shared.feature.dhikr.domain.model.Dhikr
 import com.muttaqi.shared.feature.dhikr.domain.model.DhikrSection
 import com.muttaqi.shared.feature.dhikr.domain.model.DhikrStep
 
-/** The published translation in the language, or the English where there's none in it; null when there's neither */
 private fun Translations.pick(language: Language): String? = this[language.code] ?: this[Language.English.code]
 
 internal fun DhikrBookDto.toSections(language: Language): List<DhikrSection> = sections.map { section ->

@@ -10,7 +10,6 @@ import com.muttaqi.shared.feature.onboarding.presentation.OnboardingViewModel
 import org.koin.compose.koinInject
 import org.koin.compose.viewmodel.koinViewModel
 
-/** Shows onboarding on first launch, then [content] (the tabs) once it's done, and straight away after that */
 @Composable
 fun OnboardingGate(content: @Composable () -> Unit) {
     val isOnboardingComplete = koinInject<IsOnboardingComplete>()

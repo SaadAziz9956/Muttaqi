@@ -146,7 +146,6 @@ class QuranScreenshotTest {
         }
     }
 
-    /** A bottom sheet's content as it shows over the reader, since a sheet opens in a window of its own */
     @Composable
     private fun Sheet(content: @Composable () -> Unit) {
         Box {

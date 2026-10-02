@@ -28,12 +28,9 @@ struct JournalListView: View {
                     JournalEntryRow(entry: entry)
                 }
                 .listRowInsets(Self.rowInsets)
-                // No divider above the first row, which shows while searching, when the header is hidden
                 .listRowSeparator(entry.id == entries.first?.id ? .hidden : .automatic, edges: .top)
-                // Needs the Delete button tapped, so a long swipe can't lose an entry by accident
                 .swipeActions(edge: .trailing, allowsFullSwipe: false) {
                     deleteButton(for: entry)
-                        // The app's green tint would otherwise replace the destructive red
                         .tint(.red)
                 }
                 .contextMenu {
@@ -46,7 +43,6 @@ struct JournalListView: View {
         }
         .listStyle(.plain)
         .scrollDismissesKeyboard(.immediately)
-        // Read from the view model as it is this instant, so fast typing can't be redrawn with an older query
         .searchable(text: Binding(get: { screen.viewModel.state.value.query }, set: { dispatch(JournalListIntentQueryChanged(query: $0)) }), prompt: "Search")
         .navigationBarTitleDisplayMode(.inline)
         .collapsingBarTitle("Journal", titleBottom: titleBottom)
@@ -64,7 +60,6 @@ struct JournalListView: View {
                 .accessibilityLabel("Back")
             }
 
-            // Search and a new-entry button along the bottom, as in Notes
             DefaultToolbarItem(kind: .search, placement: .bottomBar)
             ToolbarSpacer(.fixed, placement: .bottomBar)
             ToolbarItem(placement: .bottomBar) {

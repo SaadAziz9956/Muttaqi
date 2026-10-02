@@ -51,7 +51,6 @@ fun DuaCategoryRoute(categoryId: String, onOpenChapter: (String) -> Unit, onBack
     DuaCategoryScreen(state, viewModel::dispatch, onBack)
 }
 
-/** A category's chapters as floating rows under its title */
 @Composable
 fun DuaCategoryScreen(state: DuaCategoryState, onIntent: (DuaCategoryIntent) -> Unit, onBack: () -> Unit) {
     val soft = MuttaqiTheme.soft

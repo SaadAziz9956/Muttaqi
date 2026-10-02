@@ -14,12 +14,6 @@ import kotlinx.coroutines.sync.Mutex
 import kotlinx.coroutines.sync.withLock
 import kotlinx.coroutines.withContext
 
-/**
- * The duas bundled with the app. Duas.json: the Quranic duas, cut from the Quran editions the app uses (Uthmani
- * Arabic, Saheeh International, Jalandhry). HisnAlMuslim.json: text, transliteration and English from
- * hisnmuslim.com; Urdu from Hafiz Zubair Ali Za'i's Mukhtasar Hisn al-Muslim or HadeethEnc where published.
- * Each file is decoded once and kept.
- */
 class BundledDuaRepository(
     private val content: BundledContentSource,
     private val dispatchers: DispatcherProvider,
