@@ -8,18 +8,22 @@ struct QuranListView: View {
     @Environment(AppRouter.self) private var router
 
     private var state: QuranListState { screen.state }
+    private var phase: Int { state.isLoading ? 0 : state.error == nil ? 1 : 2 }
 
     var body: some View {
         Group {
             if state.isLoading {
-                ProgressView()
-                    .tint(.appPrimary)
+                SoftLoadingIndicator()
+                    .transition(.opacity)
             } else if let error = state.error {
                 errorView(error)
+                    .transition(.opacity)
             } else {
                 quranContent
+                    .transition(.opacity)
             }
         }
+        .animation(.easeInOut(duration: 0.22), value: phase)
         .task {
             dispatch(QuranListIntentAppeared.shared)
             for await effect in screen.viewModel.effects {

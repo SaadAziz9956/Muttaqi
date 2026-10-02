@@ -4,5 +4,12 @@
         <item name="android:windowBackground">@color/canvas</item>
     </style>
 
+    <style name="Theme.Muttaqi.Starting" parent="Theme.SplashScreen.IconBackground">
+        <item name="windowSplashScreenBackground">@color/canvas</item>
+        <item name="windowSplashScreenAnimatedIcon">@drawable/ic_launcher_foreground</item>
+        <item name="windowSplashScreenIconBackgroundColor">@color/ic_launcher_background</item>
+        <item name="postSplashScreenTheme">@style/Theme.Muttaqi</item>
+    </style>
+
     <color name="canvas">#F3F7F5</color>
 </resources>

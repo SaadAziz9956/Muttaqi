@@ -1,6 +1,5 @@
 package com.muttaqi.shared.feature.names.presentation
 
-import androidx.lifecycle.viewModelScope
 import com.muttaqi.shared.core.mvi.MviViewModel
 import com.muttaqi.shared.core.preferences.SelectedLanguage
 import com.muttaqi.shared.core.quote.PageQuotes
@@ -14,7 +13,6 @@ import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
-import kotlinx.coroutines.launch
 
 class NamesViewModel(
     private val getNames: GetAllahNames,
@@ -28,7 +26,7 @@ class NamesViewModel(
     val position: StateFlow<Int> = mutablePosition.asStateFlow()
 
     init {
-        viewModelScope.launch {
+        launchNow {
             selectedLanguage.changes.collect { language ->
                 try {
                     val names = getNames(language)

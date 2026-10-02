@@ -24,7 +24,6 @@ import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material3.ExperimentalMaterial3ExpressiveApi
-import androidx.compose.material3.LoadingIndicator
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -44,11 +43,13 @@ import androidx.lifecycle.compose.LifecycleResumeEffect
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.muttaqi.android.designsystem.MuttaqiTheme
 import com.muttaqi.android.designsystem.component.ArabicText
+import com.muttaqi.android.designsystem.component.FadeBetween
 import com.muttaqi.android.designsystem.component.PageHeader
 import com.muttaqi.android.designsystem.component.SoftArtwork
 import com.muttaqi.android.designsystem.component.SoftBackdrop
 import com.muttaqi.android.designsystem.component.SoftCard
 import com.muttaqi.android.designsystem.component.SoftChip
+import com.muttaqi.android.designsystem.component.SoftLoadingIndicator
 import com.muttaqi.android.designsystem.component.SoftPillSurface
 import com.muttaqi.android.designsystem.component.SoftSearchField
 import com.muttaqi.shared.feature.quran.domain.model.ReadingProgress
@@ -85,54 +86,56 @@ fun QuranListScreen(state: QuranListState, onIntent: (QuranListIntent) -> Unit) 
     val soft = MuttaqiTheme.soft
     Box {
         SoftBackdrop()
-        when {
-            state.isLoading -> Box(Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
-                LoadingIndicator(color = soft.appPrimary)
-            }
-            state.error != null -> LoadFailed(state.error.orEmpty(), onRetry = { onIntent(QuranListIntent.Retry) })
-            else -> LazyVerticalGrid(
-                columns = GridCells.Fixed(2),
-                modifier = Modifier.statusBarsPadding(),
-                contentPadding = PaddingValues(start = 20.dp, end = 20.dp, top = 24.dp, bottom = 32.dp),
-                horizontalArrangement = Arrangement.spacedBy(14.dp),
-                verticalArrangement = Arrangement.spacedBy(14.dp),
-            ) {
-                item(span = { GridItemSpan(maxLineSpan) }) {
-                    PageHeader("The Quran", state.header, Modifier.padding(bottom = 10.dp))
+        FadeBetween(state, key = { it.isLoading to (it.error != null) }) { state ->
+            when {
+                state.isLoading -> Box(Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
+                    SoftLoadingIndicator()
                 }
-                item(span = { GridItemSpan(maxLineSpan) }) {
-                    AnimatedVisibility(state.readingProgress != null, enter = fadeIn(), exit = fadeOut()) {
-                        state.readingProgress?.let { ContinueReadingCard(it, onContinue = { onIntent(QuranListIntent.ContinueTapped) }) }
+                state.error != null -> LoadFailed(state.error.orEmpty(), onRetry = { onIntent(QuranListIntent.Retry) })
+                else -> LazyVerticalGrid(
+                    columns = GridCells.Fixed(2),
+                    modifier = Modifier.statusBarsPadding(),
+                    contentPadding = PaddingValues(start = 20.dp, end = 20.dp, top = 24.dp, bottom = 32.dp),
+                    horizontalArrangement = Arrangement.spacedBy(14.dp),
+                    verticalArrangement = Arrangement.spacedBy(14.dp),
+                ) {
+                    item(span = { GridItemSpan(maxLineSpan) }) {
+                        PageHeader("The Quran", state.header, Modifier.padding(bottom = 10.dp))
                     }
-                }
-                item(span = { GridItemSpan(maxLineSpan) }) {
-                    SoftSearchField(
-                        query = state.query,
-                        onQueryChange = { onIntent(QuranListIntent.QueryChanged(it)) },
-                        onClear = { onIntent(QuranListIntent.ClearQuery) },
-                        placeholder = "Search surah or number",
-                    )
-                }
-                item(span = { GridItemSpan(maxLineSpan) }) {
-                    Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
-                        RevelationFilter.entries.forEach { filter ->
-                            SoftChip(filter.label, selected = state.filter == filter, onClick = { onIntent(QuranListIntent.FilterSelected(filter)) })
+                    item(span = { GridItemSpan(maxLineSpan) }) {
+                        AnimatedVisibility(state.readingProgress != null, enter = fadeIn(), exit = fadeOut()) {
+                            state.readingProgress?.let { ContinueReadingCard(it, onContinue = { onIntent(QuranListIntent.ContinueTapped) }) }
                         }
                     }
-                }
-                if (state.visibleSurahs.isEmpty()) {
                     item(span = { GridItemSpan(maxLineSpan) }) {
-                        Text(
-                            "No results for “${state.query}”",
-                            Modifier.fillMaxWidth().padding(top = 32.dp),
-                            style = MaterialTheme.typography.titleSmall,
-                            color = soft.textSecondary,
-                            textAlign = TextAlign.Center,
+                        SoftSearchField(
+                            query = state.query,
+                            onQueryChange = { onIntent(QuranListIntent.QueryChanged(it)) },
+                            onClear = { onIntent(QuranListIntent.ClearQuery) },
+                            placeholder = "Search surah or number",
                         )
                     }
-                }
-                items(state.visibleSurahs, key = { it.number }) { surah ->
-                    SurahCard(surah, Modifier.animateItem(), onClick = { onIntent(QuranListIntent.SurahTapped(surah.number)) })
+                    item(span = { GridItemSpan(maxLineSpan) }) {
+                        Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+                            RevelationFilter.entries.forEach { filter ->
+                                SoftChip(filter.label, selected = state.filter == filter, onClick = { onIntent(QuranListIntent.FilterSelected(filter)) })
+                            }
+                        }
+                    }
+                    if (state.visibleSurahs.isEmpty()) {
+                        item(span = { GridItemSpan(maxLineSpan) }) {
+                            Text(
+                                "No results for “${state.query}”",
+                                Modifier.fillMaxWidth().padding(top = 32.dp),
+                                style = MaterialTheme.typography.titleSmall,
+                                color = soft.textSecondary,
+                                textAlign = TextAlign.Center,
+                            )
+                        }
+                    }
+                    items(state.visibleSurahs, key = { it.number }) { surah ->
+                        SurahCard(surah, Modifier.animateItem(), onClick = { onIntent(QuranListIntent.SurahTapped(surah.number)) })
+                    }
                 }
             }
         }

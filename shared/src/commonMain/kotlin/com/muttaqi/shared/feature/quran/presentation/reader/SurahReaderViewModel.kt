@@ -45,7 +45,7 @@ class SurahReaderViewModel(
     private data class PendingProgress(val surahNumber: Int, val lastAyahNumber: Int, val readAyahs: Set<Int>, val totalAyahs: Int)
 
     init {
-        viewModelScope.launch {
+        launchNow {
             var language = state.value.settings.language
             observeSettings().collect { settings ->
                 mutate(SurahReaderMutation.SettingsChanged(settings))
@@ -100,7 +100,7 @@ class SurahReaderViewModel(
         val surahNumber = state.value.surahNumber
         val language = state.value.settings.language
         mutate(SurahReaderMutation.Loading)
-        loadJob = viewModelScope.launch {
+        loadJob = launchNow {
             try {
                 val reading = readSurah(surahNumber, language)
                 if (reading == null) {

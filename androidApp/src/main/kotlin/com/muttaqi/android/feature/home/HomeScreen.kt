@@ -4,6 +4,11 @@ import android.content.ClipData
 import android.content.Intent
 import android.net.Uri
 import android.provider.Settings
+import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.animation.expandVertically
+import androidx.compose.animation.fadeIn
+import androidx.compose.animation.fadeOut
+import androidx.compose.animation.shrinkVertically
 import androidx.compose.foundation.ScrollState
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -133,8 +138,9 @@ fun HomeScreen(
 
             Greeting(state, Modifier.padding(top = 30.dp))
 
-            state.schedule?.today?.let { today ->
-                PrayerTimesStrip(today, next = state.nextPrayerToday, modifier = Modifier.padding(top = 28.dp), zone = zone)
+            val today = state.schedule?.today
+            AnimatedVisibility(today != null, enter = fadeIn() + expandVertically(), exit = fadeOut() + shrinkVertically()) {
+                if (today != null) PrayerTimesStrip(today, next = state.nextPrayerToday, modifier = Modifier.padding(top = 28.dp), zone = zone)
             }
 
             HomeBento(state, qiblaArrow, onIntent, Modifier.padding(top = 18.dp))
@@ -167,15 +173,19 @@ private fun Greeting(state: HomeState, modifier: Modifier = Modifier) {
         Text("Assalam - o - Alaikum", style = MaterialTheme.typography.headlineMedium, color = soft.appPrimary)
         val quote = state.greeting
         val translation = quote?.ayah?.translation
-        if (quote != null && translation != null) {
-            TranslationText(translation.quoted(), Modifier.padding(top = 20.dp), fontSize = 14.sp, lineSpacing = 0.sp)
-            Text(
-                "Quran (${quote.reference})",
-                Modifier.padding(top = 4.dp),
-                style = MaterialTheme.typography.labelSmall,
-                color = soft.textSecondary,
-                textAlign = TextAlign.Center,
-            )
+        AnimatedVisibility(quote != null && translation != null, enter = fadeIn() + expandVertically()) {
+            if (quote != null && translation != null) {
+                Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                    TranslationText(translation.quoted(), Modifier.padding(top = 20.dp), fontSize = 14.sp, lineSpacing = 0.sp)
+                    Text(
+                        "Quran (${quote.reference})",
+                        Modifier.padding(top = 4.dp),
+                        style = MaterialTheme.typography.labelSmall,
+                        color = soft.textSecondary,
+                        textAlign = TextAlign.Center,
+                    )
+                }
+            }
         }
     }
 }

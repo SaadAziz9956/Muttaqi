@@ -9,6 +9,13 @@ struct TafsirView: View {
     private var state: TafsirState { screen.state }
     private var isUrdu: Bool { state.language == .urdu }
 
+    private var isSettled: Bool {
+        switch onEnum(of: state.status) {
+        case .idle, .loading: false
+        case .loaded, .failed: true
+        }
+    }
+
     var body: some View {
         VStack(spacing: 0) {
             header
@@ -16,8 +23,7 @@ struct TafsirView: View {
             switch onEnum(of: state.status) {
             case .idle, .loading:
                 Spacer()
-                ProgressView()
-                    .tint(.appPrimary)
+                SoftLoadingIndicator()
                 Spacer()
 
             case .loaded(let loaded) where loaded.entries.isEmpty:
@@ -42,6 +48,7 @@ struct TafsirView: View {
                         proxy.scrollTo(entry.ayahNumber, anchor: .top)
                     }
                 }
+                .transition(.opacity)
 
             case .failed(let failed):
                 Spacer()
@@ -68,6 +75,7 @@ struct TafsirView: View {
                 Spacer()
             }
         }
+        .animation(.easeInOut(duration: 0.22), value: isSettled)
         .task {
             if let surah {
                 screen.viewModel.dispatch(intent: TafsirIntentOpened(surahNumber: surah.number))

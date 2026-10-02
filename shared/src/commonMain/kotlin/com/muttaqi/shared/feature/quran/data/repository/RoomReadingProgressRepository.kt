@@ -3,13 +3,20 @@ package com.muttaqi.shared.feature.quran.data.repository
 import com.muttaqi.shared.feature.quran.data.local.ReadingProgressDao
 import com.muttaqi.shared.feature.quran.domain.model.SurahProgress
 import com.muttaqi.shared.feature.quran.domain.repository.ReadingProgressRepository
+import kotlin.concurrent.Volatile
 import kotlin.time.Instant
 
 internal class RoomReadingProgressRepository(private val dao: ReadingProgressDao) : ReadingProgressRepository {
 
     override suspend fun progress(surahNumber: Int): SurahProgress? = dao.progress(surahNumber)?.toDomain()
 
-    override suspend fun lastRead(): SurahProgress? = dao.lastRead()?.toDomain()
+    @Volatile
+    private var latest: Latest? = null
+
+    override suspend fun lastRead(): SurahProgress? {
+        latest?.let { return it.progress }
+        return dao.lastRead()?.toDomain().also { if (latest == null) latest = Latest(it) }
+    }
 
     override suspend fun all(): List<SurahProgress> = dao.all().map { it.toDomain() }
 
@@ -24,6 +31,8 @@ internal class RoomReadingProgressRepository(private val dao: ReadingProgressDao
             lastReadAt = at,
         )
         dao.upsert(listOf(progress.toEntity()))
+        val cached = latest?.progress
+        latest = if (latest != null && (cached == null || cached.lastReadAt <= at)) Latest(progress) else null
     }
 
     override suspend fun merge(records: List<SurahProgress>) {
@@ -38,5 +47,8 @@ internal class RoomReadingProgressRepository(private val dao: ReadingProgressDao
             )
         }
         dao.upsert(merged.map { it.toEntity() })
+        latest = null
     }
 }
+
+private class Latest(val progress: SurahProgress?)

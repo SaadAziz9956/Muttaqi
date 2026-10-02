@@ -29,6 +29,7 @@ struct HomeView: View {
                 if let today = state.schedule?.today {
                     PrayerTimesStrip(times: today, next: state.nextPrayerToday)
                         .padding(.top, 28)
+                        .transition(.opacity)
                 }
 
                 HomeBento(screen: screen)
@@ -67,6 +68,8 @@ struct HomeView: View {
             }
             .padding(.horizontal, 20)
             .padding(.bottom, 32)
+            .animation(.smooth(duration: 0.3), value: state.schedule?.today == nil)
+            .animation(.smooth(duration: 0.3), value: state.greeting == nil)
         }
         .background { SoftBackdrop() }
         .toolbar(.hidden, for: .navigationBar)
@@ -97,16 +100,19 @@ struct HomeView: View {
 
             if let quote = state.greeting, let translation = quote.ayah.translation {
                 let style = TranslationStyle(for: translation, size: 14)
-                Text(translation.quoted)
-                    .font(style.font)
-                    .foregroundStyle(.textPrimary)
-                    .multilineTextAlignment(.center)
-                    .padding(.top, 20)
+                VStack(spacing: 0) {
+                    Text(translation.quoted)
+                        .font(style.font)
+                        .foregroundStyle(.textPrimary)
+                        .multilineTextAlignment(.center)
+                        .padding(.top, 20)
 
-                Text("Quran (\(quote.reference))")
-                    .font(.labelSmall)
-                    .foregroundStyle(.textSecondary)
-                    .padding(.top, 4)
+                    Text("Quran (\(quote.reference))")
+                        .font(.labelSmall)
+                        .foregroundStyle(.textSecondary)
+                        .padding(.top, 4)
+                }
+                .transition(.opacity)
             }
         }
     }

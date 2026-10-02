@@ -9,20 +9,31 @@ struct QiblaView: View {
 
     private var state: QiblaState { screen.state }
 
+    private var phase: Int {
+        switch onEnum(of: state.phase) {
+        case .locating: 0
+        case .needsLocation: 1
+        case .ready: 2
+        }
+    }
+
     var body: some View {
         ZStack {
             SoftBackdrop()
 
             switch onEnum(of: state.phase) {
             case .locating:
-                ProgressView()
-                    .tint(.appPrimary)
+                SoftLoadingIndicator()
+                    .transition(.opacity)
             case .needsLocation(let needs):
                 locationNeeded(needs.access)
+                    .transition(.opacity)
             case .ready(let ready):
                 compass(ready.qibla)
+                    .transition(.opacity)
             }
         }
+        .animation(.easeInOut(duration: 0.22), value: phase)
         .navigationBarTitleDisplayMode(.inline)
         .toolbar {
             ToolbarItem(placement: .principal) {

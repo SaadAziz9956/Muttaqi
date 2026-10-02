@@ -23,13 +23,12 @@ import com.muttaqi.shared.feature.quran.presentation.toSharePassage
 import com.muttaqi.shared.feature.topics.domain.model.HadithPassage
 import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.catch
-import kotlinx.coroutines.flow.collectLatest
-import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.flow.flatMapLatest
 import kotlinx.coroutines.flow.flowOf
@@ -67,24 +66,20 @@ class HomeViewModel(
 
     init {
         tick(clock.now())
-        viewModelScope.launch { clock.minutes().collect(::tick) }
-        viewModelScope.launch {
-            combine(selectedLanguage.changes, refreshes) { language, _ -> language }.collectLatest { language ->
+        launchNow { clock.minutes().collect(::tick) }
+        onEachRefresh {
+            selectedLanguage.changes.collect { language ->
                 mutate(HomeMutation.ContentLoaded(getDailyContent(clock.today(), language)))
             }
         }
-        viewModelScope.launch {
-            refreshes.collectLatest {
-                mutate(HomeMutation.DhikrCounted(orZero { getDhikrSaidToday() }))
-                mutate(HomeMutation.ShortcutsLoaded(getQuranShortcuts()))
-            }
+        onEachRefresh {
+            mutate(HomeMutation.DhikrCounted(orZero { getDhikrSaidToday() }))
+            mutate(HomeMutation.ShortcutsLoaded(getQuranShortcuts()))
         }
-        viewModelScope.launch {
-            refreshes.collectLatest {
-                observeTodaysJournalEntry().catch { emit(null) }.collect { mutate(HomeMutation.JournalLoaded(it)) }
-            }
+        onEachRefresh {
+            observeTodaysJournalEntry().catch { emit(null) }.collect { mutate(HomeMutation.JournalLoaded(it)) }
         }
-        viewModelScope.launch { refreshes.collectLatest { locate() } }
+        onEachRefresh { locate() }
     }
 
     override fun handle(intent: HomeIntent) {
@@ -111,6 +106,16 @@ class HomeViewModel(
             HomeIntent.AyahOfTheDayTapped -> current.ayahOfTheDay?.let { emit(HomeEffect.OpenSurah(it.surah, it.ayah.numberInSurah)) }
             is HomeIntent.ShareTapped -> current.sharePassage(intent.card)?.let { emit(HomeEffect.OpenShare(it)) }
             is HomeIntent.CopyTapped -> current.copyText(intent.card)?.let { emit(HomeEffect.Copy(it)) }
+        }
+    }
+
+    private fun onEachRefresh(block: suspend () -> Unit) {
+        var latest: Job? = null
+        launchNow {
+            refreshes.collect {
+                latest?.cancel()
+                latest = launchNow { block() }
+            }
         }
     }
 

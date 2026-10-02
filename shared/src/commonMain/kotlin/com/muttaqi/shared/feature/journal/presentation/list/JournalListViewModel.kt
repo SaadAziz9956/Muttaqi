@@ -25,12 +25,12 @@ class JournalListViewModel(
     private val removing = mutableSetOf<String>()
 
     init {
-        viewModelScope.launch {
+        launchNow {
             selectedLanguage.changes.collect { language ->
                 mutate(JournalListMutation.HeaderLoaded(PageQuotes.byThePen.displayed(language).withoutRunOn()))
             }
         }
-        viewModelScope.launch {
+        launchNow {
             observeEntries()
                 .catch { emit(emptyList()) }
                 .collect { stored ->

@@ -3,6 +3,7 @@ package com.muttaqi.android.feature.quran
 import android.content.ClipData
 import androidx.compose.animation.AnimatedContent
 import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.animation.core.tween
 import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
 import androidx.compose.animation.slideInHorizontally
@@ -22,14 +23,13 @@ import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.LazyItemScope
 import androidx.compose.foundation.lazy.LazyListState
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.ExperimentalMaterial3ExpressiveApi
 import androidx.compose.material3.Icon
-import androidx.compose.material3.LoadingIndicator
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.ModalBottomSheet
 import androidx.compose.material3.Scaffold
@@ -72,6 +72,7 @@ import com.muttaqi.android.designsystem.component.ArabicText
 import com.muttaqi.android.designsystem.component.SoftBackdrop
 import com.muttaqi.android.designsystem.component.SoftCard
 import com.muttaqi.android.designsystem.component.SoftIconButton
+import com.muttaqi.android.designsystem.component.SoftLoadingIndicator
 import com.muttaqi.android.designsystem.component.SoftPillSurface
 import com.muttaqi.android.designsystem.component.SoftTopBar
 import com.muttaqi.android.designsystem.component.TranslationText
@@ -248,27 +249,36 @@ private fun androidx.compose.foundation.lazy.LazyListScope.loadedContent(
     onIntent: (SurahReaderIntent) -> Unit,
 ) {
     if (reading.showsBismillah) {
-        item(key = "bismillah") { Bismillah(reading.bismillahText, reading.bismillahTranslation) }
+        item(key = "bismillah") { Arriving { Bismillah(reading.bismillahText, reading.bismillahTranslation) } }
     }
     when (state.settings.mode) {
         ReadingMode.WithTranslation -> items(reading.displayAyahs, key = { it.number }) { ayah ->
-            AyahCard(
-                ayah = ayah,
-                fontSize = state.settings.fontSize,
-                language = state.settings.language,
-                onExplanation = { onIntent(SurahReaderIntent.AyahExplanationTapped(ayah.numberInSurah)) },
-                onCopy = { onIntent(SurahReaderIntent.CopyTapped(ayah.number)) },
-                onShare = { onIntent(SurahReaderIntent.ShareTapped(ayah.number)) },
-            )
+            Arriving {
+                AyahCard(
+                    ayah = ayah,
+                    fontSize = state.settings.fontSize,
+                    language = state.settings.language,
+                    onExplanation = { onIntent(SurahReaderIntent.AyahExplanationTapped(ayah.numberInSurah)) },
+                    onCopy = { onIntent(SurahReaderIntent.CopyTapped(ayah.number)) },
+                    onShare = { onIntent(SurahReaderIntent.ShareTapped(ayah.number)) },
+                )
+            }
         }
         ReadingMode.ArabicOnly -> {
             item(key = "pages-top") { Spacer(Modifier.height(16.dp)) }
-            items(reading.pages, key = { it.id }) { page -> MushafPageCard(page, state.settings.fontSize) }
+            items(reading.pages, key = { it.id }) { page -> Arriving { MushafPageCard(page, state.settings.fontSize) } }
         }
     }
     item(key = "end") {
-        SurahEndNavigation(reading.previousSurah, reading.nextSurah, onIntent, Modifier.padding(top = 24.dp, bottom = 72.dp))
+        Arriving {
+            SurahEndNavigation(reading.previousSurah, reading.nextSurah, onIntent, Modifier.padding(top = 24.dp, bottom = 72.dp))
+        }
     }
+}
+
+@Composable
+private fun LazyItemScope.Arriving(content: @Composable () -> Unit) {
+    Box(Modifier.animateItem(fadeInSpec = tween(220), placementSpec = null, fadeOutSpec = null)) { content() }
 }
 
 @Composable
@@ -551,10 +561,9 @@ private fun ReadingPositionPill(position: String) {
     }
 }
 
-@OptIn(ExperimentalMaterial3ExpressiveApi::class)
 @Composable
 internal fun Loading(modifier: Modifier = Modifier) {
     Box(modifier.fillMaxWidth(), contentAlignment = Alignment.Center) {
-        LoadingIndicator(color = MuttaqiTheme.soft.appPrimary)
+        SoftLoadingIndicator()
     }
 }

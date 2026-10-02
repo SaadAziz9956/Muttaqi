@@ -1,6 +1,5 @@
 package com.muttaqi.shared.feature.topics.presentation.explore
 
-import androidx.lifecycle.viewModelScope
 import com.muttaqi.shared.core.mvi.MviViewModel
 import com.muttaqi.shared.core.preferences.SelectedLanguage
 import com.muttaqi.shared.core.quote.displayed
@@ -9,7 +8,6 @@ import com.muttaqi.shared.feature.topics.domain.usecase.ExploreSearchIndex
 import com.muttaqi.shared.feature.topics.domain.usecase.GetExploreGroups
 import com.muttaqi.shared.feature.topics.domain.usecase.GetExploreHeader
 import kotlinx.coroutines.CancellationException
-import kotlinx.coroutines.launch
 
 class ExploreViewModel(
     private val getHeader: GetExploreHeader,
@@ -21,7 +19,7 @@ class ExploreViewModel(
     private var searchIndex: ExploreSearchIndex? = null
 
     init {
-        viewModelScope.launch {
+        launchNow {
             selectedLanguage.changes.collect { language ->
                 try {
                     val groups = getGroups(language)

@@ -1,6 +1,5 @@
 package com.muttaqi.shared.feature.dhikr.presentation.counter
 
-import androidx.lifecycle.viewModelScope
 import com.muttaqi.shared.core.mvi.MviViewModel
 import com.muttaqi.shared.core.mvi.Reducer
 import com.muttaqi.shared.core.preferences.SelectedLanguage
@@ -11,7 +10,6 @@ import com.muttaqi.shared.feature.dhikr.domain.usecase.CountDhikr
 import com.muttaqi.shared.feature.dhikr.domain.usecase.GetDhikr
 import com.muttaqi.shared.feature.dhikr.domain.usecase.GetTodaysDhikrProgress
 import com.muttaqi.shared.feature.dhikr.domain.usecase.ResetDhikrProgress
-import kotlinx.coroutines.launch
 
 internal object DhikrCounterReducer : Reducer<DhikrCounterState, DhikrCounterMutation> {
     override fun reduce(state: DhikrCounterState, mutation: DhikrCounterMutation) = when (mutation) {
@@ -32,7 +30,7 @@ class DhikrCounterViewModel(
     DhikrCounterReducer,
 ) {
     init {
-        viewModelScope.launch {
+        launchNow {
             selectedLanguage.changes.collect { language -> mutate(DhikrCounterMutation.Loaded(getDhikr(dhikrId, language))) }
         }
     }

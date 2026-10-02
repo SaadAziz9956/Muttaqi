@@ -20,7 +20,9 @@ struct MuttaqiApp: App {
                 SplashView(isOnboardingComplete: OnboardingStatus.shared.isComplete())
                     .task {
                         await container.prepareQuran()
+                        async let content: Void = container.prepareContent()
                         await appViewModel.initialize()
+                        await content
                     }
             case .onboarding:
                 OnboardingView { appViewModel.onboardingCompleted() }

@@ -19,6 +19,7 @@ import com.muttaqi.shared.feature.quran.domain.usecase.GetSurahs
 import com.muttaqi.shared.feature.topics.domain.usecase.GetHadithOfTheDay
 import com.muttaqi.shared.feature.topics.domain.usecase.GetTopicOfTheDay
 import kotlinx.coroutines.CancellationException
+import kotlinx.coroutines.CoroutineStart
 import kotlinx.coroutines.async
 import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.flow.Flow
@@ -39,12 +40,12 @@ class GetDailyContent(
     private val getTopicOfTheDay: GetTopicOfTheDay,
 ) {
     suspend operator fun invoke(date: LocalDate, language: Language): DailyContent = coroutineScope {
-        val greeting = async { orNull { getAyah(GREETING.first, GREETING.second, language) } }
-        val ayah = async { orNull { getAyahOfTheDay(date, language) } }
-        val hadith = async { orNull { getHadithOfTheDay(date, language) } }
-        val dua = async { orNull { getDuaOfTheDay(date, language) } }
-        val name = async { orNull { getNameOfTheDay(date, language) } }
-        val topic = async { orNull { getTopicOfTheDay(date, language) } }
+        val greeting = async(start = CoroutineStart.UNDISPATCHED) { orNull { getAyah(GREETING.first, GREETING.second, language) } }
+        val ayah = async(start = CoroutineStart.UNDISPATCHED) { orNull { getAyahOfTheDay(date, language) } }
+        val hadith = async(start = CoroutineStart.UNDISPATCHED) { orNull { getHadithOfTheDay(date, language) } }
+        val dua = async(start = CoroutineStart.UNDISPATCHED) { orNull { getDuaOfTheDay(date, language) } }
+        val name = async(start = CoroutineStart.UNDISPATCHED) { orNull { getNameOfTheDay(date, language) } }
+        val topic = async(start = CoroutineStart.UNDISPATCHED) { orNull { getTopicOfTheDay(date, language) } }
         DailyContent(greeting.await(), ayah.await(), hadith.await(), dua.await(), name.await(), topic.await())
     }
 

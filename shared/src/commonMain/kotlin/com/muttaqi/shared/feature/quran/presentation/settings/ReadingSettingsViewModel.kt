@@ -35,7 +35,7 @@ class ReadingSettingsViewModel(
     ReadingSettingsReducer,
 ) {
     init {
-        viewModelScope.launch {
+        launchNow {
             observeSettings().map { it.language }.distinctUntilChanged().collect {
                 mutate(ReadingSettingsMutation.LanguageChanged(it))
             }

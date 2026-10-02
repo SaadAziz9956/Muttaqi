@@ -1,12 +1,10 @@
 package com.muttaqi.shared.feature.share.presentation
 
-import androidx.lifecycle.viewModelScope
 import com.muttaqi.shared.core.mvi.MviViewModel
 import com.muttaqi.shared.core.preferences.SelectedLanguage
 import com.muttaqi.shared.core.quote.PageQuotes
 import com.muttaqi.shared.core.quote.displayed
 import com.muttaqi.shared.core.share.SharePassage
-import kotlinx.coroutines.launch
 
 class ShareViewModel(
     passage: SharePassage,
@@ -16,7 +14,7 @@ class ShareViewModel(
     ShareReducer,
 ) {
     init {
-        viewModelScope.launch {
+        launchNow {
             selectedLanguage.changes.collect { language ->
                 mutate(ShareMutation.VerseChanged(PageQuotes.inviteWithWisdom.displayed(language)))
             }

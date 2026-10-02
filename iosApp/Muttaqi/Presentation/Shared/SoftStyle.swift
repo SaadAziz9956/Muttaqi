@@ -137,6 +137,21 @@ struct SoftTextField: View {
     }
 }
 
+struct SoftLoadingIndicator: View {
+    var delay: Duration = .milliseconds(250)
+    @State private var isShown = false
+
+    var body: some View {
+        ProgressView()
+            .tint(.appPrimary)
+            .opacity(isShown ? 1 : 0)
+            .task {
+                guard (try? await Task.sleep(for: delay)) != nil else { return }
+                withAnimation(.easeIn(duration: 0.2)) { isShown = true }
+            }
+    }
+}
+
 struct SoftPressStyle: ButtonStyle {
     func makeBody(configuration: Configuration) -> some View {
         configuration.label

@@ -1,6 +1,5 @@
 package com.muttaqi.shared.feature.dua.presentation.list
 
-import androidx.lifecycle.viewModelScope
 import com.muttaqi.shared.core.mvi.MviViewModel
 import com.muttaqi.shared.core.preferences.SelectedLanguage
 import com.muttaqi.shared.core.quote.PageQuotes
@@ -9,7 +8,6 @@ import com.muttaqi.shared.feature.dua.domain.usecase.BuildDuaSearchIndex
 import com.muttaqi.shared.feature.dua.domain.usecase.DuaSearchIndex
 import com.muttaqi.shared.feature.dua.domain.usecase.GetDuaCategories
 import kotlinx.coroutines.CancellationException
-import kotlinx.coroutines.launch
 
 class DuaListViewModel(
     private val getCategories: GetDuaCategories,
@@ -20,7 +18,7 @@ class DuaListViewModel(
     private var searchIndex: DuaSearchIndex? = null
 
     init {
-        viewModelScope.launch {
+        launchNow {
             selectedLanguage.changes.collect { language ->
                 try {
                     val categories = getCategories(language)

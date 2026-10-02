@@ -57,7 +57,7 @@ class QiblaViewModel(
         .stateIn(viewModelScope, SharingStarted.WhileSubscribed(), null)
 
     init {
-        viewModelScope.launch { locate() }
+        launchNow { locate() }
     }
 
     override fun handle(intent: QiblaIntent) {

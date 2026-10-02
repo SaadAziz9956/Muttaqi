@@ -31,7 +31,6 @@ import androidx.compose.material3.CenterAlignedTopAppBar
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.ExperimentalMaterial3ExpressiveApi
 import androidx.compose.material3.Icon
-import androidx.compose.material3.LoadingIndicator
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
@@ -68,10 +67,12 @@ import androidx.compose.ui.unit.sp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.muttaqi.android.R
 import com.muttaqi.android.designsystem.MuttaqiTheme
+import com.muttaqi.android.designsystem.component.FadeBetween
 import com.muttaqi.android.designsystem.component.SoftArtwork
 import com.muttaqi.android.designsystem.component.SoftBackdrop
 import com.muttaqi.android.designsystem.component.SoftCard
 import com.muttaqi.android.designsystem.component.SoftIconButton
+import com.muttaqi.android.designsystem.component.SoftLoadingIndicator
 import com.muttaqi.android.designsystem.component.brush
 import com.muttaqi.android.designsystem.component.softFloat
 import com.muttaqi.shared.feature.prayer.domain.model.LocationAccess
@@ -116,10 +117,12 @@ fun QiblaScreen(state: QiblaState, compass: QiblaCompass?, onIntent: (QiblaInten
         SoftBackdrop()
         Scaffold(containerColor = Color.Transparent, topBar = { QiblaTopBar(onBack) }) { padding ->
             Box(Modifier.fillMaxSize().padding(padding), contentAlignment = Alignment.Center) {
-                when (val phase = state.phase) {
-                    QiblaPhase.Locating -> LoadingIndicator(color = soft.appPrimary)
-                    is QiblaPhase.NeedsLocation -> LocationNeeded(phase.access) { onIntent(QiblaIntent.LocationButtonTapped) }
-                    is QiblaPhase.Ready -> Compass(phase.qibla, compass, state.isCompassAvailable)
+                FadeBetween(state.phase, key = { it::class }, contentAlignment = Alignment.Center) { phase ->
+                    when (phase) {
+                        QiblaPhase.Locating -> SoftLoadingIndicator()
+                        is QiblaPhase.NeedsLocation -> LocationNeeded(phase.access) { onIntent(QiblaIntent.LocationButtonTapped) }
+                        is QiblaPhase.Ready -> Compass(phase.qibla, compass, state.isCompassAvailable)
+                    }
                 }
             }
         }

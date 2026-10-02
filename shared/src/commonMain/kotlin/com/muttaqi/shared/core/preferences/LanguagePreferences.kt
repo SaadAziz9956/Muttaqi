@@ -7,6 +7,7 @@ import com.russhwolf.settings.coroutines.toFlowSettings
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.flow.onStart
 
 interface SelectedLanguage {
     val current: Language
@@ -25,6 +26,7 @@ class SettingsLanguagePreferences(private val settings: ObservableSettings) : Se
     override val changes: Flow<Language> = settings.toFlowSettings()
         .getStringOrNullFlow(KEY)
         .map(Language::fromCode)
+        .onStart { emit(current) }
         .distinctUntilChanged()
 
     override fun select(language: Language) = settings.putString(KEY, language.code)

@@ -27,5 +27,9 @@ final class DependencyContainer {
             group.cancelAll()
         }
     }
+
+    func prepareContent() async {
+        _ = try? await ContentPreparation.shared.prepare()
+    }
 }
 

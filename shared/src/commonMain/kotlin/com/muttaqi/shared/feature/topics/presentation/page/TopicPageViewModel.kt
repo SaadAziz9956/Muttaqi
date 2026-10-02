@@ -1,12 +1,10 @@
 package com.muttaqi.shared.feature.topics.presentation.page
 
-import androidx.lifecycle.viewModelScope
 import com.muttaqi.shared.core.mvi.MviViewModel
 import com.muttaqi.shared.core.preferences.SelectedLanguage
 import com.muttaqi.shared.feature.topics.domain.model.TopicChips
 import com.muttaqi.shared.feature.topics.domain.usecase.GetTopicPageTopics
 import kotlinx.coroutines.CancellationException
-import kotlinx.coroutines.launch
 
 class TopicPageViewModel(
     chips: TopicChips,
@@ -18,7 +16,7 @@ class TopicPageViewModel(
     TopicPageReducer,
 ) {
     init {
-        viewModelScope.launch {
+        launchNow {
             selectedLanguage.changes.collect { language ->
                 try {
                     mutate(TopicPageMutation.Loaded(getTopics(chips, topicId, language)))

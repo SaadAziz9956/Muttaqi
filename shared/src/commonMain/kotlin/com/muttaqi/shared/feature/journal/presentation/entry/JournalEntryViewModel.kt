@@ -42,7 +42,7 @@ class JournalEntryViewModel(
         if (entryId == null) {
             mutate(JournalEntryMutation.Loaded(newEntry(), startedEmpty = true))
         } else {
-            viewModelScope.launch {
+            launchNow {
                 val entry = getEntry(entryId)
                 stored = entry
                 val shown = entry ?: newEntry().copy(id = entryId)

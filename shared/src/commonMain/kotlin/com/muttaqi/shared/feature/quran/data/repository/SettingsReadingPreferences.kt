@@ -15,6 +15,7 @@ import com.russhwolf.settings.coroutines.getStringOrNullFlow
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.distinctUntilChanged
+import kotlinx.coroutines.flow.onStart
 
 @OptIn(ExperimentalSettingsApi::class)
 internal class SettingsReadingPreferences(
@@ -35,7 +36,7 @@ internal class SettingsReadingPreferences(
         selectedLanguage.changes,
     ) { mode, fontSize, language ->
         ReadingSettings(ReadingMode.fromStoredValue(mode), fontSize(fontSize), language)
-    }.distinctUntilChanged()
+    }.onStart { emit(current) }.distinctUntilChanged()
 
     override fun setMode(mode: ReadingMode) = settings.putString(Keys.READING_MODE, mode.storedValue)
 

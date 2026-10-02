@@ -41,6 +41,7 @@ struct SurahDetailView: View {
 
                         contentView
                     }
+                    .animation(.easeIn(duration: 0.22), value: hasContent)
                     .scrollTargetLayout()
                     .padding(.horizontal, 16)
                 }
@@ -119,6 +120,10 @@ struct SurahDetailView: View {
         screen.viewModel.dispatch(intent: intent)
     }
 
+    private var hasContent: Bool {
+        if case .loading = onEnum(of: state.content) { false } else { true }
+    }
+
     private var startScrollTarget: Int32? {
         state.startScrollTarget?.int32Value
     }
@@ -127,13 +132,14 @@ struct SurahDetailView: View {
     private var contentView: some View {
         switch onEnum(of: state.content) {
         case .loading:
-            ProgressView()
-                .tint(.appPrimary)
+            SoftLoadingIndicator()
                 .padding(.top, 100)
         case .loaded(let loaded):
             loadedContent(loaded.reading)
+                .transition(.opacity)
         case .failed(let failed):
             errorView(message: failed.message, suggestion: failed.suggestion)
+                .transition(.opacity)
         }
     }
 

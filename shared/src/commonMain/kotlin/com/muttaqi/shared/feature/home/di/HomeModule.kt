@@ -7,6 +7,7 @@ import com.muttaqi.shared.feature.home.domain.usecase.GetDailyContent
 import com.muttaqi.shared.feature.home.domain.usecase.GetHijriDate
 import com.muttaqi.shared.feature.home.domain.usecase.GetQuranShortcuts
 import com.muttaqi.shared.feature.home.domain.usecase.LocatePrayerTimes
+import com.muttaqi.shared.feature.home.domain.usecase.PrepareContent
 import com.muttaqi.shared.feature.home.presentation.HomeViewModel
 import org.koin.core.module.dsl.factoryOf
 import org.koin.core.module.dsl.viewModelOf
@@ -20,6 +21,7 @@ val homeModule = module {
     factoryOf(::GetQuranShortcuts)
     factoryOf(::LocatePrayerTimes)
     factoryOf(::GetHijriDate)
+    factoryOf(::PrepareContent)
 
     viewModelOf(::HomeViewModel)
 }

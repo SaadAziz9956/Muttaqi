@@ -1,6 +1,5 @@
 package com.muttaqi.shared.feature.quran.presentation.list
 
-import androidx.lifecycle.viewModelScope
 import com.muttaqi.shared.core.domain.Outcome
 import com.muttaqi.shared.core.mvi.MviViewModel
 import com.muttaqi.shared.core.preferences.SelectedLanguage
@@ -13,7 +12,6 @@ import com.muttaqi.shared.feature.quran.domain.usecase.SyncQuran
 import com.muttaqi.shared.feature.quran.presentation.QuranMessages
 import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.Job
-import kotlinx.coroutines.launch
 
 class QuranListViewModel(
     private val syncQuran: SyncQuran,
@@ -29,7 +27,7 @@ class QuranListViewModel(
     private var loading: Job? = null
 
     init {
-        viewModelScope.launch {
+        launchNow {
             selectedLanguage.changes.collect { language ->
                 mutate(QuranListMutation.HeaderChanged(PageQuotes.learnAndTeachQuran.displayed(language)))
             }
@@ -56,12 +54,12 @@ class QuranListViewModel(
     private fun load() {
         if (loading?.isActive == true) return
         mutate(QuranListMutation.Loading)
-        loading = viewModelScope.launch {
+        loading = launchNow {
             val language = selectedLanguage.current
             try {
                 if (syncQuran(language) is Outcome.Failure) {
                     mutate(QuranListMutation.LoadFailed(QuranMessages.downloadFailed(language)))
-                    return@launch
+                    return@launchNow
                 }
                 val surahs = getSurahs()
                 val visible = filterSurahs(surahs, state.value.query, state.value.filter.revelation)
@@ -75,7 +73,7 @@ class QuranListViewModel(
     }
 
     private fun refreshProgress() {
-        viewModelScope.launch {
+        launchNow {
             val progress = getLastReading()
             if (progress != state.value.readingProgress) mutate(QuranListMutation.ProgressChanged(progress))
         }
