@@ -34,18 +34,18 @@ struct ShareCard: View {
         .foregroundStyle(.white)
         .multilineTextAlignment(.center)
         .padding(.horizontal, 24)
-        .padding(.vertical, 36)
+        .padding(.vertical, 40)
         .frame(maxWidth: .infinity)
         .background {
             Text("متقي")
                 .font(.custom("ReemKufi-Regular", size: 150))
-                .foregroundStyle(.white.opacity(0.06))
+                .foregroundStyle(.white.opacity(0.07))
                 .fixedSize()
+                .frame(maxWidth: .infinity, maxHeight: .infinity)
+                .clipShape(.rect(cornerRadius: 28, style: .continuous))
                 .accessibilityHidden(true)
         }
-        .background(.shareCard)
-        .clipShape(.rect(cornerRadius: 15))
-        .shadow(color: .black.opacity(0.25), radius: 5, y: 1)
+        .softCard(rim: 3, artwork: .forest)
     }
 }
 
@@ -58,7 +58,8 @@ extension ShareCard {
                 .fixedSize(horizontal: false, vertical: true)
                 .padding(24)
                 .frame(width: width)
-                .background(.shareCard)
+                .background { SoftBackdrop() }
+                .environment(\.colorScheme, .light)
         )
         renderer.proposedSize = ProposedViewSize(width: width, height: nil)
         renderer.scale = 3

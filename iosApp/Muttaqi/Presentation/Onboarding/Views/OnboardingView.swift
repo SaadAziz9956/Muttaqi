@@ -25,6 +25,7 @@ struct OnboardingView: View {
             }
             .frame(maxWidth: .infinity, maxHeight: .infinity)
         }
+        .background { SoftBackdrop() }
         .animation(.smooth(duration: 0.45), value: state.step)
         .task {
             for await effect in screen.viewModel.effects {
@@ -63,13 +64,23 @@ struct OnboardingView: View {
                 dispatch(OnboardingIntentNext.shared)
             }
         case .notification:
-            NotificationStepView(
-                onEnable: { dispatch(OnboardingIntentRequestNotification.shared) },
+            PermissionStepView(
+                icon: "clock-linear",
+                title: "Enable Notification",
+                detail: "Enable Notification so you don't miss daily Quran ayah and Azkar and Namaz Alarms.",
+                question: "Would you like to turn on Notifications?",
+                action: "Turn on",
+                onAction: { dispatch(OnboardingIntentRequestNotification.shared) },
                 onSkip: { dispatch(OnboardingIntentSkipNotification.shared) }
             )
         case .location:
-            LocationStepView(
-                onFind: { dispatch(OnboardingIntentRequestLocation.shared) },
+            PermissionStepView(
+                icon: "home-qibla",
+                title: "Select Location",
+                detail: "Select your current location to get latest Namaz timing",
+                question: "Find your City",
+                action: "Find",
+                onAction: { dispatch(OnboardingIntentRequestLocation.shared) },
                 onSkip: { dispatch(OnboardingIntentSkipLocation.shared) }
             )
         case .setup:

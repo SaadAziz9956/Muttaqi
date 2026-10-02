@@ -1,6 +1,5 @@
 package com.muttaqi.android.feature.share
 
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -9,27 +8,25 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.wrapContentSize
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.drawWithContent
-import androidx.compose.ui.draw.dropShadow
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.layer.GraphicsLayer
-import androidx.compose.ui.graphics.shadow.Shadow
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.semantics.clearAndSetSemantics
 import androidx.compose.ui.unit.Density
-import androidx.compose.ui.unit.DpOffset
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.muttaqi.android.designsystem.MuttaqiTheme
 import com.muttaqi.android.designsystem.component.ArabicText
+import com.muttaqi.android.designsystem.component.SoftArtwork
+import com.muttaqi.android.designsystem.component.SoftBackdrop
+import com.muttaqi.android.designsystem.component.SoftCard
 import com.muttaqi.android.designsystem.component.TranslationText
 import com.muttaqi.shared.core.share.SharePassage
 import com.muttaqi.shared.core.text.isArabicScript
@@ -37,23 +34,16 @@ import com.muttaqi.shared.core.text.isArabicScript
 @Composable
 fun ShareCard(passage: SharePassage, modifier: Modifier = Modifier) {
     val soft = MuttaqiTheme.soft
-    val shape = RoundedCornerShape(15.dp)
-    Box(
-        modifier
-            .fillMaxWidth()
-            .dropShadow(shape, Shadow(radius = 5.dp, color = Color.Black.copy(alpha = 0.25f), offset = DpOffset(0.dp, 1.dp)))
-            .clip(shape)
-            .background(soft.brandGreen),
-    ) {
+    SoftCard(modifier.fillMaxWidth(), cornerRadius = 28.dp, artwork = SoftArtwork.Forest) {
         Text(
             "متقي",
             Modifier.matchParentSize().wrapContentSize(unbounded = true).clearAndSetSemantics {},
             style = MaterialTheme.typography.headlineMedium.copy(fontSize = 150.sp),
-            color = Color.White.copy(alpha = 0.06f),
+            color = Color.White.copy(alpha = 0.07f),
             softWrap = false,
         )
         Column(
-            Modifier.fillMaxWidth().padding(horizontal = 24.dp, vertical = 36.dp),
+            Modifier.fillMaxWidth().padding(horizontal = 24.dp, vertical = 40.dp),
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.spacedBy(14.dp),
         ) {
@@ -74,8 +64,9 @@ fun ShareCard(passage: SharePassage, modifier: Modifier = Modifier) {
 
 @Composable
 fun ShareCardImage(passage: SharePassage, modifier: Modifier = Modifier) {
-    Box(modifier.width(390.dp).background(MuttaqiTheme.soft.brandGreen).padding(24.dp)) {
-        ShareCard(passage)
+    Box(modifier.width(390.dp)) {
+        SoftBackdrop(Modifier.matchParentSize())
+        ShareCard(passage, Modifier.padding(24.dp))
     }
 }
 

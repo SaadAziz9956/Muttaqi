@@ -3,39 +3,24 @@ import SwiftUI
 struct NameStepView: View {
     @Binding var name: String
     let onSave: () -> Void
-    
+
     var body: some View {
-        VStack {
+        VStack(spacing: 0) {
             Spacer()
-            
-            VStack(spacing: 14) {
+
+            VStack(spacing: 22) {
                 Text("What should we call you?")
-                    .font(.bodyLarge)
-                    .foregroundStyle(.textPrimary)
-                
-                TextField("", text: $name, prompt: Text("Type here...")
-                    .foregroundStyle(.textSecondary)
-                )
-                .font(.bodyMedium)
-                .multilineTextAlignment(.center)
-                .frame(height: 47)
-                .background(.textField)
-                .clipShape(RoundedRectangle(cornerRadius: 12))
-                .padding(.horizontal, 24)
+                    .font(.custom("ReemKufi-Medium", size: 22, relativeTo: .title3))
+                    .foregroundStyle(.appPrimary)
+
+                SoftTextField(placeholder: "Type here...", text: $name, onSubmit: onSave)
             }
-            .offset(y: -60)
-            
+            .padding(.horizontal, 24)
+
             Spacer()
-            
-            Button(action: onSave) {
-                Text("Save")
-                    .font(.bodySmall)
-                    .foregroundStyle(.onPrimaryButton)
-                    .frame(width: 140, height: 47)
-                    .background(.primaryButton)
-                    .clipShape(RoundedRectangle(cornerRadius: 12))
-            }
-            .padding(.bottom, 35)
+
+            SoftButton(title: "Save", action: onSave)
+                .padding(.bottom, 40)
         }
     }
 }

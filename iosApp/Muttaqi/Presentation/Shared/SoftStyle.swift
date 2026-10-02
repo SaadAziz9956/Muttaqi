@@ -94,6 +94,49 @@ struct SoftCircle<Label: View>: View {
     }
 }
 
+struct SoftButton: View {
+    enum Kind {
+        case primary
+        case secondary
+    }
+
+    let title: String
+    var kind: Kind = .primary
+    let action: () -> Void
+
+    var body: some View {
+        let primary = kind == .primary
+        Button(action: action) {
+            Text(title)
+                .font(.custom("ReemKufi-Medium", size: primary ? 16 : 14, relativeTo: .headline))
+                .foregroundStyle(primary ? Color.white : Color.appPrimary)
+                .padding(.horizontal, primary ? 36 : 24)
+                .frame(minWidth: primary ? 200 : 0, minHeight: primary ? 52 : 42)
+                .softGlass(in: Capsule(), fill: primary ? .shareCard : .softSurface, rim: !primary)
+        }
+        .buttonStyle(SoftPressStyle())
+    }
+}
+
+struct SoftTextField: View {
+    let placeholder: String
+    @Binding var text: String
+    var onSubmit: () -> Void = {}
+
+    var body: some View {
+        TextField("", text: $text, prompt: Text(placeholder).foregroundStyle(Color.textSecondary))
+            .font(.custom("ReemKufi-Regular", size: 17, relativeTo: .body))
+            .foregroundStyle(.textPrimary)
+            .multilineTextAlignment(.center)
+            .textInputAutocapitalization(.words)
+            .submitLabel(.done)
+            .onSubmit(onSubmit)
+            .padding(.horizontal, 22)
+            .frame(height: 52)
+            .softGlass(in: Capsule())
+    }
+}
+
 struct SoftPressStyle: ButtonStyle {
     func makeBody(configuration: Configuration) -> some View {
         configuration.label

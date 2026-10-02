@@ -3,79 +3,82 @@ import SwiftUI
 
 struct GoalsStepView: View {
     let onBegin: () -> Void
-    
+
     var body: some View {
-        VStack {
-            Spacer()
-            
+        VStack(spacing: 0) {
+            Spacer(minLength: 16)
+
             VStack(alignment: .leading, spacing: 0) {
                 Text("We will help you to achieve your Muslim Goals")
-                    .font(.bodyLarge)
-                    .foregroundStyle(.textPrimary)
-                
-                Text("by using our App on the daily basis you will")
-                    .font(.labelSmall)
-                    .foregroundStyle(.textSecondary)
-                    .padding(.top, 8)
-                
-                VStack(alignment: .leading, spacing: 8) {
-                    GoalItem(text: "Become a better Muslim")
-                    GoalItem(text: "Read Quran with translation")
-                    GoalItem(text: "Zikr o Azkar")
-                    GoalItem(text: "Learn Sunnah")
-                }
-                .padding(.top, 26)
-                
-                Text("In Shaa Allah")
-                    .font(.bodyMedium)
+                    .font(.custom("ReemKufi-Medium", size: 20, relativeTo: .title3))
                     .foregroundStyle(.appPrimary)
-                    .frame(maxWidth: .infinity, alignment: .center)
+
+                Text("by using our App on the daily basis you will")
+                    .font(.custom("ReemKufi-Regular", size: 14, relativeTo: .subheadline))
+                    .foregroundStyle(.textSecondary)
                     .padding(.top, 6)
+
+                VStack(alignment: .leading, spacing: 12) {
+                    GoalRow(icon: "lovely-linear", text: "Become a better Muslim")
+                    GoalRow(icon: "book-open-linear", text: "Read Quran with translation")
+                    GoalRow(icon: "repeat-circle-linear", text: "Zikr o Azkar")
+                    GoalRow(icon: "lamp-on-linear", text: "Learn Sunnah")
+                }
+                .padding(.top, 20)
             }
-            .padding(.horizontal, 16)
-            
-            Button(action: onBegin) {
-                Text("Begin")
-                    .font(.bodySmall)
-                    .foregroundStyle(.onPrimaryButton)
-                    .frame(width: 140, height: 47)
-                    .background(.primaryButton)
-                    .clipShape(RoundedRectangle(cornerRadius: 12))
-            }
-            .padding(.top, 58)
-            
+            .padding(22)
+            .frame(maxWidth: .infinity, alignment: .leading)
+            .softCard()
+            .padding(.horizontal, 20)
+
+            Text("In Shaa Allah")
+                .font(.custom("ReemKufi-Medium", size: 16, relativeTo: .headline))
+                .foregroundStyle(.appPrimary)
+                .padding(.top, 20)
+
+            SoftButton(title: "Begin", action: onBegin)
+                .padding(.top, 22)
+
             Spacer()
-            
+
             let verse = OnboardingVerses.shared.lovesThePure
-            VStack(spacing: 5) {
+            VStack(spacing: 6) {
                 Text(verse.arabic)
                     .font(.arabic(26))
                     .foregroundStyle(.textPrimary)
-                
+
                 Text(verse.translation)
-                    .font(.bodySmall)
-                    .foregroundStyle(.textSecondary)
-                
+                    .font(.custom("ReemKufi-Regular", size: 14, relativeTo: .subheadline))
+                    .foregroundStyle(.textPrimary)
+
                 Text(verse.source ?? "")
-                    .font(.labelMedium)
+                    .font(.labelSmall)
                     .foregroundStyle(.textSecondary)
             }
-            .padding(.bottom, 35)
+            .multilineTextAlignment(.center)
+            .padding(.horizontal, 24)
+            .padding(.bottom, 32)
         }
     }
 }
 
-private struct GoalItem: View {
+private struct GoalRow: View {
+    let icon: String
     let text: String
-    
+
     var body: some View {
-        HStack(spacing: 8) {
-            Circle()
-                .fill(.textMediumGrey)
-                .frame(width: 4, height: 4)
+        HStack(spacing: 12) {
+            Image(icon)
+                .resizable()
+                .frame(width: 18, height: 18)
+                .foregroundStyle(.brandTeal)
+                .frame(width: 36, height: 36)
+                .background(.tintedSurface, in: .circle)
+                .accessibilityHidden(true)
+
             Text(text)
-                .font(.labelSmall)
-                .foregroundStyle(.textMediumGrey)
+                .font(.custom("ReemKufi-Regular", size: 15, relativeTo: .subheadline))
+                .foregroundStyle(.textPrimary)
         }
     }
 }
