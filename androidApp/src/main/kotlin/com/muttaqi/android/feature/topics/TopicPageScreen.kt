@@ -183,7 +183,7 @@ private fun TopicSectionPicker(
     modifier: Modifier = Modifier,
 ) {
     val soft = MuttaqiTheme.soft
-    val colors = ToggleButtonDefaults.colors(
+    val colors = ToggleButtonDefaults.toggleButtonColors(
         containerColor = if (soft.dark) Color(0x3D767680) else Color(0x1F767680),
         contentColor = soft.textPrimary,
         checkedContainerColor = if (soft.dark) Color(0xFF5A5A5E) else Color.White,

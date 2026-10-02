@@ -60,7 +60,6 @@ private enum class Tab(val graph: Any, val root: Any, val label: String, @Drawab
     Dua(DuaTab, DuaListRoute, "Dua", R.drawable.ic_moon_linear, R.drawable.ic_moon_bold),
 }
 
-@OptIn(ExperimentalMaterial3ExpressiveApi::class)
 @Composable
 fun MuttaqiApp() {
     OnboardingGate {
@@ -90,8 +89,7 @@ fun MuttaqiApp() {
                                 label = { Text(tab.label, style = MaterialTheme.typography.labelMedium) },
                                 colors = ShortNavigationBarItemDefaults.colors(
                                     selectedIconColor = MuttaqiTheme.soft.appPrimary,
-                                    selectedTextColorTopIconPosition = MuttaqiTheme.soft.appPrimary,
-                                    selectedTextColorStartIconPosition = MuttaqiTheme.soft.appPrimary,
+                                    selectedTextColor = MuttaqiTheme.soft.appPrimary,
                                     selectedIndicatorColor = MuttaqiTheme.soft.tintedSurface,
                                 ),
                             )

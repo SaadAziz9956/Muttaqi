@@ -1,15 +1,17 @@
 package com.muttaqi.android.feature.share
 
 import android.app.Application
+import android.graphics.Bitmap
+import android.graphics.Canvas
+import android.view.View
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.asAndroidBitmap
 import androidx.compose.ui.graphics.layer.GraphicsLayer
 import androidx.compose.ui.graphics.rememberGraphicsLayer
-import androidx.compose.ui.test.captureToImage
+import androidx.compose.ui.platform.LocalView
 import androidx.compose.ui.test.junit4.createComposeRule
-import androidx.compose.ui.test.onRoot
 import com.github.takahirom.roborazzi.captureRoboImage
 import com.muttaqi.android.designsystem.MuttaqiTheme
 import com.muttaqi.android.testing.captureLightAndDark
@@ -29,6 +31,7 @@ import com.muttaqi.shared.feature.topics.domain.usecase.GetTopicPageTopics
 import com.muttaqi.shared.feature.topics.presentation.page.TopicPageIntent
 import com.muttaqi.shared.feature.topics.presentation.page.TopicPageViewModel
 import com.muttaqi.shared.feature.topics.presentation.page.TopicSection
+import java.io.File
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -40,7 +43,6 @@ import org.junit.runner.RunWith
 import org.robolectric.RobolectricTestRunner
 import org.robolectric.annotation.Config
 import org.robolectric.annotation.GraphicsMode
-import java.io.File
 
 @RunWith(RobolectricTestRunner::class)
 @GraphicsMode(GraphicsMode.Mode.NATIVE)
@@ -107,13 +109,19 @@ class ShareScreenshotTest {
     @Test
     fun sharedImage() {
         lateinit var layer: GraphicsLayer
+        lateinit var view: View
         compose.setContent {
             layer = rememberGraphicsLayer()
+            view = LocalView.current
             MuttaqiTheme(darkTheme = true) {
                 Box(Modifier.fillMaxSize()) { RecordShareCardImage(quranicDua(26, 83), layer) }
             }
         }
-        compose.onRoot().captureToImage()
+        compose.waitForIdle()
+        compose.runOnUiThread {
+            val root = view.rootView
+            root.draw(Canvas(Bitmap.createBitmap(root.width, root.height, Bitmap.Config.ARGB_8888)))
+        }
         val bitmap = runBlocking { layer.toImageBitmap() }.asAndroidBitmap()
         assertEquals(1170, bitmap.width)
         bitmap.captureRoboImage("screenshots/share_image.png")

@@ -13,6 +13,7 @@ import kotlinx.coroutines.IO
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.test.TestScope
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.runCurrent
 import kotlinx.coroutines.test.runTest
 import kotlin.test.AfterTest
@@ -82,6 +83,7 @@ class RoomJournalRepositoryTest {
         assertEquals("Written again", repository.entry("walk")?.body)
     }
 
+    @OptIn(ExperimentalCoroutinesApi::class)
     @Test
     fun aWriteFinishesEvenIfTheScreenThatAskedIsGone() = runTest {
         val repository = repository()

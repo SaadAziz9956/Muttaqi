@@ -133,7 +133,7 @@ private fun ModeButtons(mode: NameSearchMode, onSelect: (NameSearchMode) -> Unit
                 onCheckedChange = { if (option != mode) onSelect(option) },
                 modifier = Modifier.weight(1f).semantics { role = Role.RadioButton },
                 shapes = if (index == 0) ButtonGroupDefaults.connectedLeadingButtonShapes() else ButtonGroupDefaults.connectedTrailingButtonShapes(),
-                colors = ToggleButtonDefaults.colors(
+                colors = ToggleButtonDefaults.toggleButtonColors(
                     containerColor = soft.surface,
                     contentColor = soft.appPrimary,
                     checkedContainerColor = soft.brandGreen,
