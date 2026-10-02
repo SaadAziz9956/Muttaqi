@@ -59,10 +59,6 @@ import kotlin.math.roundToInt
 private val Spacing = 14.dp
 private val TileHeight = 132.dp
 
-/**
- * The Home features as floating tiles that each show something live: the Qibla, today's dhikr, a Name of Allah, the
- * journal, a way into Emotions and an Explore topic
- */
 @Composable
 internal fun HomeBento(state: HomeState, qiblaArrow: () -> Double?, onIntent: (HomeIntent) -> Unit, modifier: Modifier = Modifier) {
     Column(modifier, verticalArrangement = Arrangement.spacedBy(Spacing)) {
@@ -113,21 +109,15 @@ private fun QiblaTile(state: HomeState, qiblaArrow: () -> Double?, modifier: Mod
     }
 }
 
-/**
- * A pointer in a dial: towards the Kaaba as the phone turns, or its bearing from north without a compass. The arrow
- * is read here only, so each compass reading redraws the pointer, not the tiles
- */
 @Composable
 private fun QiblaPointer(qiblaArrow: () -> Double?, bearing: Double?, modifier: Modifier = Modifier) {
     val arrow = qiblaArrow()
-    // The icon's tip points up and to the right, so it's turned back 45° to point up at zero
     val target = ((arrow ?: bearing ?: 0.0) - 45).toFloat()
     val rotation by animateFloatAsState(target, tween(250), label = "qiblaArrow")
     Box(modifier, contentAlignment = Alignment.Center) {
         Box(Modifier.fillMaxSize().border(1.5.dp, Color.White.copy(alpha = 0.35f), CircleShape))
         Box(Modifier.fillMaxSize().padding(10.dp).background(Color.White.copy(alpha = 0.12f), CircleShape))
         val turned = Modifier.size(42.dp).graphicsLayer { rotationZ = if (arrow != null) rotation else target }
-        // Its soft shadow, as iOS draws under it
         Icon(
             painterResource(R.drawable.ic_send_2_bold),
             null,
@@ -177,12 +167,10 @@ private fun NameTile(state: HomeState, modifier: Modifier, onClick: () -> Unit) 
     }
 }
 
-/** The tile opens the journal's entries; its round button starts today's entry, or opens it once written */
 @Composable
 private fun JournalTile(state: HomeState, onIntent: (HomeIntent) -> Unit, modifier: Modifier) {
     val soft = MuttaqiTheme.soft
     val entry = state.journalToday
-    // At least 96 high, with the card its content's height in the middle, as iOS frames it
     Box(modifier.fillMaxWidth(), contentAlignment = Alignment.Center) {
         SoftCard(
             Modifier.fillMaxWidth().semantics { contentDescription = "Journal" },
@@ -242,7 +230,6 @@ private fun TopicTile(state: HomeState, modifier: Modifier, onClick: () -> Unit)
     }
 }
 
-/** A tile with a label and a small arrow button along the top, on the soft card or on blurred artwork */
 @Composable
 private fun Tile(
     label: String,
@@ -258,7 +245,6 @@ private fun Tile(
             Row(verticalAlignment = Alignment.Top) {
                 TileLabel(label, icon, if (onArtwork) Color.White.copy(alpha = 0.85f) else MuttaqiTheme.soft.textSecondary, Modifier.weight(1f))
                 Spacer(Modifier.width(4.dp))
-                // Opaque, as iOS's glass draws it, even over the artwork
                 SoftPillSurface(Modifier.size(30.dp), fill = MuttaqiTheme.soft.surface.copy(alpha = 1f)) {
                     Icon(
                         painterResource(R.drawable.ic_arrow_right_01_linear),

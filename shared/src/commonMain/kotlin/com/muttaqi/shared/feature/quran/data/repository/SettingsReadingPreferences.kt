@@ -16,11 +16,6 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.distinctUntilChanged
 
-/**
- * The reader's settings and download notes, under the keys and in the formats ReadingPreferencesStore used on iOS, so
- * a reading mode or font size chosen before the move to shared code carries over. The translation language is the
- * app-wide one (SettingsLanguagePreferences), stored under `reading_selected_language`.
- */
 @OptIn(ExperimentalSettingsApi::class)
 internal class SettingsReadingPreferences(
     private val settings: ObservableSettings,
@@ -34,8 +29,6 @@ internal class SettingsReadingPreferences(
             language = selectedLanguage.current,
         )
 
-    // Observed in the collector's own context rather than on a background dispatcher, so a change reaches the reader
-    // in order and at once
     override val changes: Flow<ReadingSettings> = combine(
         settings.getStringOrNullFlow(Keys.READING_MODE),
         settings.getIntFlow(Keys.FONT_SIZE, 0),
@@ -50,8 +43,6 @@ internal class SettingsReadingPreferences(
 
     override fun markTextDownloaded() = settings.putBoolean(Keys.DATA_DOWNLOADED, true)
 
-    // iOS kept these as a string array, which the settings library can't hold; those languages' translations were in
-    // SwiftData and are downloaded again, so the list starts afresh as comma-separated codes
     override fun markLanguageDownloaded(language: Language) {
         val codes = settings.getStringOrNull(Keys.DOWNLOADED_LANGUAGES)?.split(',')?.filter { it.isNotBlank() }.orEmpty()
         if (language.code !in codes) settings.putString(Keys.DOWNLOADED_LANGUAGES, (codes + language.code).joinToString(","))
@@ -61,7 +52,6 @@ internal class SettingsReadingPreferences(
 
     override fun markImported() = settings.putBoolean(Keys.PROGRESS_IMPORTED, true)
 
-    // Values below the minimum are from an old format that stored points rather than a percentage
     private fun fontSize(stored: Int): FontSize = if (stored >= FontSize.MINIMUM_PERCENT) FontSize(stored) else FontSize()
 
     internal object Keys {
@@ -69,7 +59,6 @@ internal class SettingsReadingPreferences(
         const val FONT_SIZE = "reading_font_size"
         const val DATA_DOWNLOADED = "quran_data_downloaded"
         const val DOWNLOADED_LANGUAGES = "downloaded_languages"
-        /** New with shared code: set once SwiftData's reading progress is in the Room database */
         const val PROGRESS_IMPORTED = "quran_reading_progress_imported"
     }
 }

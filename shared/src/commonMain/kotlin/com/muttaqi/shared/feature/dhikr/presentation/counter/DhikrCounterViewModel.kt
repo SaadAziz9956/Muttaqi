@@ -28,7 +28,6 @@ class DhikrCounterViewModel(
     private val resetProgress: ResetDhikrProgress,
     selectedLanguage: SelectedLanguage,
 ) : MviViewModel<DhikrCounterState, DhikrCounterIntent, DhikrCounterMutation, DhikrCounterEffect>(
-    // Today's count is read straight away, so the counter opens showing it
     DhikrCounterState(progress = getProgress(dhikrId)),
     DhikrCounterReducer,
 ) {
@@ -52,7 +51,6 @@ class DhikrCounterViewModel(
     }
 }
 
-/** A dhikr as a share card; a set without a translation of its own shares its phrases' translations */
 fun Dhikr.toSharePassage() = SharePassage(
     arabic = arabic,
     transliteration = transliteration,

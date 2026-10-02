@@ -30,11 +30,6 @@ import androidx.compose.ui.unit.dp
 import com.muttaqi.android.R
 import com.muttaqi.android.designsystem.MuttaqiTheme
 
-/**
- * The bar over a page: a round back button, and the page's title once its own large title has scrolled away (like
- * iOS's collapsing titles). [showTitle] is usually `listState.firstVisibleItemIndex > 0`. While it shows, the page
- * fades out under the bar, as under iOS's soft scroll edge, so text passing beneath never shows through
- */
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun SoftTopBar(
@@ -63,7 +58,6 @@ fun SoftTopBar(
     )
 }
 
-/** The same fade for a page with no bar, such as Home: behind the status bar, shown once the page has scrolled */
 @Composable
 fun StatusBarFade(visible: Boolean, modifier: Modifier = Modifier) {
     val canvas = MuttaqiTheme.soft.canvas
@@ -77,7 +71,6 @@ fun StatusBarFade(visible: Boolean, modifier: Modifier = Modifier) {
     )
 }
 
-/** The canvas colour over [solidHeight], then fading out over [EdgeFade] below it */
 private fun DrawScope.drawEdgeFade(canvas: Color, solidHeight: Float, alpha: Float) {
     val height = solidHeight + EdgeFade.toPx()
     drawRect(
@@ -92,5 +85,4 @@ private fun DrawScope.drawEdgeFade(canvas: Color, solidHeight: Float, alpha: Flo
     )
 }
 
-/** How far below the bar the page takes to fade back in */
 private val EdgeFade = 28.dp

@@ -7,7 +7,6 @@ import com.muttaqi.shared.core.mvi.UiState
 import com.muttaqi.shared.core.quote.DisplayedQuote
 import com.muttaqi.shared.feature.topics.domain.model.Emotion
 
-/** The Emotions page: the verse under the title and a tile for each emotion, each opening its topic page */
 data class EmotionsState(
     val isLoading: Boolean = true,
     val header: DisplayedQuote? = null,
@@ -25,6 +24,5 @@ sealed interface EmotionsMutation : UiMutation {
 }
 
 sealed interface EmotionsEffect : UiEffect {
-    /** The topic page, with a chip for every emotion */
     data class OpenEmotion(val emotionId: String) : EmotionsEffect
 }

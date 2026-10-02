@@ -12,7 +12,6 @@ class ShareViewModel(
     passage: SharePassage,
     selectedLanguage: SelectedLanguage,
 ) : MviViewModel<ShareState, ShareIntent, ShareMutation, ShareEffect>(
-    // The verse is there from the first frame, so the page doesn't change height as it opens
     ShareState(passage, PageQuotes.inviteWithWisdom.displayed(selectedLanguage.current)),
     ShareReducer,
 ) {
@@ -33,9 +32,5 @@ class ShareViewModel(
     }
 }
 
-/**
- * The name of the card's image file, without its extension: where the passage is from, e.g. "Quran (2-255)", with
- * the characters file systems reject replaced by a dash
- */
 internal fun SharePassage.imageFileName(): String =
     reference.map { if (it in "\\/:*?\"<>|" || it.isISOControl()) '-' else it }.joinToString("").trim().ifEmpty { "Muttaqi" }

@@ -10,9 +10,7 @@ import com.muttaqi.shared.feature.quran.domain.repository.QuranLibrary
 import com.muttaqi.shared.feature.quran.domain.repository.ReadingPreferences
 import kotlinx.coroutines.flow.Flow
 
-/** The reader's settings, then each change, e.g. to follow the font size while the settings are open */
 class ObserveReadingSettings(private val preferences: ReadingPreferences) {
-    /** The settings now, so a screen opens already laid out in them */
     val current: ReadingSettings get() = preferences.current
 
     operator fun invoke(): Flow<ReadingSettings> = preferences.changes
@@ -26,7 +24,6 @@ class ChangeFontSize(private val preferences: ReadingPreferences) {
     operator fun invoke(size: FontSize) = preferences.setFontSize(size)
 }
 
-/** Reads in another translation, downloading it first if it isn't stored */
 class ChangeTranslation(
     private val library: QuranLibrary,
     private val syncQuran: SyncQuran,

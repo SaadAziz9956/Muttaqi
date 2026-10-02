@@ -13,7 +13,6 @@ import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertNull
 
-/** The Swift app's last known coordinates read from real user defaults, as they're stored on a phone before the update */
 class SwiftCoordinatesTest {
     private val suite = "com.muttaqi.shared.tests.coordinates"
     private val defaults = NSUserDefaults(suiteName = suite)
@@ -26,7 +25,6 @@ class SwiftCoordinatesTest {
 
     @Test
     fun theSwiftAppsDataIsReadAndReplacedByTheNextFix() {
-        // What `defaults.set(try? JSONEncoder().encode(coordinates), forKey:)` stored in Karachi, byte for byte
         defaults.setObject(swiftData("""{"longitude":67.0011,"latitude":24.8607}"""), forKey = "last_known_coordinates")
         val settings = NSUserDefaultsSettings(defaults)
         assertNull(settings.getStringOrNull("last_known_coordinates"))

@@ -12,7 +12,6 @@ import org.koin.core.module.dsl.factoryOf
 import org.koin.core.module.dsl.viewModelOf
 import org.koin.dsl.module
 
-/** Home: the day's content and the bento tiles, drawn from the other features */
 val homeModule = module {
     single<ReaderClock> { SystemReaderClock() }
     single<HijriCalendar> { platformHijriCalendar() }
@@ -25,5 +24,4 @@ val homeModule = module {
     viewModelOf(::HomeViewModel)
 }
 
-/** The platform's Umm al-Qura calendar: Foundation's on iOS, ICU's on Android */
 internal expect fun platformHijriCalendar(): HijriCalendar

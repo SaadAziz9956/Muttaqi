@@ -32,10 +32,6 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.muttaqi.android.designsystem.MuttaqiTheme
 
-// The soft floating style (SoftStyle.swift on iOS): a tinted canvas with soft blooms of the brand colours, cards with
-// large rounded corners, a bright rim and a soft green-tinted shadow, and a springy press with a light haptic.
-
-/** The page behind floating cards: the soft canvas with blooms of mint, teal and gold, drawn as radial gradients */
 @Composable
 fun SoftBackdrop(modifier: Modifier = Modifier) {
     val soft = MuttaqiTheme.soft
@@ -58,7 +54,6 @@ fun SoftBackdrop(modifier: Modifier = Modifier) {
     )
 }
 
-/** Soft colour in the brand palette behind a tile's content, like light through frosted glass */
 enum class SoftArtwork { Forest, Dawn, Lagoon }
 
 internal fun SoftArtwork.brush(dark: Boolean): Brush {
@@ -70,7 +65,6 @@ internal fun SoftArtwork.brush(dark: Boolean): Brush {
     return Brush.linearGradient(colors.map(::Color))
 }
 
-/** A spring press with a light haptic, like touching glass; pair with [softClickable] on the same interaction source */
 @Composable
 fun Modifier.softPressScale(interaction: MutableInteractionSource): Modifier {
     val pressed by interaction.collectIsPressedAsState()
@@ -91,10 +85,6 @@ fun Modifier.softClickable(interaction: MutableInteractionSource, onClick: () ->
     }
 }
 
-/**
- * A floating card: a bright rim and soft shadow on the soft surface, or on [artwork]. Tappable when [onClick] is
- * given, with the soft spring press. The shadow is drawn from the card's shape, so long lists stay smooth
- */
 @Composable
 fun SoftCard(
     modifier: Modifier = Modifier,
@@ -119,14 +109,12 @@ fun SoftCard(
     )
 }
 
-/** The soft float shadow for any shape */
 @Composable
 fun Modifier.softFloat(shape: Shape, elevation: Dp = 14.dp): Modifier {
     val soft = MuttaqiTheme.soft
     return shadow(elevation, shape, clip = false, ambientColor = soft.shadow, spotColor = soft.shadow)
 }
 
-/** A floating capsule or circle, e.g. a chip, pill or round button, filled with [fill] */
 @Composable
 fun SoftPillSurface(
     modifier: Modifier = Modifier,

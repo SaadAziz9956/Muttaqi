@@ -1,7 +1,6 @@
 import Shared
 import SwiftUI
 
-/// Topics in groups, e.g. Worship › Fasting; each opens its Quran verses, hadith and duas
 struct ExploreView: View {
     @State private var screen = SharedViewModel(TopicsViewModels.shared.explore()) { $0.state }
     @State private var titleBottom: CGFloat = .infinity
@@ -77,8 +76,6 @@ struct ExploreView: View {
                 .foregroundStyle(.textSecondary)
                 .accessibilityHidden(true)
 
-            // Reads the view model's query as it is now rather than the last one drawn: clearing unfocuses the field in
-            // the same moment, and a field still showing the old text would send it back as it lets go
             TextField("Search", text: Binding(get: { screen.viewModel.state.value.query }, set: { dispatch(ExploreIntentQueryChanged(query: $0)) }))
                 .font(.bodyMedium)
                 .foregroundStyle(.textPrimary)
@@ -191,7 +188,6 @@ private struct TopicTile: View {
                 .foregroundStyle(.appPrimary)
                 .multilineTextAlignment(.leading)
                 .lineLimit(2)
-                // Room for the ﷺ after the Prophet's name, which is wide in any font
                 .minimumScaleFactor(0.7)
             Spacer(minLength: 0)
         }

@@ -52,9 +52,7 @@ import kotlin.time.Clock
 
 private val QuranHttpClient = named("quranHttpClient")
 
-/** The Quran: surah list, reader, reading progress, reading settings and tafsir */
 val quranModule = module {
-    // The bundled SQLite, so both platforms run the same SQLite, with queries off the main thread
     single {
         quranDatabaseBuilder()
             .setDriver(BundledSQLiteDriver())
@@ -62,7 +60,6 @@ val quranModule = module {
             .build()
     }
 
-    // Named, so it's the Quran's own client and never another feature's
     single(QuranHttpClient) { quranHttpClient() }
     single { QuranApi(get(QuranHttpClient)) }
     single { TafsirApi(get(QuranHttpClient)) }
@@ -83,7 +80,6 @@ val quranModule = module {
     factoryOf(::GetAyahOfTheDay)
     factoryOf(::FilterSurahs)
     factoryOf(::IsQuranStored)
-    // One instance, so a second sync waits for the first rather than downloading the same editions again
     singleOf(::SyncQuran)
     factory { RecordReading(get(), Clock.System) }
     factoryOf(::GetLastReading)
@@ -96,7 +92,6 @@ val quranModule = module {
     factoryOf(::GetTafsir)
 
     viewModelOf(::QuranListViewModel)
-    // startAyah 0 opens at the start of the surah
     viewModel { (surahNumber: Int, startAyah: Int) ->
         SurahReaderViewModel(surahNumber, startAyah.takeIf { it > 0 }, get(), get(), get())
     }
@@ -104,5 +99,4 @@ val quranModule = module {
     viewModelOf(::TafsirViewModel)
 }
 
-/** The database file's builder, in each platform's place for app data */
 internal expect fun Scope.quranDatabaseBuilder(): RoomDatabase.Builder<QuranDatabase>

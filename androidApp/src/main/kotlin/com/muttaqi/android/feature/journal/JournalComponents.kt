@@ -32,22 +32,15 @@ import java.time.format.DateTimeFormatter
 import java.util.Locale
 import kotlin.time.Instant
 
-// The journal is a plain page like Notes, as on iOS: the system background rather than the soft backdrop, and its
-// bar buttons in the text colour
-
-/** The page behind the journal: white, or black in dark mode, as iOS's system background */
 internal val journalBackground: Color
     @Composable @ReadOnlyComposable get() = if (MuttaqiTheme.soft.dark) Color.Black else Color.White
 
-/** The hairline between entries, as iOS's list separator */
 internal val journalDivider: Color
     @Composable @ReadOnlyComposable get() = if (MuttaqiTheme.soft.dark) Color(0xFF38383A) else Color(0xFFE3E3E6)
 
-/** iOS's red for deleting */
 internal val destructiveRed: Color
     @Composable @ReadOnlyComposable get() = if (MuttaqiTheme.soft.dark) Color(0xFFFF453A) else Color(0xFFFF3B30)
 
-/** A round floating bar button with an Iconsax icon */
 @Composable
 internal fun JournalBarButton(
     @DrawableRes icon: Int,
@@ -63,7 +56,6 @@ internal fun JournalBarButton(
     }
 }
 
-/** The bar over a journal page: the back button, the page's title once its own has scrolled away, and [trailing] */
 @Composable
 internal fun JournalTopBar(
     title: String,
@@ -88,15 +80,12 @@ private fun Instant.format(skeleton: String): String {
     return DateTimeFormatter.ofPattern(DateFormat.getBestDateTimePattern(locale, skeleton), locale).format(local())
 }
 
-/** "30 Sep", in the reader's order for day and month */
 internal fun Instant.dayAndMonth(): String = format("dMMM")
 
-/** The weekday, plus the year for entries from another year, since the date beside it shows only day and month */
 internal fun Instant.weekdayAndYear(): String {
     val weekday = format("EEEE")
     return if (local().year == ZonedDateTime.now().year) weekday else "$weekday · ${format("y")}"
 }
 
-/** "02 - May - 2023", as in the design */
 internal fun Instant.entryDate(): String =
     DateTimeFormatter.ofPattern("dd - MMM - y", Locale.getDefault()).format(local())

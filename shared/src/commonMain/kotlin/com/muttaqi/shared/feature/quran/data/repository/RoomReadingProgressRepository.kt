@@ -5,7 +5,6 @@ import com.muttaqi.shared.feature.quran.domain.model.SurahProgress
 import com.muttaqi.shared.feature.quran.domain.repository.ReadingProgressRepository
 import kotlin.time.Instant
 
-/** Each surah's reading progress, one row per surah */
 internal class RoomReadingProgressRepository(private val dao: ReadingProgressDao) : ReadingProgressRepository {
 
     override suspend fun progress(surahNumber: Int): SurahProgress? = dao.progress(surahNumber)?.toDomain()
@@ -15,7 +14,6 @@ internal class RoomReadingProgressRepository(private val dao: ReadingProgressDao
     override suspend fun all(): List<SurahProgress> = dao.all().map { it.toDomain() }
 
     override suspend fun record(surahNumber: Int, lastAyahNumber: Int, readAyahs: Set<Int>, totalAyahs: Int, at: Instant) {
-        // A union, so re-reading an ayah never counts it twice and skipping around never loses any
         val read = dao.progress(surahNumber)?.toDomain()?.readAyahs.orEmpty() + readAyahs
         val progress = SurahProgress(
             surahNumber = surahNumber,

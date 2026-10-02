@@ -11,13 +11,6 @@ import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 
-/**
- * A screen's single source of truth, shared by the SwiftUI and Compose apps.
- *
- * The screen sends intents through [dispatch] and draws [state]; one-off [effects] are collected separately.
- * Subclasses decide what an intent does in [handle], and change the state only by [mutate], which goes through the
- * [reducer], so the state can't be edited from anywhere else.
- */
 abstract class MviViewModel<S : UiState, I : UiIntent, M : UiMutation, E : UiEffect>(
     initialState: S,
     private val reducer: Reducer<S, M>,

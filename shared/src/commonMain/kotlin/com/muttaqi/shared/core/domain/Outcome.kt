@@ -1,12 +1,10 @@
 package com.muttaqi.shared.core.domain
 
-/** The result of work that can fail in a way the screen should explain, e.g. no connection when syncing the Quran */
 sealed interface Outcome<out T> {
     data class Success<out T>(val value: T) : Outcome<T>
     data class Failure(val error: DomainError) : Outcome<Nothing>
 }
 
-/** Why something failed, in terms the app can act on rather than as a platform exception */
 sealed interface DomainError {
     data object NoConnection : DomainError
     data object NotFound : DomainError

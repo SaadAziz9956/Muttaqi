@@ -88,10 +88,6 @@ fun JournalListRoute(onOpenEntry: (String?) -> Unit, onBack: () -> Unit) {
     JournalListScreen(state, viewModel::dispatch, onBack)
 }
 
-/**
- * Every entry under the title and its verse, newest first, like Notes: search and the new-entry button along the
- * bottom, and a swipe (or a long press) to delete. While searching, the matches replace the list
- */
 @Composable
 fun JournalListScreen(
     state: JournalListState,
@@ -108,7 +104,6 @@ fun JournalListScreen(
         Scaffold(
             containerColor = Color.Transparent,
             topBar = {
-                // Search takes the whole page, as on iOS, so the bar steps aside while it's open
                 AnimatedVisibility(!searchActive, enter = fadeIn(), exit = fadeOut()) {
                     JournalTopBar("Journal", showTitle = list.firstVisibleItemIndex > 0, onBack = onBack)
                 }
@@ -184,7 +179,6 @@ private enum class Swipe { Closed, Open }
 
 private val DeleteActionWidth = 76.dp
 
-/** One entry: its date in a column of its own, then its title or first line. Swiped left, it shows Delete */
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
 private fun JournalEntryRow(entry: JournalEntry, onClick: () -> Unit, onDelete: () -> Unit, modifier: Modifier = Modifier) {
@@ -198,7 +192,6 @@ private fun JournalEntryRow(entry: JournalEntry, onClick: () -> Unit, onDelete: 
     var showMenu by remember { mutableStateOf(false) }
 
     Box(modifier.fillMaxWidth()) {
-        // Only there once the row moves aside, so it never shows through the row
         if (offset < 0f) {
             DeleteAction(
                 onClick = onDelete,
@@ -238,7 +231,6 @@ private fun JournalEntryRow(entry: JournalEntry, onClick: () -> Unit, onDelete: 
                 Spacer(Modifier.width(12.dp))
                 Icon(painterResource(R.drawable.ic_arrow_right_02_linear), null, Modifier.padding(end = 8.dp).size(24.dp), tint = soft.textPrimary)
             }
-            // The divider spans the row's full width, under the date too
             HorizontalDivider(thickness = 0.5.dp, color = journalDivider)
         }
         DropdownMenu(expanded = showMenu, onDismissRequest = { showMenu = false }) {
@@ -267,7 +259,6 @@ private fun DeleteAction(onClick: () -> Unit, modifier: Modifier = Modifier) {
     }
 }
 
-/** Search and the new-entry button along the bottom, as in Notes; while searching, the button closes search */
 @Composable
 private fun JournalSearchBar(
     query: String,
@@ -277,7 +268,6 @@ private fun JournalSearchBar(
     onCloseSearch: () -> Unit,
 ) {
     val soft = MuttaqiTheme.soft
-    // The + turns into a ×
     val turn by animateFloatAsState(if (searchActive) 45f else 0f, label = "newEntryTurn")
     Row(
         Modifier.fillMaxWidth().navigationBarsPadding().imePadding().padding(start = 28.dp, end = 28.dp, top = 8.dp, bottom = 8.dp),
@@ -301,7 +291,6 @@ private fun JournalSearchBar(
     }
 }
 
-/** As iOS's empty page: an icon, a bold line in the system font, and what to do next */
 @Composable
 private fun EmptyState(icon: Int, iconTint: Color, title: String, description: String, modifier: Modifier = Modifier) {
     val soft = MuttaqiTheme.soft

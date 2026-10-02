@@ -2,7 +2,6 @@ package com.muttaqi.shared.feature.prayer.presentation.qibla
 
 import com.muttaqi.shared.feature.prayer.domain.model.CompassHeading
 
-/** The shortest turn from one angle to another, in degrees from -180 to 180: positive is clockwise */
 internal fun shortestTurn(from: Double, to: Double): Double {
     val delta = (to - from).rem(360.0)
     return when {
@@ -12,10 +11,6 @@ internal fun shortestTurn(from: Double, to: Double): Double {
     }
 }
 
-/**
- * The dial's rotation as the compass moves: it starts at the first heading and then turns by the shortest step to each
- * next one, so it can pass 360 and the dial never spins the long way round
- */
 internal data class DialReading(val heading: CompassHeading, val rotation: Double) {
     fun next(heading: CompassHeading) = DialReading(heading, rotation + shortestTurn(this.heading.degrees, heading.degrees))
 

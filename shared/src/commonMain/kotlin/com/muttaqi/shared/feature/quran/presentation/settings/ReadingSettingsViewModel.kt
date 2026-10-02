@@ -24,11 +24,6 @@ internal object ReadingSettingsReducer : Reducer<ReadingSettingsState, ReadingSe
     }
 }
 
-/**
- * The reader's settings. Made with the reader rather than the sheet, so a translation still downloading when the
- * sheet is closed carries on. Only this screen changes the mode and font size, so it keeps them itself; the language
- * is followed, since it's the app's and changes once a download finishes
- */
 class ReadingSettingsViewModel(
     observeSettings: ObserveReadingSettings,
     private val changeReadingMode: ChangeReadingMode,
@@ -67,7 +62,6 @@ class ReadingSettingsViewModel(
     private fun selectLanguage(intent: ReadingSettingsIntent.LanguageSelected) {
         if (intent.language == state.value.language || state.value.isDownloadingLanguage) return
         viewModelScope.launch {
-            // Only a translation that has to be downloaded shows its progress
             val downloading = !isQuranStored(intent.language)
             if (downloading) mutate(ReadingSettingsMutation.DownloadingChanged(true))
             val outcome = changeTranslation(intent.language)

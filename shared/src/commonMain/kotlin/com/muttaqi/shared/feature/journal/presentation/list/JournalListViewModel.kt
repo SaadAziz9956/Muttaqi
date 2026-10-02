@@ -22,7 +22,6 @@ class JournalListViewModel(
 
     private var searchIndex: JournalSearchIndex? = null
 
-    /** Entries deleted here that the database hasn't confirmed gone yet, kept out of the list meanwhile */
     private val removing = mutableSetOf<String>()
 
     init {
@@ -31,7 +30,6 @@ class JournalListViewModel(
                 mutate(JournalListMutation.HeaderLoaded(PageQuotes.byThePen.displayed(language).withoutRunOn()))
             }
         }
-        // Follows the database, so an entry saved or deleted anywhere shows here straight away, keeping any search
         viewModelScope.launch {
             observeEntries()
                 .catch { emit(emptyList()) }
@@ -59,5 +57,4 @@ class JournalListViewModel(
     }
 }
 
-/** 68:1's sentence runs on into 68:2, so its translation ends in a comma, which the page leaves off */
 internal fun DisplayedQuote.withoutRunOn() = copy(text = text.trim { it == ',' || it == ';' || it.isWhitespace() })

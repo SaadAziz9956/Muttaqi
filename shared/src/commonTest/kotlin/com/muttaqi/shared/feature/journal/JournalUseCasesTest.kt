@@ -55,7 +55,6 @@ class JournalUseCasesTest {
         assertEquals("new", entry.id)
         assertTrue(entry.isEmpty)
         assertEquals(JournalTestData.now, entry.createdAt)
-        // Real ids are unique
         val make = NewJournalEntry(FakeClock())
         assertTrue(make().id != make().id)
     }
@@ -75,9 +74,7 @@ class JournalUseCasesTest {
         val repository = FakeJournalRepository(parents, walk)
         val clock = FakeClock()
         fun today(zone: String) = ObserveTodaysJournalEntry(ObserveJournalEntries(repository), clock) { TimeZone.of(zone) }()
-        // Both were written on the 30th in Karachi; the walk is the newer
         assertEquals("walk", today("Asia/Karachi").first()?.id)
-        // At 02:00 UTC it's still the evening of the 29th in New York, when the parents entry was written
         clock.now = Instant.parse("2026-09-30T02:00:00Z")
         assertEquals("parents", today("America/New_York").first()?.id)
         clock.now = Instant.parse("2026-10-02T10:00:00Z")
@@ -104,7 +101,6 @@ class JournalUseCasesTest {
         import(listOf(walk, parents))
         assertFalse(import.isNeeded)
         assertEquals(setOf("Edited since", ""), repository.stored.value.map { it.title }.toSet())
-        // A second launch brings nothing over again, even an entry deleted since
         repository.delete("parents")
         import(listOf(walk, parents))
         assertEquals(listOf("walk"), repository.stored.value.map { it.id })

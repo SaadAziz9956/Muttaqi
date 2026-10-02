@@ -22,7 +22,6 @@ class QuranListViewModel(
     private val filterSurahs: FilterSurahs,
     private val selectedLanguage: SelectedLanguage,
 ) : MviViewModel<QuranListState, QuranListIntent, QuranListMutation, QuranListEffect>(
-    // The hadith is there from the first frame, so the page never reflows as it arrives
     QuranListState(header = PageQuotes.learnAndTeachQuran.displayed(selectedLanguage.current)),
     QuranListReducer,
 ) {
@@ -30,7 +29,6 @@ class QuranListViewModel(
     private var loading: Job? = null
 
     init {
-        // The hadith under the title follows the translation language
         viewModelScope.launch {
             selectedLanguage.changes.collect { language ->
                 mutate(QuranListMutation.HeaderChanged(PageQuotes.learnAndTeachQuran.displayed(language)))
@@ -41,7 +39,6 @@ class QuranListViewModel(
 
     override fun handle(intent: QuranListIntent) {
         when (intent) {
-            // Back from a surah: the list is already loaded, only the reading position has moved
             QuranListIntent.Appeared -> if (!state.value.isLoading && state.value.error == null) refreshProgress()
             QuranListIntent.Retry -> load()
             is QuranListIntent.QueryChanged -> filter(intent.query, state.value.filter)
@@ -56,7 +53,6 @@ class QuranListViewModel(
         }
     }
 
-    // Downloads the Quran first if it isn't stored, e.g. the first time after the move to shared code
     private fun load() {
         if (loading?.isActive == true) return
         mutate(QuranListMutation.Loading)

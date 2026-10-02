@@ -1,6 +1,4 @@
 #!/bin/sh
-# Converts the Iconsax SVGs in the iOS asset catalogue into Android vector drawables (res/drawable/ic_<name>.xml),
-# so both apps use exactly the same icons. Run again after adding an icon to the iOS catalogue.
 set -e
 cd "$(dirname "$0")/.."
 OUT=androidApp/src/main/res/drawable

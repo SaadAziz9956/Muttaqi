@@ -15,7 +15,6 @@ class DhikrListViewModel(
 ) : MviViewModel<DhikrListState, DhikrListIntent, DhikrListMutation, DhikrListEffect>(DhikrListState(), DhikrListReducer) {
 
     init {
-        // Reloads in the new language whenever the reader switches it, keeping the picked tab
         viewModelScope.launch {
             selectedLanguage.changes.collect { language ->
                 try {

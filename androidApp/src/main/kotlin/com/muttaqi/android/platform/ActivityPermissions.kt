@@ -12,14 +12,8 @@ import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.core.content.edit
 
-/**
- * Runtime permissions for the device services the shared code uses, through the Activity Result APIs. The system's
- * dialog needs an activity while the services are app-wide, so this follows whichever activity is showing. Create it
- * before the first activity starts (it's made at Koin's start), so it sees that one too
- */
 class ActivityPermissions(private val application: Application) : Application.ActivityLifecycleCallbacks {
     private var activity: ComponentActivity? = null
-    /** Which permissions have been asked for, since the system can't tell "never asked" from "don't ask again" */
     private val asked = application.getSharedPreferences("muttaqi_permissions", Context.MODE_PRIVATE)
     private var requests = 0
 
@@ -30,7 +24,6 @@ class ActivityPermissions(private val application: Application) : Application.Ac
     fun isGranted(permission: String): Boolean =
         ContextCompat.checkSelfPermission(application, permission) == PackageManager.PERMISSION_GRANTED
 
-    /** Refused so that the system won't ask again, so only the app's settings can grant it */
     fun isPermanentlyDenied(permission: String): Boolean {
         val activity = activity ?: return false
         return !isGranted(permission) &&
@@ -38,7 +31,6 @@ class ActivityPermissions(private val application: Application) : Application.Ac
             !ActivityCompat.shouldShowRequestPermissionRationale(activity, permission)
     }
 
-    /** Shows the system's dialog for [permissions], then reports which were granted; nothing is asked without an activity */
     fun request(permissions: Array<String>, onResult: (Map<String, Boolean>) -> Unit) {
         val activity = activity ?: return onResult(emptyMap())
         asked.edit { permissions.forEach { putBoolean(it, true) } }

@@ -37,7 +37,6 @@ import com.muttaqi.shared.feature.quran.domain.model.ReadingMode
 import com.muttaqi.shared.feature.quran.presentation.settings.ReadingSettingsIntent
 import com.muttaqi.shared.feature.quran.presentation.settings.ReadingSettingsState
 
-/** The reader's settings: the reading mode, the font size and the translation, which may need downloading */
 @OptIn(ExperimentalMaterial3ExpressiveApi::class)
 @Composable
 fun ReadingSettingsContent(state: ReadingSettingsState, onIntent: (ReadingSettingsIntent) -> Unit, onChooseLanguage: () -> Unit) {
@@ -83,7 +82,6 @@ fun ReadingSettingsContent(state: ReadingSettingsState, onIntent: (ReadingSettin
     }
 }
 
-/** A reading mode with a small preview of how a surah looks in it */
 @Composable
 private fun ReadingModeCard(
     mode: ReadingMode,
@@ -131,7 +129,6 @@ private fun ReadingModeCard(
     }
 }
 
-/** The translations to choose from, the current one outlined */
 @Composable
 fun LanguagePickerContent(state: ReadingSettingsState, onSelect: (ReadingSettingsIntent) -> Unit) {
     val soft = MuttaqiTheme.soft
@@ -161,7 +158,6 @@ private fun LanguageRow(language: Language, selected: Boolean, onClick: () -> Un
     )
 }
 
-// iOS's system greys, which the settings sheet uses for its unselected outlines and fills
 @Composable
 private fun systemGray4(): Color = if (MuttaqiTheme.soft.dark) Color(0xFF3A3A3C) else Color(0xFFD1D1D6)
 

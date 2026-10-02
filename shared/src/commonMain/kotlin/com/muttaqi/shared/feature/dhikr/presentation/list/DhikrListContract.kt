@@ -7,7 +7,6 @@ import com.muttaqi.shared.core.mvi.UiState
 import com.muttaqi.shared.core.quote.DisplayedQuote
 import com.muttaqi.shared.feature.dhikr.domain.model.DhikrSection
 
-/** The Dikr page: the hadith under the title, a tab for each section, and the picked section's dhikr */
 data class DhikrListState(
     val isLoading: Boolean = true,
     val header: DisplayedQuote? = null,
@@ -15,7 +14,6 @@ data class DhikrListState(
     val selectedSectionId: String? = null,
     val failed: Boolean = false,
 ) : UiState {
-    /** The tab being shown: the one picked, or the first */
     val selectedSection: DhikrSection? get() = sections.firstOrNull { it.id == selectedSectionId } ?: sections.firstOrNull()
 }
 

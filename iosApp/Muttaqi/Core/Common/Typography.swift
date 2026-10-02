@@ -12,28 +12,23 @@ private enum FontName {
         static let regular = "kfgqpchafsuthmanicscript-Reg"
     }
 
-    // iOS system Nastaliq font — available on all iOS 9+ devices, no bundling needed
     enum Urdu {
         static let nastaliq = "NotoNastaliqUrdu"
     }
 
-    // Apple's own Devanagari font — available on all iOS 9+ devices, no bundling needed
     enum Hindi {
         static let devanagari = "KohinoorDevanagari-Regular"
     }
 }
 
 extension String {
-    /// Re-encodes standard Uthmani text for the KFGQPC Hafs font used by `Font.arabic`, which assigns some marks
-    /// differently: its sukun is U+06E1 and its silent-letter circle is U+0652, so the standard U+06DF would draw
-    /// as a dotted-circle placeholder. Mapping checked against quran.com's QPC Hafs text for all 6,236 ayahs.
     nonisolated var kfgqpcEncoded: String {
         String(String.UnicodeScalarView(unicodeScalars.map { scalar -> Unicode.Scalar in
             switch scalar.value {
-            case 0x0652: "\u{06E1}" // sukun
-            case 0x06DF: "\u{0652}" // silent-letter circle
-            case 0x06E3: "\u{06DC}" // small seen (52:37)
-            case 0x06EB: "\u{06EC}" // ishmam (12:11)
+            case 0x0652: "\u{06E1}"
+            case 0x06DF: "\u{0652}"
+            case 0x06E3: "\u{06DC}"
+            case 0x06EB: "\u{06EC}"
             default: scalar
             }
         }))
@@ -41,9 +36,6 @@ extension String {
 }
 
 extension AttributedString {
-    /// Arabic text in the Quran font, for text from outside the Quran such as duas and dhikr. The font has no Arabic
-    /// punctuation, since the Quran uses none, so ، ؛ ؟ would draw as dotted-circle placeholders; they're set in the
-    /// system font instead, as are ﴿ ﴾, which the font draws as large ayah ornaments.
     static func arabic(_ text: String, size: CGFloat) -> AttributedString {
         var styled = AttributedString(text.kfgqpcEncoded)
         styled.font = .arabic(size)

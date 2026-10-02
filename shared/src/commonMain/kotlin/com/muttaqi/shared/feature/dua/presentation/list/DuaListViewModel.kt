@@ -20,7 +20,6 @@ class DuaListViewModel(
     private var searchIndex: DuaSearchIndex? = null
 
     init {
-        // Reloads in the new language whenever the reader switches it, keeping any search in progress
         viewModelScope.launch {
             selectedLanguage.changes.collect { language ->
                 try {

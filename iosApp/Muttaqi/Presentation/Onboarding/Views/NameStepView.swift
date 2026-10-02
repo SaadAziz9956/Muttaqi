@@ -2,7 +2,6 @@ import SwiftUI
 
 struct NameStepView: View {
     @Binding var name: String
-    /// A blank name isn't saved, so the step stays
     let onSave: () -> Void
     
     var body: some View {

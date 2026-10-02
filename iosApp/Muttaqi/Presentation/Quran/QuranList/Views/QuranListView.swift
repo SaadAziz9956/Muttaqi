@@ -21,7 +21,6 @@ struct QuranListView: View {
             }
         }
         .task {
-            // Coming back from a surah: the reading position may have moved
             dispatch(QuranListIntentAppeared.shared)
             for await effect in screen.viewModel.effects {
                 switch onEnum(of: effect) {
@@ -44,12 +43,9 @@ struct QuranListView: View {
         state.surahs.first { $0.number == number }
     }
 
-    // MARK: - Main Content
-
     private var quranContent: some View {
         ScrollView {
             LazyVStack(spacing: 0) {
-                // Custom title
                 Text("The Quran")
                     .font(.custom("ReemKufi-Regular", size: 28))
                     .foregroundStyle(.appPrimary)
@@ -67,7 +63,6 @@ struct QuranListView: View {
                     .padding(.top, 18)
             }
             .padding(.horizontal, 20)
-            // A new reading position slides in, and a filter or search reflows the grid
             .animation(.smooth, value: state.readingProgress)
             .animation(.snappy, value: state.filter)
         }
@@ -76,8 +71,6 @@ struct QuranListView: View {
         .navigationBarTitleDisplayMode(.inline)
         .collapsingBarTitle("The Quran", titleBottom: titleBottom)
     }
-
-    // MARK: - Header
 
     @ViewBuilder
     private var headerSection: some View {
@@ -98,9 +91,6 @@ struct QuranListView: View {
         }
     }
 
-    // MARK: - Continue Reading Card
-
-    // The whole card is one button, so it can be tapped anywhere and VoiceOver reads it as a single control
     @ViewBuilder
     private var continueReadingCard: some View {
         if let progress = state.readingProgress {
@@ -148,8 +138,6 @@ struct QuranListView: View {
         }
     }
 
-    // MARK: - Search and filters
-
     private var searchField: some View {
         HStack(spacing: 10) {
             Image("search-normal-linear")
@@ -189,7 +177,6 @@ struct QuranListView: View {
     }
 
     private var revelationChips: some View {
-        // Native glass rendered as one group, which is cheaper than each on its own
         GlassEffectContainer(spacing: 4) {
             HStack(spacing: 8) {
                 ForEach(RevelationFilter.allCases, id: \.self) { filter in
@@ -211,8 +198,6 @@ struct QuranListView: View {
             }
         }
     }
-
-    // MARK: - Surah Grid
 
     @ViewBuilder
     private var surahGrid: some View {
@@ -239,8 +224,6 @@ struct QuranListView: View {
             .padding(.bottom, 32)
         }
     }
-
-    // MARK: - Error
 
     private func errorView(_ message: String) -> some View {
         VStack(spacing: 16) {

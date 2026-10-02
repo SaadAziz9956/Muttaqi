@@ -5,7 +5,6 @@ struct AyahCardView: View {
     let ayah: Ayah
     let fontSize: FontSize
     let language: Language
-    /// Opens the explanation at this ayah
     let onExplanation: () -> Void
     let onCopy: () -> Void
     let onShare: () -> Void
@@ -95,7 +94,6 @@ struct AyahCardView: View {
     }
 
     private var actions: some View {
-        // Native glass rendered as one group, which is cheaper than each on its own
         GlassEffectContainer(spacing: 4) {
             HStack(spacing: 10) {
                 Text(reference)
@@ -129,7 +127,6 @@ struct AyahCardView: View {
         }
     }
 
-    // The shared view model puts the text on the clipboard; the tick and haptic are this card's own
     private func copy() {
         onCopy()
         didCopy = true

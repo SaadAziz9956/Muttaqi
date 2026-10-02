@@ -16,7 +16,6 @@ struct BismillahView: View {
                 .font(translationFont)
                 .foregroundStyle(.textSecondary)
                 .multilineTextAlignment(.center)
-                // Urdu and Hindi fit on one line; the longer English default wraps into two balanced lines
                 .lineLimit(isEnglish ? nil : 1)
                 .minimumScaleFactor(isEnglish ? 1 : 0.8)
                 .padding(.top, 18)
@@ -25,7 +24,6 @@ struct BismillahView: View {
         }
     }
 
-    // Detected from the script, not the selected language: only Al-Fatiha's translation is localised, other surahs show the English default
     private var isUrdu: Bool {
         translation.unicodeScalars.contains { (0x0600...0x06FF).contains($0.value) }
     }

@@ -102,12 +102,6 @@ import kotlinx.coroutines.launch
 import org.koin.compose.viewmodel.koinViewModel
 import org.koin.core.parameter.parametersOf
 
-/**
- * A surah to read, with its settings and explanation. The settings and tafsir view models belong to this screen, so a
- * translation still downloading when its sheet closes carries on, and the explanation opens straight away once loaded
- *
- * @param startAyah the ayah (number within the surah) to open at; 0 opens at the start
- */
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun SurahReaderRoute(surahNumber: Int, startAyah: Int, onShare: (SharePassage) -> Unit, onBack: () -> Unit) {
@@ -122,7 +116,6 @@ fun SurahReaderRoute(surahNumber: Int, startAyah: Int, onShare: (SharePassage) -
     val scope = rememberCoroutineScope()
     var showSettings by rememberSaveable { mutableStateOf(false) }
     var showLanguages by rememberSaveable { mutableStateOf(false) }
-    // The explanation being shown, at the passage covering this ayah; 0 opens at the start, null is closed
     var tafsirStart by rememberSaveable { mutableStateOf<Int?>(null) }
 
     LaunchedEffect(viewModel) {
@@ -137,7 +130,6 @@ fun SurahReaderRoute(surahNumber: Int, startAyah: Int, onShare: (SharePassage) -
             }
         }
     }
-    // Leaving writes the reading position at once rather than when scrolling would have settled
     DisposableEffect(viewModel) { onDispose { viewModel.dispatch(SurahReaderIntent.Left) } }
 
     SurahReaderScreen(
@@ -164,7 +156,6 @@ fun SurahReaderRoute(surahNumber: Int, startAyah: Int, onShare: (SharePassage) -
     tafsirStart?.let { start ->
         ModalBottomSheet(
             onDismissRequest = { tafsirStart = null },
-            // Opens straight to full height, like the iOS sheet's large detent
             sheetState = rememberBottomSheetState(SheetValue.Hidden, setOf(SheetValue.Hidden, SheetValue.Expanded)),
             containerColor = MuttaqiTheme.soft.canvas,
         ) {
@@ -178,10 +169,6 @@ fun SurahReaderRoute(surahNumber: Int, startAyah: Int, onShare: (SharePassage) -
     }
 }
 
-/**
- * The surah under its name in large calligraphy, as ayah cards or as Mushaf pages, with the surahs either side at the
- * end and where the reader is floating at the foot. The next or previous surah slides in from the side that was tapped
- */
 @Composable
 fun SurahReaderScreen(
     state: SurahReaderState,
@@ -192,7 +179,6 @@ fun SurahReaderScreen(
 ) {
     Box {
         SoftBackdrop()
-        // Keyed by surah, so the surah sliding out keeps showing itself while the next one loads
         AnimatedContent(
             targetState = state,
             contentKey = { it.surahNumber },
@@ -286,7 +272,6 @@ private fun androidx.compose.foundation.lazy.LazyListScope.loadedContent(
     }
 }
 
-/** Reports the ayahs (or Mushaf pages) at least a fifth on screen, by their ids, which the list uses as keys */
 @Composable
 private fun TrackVisibleAyahs(list: LazyListState, onIntent: (SurahReaderIntent) -> Unit) {
     LaunchedEffect(list) {
@@ -303,10 +288,6 @@ private fun TrackVisibleAyahs(list: LazyListState, onIntent: (SurahReaderIntent)
     }
 }
 
-/**
- * Opens at the ayah being continued from. Items are measured lazily, so the first jump can land an ayah off; once the
- * items around it are laid out, a second lands exactly
- */
 @Composable
 private fun ScrollToStart(state: SurahReaderState, list: LazyListState, onIntent: (SurahReaderIntent) -> Unit) {
     val target = state.startScrollTarget
@@ -320,7 +301,6 @@ private fun ScrollToStart(state: SurahReaderState, list: LazyListState, onIntent
     }
 }
 
-// The item's place in the list: the header, the Bismillah, then the ayahs or pages
 private fun itemIndex(state: SurahReaderState, target: Int): Int {
     val reading = state.reading ?: return 0
     val leading = 1 + (if (reading.showsBismillah) 1 else 0)
@@ -330,7 +310,6 @@ private fun itemIndex(state: SurahReaderState, target: Int): Int {
     }
 }
 
-/** The surah's Arabic name in large calligraphy, its English name and details, and the way to its neighbours */
 @Composable
 private fun SurahHeader(surah: Surah?, previous: Surah?, next: Surah?, onIntent: (SurahReaderIntent) -> Unit) {
     val soft = MuttaqiTheme.soft
@@ -352,7 +331,6 @@ private fun SurahHeader(surah: Surah?, previous: Surah?, next: Surah?, onIntent:
                 color = soft.textSecondary,
             )
         }
-        // Surah switching is labelled with the neighbour's name so it can't be mistaken for the back button above
         Row(Modifier.padding(top = 18.dp), horizontalArrangement = Arrangement.spacedBy(8.dp), verticalAlignment = Alignment.CenterVertically) {
             previous?.let { NeighbourPill(it, isNext = false) { onIntent(SurahReaderIntent.PreviousTapped) } }
             SoftPillSurface(Modifier.height(36.dp), fill = soft.brandGreen, rim = false, onClick = { onIntent(SurahReaderIntent.ExplanationTapped) }) {
@@ -375,10 +353,6 @@ private fun NeighbourPill(neighbour: Surah, isNext: Boolean, onClick: () -> Unit
     }
 }
 
-/**
- * The Bismillah above every surah but At-Tawbah. Urdu and Hindi fit on one line; the longer English default wraps
- * into two balanced lines
- */
 @Composable
 private fun Bismillah(text: String, translation: String) {
     val soft = MuttaqiTheme.soft
@@ -396,10 +370,6 @@ private fun Bismillah(text: String, translation: String) {
     }
 }
 
-/**
- * One ayah on its card: the Arabic closed by its number in ornate brackets, the transliteration and the translation,
- * and its reference with Explanation, Copy and Share
- */
 @Composable
 fun AyahCard(
     ayah: Ayah,
@@ -432,8 +402,6 @@ fun AyahCard(
             }
             ayah.translation?.takeIf { it.isNotEmpty() }?.let { translation ->
                 if (language == Language.Urdu) {
-                    // Right, not End: in a right-to-left paragraph End is the left edge
-                    // Nastaliq at the translation size itself, as on iOS, where TranslationText would add a point
                     TranslationText(
                         translation,
                         Modifier.fillMaxWidth().padding(top = 8.dp),
@@ -476,7 +444,6 @@ fun AyahCard(
     }
 }
 
-/** The ayah's Arabic, right-aligned, followed by its number between ornate brackets, flowered as on iOS */
 @Composable
 private fun AyahArabic(ayah: Ayah, fontSize: FontSize) {
     val soft = MuttaqiTheme.soft
@@ -498,10 +465,6 @@ private fun AyahArabic(ayah: Ayah, fontSize: FontSize) {
     )
 }
 
-/**
- * One page of the Madinah Mushaf: its ayahs flowing in justified lines, each closed by the Quran font's numbered
- * medallion, with the page number at its foot as printed
- */
 @Composable
 fun MushafPageCard(page: MushafPage, fontSize: FontSize) {
     val soft = MuttaqiTheme.soft
@@ -510,8 +473,6 @@ fun MushafPageCard(page: MushafPage, fontSize: FontSize) {
             page.ayahs.forEachIndexed { index, ayah ->
                 append(ayah.arabicWithoutEndSign().kfgqpcEncoded())
                 append(' ')
-                // The font draws Arabic-Indic digits that follow a space as the ayah-end medallion; no space after the
-                // page's last, or it would push the last line off the right edge
                 withStyle(SpanStyle(color = soft.appPrimary)) { append(arabicIndicDigits(ayah.numberInSurah)) }
                 if (index < page.ayahs.lastIndex) append(' ')
             }
@@ -526,7 +487,6 @@ fun MushafPageCard(page: MushafPage, fontSize: FontSize) {
                 style = TextStyle(
                     fontFamily = QuranFont,
                     fontSize = fontSize.arabicSize.sp,
-                    // The font's own line height and then, as iOS spaces the page, 0.6 of the font size
                     lineHeight = (QURAN_FONT_LINE_HEIGHT + MUSHAF_LINE_SPACING).em,
                     lineHeightStyle = LineHeightStyle(LineHeightStyle.Alignment.Top, LineHeightStyle.Trim.Both),
                     textAlign = TextAlign.Justify,
@@ -547,13 +507,11 @@ internal fun Hairline(modifier: Modifier = Modifier) {
     Box(modifier.height(1.dp).background(if (MuttaqiTheme.soft.dark) Color(0xFF2C2C2E) else Color(0xFFE5E5EA)))
 }
 
-// The Quran font's line height in ems (its ascender plus descender), as the design system's ArabicText lays it out
 private const val QURAN_FONT_LINE_HEIGHT = 1.758f
 private const val MUSHAF_LINE_SPACING = 0.6f
 
 private fun arabicIndicDigits(number: Int): String = number.toString().map { (0x0660 + (it - '0')).toChar() }.joinToString("")
 
-/** Shown after the last ayah, where a reader who has finished the surah naturally moves on */
 @Composable
 private fun SurahEndNavigation(previous: Surah?, next: Surah?, onIntent: (SurahReaderIntent) -> Unit, modifier: Modifier = Modifier) {
     Row(modifier.fillMaxWidth(), horizontalArrangement = Arrangement.spacedBy(12.dp)) {
@@ -585,10 +543,8 @@ private fun EndCard(neighbour: Surah, isNext: Boolean, onClick: () -> Unit) {
     }
 }
 
-/** Where the reader is, floating over the ayahs as they scroll beneath it */
 @Composable
 private fun ReadingPositionPill(position: String) {
-    // Nearly solid, since nothing blurs the ayahs passing under it as iOS's glass does
     SoftPillSurface(Modifier.height(36.dp), fill = MuttaqiTheme.soft.surface.copy(alpha = 0.96f)) {
         AnimatedContent(position, label = "position") {
             Text(it, Modifier.padding(horizontal = 16.dp), style = MaterialTheme.typography.labelLarge.copy(fontSize = 13.sp), color = MuttaqiTheme.soft.appPrimary)

@@ -24,7 +24,6 @@ import androidx.compose.ui.unit.dp
 import com.muttaqi.android.R
 import com.muttaqi.android.designsystem.MuttaqiTheme
 
-/** A floating search pill with a clear button while there's a query */
 @Composable
 fun SoftSearchField(
     query: String,
@@ -58,7 +57,6 @@ fun SoftSearchField(
     }
 }
 
-/** A round floating button with an Iconsax icon; [filled] is the brand green for the main action */
 @Composable
 fun SoftIconButton(
     @DrawableRes icon: Int,
@@ -86,7 +84,6 @@ fun SoftIconButton(
     }
 }
 
-/** A floating chip: white with a rim, or the brand green when selected */
 @Composable
 fun SoftChip(label: String, selected: Boolean, onClick: () -> Unit, modifier: Modifier = Modifier) {
     val soft = MuttaqiTheme.soft

@@ -3,11 +3,9 @@ SRC = '/private/tmp/claude-501/-Users-vyro-Projects-IOS-Projects-Muttaqi/5811127
 OUT = '/Users/vyro/Projects/IOS Projects/Muttaqi/Muttaqi/Resources/Data/Dhikr.json'
 v = json.load(open(SRC))['verified']
 PUBLISHED = json.load(open('/private/tmp/claude-501/-Users-vyro-Projects-IOS-Projects-Muttaqi/58111274-270b-439e-81ca-c9cc28a6407b/scratchpad/dhikr-published.json'))['entries']
-# No published translation exists in the allowed sources, so the entry isn't shipped
 DROPPED = {'subhanallahi-adada-ma-khalaq-wa-subhanallahi'}
 
 def credit(source):
-    """Short name of a published translation, from the source line recorded with it"""
     if source.startswith('HadeethEnc'): return 'HadeethEnc.com'
     if source.startswith('Hisn al-Muslim'): return 'Hisn al-Muslim (hisnmuslim.com)'
     if '—' in source:
@@ -23,16 +21,13 @@ def credit(source):
     raise ValueError(source)
 
 def published(entry_id, field, language):
-    """The published text for a field, preferring the more accurate alternative where the research recorded one"""
     entry = PUBLISHED[entry_id]
     alternative = (entry.get('alternatives') or {}).get(f'{field}.{language}')
     value = alternative or (entry.get(field) or {}).get(language)
     if not value: return None
-    # HadeethEnc may only be republished unmodified, so a hadith is shown in full
     text = value.get('fullText') if field == 'hadith' and value.get('fullText') else value['text']
     return text.strip(), credit(value['source'])
 
-# Phrases used inside counted sets
 STEP = {
     'سُبْحَانَ اللَّهِ': ('SubhanAllah', 'Glory be to Allah.'),
     'الْحَمْدُ لِلَّهِ': ('Alhamdulillah', 'All praise is for Allah.'),
@@ -48,7 +43,6 @@ STEP = {
     'لَا إِلَهَ إِلَّا اللَّهُ وَلَا حَوْلَ وَلَا قُوَّةَ إِلَّا بِاللَّهِ': ('La ilaha illallahu wa la hawla wa la quwwata illa billah', 'There is no god but Allah, and there is no might nor power except by Allah.'),
 }
 
-# Shown on the list row instead of the translation, for entries that are a set of phrases
 TITLES = {
     15: 'Five declarations of oneness',
     54: 'After every prayer · 33, 33, 33 and 1',
@@ -59,7 +53,6 @@ TITLES = {
     59: '100 each, as taught to Umm Hani',
 }
 
-# When or where the hadith places it; the candidate file's other notes are verification notes, not for readers
 CONTEXT = {
     17: 'A Companion said it when opening the prayer.',
     18: 'Said in prayer, after rising from bowing.',
@@ -69,7 +62,6 @@ CONTEXT = {
     25: 'Said at the end of a gathering.',
 }
 
-# Corrections: only undisputed virtues ship (Musnad Ahmad 8012 may be Ka'b's own words, per Ibn Rajab)
 OVERRIDE = {
     3: {'virtue': 'Every takbir is an act of charity, as is every tasbih, tahmid and tahlil.',
         'reference': 'Sahih Muslim 1006', 'grade': 'Sahih (Muslim)'},
@@ -116,7 +108,6 @@ for sid, title, subtitle, order in SECTIONS:
         if entry_id in DROPPED: continue
         item = {'id': entry_id}
         if i in TITLES: item['title'] = TITLES[i]
-        # A set lists its phrases; the counts are in its title, and the Quran font would draw digits as ayah markers
         arabic = '، '.join(step['arabic'] for step in e['sequence']) if e.get('sequence') else e['arabic']
         credits = {'en': [], 'ur': []}
         def take(field, language):

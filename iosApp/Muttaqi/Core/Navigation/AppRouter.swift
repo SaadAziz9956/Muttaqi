@@ -13,24 +13,19 @@ final class AppRouter {
     enum HomeDestination: Hashable {
         case qibla
         case journal
-        /// A journal entry to read or edit, by id; nil for a new entry
         case journalEntry(id: String?)
         case dhikrList
         case names
         case emotions
-        /// One emotion's page, opened at that emotion's tab
         case emotion(id: String)
-        /// One dhikr with its counter
         case dhikr(id: String)
     }
     
     enum ExploreDestination: Hashable {
-        /// One topic's page, opened at that topic's tab
         case topic(id: String)
     }
     
     enum QuranDestination: Hashable {
-        /// `startAyah` is the ayah (number within the surah) to open at, e.g. when continuing where the reader left off
         case surahDetail(surah: Surah, startAyah: Int? = nil)
     }
     
@@ -51,14 +46,12 @@ final class AppRouter {
         quranPath.append(destination)
     }
 
-    /// Switches to the Quran tab and opens the surah at the given ayah, e.g. from the Ayah of the Day
     func openInQuran(surah: Surah, ayah: Int) {
         quranPath = NavigationPath()
         quranPath.append(QuranDestination.surahDetail(surah: surah, startAyah: ayah))
         selectedTab = .quran
     }
     
-    /// Switches to the Explore tab and opens the topic, e.g. from the topic of the day on Home
     func openInExplore(topicID: String) {
         explorePath = NavigationPath()
         explorePath.append(ExploreDestination.topic(id: topicID))

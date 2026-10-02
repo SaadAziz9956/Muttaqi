@@ -12,11 +12,6 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
 
-/**
- * The journal in its Room database. Writes run one at a time, in the order they were asked for, in [writeScope],
- * which lives as long as the app: a save asked for as the reader leaves an entry still lands after that screen's
- * view model is gone, and a delete asked for after a save can't overtake it.
- */
 internal class RoomJournalRepository(
     private val dao: JournalDao,
     writeScope: CoroutineScope,
@@ -40,7 +35,6 @@ internal class RoomJournalRepository(
 
     override suspend fun addMissing(entries: List<JournalEntry>) = write { dao.insertMissing(entries.map { it.toEntity() }) }
 
-    /** Queues the write and waits for it; if the caller stops waiting, the write still happens */
     private suspend fun write(block: suspend () -> Unit) {
         val done = CompletableDeferred<Unit>()
         writes.trySend {

@@ -14,18 +14,15 @@ data object ExploreRoute
 @Serializable
 data object EmotionsRoute
 
-/** One topic's page, with chips for every emotion or for the topics in its Explore group */
 @Serializable
 data class TopicPageRoute(val chips: TopicChips, val topicId: String)
 
-/** The Explore tab's root: topics in groups, and search */
 fun NavGraphBuilder.exploreDestinations(navController: NavController) {
     composable<ExploreRoute> {
         ExploreRoute(onOpenTopic = { navController.navigate(TopicPageRoute(TopicChips.ExploreGroup, it)) })
     }
 }
 
-/** Emotions, reached from Home */
 fun NavGraphBuilder.emotionsDestinations(navController: NavController) {
     composable<EmotionsRoute> {
         EmotionsRoute(
@@ -35,7 +32,6 @@ fun NavGraphBuilder.emotionsDestinations(navController: NavController) {
     }
 }
 
-/** The topic page Emotions and Explore share. Registered once, outside the tabs, since both open it */
 fun NavGraphBuilder.topicPageDestinations(navController: NavController) {
     composable<TopicPageRoute> { entry ->
         val route = entry.toRoute<TopicPageRoute>()

@@ -53,7 +53,6 @@ class TopicPageViewModelTest {
     fun anExploreTopicOpensWithTheTopicsInItsGroup() = runTest {
         val state = viewModel(TopicChips.ExploreGroup, "prayer").state.value
         assertEquals(listOf("Fasting", "Charity & Zakat", "Prayer"), state.topics.map { it.title })
-        // Prayer has only a dua
         assertEquals(listOf(TopicSection.Dua), state.sections)
         assertEquals(TopicSection.Dua, state.section)
         assertEquals(listOf("Hisn al-Muslim (hisnmuslim.com)"), state.translationCredits)
@@ -85,7 +84,6 @@ class TopicPageViewModelTest {
                 TopicPageEffect.OpenShare(SharePassage("سُبْحَانَ الَّذِي سَخَّرَ", "Subhaanal-lathee", "How perfect He is", "Muslim")),
                 awaitItem(),
             )
-            // A passage that isn't shown any more
             viewModel.dispatch(TopicPageIntent.ShareTapped("quran-2:183"))
             expectNoEvents()
         }

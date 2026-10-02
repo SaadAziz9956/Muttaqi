@@ -23,7 +23,6 @@ import kotlin.time.Instant
 
 @RunWith(RobolectricTestRunner::class)
 @GraphicsMode(GraphicsMode.Mode.NATIVE)
-// English in Pakistan, as the iOS screenshots were taken in, so dates read "30 Sep"
 @Config(application = Application::class, sdk = [35], qualifiers = "en-rPK-$PHONE")
 class JournalScreenshotTest {
     @get:Rule
@@ -70,7 +69,6 @@ class JournalScreenshotTest {
 
     @Test
     fun entry() = compose.captureLightAndDark("journal_entry") {
-        // Long enough to wrap, so the body's line spacing shows
         val body = walk.body + " We talked for an hour and laughed about old times at home. Then we planned a visit for the winter holidays."
         JournalEntryScreen(JournalEntryState(entry = walk.copy(body = body)), onIntent = {}, onBack = {})
     }

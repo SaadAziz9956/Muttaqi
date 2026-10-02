@@ -15,11 +15,9 @@ import org.koin.core.component.KoinComponent
 import org.koin.core.component.get
 import org.koin.core.parameter.parametersOf
 
-/** The Quran screens' view models for Swift, from Koin: `QuranViewModels.shared.list()` */
 object QuranViewModels : KoinComponent {
     fun list(): QuranListViewModel = get()
 
-    /** [startAyah] is the ayah (number within the surah) to open at; 0 opens at the start */
     fun reader(surahNumber: Int, startAyah: Int): SurahReaderViewModel = get { parametersOf(surahNumber, startAyah) }
 
     fun settings(): ReadingSettingsViewModel = get()
@@ -27,21 +25,14 @@ object QuranViewModels : KoinComponent {
     fun tafsir(): TafsirViewModel = get()
 }
 
-/**
- * The Quran for the Swift app's launch: the first download after the update, and bringing over the reading progress
- * SwiftData kept. Nothing here throws into Swift: a failure is an [Outcome]
- */
 object QuranUseCases : KoinComponent {
-    /** Downloads what isn't stored of the Quran in the reader's language, e.g. the first launch after the update */
     suspend fun syncIfNeeded(): Outcome<Unit> = safely {
         val language = get<SelectedLanguage>().current
         if (get<IsQuranStored>()(language)) Outcome.Success(Unit) else get<SyncQuran>()(language)
     }
 
-    /** Whether SwiftData's reading progress still has to be brought over */
     val isStoredReadingProgressImportNeeded: Boolean get() = get<ImportStoredReadingProgress>().isNeeded
 
-    /** Brings SwiftData's reading progress into the shared database, once */
     suspend fun importStoredReadingProgress(records: List<StoredReadingProgress>): Boolean = runCatching {
         get<ImportStoredReadingProgress>()(records)
     }.isSuccess

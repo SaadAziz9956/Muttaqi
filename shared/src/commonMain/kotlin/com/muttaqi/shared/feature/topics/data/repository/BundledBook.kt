@@ -6,7 +6,6 @@ import kotlinx.coroutines.sync.Mutex
 import kotlinx.coroutines.sync.withLock
 import kotlinx.coroutines.withContext
 
-/** A bundled file, decoded off the main thread the first time it's needed and then kept */
 internal class BundledBook<T : Any>(
     private val content: BundledContentSource,
     private val dispatchers: DispatcherProvider,

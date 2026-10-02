@@ -58,7 +58,6 @@ import com.muttaqi.shared.feature.home.presentation.HomeIntent
 import com.muttaqi.shared.feature.quran.domain.model.DailyAyah
 import com.muttaqi.shared.feature.topics.domain.model.HadithPassage
 
-/** A wide floating row that opens a surah, e.g. where the reader left off */
 @Composable
 internal fun SurahShortcut(surahNumber: Int, title: String, subtitle: String, onClick: () -> Unit) {
     val soft = MuttaqiTheme.soft
@@ -103,7 +102,6 @@ internal fun AyahOfTheDayCard(dailyAyah: DailyAyah, onIntent: (HomeIntent) -> Un
     }
 }
 
-/** A short authentic hadith from Explore, in full as HadeethEnc publishes it */
 @Composable
 internal fun HadithOfTheDayCard(hadith: HadithPassage, onIntent: (HomeIntent) -> Unit) {
     val soft = MuttaqiTheme.soft
@@ -164,10 +162,6 @@ internal fun DuaOfTheDayCard(dua: QuranicDua, onIntent: (HomeIntent) -> Unit) {
     }
 }
 
-/**
- * A daily card floating on Home like its tiles, with its share button in the corner; a long press offers Copy and
- * Share, as iOS's context menu does. [onClick] makes the whole card tappable, as the Ayah of the Day is
- */
 @Composable
 private fun DailyCardSurface(
     card: DailyCard,
@@ -189,7 +183,6 @@ private fun DailyCardSurface(
                 .fillMaxWidth()
                 .then(
                     if (onClick != null) {
-                        // The soft tap on a press, as every soft card gives, and one haptic for the long press
                         Modifier.combinedClickable(
                             interactionSource = interaction,
                             indication = ripple(),
@@ -231,7 +224,6 @@ private fun DailyCardSurface(
     }
 }
 
-/** The share icon in a card's corner, with room around it to tap */
 @Composable
 private fun ShareButton(modifier: Modifier = Modifier, onClick: () -> Unit) {
     val interaction = remember { MutableInteractionSource() }

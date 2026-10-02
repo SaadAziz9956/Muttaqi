@@ -4,11 +4,6 @@ import com.muttaqi.shared.core.text.TextFolder
 import com.muttaqi.shared.feature.quran.domain.model.Revelation
 import com.muttaqi.shared.feature.quran.domain.model.Surah
 
-/**
- * The surahs revealed where chosen that match a search, by number or by name. A number finds the surahs whose number
- * starts with it; names match without their hyphens, apostrophes and accents, so "alkahf", "Al Kahf" and "kahf" all
- * find Al-Kahf, and the Arabic matches without its harakat.
- */
 class FilterSurahs(private val folder: TextFolder) {
     operator fun invoke(surahs: List<Surah>, query: String, revelation: Revelation?): List<Surah> {
         val byPlace = if (revelation == null) surahs else surahs.filter { it.revelationType == revelation.label }

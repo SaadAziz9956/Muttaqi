@@ -58,7 +58,6 @@ import kotlin.math.absoluteValue
 import kotlin.math.max
 import kotlinx.coroutines.flow.drop
 
-/** The 99 Names page; [viewModel] is shared with its search, so a picked result turns the page */
 @Composable
 fun NamesRoute(viewModel: NamesViewModel, onOpenSearch: () -> Unit, onShare: (SharePassage) -> Unit, onBack: () -> Unit) {
     val state by viewModel.state.collectAsStateWithLifecycle()
@@ -67,7 +66,6 @@ fun NamesRoute(viewModel: NamesViewModel, onOpenSearch: () -> Unit, onShare: (Sh
         viewModel.effects.collect { effect ->
             when (effect) {
                 is NamesEffect.OpenShare -> onShare(effect.passage)
-                // The page follows the position, which the pick has already moved
                 is NamesEffect.ShowName -> Unit
             }
         }
@@ -76,10 +74,6 @@ fun NamesRoute(viewModel: NamesViewModel, onOpenSearch: () -> Unit, onShare: (Sh
     NamesScreen(state, pager, position, viewModel::dispatch, onOpenSearch, onBack)
 }
 
-/**
- * One name at a time, with the next and previous peeking in at the edges, smaller and faded, which of the 99 is
- * showing, and the hadith at the foot of the page
- */
 @Composable
 fun NamesScreen(
     state: NamesState,
@@ -91,7 +85,6 @@ fun NamesScreen(
 ) {
     val soft = MuttaqiTheme.soft
     val haptics = LocalHapticFeedback.current
-    // The page reports where it settles, and follows the position when it moves elsewhere, e.g. to a search pick
     LaunchedEffect(pager, state.names) {
         snapshotFlow { pager.settledPage }.collect { page -> state.names.getOrNull(page)?.let { onIntent(NamesIntent.NameShown(it.number)) } }
     }
@@ -100,7 +93,6 @@ fun NamesScreen(
         if (index >= 0 && index != pager.settledPage) pager.scrollToPage(index)
     }
     LaunchedEffect(pager) {
-        // A tick as each name comes in, not on opening
         snapshotFlow { pager.currentPage }.drop(1).collect { haptics.performHapticFeedback(HapticFeedbackType.SegmentTick) }
     }
     val shownNumber = state.names.getOrNull(pager.currentPage)?.number ?: position
@@ -120,10 +112,8 @@ fun NamesScreen(
             },
         ) { padding ->
             BoxWithConstraints(Modifier.padding(top = padding.calculateTopPadding())) {
-                // 300dp on a large phone, in proportion on bigger and smaller screens, as on iOS
                 val cardHeight = max(260f, maxHeight.value * 0.415f).dp
                 Column(
-                    // Clear of the system bar, which the page's backdrop runs under
                     Modifier.verticalScroll(rememberScrollState()).heightIn(min = maxHeight).fillMaxWidth().navigationBarsPadding(),
                     horizontalAlignment = Alignment.CenterHorizontally,
                     verticalArrangement = Arrangement.SpaceBetween,
@@ -136,21 +126,17 @@ fun NamesScreen(
                             contentPadding = PaddingValues(horizontal = 38.dp),
                             pageSpacing = 12.dp,
                             beyondViewportPageCount = 1,
-                            // The page count follows the latest state while this lambda may still hold an earlier one, e.g.
-                            // the empty list before the names load, so a page it has no name for gets a key of its own
                             key = { page -> state.names.getOrNull(page)?.number ?: -(page + 1) },
                         ) { page ->
                             val name = state.names.getOrNull(page) ?: return@HorizontalPager
                             NameCard(
                                 name,
-                                // Room for the card's float shadow
                                 Modifier.padding(vertical = 18.dp).graphicsLayer {
                                     val offset = pager.currentPage - page + pager.currentPageOffsetFraction
                                     val away = offset.absoluteValue.coerceIn(0f, 1f)
                                     scaleX = lerp(1f, 0.88f, away)
                                     scaleY = scaleX
                                     alpha = lerp(1f, 0.6f, away)
-                                    // Shrinks toward the middle card, so the peeking edge stays in view
                                     transformOrigin = TransformOrigin(if (offset > 0) 1f else 0f, 0.5f)
                                 },
                                 minHeight = cardHeight,

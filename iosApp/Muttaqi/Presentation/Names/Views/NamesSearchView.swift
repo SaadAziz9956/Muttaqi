@@ -2,9 +2,7 @@ import Shared
 import SwiftUI
 
 struct NamesSearchView: View {
-    /// The 99 Names page's own view model, so a picked result turns its page
     let screen: SharedViewModel<NamesViewModel, NamesState>
-    /// Called with the number of the name picked
     let onSelect: (Int32) -> Void
     @FocusState private var isFieldFocused: Bool
     @Environment(\.dismiss) private var dismiss
@@ -38,8 +36,6 @@ struct NamesSearchView: View {
                 }
                 .pickerStyle(.segmented)
                 .padding(.top, 20)
-                // A new mode starts the query again and needs its own keyboard, e.g. the number pad, which only
-                // appears on refocusing
                 .onChange(of: state.searchMode) {
                     isFieldFocused = false
                     Task { isFieldFocused = true }

@@ -9,7 +9,6 @@ import com.muttaqi.shared.feature.onboarding.domain.platform.NotificationPermiss
 import org.koin.android.ext.koin.androidContext
 import org.koin.dsl.module
 
-/** Notification permission, which Android 13 and later ask for; before that notifications are on unless turned off */
 class AndroidNotificationPermission(
     private val context: Context,
     private val permissions: ActivityPermissions,
@@ -22,7 +21,6 @@ class AndroidNotificationPermission(
     private fun enabled() = NotificationManagerCompat.from(context).areNotificationsEnabled()
 }
 
-/** Android's notification permission for the shared onboarding */
 val onboardingServicesModule = module {
     single<NotificationPermission> { AndroidNotificationPermission(androidContext(), get()) }
 }

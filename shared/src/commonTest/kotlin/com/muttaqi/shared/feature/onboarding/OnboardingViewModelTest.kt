@@ -167,7 +167,6 @@ class OnboardingViewModelTest {
         assertFalse(viewModel.state.value.isSettingUp)
         assertTrue(IsOnboardingComplete(repository)())
         assertEquals(true, settings.getBooleanOrNull("onboarding_complete"))
-        // The English translation it downloaded is what the Quran reads in
         assertEquals(Language.English, readingLanguage)
     }
 
@@ -206,7 +205,6 @@ class FakeNotificationPermission(var answer: Boolean = true) : NotificationPermi
     }
 }
 
-/** The Quran's download; with [hold] it waits, as over a slow connection, until [finish] */
 class FakeQuranDownload : QuranLibrary {
     var runs = 0
     var hold = false
@@ -226,7 +224,6 @@ class FakeQuranDownload : QuranLibrary {
 
     override suspend fun downloadTranslation(language: Language): Outcome<Unit> = Outcome.Success(Unit)
 
-    /** Finishes the download, failing with [error] when there is one */
     fun finish(error: DomainError?) {
         pending?.complete(if (error == null) Outcome.Success(Unit) else Outcome.Failure(error))
         pending = null

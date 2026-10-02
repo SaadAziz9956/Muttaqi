@@ -10,10 +10,6 @@ import com.muttaqi.shared.feature.topics.data.dto.ExploreBookDto
 import com.muttaqi.shared.feature.topics.domain.model.ExploreGroup
 import com.muttaqi.shared.feature.topics.domain.repository.ExploreRepository
 
-/**
- * Explore.json: topics in groups, each with the Quran verses, HadeethEnc's authentic hadith and the Hisn al-Muslim
- * duas chosen for it, the duas joined by number to the Dua feature's entries. The file is decoded once and kept.
- */
 class BundledExploreRepository(
     content: BundledContentSource,
     dispatchers: DispatcherProvider,

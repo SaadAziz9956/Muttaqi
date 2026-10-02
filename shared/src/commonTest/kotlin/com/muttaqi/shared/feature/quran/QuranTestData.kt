@@ -1,6 +1,5 @@
 package com.muttaqi.shared.feature.quran
 
-/** A few surahs as the Quran API gives them, word for word, for the tests */
 internal object QuranTestData {
     data class AyahText(
         val surah: Int, val number: Int, val numberInSurah: Int, val juz: Int, val page: Int, val hizbQuarter: Int,

@@ -3,7 +3,6 @@ package com.muttaqi.android.feature.quran
 import com.muttaqi.shared.feature.quran.domain.model.Ayah
 import com.muttaqi.shared.feature.quran.domain.model.Surah
 
-/** Surahs, ayahs and tafsir as the Quran APIs give them, word for word, for the screenshots */
 internal object QuranScreenshotData {
     val surahs = listOf(
         Surah(1, "سورة الفاتحة", "Al-Faatiha", "The Opening", "Meccan", 7),
@@ -53,7 +52,6 @@ internal object QuranScreenshotData {
         Ayah(12, 5, 2, "أُو۟لَٰٓئِكَ عَلَىٰ هُدًۭى مِّن رَّبِّهِمْ ۖ وَأُو۟لَٰٓئِكَ هُمُ ٱلْمُفْلِحُونَ", "Ulaaa'ika 'alaa hudam mir rabbihim wa ulaaa'ika humul muflihoon", "یہی لوگ اپنے پروردگار (کی طرف) سے ہدایت پر ہیں اور یہی نجات پانے والے ہیں", 1, 2, 1),
     )
 
-    /** The start of Ibn Kathir (Abridged) on Al-Fatiha, from quran.com */
     val fatihaTafsir = listOf(
         "Introduction to Fatihah",
         "Which was revealed in Makkah",

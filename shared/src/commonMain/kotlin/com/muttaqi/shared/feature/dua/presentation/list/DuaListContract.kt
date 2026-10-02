@@ -8,7 +8,6 @@ import com.muttaqi.shared.core.quote.DisplayedQuote
 import com.muttaqi.shared.feature.dua.domain.model.DuaCategory
 import com.muttaqi.shared.feature.dua.domain.usecase.DuaSearchResult
 
-/** The Dua tab: the verse under the title, the category tiles, and search across every chapter */
 data class DuaListState(
     val isLoading: Boolean = true,
     val header: DisplayedQuote? = null,
@@ -39,6 +38,5 @@ sealed interface DuaListMutation : UiMutation {
 
 sealed interface DuaListEffect : UiEffect {
     data class OpenCategory(val categoryId: String) : DuaListEffect
-    /** A category with a single chapter opens straight to its duas */
     data class OpenChapter(val chapterId: String) : DuaListEffect
 }

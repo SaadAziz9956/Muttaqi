@@ -16,7 +16,6 @@ import org.robolectric.RobolectricTestRunner
 import org.robolectric.Shadows.shadowOf
 import org.robolectric.annotation.Config
 
-/** The image goes to the share sheet as a PNG through the app's FileProvider, titled as on iOS */
 @RunWith(RobolectricTestRunner::class)
 @Config(application = Application::class, sdk = [35])
 class ShareImageFilesTest {

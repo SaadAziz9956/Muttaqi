@@ -60,7 +60,6 @@ import com.muttaqi.shared.feature.quran.presentation.list.QuranListViewModel
 import com.muttaqi.shared.feature.quran.presentation.list.RevelationFilter
 import org.koin.compose.viewmodel.koinViewModel
 
-/** The Quran tab's first screen, wired to its shared view model */
 @Composable
 fun QuranListRoute(onOpenSurah: (surahNumber: Int, startAyah: Int) -> Unit) {
     val viewModel = koinViewModel<QuranListViewModel>()
@@ -73,7 +72,6 @@ fun QuranListRoute(onOpenSurah: (surahNumber: Int, startAyah: Int) -> Unit) {
             }
         }
     }
-    // Back from a surah, the reading position may have moved
     LifecycleResumeEffect(viewModel) {
         viewModel.dispatch(QuranListIntent.Appeared)
         onPauseOrDispose {}
@@ -81,7 +79,6 @@ fun QuranListRoute(onOpenSurah: (surahNumber: Int, startAyah: Int) -> Unit) {
     QuranListScreen(state, viewModel::dispatch)
 }
 
-/** The hadith under the title, where the reader left off, and the surahs to search and filter by where they were revealed */
 @OptIn(ExperimentalMaterial3ExpressiveApi::class)
 @Composable
 fun QuranListScreen(state: QuranListState, onIntent: (QuranListIntent) -> Unit) {
@@ -142,7 +139,6 @@ fun QuranListScreen(state: QuranListState, onIntent: (QuranListIntent) -> Unit) 
     }
 }
 
-/** Where the reader left off, on the deep green artwork; the whole card is one button */
 @Composable
 private fun ContinueReadingCard(progress: ReadingProgress, onContinue: () -> Unit) {
     SoftCard(
@@ -180,7 +176,6 @@ private fun ContinueReadingCard(progress: ReadingProgress, onContinue: () -> Uni
     }
 }
 
-/** One surah on its floating card: its number, Arabic and English names, meaning, length and where it was revealed */
 @Composable
 fun SurahCard(surah: Surah, modifier: Modifier = Modifier, onClick: () -> Unit) {
     val soft = MuttaqiTheme.soft
@@ -212,7 +207,6 @@ fun SurahCard(surah: Surah, modifier: Modifier = Modifier, onClick: () -> Unit) 
     }
 }
 
-/** The Quran couldn't be loaded, e.g. it couldn't be downloaded, with a way to try again */
 @Composable
 internal fun LoadFailed(
     message: String,

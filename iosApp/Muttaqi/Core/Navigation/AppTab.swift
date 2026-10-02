@@ -13,7 +13,6 @@ enum AppTab: Int, CaseIterable {
         }
     }
     
-    // Iconsax icons: Linear for unselected tabs, Bold for the selected one
     var icon: String {
         switch self {
         case .home: "home-linear"

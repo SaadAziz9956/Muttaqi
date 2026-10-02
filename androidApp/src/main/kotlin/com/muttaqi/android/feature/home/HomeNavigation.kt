@@ -21,10 +21,6 @@ import kotlinx.serialization.Serializable
 @Serializable
 data object HomeRoute
 
-/**
- * The Home screens. Registered in their tab's graph by MuttaqiApp. Its tiles open their features in the Home tab, as
- * on iOS, while the Explore topic and the Quran open in their own tabs
- */
 fun NavGraphBuilder.homeDestinations(navController: NavController) {
     composable<HomeRoute> {
         HomeRoute(
@@ -41,10 +37,6 @@ fun NavGraphBuilder.homeDestinations(navController: NavController) {
     }
 }
 
-/**
- * Switches to [tab] and opens [route] on it, as iOS's router does: the tab starts again from its first screen, with
- * [route] on top, and Home keeps its own place for when the reader comes back
- */
 internal fun NavController.openInTab(tab: Any, route: Any) {
     navigate(tab) {
         popUpTo(graph.findStartDestination().id) { saveState = true }

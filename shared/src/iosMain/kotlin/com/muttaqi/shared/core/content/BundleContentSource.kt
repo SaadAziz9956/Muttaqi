@@ -6,7 +6,6 @@ import platform.Foundation.NSString
 import platform.Foundation.NSUTF8StringEncoding
 import platform.Foundation.stringWithContentsOfFile
 
-/** Reads the bundled texts from the app bundle, where an Xcode build phase copies them from content/data */
 class BundleContentSource(private val bundle: NSBundle = NSBundle.mainBundle) : BundledContentSource {
     @OptIn(ExperimentalForeignApi::class)
     override fun read(fileName: String): String {

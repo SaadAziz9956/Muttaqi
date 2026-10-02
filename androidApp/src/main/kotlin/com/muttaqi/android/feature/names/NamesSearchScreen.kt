@@ -48,7 +48,6 @@ import com.muttaqi.shared.feature.names.presentation.NamesIntent
 import com.muttaqi.shared.feature.names.presentation.NamesState
 import com.muttaqi.shared.feature.names.presentation.NamesViewModel
 
-/** The search on the 99 Names page, on the page's own [viewModel]; picking a result goes back to the page, turned to it */
 @Composable
 fun NamesSearchRoute(viewModel: NamesViewModel, onBack: () -> Unit) {
     val state by viewModel.state.collectAsStateWithLifecycle()
@@ -60,12 +59,10 @@ fun NamesSearchRoute(viewModel: NamesViewModel, onBack: () -> Unit) {
             }
         }
     }
-    // The next search starts empty, as on iOS
     DisposableEffect(viewModel) { onDispose { viewModel.dispatch(NamesIntent.ClearQuery) } }
     NamesSearchScreen(state, viewModel::dispatch, onBack)
 }
 
-/** A search field, whether it reads a number or a name, and the matching names as cards */
 @OptIn(ExperimentalMaterial3ExpressiveApi::class)
 @Composable
 fun NamesSearchScreen(state: NamesState, onIntent: (NamesIntent) -> Unit, onBack: () -> Unit) {
@@ -124,7 +121,6 @@ fun NamesSearchScreen(state: NamesState, onIntent: (NamesIntent) -> Unit, onBack
     }
 }
 
-/** By number or by name, as a connected button group (Material 3 Expressive's segmented control) */
 @OptIn(ExperimentalMaterial3ExpressiveApi::class)
 @Composable
 private fun ModeButtons(mode: NameSearchMode, onSelect: (NameSearchMode) -> Unit) {

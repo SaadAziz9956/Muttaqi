@@ -3,7 +3,6 @@ import SwiftUI
 
 struct MainTabView: View {
     @State private var router = AppRouter()
-    /// Home's shared view model, kept here as the tabs redraw, since making it starts its loading and location
     @State private var home = SharedViewModel(HomeViewModels.shared.home()) { $0.state }
 
     init() {
@@ -23,7 +22,6 @@ struct MainTabView: View {
     private func tabView(for tab: AppTab) -> some View {
         NavigationStack(path: pathBinding(for: tab)) {
             tabContent(for: tab)
-                // Any card or page in any tab can open the Share page
                 .navigationDestination(for: SharePassage.self) { passage in
                     ShareView(passage: passage)
                 }

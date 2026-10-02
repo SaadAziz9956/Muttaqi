@@ -2,7 +2,6 @@ package com.muttaqi.shared.feature.prayer.domain.model
 
 import kotlin.time.Instant
 
-/** The five daily prayers, in the order of the day */
 enum class Prayer(val displayName: String) {
     Fajr("Fajr"),
     Dhuhr("Dhuhr"),
@@ -11,7 +10,6 @@ enum class Prayer(val displayName: String) {
     Isha("Isha"),
 }
 
-/** One day's prayer times, and sunrise, each rounded to the minute */
 data class DailyPrayerTimes(
     val fajr: Instant,
     val sunrise: Instant,
@@ -31,7 +29,6 @@ data class DailyPrayerTimes(
 
 data class UpcomingPrayer(val prayer: Prayer, val time: Instant)
 
-/** Today's and tomorrow's times, so there is always a next prayer, even after Isha */
 data class PrayerSchedule(val today: DailyPrayerTimes, val tomorrow: DailyPrayerTimes) {
     fun nextPrayer(after: Instant): UpcomingPrayer? =
         listOf(today, tomorrow)

@@ -1,10 +1,8 @@
 import Shared
 import SwiftUI
 
-/// One name: its number, Arabic, transliteration and meaning, over a large faint copy of the Arabic
 struct NameCard: View {
     let name: AllahName
-    /// Grows with the screen on the swiping page; a card grows further if its text needs the room
     var minHeight: CGFloat = 300
     @Environment(\.colorScheme) private var colorScheme
 
@@ -41,13 +39,10 @@ struct NameCard: View {
                 .padding(.leading, 16)
                 .padding(.top, 16)
         }
-        // Floats on the soft mint-and-gold artwork, like the Name of the day on Home
         .softCard(cornerRadius: 30, rim: 3, artwork: .dawn)
         .accessibilityElement(children: .combine)
     }
 
-    // The design's faint Kufic copy of the name behind the text; fainter in dark mode, where the lighter teal on a dark
-    // card stands out more
     private var watermark: some View {
         Text(name.arabic)
             .font(.custom("ReemKufi-Regular", size: 90))

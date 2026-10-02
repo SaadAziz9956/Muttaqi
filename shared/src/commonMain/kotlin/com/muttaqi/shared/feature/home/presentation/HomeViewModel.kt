@@ -41,11 +41,6 @@ import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import kotlin.time.Instant
 
-/**
- * Home, drawn from the other features' use cases. Everything is loaded at once and again on [HomeIntent.Refresh]
- * (when Home comes into view or the app returns to the foreground), so the day's picks, counts and times stay
- * current; the texts also follow the translation language
- */
 class HomeViewModel(
     private val getDailyContent: GetDailyContent,
     private val getQuranShortcuts: GetQuranShortcuts,
@@ -64,11 +59,6 @@ class HomeViewModel(
 ) {
     private val refreshes = MutableStateFlow(0)
 
-    /**
-     * The Qibla arrow's turn from the phone's heading to the Kaaba, as a continuous angle (it can pass 360) so it turns
-     * the short way round; null until the compass reports, or without one. The compass runs only while this is
-     * collected and the Qibla is known, so it stops when Home goes away or the app goes to the background
-     */
     @OptIn(ExperimentalCoroutinesApi::class)
     val qiblaArrow: StateFlow<Double?> = state.map { it.qibla != null }
         .distinctUntilChanged()
@@ -89,7 +79,6 @@ class HomeViewModel(
                 mutate(HomeMutation.ShortcutsLoaded(getQuranShortcuts()))
             }
         }
-        // Looked for again on each refresh, so the entry that counts as today's moves on after midnight
         viewModelScope.launch {
             refreshes.collectLatest {
                 observeTodaysJournalEntry().catch { emit(null) }.collect { mutate(HomeMutation.JournalLoaded(it)) }
@@ -130,11 +119,9 @@ class HomeViewModel(
         mutate(HomeMutation.ClockTicked(now, clock.dateAt(now), getHijriDate(now, maghrib, clock.timeZone)))
     }
 
-    /** The saved location shows the times at once, and a fresh fix corrects them; then why there are none, if not */
     private suspend fun locate() {
         locatePrayerTimes().collect { here ->
             mutate(HomeMutation.Located(here.schedule, here.qibla))
-            // Maghrib may now be known, which turns the Hijri date
             tick(clock.now())
         }
         mutate(HomeMutation.LocationChecked(getLocationAccess()))
@@ -146,7 +133,6 @@ class HomeViewModel(
         .map { it?.rotation }
 }
 
-/** The arrow pointing at [target], turned to [rotation]: the last turn plus the shortest step to the new target */
 private data class ArrowTurn(val target: Double, val rotation: Double) {
     fun next(target: Double) = ArrowTurn(target, rotation + shortestTurn(this.target, target))
 }
@@ -167,7 +153,6 @@ private fun HadithPassage.toSharePassage() = SharePassage(arabic, null, translat
 
 private fun QuranicDua.toSharePassage() = SharePassage(arabic, transliteration, translation, source)
 
-/** e.g. "Quran (2:201)" */
 private val QuranicDua.source: String get() = "Quran ($reference)"
 
 private suspend fun orZero(count: suspend () -> Int): Int = try {

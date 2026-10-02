@@ -30,11 +30,6 @@ import kotlinx.datetime.plus
 import kotlinx.datetime.toLocalDateTime
 import kotlin.time.Instant
 
-/**
- * The day's texts from the other features: the verse under the greeting, and the ayah, hadith, dua, Name and Explore
- * topic of the day, each picked as the iOS app always has. One that can't be read is left out rather than keeping the
- * rest off Home
- */
 class GetDailyContent(
     private val getAyah: GetAyah,
     private val getAyahOfTheDay: GetAyahOfTheDay,
@@ -54,12 +49,10 @@ class GetDailyContent(
     }
 
     private companion object {
-        /** "So do not weaken and do not grieve…" */
         val GREETING = 3 to 139
     }
 }
 
-/** Where the reader left off in the Quran, and Surah al-Kahf, from the stored surahs; none before they're downloaded */
 class GetQuranShortcuts(
     private val getSurahs: GetSurahs,
     private val getLastReading: GetLastReading,
@@ -80,10 +73,6 @@ class GetQuranShortcuts(
     }
 }
 
-/**
- * The prayer times and the Qibla where the reader is: from the saved location straight away, which works offline,
- * then again from a fresh fix when there's access, in case they've moved
- */
 class LocatePrayerTimes(
     private val locateReader: LocateReader,
     private val getPrayerSchedule: GetPrayerSchedule,
@@ -95,7 +84,6 @@ class LocatePrayerTimes(
     }
 }
 
-/** Today's Hijri date where the reader is. The Islamic day begins at Maghrib, so after sunset it's the next one's */
 class GetHijriDate(private val calendar: HijriCalendar) {
     operator fun invoke(now: Instant, maghrib: Instant?, timeZone: TimeZone): String {
         val today = now.toLocalDateTime(timeZone).date

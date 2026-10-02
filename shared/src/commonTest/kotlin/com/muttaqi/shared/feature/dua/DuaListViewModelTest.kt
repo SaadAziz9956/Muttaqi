@@ -77,7 +77,6 @@ class DuaListViewModelTest {
         language.switchTo(Language.Urdu)
         val state = viewModel.state.value
         assertEquals("waking", state.query)
-        // "waking" is in the category's name, so both of its chapters match
         assertEquals(listOf("hisn-1", "hisn-2"), state.results.map { it.chapter.id })
         assertEquals("سب تعریف اللہ کے لیے", state.results.first().chapter.entries.single().translation)
         assertTrue(state.header!!.text.contains("دعا"))

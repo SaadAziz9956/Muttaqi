@@ -4,13 +4,11 @@ plugins {
     alias(libs.plugins.androidKotlinMultiplatformLibrary)
     alias(libs.plugins.ksp)
     alias(libs.plugins.room)
-    // Swift-friendly API for iOS: Flows become AsyncSequences, sealed classes become Swift enums
     alias(libs.plugins.skie)
 }
 
 kotlin {
     compilerOptions {
-        // Room generates an expect object with an actual per platform for each database's constructor
         freeCompilerArgs.add("-Xexpect-actual-classes")
     }
 
@@ -18,7 +16,6 @@ kotlin {
         namespace = "com.muttaqi.shared"
         compileSdk = libs.versions.android.compileSdk.get().toInt()
         minSdk = libs.versions.android.minSdk.get().toInt()
-        // The common tests also run on the JVM, which checks the Android implementations
         withHostTest {}
     }
 
@@ -33,7 +30,6 @@ kotlin {
         commonMain.dependencies {
             implementation(libs.kotlinx.coroutines.core)
             implementation(libs.kotlinx.serialization.json)
-            // api: the domain's models use its dates (e.g. a dhikr's progress is for a LocalDate), so the apps see them
             api(libs.kotlinx.datetime)
             api(libs.androidx.lifecycle.viewmodel)
             api(libs.koin.core)
@@ -63,7 +59,6 @@ kotlin {
     }
 }
 
-// Room: each feature with stored data has its own database in its own package (see feature/journal, feature/quran)
 room {
     schemaDirectory("$projectDir/schemas")
 }

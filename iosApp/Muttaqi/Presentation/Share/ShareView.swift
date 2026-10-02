@@ -1,7 +1,6 @@
 import Shared
 import SwiftUI
 
-/// A preview of the card to share; the send button opens the share sheet with the card as an image
 struct ShareView: View {
     @State private var screen: SharedViewModel<ShareViewModel, ShareState>
     @State private var image: UIImage?
@@ -45,7 +44,6 @@ struct ShareView: View {
                 .accessibilityLabel("Back")
             }
             ToolbarItem(placement: .navigationBarTrailing) {
-                // The share sheet's own Save Image saves the card to Photos, so there's no separate save button
                 if let image {
                     let picture = Image(uiImage: image)
                     ShareLink(item: picture, preview: SharePreview(passage.reference, image: picture)) {

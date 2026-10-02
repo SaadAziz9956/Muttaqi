@@ -26,7 +26,6 @@ import org.junit.runner.RunWith
 import org.robolectric.RobolectricTestRunner
 import org.robolectric.annotation.Config
 
-/** Home's ways into the Quran and Explore switch tabs, as iOS's router does */
 @RunWith(RobolectricTestRunner::class)
 @Config(application = Application::class, sdk = [35])
 class HomeNavigationTest {
@@ -37,7 +36,6 @@ class HomeNavigationTest {
 
     private fun tabs() = compose.setContent {
         navController = rememberNavController()
-        // The app's tabs, as MuttaqiApp lays them out, with empty screens
         NavHost(navController, startDestination = HomeTab) {
             navigation<HomeTab>(startDestination = HomeRoute) { composable<HomeRoute> {} }
             navigation<ExploreTab>(startDestination = ExploreRoute) { composable<ExploreRoute> {} }
@@ -58,7 +56,6 @@ class HomeNavigationTest {
         compose.runOnIdle {
             assertEquals(SurahRoute(16, 127), navController.currentBackStackEntry!!.toRoute<SurahRoute>())
             assertTrue(onTab(QuranTab))
-            // Back goes to the Quran tab's list, then Home, as on iOS
             navController.popBackStack()
         }
         compose.runOnIdle {

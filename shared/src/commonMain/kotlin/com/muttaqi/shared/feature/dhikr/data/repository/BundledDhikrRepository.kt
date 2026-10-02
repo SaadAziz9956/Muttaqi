@@ -11,12 +11,6 @@ import kotlinx.coroutines.sync.Mutex
 import kotlinx.coroutines.sync.withLock
 import kotlinx.coroutines.withContext
 
-/**
- * Dhikr.json: general remembrance from the Quran, Sahih al-Bukhari, Sahih Muslim and the Sunan, keeping only Quranic
- * text and hadith graded sahih or hasan. Every translation is taken word for word from a published one, named with
- * the entry: Saheeh International, Jalandhry and Junagarhi for the Quran; HadeethEnc, Hisn al-Muslim and the
- * collections' published translations for hadith. Decoded once and kept.
- */
 class BundledDhikrRepository(
     private val content: BundledContentSource,
     private val dispatchers: DispatcherProvider,

@@ -68,7 +68,6 @@ fun DuaChapterRoute(chapterId: String, onShare: (SharePassage) -> Unit, onBack: 
     DuaChapterScreen(state, viewModel::dispatch, onBack)
 }
 
-/** A chapter's duas, each on its own card, and the translations they show, credited as their publishers ask */
 @Composable
 fun DuaChapterScreen(state: DuaChapterState, onIntent: (DuaChapterIntent) -> Unit, onBack: () -> Unit) {
     val soft = MuttaqiTheme.soft
@@ -114,14 +113,12 @@ fun DuaChapterScreen(state: DuaChapterState, onIntent: (DuaChapterIntent) -> Uni
     }
 }
 
-/** One dua: the Arabic, how it's said, its meaning, where it's from and how many times to say it */
 @Composable
 fun DuaEntryCard(entry: DuaEntry, onShare: () -> Unit, onCopy: () -> Unit) {
     val soft = MuttaqiTheme.soft
     val urdu = entry.translation.isArabicScript()
     SoftCard(cornerRadius = 26.dp) {
         Column(Modifier.fillMaxWidth().padding(horizontal = 20.dp, vertical = 18.dp)) {
-            // Right, not End: in a right-to-left paragraph End is the left edge
             ArabicText(entry.arabic, Modifier.fillMaxWidth(), textAlign = TextAlign.Right)
             if (entry.transliteration.isNotBlank()) {
                 Text(entry.transliteration, Modifier.padding(top = 14.dp), style = MaterialTheme.typography.labelLarge.copy(fontSize = 14.sp), color = soft.appPrimary)
@@ -148,7 +145,6 @@ fun DuaEntryCard(entry: DuaEntry, onShare: () -> Unit, onCopy: () -> Unit) {
                 Spacer(Modifier.padding(start = 8.dp))
                 SoftIconButton(R.drawable.ic_export_arrow_01_linear, "Share", onShare, size = 32.dp, iconSize = 15.dp)
             }
-            // The book's own reference, e.g. volume and page in Bukhari with Fath al-Bari
             if (entry.reference.isNotBlank()) {
                 Text(
                     entry.reference,

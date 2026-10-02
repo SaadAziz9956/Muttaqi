@@ -4,7 +4,6 @@ E = {e: json.load(open(f"editions/{e}.json"))["data"]["surahs"] for e in
 def text(ed, s, a): return E[ed][s-1]["ayahs"][a-1]["text"]
 def bare(w): return "".join(c for c in unicodedata.normalize("NFD", w) if unicodedata.category(c) != "Mn" and c != "ـ")
 
-# Where each dua starts: n-th "Lord" word per language (0 = the whole ayah is the dua). Default 1 for every language.
 DEFAULT = dict(ar=1, tl=1, en=1, ur=1)
 WHOLE = dict(ar=0, tl=0, en=0, ur=0)
 DUAS = {
@@ -25,7 +24,7 @@ def cut_marker(t, n, pattern):
     if n == 0: return t
     return t[[m.start() for m in re.finditer(pattern, t)][n-1]:]
 def clean_en(t):
-    t = re.sub(r'^\[[^\]]*\],?\s*', '', t)          # leading "[Who say]," / "[And he said],"
+    t = re.sub(r'^\[[^\]]*\],?\s*', '', t)
     t = t.strip().strip('"“”').strip()
     t = re.sub(r"[,;]$", ".", t.rstrip("'").rstrip())
     return t if t[-1] in ".!?" else t + "."

@@ -8,7 +8,6 @@ import org.koin.core.component.KoinComponent
 import org.koin.core.component.get
 import org.koin.core.parameter.parametersOf
 
-/** The Emotions and Explore screens' view models for Swift, from Koin: `TopicsViewModels.shared.explore()` */
 object TopicsViewModels : KoinComponent {
     fun emotions(): EmotionsViewModel = get()
     fun explore(): ExploreViewModel = get()

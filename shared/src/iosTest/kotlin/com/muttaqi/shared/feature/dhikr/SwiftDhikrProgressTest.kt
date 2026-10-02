@@ -15,7 +15,6 @@ import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertNull
 
-/** The Swift app's saved progress read from real user defaults, as it's stored on a phone before the update */
 class SwiftDhikrProgressTest {
     private val suite = "com.muttaqi.shared.tests.dhikr"
     private val defaults = NSUserDefaults(suiteName = suite)
@@ -28,10 +27,8 @@ class SwiftDhikrProgressTest {
 
     @Test
     fun theSwiftAppsDataIsReadAndReplacedByTheNextCount() {
-        // What `defaults.set(try? JSONEncoder().encode(progress), forKey:)` stored after 7 taps on 2026-09-30 in Karachi
         defaults.setObject(swiftData("""{"rounds":0,"day":812401200,"count":7}"""), forKey = "dhikr_progress.subhanallah")
         val settings = NSUserDefaultsSettings(defaults)
-        // Settings only reads text, which is why the data needs a reader of its own
         assertNull(settings.getStringOrNull("dhikr_progress.subhanallah"))
 
         val today = LocalDate(2026, 9, 30)

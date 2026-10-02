@@ -17,7 +17,6 @@ import com.muttaqi.shared.feature.topics.domain.model.QuranPassage
 
 internal fun PageQuoteDto.toPublishedQuote() = PublishedQuote(translation, "Quran ($reference)")
 
-/** Jalandhry is credited only where his Urdu is shown; a verse without it shows (and credits) Saheeh International */
 internal fun VerseDto.toPassage(language: Language) = QuranPassage(
     reference = reference,
     arabic = arabic,
@@ -37,7 +36,6 @@ internal fun HadithDto.toPassage(language: Language) = HadithPassage(
     credit = source,
 )
 
-/** Duas listed by their number in Hisn al-Muslim, e.g. 176, as the Dua feature's entries ("hisn-176") */
 private fun List<Int>.toDuas(entries: Map<String, DuaEntry>): List<DuaEntry> = mapNotNull { entries["hisn-$it"] }
 
 internal fun EmotionsBookDto.Entry.toEmotion(language: Language, duas: Map<String, DuaEntry>) = Emotion(

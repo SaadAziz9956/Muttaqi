@@ -53,7 +53,6 @@ import kotlinx.serialization.Serializable
 @Serializable data object QuranTab
 @Serializable data object DuaTab
 
-/** The four tabs, as on iOS: Iconsax linear icons, and bold for the selected tab */
 private enum class Tab(val graph: Any, val root: Any, val label: String, @DrawableRes val icon: Int, @DrawableRes val selectedIcon: Int) {
     Home(HomeTab, HomeRoute, "Home", R.drawable.ic_home_linear, R.drawable.ic_home_bold),
     Explore(ExploreTab, ExploreRoute, "Explore", R.drawable.ic_search_normal_linear, R.drawable.ic_search_normal_bold),
@@ -61,11 +60,6 @@ private enum class Tab(val graph: Any, val root: Any, val label: String, @Drawab
     Dua(DuaTab, DuaListRoute, "Dua", R.drawable.ic_moon_linear, R.drawable.ic_moon_bold),
 }
 
-/**
- * The app: onboarding on first launch, then the tabs. Each tab keeps its own back stack; features add their screens
- * through their `…Destinations` functions, and screens every tab can open (share, the topic page) sit outside the tabs.
- * The bar shows only on each tab's first screen, as on iOS
- */
 @OptIn(ExperimentalMaterial3ExpressiveApi::class)
 @Composable
 fun MuttaqiApp() {
@@ -77,7 +71,6 @@ fun MuttaqiApp() {
 
         Scaffold(
             containerColor = Color.Transparent,
-            // Screens reach the bottom edge and draw their backdrop under the system bar; only the tab bar takes room
             contentWindowInsets = WindowInsets(0, 0, 0, 0),
             bottomBar = {
                 if (onTabRoot) {
@@ -107,8 +100,6 @@ fun MuttaqiApp() {
                 }
             },
         ) { padding ->
-            // The tab bar's room counts as the bottom inset it takes up, so a screen giving itself the navigation bar's
-            // inset (Home) gets none above the tab bar, and all of it where the bar is hidden
             Box(Modifier.fillMaxSize().padding(bottom = padding.calculateBottomPadding()).consumeWindowInsets(padding)) {
                 NavHost(navController, startDestination = HomeTab) {
                     navigation<HomeTab>(startDestination = HomeRoute) {

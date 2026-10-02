@@ -19,10 +19,6 @@ import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.withContext
 import kotlinx.io.IOException
 
-/**
- * The Quran text in the Room database, synced from the Quran API: the Uthmani Arabic with the English
- * transliteration, and each translation language the reader has chosen
- */
 internal class RoomQuranRepository(
     private val dao: QuranTextDao,
     private val api: QuranApi,
@@ -49,7 +45,6 @@ internal class RoomQuranRepository(
             val transliteration = async { api.fullQuran(QuranEdition.TRANSLITERATION) }
             arabic.await() to transliteration.await()
         }
-        // Matched by the ayah's number in the whole Quran, which both editions share
         val transliterations = transliteration.surahs.flatMap { it.ayahs }.associate { it.number to it.text }
         dao.storeText(
             surahs = arabic.surahs.map { it.toEntity() },
@@ -68,7 +63,6 @@ internal class RoomQuranRepository(
         )
     }
 
-    // Off the main thread, since each edition is a few megabytes of JSON to decode and thousands of rows to store
     private suspend fun downloading(work: suspend () -> Unit): Outcome<Unit> = try {
         withContext(dispatchers.io) { work() }
         Outcome.Success(Unit)

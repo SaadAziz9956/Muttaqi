@@ -10,11 +10,9 @@ import kotlinx.serialization.Serializable
 @Serializable
 data object QuranListRoute
 
-/** A surah to read; [startAyah] is the ayah (number within the surah) to open at, 0 for the start */
 @Serializable
 data class SurahRoute(val surahNumber: Int, val startAyah: Int = 0)
 
-/** The Quran tab: the surahs, and a surah to read with its settings and explanation */
 fun NavGraphBuilder.quranDestinations(navController: NavController) {
     composable<QuranListRoute> {
         QuranListRoute(onOpenSurah = { surah, ayah -> navController.navigate(SurahRoute(surah, ayah)) })

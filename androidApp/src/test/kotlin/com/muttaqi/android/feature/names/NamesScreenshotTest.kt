@@ -25,7 +25,6 @@ import org.robolectric.RuntimeEnvironment
 import org.robolectric.annotation.Config
 import org.robolectric.annotation.GraphicsMode
 
-/** The 99 Names page and its search with the real bundled names, to compare with the iOS screenshots */
 @RunWith(RobolectricTestRunner::class)
 @GraphicsMode(GraphicsMode.Mode.NATIVE)
 @Config(application = Application::class, sdk = [35], qualifiers = PHONE)
@@ -54,7 +53,6 @@ class NamesScreenshotTest {
     }
 }
 
-/** Runs the repository's reads where they're called, so a test can load the texts before drawing */
 private object Immediately : DispatcherProvider {
     override val main = Dispatchers.Unconfined
     override val io = Dispatchers.Unconfined

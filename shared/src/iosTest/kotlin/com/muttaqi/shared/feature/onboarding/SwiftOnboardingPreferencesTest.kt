@@ -8,7 +8,6 @@ import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertTrue
 
-/** What the Swift app's onboarding saved, read from real user defaults as it's stored on a phone before the update */
 class SwiftOnboardingPreferencesTest {
     private val suite = "com.muttaqi.shared.tests.onboarding"
     private val defaults = NSUserDefaults(suiteName = suite)
@@ -18,7 +17,6 @@ class SwiftOnboardingPreferencesTest {
 
     @Test
     fun aReaderWhoFinishedOnboardingIsntAskedAgain() {
-        // As `defaults.set(name, forKey:)` and `defaults.set(true, forKey:)` stored them
         defaults.setObject("Saad Aziz", forKey = "user_name")
         defaults.setBool(true, forKey = "onboarding_complete")
 

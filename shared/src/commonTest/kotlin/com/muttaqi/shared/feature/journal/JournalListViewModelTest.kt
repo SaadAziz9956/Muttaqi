@@ -49,7 +49,6 @@ class JournalListViewModelTest {
         val state = viewModel().state.value
         assertFalse(state.isLoading)
         assertEquals(listOf("walk", "parents", "cafe"), state.shownEntries.map { it.id })
-        // 68:1's translation runs on into 68:2; the page leaves off its comma
         assertEquals("Nun. By the pen and what they inscribe", state.header?.text)
         assertEquals("Quran (68:1)", state.header?.source)
     }
@@ -59,7 +58,6 @@ class JournalListViewModelTest {
         val viewModel = viewModel()
         language.switchTo(Language.Urdu)
         assertEquals("نٓ۔ قلم کی اور جو (اہل قلم) لکھتے ہیں اس کی قسم", viewModel.state.value.header?.text)
-        // Hindi has no published translation here, so it shows the English
         language.switchTo(Language.Hindi)
         assertEquals("Nun. By the pen and what they inscribe", viewModel.state.value.header?.text)
     }
@@ -80,7 +78,6 @@ class JournalListViewModelTest {
         assertEquals(listOf("parents"), viewModel.state.value.shownEntries.map { it.id })
         repository.save(JournalTestData.entry("storm", "Rain at last", "", "2026-09-30T09:00:00Z"))
         assertEquals(listOf("storm", "parents"), viewModel.state.value.shownEntries.map { it.id })
-        // Spaces alone aren't a search
         viewModel.dispatch(JournalListIntent.QueryChanged("  "))
         assertFalse(viewModel.state.value.isSearching)
         assertEquals(4, viewModel.state.value.shownEntries.size)

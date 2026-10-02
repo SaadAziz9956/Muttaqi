@@ -18,7 +18,6 @@ import org.koin.core.module.dsl.viewModelOf
 import org.koin.dsl.binds
 import org.koin.dsl.module
 
-/** Hisn al-Muslim and the Quranic duas: the Dua tab, its categories and chapters */
 val duaModule = module {
     single { BundledDuaRepository(get(), get()) } binds arrayOf(DuaCategoryRepository::class, QuranicDuaRepository::class)
 

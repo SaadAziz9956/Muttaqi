@@ -12,17 +12,14 @@ import kotlin.time.Clock
 import kotlin.uuid.ExperimentalUuidApi
 import kotlin.uuid.Uuid
 
-/** Every entry, newest first, and again after each change */
 class ObserveJournalEntries(private val repository: JournalReadRepository) {
     operator fun invoke(): Flow<List<JournalEntry>> = repository.entries().map { entries -> entries.sortedByDescending { it.createdAt } }
 }
 
-/** One entry by id, e.g. to open it for editing */
 class GetJournalEntry(private val repository: JournalReadRepository) {
     suspend operator fun invoke(id: String): JournalEntry? = repository.entry(id)
 }
 
-/** A blank entry for now, with an id of its own; it's only saved once something is written in it */
 class NewJournalEntry @OptIn(ExperimentalUuidApi::class) constructor(
     private val clock: Clock,
     private val newId: () -> String = { Uuid.random().toString() },
@@ -33,7 +30,6 @@ class NewJournalEntry @OptIn(ExperimentalUuidApi::class) constructor(
     }
 }
 
-/** Saves the entry, or deletes it once it's empty, so an untouched or cleared entry is never kept */
 class SaveJournalEntry(private val repository: JournalWriteRepository) {
     suspend operator fun invoke(entry: JournalEntry) {
         if (entry.isEmpty) repository.delete(entry.id) else repository.save(entry)
@@ -44,7 +40,6 @@ class DeleteJournalEntry(private val repository: JournalWriteRepository) {
     suspend operator fun invoke(id: String) = repository.delete(id)
 }
 
-/** The newest entry written today, if there is one, e.g. for the Journal tile on Home */
 class ObserveTodaysJournalEntry(
     private val observeEntries: ObserveJournalEntries,
     private val clock: Clock,
@@ -57,11 +52,6 @@ class ObserveTodaysJournalEntry(
     }
 }
 
-/**
- * Brings over the entries written before the journal moved to shared code (on iOS, from SwiftData), once. It's marked
- * done only after every entry is in, so if it's interrupted it runs again at the next launch, and entries it already
- * brought over are left as they are
- */
 class ImportJournalEntries(
     private val repository: JournalWriteRepository,
     private val status: JournalImportStatus,

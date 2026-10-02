@@ -11,10 +11,6 @@ import kotlinx.coroutines.sync.Mutex
 import kotlinx.coroutines.sync.withLock
 import kotlinx.coroutines.withContext
 
-/**
- * AsmaUlHusna.json: the 99 names as listed in Jami at-Tirmidhi 3507, with meanings taken word for word from published
- * translations: Darussalam's English and al-Faryiwa'i's Urdu. Decoded once and kept.
- */
 class BundledNamesRepository(
     private val content: BundledContentSource,
     private val dispatchers: DispatcherProvider,

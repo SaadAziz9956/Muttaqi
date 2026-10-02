@@ -42,10 +42,6 @@ import org.robolectric.annotation.Config
 import org.robolectric.annotation.GraphicsMode
 import java.io.File
 
-/**
- * The Share page with passages from the real bundled texts, handed over as the features that share them do, to
- * compare with the iOS screenshots; and the image that's shared
- */
 @RunWith(RobolectricTestRunner::class)
 @GraphicsMode(GraphicsMode.Mode.NATIVE)
 @Config(application = Application::class, sdk = [35], qualifiers = IPHONE_AIR)
@@ -55,7 +51,6 @@ class ShareScreenshotTest {
 
     private val content = BundledContentSource { File("../content/data/$it").readText() }
 
-    // Everything runs where it's called, so each view model has loaded by the time it's made
     private val dispatchers = object : DispatcherProvider {
         override val main: CoroutineDispatcher = Dispatchers.Unconfined
         override val io: CoroutineDispatcher = Dispatchers.Unconfined
@@ -71,13 +66,11 @@ class ShareScreenshotTest {
         override val changes = MutableStateFlow(language)
     }
 
-    /** A verse or hadith as an Explore topic page hands it over */
     private fun topicPassage(topicId: String, section: TopicSection, language: Language, index: Int = 0): SharePassage =
         TopicPageViewModel(TopicChips.ExploreGroup, topicId, topics, language(language))
             .apply { dispatch(TopicPageIntent.SectionTapped(section)) }
             .state.value.passages[index].toSharePassage()
 
-    /** A Quranic dua with its transliteration, as the Dua of the Day hands it over */
     private fun quranicDua(surah: Int, ayah: Int): SharePassage {
         val dua = runBlocking { duas.quranicDuas(Language.English) }.first { it.surahNumber == surah && it.ayahNumber == ayah }
         return SharePassage(dua.arabic, dua.transliteration, dua.translation, "Quran (${dua.reference})")
@@ -111,25 +104,20 @@ class ShareScreenshotTest {
         capture("share_dua_transliteration", share(quranicDua(26, 83), Language.English))
     }
 
-    /** The image as it's shared: drawn off screen into a layer, at 3 pixels a point, as iOS renders it */
     @Test
     fun sharedImage() {
         lateinit var layer: GraphicsLayer
         compose.setContent {
             layer = rememberGraphicsLayer()
-            // On a page in dark mode, which the image doesn't follow
             MuttaqiTheme(darkTheme = true) {
                 Box(Modifier.fillMaxSize()) { RecordShareCardImage(quranicDua(26, 83), layer) }
             }
         }
-        // Robolectric draws only when asked, where a phone draws every frame; drawing records the image
         compose.onRoot().captureToImage()
         val bitmap = runBlocking { layer.toImageBitmap() }.asAndroidBitmap()
-        // 390 points wide at 3x, as iOS's ImageRenderer makes it, whatever the phone
         assertEquals(1170, bitmap.width)
         bitmap.captureRoboImage("screenshots/share_image.png")
     }
 }
 
-/** The iPhone Air's screen, which the iOS Share screenshots were taken on, so lines wrap where they do there */
 private const val IPHONE_AIR = "w420dp-h912dp-xxhdpi"

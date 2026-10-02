@@ -12,7 +12,6 @@ import kotlinx.coroutines.launch
 
 internal object TafsirReducer : Reducer<TafsirState, TafsirMutation> {
     override fun reduce(state: TafsirState, mutation: TafsirMutation) = when (mutation) {
-        // The tafsir loaded for the old language is dropped; it loads again in the new one when next opened
         is TafsirMutation.LanguageChanged -> state.copy(language = mutation.language, status = TafsirStatus.Idle)
         is TafsirMutation.Loading -> state.copy(surahNumber = mutation.surahNumber, status = TafsirStatus.Loading)
         is TafsirMutation.Loaded -> state.copy(status = TafsirStatus.Loaded(mutation.entries))
@@ -20,10 +19,6 @@ internal object TafsirReducer : Reducer<TafsirState, TafsirMutation> {
     }
 }
 
-/**
- * The explanation for the surah being read. Made with the reader and loaded only when the sheet first opens, so
- * reading a surah never downloads its tafsir unasked; reopening the sheet shows what was loaded straight away
- */
 class TafsirViewModel(
     private val getTafsir: GetTafsir,
     selectedLanguage: SelectedLanguage,

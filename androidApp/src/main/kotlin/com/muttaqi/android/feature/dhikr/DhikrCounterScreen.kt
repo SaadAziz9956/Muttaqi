@@ -99,7 +99,6 @@ fun DhikrCounterRoute(dhikrId: String, onShare: (SharePassage) -> Unit, onBack: 
     LaunchedEffect(viewModel) {
         viewModel.effects.collect { effect ->
             when (effect) {
-                // A light tick for each count, a stronger one at the end of a phrase, and a confirmation for the round
                 is DhikrCounterEffect.Counted -> haptics.performHapticFeedback(
                     when (effect.milestone) {
                         DhikrMilestone.Repetition -> HapticFeedbackType.SegmentTick
@@ -111,7 +110,6 @@ fun DhikrCounterRoute(dhikrId: String, onShare: (SharePassage) -> Unit, onBack: 
             }
         }
     }
-    // Counting a long set shouldn't be interrupted by the screen locking
     val view = LocalView.current
     DisposableEffect(view) {
         view.keepScreenOn = true
@@ -120,7 +118,6 @@ fun DhikrCounterRoute(dhikrId: String, onShare: (SharePassage) -> Unit, onBack: 
     DhikrCounterScreen(state, viewModel::dispatch, onBack)
 }
 
-/** One dhikr in full, with a counter pinned at the bottom within reach of the thumb */
 @Composable
 fun DhikrCounterScreen(state: DhikrCounterState, onIntent: (DhikrCounterIntent) -> Unit, onBack: () -> Unit) {
     var confirmingReset by rememberSaveable { mutableStateOf(false) }
@@ -168,14 +165,12 @@ fun DhikrCounterScreen(state: DhikrCounterState, onIntent: (DhikrCounterIntent) 
     }
 }
 
-/** The dhikr: its words or its set of phrases, the hadith giving its virtue, and where it's from */
 @Composable
 private fun DhikrText(dhikr: Dhikr, state: DhikrCounterState) {
     val soft = MuttaqiTheme.soft
     val list = rememberLazyListState()
     val current = state.currentStep?.index ?: 0
     val firstStep = if (dhikr.title != null) 1 else 0
-    // Keeps the phrase to say now in view as a set moves on to the next one (not on opening, as on iOS)
     var shownStep by remember { mutableStateOf(current) }
     LaunchedEffect(current) {
         if (current == shownStep || dhikr.steps.isEmpty()) return@LaunchedEffect
@@ -232,7 +227,6 @@ private fun DhikrText(dhikr: Dhikr, state: DhikrCounterState) {
         item(key = "source") {
             Column(Modifier.padding(top = 16.dp), verticalArrangement = Arrangement.spacedBy(4.dp)) {
                 Text(dhikr.reference, style = MaterialTheme.typography.labelSmall, color = soft.brandTeal)
-                // The grade and credit are set in the system font, as on iOS
                 val small = MaterialTheme.typography.labelSmall.copy(fontFamily = FontFamily.Default, fontSize = 11.sp)
                 Text(dhikr.grade, style = small, color = soft.textSecondary)
                 dhikr.credit?.let { Text("Translation: $it", style = small, color = soft.textSecondary) }
@@ -241,7 +235,6 @@ private fun DhikrText(dhikr: Dhikr, state: DhikrCounterState) {
     }
 }
 
-/** A single phrase: the Arabic, how it's said and what it means, selectable to copy */
 @Composable
 private fun Phrase(dhikr: Dhikr, modifier: Modifier = Modifier) {
     val soft = MuttaqiTheme.soft
@@ -256,7 +249,6 @@ private fun Phrase(dhikr: Dhikr, modifier: Modifier = Modifier) {
     }
 }
 
-/** A translation in the direction of its script: Urdu from the right, English from the left */
 @Composable
 private fun Translated(text: String, size: Int, color: Color) {
     TranslationText(
@@ -268,10 +260,6 @@ private fun Translated(text: String, size: Int, color: Color) {
     )
 }
 
-/**
- * The counter orb over a fade of the page: the phrase being said for a set, the count in an expressive wavy ring that
- * fills as the round goes on and turns green when it's complete, and the rounds finished today
- */
 @OptIn(ExperimentalMaterial3ExpressiveApi::class)
 @Composable
 private fun Counter(dhikr: Dhikr, state: DhikrCounterState, onCount: () -> Unit, modifier: Modifier = Modifier) {
@@ -291,7 +279,6 @@ private fun Counter(dhikr: Dhikr, state: DhikrCounterState, onCount: () -> Unit,
     Column(
         modifier
             .fillMaxWidth()
-            // Fades the text out behind the counter, so the orb floats over the page rather than on a bar
             .background(Brush.verticalGradient(0f to soft.canvas.copy(alpha = 0f), 0.3f to soft.canvas.copy(alpha = 0.92f), 1f to soft.canvas))
             .navigationBarsPadding()
             .padding(top = 44.dp, bottom = 6.dp),

@@ -19,7 +19,6 @@ class LocationRepositoryTest {
     private val legacy = mutableMapOf<String, String>()
     private val saved = savedCoordinates(settings, legacy)
 
-    // What the Swift app's JSONEncoder wrote for Karachi, key order and all
     private val swiftJson = """{"longitude":67.0011,"latitude":24.8607}"""
 
     @Test

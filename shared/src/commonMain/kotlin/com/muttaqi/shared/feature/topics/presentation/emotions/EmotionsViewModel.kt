@@ -24,7 +24,6 @@ class EmotionsViewModel(
 ) : MviViewModel<EmotionsState, EmotionsIntent, EmotionsMutation, EmotionsEffect>(EmotionsState(), EmotionsReducer) {
 
     init {
-        // Reloads in the new language whenever the reader switches it
         viewModelScope.launch {
             selectedLanguage.changes.collect { language ->
                 try {

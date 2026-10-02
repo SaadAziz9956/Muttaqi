@@ -63,7 +63,6 @@ import com.muttaqi.shared.feature.onboarding.presentation.OnboardingVerse
 import com.muttaqi.shared.feature.onboarding.presentation.OnboardingVerses
 import com.muttaqi.shared.feature.onboarding.presentation.OnboardingViewModel
 
-/** The first launch; [onFinished] once it's done and saved */
 @Composable
 fun OnboardingRoute(viewModel: OnboardingViewModel, onFinished: () -> Unit) {
     val state by viewModel.state.collectAsStateWithLifecycle()
@@ -77,10 +76,6 @@ fun OnboardingRoute(viewModel: OnboardingViewModel, onFinished: () -> Unit) {
     OnboardingScreen(state, viewModel::dispatch)
 }
 
-/**
- * One step at a time under the app's name, which stays still while the steps move on like pages; setup centres its
- * own. On the plain system background, as on iOS, rather than the soft backdrop
- */
 @Composable
 fun OnboardingScreen(state: OnboardingState, onIntent: (OnboardingIntent) -> Unit) {
     val colors = OnboardingColors.current()
@@ -91,7 +86,6 @@ fun OnboardingScreen(state: OnboardingState, onIntent: (OnboardingIntent) -> Uni
         AnimatedContent(
             targetState = state.step,
             modifier = Modifier.weight(1f).fillMaxWidth(),
-            // Pushed in from the trailing edge, as iOS moves between the steps
             transitionSpec = {
                 val duration = tween<androidx.compose.ui.unit.IntOffset>(450)
                 (slideInHorizontally(duration) { it } + fadeIn(tween(450))) togetherWith
@@ -220,7 +214,6 @@ private fun ColumnScope.GoalsStep(onBegin: () -> Unit) {
     }
 }
 
-/** A step asking for a permission, as notifications and location do */
 @Composable
 private fun ColumnScope.PermissionStep(
     title: String,
@@ -291,13 +284,11 @@ private fun ColumnScope.SetupStep(error: String?, onRetry: () -> Unit) {
     Spacer(Modifier.weight(1f))
 }
 
-/** A verse in the Quran font as iOS sets it on these steps: the published text as it is, not re-encoded for the font */
 @Composable
 private fun VerseArabic(verse: OnboardingVerse, size: TextUnit, color: Color) {
     Text(verse.arabic, style = TextStyle(fontFamily = QuranFont, fontSize = size, textDirection = TextDirection.Rtl), color = color, textAlign = TextAlign.Center)
 }
 
-/** The onboarding's own teal button */
 @Composable
 private fun OnboardingButton(
     label: String,
@@ -320,7 +311,6 @@ private fun OnboardingButton(
     }
 }
 
-/** The iOS asset catalogue's onboarding colours, which aren't part of the soft style */
 private data class OnboardingColors(
     val background: Color,
     val textPrimary: Color,

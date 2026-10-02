@@ -1,8 +1,6 @@
 import Observation
 import Shared
 
-/// A shared value that changes many times a second, like the reading position while scrolling, observed on its own so
-/// only the view that shows it redraws
 @Observable
 @MainActor
 final class SharedValue<Value> {

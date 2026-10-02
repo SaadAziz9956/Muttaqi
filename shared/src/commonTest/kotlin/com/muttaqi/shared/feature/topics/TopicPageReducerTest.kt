@@ -45,13 +45,10 @@ class TopicPageReducerTest {
         assertEquals(listOf("hisn-1"), onDua.passages.map { it.id })
         assertEquals("Alhamdu lillaah", onDua.passages.single().transliteration)
 
-        // Happy has duas too
         assertEquals(TopicSection.Dua, TopicPageReducer.reduce(onDua, TopicPageMutation.TopicSelected("happy")).section)
-        // Bored has none, so its first kind shows
         val boredState = TopicPageReducer.reduce(onDua, TopicPageMutation.TopicSelected("bored"))
         assertEquals(TopicSection.Quran, boredState.section)
         assertEquals("bored", boredState.selectedId)
-        // Happy has no verses, so it opens on hadith
         assertEquals(TopicSection.Hadith, TopicPageReducer.reduce(boredState, TopicPageMutation.TopicSelected("happy")).section)
     }
 

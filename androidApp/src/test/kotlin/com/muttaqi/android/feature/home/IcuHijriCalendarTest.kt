@@ -9,10 +9,6 @@ import org.junit.runner.RunWith
 import org.robolectric.RobolectricTestRunner
 import org.robolectric.annotation.Config
 
-/**
- * Android's Hijri date against what Foundation's Umm al-Qura calendar wrote on iOS for the same days (the shared iOS
- * test checks the same dates there), so both apps show the same date in the same words
- */
 @RunWith(RobolectricTestRunner::class)
 @Config(application = Application::class, sdk = [35])
 class IcuHijriCalendarTest {

@@ -22,10 +22,6 @@ import kotlin.test.assertNull
 import kotlin.time.Duration.Companion.hours
 import kotlin.time.Instant
 
-/**
- * The journal's Room database itself, in memory, with the SQLite driver the apps use. It runs in the iOS simulator
- * tests: the Android host tests' JVM has no build of the bundled SQLite for the computer it runs on
- */
 class RoomJournalRepositoryTest {
     private val database = Room.inMemoryDatabaseBuilder<JournalDatabase>()
         .setDriver(BundledSQLiteDriver())

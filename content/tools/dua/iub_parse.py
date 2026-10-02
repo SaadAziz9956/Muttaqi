@@ -3,7 +3,6 @@ out=[]; seen=set()
 for n in range(1,281):
     try: s=open(f'iub/h{n}.html',encoding='utf-8',errors='replace').read()
     except: continue
-    # split on hadith number markers
     parts=re.split(r'<span class="fontarabic fs2 hno_color bold">حدیث نمبر: </span><span class="fontcalibri fs1 hno_color bold">',s)
     for p in parts[1:]:
         num=p.split('<',1)[0].strip()

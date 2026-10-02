@@ -38,7 +38,6 @@ import com.muttaqi.shared.feature.dua.presentation.list.DuaListState
 import com.muttaqi.shared.feature.dua.presentation.list.DuaListViewModel
 import org.koin.compose.viewmodel.koinViewModel
 
-/** The Dua tab's first screen, wired to its shared view model */
 @Composable
 fun DuaListRoute(onOpenCategory: (String) -> Unit, onOpenChapter: (String) -> Unit) {
     val viewModel = koinViewModel<DuaListViewModel>()
@@ -54,7 +53,6 @@ fun DuaListRoute(onOpenCategory: (String) -> Unit, onOpenChapter: (String) -> Un
     DuaListScreen(state, viewModel::dispatch)
 }
 
-/** The categories as tiles under the title and search; search results replace them while there's a query */
 @Composable
 fun DuaListScreen(state: DuaListState, onIntent: (DuaListIntent) -> Unit) {
     val soft = MuttaqiTheme.soft

@@ -4,11 +4,6 @@ import com.muttaqi.shared.core.model.Language
 import com.muttaqi.shared.feature.quran.domain.model.Ayah
 import com.muttaqi.shared.feature.quran.domain.model.Surah
 
-/**
- * The Quran as Home shows it on 30 September and 2 October 2026, word for word from the Quran API's editions (Uthmani,
- * Saheeh International, Fateh Muhammad Jalandhry) as the app stores them: the verse under the greeting (3:139) and
- * the Ayah of the Day (16:128, and 25:63 on the Friday), with the surahs Home names
- */
 internal object HomeScreenshotQuran {
     val surahs = listOf(
         Surah(2, "سورة البقرة", "Al-Baqara", "The Cow", "Medinan", 286),

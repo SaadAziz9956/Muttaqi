@@ -1,6 +1,5 @@
 import SwiftUI
 
-// Re-enables the swipe-back gesture that navigationBarBackButtonHidden(true) disables.
 struct SwipeBackEnabler: UIViewRepresentable {
     func makeUIView(context: Context) -> UIView {
         let view = UIView()

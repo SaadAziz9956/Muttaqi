@@ -113,7 +113,6 @@ class HomeViewModelTest {
         )
     }
 
-    /** A time where the reader is, e.g. `at(2026, 9, 30, 18, 25)` */
     private fun at(year: Int, month: Int, day: Int, hour: Int, minute: Int): Instant =
         LocalDateTime(year, month, day, hour, minute).toInstant(karachi)
 
@@ -125,8 +124,6 @@ class HomeViewModelTest {
 
     @Test
     fun theDaysPicksAreTheOnesTheIosAppShowed() {
-        // 30 September 2026 is day 739,889 of the era, as Foundation counts it: names[day % 99], topics[day × 7 % 5],
-        // the short everyday hadith[day × 13 % 5], the curated ayahs[day % 39] and duas[day % 38]
         val state = viewModel().state.value
         assertEquals(63, state.nameOfTheDay?.number)
         assertEquals("food", state.topicOfTheDay?.id)
@@ -134,7 +131,6 @@ class HomeViewModelTest {
         assertEquals("16:128", state.ayahOfTheDay?.reference)
         assertEquals("30:30", state.duaOfTheDay?.reference)
 
-        // The same all day, then the next at the reader's midnight, once Home is refreshed
         val viewModel = viewModel()
         clock.now = at(2026, 9, 30, 23, 59)
         viewModel.dispatch(HomeIntent.Refresh)
@@ -167,12 +163,10 @@ class HomeViewModelTest {
         assertEquals(qibla(karachiCoordinates), state.qibla)
         assertEquals("en 3:139", state.greeting?.ayah?.translation)
         assertEquals("3:139", state.greeting?.reference)
-        // A round of 33 finished and 10 more, and 7 of open-ended remembrance
         assertEquals(50, state.dhikrToday)
         assertEquals("today", state.journalToday?.id)
         assertEquals(LastReading(surah(2), 9), state.lastReading)
         assertEquals(surah(18), state.kahf)
-        // Wednesday, so no Al-Kahf
         assertNull(state.fridayKahf)
     }
 
@@ -186,7 +180,6 @@ class HomeViewModelTest {
         assertNull(state.kahf)
         assertEquals(0, state.dhikrToday)
         assertNull(state.journalToday)
-        // The rest comes from the bundled texts, so it's there without the Quran
         assertNotNull(state.nameOfTheDay)
         assertNotNull(state.duaOfTheDay)
         assertNotNull(state.hadithOfTheDay)
@@ -204,7 +197,6 @@ class HomeViewModelTest {
         assertEquals(LastReading(surah(18), 40), viewModel.state.value.lastReading)
         assertNull(viewModel.state.value.fridayKahf)
 
-        // Friday is the reader's Friday: 23:30 on Thursday in UTC is already Friday in Karachi
         quran.last = null
         clock.now = Instant.parse("2026-10-01T23:30:00Z")
         viewModel.dispatch(HomeIntent.Refresh)
@@ -218,17 +210,14 @@ class HomeViewModelTest {
         assertEquals(Prayer.Maghrib, viewModel.state.value.nextPrayerToday)
         assertEquals("Hijri of 2026-09-30", viewModel.state.value.hijriDate)
 
-        // The Islamic day begins at Maghrib, so the next Hijri date shows from then
         clock.now = at(2026, 9, 30, 18, 25)
         assertEquals(Prayer.Isha, viewModel.state.value.nextPrayerToday)
         assertEquals("Hijri of 2026-10-01", viewModel.state.value.hijriDate)
 
-        // After Isha the next prayer is tomorrow's Fajr, so none of today's row is picked out
         clock.now = at(2026, 9, 30, 21, 0)
         assertEquals(Prayer.Fajr, viewModel.state.value.nextPrayer?.prayer)
         assertNull(viewModel.state.value.nextPrayerToday)
 
-        // After midnight the civil date and the Hijri date agree again
         clock.now = at(2026, 10, 1, 0, 30)
         assertEquals("Hijri of 2026-10-01", viewModel.state.value.hijriDate)
         assertEquals(LocalDate(2026, 10, 1), viewModel.state.value.today)
@@ -322,13 +311,11 @@ class HomeViewModelTest {
         viewModel.dispatch(HomeIntent.Refresh)
         assertEquals(3, viewModel.state.value.dhikrToday)
 
-        // An entry written today shows at once; yesterday's never counts as today's
         journal.save(JournalTestData.entry("yesterday", "Rain", "", "2026-09-29T10:00:00Z"))
         assertNull(viewModel.state.value.journalToday)
         journal.save(JournalTestData.entry("today", "Family", "", "2026-09-30T10:00:00Z"))
         assertEquals("today", viewModel.state.value.journalToday?.id)
 
-        // After midnight, once Home is refreshed, it's a new day with no entry yet
         clock.now = at(2026, 10, 1, 7, 0)
         viewModel.dispatch(HomeIntent.Refresh)
         assertNull(viewModel.state.value.journalToday)
@@ -363,14 +350,12 @@ class HomeViewModelTest {
             assertEquals(HomeEffect.OpenNames, awaitItem())
             viewModel.dispatch(HomeIntent.EmotionsTapped)
             assertEquals(HomeEffect.OpenEmotions, awaitItem())
-            // Friday 2 October is day 739,891: topics[739,891 × 7 % 5]
             viewModel.dispatch(HomeIntent.TopicTapped)
             assertEquals(HomeEffect.OpenTopic("prayer"), awaitItem())
             viewModel.dispatch(HomeIntent.ContinueReadingTapped)
             assertEquals(HomeEffect.OpenSurah(surah(2), 9), awaitItem())
             viewModel.dispatch(HomeIntent.KahfTapped)
             assertEquals(HomeEffect.OpenSurah(surah(18), 1), awaitItem())
-            // The curated ayahs[739,891 % 39] is 25:63
             viewModel.dispatch(HomeIntent.AyahOfTheDayTapped)
             assertEquals(HomeEffect.OpenSurah(surah(25), 63), awaitItem())
         }
@@ -392,7 +377,6 @@ class HomeViewModelTest {
     fun theDailyCardsShareAndCopyAsTheIosAppDid() = runTest {
         val viewModel = viewModel()
         viewModel.effects.test {
-            // The ayah without its end-of-ayah sign, which the card doesn't number
             viewModel.dispatch(HomeIntent.ShareTapped(DailyCard.Ayah))
             assertEquals(HomeEffect.OpenShare(SharePassage("آية 16:128", null, "en 16:128", "Quran (16:128)")), awaitItem())
             viewModel.dispatch(HomeIntent.CopyTapped(DailyCard.Ayah))
@@ -418,13 +402,11 @@ class HomeViewModelTest {
         saved.save(karachiCoordinates)
         val heading = FakeHeadingProvider()
         val viewModel = viewModel(FakeLocationProvider(LocationAccess.Denied), heading)
-        // Karachi's Qibla is 267.74° from north
         val bearing = qibla(karachiCoordinates).bearing
         viewModel.qiblaArrow.test {
             assertNull(awaitItem())
             heading.turnTo(10.0)
             assertEquals(bearing - 10.0, awaitItem()!!, absoluteTolerance = 1e-9)
-            // Turning back past north, the arrow carries on round by 20° rather than spinning back 340°
             heading.turnTo(350.0)
             assertEquals(bearing - 10.0 + 20.0, awaitItem()!!, absoluteTolerance = 1e-9)
             heading.turnTo(90.0)

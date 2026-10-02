@@ -4,7 +4,6 @@ import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.IO
 
-/** Where work runs, passed in rather than hard-coded, so tests can run everything on one test dispatcher */
 interface DispatcherProvider {
     val main: CoroutineDispatcher
     val io: CoroutineDispatcher

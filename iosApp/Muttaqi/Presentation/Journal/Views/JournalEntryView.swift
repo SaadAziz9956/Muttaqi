@@ -1,8 +1,6 @@
 import Shared
 import SwiftUI
 
-/// One entry, or a new one when `entryId` is nil. There's no Save button: the view model saves a moment after typing
-/// stops, and straight away when the reader leaves, puts the keyboard away or leaves the app
 struct JournalEntryView: View {
     private enum Field {
         case title, body
@@ -19,13 +17,10 @@ struct JournalEntryView: View {
 
     private var state: JournalEntryState { screen.state }
 
-    /// The view model's state as it is this instant. `screen.state` follows it a moment later, so a text field bound
-    /// to that could be redrawn with an older value between two fast keystrokes and lose the second
     private var current: JournalEntryState { screen.viewModel.state.value }
 
     var body: some View {
         ScrollView {
-            // An existing entry is read from the database first, which takes a moment; a new one is ready at once
             if let entry = state.entry {
                 VStack(alignment: .leading, spacing: 0) {
                     Text(entry.createdDate.formatted(Self.dateFormat))
@@ -39,7 +34,6 @@ struct JournalEntryView: View {
                         .focused($focus, equals: .title)
                         .submitLabel(.next)
                         .padding(.top, 16)
-                        // In the title, Return moves on to the body rather than adding a line
                         .onSubmit { focus = .body }
 
                     TextField("Body", text: Binding(get: { current.body }, set: { dispatch(JournalEntryIntentBodyChanged(body: $0)) }), prompt: Text("Body").foregroundStyle(Color.textSecondary), axis: .vertical)
@@ -49,7 +43,6 @@ struct JournalEntryView: View {
                         .focused($focus, equals: .body)
                         .padding(.top, 20)
 
-                    // Tapping below the text carries on writing, as on a page
                     Color.clear
                         .frame(maxWidth: .infinity, minHeight: 240)
                         .contentShape(.rect)
@@ -85,8 +78,6 @@ struct JournalEntryView: View {
         }
         .task {
             guard state.startedEmpty else { return }
-            // A focus request made while the screen is still being pushed can be dropped, so it's repeated until
-            // the title takes it, for up to a second
             for _ in 0..<10 where focus == nil {
                 focus = .title
                 try? await Task.sleep(for: .milliseconds(100))
@@ -114,17 +105,14 @@ struct JournalEntryView: View {
         screen.viewModel.dispatch(intent: intent)
     }
 
-    /// The view model keeps a title to one line; Return, typed as a line break, moves on to the body
     private var title: Binding<String> {
         Binding(get: { current.title }, set: { title in
             dispatch(JournalEntryIntentTitleChanged(title: title))
-            // After UIKit finishes handling the key, or the focus change is lost
             if title.contains(where: \.isNewline) { Task { focus = .body } }
         })
     }
 
     private var deleteButton: some View {
-        // Nothing written yet: the view model deletes and closes without asking
         Button {
             dispatch(JournalEntryIntentDeleteTapped.shared)
         } label: {
@@ -147,7 +135,6 @@ struct JournalEntryView: View {
         }
     }
 
-    /// "02 - May - 2023", as in the design
     private static let dateFormat = Date.VerbatimFormatStyle(
         format: "\(day: .twoDigits) - \(month: .abbreviated) - \(year: .defaultDigits)",
         locale: .autoupdatingCurrent,

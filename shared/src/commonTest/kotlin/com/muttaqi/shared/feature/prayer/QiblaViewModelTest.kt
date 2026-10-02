@@ -39,7 +39,6 @@ class QiblaViewModelTest {
     private val dispatcher = UnconfinedTestDispatcher()
     private val saved: SavedCoordinates = savedCoordinates()
     private val qibla = GetQiblaDirection(AdhanQiblaRepository())
-    // Karachi's Qibla is 267.74° from north
     private val karachiBearing = qibla(karachi).bearing
 
     private fun viewModel(
@@ -130,11 +129,9 @@ class QiblaViewModelTest {
             assertNull(awaitItem())
             heading.turnTo(350.0)
             assertEquals(QiblaCompass(CompassHeading(350.0, 5.0), 350.0, karachiBearing - 350.0), awaitItem())
-            // Past north the dial keeps going round rather than spinning back
             heading.turnTo(10.0)
             val past = awaitItem()!!
             assertEquals(370.0, past.dialRotation)
-            // From 10° the Qibla, at 267.74°, is 102° to the left
             assertEquals(-102, past.turnAngle.roundToInt())
             heading.turnTo(270.0)
             assertEquals(270.0, awaitItem()!!.dialRotation)
@@ -152,7 +149,6 @@ class QiblaViewModelTest {
             heading.turnTo(266.0)
             assertEquals(QiblaEffect.FacingQibla, awaitItem())
             assertTrue(viewModel.compass.value!!.isAligned)
-            // Still facing it: no second haptic
             heading.turnTo(268.0)
             expectNoEvents()
             heading.turnTo(300.0)

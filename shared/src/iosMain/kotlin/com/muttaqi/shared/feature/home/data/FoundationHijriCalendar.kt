@@ -15,7 +15,6 @@ import platform.Foundation.NSTimeZone
 import platform.Foundation.dateWithTimeIntervalSince1970
 import platform.Foundation.timeZoneForSecondsFromGMT
 
-/** Foundation's Umm al-Qura calendar, in the English the Swift app's formatter wrote, e.g. "Rabiʻ II 19, 1448 AH" */
 class FoundationHijriCalendar : HijriCalendar {
     private val formatter = NSDateFormatter().apply {
         calendar = NSCalendar(calendarIdentifier = NSCalendarIdentifierIslamicUmmAlQura).apply {
@@ -23,7 +22,6 @@ class FoundationHijriCalendar : HijriCalendar {
         }
         locale = NSLocale(localeIdentifier = "en")
         dateFormat = "MMMM d, y G"
-        // The day is given as a date, so it's read at noon in one fixed zone, whatever the reader's
         timeZone = NSTimeZone.timeZoneForSecondsFromGMT(0)
     }
 

@@ -1,7 +1,6 @@
 import Shared
 import UserNotifications
 
-/// Notification permission for the shared code, on UserNotifications
 nonisolated final class NotificationService: NSObject, NotificationPermission {
     func request(onResult: @escaping (KotlinBoolean) -> Void) {
         Task {

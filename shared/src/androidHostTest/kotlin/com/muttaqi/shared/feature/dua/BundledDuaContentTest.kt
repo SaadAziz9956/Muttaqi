@@ -13,7 +13,6 @@ import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertTrue
 
-/** Decodes the real bundled files, so a change to their shape is caught here rather than in the apps */
 class BundledDuaContentTest {
     private val content = BundledContentSource { File("../content/data/$it").readText() }
 
@@ -29,7 +28,6 @@ class BundledDuaContentTest {
     @Test
     fun theDuaOfTheDayIsTheOneTheIosAppShowedOnTheSameDays() = runTest {
         val pick = GetDuaOfTheDay(BundledDuaRepository(content, TestDispatchers(StandardTestDispatcher(testScheduler))))
-        // Swift picked duas[ordinality of the day in the era % 38]; 30 September 2026 showed 26:83 on iOS
         assertEquals("26:83", pick(LocalDate(2026, 9, 30), Language.English)?.reference)
         assertEquals("26:83", pick(LocalDate(2026, 9, 30), Language.Urdu)?.reference)
         assertEquals("27:19", pick(LocalDate(2026, 10, 1), Language.English)?.reference)

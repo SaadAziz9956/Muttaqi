@@ -1,14 +1,6 @@
 import Observation
 import Shared
 
-/// A shared (Kotlin) view model for one SwiftUI screen: `state` follows the view model's state flow, so SwiftUI
-/// redraws when it changes, and the view model is cleared, cancelling its work, when the screen goes away.
-///
-///     @State private var screen = SharedViewModel(DuaViewModels.shared.list()) { $0.state }
-///     ...
-///     Text(screen.state.query)
-///     screen.viewModel.dispatch(intent: DuaListIntentQueryChanged(query: text))
-///     .task { for await effect in screen.viewModel.effects { ... } }
 @Observable
 @MainActor
 final class SharedViewModel<VM: Lifecycle_viewmodelViewModel, State: AnyObject> {

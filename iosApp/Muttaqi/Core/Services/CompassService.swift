@@ -1,14 +1,12 @@
 import CoreLocation
 import Shared
 
-/// The compass for the shared code, on Core Location's heading
 nonisolated final class CompassService: NSObject, HeadingProvider {
     var isAvailable: Bool {
         CLLocationManager.headingAvailable()
     }
 
     func startUpdates(onHeading: @escaping (CompassHeading) -> Void) -> HeadingUpdates {
-        // Each caller has its own location manager, so one stopping can never stop another
         HeadingTracker(onHeading: onHeading)
     }
 }
@@ -28,7 +26,6 @@ private nonisolated final class HeadingTracker: NSObject, HeadingUpdates, CLLoca
         self.manager = manager
         manager.delegate = self
         manager.headingFilter = 1
-        // Core Location only reports true north while this manager also has a location; a rough one is enough
         if [.authorizedWhenInUse, .authorizedAlways].contains(manager.authorizationStatus) {
             manager.desiredAccuracy = kCLLocationAccuracyThreeKilometers
             manager.startUpdatingLocation()

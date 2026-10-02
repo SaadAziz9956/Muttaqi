@@ -82,7 +82,6 @@ fun ShareRoute(passage: SharePassage, onBack: () -> Unit) {
         val saved = image.toShareBitmap()?.let { context.saveImageToGallery(it, fileName) } ?: false
         snackbar.showSnackbar(if (saved) "Saved to your gallery" else "Couldn't save the image")
     }
-    // Android 8 and 9 need the storage permission to save; the save waits for it
     var waitingToSave by rememberSaveable { mutableStateOf<String?>(null) }
     val storagePermission = rememberLauncherForActivityResult(ActivityResultContracts.RequestPermission()) { granted ->
         val fileName = waitingToSave ?: return@rememberLauncherForActivityResult
@@ -110,10 +109,6 @@ fun ShareRoute(passage: SharePassage, onBack: () -> Unit) {
     }
 }
 
-/**
- * A preview of the card to share on the brand green, with Quran 16:125 at the foot of the page; the send button
- * opens the share sheet with the card as an image, and the save button saves it to the gallery
- */
 @Composable
 fun ShareScreen(
     state: ShareState,
@@ -122,7 +117,6 @@ fun ShareScreen(
     snackbar: SnackbarHostState = remember { SnackbarHostState() },
 ) {
     val green = MuttaqiTheme.soft.brandGreen
-    // The app stops each page above the navigation bar; the green goes on under it, as iOS fills the screen
     val navigationBar = WindowInsets.navigationBars.getBottom(LocalDensity.current)
     Scaffold(
         modifier = Modifier.drawBehind { drawRect(green, size = Size(size.width, size.height + navigationBar)) },
@@ -141,7 +135,6 @@ fun ShareScreen(
             Modifier
                 .fillMaxSize()
                 .verticalScroll(rememberScrollState())
-                // Inside the scroll, so the card scrolls under the bar and above the verse, as on iOS
                 .padding(top = padding.calculateTopPadding(), bottom = padding.calculateBottomPadding() + 32.dp),
             horizontalAlignment = Alignment.CenterHorizontally,
         ) {
@@ -158,7 +151,6 @@ private fun ShareTopBar(onBack: () -> Unit, onSave: () -> Unit, onShare: () -> U
         title = {},
         navigationIcon = { GlassButton(R.drawable.ic_arrow_left_02_linear, "Back", onBack, Modifier.padding(start = 12.dp)) },
         actions = {
-            // iOS saves from its share sheet; Android's has no save, so it's a button of its own
             GlassButton(R.drawable.ic_import_linear, "Save image", onSave)
             Spacer(Modifier.width(8.dp))
             GlassButton(R.drawable.ic_send_2_linear, "Share", onShare, Modifier.padding(end = 12.dp))
@@ -167,7 +159,6 @@ private fun ShareTopBar(onBack: () -> Unit, onSave: () -> Unit, onShare: () -> U
     )
 }
 
-/** A round bar button with a white icon, in the tint iOS 26's glass takes over the brand green */
 @Composable
 private fun GlassButton(@DrawableRes icon: Int, contentDescription: String, onClick: () -> Unit, modifier: Modifier = Modifier) {
     val dark = MuttaqiTheme.soft.dark
@@ -186,7 +177,6 @@ private fun GlassButton(@DrawableRes icon: Int, contentDescription: String, onCl
     }
 }
 
-/** Quran 16:125 in the reader's language, fixed at the foot of the page */
 @Composable
 private fun ShareFooter(verse: DisplayedQuote) {
     val text = Color.White.copy(alpha = 0.85f)
@@ -203,7 +193,6 @@ private fun ShareFooter(verse: DisplayedQuote) {
     }
 }
 
-/** White status and navigation bar icons over the green, as iOS's dark bar; the app's own come back on leaving */
 @Composable
 private fun LightSystemBarIcons() {
     val window = LocalActivity.current?.window ?: return

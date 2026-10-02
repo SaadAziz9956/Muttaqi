@@ -13,7 +13,6 @@ data object DhikrListRoute
 @Serializable
 data class DhikrCounterRoute(val dhikrId: String)
 
-/** The Dikr screens: the list by section and one dhikr's counter. Registered in their tab's graph by MuttaqiApp */
 fun NavGraphBuilder.dhikrDestinations(navController: NavController) {
     composable<DhikrListRoute> {
         DhikrListRoute(

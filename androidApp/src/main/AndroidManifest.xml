@@ -1,15 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <!-- The Quran text, translations and tafsir are downloaded from their APIs -->
     <uses-permission android:name="android.permission.INTERNET" />
 
-    <!-- Saving a share card to the gallery on Android 8 and 9; from Android 10 MediaStore needs no permission -->
     <uses-permission
         android:name="android.permission.WRITE_EXTERNAL_STORAGE"
         android:maxSdkVersion="28" />
 
-    <!-- Prayer times and the Qibla; approximate location is enough, and the reader can choose it -->
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
@@ -29,7 +26,6 @@
             </intent-filter>
         </activity>
 
-        <!-- Hands the share card's image to the app it's shared with (feature/share) -->
         <provider
             android:name="androidx.core.content.FileProvider"
             android:authorities="${applicationId}.share"

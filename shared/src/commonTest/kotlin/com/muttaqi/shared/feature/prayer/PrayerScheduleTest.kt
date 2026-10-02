@@ -18,12 +18,10 @@ class PrayerScheduleTest {
     private val times = AdhanPrayerTimesRepository()
     private val getSchedule = GetPrayerSchedule(times)
 
-    // Karachi on 2026-09-30 (UTC+5): Fajr 05:08, Dhuhr 12:23, Asr 16:40, Maghrib 18:20, Isha 19:36
     private fun schedule(now: String) = getSchedule(karachi, Instant.parse(now), karachiTime)!!
 
     @Test
     fun todayIsTheReadersDayNotUtcs() {
-        // 01:00 on the 30th in Karachi is still the 29th in UTC
         val schedule = schedule("2026-09-29T20:00:00Z")
         assertEquals(times.prayerTimes(LocalDate(2026, 9, 30), karachi), schedule.today)
         assertEquals(times.prayerTimes(LocalDate(2026, 10, 1), karachi), schedule.tomorrow)
@@ -37,7 +35,6 @@ class PrayerScheduleTest {
             UpcomingPrayer(Prayer.Asr, Instant.parse("2026-09-30T11:40:00Z")),
             schedule.nextPrayer(Instant.parse("2026-09-30T08:00:00Z")),
         )
-        // At the very minute of Asr it has begun, so Maghrib is next
         assertEquals(Prayer.Maghrib, schedule.nextPrayer(Instant.parse("2026-09-30T11:40:00Z"))?.prayer)
     }
 

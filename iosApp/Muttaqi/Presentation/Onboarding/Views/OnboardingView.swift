@@ -10,7 +10,6 @@ struct OnboardingView: View {
 
     var body: some View {
         VStack(spacing: 0) {
-            // Shared by every step so it stays still while the step content changes; setup centres its own
             if state.step != .setup {
                 Text("متقي")
                     .font(.custom("ReemKufi-Regular", size: 60))
@@ -36,7 +35,6 @@ struct OnboardingView: View {
         }
     }
 
-    // Steps advance like a navigation push; with Reduce Motion on they cross-fade instead
     private var stepTransition: AnyTransition {
         reduceMotion ? .opacity : .push(from: .trailing)
     }
@@ -53,7 +51,6 @@ struct OnboardingView: View {
                 dispatch(OnboardingIntentBegin.shared)
             }
         case .name:
-            // Read from the view model itself, as the drawn state can lag a fast typist
             NameStepView(
                 name: Binding(
                     get: { screen.viewModel.state.value.name },
@@ -76,7 +73,6 @@ struct OnboardingView: View {
                 onSkip: { dispatch(OnboardingIntentSkipLocation.shared) }
             )
         case .setup:
-            // The shared view model starts the download as this step opens
             SetupStepView(
                 errorMessage: state.setupError,
                 onRetry: { dispatch(OnboardingIntentRetrySetup.shared) }

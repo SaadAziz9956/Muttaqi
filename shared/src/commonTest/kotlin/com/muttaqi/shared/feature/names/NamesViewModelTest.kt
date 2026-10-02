@@ -85,7 +85,6 @@ class NamesViewModelTest {
         assertEquals(listOf(3), viewModel.state.value.results.map { it.number })
         viewModel.dispatch(NamesIntent.ClearQuery)
         assertFalse(viewModel.state.value.isSearching)
-        // The mode stays for the next search
         assertEquals(NameSearchMode.ByName, viewModel.state.value.searchMode)
     }
 

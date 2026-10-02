@@ -9,11 +9,9 @@ import kotlinx.serialization.Serializable
 @Serializable
 data object JournalListRoute
 
-/** The editor on an entry; a new entry has no id */
 @Serializable
 data class JournalEntryRoute(val entryId: String? = null)
 
-/** The Journal screens. Registered in their tab's graph by MuttaqiApp */
 fun NavGraphBuilder.journalDestinations(navController: NavController) {
     composable<JournalListRoute> {
         JournalListRoute(

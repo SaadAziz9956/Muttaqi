@@ -21,10 +21,6 @@ import org.koin.core.module.dsl.factoryOf
 import org.koin.core.module.dsl.viewModelOf
 import org.koin.dsl.module
 
-/**
- * Prayer times, the Hijri date and the Qibla, from location and the compass. Each app supplies the device services,
- * LocationProvider and HeadingProvider: iOS through `initKoinIos`, Android through its own module
- */
 val prayerModule = module {
     single<PrayerTimesRepository> { AdhanPrayerTimesRepository() }
     single<QiblaRepository> { AdhanQiblaRepository() }

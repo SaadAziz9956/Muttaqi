@@ -29,14 +29,11 @@ import kotlinx.datetime.TimeZone
 import kotlin.time.Clock
 import kotlin.time.Instant
 
-/** Stand-ins for what Home reads from the other features. The texts are placeholders, marked with their language */
 internal object HomeTestData {
     val karachi = TimeZone.of("Asia/Karachi")
 
-    /** Wednesday 30 September 2026, 17:45 in Karachi, before Maghrib (18:20) */
     val wednesdayEvening: Instant = Instant.parse("2026-09-30T12:45:00Z")
 
-    /** Friday 2 October 2026, 10:00 in Karachi */
     val fridayMorning: Instant = Instant.parse("2026-10-02T05:00:00Z")
 
     val surahs: List<Surah> = (Surah.FIRST..Surah.LAST).map { number ->
@@ -51,10 +48,8 @@ internal object HomeTestData {
 
     fun surah(number: Int): Surah = surahs.first { it.number == number }
 
-    /** 38 duas, as many as Duas.json has, so the day's index is the one the app picks */
     val duaCount = 38
 
-    /** Five Explore topics; the hadith of the day picks from the four short ones in everyday groups */
     fun explore(language: Language) = listOf(
         ExploreGroup(
             "faith",
@@ -84,7 +79,6 @@ internal object HomeTestData {
     val istighfar = subhanAllah.copy(id = "istighfar", count = null)
 }
 
-/** The Quran as stored, or not yet downloaded; each ayah's text names its place and language */
 internal class FakeQuran(var stored: Boolean = true) : SurahRepository, AyahRepository, ReadingProgressRepository {
     var last: SurahProgress? = null
 
@@ -144,7 +138,6 @@ internal class FakeDhikrProgress : DhikrProgressRepository {
     }
 }
 
-/** A clock the test moves by hand; each move is a new minute for Home */
 internal class FakeReaderClock(now: Instant, override val timeZone: TimeZone = HomeTestData.karachi) : ReaderClock {
     private val ticks = MutableStateFlow(now)
 
@@ -157,11 +150,9 @@ internal class FakeReaderClock(now: Instant, override val timeZone: TimeZone = H
     override fun now(): Instant = ticks.value
     override fun minutes(): Flow<Instant> = ticks
 
-    /** The same time, for the features that take the standard clock */
     val asClock: Clock = object : Clock {
         override fun now(): Instant = ticks.value
     }
 }
 
-/** Names the civil day it's given, so tests see which day the Hijri date is for */
 internal val fakeHijri = HijriCalendar { "Hijri of $it" }

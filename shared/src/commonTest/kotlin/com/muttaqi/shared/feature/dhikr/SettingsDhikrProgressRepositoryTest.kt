@@ -19,8 +19,6 @@ class SettingsDhikrProgressRepositoryTest {
     private fun repository(timeZone: TimeZone = karachi) =
         SettingsDhikrProgressRepository(settings, LegacyDataSource { legacy[it] }, timeZone = { timeZone })
 
-    // What the Swift app saved after 7 taps on 2026-09-30 in Karachi: that day's local midnight, 2026-09-29 19:00 UTC,
-    // as seconds since 2001-01-01 UTC
     private val swiftJson = """{"rounds":0,"day":812401200,"count":7}"""
 
     @Test
@@ -52,7 +50,6 @@ class SettingsDhikrProgressRepositoryTest {
     @Test
     fun theDayIsReadInTheReadersTimeZone() {
         settings.putString("dhikr_progress.subhanallah", swiftJson)
-        // Midnight in Karachi is 19:00 the evening before in UTC
         assertEquals(LocalDate(2026, 9, 29), repository(TimeZone.UTC).saved("subhanallah")?.day)
     }
 

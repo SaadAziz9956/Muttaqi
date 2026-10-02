@@ -20,7 +20,6 @@ class TafsirRepositoryTest {
         surahRows[2] = SurahEntity(2, "سورة البقرة", "Al-Baqara", "The Cow", "Medinan", 7)
     }
 
-    // As quran.com sends it: commentary on a group of ayahs sits on the first, and the rest are empty
     private val response = """
         {"tafsirs":[
           {"id":1,"resource_id":169,"verse_key":"2:1","text":"<h2>Alif Lam Mim</h2><p>The letters &amp; their meaning</p>"},

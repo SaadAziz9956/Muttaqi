@@ -22,7 +22,6 @@ bins=collections.Counter()
 for k,v in res.items():
     s=v['score']; bins['>=.9' if s>=.9 else '>=.8' if s>=.8 else '>=.6' if s>=.6 else '>=.4' if s>=.4 else '<.4']+=1
 print(bins)
-# duplicates: same iub entry mapped to multiple hisn
 c=collections.Counter(v['num'] for v in res.values() if v['score']>=0.4)
 print('multi-mapped', {k:n for k,n in c.items() if n>1})
 for k,v in res.items():

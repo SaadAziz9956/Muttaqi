@@ -8,7 +8,6 @@ import com.muttaqi.shared.feature.topics.domain.usecase.GetTopicPageTopics
 import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.launch
 
-/** The topic page for Emotions and Explore alike; [chips] says which topics it moves between */
 class TopicPageViewModel(
     chips: TopicChips,
     topicId: String,
@@ -19,7 +18,6 @@ class TopicPageViewModel(
     TopicPageReducer,
 ) {
     init {
-        // Reloads in the new language whenever the reader switches it, staying on the same topic and kind of text
         viewModelScope.launch {
             selectedLanguage.changes.collect { language ->
                 try {

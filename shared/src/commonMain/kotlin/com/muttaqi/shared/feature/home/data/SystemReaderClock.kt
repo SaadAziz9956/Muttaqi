@@ -8,7 +8,6 @@ import kotlinx.datetime.TimeZone
 import kotlin.time.Clock
 import kotlin.time.Instant
 
-/** The device's clock and time zone; the zone is read each time, so moving to another one is followed */
 class SystemReaderClock(private val clock: Clock = Clock.System) : ReaderClock {
     override val timeZone: TimeZone get() = TimeZone.currentSystemDefault()
 

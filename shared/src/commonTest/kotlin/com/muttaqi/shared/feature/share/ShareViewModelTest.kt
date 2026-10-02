@@ -28,7 +28,6 @@ import kotlin.test.assertSame
 class ShareViewModelTest {
     private val dispatcher = UnconfinedTestDispatcher()
 
-    // A dua as its chapter hands it over, with a transliteration and a reference file systems don't allow as a name
     private val dua = SharePassage(
         arabic = "رَبِّ هَبْ لِي حُكْمًا وَأَلْحِقْنِي بِالصَّالِحِينَ",
         transliteration = "Rabbi hab lee hukmanw wa alhiqnee bis saaliheen",
@@ -67,7 +66,6 @@ class ShareViewModelTest {
         language.switchTo(Language.Urdu)
         assertEquals(urduVerse, viewModel.state.value.verse.text)
         assertEquals(dua, viewModel.state.value.passage)
-        // Hindi has no published translation of the verse here, so it falls back to the English
         language.switchTo(Language.Hindi)
         assertEquals(englishVerse, viewModel.state.value.verse.text)
     }

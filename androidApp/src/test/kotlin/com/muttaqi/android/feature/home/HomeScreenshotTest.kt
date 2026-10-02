@@ -78,11 +78,6 @@ import java.time.ZoneId
 import kotlin.time.Clock
 import kotlin.time.Instant
 
-/**
- * Home from its shared view model, with the real bundled texts and the Quran's own words, in Karachi on the evening
- * the iOS screenshots were taken (30 September 2026, before Isha) on an iPhone 17 Pro Max-sized screen. The `_page`
- * shots are the whole page on a tall screen
- */
 @RunWith(RobolectricTestRunner::class)
 @GraphicsMode(GraphicsMode.Mode.NATIVE)
 @Config(application = Application::class, sdk = [35], qualifiers = PRO_MAX)
@@ -96,7 +91,6 @@ class HomeScreenshotTest {
 
     private val content = BundledContentSource { File("../content/data/$it").readText() }
 
-    // Everything runs where it's called, so the view model has loaded by the time it's made
     private val dispatchers = object : DispatcherProvider {
         override val main: CoroutineDispatcher = Dispatchers.Unconfined
         override val io: CoroutineDispatcher = Dispatchers.Unconfined
@@ -107,7 +101,6 @@ class HomeScreenshotTest {
     private val names = BundledNamesRepository(content, dispatchers)
     private val dhikr = BundledDhikrRepository(content, dispatchers)
 
-    /** What the reader has done on the day, as on the iOS simulator the screenshots were taken on */
     private data class Saved(
         val dhikrSaid: Int = 10,
         val journal: String? = "Grateful for family",
@@ -214,5 +207,4 @@ class HomeScreenshotTest {
         capture("home_first_day_page", viewModel(wednesdayEvening, saved = Saved(dhikrSaid = 0, journal = null, reading = null)))
 }
 
-/** The iPhone 17 Pro Max's width, tall enough for the whole of Home */
 private const val TALL = "w440dp-h2700dp-xxhdpi"

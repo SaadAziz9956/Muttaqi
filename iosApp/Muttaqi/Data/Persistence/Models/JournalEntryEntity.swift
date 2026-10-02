@@ -1,8 +1,6 @@
 import Foundation
 import SwiftData
 
-/// A journal entry as the app kept it before the journal moved to the shared database. Kept in the schema only so
-/// `SwiftDataJournalImport` can read these once; nothing writes them any more
 @Model
 final class JournalEntryEntity {
     @Attribute(.unique) var id: UUID

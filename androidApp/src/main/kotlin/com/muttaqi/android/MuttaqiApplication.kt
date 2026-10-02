@@ -13,7 +13,6 @@ class MuttaqiApplication : Application() {
         super.onCreate()
         initKoin(androidPlatformModule(this)) {
             androidContext(this@MuttaqiApplication)
-            // The device services the shared code asks each app for: location, the compass and notifications
             modules(permissionsModule, prayerServicesModule, onboardingServicesModule)
         }
     }

@@ -46,7 +46,6 @@ struct DuaChapterView: View {
                     )
                 }
 
-                // Names whose translations are shown, as their publishers ask
                 Text("Translation: " + screen.state.translationCredits.joined(separator: ", "))
                     .font(.system(size: 11))
                     .foregroundStyle(.textSecondary)
