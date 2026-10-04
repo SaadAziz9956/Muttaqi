@@ -31,7 +31,7 @@ class RoomQuranDatabaseTest {
     private val api = MockHttp { request -> respondJson(fullQuranJson(request.url.encodedPath.substringAfterLast('/'))) }
 
     private fun TestScope.quran() =
-        RoomQuranRepository(database.textDao(), QuranApi(api.client), TestDispatchers(StandardTestDispatcher(testScheduler)))
+        RoomQuranRepository(database.textDao(), QuranApi(api.client), TestDispatchers(StandardTestDispatcher(testScheduler)), QuranTestData.mushaf)
 
     @AfterTest
     fun tearDown() = database.close()

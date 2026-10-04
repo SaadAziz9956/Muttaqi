@@ -4,6 +4,8 @@ import com.muttaqi.shared.core.domain.DomainError
 import com.muttaqi.shared.core.domain.Outcome
 import com.muttaqi.shared.core.model.Language
 import com.muttaqi.shared.feature.quran.data.remote.QuranApi
+import com.muttaqi.shared.feature.quran.data.repository.MushafAyah
+import com.muttaqi.shared.feature.quran.data.repository.MushafSource
 import com.muttaqi.shared.feature.quran.data.repository.RoomQuranRepository
 import com.muttaqi.shared.testing.TestDispatchers
 import io.ktor.http.HttpStatusCode
@@ -21,10 +23,12 @@ import kotlin.test.assertTrue
 class QuranRepositoryTest {
     private val dao = FakeQuranTextDao()
 
+    private var mushaf: MushafSource = QuranTestData.mushaf
+
     private val api = MockHttp { request -> respondJson(fullQuranJson(request.url.encodedPath.substringAfterLast('/'))) }
 
     private fun TestScope.repository(http: MockHttp = api) =
-        RoomQuranRepository(dao, QuranApi(http.client), TestDispatchers(StandardTestDispatcher(testScheduler)))
+        RoomQuranRepository(dao, QuranApi(http.client), TestDispatchers(StandardTestDispatcher(testScheduler)), mushaf)
 
     @Test
     fun syncsFromTheSameApiAndEditionsAsTheIosApp() = runTest {
@@ -54,6 +58,19 @@ class QuranRepositoryTest {
         assertEquals(first.transliteration, baqara.first().transliteration)
         assertEquals(first.page, baqara.first().page)
         assertNull(baqara.first().translation)
+    }
+
+    @Test
+    fun theWordsPageAndJuzAlwaysComeFromTheMushafNotTheApi() = runTest {
+        mushaf = MushafSource { surah, ayah -> MushafAyah("mushaf $surah:$ayah", "\uFC00", page = 600, juz = 30) }
+        val repository = repository()
+        repository.downloadText()
+        val first = repository.ayahs(2, Language.English).first()
+        assertEquals("mushaf 2:1", first.arabicText)
+        assertEquals("\uFC00", first.ayahMark)
+        assertEquals(600, first.page)
+        assertEquals(30, first.juz)
+        assertEquals("mushaf 2:1", repository.ayah(2, 1, Language.English)?.arabicText)
     }
 
     @Test

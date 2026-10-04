@@ -72,21 +72,15 @@ private struct MushafPageText: UIViewRepresentable {
 
         let text = NSMutableAttributedString()
         for (index, ayah) in ayahs.enumerated() {
-            let words = ayah.arabicWithoutEndSign().kfgqpcEncoded
-            text.append(NSAttributedString(string: words + " ", attributes: [
+            let words = ayah.arabicWithoutEndSign()
+            text.append(NSAttributedString(string: words + "\u{00A0}", attributes: [
                 .font: font, .paragraphStyle: paragraph, .foregroundColor: UIColor(resource: .textPrimary),
             ]))
             let separator = index == ayahs.count - 1 ? "" : " "
-            text.append(NSAttributedString(string: Self.arabicIndicDigits(Int(ayah.numberInSurah)) + separator, attributes: [
+            text.append(NSAttributedString(string: ayah.ayahMark + separator, attributes: [
                 .font: font, .paragraphStyle: paragraph, .foregroundColor: UIColor(resource: .appPrimary),
             ]))
         }
         return text
-    }
-
-    private static func arabicIndicDigits(_ number: Int) -> String {
-        String(String(number).compactMap { digit in
-            digit.wholeNumberValue.flatMap { Character(UnicodeScalar(0x0660 + $0)!) }
-        })
     }
 }

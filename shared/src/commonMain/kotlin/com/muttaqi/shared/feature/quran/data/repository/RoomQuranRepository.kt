@@ -25,6 +25,7 @@ internal class RoomQuranRepository(
     private val dao: QuranTextDao,
     private val api: QuranApi,
     private val dispatchers: DispatcherProvider,
+    private val mushaf: MushafSource,
 ) : SurahRepository, AyahRepository, QuranLibrary {
 
     @Volatile
@@ -50,14 +51,14 @@ internal class RoomQuranRepository(
     override suspend fun ayahs(surahNumber: Int, language: Language): List<Ayah> {
         val key = surahNumber to language
         surahAyahs[key]?.let { return it }
-        return dao.ayahs(surahNumber, language.code).map { it.toDomain() }.also { if (it.isNotEmpty()) surahAyahs[key] = it }
+        return dao.ayahs(surahNumber, language.code).map { it.toDomain().inMushafScript() }.also { if (it.isNotEmpty()) surahAyahs[key] = it }
     }
 
     override suspend fun ayah(surahNumber: Int, numberInSurah: Int, language: Language): Ayah? {
         val key = Triple(surahNumber, numberInSurah, language)
         singleAyahs[key]?.let { return it }
         surahAyahs[surahNumber to language]?.firstOrNull { it.numberInSurah == numberInSurah }?.let { return it }
-        return dao.ayah(surahNumber, numberInSurah, language.code)?.toDomain()?.also { singleAyahs[key] = it }
+        return dao.ayah(surahNumber, numberInSurah, language.code)?.toDomain()?.inMushafScript()?.also { singleAyahs[key] = it }
     }
 
     override suspend fun hasText(): Boolean =
@@ -90,6 +91,11 @@ internal class RoomQuranRepository(
                 surah.ayahs.map { AyahTranslationEntity(it.number, language.code, edition, it.text) }
             },
         )
+    }
+
+    private suspend fun Ayah.inMushafScript(): Ayah {
+        val mushafAyah = checkNotNull(mushaf.ayah(surahNumber, numberInSurah)) { "No Mushaf text for $reference" }
+        return copy(arabicText = mushafAyah.words, ayahMark = mushafAyah.mark, page = mushafAyah.page, juz = mushafAyah.juz)
     }
 
     private fun forgetText() {

@@ -7,6 +7,7 @@ import com.muttaqi.shared.feature.quran.data.local.QuranDatabase
 import com.muttaqi.shared.feature.quran.data.remote.QuranApi
 import com.muttaqi.shared.feature.quran.data.remote.TafsirApi
 import com.muttaqi.shared.feature.quran.data.remote.quranHttpClient
+import com.muttaqi.shared.feature.quran.data.repository.BundledMushaf
 import com.muttaqi.shared.feature.quran.data.repository.RoomQuranRepository
 import com.muttaqi.shared.feature.quran.data.repository.RoomReadingProgressRepository
 import com.muttaqi.shared.feature.quran.data.repository.RoomTafsirRepository
@@ -67,7 +68,8 @@ val quranModule = module {
     single { get<QuranDatabase>().progressDao() }
     single { get<QuranDatabase>().tafsirDao() }
 
-    single { RoomQuranRepository(get(), get(), get()) } binds arrayOf(SurahRepository::class, AyahRepository::class, QuranLibrary::class)
+    single { BundledMushaf(get(), get()) }
+    single { RoomQuranRepository(get(), get(), get(), get<BundledMushaf>()) } binds arrayOf(SurahRepository::class, AyahRepository::class, QuranLibrary::class)
     single<ReadingProgressRepository> { RoomReadingProgressRepository(get()) }
     single<TafsirRepository> { RoomTafsirRepository(get(), get(), get(), get()) }
     single { SettingsReadingPreferences(get(), get()) } binds

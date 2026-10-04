@@ -22,9 +22,9 @@ import androidx.compose.ui.text.style.TextDirection
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.TextUnit
-import androidx.compose.ui.unit.isSpecified
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.em
+import androidx.compose.ui.unit.isSpecified
 import androidx.compose.ui.unit.sp
 import com.muttaqi.android.designsystem.MuttaqiTheme
 import com.muttaqi.android.designsystem.NastaliqFont
@@ -33,7 +33,6 @@ import com.muttaqi.android.designsystem.ReemKufi
 import com.muttaqi.shared.core.quote.DisplayedQuote
 import com.muttaqi.shared.core.text.arabicMarksOutsideQuranFont
 import com.muttaqi.shared.core.text.isArabicScript
-import com.muttaqi.shared.core.text.kfgqpcEncoded
 import com.muttaqi.shared.core.text.quoted
 
 @Composable
@@ -48,7 +47,7 @@ fun ArabicText(
 ) {
     val annotated = remember(text) {
         buildAnnotatedString {
-            for (char in text.kfgqpcEncoded().withRightToLeftGuillemets()) {
+            for (char in text.withRightToLeftGuillemets()) {
                 if (char in arabicMarksOutsideQuranFont) {
                     withStyle(SpanStyle(fontFamily = if (char in OrnateBrackets) NastaliqFont else FontFamily.Default, fontSize = 0.9.em)) {
                         append(char)

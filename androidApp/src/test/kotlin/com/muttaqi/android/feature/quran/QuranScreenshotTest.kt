@@ -58,8 +58,10 @@ class QuranScreenshotTest {
         settings = settings,
     )
 
-    private val fatiha = SurahReading(surah(1), QuranScreenshotData.fatiha, null, surah(2))
-    private val baqara = SurahReading(surah(2), QuranScreenshotData.baqara, surah(1), surah(3))
+    private val bismillah = QuranScreenshotData.fatiha.first().arabicText
+
+    private val fatiha = SurahReading(surah(1), QuranScreenshotData.fatiha, null, surah(2), bismillah)
+    private val baqara = SurahReading(surah(2), QuranScreenshotData.baqara, surah(1), surah(3), bismillah)
 
     @Test
     fun list() = compose.captureLightAndDark("quran_list") {
@@ -97,7 +99,7 @@ class QuranScreenshotTest {
     @Test
     fun readerInUrdu() = compose.captureLightAndDark("quran_reader_urdu") {
         SurahReaderScreen(
-            reader(SurahReading(surah(2), QuranScreenshotData.baqaraUrdu, surah(1), surah(3)), ReadingSettings(language = Language.Urdu)),
+            reader(SurahReading(surah(2), QuranScreenshotData.baqaraUrdu, surah(1), surah(3), bismillah), ReadingSettings(language = Language.Urdu)),
             readingPosition = "Ayah 1 of 286",
             onIntent = {},
             onSettings = {},

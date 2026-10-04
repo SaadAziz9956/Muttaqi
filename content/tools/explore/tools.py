@@ -11,7 +11,18 @@ UNGRADED = ("No judgment", "left no comment")
 
 def _edition(name):
     d = json.load(open(os.path.join(SCRATCH, "editions", f"{name}.json")))["data"]["surahs"]
-    return {f"{s['number']}:{a['numberInSurah']}": a["text"] for s in d for a in s["ayahs"]}
+    book = {f"{s['number']}:{a['numberInSurah']}": a["text"].lstrip("\ufeff") for s in d for a in s["ayahs"]}
+    if name.startswith("quran-"):
+        words = len(book["1:1"].split())
+        for s in d:
+            ref = f"{s['number']}:1"
+            text = book.get(ref, "")
+            if s["number"] not in (1, 9) and len(text.split()) > words and _bare(" ".join(text.split()[:words])) == _bare(book["1:1"]):
+                book[ref] = text.split(None, words)[words]
+    return book
+
+def _bare(text):
+    return re.sub(r"[\u064B-\u065F\u0670\u06D6-\u06ED]", "", text)
 
 _q = {}
 def quran():

@@ -6,7 +6,7 @@ struct BismillahView: View {
 
     var body: some View {
         VStack(spacing: 0) {
-            Text(text.kfgqpcEncoded)
+            Text(text)
                 .font(.arabic(18))
                 .foregroundStyle(.textPrimary)
                 .multilineTextAlignment(.center)

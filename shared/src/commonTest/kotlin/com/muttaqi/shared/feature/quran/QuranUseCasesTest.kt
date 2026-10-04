@@ -95,23 +95,24 @@ class QuranUseCasesTest {
 
     @Test
     fun alFatihasBismillahIsItsFirstAyahAndAtTawbahHasNone() {
-        val fatiha = SurahReading(testSurah(1), testAyahs(1), null, testSurah(2))
+        val fatiha = SurahReading(testSurah(1), testAyahs(1), null, testSurah(2), BISMILLAH)
         assertEquals((2..7).toList(), fatiha.displayAyahs.map { it.numberInSurah })
         assertEquals(QuranTestData.ayahs.first().arabic, fatiha.bismillahText)
         assertEquals(QuranTestData.ayahs.first().english, fatiha.bismillahTranslation)
         assertTrue(fatiha.showsBismillah)
 
-        val tawbah = SurahReading(testSurah(9), testAyahs(9), null, null)
+        val tawbah = SurahReading(testSurah(9), testAyahs(9), null, null, BISMILLAH)
         assertFalse(tawbah.showsBismillah)
         assertEquals(2, tawbah.displayAyahs.size)
 
-        val baqara = SurahReading(testSurah(2), testAyahs(2, Language.Urdu), null, null)
+        val baqara = SurahReading(testSurah(2), testAyahs(2, Language.Urdu), null, null, BISMILLAH)
+        assertEquals(BISMILLAH, baqara.bismillahText)
         assertEquals("In the Name of Allah—the Most Compassionate, Most Merciful.", baqara.bismillahTranslation)
     }
 
     @Test
     fun ayahsAreGroupedIntoTheirMushafPages() {
-        val pages = SurahReading(testSurah(2), testAyahs(2), null, null).pages
+        val pages = SurahReading(testSurah(2), testAyahs(2), null, null, BISMILLAH).pages
         assertEquals(listOf(2, 3), pages.map { it.number })
         assertEquals(listOf(8, 13), pages.map { it.id })
         assertEquals(listOf(5, 3), pages.map { it.ayahs.size })
@@ -188,3 +189,5 @@ class QuranUseCasesTest {
         assertEquals(3, progress.progress(2)!!.lastAyahNumber)
     }
 }
+
+private const val BISMILLAH = "bismillah from the mushaf"

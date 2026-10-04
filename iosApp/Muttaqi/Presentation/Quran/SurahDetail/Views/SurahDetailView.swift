@@ -172,12 +172,18 @@ struct SurahDetailView: View {
             .padding(.top, 16)
         }
 
-        SurahEndNavigationView(
-            previousSurah: reading.previousSurah,
-            nextSurah: reading.nextSurah,
-            onPrevious: { dispatch(SurahReaderIntentPreviousTapped.shared) },
-            onNext: { dispatch(SurahReaderIntentNextTapped.shared) }
-        )
+        VStack(spacing: 20) {
+            SurahEndNavigationView(
+                previousSurah: reading.previousSurah,
+                nextSurah: reading.nextSurah,
+                onPrevious: { dispatch(SurahReaderIntentPreviousTapped.shared) },
+                onNext: { dispatch(SurahReaderIntentNextTapped.shared) }
+            )
+            Text(QuranMessages.shared.MUSHAF_CREDIT)
+                .font(.labelSmall)
+                .foregroundStyle(.textSecondary)
+                .multilineTextAlignment(.center)
+        }
         .padding(.top, 24)
         .padding(.bottom, 72)
     }

@@ -14,7 +14,7 @@ struct AyahCardView: View {
     private var isHindi: Bool { language == .hindi }
 
     private var cleanArabicText: String {
-        ayah.arabicWithoutEndSign().kfgqpcEncoded
+        ayah.arabicWithoutEndSign()
     }
 
     private var attributedAyah: AttributedString {
