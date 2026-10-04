@@ -135,7 +135,7 @@ struct TafsirView: View {
                 .frame(maxWidth: .infinity, alignment: .trailing)
                 .fixedSize(horizontal: false, vertical: true)
         } else if Self.startsWithArabic(paragraph) {
-            Text(restyling(["،", "؟", "؛"], in: paragraph.kfgqpcEncoded, base: .arabic(20), mark: .system(size: 17)))
+            Text(restyling(["،", "؟", "؛"], in: paragraph, base: .arabic(20), mark: .system(size: 17)))
                 .foregroundStyle(.textPrimary)
                 .multilineTextAlignment(.trailing)
                 .frame(maxWidth: .infinity, alignment: .trailing)

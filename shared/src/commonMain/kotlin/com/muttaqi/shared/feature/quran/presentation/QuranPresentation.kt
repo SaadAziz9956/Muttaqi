@@ -19,6 +19,8 @@ object QuranMessages {
 
     const val INVALID_SURAH_SUGGESTION = "Please navigate to a valid Surah."
 
+    const val MUSHAF_CREDIT = "Quran text and font: King Fahd Glorious Qur'an Printing Complex, Madinah"
+
     fun tafsirFailed(error: DomainError): String = when (error) {
         DomainError.NoConnection -> "The Internet connection appears to be offline."
         DomainError.NotFound -> "No tafseer was found for this surah."

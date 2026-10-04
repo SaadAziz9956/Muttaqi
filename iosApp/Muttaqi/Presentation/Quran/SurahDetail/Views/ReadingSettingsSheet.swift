@@ -145,7 +145,7 @@ struct ReadingSettingsSheet: View {
         VStack(spacing: 4) {
             switch mode {
             case .withTranslation:
-                Text("بِسْمِ ٱللَّهِ")
+                Text(MushafSamples.shared.BISMILLAH_OPENING_WORDS)
                     .font(.arabic(12))
                     .foregroundStyle(.textPrimary)
                 Text("Bismillaahir")
@@ -160,7 +160,7 @@ struct ReadingSettingsSheet: View {
                     .frame(height: 0.5)
                     .padding(.horizontal, 12)
 
-                Text("ٱلْحَمْدُ لِلَّهِ")
+                Text(MushafSamples.shared.ALHAMDU_OPENING_WORDS)
                     .font(.arabic(12))
                     .foregroundStyle(.textPrimary)
                 Text("Alhamdu lillaahi")
@@ -168,7 +168,7 @@ struct ReadingSettingsSheet: View {
                     .foregroundStyle(.appPrimary)
 
             case .arabicOnly:
-                Text("بِسْمِ ٱللَّهِ ٱلرَّحْمَٰنِ ٱلرَّحِيمِ ۝١ ٱلْحَمْدُ لِلَّهِ رَبِّ ٱلْعَٰلَمِينَ ۝٢")
+                Text(MushafSamples.shared.FATIHA_OPENING)
                     .font(.arabic(11))
                     .foregroundStyle(.textPrimary)
                     .multilineTextAlignment(.trailing)

@@ -10,7 +10,7 @@ struct AyahOfTheDayCard: View {
             VStack(spacing: 0) {
                 cardTitle("Ayah of the Day")
 
-                Text(dailyAyah.ayah.arabicText.kfgqpcEncoded)
+                Text(dailyAyah.ayah.arabicText)
                     .font(.arabic(21))
                     .lineSpacing(10)
                     .foregroundStyle(.textPrimary)

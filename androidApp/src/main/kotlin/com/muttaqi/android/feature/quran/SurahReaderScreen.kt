@@ -79,13 +79,13 @@ import com.muttaqi.android.designsystem.component.TranslationText
 import com.muttaqi.shared.core.model.Language
 import com.muttaqi.shared.core.share.SharePassage
 import com.muttaqi.shared.core.text.isArabicScript
-import com.muttaqi.shared.core.text.kfgqpcEncoded
 import com.muttaqi.shared.feature.quran.domain.model.Ayah
 import com.muttaqi.shared.feature.quran.domain.model.FontSize
 import com.muttaqi.shared.feature.quran.domain.model.MushafPage
 import com.muttaqi.shared.feature.quran.domain.model.ReadingMode
 import com.muttaqi.shared.feature.quran.domain.model.Surah
 import com.muttaqi.shared.feature.quran.domain.model.SurahReading
+import com.muttaqi.shared.feature.quran.presentation.QuranMessages
 import com.muttaqi.shared.feature.quran.presentation.arabicWithoutEndSign
 import com.muttaqi.shared.feature.quran.presentation.reader.SurahDirection
 import com.muttaqi.shared.feature.quran.presentation.reader.SurahReaderContent
@@ -271,7 +271,16 @@ private fun androidx.compose.foundation.lazy.LazyListScope.loadedContent(
     }
     item(key = "end") {
         Arriving {
-            SurahEndNavigation(reading.previousSurah, reading.nextSurah, onIntent, Modifier.padding(top = 24.dp, bottom = 72.dp))
+            Column(Modifier.padding(top = 24.dp, bottom = 72.dp), verticalArrangement = Arrangement.spacedBy(20.dp)) {
+                SurahEndNavigation(reading.previousSurah, reading.nextSurah, onIntent)
+                Text(
+                    QuranMessages.MUSHAF_CREDIT,
+                    Modifier.fillMaxWidth(),
+                    style = MaterialTheme.typography.labelSmall,
+                    color = MuttaqiTheme.soft.textSecondary,
+                    textAlign = TextAlign.Center,
+                )
+            }
         }
     }
 }
@@ -458,7 +467,7 @@ private fun AyahArabic(ayah: Ayah, fontSize: FontSize) {
     val soft = MuttaqiTheme.soft
     val text = remember(ayah.number, soft.appPrimary) {
         buildAnnotatedString {
-            append(ayah.arabicWithoutEndSign().kfgqpcEncoded())
+            append(ayah.arabicWithoutEndSign())
             append(' ')
             withStyle(SpanStyle(color = soft.appPrimary, fontSize = 10.sp, fontFamily = NastaliqFont)) { append('﴿') }
             withStyle(SpanStyle(color = soft.appPrimary, fontSize = 14.sp)) { append("${ayah.numberInSurah}") }
@@ -480,9 +489,9 @@ fun MushafPageCard(page: MushafPage, fontSize: FontSize) {
     val text = remember(page.id, soft.appPrimary) {
         buildAnnotatedString {
             page.ayahs.forEachIndexed { index, ayah ->
-                append(ayah.arabicWithoutEndSign().kfgqpcEncoded())
-                append(' ')
-                withStyle(SpanStyle(color = soft.appPrimary)) { append(arabicIndicDigits(ayah.numberInSurah)) }
+                append(ayah.arabicWithoutEndSign())
+                append('\u00A0')
+                withStyle(SpanStyle(color = soft.appPrimary)) { append(ayah.ayahMark) }
                 if (index < page.ayahs.lastIndex) append(' ')
             }
         }
@@ -519,7 +528,6 @@ internal fun Hairline(modifier: Modifier = Modifier) {
 private const val QURAN_FONT_LINE_HEIGHT = 1.758f
 private const val MUSHAF_LINE_SPACING = 0.6f
 
-private fun arabicIndicDigits(number: Int): String = number.toString().map { (0x0660 + (it - '0')).toChar() }.joinToString("")
 
 @Composable
 private fun SurahEndNavigation(previous: Surah?, next: Surah?, onIntent: (SurahReaderIntent) -> Unit, modifier: Modifier = Modifier) {

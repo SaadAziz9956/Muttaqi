@@ -31,6 +31,7 @@ data class Ayah(
     val juz: Int,
     val page: Int,
     val hizbQuarter: Int,
+    val ayahMark: String = "",
 ) {
     val reference: String get() = "$surahNumber:$numberInSurah"
 }
@@ -44,13 +45,14 @@ data class SurahReading(
     val ayahs: List<Ayah>,
     val previousSurah: Surah?,
     val nextSurah: Surah?,
+    val bismillah: String,
 ) {
     val displayAyahs: List<Ayah> = if (surah.number == 1) ayahs.drop(1) else ayahs
 
     val showsBismillah: Boolean get() = surah.number != 9
 
     val bismillahText: String
-        get() = ayahs.firstOrNull()?.takeIf { surah.number == 1 }?.arabicText ?: BISMILLAH
+        get() = ayahs.firstOrNull()?.takeIf { surah.number == 1 }?.arabicText ?: bismillah
 
     val bismillahTranslation: String
         get() = ayahs.firstOrNull()?.takeIf { surah.number == 1 }?.translation ?: BISMILLAH_TRANSLATION
@@ -66,7 +68,6 @@ data class SurahReading(
     }
 
     private companion object {
-        const val BISMILLAH = "بِسْمِ ٱللَّهِ ٱلرَّحْمَٰنِ ٱلرَّحِيمِ"
         const val BISMILLAH_TRANSLATION = "In the Name of Allah—the Most Compassionate, Most Merciful."
     }
 }

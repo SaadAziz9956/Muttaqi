@@ -1,5 +1,8 @@
 package com.muttaqi.shared.feature.quran
 
+import com.muttaqi.shared.feature.quran.data.repository.MushafAyah
+import com.muttaqi.shared.feature.quran.data.repository.MushafSource
+
 internal object QuranTestData {
     data class AyahText(
         val surah: Int, val number: Int, val numberInSurah: Int, val juz: Int, val page: Int, val hizbQuarter: Int,
@@ -14,6 +17,10 @@ internal object QuranTestData {
         SurahInfo(18, "سورة الكهف", "Al-Kahf", "The Cave", "Meccan", 110),
         SurahInfo(114, "سورة الناس", "An-Naas", "Mankind", "Meccan", 6),
     )
+
+    val mushaf = MushafSource { surah, ayah ->
+        ayahs.firstOrNull { it.surah == surah && it.numberInSurah == ayah }?.let { MushafAyah(it.arabic, "", it.page, it.juz) }
+    }
 
     val ayahs = listOf(
         AyahText(1, 1, 1, 1, 1, 1,

@@ -20,23 +20,9 @@ private enum FontName {
     }
 }
 
-extension String {
-    nonisolated var kfgqpcEncoded: String {
-        String(String.UnicodeScalarView(unicodeScalars.map { scalar -> Unicode.Scalar in
-            switch scalar.value {
-            case 0x0652: "\u{06E1}"
-            case 0x06DF: "\u{0652}"
-            case 0x06E3: "\u{06DC}"
-            case 0x06EB: "\u{06EC}"
-            default: scalar
-            }
-        }))
-    }
-}
-
 extension AttributedString {
     static func arabic(_ text: String, size: CGFloat) -> AttributedString {
-        var styled = AttributedString(text.kfgqpcEncoded)
+        var styled = AttributedString(text)
         styled.font = .arabic(size)
         for mark in ["،", "؛", "؟", "﴿", "﴾"] {
             var searchStart = styled.startIndex
