@@ -9,7 +9,6 @@ import androidx.compose.animation.fadeOut
 import androidx.compose.animation.slideInHorizontally
 import androidx.compose.animation.slideOutHorizontally
 import androidx.compose.animation.togetherWith
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -24,20 +23,33 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyItemScope
+import androidx.compose.foundation.lazy.LazyListScope
 import androidx.compose.foundation.lazy.LazyListState
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.rememberLazyListState
-import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.Card
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.ExperimentalMaterial3ExpressiveApi
+import androidx.compose.material3.FilledTonalButton
+import androidx.compose.material3.FloatingToolbarDefaults
+import androidx.compose.material3.HorizontalDivider
+import androidx.compose.material3.HorizontalFloatingToolbar
 import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.ModalBottomSheet
+import androidx.compose.material3.OutlinedCard
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextButton
+import androidx.compose.material3.TopAppBar
+import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.material3.rememberModalBottomSheetState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -47,38 +59,31 @@ import androidx.compose.runtime.setValue
 import androidx.compose.runtime.snapshotFlow
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.platform.ClipEntry
 import androidx.compose.ui.platform.LocalClipboard
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.buildAnnotatedString
-import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.LineHeightStyle
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextDirection
-import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.em
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.muttaqi.android.R
-import com.muttaqi.android.designsystem.MuttaqiTheme
 import com.muttaqi.android.designsystem.NastaliqFont
 import com.muttaqi.android.designsystem.QuranFont
 import com.muttaqi.android.designsystem.component.ArabicText
-import com.muttaqi.android.designsystem.component.SoftBackdrop
-import com.muttaqi.android.designsystem.component.SoftCard
-import com.muttaqi.android.designsystem.component.SoftIconButton
-import com.muttaqi.android.designsystem.component.SoftLoadingIndicator
-import com.muttaqi.android.designsystem.component.SoftPillSurface
-import com.muttaqi.android.designsystem.component.SoftTopBar
+import com.muttaqi.android.designsystem.component.BackButton
+import com.muttaqi.android.designsystem.component.DelayedLoadingIndicator
+import com.muttaqi.android.designsystem.component.QuranText
 import com.muttaqi.android.designsystem.component.TranslationText
 import com.muttaqi.shared.core.model.Language
 import com.muttaqi.shared.core.share.SharePassage
-import com.muttaqi.shared.core.text.isArabicScript
 import com.muttaqi.shared.feature.quran.domain.model.Ayah
 import com.muttaqi.shared.feature.quran.domain.model.FontSize
 import com.muttaqi.shared.feature.quran.domain.model.MushafPage
@@ -115,7 +120,6 @@ fun SurahReaderRoute(surahNumber: Int, startAyah: Int, onShare: (SharePassage) -
     val clipboard = LocalClipboard.current
     val scope = rememberCoroutineScope()
     var showSettings by rememberSaveable { mutableStateOf(false) }
-    var showLanguages by rememberSaveable { mutableStateOf(false) }
     var tafsirStart by rememberSaveable { mutableStateOf<Int?>(null) }
 
     LaunchedEffect(viewModel) {
@@ -141,23 +145,14 @@ fun SurahReaderRoute(surahNumber: Int, startAyah: Int, onShare: (SharePassage) -
     )
 
     if (showSettings) {
-        ModalBottomSheet(onDismissRequest = { showSettings = false }, containerColor = MuttaqiTheme.soft.canvas) {
-            ReadingSettingsContent(settingsState, settings::dispatch, onChooseLanguage = { showLanguages = true })
-        }
-    }
-    if (showLanguages) {
-        ModalBottomSheet(onDismissRequest = { showLanguages = false }, containerColor = MuttaqiTheme.soft.canvas) {
-            LanguagePickerContent(settingsState, onSelect = {
-                settings.dispatch(it)
-                showLanguages = false
-            })
+        ModalBottomSheet(onDismissRequest = { showSettings = false }) {
+            ReadingSettingsContent(settingsState, settings::dispatch)
         }
     }
     tafsirStart?.let { start ->
         ModalBottomSheet(
             onDismissRequest = { tafsirStart = null },
             sheetState = rememberModalBottomSheetState(skipPartiallyExpanded = true),
-            containerColor = MuttaqiTheme.soft.canvas,
         ) {
             TafsirContent(
                 surah = state.headerSurah,
@@ -177,8 +172,7 @@ fun SurahReaderScreen(
     onSettings: () -> Unit,
     onBack: () -> Unit,
 ) {
-    Box {
-        SoftBackdrop()
+    Box(Modifier.fillMaxSize()) {
         AnimatedContent(
             targetState = state,
             contentKey = { it.surahNumber },
@@ -192,37 +186,47 @@ fun SurahReaderScreen(
         }
         AnimatedVisibility(
             readingPosition != null,
-            Modifier.align(Alignment.BottomCenter).navigationBarsPadding().padding(bottom = 8.dp),
+            Modifier.align(Alignment.BottomCenter).navigationBarsPadding().padding(bottom = 16.dp),
             enter = fadeIn(),
             exit = fadeOut(),
         ) {
-            ReadingPositionPill(readingPosition.orEmpty())
+            ReadingPosition(readingPosition.orEmpty())
         }
     }
 }
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 private fun SurahPage(state: SurahReaderState, onIntent: (SurahReaderIntent) -> Unit, onSettings: () -> Unit, onBack: () -> Unit) {
     val list = rememberLazyListState()
     val header = state.headerSurah
     TrackVisibleAyahs(list, onIntent)
     ScrollToStart(state, list, onIntent)
+    val scrollBehavior = TopAppBarDefaults.pinnedScrollBehavior()
+    val showTitle by remember(list) { derivedStateOf { list.firstVisibleItemIndex > 0 } }
     Scaffold(
-        containerColor = Color.Transparent,
+        modifier = Modifier.nestedScroll(scrollBehavior.nestedScrollConnection),
         topBar = {
-            SoftTopBar(
-                title = header?.englishName.orEmpty(),
-                showTitle = list.firstVisibleItemIndex > 0,
-                onBack = onBack,
-                actions = {
-                    SoftIconButton(R.drawable.ic_setting_4_linear, "Reading settings", onSettings, Modifier.padding(end = 12.dp), size = 44.dp, iconSize = 22.dp)
+            TopAppBar(
+                title = {
+                    AnimatedVisibility(showTitle, enter = fadeIn(), exit = fadeOut()) {
+                        Text(header?.englishName.orEmpty())
+                    }
                 },
+                navigationIcon = { BackButton(onBack) },
+                actions = {
+                    IconButton(onClick = onSettings) {
+                        Icon(painterResource(R.drawable.ic_tune), contentDescription = "Reading settings")
+                    }
+                },
+                scrollBehavior = scrollBehavior,
             )
         },
     ) { padding ->
         LazyColumn(
             state = list,
             contentPadding = PaddingValues(start = 16.dp, end = 16.dp, top = padding.calculateTopPadding()),
+            verticalArrangement = Arrangement.spacedBy(12.dp),
         ) {
             item(key = "header") {
                 SurahHeader(header, state.previousSurah, state.nextSurah, onIntent)
@@ -243,7 +247,7 @@ private fun SurahPage(state: SurahReaderState, onIntent: (SurahReaderIntent) -> 
     }
 }
 
-private fun androidx.compose.foundation.lazy.LazyListScope.loadedContent(
+private fun LazyListScope.loadedContent(
     reading: SurahReading,
     state: SurahReaderState,
     onIntent: (SurahReaderIntent) -> Unit,
@@ -265,19 +269,22 @@ private fun androidx.compose.foundation.lazy.LazyListScope.loadedContent(
             }
         }
         ReadingMode.ArabicOnly -> {
-            item(key = "pages-top") { Spacer(Modifier.height(16.dp)) }
+            item(key = "pages-top") { Spacer(Modifier.height(4.dp)) }
             items(reading.pages, key = { it.id }) { page -> Arriving { MushafPageCard(page, state.settings.fontSize) } }
         }
     }
     item(key = "end") {
         Arriving {
-            Column(Modifier.padding(top = 24.dp, bottom = 72.dp), verticalArrangement = Arrangement.spacedBy(20.dp)) {
+            Column(
+                Modifier.navigationBarsPadding().padding(top = 12.dp, bottom = 104.dp),
+                verticalArrangement = Arrangement.spacedBy(24.dp),
+            ) {
                 SurahEndNavigation(reading.previousSurah, reading.nextSurah, onIntent)
                 Text(
                     QuranMessages.MUSHAF_CREDIT + "\n" + QuranMessages.translationCredit(state.settings.language),
                     Modifier.fillMaxWidth(),
-                    style = MaterialTheme.typography.labelSmall,
-                    color = MuttaqiTheme.soft.textSecondary,
+                    style = MaterialTheme.typography.bodySmall,
+                    color = MaterialTheme.colorScheme.onSurfaceVariant,
                     textAlign = TextAlign.Center,
                 )
             }
@@ -330,60 +337,65 @@ private fun itemIndex(state: SurahReaderState, target: Int): Int {
 
 @Composable
 private fun SurahHeader(surah: Surah?, previous: Surah?, next: Surah?, onIntent: (SurahReaderIntent) -> Unit) {
-    val soft = MuttaqiTheme.soft
-    Column(Modifier.fillMaxWidth().padding(top = 20.dp), horizontalAlignment = Alignment.CenterHorizontally) {
+    Column(Modifier.fillMaxWidth().padding(top = 8.dp), horizontalAlignment = Alignment.CenterHorizontally) {
         if (surah != null) {
-            ArabicText(surah.name, fontSize = 40.sp, lineSpacing = 0.sp)
+            ArabicText(surah.name, style = MaterialTheme.typography.displaySmall, textAlign = TextAlign.Center)
         }
-        Text(
-            surah?.englishName.orEmpty(),
-            Modifier.padding(top = 6.dp),
-            style = MaterialTheme.typography.headlineSmall.copy(fontWeight = FontWeight.Medium, fontSize = 26.sp),
-            color = soft.appPrimary,
-        )
+        Text(surah?.englishName.orEmpty(), style = MaterialTheme.typography.headlineMedium, textAlign = TextAlign.Center)
         if (surah != null) {
             Text(
                 "${surah.englishNameTranslation} · ${surah.revelationType} · ${surah.numberOfAyahs} ayahs",
-                Modifier.padding(top = 2.dp),
-                style = MaterialTheme.typography.bodySmall,
-                color = soft.textSecondary,
+                Modifier.padding(top = 4.dp),
+                style = MaterialTheme.typography.bodyMedium,
+                color = MaterialTheme.colorScheme.onSurfaceVariant,
+                textAlign = TextAlign.Center,
             )
         }
-        Row(Modifier.padding(top = 18.dp), horizontalArrangement = Arrangement.spacedBy(8.dp), verticalAlignment = Alignment.CenterVertically) {
-            previous?.let { NeighbourPill(it, isNext = false) { onIntent(SurahReaderIntent.PreviousTapped) } }
-            SoftPillSurface(Modifier.height(36.dp), fill = soft.brandGreen, rim = false, onClick = { onIntent(SurahReaderIntent.ExplanationTapped) }) {
-                Text("Explanation", Modifier.padding(horizontal = 18.dp), style = MaterialTheme.typography.labelLarge.copy(fontSize = 13.sp), color = Color.White)
+        FilledTonalButton(onClick = { onIntent(SurahReaderIntent.ExplanationTapped) }, Modifier.padding(top = 16.dp)) {
+            Icon(painterResource(R.drawable.ic_book), contentDescription = null, Modifier.size(ButtonDefaults.IconSize))
+            Spacer(Modifier.size(ButtonDefaults.IconSpacing))
+            Text("Explanation")
+        }
+        if (previous != null || next != null) {
+            Row(Modifier.fillMaxWidth().padding(top = 4.dp), verticalAlignment = Alignment.CenterVertically) {
+                previous?.let { NeighbourButton(it, isNext = false) { onIntent(SurahReaderIntent.PreviousTapped) } }
+                Spacer(Modifier.weight(1f))
+                next?.let { NeighbourButton(it, isNext = true) { onIntent(SurahReaderIntent.NextTapped) } }
             }
-            next?.let { NeighbourPill(it, isNext = true) { onIntent(SurahReaderIntent.NextTapped) } }
         }
     }
 }
 
 @Composable
-private fun NeighbourPill(neighbour: Surah, isNext: Boolean, onClick: () -> Unit) {
-    val soft = MuttaqiTheme.soft
-    SoftPillSurface(Modifier.height(36.dp), onClick = onClick) {
-        Row(Modifier.padding(horizontal = 12.dp), horizontalArrangement = Arrangement.spacedBy(4.dp), verticalAlignment = Alignment.CenterVertically) {
-            if (!isNext) Icon(painterResource(R.drawable.ic_arrow_left_02_linear), null, Modifier.size(14.dp), tint = soft.appPrimary)
-            Text(neighbour.englishName, style = MaterialTheme.typography.labelSmall, color = soft.appPrimary, maxLines = 1)
-            if (isNext) Icon(painterResource(R.drawable.ic_arrow_right_02_linear), null, Modifier.size(14.dp), tint = soft.appPrimary)
+private fun NeighbourButton(neighbour: Surah, isNext: Boolean, onClick: () -> Unit) {
+    TextButton(onClick = onClick) {
+        if (!isNext) {
+            Icon(painterResource(R.drawable.ic_arrow_back), contentDescription = null, Modifier.size(ButtonDefaults.IconSize))
+            Spacer(Modifier.size(ButtonDefaults.IconSpacing))
+        }
+        Text(neighbour.englishName)
+        if (isNext) {
+            Spacer(Modifier.size(ButtonDefaults.IconSpacing))
+            Icon(painterResource(R.drawable.ic_arrow_forward), contentDescription = null, Modifier.size(ButtonDefaults.IconSize))
         }
     }
 }
 
 @Composable
 private fun Bismillah(text: String, translation: String?) {
-    val soft = MuttaqiTheme.soft
-    Column(Modifier.fillMaxWidth(), horizontalAlignment = Alignment.CenterHorizontally) {
-        ArabicText(text, Modifier.padding(top = 44.dp, bottom = if (translation == null) 20.dp else 0.dp), fontSize = 18.sp, lineSpacing = 0.sp)
+    Column(
+        Modifier.fillMaxWidth().padding(vertical = 16.dp),
+        horizontalAlignment = Alignment.CenterHorizontally,
+        verticalArrangement = Arrangement.spacedBy(12.dp),
+    ) {
+        QuranText(text, Modifier.fillMaxWidth(), lineSpacing = 0.sp)
         translation?.let {
-            val english = !it.isArabicScript() && it.none { char -> char.code in 0x0900..0x097F }
             TranslationText(
                 it,
-                Modifier.padding(top = 18.dp, bottom = 20.dp).padding(horizontal = if (english) 60.dp else 16.dp),
-                fontSize = if (english) 12.sp else 13.sp,
-                color = soft.textSecondary,
-                lineSpacing = 0.sp,
+                Modifier.fillMaxWidth().padding(horizontal = 16.dp),
+                style = MaterialTheme.typography.bodyMedium,
+                color = MaterialTheme.colorScheme.onSurfaceVariant,
+                textAlign = TextAlign.Center,
             )
         }
     }
@@ -398,7 +410,6 @@ fun AyahCard(
     onCopy: () -> Unit,
     onShare: () -> Unit,
 ) {
-    val soft = MuttaqiTheme.soft
     var copied by remember { mutableStateOf(false) }
     LaunchedEffect(copied) {
         if (copied) {
@@ -406,15 +417,15 @@ fun AyahCard(
             copied = false
         }
     }
-    SoftCard(Modifier.fillMaxWidth().padding(top = 14.dp), cornerRadius = 26.dp) {
-        Column(Modifier.fillMaxWidth().padding(18.dp)) {
+    Card(Modifier.fillMaxWidth()) {
+        Column(Modifier.fillMaxWidth().padding(start = 16.dp, end = 16.dp, top = 16.dp, bottom = 8.dp)) {
             AyahArabic(ayah, fontSize)
             ayah.transliteration?.takeIf { it.isNotEmpty() }?.let {
                 TranslationText(
                     it,
                     Modifier.fillMaxWidth().padding(top = 12.dp),
                     fontSize = fontSize.transliterationSize.sp,
-                    color = soft.appPrimary,
+                    color = MaterialTheme.colorScheme.primary,
                     textAlign = TextAlign.Left,
                     lineSpacing = 0.sp,
                 )
@@ -438,26 +449,30 @@ fun AyahCard(
                     )
                 }
             }
-            Row(Modifier.fillMaxWidth().padding(top = 16.dp), horizontalArrangement = Arrangement.spacedBy(10.dp), verticalAlignment = Alignment.CenterVertically) {
+            Row(Modifier.fillMaxWidth().padding(top = 8.dp), verticalAlignment = Alignment.CenterVertically) {
                 Text(
                     ayah.reference,
-                    Modifier.background(soft.tintedSurface, CircleShape).padding(horizontal = 10.dp, vertical = 5.dp),
-                    style = MaterialTheme.typography.labelSmall,
-                    color = soft.brandTeal,
+                    Modifier.weight(1f),
+                    style = MaterialTheme.typography.labelLarge,
+                    color = MaterialTheme.colorScheme.primary,
                 )
-                Spacer(Modifier.weight(1f))
-                SoftIconButton(R.drawable.ic_book_linear, "Explanation", onExplanation, size = 34.dp, iconSize = 16.dp)
-                SoftIconButton(
-                    if (copied) R.drawable.ic_tick_circle_linear else R.drawable.ic_copy_linear,
-                    if (copied) "Copied" else "Copy",
+                IconButton(onClick = onExplanation) {
+                    Icon(painterResource(R.drawable.ic_book), contentDescription = "Explanation")
+                }
+                IconButton(
                     onClick = {
                         onCopy()
                         copied = true
                     },
-                    size = 34.dp,
-                    iconSize = 16.dp,
-                )
-                SoftIconButton(R.drawable.ic_export_arrow_01_linear, "Share", onShare, size = 34.dp, iconSize = 16.dp)
+                ) {
+                    Icon(
+                        painterResource(if (copied) R.drawable.ic_check else R.drawable.ic_content_copy),
+                        contentDescription = if (copied) "Copied" else "Copy",
+                    )
+                }
+                IconButton(onClick = onShare) {
+                    Icon(painterResource(R.drawable.ic_share), contentDescription = "Share")
+                }
             }
         }
     }
@@ -465,20 +480,19 @@ fun AyahCard(
 
 @Composable
 private fun AyahArabic(ayah: Ayah, fontSize: FontSize) {
-    val soft = MuttaqiTheme.soft
-    val text = remember(ayah.number, soft.appPrimary) {
+    val markColor = MaterialTheme.colorScheme.primary
+    val text = remember(ayah.number, markColor) {
         buildAnnotatedString {
             append(ayah.arabicWithoutEndSign())
             append(' ')
-            withStyle(SpanStyle(color = soft.appPrimary, fontSize = 10.sp, fontFamily = NastaliqFont)) { append('﴿') }
-            withStyle(SpanStyle(color = soft.appPrimary, fontSize = 14.sp)) { append("${ayah.numberInSurah}") }
-            withStyle(SpanStyle(color = soft.appPrimary, fontSize = 10.sp, fontFamily = NastaliqFont)) { append('﴾') }
+            withStyle(SpanStyle(color = markColor, fontSize = 10.sp, fontFamily = NastaliqFont)) { append('﴿') }
+            withStyle(SpanStyle(color = markColor, fontSize = 14.sp)) { append("${ayah.numberInSurah}") }
+            withStyle(SpanStyle(color = markColor, fontSize = 10.sp, fontFamily = NastaliqFont)) { append('﴾') }
         }
     }
     Text(
         text,
         Modifier.fillMaxWidth().padding(top = 6.dp),
-        color = soft.textPrimary,
         textAlign = TextAlign.Right,
         style = TextStyle(fontFamily = QuranFont, fontSize = fontSize.arabicSize.sp, textDirection = TextDirection.Rtl),
     )
@@ -486,23 +500,22 @@ private fun AyahArabic(ayah: Ayah, fontSize: FontSize) {
 
 @Composable
 fun MushafPageCard(page: MushafPage, fontSize: FontSize) {
-    val soft = MuttaqiTheme.soft
-    val text = remember(page.id, soft.appPrimary) {
+    val markColor = MaterialTheme.colorScheme.primary
+    val text = remember(page.id, markColor) {
         buildAnnotatedString {
             page.ayahs.forEachIndexed { index, ayah ->
                 append(ayah.arabicWithoutEndSign())
-                append('\u00A0')
-                withStyle(SpanStyle(color = soft.appPrimary)) { append(ayah.ayahMark) }
+                append(' ')
+                withStyle(SpanStyle(color = markColor)) { append(ayah.ayahMark) }
                 if (index < page.ayahs.lastIndex) append(' ')
             }
         }
     }
-    SoftCard(Modifier.fillMaxWidth().padding(vertical = 8.dp), cornerRadius = 26.dp) {
-        Column(Modifier.fillMaxWidth().padding(18.dp), verticalArrangement = Arrangement.spacedBy(20.dp)) {
+    Card(Modifier.fillMaxWidth()) {
+        Column(Modifier.fillMaxWidth().padding(16.dp), verticalArrangement = Arrangement.spacedBy(20.dp)) {
             Text(
                 text,
                 Modifier.fillMaxWidth(),
-                color = soft.textPrimary,
                 style = TextStyle(
                     fontFamily = QuranFont,
                     fontSize = fontSize.arabicSize.sp,
@@ -513,22 +526,16 @@ fun MushafPageCard(page: MushafPage, fontSize: FontSize) {
                 ),
             )
             Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(12.dp)) {
-                Hairline(Modifier.weight(1f))
-                Text("${page.number}", style = MaterialTheme.typography.labelSmall, color = soft.textSecondary)
-                Hairline(Modifier.weight(1f))
+                HorizontalDivider(Modifier.weight(1f))
+                Text("${page.number}", style = MaterialTheme.typography.labelMedium, color = MaterialTheme.colorScheme.onSurfaceVariant)
+                HorizontalDivider(Modifier.weight(1f))
             }
         }
     }
 }
 
-@Composable
-internal fun Hairline(modifier: Modifier = Modifier) {
-    Box(modifier.height(1.dp).background(if (MuttaqiTheme.soft.dark) Color(0xFF2C2C2E) else Color(0xFFE5E5EA)))
-}
-
 private const val QURAN_FONT_LINE_HEIGHT = 1.758f
 private const val MUSHAF_LINE_SPACING = 0.6f
-
 
 @Composable
 private fun SurahEndNavigation(previous: Surah?, next: Surah?, onIntent: (SurahReaderIntent) -> Unit, modifier: Modifier = Modifier) {
@@ -544,28 +551,32 @@ private fun SurahEndNavigation(previous: Surah?, next: Surah?, onIntent: (SurahR
 
 @Composable
 private fun EndCard(neighbour: Surah, isNext: Boolean, onClick: () -> Unit) {
-    val soft = MuttaqiTheme.soft
-    SoftCard(Modifier.fillMaxWidth(), cornerRadius = 24.dp, onClick = onClick) {
+    OutlinedCard(onClick = onClick, modifier = Modifier.fillMaxWidth()) {
         Column(
             Modifier.fillMaxWidth().padding(16.dp),
             horizontalAlignment = if (isNext) Alignment.End else Alignment.Start,
             verticalArrangement = Arrangement.spacedBy(4.dp),
         ) {
-            Text(if (isNext) "Next" else "Previous", style = MaterialTheme.typography.labelSmall, color = soft.textSecondary)
+            Text(
+                if (isNext) "Next" else "Previous",
+                style = MaterialTheme.typography.labelMedium,
+                color = MaterialTheme.colorScheme.onSurfaceVariant,
+            )
             Row(horizontalArrangement = Arrangement.spacedBy(4.dp), verticalAlignment = Alignment.CenterVertically) {
-                if (!isNext) Icon(painterResource(R.drawable.ic_arrow_left_02_linear), null, Modifier.size(16.dp), tint = soft.textPrimary)
-                Text(neighbour.englishName, style = MaterialTheme.typography.bodyMedium, color = soft.textPrimary, maxLines = 1, overflow = TextOverflow.Ellipsis)
-                if (isNext) Icon(painterResource(R.drawable.ic_arrow_right_02_linear), null, Modifier.size(16.dp), tint = soft.textPrimary)
+                if (!isNext) Icon(painterResource(R.drawable.ic_arrow_back), contentDescription = null, Modifier.size(18.dp))
+                Text(neighbour.englishName, Modifier.weight(1f, fill = false), style = MaterialTheme.typography.titleSmall)
+                if (isNext) Icon(painterResource(R.drawable.ic_arrow_forward), contentDescription = null, Modifier.size(18.dp))
             }
         }
     }
 }
 
+@OptIn(ExperimentalMaterial3ExpressiveApi::class)
 @Composable
-private fun ReadingPositionPill(position: String) {
-    SoftPillSurface(Modifier.height(36.dp), fill = MuttaqiTheme.soft.surface.copy(alpha = 0.96f)) {
-        AnimatedContent(position, label = "position") {
-            Text(it, Modifier.padding(horizontal = 16.dp), style = MaterialTheme.typography.labelLarge.copy(fontSize = 13.sp), color = MuttaqiTheme.soft.appPrimary)
+private fun ReadingPosition(position: String) {
+    HorizontalFloatingToolbar(expanded = true, colors = FloatingToolbarDefaults.vibrantFloatingToolbarColors()) {
+        AnimatedContent(position, Modifier.align(Alignment.CenterVertically), label = "position") {
+            Text(it, Modifier.padding(horizontal = 12.dp), style = MaterialTheme.typography.labelLarge)
         }
     }
 }
@@ -573,6 +584,6 @@ private fun ReadingPositionPill(position: String) {
 @Composable
 internal fun Loading(modifier: Modifier = Modifier) {
     Box(modifier.fillMaxWidth(), contentAlignment = Alignment.Center) {
-        SoftLoadingIndicator()
+        DelayedLoadingIndicator()
     }
 }

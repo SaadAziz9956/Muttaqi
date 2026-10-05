@@ -17,21 +17,20 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.graphicsLayer
-import com.muttaqi.android.designsystem.MuttaqiTheme
 import kotlinx.coroutines.delay
 import kotlin.time.Duration
 import kotlin.time.Duration.Companion.milliseconds
 
 @OptIn(ExperimentalMaterial3ExpressiveApi::class)
 @Composable
-fun SoftLoadingIndicator(modifier: Modifier = Modifier, after: Duration = 250.milliseconds) {
+fun DelayedLoadingIndicator(modifier: Modifier = Modifier, after: Duration = 250.milliseconds) {
     var shown by remember { mutableStateOf(false) }
     LaunchedEffect(Unit) {
         delay(after)
         shown = true
     }
     val alpha by animateFloatAsState(if (shown) 1f else 0f, tween(220), label = "loading")
-    LoadingIndicator(modifier.graphicsLayer { this.alpha = alpha }, color = MuttaqiTheme.soft.appPrimary)
+    LoadingIndicator(modifier.graphicsLayer { this.alpha = alpha })
 }
 
 @Composable

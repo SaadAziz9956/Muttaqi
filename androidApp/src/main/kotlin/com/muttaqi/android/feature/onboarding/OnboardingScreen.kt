@@ -18,45 +18,44 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.systemBarsPadding
-import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.foundation.text.KeyboardActions
+import androidx.compose.foundation.text.KeyboardOptions
+import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.Card
 import androidx.compose.material3.ExperimentalMaterial3ExpressiveApi
 import androidx.compose.material3.Icon
 import androidx.compose.material3.LoadingIndicator
+import androidx.compose.material3.MaterialShapes
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextButton
+import androidx.compose.material3.TextField
+import androidx.compose.material3.toShape
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.text.TextStyle
-import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.input.ImeAction
+import androidx.compose.ui.text.input.KeyboardCapitalization
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.text.style.TextDirection
-import androidx.compose.ui.unit.TextUnit
+import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.muttaqi.android.R
-import com.muttaqi.android.designsystem.MuttaqiTheme
-import com.muttaqi.android.designsystem.QuranFont
-import com.muttaqi.android.designsystem.component.SoftArtwork
-import com.muttaqi.android.designsystem.component.SoftBackdrop
-import com.muttaqi.android.designsystem.component.SoftButton
-import com.muttaqi.android.designsystem.component.SoftButtonKind
-import com.muttaqi.android.designsystem.component.SoftCard
-import com.muttaqi.android.designsystem.component.SoftPillSurface
-import com.muttaqi.android.designsystem.component.SoftTextField
+import com.muttaqi.android.designsystem.component.ArabicText
+import com.muttaqi.android.designsystem.component.QuranText
+import com.muttaqi.android.designsystem.component.TranslationText
 import com.muttaqi.shared.feature.onboarding.domain.model.OnboardingStep
 import com.muttaqi.shared.feature.onboarding.presentation.OnboardingEffect
 import com.muttaqi.shared.feature.onboarding.presentation.OnboardingIntent
 import com.muttaqi.shared.feature.onboarding.presentation.OnboardingState
-import com.muttaqi.shared.feature.onboarding.presentation.OnboardingVerse
 import com.muttaqi.shared.feature.onboarding.presentation.OnboardingVerses
 import com.muttaqi.shared.feature.onboarding.presentation.OnboardingViewModel
 
@@ -75,9 +74,8 @@ fun OnboardingRoute(viewModel: OnboardingViewModel, onFinished: () -> Unit) {
 
 @Composable
 fun OnboardingScreen(state: OnboardingState, onIntent: (OnboardingIntent) -> Unit) {
-    Box(Modifier.fillMaxSize()) {
-        SoftBackdrop()
-        Column(Modifier.fillMaxSize().systemBarsPadding()) {
+    Scaffold { padding ->
+        Column(Modifier.fillMaxSize().padding(padding)) {
             AnimatedVisibility(state.step != OnboardingStep.Setup, enter = fadeIn(), exit = fadeOut()) {
                 AppName(Modifier.fillMaxWidth().padding(top = 48.dp))
             }
@@ -85,19 +83,19 @@ fun OnboardingScreen(state: OnboardingState, onIntent: (OnboardingIntent) -> Uni
                 targetState = state.step,
                 modifier = Modifier.weight(1f).fillMaxWidth(),
                 transitionSpec = {
-                    val duration = tween<androidx.compose.ui.unit.IntOffset>(450)
+                    val duration = tween<IntOffset>(450)
                     (slideInHorizontally(duration) { it } + fadeIn(tween(450))) togetherWith
                         (slideOutHorizontally(duration) { -it / 3 } + fadeOut(tween(450)))
                 },
                 label = "step",
             ) { step ->
-                Column(Modifier.fillMaxSize(), horizontalAlignment = Alignment.CenterHorizontally) {
+                Column(Modifier.fillMaxSize().padding(horizontal = 16.dp), horizontalAlignment = Alignment.CenterHorizontally) {
                     when (step) {
                         OnboardingStep.Welcome -> WelcomeStep { onIntent(OnboardingIntent.Begin) }
                         OnboardingStep.Name -> NameStep(state.name, { onIntent(OnboardingIntent.NameChanged(it)) }) { onIntent(OnboardingIntent.SaveName) }
                         OnboardingStep.Goals -> GoalsStep { onIntent(OnboardingIntent.Next) }
                         OnboardingStep.Notification -> PermissionStep(
-                            icon = R.drawable.ic_clock_linear,
+                            icon = R.drawable.ic_notifications,
                             title = "Enable Notification",
                             detail = "Enable Notification so you don't miss daily Quran ayah and Azkar and Namaz Alarms.",
                             question = "Would you like to turn on Notifications?",
@@ -106,7 +104,7 @@ fun OnboardingScreen(state: OnboardingState, onIntent: (OnboardingIntent) -> Uni
                             onSkip = { onIntent(OnboardingIntent.SkipNotification) },
                         )
                         OnboardingStep.Location -> PermissionStep(
-                            icon = R.drawable.ic_home_qibla,
+                            icon = R.drawable.ic_location_on,
                             title = "Select Location",
                             detail = "Select your current location to get latest Namaz timing",
                             question = "Find your City",
@@ -124,94 +122,128 @@ fun OnboardingScreen(state: OnboardingState, onIntent: (OnboardingIntent) -> Uni
 
 @Composable
 private fun AppName(modifier: Modifier = Modifier) {
-    Text(
+    ArabicText(
         "متقي",
         modifier,
-        style = MaterialTheme.typography.bodyLarge.copy(fontSize = 60.sp, textDirection = TextDirection.Rtl),
-        color = MuttaqiTheme.soft.appPrimary,
+        style = MaterialTheme.typography.displayLarge,
+        color = MaterialTheme.colorScheme.primary,
         textAlign = TextAlign.Center,
     )
 }
 
+@OptIn(ExperimentalMaterial3ExpressiveApi::class)
 @Composable
-private fun StepTitle(text: String, modifier: Modifier = Modifier, size: TextUnit = 22.sp, textAlign: TextAlign = TextAlign.Center) {
-    Text(text, modifier, style = MaterialTheme.typography.titleMedium.copy(fontSize = size, fontWeight = FontWeight.Medium), color = MuttaqiTheme.soft.appPrimary, textAlign = textAlign)
+private fun PrimaryButton(text: String, onClick: () -> Unit, modifier: Modifier = Modifier) {
+    val size = ButtonDefaults.MediumContainerHeight
+    Button(
+        onClick = onClick,
+        modifier = modifier.fillMaxWidth().heightIn(size),
+        contentPadding = ButtonDefaults.contentPaddingFor(size),
+    ) {
+        Text(text, style = ButtonDefaults.textStyleFor(size))
+    }
 }
 
+@OptIn(ExperimentalMaterial3ExpressiveApi::class)
 @Composable
-private fun StepDetail(text: String, modifier: Modifier = Modifier, color: Color = MuttaqiTheme.soft.textSecondary, textAlign: TextAlign = TextAlign.Center) {
-    Text(text, modifier, style = MaterialTheme.typography.bodyMedium.copy(fontSize = 15.sp, lineHeight = 26.sp), color = color, textAlign = textAlign)
+private fun SecondaryButton(text: String, onClick: () -> Unit, modifier: Modifier = Modifier) {
+    val size = ButtonDefaults.MediumContainerHeight
+    TextButton(
+        onClick = onClick,
+        modifier = modifier.fillMaxWidth().heightIn(size),
+        contentPadding = ButtonDefaults.contentPaddingFor(size),
+    ) {
+        Text(text, style = ButtonDefaults.textStyleFor(size))
+    }
 }
 
 @Composable
 private fun ColumnScope.WelcomeStep(onBegin: () -> Unit) {
-    val soft = MuttaqiTheme.soft
     val verse = OnboardingVerses.basmala
     Spacer(Modifier.weight(1f))
-    SoftCard(Modifier.padding(horizontal = 20.dp).fillMaxWidth(), artwork = SoftArtwork.Dawn) {
+    Card(Modifier.fillMaxWidth()) {
         Column(
-            Modifier.fillMaxWidth().padding(horizontal = 24.dp, vertical = 36.dp),
+            Modifier.fillMaxWidth().padding(horizontal = 24.dp, vertical = 32.dp),
             horizontalAlignment = Alignment.CenterHorizontally,
-            verticalArrangement = Arrangement.spacedBy(14.dp),
+            verticalArrangement = Arrangement.spacedBy(16.dp),
         ) {
-            VerseArabic(verse, 32.sp)
-            StepDetail(verse.translation, color = soft.textPrimary)
+            QuranText(verse.arabic, Modifier.fillMaxWidth(), fontSize = MaterialTheme.typography.headlineLarge.fontSize)
+            TranslationText(verse.translation, Modifier.fillMaxWidth(), textAlign = TextAlign.Center)
         }
     }
     Spacer(Modifier.weight(1f))
-    SoftButton("Begin", onBegin, Modifier.padding(bottom = 40.dp))
+    PrimaryButton("Begin", onBegin, Modifier.padding(bottom = 24.dp))
 }
 
 @Composable
 private fun ColumnScope.NameStep(name: String, onNameChange: (String) -> Unit, onSave: () -> Unit) {
     Spacer(Modifier.weight(1f))
-    Column(Modifier.padding(horizontal = 24.dp), horizontalAlignment = Alignment.CenterHorizontally, verticalArrangement = Arrangement.spacedBy(22.dp)) {
-        StepTitle("What should we call you?")
-        SoftTextField(name, onNameChange, "Type here...", onDone = onSave)
-    }
+    Text("What should we call you?", style = MaterialTheme.typography.headlineSmall, textAlign = TextAlign.Center)
+    TextField(
+        value = name,
+        onValueChange = onNameChange,
+        modifier = Modifier.fillMaxWidth().padding(top = 24.dp),
+        placeholder = { Text("Type here...") },
+        singleLine = true,
+        keyboardOptions = KeyboardOptions(capitalization = KeyboardCapitalization.Words, imeAction = ImeAction.Done),
+        keyboardActions = KeyboardActions(onDone = { onSave() }),
+    )
     Spacer(Modifier.weight(1f))
-    SoftButton("Save", onSave, Modifier.padding(bottom = 40.dp))
+    PrimaryButton("Save", onSave, Modifier.padding(bottom = 24.dp))
 }
 
 @Composable
 private fun ColumnScope.GoalsStep(onBegin: () -> Unit) {
-    val soft = MuttaqiTheme.soft
     val verse = OnboardingVerses.lovesThePure
     Spacer(Modifier.weight(1f))
-    SoftCard(Modifier.padding(horizontal = 20.dp).fillMaxWidth()) {
-        Column(Modifier.fillMaxWidth().padding(22.dp)) {
-            StepTitle("We will help you to achieve your Muslim Goals", size = 20.sp, textAlign = TextAlign.Start)
-            StepDetail("by using our App on the daily basis you will", Modifier.padding(top = 6.dp), textAlign = TextAlign.Start)
-            Column(Modifier.padding(top = 20.dp), verticalArrangement = Arrangement.spacedBy(12.dp)) {
-                GoalRow(R.drawable.ic_lovely_linear, "Become a better Muslim")
-                GoalRow(R.drawable.ic_book_open_linear, "Read Quran with translation")
-                GoalRow(R.drawable.ic_repeat_circle_linear, "Zikr o Azkar")
-                GoalRow(R.drawable.ic_lamp_on_linear, "Learn Sunnah")
+    Card(Modifier.fillMaxWidth()) {
+        Column(Modifier.fillMaxWidth().padding(24.dp)) {
+            Text("We will help you to achieve your Muslim Goals", style = MaterialTheme.typography.titleLarge)
+            Text(
+                "by using our App on the daily basis you will",
+                Modifier.padding(top = 4.dp),
+                style = MaterialTheme.typography.bodyMedium,
+                color = MaterialTheme.colorScheme.onSurfaceVariant,
+            )
+            Column(Modifier.padding(top = 20.dp), verticalArrangement = Arrangement.spacedBy(16.dp)) {
+                GoalRow(R.drawable.ic_volunteer_activism, "Become a better Muslim")
+                GoalRow(R.drawable.ic_menu_book, "Read Quran with translation")
+                GoalRow(R.drawable.ic_self_improvement, "Zikr o Azkar")
+                GoalRow(R.drawable.ic_lightbulb, "Learn Sunnah")
             }
         }
     }
-    StepTitle("In Shaa Allah", Modifier.padding(top = 20.dp), size = 16.sp)
-    SoftButton("Begin", onBegin, Modifier.padding(top = 22.dp))
+    Text(
+        "In Shaa Allah",
+        Modifier.padding(top = 20.dp),
+        style = MaterialTheme.typography.titleMedium,
+        color = MaterialTheme.colorScheme.primary,
+    )
     Spacer(Modifier.weight(1f))
     Column(
-        Modifier.padding(horizontal = 24.dp).padding(bottom = 32.dp),
+        Modifier.fillMaxWidth().padding(horizontal = 8.dp),
         horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.spacedBy(6.dp),
+        verticalArrangement = Arrangement.spacedBy(8.dp),
     ) {
-        VerseArabic(verse, 26.sp)
-        Text(verse.translation, style = MaterialTheme.typography.bodyMedium.copy(fontSize = 14.sp), color = soft.textPrimary, textAlign = TextAlign.Center)
-        verse.source?.let { Text(it, style = MaterialTheme.typography.labelSmall, color = soft.textSecondary) }
+        QuranText(verse.arabic, Modifier.fillMaxWidth(), fontSize = MaterialTheme.typography.headlineSmall.fontSize)
+        TranslationText(
+            verse.translation,
+            Modifier.fillMaxWidth(),
+            style = MaterialTheme.typography.bodyMedium,
+            textAlign = TextAlign.Center,
+        )
+        verse.source?.let {
+            Text(it, style = MaterialTheme.typography.labelMedium, color = MaterialTheme.colorScheme.onSurfaceVariant)
+        }
     }
+    PrimaryButton("Begin", onBegin, Modifier.padding(top = 24.dp, bottom = 24.dp))
 }
 
 @Composable
 private fun GoalRow(@DrawableRes icon: Int, text: String) {
-    val soft = MuttaqiTheme.soft
-    Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(12.dp)) {
-        Box(Modifier.size(36.dp).background(soft.tintedSurface, CircleShape), contentAlignment = Alignment.Center) {
-            Icon(painterResource(icon), null, Modifier.size(18.dp), tint = soft.brandTeal)
-        }
-        Text(text, style = MaterialTheme.typography.bodyMedium.copy(fontSize = 15.sp), color = soft.textPrimary)
+    Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(16.dp)) {
+        Icon(painterResource(icon), contentDescription = null, tint = MaterialTheme.colorScheme.primary)
+        Text(text, style = MaterialTheme.typography.bodyLarge)
     }
 }
 
@@ -225,65 +257,67 @@ private fun ColumnScope.PermissionStep(
     onAction: () -> Unit,
     onSkip: () -> Unit,
 ) {
-    val soft = MuttaqiTheme.soft
     Spacer(Modifier.weight(1f))
-    SoftCard(Modifier.padding(horizontal = 20.dp).fillMaxWidth()) {
+    Card(Modifier.fillMaxWidth()) {
         Column(
             Modifier.fillMaxWidth().padding(horizontal = 24.dp, vertical = 32.dp),
             horizontalAlignment = Alignment.CenterHorizontally,
         ) {
-            SoftPillSurface(Modifier.size(72.dp), fill = soft.brandGreen, rim = false) {
-                Icon(painterResource(icon), null, Modifier.size(30.dp), tint = Color.White)
+            Box(
+                Modifier.size(72.dp).background(MaterialTheme.colorScheme.primary, MaterialShapes.Cookie9Sided.toShape()),
+                contentAlignment = Alignment.Center,
+            ) {
+                Icon(painterResource(icon), contentDescription = null, Modifier.size(32.dp), tint = MaterialTheme.colorScheme.onPrimary)
             }
-            StepTitle(title, Modifier.padding(top = 22.dp))
-            StepDetail(detail, Modifier.padding(top = 10.dp))
+            Text(title, Modifier.padding(top = 24.dp), style = MaterialTheme.typography.headlineSmall, textAlign = TextAlign.Center)
+            Text(
+                detail,
+                Modifier.padding(top = 8.dp),
+                style = MaterialTheme.typography.bodyMedium,
+                color = MaterialTheme.colorScheme.onSurfaceVariant,
+                textAlign = TextAlign.Center,
+            )
         }
     }
     Spacer(Modifier.weight(1f))
-    Column(
-        Modifier.padding(horizontal = 20.dp).padding(bottom = 32.dp),
-        horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.spacedBy(14.dp),
-    ) {
-        Text(question, style = MaterialTheme.typography.titleMedium.copy(fontSize = 17.sp), color = soft.textPrimary, textAlign = TextAlign.Center)
-        SoftButton(action, onAction, Modifier.padding(top = 4.dp))
-        SoftButton("Not now", onSkip, kind = SoftButtonKind.Secondary)
-    }
+    Text(question, style = MaterialTheme.typography.titleMedium, textAlign = TextAlign.Center)
+    PrimaryButton(action, onAction, Modifier.padding(top = 16.dp))
+    SecondaryButton("Not now", onSkip, Modifier.padding(top = 8.dp, bottom = 24.dp))
 }
 
 @OptIn(ExperimentalMaterial3ExpressiveApi::class)
 @Composable
 private fun ColumnScope.SetupStep(error: String?, onRetry: () -> Unit) {
-    val soft = MuttaqiTheme.soft
     Spacer(Modifier.weight(1f))
     AppName()
-    SoftCard(Modifier.padding(horizontal = 20.dp).padding(top = 28.dp).fillMaxWidth()) {
+    Card(Modifier.padding(top = 24.dp).fillMaxWidth()) {
         Column(
             Modifier.fillMaxWidth().padding(horizontal = 24.dp, vertical = 28.dp),
             horizontalAlignment = Alignment.CenterHorizontally,
         ) {
             if (error == null) {
-                StepTitle("Setting up for first time", size = 20.sp)
-                StepDetail("Downloading Quran data...", Modifier.padding(top = 8.dp))
-                LoadingIndicator(Modifier.padding(top = 14.dp).size(40.dp), color = soft.appPrimary)
+                Text("Setting up for first time", style = MaterialTheme.typography.titleLarge, textAlign = TextAlign.Center)
+                Text(
+                    "Downloading Quran data...",
+                    Modifier.padding(top = 8.dp),
+                    style = MaterialTheme.typography.bodyMedium,
+                    color = MaterialTheme.colorScheme.onSurfaceVariant,
+                )
+                LoadingIndicator(Modifier.padding(top = 16.dp))
             } else {
-                StepTitle("Setup Failed", size = 20.sp)
-                StepDetail(error, Modifier.padding(top = 8.dp))
+                Text("Setup Failed", style = MaterialTheme.typography.titleLarge, textAlign = TextAlign.Center)
+                Text(
+                    error,
+                    Modifier.padding(top = 8.dp),
+                    style = MaterialTheme.typography.bodyMedium,
+                    color = MaterialTheme.colorScheme.onSurfaceVariant,
+                    textAlign = TextAlign.Center,
+                )
             }
         }
     }
     if (error != null) {
-        SoftButton("Retry", onRetry, Modifier.padding(top = 28.dp))
+        PrimaryButton("Retry", onRetry, Modifier.padding(top = 24.dp))
     }
     Spacer(Modifier.weight(1f))
-}
-
-@Composable
-private fun VerseArabic(verse: OnboardingVerse, size: TextUnit) {
-    Text(
-        verse.arabic,
-        style = TextStyle(fontFamily = QuranFont, fontSize = size, textDirection = TextDirection.Rtl),
-        color = MuttaqiTheme.soft.textPrimary,
-        textAlign = TextAlign.Center,
-    )
 }

@@ -4,5 +4,5 @@
         <item name="android:windowBackground">@color/canvas</item>
     </style>
 
-    <color name="canvas">#0A1210</color>
+    <color name="canvas">#0F1512</color>
 </resources>

@@ -6,21 +6,16 @@ import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.consumeWindowInsets
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
 import androidx.compose.material3.ExperimentalMaterial3ExpressiveApi
 import androidx.compose.material3.Icon
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.ShortNavigationBar
 import androidx.compose.material3.ShortNavigationBarItem
-import androidx.compose.material3.ShortNavigationBarItemDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.unit.dp
 import androidx.navigation.NavDestination.Companion.hasRoute
 import androidx.navigation.NavDestination.Companion.hierarchy
 import androidx.navigation.NavGraph.Companion.findStartDestination
@@ -29,7 +24,6 @@ import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.navigation
 import androidx.navigation.compose.rememberNavController
 import com.muttaqi.android.R
-import com.muttaqi.android.designsystem.MuttaqiTheme
 import com.muttaqi.android.feature.dhikr.dhikrDestinations
 import com.muttaqi.android.feature.dua.DuaListRoute
 import com.muttaqi.android.feature.dua.duaDestinations
@@ -54,10 +48,10 @@ import kotlinx.serialization.Serializable
 @Serializable data object DuaTab
 
 private enum class Tab(val graph: Any, val root: Any, val label: String, @DrawableRes val icon: Int, @DrawableRes val selectedIcon: Int) {
-    Home(HomeTab, HomeRoute, "Home", R.drawable.ic_home_linear, R.drawable.ic_home_bold),
-    Explore(ExploreTab, ExploreRoute, "Explore", R.drawable.ic_search_normal_linear, R.drawable.ic_search_normal_bold),
-    Quran(QuranTab, QuranListRoute, "Quran", R.drawable.ic_book_saved_linear, R.drawable.ic_book_saved_bold),
-    Dua(DuaTab, DuaListRoute, "Dua", R.drawable.ic_moon_linear, R.drawable.ic_moon_bold),
+    Home(HomeTab, HomeRoute, "Home", R.drawable.ic_home, R.drawable.ic_home_filled),
+    Explore(ExploreTab, ExploreRoute, "Explore", R.drawable.ic_explore, R.drawable.ic_explore_filled),
+    Quran(QuranTab, QuranListRoute, "Quran", R.drawable.ic_menu_book, R.drawable.ic_menu_book_filled),
+    Dua(DuaTab, DuaListRoute, "Dua", R.drawable.ic_dark_mode, R.drawable.ic_dark_mode_filled),
 }
 
 @Composable
@@ -69,11 +63,10 @@ fun MuttaqiApp() {
         val onTabRoot = Tab.entries.any { tab -> destination?.hasRoute(tab.root::class) == true }
 
         Scaffold(
-            containerColor = Color.Transparent,
             contentWindowInsets = WindowInsets(0, 0, 0, 0),
             bottomBar = {
                 if (onTabRoot) {
-                    ShortNavigationBar(containerColor = MuttaqiTheme.soft.surface) {
+                    ShortNavigationBar {
                         Tab.entries.forEach { tab ->
                             val selected = destination?.hierarchy?.any { it.hasRoute(tab.graph::class) } == true
                             ShortNavigationBarItem(
@@ -85,13 +78,8 @@ fun MuttaqiApp() {
                                         restoreState = true
                                     }
                                 },
-                                icon = { Icon(painterResource(if (selected) tab.selectedIcon else tab.icon), null, Modifier.size(24.dp)) },
-                                label = { Text(tab.label, style = MaterialTheme.typography.labelMedium) },
-                                colors = ShortNavigationBarItemDefaults.colors(
-                                    selectedIconColor = MuttaqiTheme.soft.appPrimary,
-                                    selectedTextColor = MuttaqiTheme.soft.appPrimary,
-                                    selectedIndicatorColor = MuttaqiTheme.soft.tintedSurface,
-                                ),
+                                icon = { Icon(painterResource(if (selected) tab.selectedIcon else tab.icon), contentDescription = null) },
+                                label = { Text(tab.label) },
                             )
                         }
                     }
