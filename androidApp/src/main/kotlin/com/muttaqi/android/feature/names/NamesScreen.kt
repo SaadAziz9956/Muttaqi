@@ -7,54 +7,45 @@ import androidx.compose.animation.slideInVertically
 import androidx.compose.animation.slideOutVertically
 import androidx.compose.animation.togetherWith
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.BoxWithConstraints
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.heightIn
-import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.pager.HorizontalPager
 import androidx.compose.foundation.pager.PagerState
 import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.material3.Card
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
+import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.snapshotFlow
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.TransformOrigin
-import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.hapticfeedback.HapticFeedbackType
 import androidx.compose.ui.platform.LocalHapticFeedback
-import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.compose.ui.util.lerp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.muttaqi.android.R
-import com.muttaqi.android.designsystem.MuttaqiTheme
-import com.muttaqi.android.designsystem.component.SoftBackdrop
-import com.muttaqi.android.designsystem.component.SoftIconButton
-import com.muttaqi.android.designsystem.component.SoftPillSurface
-import com.muttaqi.android.designsystem.component.SoftTopBar
+import com.muttaqi.android.designsystem.component.BackButton
 import com.muttaqi.android.designsystem.component.TranslationText
 import com.muttaqi.shared.core.share.SharePassage
 import com.muttaqi.shared.feature.names.presentation.NamesEffect
 import com.muttaqi.shared.feature.names.presentation.NamesIntent
 import com.muttaqi.shared.feature.names.presentation.NamesState
 import com.muttaqi.shared.feature.names.presentation.NamesViewModel
-import kotlin.math.absoluteValue
 import kotlin.math.max
 import kotlinx.coroutines.flow.drop
 
@@ -74,6 +65,7 @@ fun NamesRoute(viewModel: NamesViewModel, onOpenSearch: () -> Unit, onShare: (Sh
     NamesScreen(state, pager, position, viewModel::dispatch, onOpenSearch, onBack)
 }
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun NamesScreen(
     state: NamesState,
@@ -83,7 +75,6 @@ fun NamesScreen(
     onOpenSearch: () -> Unit,
     onBack: () -> Unit,
 ) {
-    val soft = MuttaqiTheme.soft
     val haptics = LocalHapticFeedback.current
     LaunchedEffect(pager, state.names) {
         snapshotFlow { pager.settledPage }.collect { page -> state.names.getOrNull(page)?.let { onIntent(NamesIntent.NameShown(it.number)) } }
@@ -97,77 +88,62 @@ fun NamesScreen(
     }
     val shownNumber = state.names.getOrNull(pager.currentPage)?.number ?: position
 
-    Box {
-        SoftBackdrop()
-        Scaffold(
-            containerColor = Color.Transparent,
-            topBar = {
-                SoftTopBar("", showTitle = false, onBack = onBack) {
+    Scaffold(
+        topBar = {
+            TopAppBar(
+                title = { Text("99 Names") },
+                navigationIcon = { BackButton(onBack) },
+                actions = {
                     if (state.names.isNotEmpty()) {
-                        SoftIconButton(R.drawable.ic_export_arrow_01_linear, "Share", { onIntent(NamesIntent.ShareTapped) }, size = 44.dp, iconSize = 22.dp)
-                        Spacer(Modifier.width(8.dp))
+                        IconButton(onClick = { onIntent(NamesIntent.ShareTapped) }) {
+                            Icon(painterResource(R.drawable.ic_share), contentDescription = "Share")
+                        }
                     }
-                    SoftIconButton(R.drawable.ic_search_normal_linear, "Search names", onOpenSearch, Modifier.padding(end = 12.dp), size = 44.dp, iconSize = 22.dp)
+                    IconButton(onClick = onOpenSearch) {
+                        Icon(painterResource(R.drawable.ic_search), contentDescription = "Search names")
+                    }
+                },
+            )
+        },
+    ) { padding ->
+        BoxWithConstraints(Modifier.padding(padding)) {
+            val cardHeight = max(260f, maxHeight.value * 0.55f).dp
+            Column(
+                Modifier.verticalScroll(rememberScrollState()).heightIn(min = maxHeight).fillMaxWidth(),
+                horizontalAlignment = Alignment.CenterHorizontally,
+                verticalArrangement = Arrangement.SpaceBetween,
+            ) {
+                Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                    HorizontalPager(
+                        state = pager,
+                        modifier = Modifier.padding(top = 16.dp),
+                        contentPadding = PaddingValues(horizontal = 32.dp),
+                        pageSpacing = 16.dp,
+                        beyondViewportPageCount = 1,
+                        key = { page -> state.names.getOrNull(page)?.number ?: -(page + 1) },
+                    ) { page ->
+                        val name = state.names.getOrNull(page) ?: return@HorizontalPager
+                        NameCard(name, minHeight = cardHeight)
+                    }
+                    AnimatedContent(
+                        targetState = shownNumber,
+                        modifier = Modifier.padding(top = 16.dp),
+                        transitionSpec = { (slideInVertically { it / 2 } + fadeIn()) togetherWith (slideOutVertically { -it / 2 } + fadeOut()) },
+                        label = "position",
+                    ) { number ->
+                        Text(
+                            "$number of ${max(state.names.size, 99)}",
+                            style = MaterialTheme.typography.labelLarge,
+                            color = MaterialTheme.colorScheme.onSurfaceVariant,
+                        )
+                    }
                 }
-            },
-        ) { padding ->
-            BoxWithConstraints(Modifier.padding(top = padding.calculateTopPadding())) {
-                val cardHeight = max(260f, maxHeight.value * 0.415f).dp
-                Column(
-                    Modifier.verticalScroll(rememberScrollState()).heightIn(min = maxHeight).fillMaxWidth().navigationBarsPadding(),
-                    horizontalAlignment = Alignment.CenterHorizontally,
-                    verticalArrangement = Arrangement.SpaceBetween,
-                ) {
-                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
-                        Text("99 Names", Modifier.padding(top = 8.dp), style = MaterialTheme.typography.headlineMedium, color = soft.appPrimary)
-                        HorizontalPager(
-                            state = pager,
-                            modifier = Modifier.padding(top = 28.dp),
-                            contentPadding = PaddingValues(horizontal = 38.dp),
-                            pageSpacing = 12.dp,
-                            beyondViewportPageCount = 1,
-                            key = { page -> state.names.getOrNull(page)?.number ?: -(page + 1) },
-                        ) { page ->
-                            val name = state.names.getOrNull(page) ?: return@HorizontalPager
-                            NameCard(
-                                name,
-                                Modifier.padding(vertical = 18.dp).graphicsLayer {
-                                    val offset = pager.currentPage - page + pager.currentPageOffsetFraction
-                                    val away = offset.absoluteValue.coerceIn(0f, 1f)
-                                    scaleX = lerp(1f, 0.88f, away)
-                                    scaleY = scaleX
-                                    alpha = lerp(1f, 0.6f, away)
-                                    transformOrigin = TransformOrigin(if (offset > 0) 1f else 0f, 0.5f)
-                                },
-                                minHeight = cardHeight,
-                            )
-                        }
-                    }
-                    Column(Modifier.padding(top = 32.dp), horizontalAlignment = Alignment.CenterHorizontally) {
-                        SoftPillSurface(Modifier.height(34.dp)) {
-                            AnimatedContent(
-                                targetState = shownNumber,
-                                transitionSpec = { (slideInVertically { it / 2 } + fadeIn()) togetherWith (slideOutVertically { -it / 2 } + fadeOut()) },
-                                label = "position",
-                            ) { number ->
-                                Text(
-                                    "$number of ${max(state.names.size, 99)}",
-                                    Modifier.padding(horizontal = 14.dp),
-                                    style = MaterialTheme.typography.labelLarge.copy(fontSize = 13.sp),
-                                    color = soft.appPrimary,
-                                )
-                            }
-                        }
-                        state.hadith?.let { hadith ->
-                            Column(
-                                Modifier.padding(start = 24.dp, end = 24.dp, top = 22.dp, bottom = 12.dp),
-                                horizontalAlignment = Alignment.CenterHorizontally,
-                                verticalArrangement = Arrangement.spacedBy(6.dp),
-                            ) {
-                                TranslationText(hadith.text, color = soft.textSecondary, textAlign = TextAlign.Center, lineSpacing = 0.sp)
-                                Text(hadith.source, style = MaterialTheme.typography.labelSmall, color = soft.brandTeal, textAlign = TextAlign.Center)
-                                Text(state.listSource, style = MaterialTheme.typography.labelSmall, color = soft.textSecondary, textAlign = TextAlign.Center)
-                            }
+                state.hadith?.let { hadith ->
+                    Card(Modifier.fillMaxWidth().padding(16.dp)) {
+                        Column(Modifier.fillMaxWidth().padding(16.dp), verticalArrangement = Arrangement.spacedBy(8.dp)) {
+                            TranslationText(hadith.text, Modifier.fillMaxWidth(), lineSpacing = 0.sp)
+                            Text(hadith.source, style = MaterialTheme.typography.labelMedium, color = MaterialTheme.colorScheme.primary)
+                            Text(state.listSource, style = MaterialTheme.typography.labelSmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
                         }
                     }
                 }
