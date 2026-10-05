@@ -9,50 +9,37 @@ import androidx.compose.animation.expandVertically
 import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
 import androidx.compose.animation.shrinkVertically
-import androidx.compose.foundation.ScrollState
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.WindowInsets
-import androidx.compose.foundation.layout.asPaddingValues
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.navigationBars
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.statusBarsPadding
-import androidx.compose.foundation.layout.widthIn
-import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.verticalScroll
-import androidx.compose.material3.MaterialTheme
+import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.ExperimentalMaterial3ExpressiveApi
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
+import androidx.compose.material3.LargeFlexibleTopAppBar
+import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
+import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.platform.ClipEntry
 import androidx.compose.ui.platform.LocalClipboard
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import androidx.lifecycle.compose.LifecycleResumeEffect
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import com.muttaqi.android.designsystem.MuttaqiTheme
-import com.muttaqi.android.designsystem.component.SoftBackdrop
-import com.muttaqi.android.designsystem.component.StatusBarFade
-import com.muttaqi.android.designsystem.component.TranslationText
-import com.muttaqi.android.feature.prayer.NextPrayerPill
-import com.muttaqi.android.feature.prayer.PrayerTimesStrip
+import com.muttaqi.android.R
+import com.muttaqi.android.designsystem.component.PageQuote
+import com.muttaqi.android.feature.prayer.PrayerTimesCard
+import com.muttaqi.android.feature.prayer.SetLocationButton
+import com.muttaqi.shared.core.quote.DisplayedQuote
 import com.muttaqi.shared.core.share.SharePassage
-import com.muttaqi.shared.core.text.quoted
 import com.muttaqi.shared.feature.home.presentation.HomeEffect
 import com.muttaqi.shared.feature.home.presentation.HomeIntent
 import com.muttaqi.shared.feature.home.presentation.HomeState
@@ -106,88 +93,75 @@ fun HomeRoute(
     HomeScreen(state, qiblaArrow = { qiblaArrow.value }, onIntent = viewModel::dispatch, onOpenSettings = onOpenSettings)
 }
 
+@OptIn(ExperimentalMaterial3Api::class, ExperimentalMaterial3ExpressiveApi::class)
 @Composable
 fun HomeScreen(
     state: HomeState,
     qiblaArrow: () -> Double?,
     onIntent: (HomeIntent) -> Unit,
     onOpenSettings: () -> Unit = {},
-    scrollState: ScrollState = rememberScrollState(),
     zone: ZoneId = ZoneId.systemDefault(),
 ) {
-    val soft = MuttaqiTheme.soft
-    val bottomInset = WindowInsets.navigationBars.asPaddingValues().calculateBottomPadding()
-    val scrolled by remember(scrollState) { derivedStateOf { scrollState.value > 0 } }
-    Box(Modifier.fillMaxSize()) {
-        SoftBackdrop()
-        Column(
-            Modifier
-                .fillMaxSize()
-                .verticalScroll(scrollState)
-                .statusBarsPadding()
-                .padding(start = 20.dp, end = 20.dp, bottom = 32.dp + bottomInset),
+    val scrollBehavior = TopAppBarDefaults.exitUntilCollapsedScrollBehavior()
+    Scaffold(
+        modifier = Modifier.nestedScroll(scrollBehavior.nestedScrollConnection),
+        topBar = {
+            LargeFlexibleTopAppBar(
+                title = { Text("Assalam - o - Alaikum") },
+                subtitle = { Text(state.hijriDate) },
+                actions = {
+                    IconButton(onClick = onOpenSettings) {
+                        Icon(painterResource(R.drawable.ic_settings), contentDescription = "Settings")
+                    }
+                },
+                scrollBehavior = scrollBehavior,
+            )
+        },
+    ) { padding ->
+        LazyColumn(
+            contentPadding = PaddingValues(
+                start = 16.dp,
+                end = 16.dp,
+                top = padding.calculateTopPadding(),
+                bottom = padding.calculateBottomPadding() + 16.dp,
+            ),
+            verticalArrangement = Arrangement.spacedBy(12.dp),
         ) {
-            Row(Modifier.padding(top = 6.dp), verticalAlignment = Alignment.CenterVertically) {
-                Text(state.hijriDate, style = MaterialTheme.typography.bodySmall, color = soft.appPrimary)
-                Spacer(Modifier.weight(1f).widthIn(min = 8.dp))
-                NextPrayerPill(
-                    upcoming = state.nextPrayer,
-                    needsLocation = state.asksForLocation,
-                    onSetLocation = { onIntent(HomeIntent.SetLocationTapped) },
-                    zone = zone,
-                )
+            state.greeting?.let { greeting ->
+                greeting.ayah.translation?.let { translation ->
+                    item(key = "greeting") { PageQuote(DisplayedQuote(translation, "Quran (${greeting.reference})")) }
+                }
             }
-
-            Greeting(state, Modifier.padding(top = 30.dp))
-
-            val today = state.schedule?.today
-            AnimatedVisibility(today != null, enter = fadeIn() + expandVertically(), exit = fadeOut() + shrinkVertically()) {
-                if (today != null) PrayerTimesStrip(today, next = state.nextPrayerToday, modifier = Modifier.padding(top = 28.dp), zone = zone)
+            item(key = "prayer") {
+                val upcoming = state.nextPrayer
+                val today = state.schedule?.today
+                Column {
+                    AnimatedVisibility(
+                        upcoming != null || today != null,
+                        enter = fadeIn() + expandVertically(),
+                        exit = fadeOut() + shrinkVertically(),
+                    ) {
+                        PrayerTimesCard(upcoming, today, state.nextPrayerToday, zone = zone)
+                    }
+                    if (state.asksForLocation) SetLocationButton(onClick = { onIntent(HomeIntent.SetLocationTapped) })
+                }
             }
-
-            HomeBento(state, qiblaArrow, onIntent, Modifier.padding(top = 18.dp))
-
-            Column(Modifier.padding(top = 14.dp), verticalArrangement = Arrangement.spacedBy(14.dp)) {
-                state.lastReading?.let { reading ->
+            item(key = "tiles") { HomeTiles(state, qiblaArrow, onIntent) }
+            state.lastReading?.let { reading ->
+                item(key = "continue") {
                     SurahShortcut(reading.surah.number, "Continue ${reading.surah.englishName}", "Ayah ${reading.ayahNumber}") {
                         onIntent(HomeIntent.ContinueReadingTapped)
                     }
                 }
-                state.fridayKahf?.let { kahf ->
+            }
+            state.fridayKahf?.let { kahf ->
+                item(key = "kahf") {
                     SurahShortcut(kahf.number, "Surah ${kahf.englishName}", "Friday") { onIntent(HomeIntent.KahfTapped) }
                 }
             }
-
-            Column(Modifier.padding(top = 28.dp), verticalArrangement = Arrangement.spacedBy(18.dp)) {
-                state.ayahOfTheDay?.let { AyahOfTheDayCard(it, onIntent) }
-                state.hadithOfTheDay?.let { HadithOfTheDayCard(it, onIntent) }
-                state.duaOfTheDay?.let { DuaOfTheDayCard(it, onIntent) }
-            }
-        }
-        StatusBarFade(visible = scrolled)
-    }
-}
-
-@Composable
-private fun Greeting(state: HomeState, modifier: Modifier = Modifier) {
-    val soft = MuttaqiTheme.soft
-    Column(modifier.fillMaxWidth(), horizontalAlignment = Alignment.CenterHorizontally) {
-        Text("Assalam - o - Alaikum", style = MaterialTheme.typography.headlineMedium, color = soft.appPrimary)
-        val quote = state.greeting
-        val translation = quote?.ayah?.translation
-        AnimatedVisibility(quote != null && translation != null, enter = fadeIn() + expandVertically()) {
-            if (quote != null && translation != null) {
-                Column(horizontalAlignment = Alignment.CenterHorizontally) {
-                    TranslationText(translation.quoted(), Modifier.padding(top = 20.dp), fontSize = 14.sp, lineSpacing = 0.sp)
-                    Text(
-                        "Quran (${quote.reference})",
-                        Modifier.padding(top = 4.dp),
-                        style = MaterialTheme.typography.labelSmall,
-                        color = soft.textSecondary,
-                        textAlign = TextAlign.Center,
-                    )
-                }
-            }
+            state.ayahOfTheDay?.let { item(key = "ayah") { AyahOfTheDayCard(it, onIntent) } }
+            state.hadithOfTheDay?.let { item(key = "hadith") { HadithOfTheDayCard(it, onIntent) } }
+            state.duaOfTheDay?.let { item(key = "dua") { DuaOfTheDayCard(it, onIntent) } }
         }
     }
 }

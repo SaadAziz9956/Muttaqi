@@ -1,56 +1,31 @@
 package com.muttaqi.android.feature.home
 
 import androidx.compose.foundation.background
-import androidx.compose.foundation.border
-import androidx.compose.foundation.combinedClickable
-import androidx.compose.foundation.gestures.detectTapGestures
-import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.ColumnScope
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.width
-import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.material3.DropdownMenu
-import androidx.compose.material3.DropdownMenuItem
+import androidx.compose.material3.Card
 import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
+import androidx.compose.material3.MaterialShapes
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
-import androidx.compose.material3.ripple
+import androidx.compose.material3.toShape
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.hapticfeedback.HapticFeedbackType
-import androidx.compose.ui.input.pointer.pointerInput
-import androidx.compose.ui.platform.LocalHapticFeedback
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.semantics.contentDescription
-import androidx.compose.ui.semantics.onLongClick
-import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import com.muttaqi.android.R
-import com.muttaqi.android.designsystem.MuttaqiTheme
+import com.muttaqi.android.designsystem.component.ArabicText
 import com.muttaqi.android.designsystem.component.QuranText
-import com.muttaqi.android.designsystem.component.SoftArtwork
-import com.muttaqi.android.designsystem.component.SoftCard
-import com.muttaqi.android.designsystem.component.SoftPillSurface
 import com.muttaqi.android.designsystem.component.TranslationText
-import com.muttaqi.android.designsystem.component.brush
-import com.muttaqi.android.designsystem.component.softClickable
-import com.muttaqi.android.designsystem.component.softPressScale
 import com.muttaqi.shared.core.text.isArabicScript
 import com.muttaqi.shared.feature.dua.domain.model.QuranicDua
 import com.muttaqi.shared.feature.home.presentation.DailyCard
@@ -60,186 +35,113 @@ import com.muttaqi.shared.feature.topics.domain.model.HadithPassage
 
 @Composable
 internal fun SurahShortcut(surahNumber: Int, title: String, subtitle: String, onClick: () -> Unit) {
-    val soft = MuttaqiTheme.soft
-    SoftCard(Modifier.fillMaxWidth(), cornerRadius = 36.dp, onClick = onClick) {
+    Card(onClick = onClick, modifier = Modifier.fillMaxWidth()) {
         Row(
-            Modifier.fillMaxWidth().padding(start = 10.dp, top = 10.dp, bottom = 10.dp, end = 14.dp),
+            Modifier.fillMaxWidth().padding(horizontal = 16.dp, vertical = 12.dp),
+            horizontalArrangement = Arrangement.spacedBy(16.dp),
             verticalAlignment = Alignment.CenterVertically,
         ) {
             Box(
-                Modifier.size(50.dp).clip(CircleShape).background(SoftArtwork.Forest.brush(soft.dark)).border(2.dp, soft.rim, CircleShape),
+                Modifier.size(48.dp).background(MaterialTheme.colorScheme.primary, MaterialShapes.Cookie9Sided.toShape()),
                 contentAlignment = Alignment.Center,
             ) {
-                Text("$surahNumber", style = MaterialTheme.typography.labelLarge.copy(fontSize = 17.sp), color = Color.White)
+                Text("$surahNumber", style = MaterialTheme.typography.titleMedium, color = MaterialTheme.colorScheme.onPrimary)
             }
-            Column(Modifier.weight(1f).padding(start = 14.dp), verticalArrangement = Arrangement.spacedBy(2.dp)) {
-                Text(title, style = MaterialTheme.typography.titleSmall, color = soft.appPrimary)
-                Text(subtitle, style = MaterialTheme.typography.labelSmall, color = soft.textSecondary)
+            Column(Modifier.weight(1f), verticalArrangement = Arrangement.spacedBy(2.dp)) {
+                Text(title, style = MaterialTheme.typography.titleMedium)
+                Text(subtitle, style = MaterialTheme.typography.bodyMedium, color = MaterialTheme.colorScheme.onSurfaceVariant)
             }
-            Spacer(Modifier.width(8.dp))
-            SoftPillSurface(Modifier.size(40.dp), fill = soft.brandGreen, rim = false) {
-                Icon(painterResource(R.drawable.ic_arrow_right_01_linear), null, Modifier.size(18.dp), tint = Color.White)
-            }
+            Icon(painterResource(R.drawable.ic_chevron_right), contentDescription = null, tint = MaterialTheme.colorScheme.onSurfaceVariant)
         }
     }
 }
 
 @Composable
 internal fun AyahOfTheDayCard(dailyAyah: DailyAyah, onIntent: (HomeIntent) -> Unit) {
-    val soft = MuttaqiTheme.soft
-    DailyCardSurface(DailyCard.Ayah, onIntent, onClick = { onIntent(HomeIntent.AyahOfTheDayTapped) }) {
-        CardTitle("Ayah of the Day")
-        QuranText(dailyAyah.ayah.arabicText, Modifier.padding(top = 22.dp), fontSize = 21.sp, lineSpacing = 10.sp)
-        dailyAyah.ayah.translation?.let {
-            TranslationText(it, Modifier.padding(top = 12.dp), fontSize = 14.sp, lineSpacing = 4.sp)
-        }
-        Text(
-            "Quran (${dailyAyah.reference})",
-            Modifier.padding(top = 12.dp),
-            style = MaterialTheme.typography.labelSmall,
-            color = soft.brandTeal,
-        )
+    DailyPassageCard(
+        title = "Ayah of the Day",
+        card = DailyCard.Ayah,
+        onIntent = onIntent,
+        onClick = { onIntent(HomeIntent.AyahOfTheDayTapped) },
+        source = { Source("Quran (${dailyAyah.reference})") },
+    ) {
+        QuranText(dailyAyah.ayah.arabicText, Modifier.fillMaxWidth(), textAlign = TextAlign.Start)
+        dailyAyah.ayah.translation?.let { TranslationText(it, Modifier.fillMaxWidth()) }
     }
 }
 
 @Composable
 internal fun HadithOfTheDayCard(hadith: HadithPassage, onIntent: (HomeIntent) -> Unit) {
-    val soft = MuttaqiTheme.soft
-    val urdu = hadith.translation.isArabicScript()
-    DailyCardSurface(DailyCard.Hadith, onIntent) {
-        CardTitle("Hadith of the Day")
+    DailyPassageCard(
+        title = "Hadith of the Day",
+        card = DailyCard.Hadith,
+        onIntent = onIntent,
+        source = { Source(hadith.source) },
+    ) {
         if (hadith.arabic.isNotEmpty()) {
-            QuranText(hadith.arabic, Modifier.padding(top = 22.dp), fontSize = 19.sp, lineSpacing = 9.sp)
+            ArabicText(hadith.arabic, Modifier.fillMaxWidth(), style = MaterialTheme.typography.titleLarge)
         }
-        TranslationText(hadith.translation, Modifier.padding(top = 12.dp), fontSize = 14.sp, lineSpacing = if (urdu) 8.sp else 4.sp)
-        if (hadith.source.isArabicScript()) {
-            TranslationText(hadith.source, Modifier.padding(top = 12.dp), fontSize = 11.sp, color = soft.brandTeal, lineSpacing = 0.sp)
-        } else {
-            Text(
-                hadith.source,
-                Modifier.padding(top = 12.dp),
-                style = MaterialTheme.typography.labelSmall,
-                color = soft.brandTeal,
-                textAlign = TextAlign.Center,
-            )
-        }
+        TranslationText(hadith.translation, Modifier.fillMaxWidth())
     }
 }
 
 @Composable
 internal fun DuaOfTheDayCard(dua: QuranicDua, onIntent: (HomeIntent) -> Unit) {
-    val soft = MuttaqiTheme.soft
-    val urdu = dua.translation.isArabicScript()
-    DailyCardSurface(DailyCard.Dua, onIntent, horizontalAlignment = Alignment.Start) {
-        CardTitle("Dua of the Day", Modifier.fillMaxWidth())
-        QuranText(
-            dua.arabic,
-            Modifier.fillMaxWidth().padding(top = 22.dp),
-            fontSize = 20.sp,
-            textAlign = TextAlign.Right,
-            lineSpacing = 10.sp,
-        )
-        Text(
-            dua.transliteration,
-            Modifier.padding(top = 14.dp),
-            style = MaterialTheme.typography.bodySmall.copy(fontSize = 14.sp),
-            color = soft.appPrimary,
-        )
-        TranslationText(
-            dua.translation,
-            Modifier.fillMaxWidth().padding(top = 12.dp),
-            fontSize = 14.sp,
-            textAlign = if (urdu) TextAlign.Right else TextAlign.Left,
-            lineSpacing = 4.sp,
-        )
-        Text(
-            "Quran (${dua.reference})",
-            Modifier.fillMaxWidth().padding(top = 14.dp),
-            style = MaterialTheme.typography.labelSmall,
-            color = soft.brandTeal,
-            textAlign = TextAlign.Center,
-        )
+    DailyPassageCard(
+        title = "Dua of the Day",
+        card = DailyCard.Dua,
+        onIntent = onIntent,
+        source = { Source("Quran (${dua.reference})") },
+    ) {
+        QuranText(dua.arabic, Modifier.fillMaxWidth(), textAlign = TextAlign.Start)
+        if (dua.transliteration.isNotBlank()) {
+            Text(dua.transliteration, style = MaterialTheme.typography.bodyMedium, color = MaterialTheme.colorScheme.primary)
+        }
+        TranslationText(dua.translation, Modifier.fillMaxWidth())
     }
 }
 
 @Composable
-private fun DailyCardSurface(
+private fun DailyPassageCard(
+    title: String,
     card: DailyCard,
     onIntent: (HomeIntent) -> Unit,
+    source: @Composable () -> Unit,
     onClick: (() -> Unit)? = null,
-    horizontalAlignment: Alignment.Horizontal = Alignment.CenterHorizontally,
     content: @Composable ColumnScope.() -> Unit,
 ) {
-    val interaction = remember { MutableInteractionSource() }
-    val haptics = LocalHapticFeedback.current
-    var showMenu by remember { mutableStateOf(false) }
-    val openMenu = {
-        haptics.performHapticFeedback(HapticFeedbackType.LongPress)
-        showMenu = true
-    }
-    SoftCard(Modifier.fillMaxWidth().then(if (onClick != null) Modifier.softPressScale(interaction) else Modifier)) {
-        Column(
-            Modifier
-                .fillMaxWidth()
-                .then(
-                    if (onClick != null) {
-                        Modifier.combinedClickable(
-                            interactionSource = interaction,
-                            indication = ripple(),
-                            hapticFeedbackEnabled = false,
-                            onLongClick = openMenu,
-                        ) {
-                            haptics.performHapticFeedback(HapticFeedbackType.VirtualKey)
-                            onClick()
-                        }
-                    } else {
-                        Modifier
-                            .pointerInput(Unit) { detectTapGestures(onLongPress = { openMenu() }) }
-                            .semantics { onLongClick(label = "Copy or share") { openMenu(); true } }
-                    },
-                )
-                .padding(start = 22.dp, end = 22.dp, top = 18.dp, bottom = 22.dp),
-            horizontalAlignment = horizontalAlignment,
-            content = content,
-        )
-        ShareButton(Modifier.align(Alignment.TopEnd).padding(10.dp)) { onIntent(HomeIntent.ShareTapped(card)) }
-        DropdownMenu(expanded = showMenu, onDismissRequest = { showMenu = false }) {
-            DropdownMenuItem(
-                text = { Text("Copy") },
-                leadingIcon = { Icon(painterResource(R.drawable.ic_copy_linear), null, Modifier.size(20.dp)) },
-                onClick = {
-                    showMenu = false
-                    onIntent(HomeIntent.CopyTapped(card))
-                },
-            )
-            DropdownMenuItem(
-                text = { Text("Share") },
-                leadingIcon = { Icon(painterResource(R.drawable.ic_export_arrow_01_linear), null, Modifier.size(20.dp)) },
-                onClick = {
-                    showMenu = false
-                    onIntent(HomeIntent.ShareTapped(card))
-                },
-            )
+    val body: @Composable ColumnScope.() -> Unit = {
+        Column(Modifier.fillMaxWidth().padding(16.dp), verticalArrangement = Arrangement.spacedBy(12.dp)) {
+            Text(title, style = MaterialTheme.typography.titleMedium, color = MaterialTheme.colorScheme.primary)
+            content()
+            Row(verticalAlignment = Alignment.CenterVertically) {
+                Box(Modifier.weight(1f)) { source() }
+                IconButton(onClick = { onIntent(HomeIntent.CopyTapped(card)) }) {
+                    Icon(painterResource(R.drawable.ic_content_copy), contentDescription = "Copy")
+                }
+                IconButton(onClick = { onIntent(HomeIntent.ShareTapped(card)) }) {
+                    Icon(painterResource(R.drawable.ic_share), contentDescription = "Share")
+                }
+            }
         }
     }
-}
-
-@Composable
-private fun ShareButton(modifier: Modifier = Modifier, onClick: () -> Unit) {
-    val interaction = remember { MutableInteractionSource() }
-    Box(
-        modifier
-            .softPressScale(interaction)
-            .clip(CircleShape)
-            .softClickable(interaction, onClick)
-            .padding(6.dp)
-            .semantics { contentDescription = "Share" },
-    ) {
-        Icon(painterResource(R.drawable.ic_export_arrow_01_linear), null, Modifier.size(18.dp), tint = MuttaqiTheme.soft.textSecondary)
+    if (onClick != null) {
+        Card(onClick = onClick, modifier = Modifier.fillMaxWidth(), content = body)
+    } else {
+        Card(Modifier.fillMaxWidth(), content = body)
     }
 }
 
 @Composable
-private fun CardTitle(title: String, modifier: Modifier = Modifier) {
-    Text(title, modifier, style = MaterialTheme.typography.labelSmall, color = MuttaqiTheme.soft.appPrimary, textAlign = TextAlign.Center)
+private fun Source(text: String) {
+    if (text.isArabicScript()) {
+        TranslationText(
+            text,
+            Modifier.fillMaxWidth(),
+            style = MaterialTheme.typography.labelLarge,
+            color = MaterialTheme.colorScheme.primary,
+        )
+    } else {
+        Text(text, style = MaterialTheme.typography.labelLarge, color = MaterialTheme.colorScheme.primary)
+    }
 }
