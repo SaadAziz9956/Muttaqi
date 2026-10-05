@@ -173,12 +173,28 @@ struct TopicPageView: View {
                 .buttonStyle(SoftPressStyle())
                 .accessibilityLabel("Share")
             }
+            if let grade = passage.grade {
+                Text(grade)
+                    .font(TranslationStyle(for: grade, size: 11).font)
+                    .foregroundStyle(.textSecondary)
+            }
         }
         .multilineTextAlignment(.center)
         .frame(maxWidth: .infinity)
         .padding(.horizontal, 18)
         .padding(.vertical, 22)
         .softCard(cornerRadius: 26)
-        .textSelection(.enabled)
+        .selectable(state.section != .quran)
+    }
+}
+
+private extension View {
+    @ViewBuilder
+    func selectable(_ enabled: Bool) -> some View {
+        if enabled {
+            textSelection(.enabled)
+        } else {
+            textSelection(.disabled)
+        }
     }
 }

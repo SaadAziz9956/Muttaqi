@@ -142,21 +142,24 @@ private struct DhikrRow: View {
 
     var body: some View {
         let caption = dhikr.title
-            ?? dhikr.translation.map { $0.sentenceCased.quoted }
+            ?? dhikr.translation.map { $0.quoted }
             ?? dhikr.transliteration
+            ?? ""
         let captionStyle = TranslationStyle(for: caption, size: 12)
 
         VStack(alignment: .leading, spacing: 12) {
             Text(AttributedString.arabic(dhikr.arabic, size: 21))
                 .foregroundStyle(.textPrimary)
-                .lineLimit(1)
+                .multilineTextAlignment(.trailing)
+                .fixedSize(horizontal: false, vertical: true)
                 .frame(maxWidth: .infinity, alignment: .trailing)
 
             HStack(spacing: 10) {
                 Text(caption)
                     .font(captionStyle.font)
                     .foregroundStyle(.appPrimary)
-                    .lineLimit(1)
+                    .multilineTextAlignment(captionStyle.isRightToLeft ? .trailing : .leading)
+                    .fixedSize(horizontal: false, vertical: true)
                     .frame(maxWidth: .infinity, alignment: captionStyle.isRightToLeft ? .trailing : .leading)
 
                 if let count = dhikr.target {
@@ -172,7 +175,7 @@ private struct DhikrRow: View {
         .padding(18)
         .softCard(cornerRadius: 24)
         .accessibilityElement(children: .ignore)
-        .accessibilityLabel(dhikr.title ?? dhikr.transliteration)
+        .accessibilityLabel(dhikr.title ?? dhikr.transliteration ?? dhikr.arabic)
         .accessibilityValue(dhikr.translation ?? "")
     }
 }

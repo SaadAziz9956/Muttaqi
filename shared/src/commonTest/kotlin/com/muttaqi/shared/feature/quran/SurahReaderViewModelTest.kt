@@ -68,7 +68,7 @@ class SurahReaderViewModelTest {
         settings.putInt("reading_font_size", 120)
         val state = viewModel().state.value
         val reading = assertIs<SurahReaderContent.Loaded>(state.content).reading
-        assertEquals(8, reading.displayAyahs.size)
+        assertEquals(8, reading.ayahs.size)
         assertEquals("Al-Baqara", state.headerSurah?.englishName)
         assertEquals(1, state.previousSurah?.number)
         assertEquals(120, state.settings.fontSize.percentage)
@@ -97,11 +97,11 @@ class SurahReaderViewModelTest {
     }
 
     @Test
-    fun alFatihasBismillahCountsAsReadAtTheTop() = runTest {
+    fun alFatihasBismillahIsItsFirstAyahAndIsReadLikeAnyOther() = runTest {
         val viewModel = viewModel(surahNumber = 1)
-        viewModel.dispatch(SurahReaderIntent.VisibleAyahsChanged(ids(1, 2, 3)))
+        viewModel.dispatch(SurahReaderIntent.VisibleAyahsChanged(ids(1, 1, 2)))
         settle()
-        assertEquals(setOf(1, 2, 3), progress.progress(1)!!.readAyahs)
+        assertEquals(setOf(1, 2), progress.progress(1)!!.readAyahs)
     }
 
     @Test
@@ -194,7 +194,7 @@ class SurahReaderViewModelTest {
         val viewModel = viewModel()
         language.switchTo(Language.Urdu)
         runCurrent()
-        val first = viewModel.state.value.reading!!.displayAyahs.first()
+        val first = viewModel.state.value.reading!!.ayahs.first()
         assertEquals(QuranTestData.ayahs.first { it.surah == 2 }.urdu, first.translation)
         assertEquals(Language.Urdu, viewModel.state.value.settings.language)
     }

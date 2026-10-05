@@ -66,6 +66,16 @@ struct DuaEntryCard: View {
             }
             .padding(.top, 16)
 
+            if let grade = entry.grade {
+                let gradeStyle = TranslationStyle(for: grade, size: 11)
+                Text(grade)
+                    .font(gradeStyle.font)
+                    .foregroundStyle(.textSecondary)
+                    .multilineTextAlignment(gradeStyle.isRightToLeft ? .trailing : .leading)
+                    .frame(maxWidth: .infinity, alignment: gradeStyle.isRightToLeft ? .trailing : .leading)
+                    .padding(.top, 6)
+            }
+
             if !entry.reference.isEmpty {
                 Text(entry.reference)
                     .font(.system(size: 11))

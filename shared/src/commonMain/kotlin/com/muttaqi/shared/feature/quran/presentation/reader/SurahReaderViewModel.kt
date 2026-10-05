@@ -118,7 +118,7 @@ class SurahReaderViewModel(
     }
 
     private fun firstVisibleAyah(): Ayah? =
-        state.value.reading?.displayAyahs?.filter { it.number in visibleIds }?.minByOrNull { it.numberInSurah }
+        state.value.reading?.ayahs?.filter { it.number in visibleIds }?.minByOrNull { it.numberInSurah }
 
     private fun updatePosition() {
         val state = state.value
@@ -138,17 +138,16 @@ class SurahReaderViewModel(
         val state = state.value
         if (state.pendingStartAyah != null) return
         val reading = state.reading ?: return
-        val visible = reading.displayAyahs.filter { it.number in visibleIds }
+        val visible = reading.ayahs.filter { it.number in visibleIds }
         val first = visible.minByOrNull { it.numberInSurah } ?: return
 
         val onScreen = when (state.settings.mode) {
             ReadingMode.WithTranslation -> visible.map { it.numberInSurah }.toMutableSet()
             ReadingMode.ArabicOnly -> {
                 val pages = visible.map { it.page }.toSet()
-                reading.displayAyahs.filter { it.page in pages }.map { it.numberInSurah }.toMutableSet()
+                reading.ayahs.filter { it.page in pages }.map { it.numberInSurah }.toMutableSet()
             }
         }
-        if (reading.surah.number == 1 && first.numberInSurah <= 3) onScreen += 1
         sessionReadAyahs += onScreen
 
         pendingProgress = PendingProgress(reading.surah.number, first.numberInSurah, sessionReadAyahs.toSet(), reading.surah.numberOfAyahs)
@@ -173,7 +172,7 @@ class SurahReaderViewModel(
         }
     }
 
-    private fun ayah(number: Int): Ayah? = state.value.reading?.displayAyahs?.firstOrNull { it.number == number }
+    private fun ayah(number: Int): Ayah? = state.value.reading?.ayahs?.firstOrNull { it.number == number }
 
     private fun tafsirSurah(): Int = state.value.headerSurah?.number ?: state.value.surahNumber
 }

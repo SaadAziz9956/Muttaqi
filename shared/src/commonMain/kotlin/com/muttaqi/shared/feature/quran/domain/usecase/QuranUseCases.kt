@@ -35,7 +35,7 @@ class ReadSurah(
             ayahs = ayahs.ayahs(number, language),
             previousSurah = all.firstOrNull { it.number == number - 1 },
             nextSurah = all.firstOrNull { it.number == number + 1 },
-            bismillah = ayahs.ayah(1, 1, language)?.arabicText.orEmpty(),
+            bismillah = ayahs.ayah(1, 1, language),
         )
     }
 }

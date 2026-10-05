@@ -9,7 +9,10 @@ data class DuaEntry(
     val source: String,
     val reference: String,
     val translationCredit: String,
-)
+    val grade: String? = null,
+) {
+    val sourceAndGrade: String get() = listOfNotNull(source, grade).joinToString(" · ")
+}
 
 data class DuaChapter(
     val id: String,

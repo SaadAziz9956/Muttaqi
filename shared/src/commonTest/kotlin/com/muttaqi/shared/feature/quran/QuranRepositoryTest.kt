@@ -3,6 +3,7 @@ package com.muttaqi.shared.feature.quran
 import com.muttaqi.shared.core.domain.DomainError
 import com.muttaqi.shared.core.domain.Outcome
 import com.muttaqi.shared.core.model.Language
+import com.muttaqi.shared.feature.quran.data.local.AyahEntity
 import com.muttaqi.shared.feature.quran.data.remote.QuranApi
 import com.muttaqi.shared.feature.quran.data.repository.MushafAyah
 import com.muttaqi.shared.feature.quran.data.repository.MushafSource
@@ -29,6 +30,11 @@ class QuranRepositoryTest {
 
     private fun TestScope.repository(http: MockHttp = api) =
         RoomQuranRepository(dao, QuranApi(http.client), TestDispatchers(StandardTestDispatcher(testScheduler)), mushaf)
+
+    private fun storeQaf(vararg transliterations: Pair<Int, String>) {
+        mushaf = MushafSource { _, _ -> MushafAyah("", "", page = 519, juz = 26) }
+        transliterations.forEach { (ayah, text) -> dao.ayahRows[4630 + ayah] = AyahEntity(4630 + ayah, ayah, 50, "", text, 26, 519, 207) }
+    }
 
     @Test
     fun syncsFromTheSameApiAndEditionsAsTheIosApp() = runTest {
@@ -71,6 +77,23 @@ class QuranRepositoryTest {
         assertEquals(600, first.page)
         assertEquals(30, first.juz)
         assertEquals("mushaf 2:1", repository.ayah(2, 1, Language.English)?.arabicText)
+    }
+
+    @Test
+    fun theTransliterationOf50_21CopiedInto50_19IsReplacedWithItsOwnEvenInTextStoredBeforehand() = runTest {
+        storeQaf(19 to COPIED_50_21, 20 to "Wa nufikha fis Soor; zaalika yawmul wa'eed", 21 to COPIED_50_21)
+        val repository = repository()
+        val qaf = repository.ayahs(50, Language.English).associate { it.numberInSurah to it.transliteration }
+        assertEquals("Wajaat sakratu almawti bialhaqqi thalika ma kunta minhu taheedu", qaf[19])
+        assertEquals("Wa nufikha fis Soor; zaalika yawmul wa'eed", qaf[20])
+        assertEquals(COPIED_50_21, qaf[21])
+        assertEquals("Wajaat sakratu almawti bialhaqqi thalika ma kunta minhu taheedu", repository.ayah(50, 19, Language.Urdu)?.transliteration)
+    }
+
+    @Test
+    fun aTransliterationOf50_19TheApiNoLongerCopiesIsLeftAsItCame() = runTest {
+        storeQaf(19 to "fixed upstream")
+        assertEquals("fixed upstream", repository().ayah(50, 19, Language.English)?.transliteration)
     }
 
     @Test
@@ -117,5 +140,9 @@ class QuranRepositoryTest {
         repository(withoutCounts).downloadText()
         assertEquals(7, dao.surahRows.getValue(1).numberOfAyahs)
         assertEquals(8, dao.surahRows.getValue(2).numberOfAyahs)
+    }
+
+    private companion object {
+        const val COPIED_50_21 = "Wa jaaa'at kullu nafsim ma'ahaa saaa'iqunw wa shaheed"
     }
 }

@@ -45,19 +45,15 @@ data class SurahReading(
     val ayahs: List<Ayah>,
     val previousSurah: Surah?,
     val nextSurah: Surah?,
-    val bismillah: String,
+    val bismillah: Ayah?,
 ) {
-    val displayAyahs: List<Ayah> = if (surah.number == 1) ayahs.drop(1) else ayahs
+    val showsBismillah: Boolean get() = surah.number != 1 && surah.number != 9
 
-    val showsBismillah: Boolean get() = surah.number != 9
+    val bismillahText: String get() = bismillah?.arabicText.orEmpty()
 
-    val bismillahText: String
-        get() = ayahs.firstOrNull()?.takeIf { surah.number == 1 }?.arabicText ?: bismillah
+    val bismillahTranslation: String? get() = bismillah?.translation
 
-    val bismillahTranslation: String
-        get() = ayahs.firstOrNull()?.takeIf { surah.number == 1 }?.translation ?: BISMILLAH_TRANSLATION
-
-    val pages: List<MushafPage> = displayAyahs.fold(mutableListOf<MushafPage>()) { pages, ayah ->
+    val pages: List<MushafPage> = ayahs.fold(mutableListOf<MushafPage>()) { pages, ayah ->
         val last = pages.lastOrNull()
         if (last?.number == ayah.page) {
             pages[pages.lastIndex] = last.copy(ayahs = last.ayahs + ayah)
@@ -65,10 +61,6 @@ data class SurahReading(
             pages += MushafPage(id = ayah.number, number = ayah.page, ayahs = listOf(ayah))
         }
         pages
-    }
-
-    private companion object {
-        const val BISMILLAH_TRANSLATION = "In the Name of Allah—the Most Compassionate, Most Merciful."
     }
 }
 

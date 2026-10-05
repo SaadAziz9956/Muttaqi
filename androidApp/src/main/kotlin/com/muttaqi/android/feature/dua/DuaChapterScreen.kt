@@ -145,6 +145,16 @@ fun DuaEntryCard(entry: DuaEntry, onShare: () -> Unit, onCopy: () -> Unit) {
                 Spacer(Modifier.padding(start = 8.dp))
                 SoftIconButton(R.drawable.ic_export_arrow_01_linear, "Share", onShare, size = 32.dp, iconSize = 15.dp)
             }
+            entry.grade?.let { grade ->
+                TranslationText(
+                    grade,
+                    Modifier.fillMaxWidth().padding(top = 6.dp),
+                    fontSize = 11.sp,
+                    color = soft.textSecondary,
+                    textAlign = if (grade.isArabicScript()) TextAlign.Right else TextAlign.Left,
+                    lineSpacing = 4.sp,
+                )
+            }
             if (entry.reference.isNotBlank()) {
                 Text(
                     entry.reference,

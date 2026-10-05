@@ -5,6 +5,7 @@ import com.muttaqi.shared.core.mvi.UiEffect
 import com.muttaqi.shared.core.mvi.UiIntent
 import com.muttaqi.shared.core.mvi.UiMutation
 import com.muttaqi.shared.core.mvi.UiState
+import com.muttaqi.shared.feature.quran.data.remote.TafsirSource
 import com.muttaqi.shared.feature.quran.domain.model.TafsirEntry
 
 sealed interface TafsirStatus {
@@ -20,6 +21,8 @@ data class TafsirState(
     val status: TafsirStatus = TafsirStatus.Idle,
 ) : UiState {
     val showsEnglishInstead: Boolean get() = language == Language.Hindi
+
+    val sourceTitle: String get() = TafsirSource.forLanguage(language).title
 
     fun entryCovering(ayah: Int): TafsirEntry? = (status as? TafsirStatus.Loaded)?.entries?.firstOrNull { it.covers(ayah) }
 }

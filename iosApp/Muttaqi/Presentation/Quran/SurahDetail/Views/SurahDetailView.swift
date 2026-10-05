@@ -154,7 +154,7 @@ struct SurahDetailView: View {
 
         switch state.settings.mode {
         case .withTranslation:
-            ForEach(reading.displayAyahs, id: \.number) { ayah in
+            ForEach(reading.ayahs, id: \.number) { ayah in
                 AyahCardView(
                     ayah: ayah,
                     fontSize: state.settings.fontSize,
@@ -179,7 +179,7 @@ struct SurahDetailView: View {
                 onPrevious: { dispatch(SurahReaderIntentPreviousTapped.shared) },
                 onNext: { dispatch(SurahReaderIntentNextTapped.shared) }
             )
-            Text(QuranMessages.shared.MUSHAF_CREDIT)
+            Text(QuranMessages.shared.MUSHAF_CREDIT + "\n" + QuranMessages.shared.translationCredit(language: state.settings.language))
                 .font(.labelSmall)
                 .foregroundStyle(.textSecondary)
                 .multilineTextAlignment(.center)

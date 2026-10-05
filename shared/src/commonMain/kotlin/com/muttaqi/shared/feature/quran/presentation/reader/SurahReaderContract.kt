@@ -36,10 +36,10 @@ data class SurahReaderState(
         get() {
             val start = pendingStartAyah ?: return null
             val reading = reading ?: return null
-            val ayah = reading.displayAyahs.firstOrNull { it.numberInSurah == start } ?: return null
+            val ayah = reading.ayahs.firstOrNull { it.numberInSurah == start } ?: return null
             return when (settings.mode) {
                 ReadingMode.WithTranslation -> ayah.number
-                ReadingMode.ArabicOnly -> reading.displayAyahs.first { it.page == ayah.page }.number
+                ReadingMode.ArabicOnly -> reading.ayahs.first { it.page == ayah.page }.number
             }
         }
 }

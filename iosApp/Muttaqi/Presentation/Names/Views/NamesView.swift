@@ -40,6 +40,9 @@ struct NamesView: View {
                             Text(hadith.source)
                                 .font(.labelSmall)
                                 .foregroundStyle(.brandTeal)
+                            Text(state.listSource)
+                                .font(.labelSmall)
+                                .foregroundStyle(.textSecondary)
                         }
                         .multilineTextAlignment(.center)
                         .padding(.horizontal, 24)

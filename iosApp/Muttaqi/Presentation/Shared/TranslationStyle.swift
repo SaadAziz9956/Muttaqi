@@ -1,10 +1,6 @@
 import SwiftUI
 
 extension String {
-    var sentenceCased: String {
-        prefix(1).uppercased() + dropFirst()
-    }
-
     var quoted: String {
         TranslationStyle.isArabicScript(self) ? "\u{201D}\(self)\u{201C}" : "\u{201C}\(self)\u{201D}"
     }
@@ -28,6 +24,7 @@ struct TranslationStyle {
     }
 
     static func isArabicScript(_ text: String) -> Bool {
-        text.unicodeScalars.contains { (0x0600...0x06FF).contains($0.value) }
+        guard let letter = text.unicodeScalars.first(where: { $0.properties.isAlphabetic }) else { return false }
+        return [0x0600...0x06FF, 0x0750...0x077F, 0xFB50...0xFDFF, 0xFE70...0xFEFF].contains { $0.contains(letter.value) }
     }
 }

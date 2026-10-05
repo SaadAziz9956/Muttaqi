@@ -160,8 +160,6 @@ private fun NameTile(state: HomeState, modifier: Modifier, onClick: () -> Unit) 
                 name.transliteration,
                 style = MaterialTheme.typography.labelLarge.copy(fontSize = 15.sp),
                 color = soft.appPrimary,
-                maxLines = 1,
-                overflow = TextOverflow.Ellipsis,
             )
         }
     }

@@ -65,5 +65,5 @@ fun AllahName.toSharePassage() = SharePassage(
     arabic = arabic,
     transliteration = transliteration,
     translation = meaning,
-    reference = "The Names of Allah ($number of 99)",
+    reference = "The Names of Allah ($number of 99) · Jami at-Tirmidhi 3507",
 )

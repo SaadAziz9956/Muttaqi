@@ -19,7 +19,11 @@ data class NamesState(
     val failed: Boolean = false,
 ) : UiState {
     val isSearching: Boolean get() = query.isNotBlank()
+
+    val listSource: String get() = NAMES_LIST_SOURCE
 }
+
+const val NAMES_LIST_SOURCE = "List of names: Jami at-Tirmidhi 3507 · graded weak (ḍaʿīf) by al-Albani and Darussalam"
 
 sealed interface NamesIntent : UiIntent {
     data class NameShown(val number: Int) : NamesIntent

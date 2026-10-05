@@ -30,7 +30,6 @@ import com.muttaqi.android.designsystem.component.SoftArtwork
 import com.muttaqi.android.designsystem.component.SoftCard
 import com.muttaqi.android.designsystem.component.TranslationText
 import com.muttaqi.shared.core.text.isArabicScript
-import com.muttaqi.shared.core.text.sentenceCased
 import com.muttaqi.shared.feature.names.domain.model.AllahName
 
 @Composable
@@ -61,7 +60,7 @@ fun NameCard(name: AllahName, modifier: Modifier = Modifier, minHeight: Dp = 300
                     color = soft.appPrimary,
                 )
                 TranslationText(
-                    name.meaning.sentenceCased(),
+                    name.meaning,
                     Modifier.padding(top = 10.dp),
                     lineSpacing = if (name.meaning.isArabicScript()) 6.sp else 2.sp,
                 )

@@ -31,7 +31,7 @@ internal fun PassageTopic.passages(section: TopicSection): List<TopicPassage> = 
     TopicSection.Hadith -> hadith.mapIndexed { index, hadith ->
         TopicPassage("hadith-$index", hadith.arabic, hadith.translation, hadith.source, null)
     }
-    TopicSection.Dua -> duas.map { TopicPassage(it.id, it.arabic, it.translation, it.source, it.transliteration.ifBlank { null }) }
+    TopicSection.Dua -> duas.map { TopicPassage(it.id, it.arabic, it.translation, it.source, it.transliteration.ifBlank { null }, it.grade) }
 }
 
 private fun PassageTopic.credits(section: TopicSection): List<String> = when (section) {

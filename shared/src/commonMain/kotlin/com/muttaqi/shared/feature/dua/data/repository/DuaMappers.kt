@@ -69,5 +69,6 @@ private fun HisnBookDto.Entry.toEntry(language: Language): DuaEntry {
         source = source,
         reference = reference,
         translationCredit = urdu?.let { translationUrduCredit } ?: HISN_CREDIT,
+        grade = grade?.inLanguage(language),
     )
 }

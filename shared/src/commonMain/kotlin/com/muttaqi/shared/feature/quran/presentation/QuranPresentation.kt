@@ -21,6 +21,12 @@ object QuranMessages {
 
     const val MUSHAF_CREDIT = "Quran text and font: King Fahd Glorious Qur'an Printing Complex, Madinah"
 
+    fun translationCredit(language: Language): String = "Translation: " + when (language) {
+        Language.English -> "Saheeh International"
+        Language.Urdu -> "Fateh Muhammad Jalandhry"
+        Language.Hindi -> "Suhel Farooq Khan and Saifur Rahman Nadwi"
+    }
+
     fun tafsirFailed(error: DomainError): String = when (error) {
         DomainError.NoConnection -> "The Internet connection appears to be offline."
         DomainError.NotFound -> "No tafseer was found for this surah."

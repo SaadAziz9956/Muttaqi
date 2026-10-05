@@ -41,6 +41,6 @@ class DuaChapterViewModel(
     private fun entry(id: String): DuaEntry? = state.value.chapter?.entries?.firstOrNull { it.id == id }
 }
 
-fun DuaEntry.toSharePassage() = SharePassage(arabic, transliteration.ifBlank { null }, translation, source)
+fun DuaEntry.toSharePassage() = SharePassage(arabic, transliteration.ifBlank { null }, translation, sourceAndGrade)
 
-fun DuaEntry.copyText(): String = listOf(arabic, transliteration, translation, source).filter { it.isNotBlank() }.joinToString("\n\n")
+fun DuaEntry.copyText(): String = listOf(arabic, transliteration, translation, sourceAndGrade).filter { it.isNotBlank() }.joinToString("\n\n")

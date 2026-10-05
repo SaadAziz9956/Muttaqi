@@ -9,6 +9,17 @@ import com.muttaqi.shared.feature.dhikr.domain.model.DhikrStep
 
 private fun Translations.pick(language: Language): String? = this[language.code] ?: this[Language.English.code]
 
+private fun Translations.shownLanguage(language: Language): String? =
+    if (containsKey(language.code)) language.code else Language.English.code.takeIf { containsKey(it) }
+
+private fun DhikrBookDto.Entry.creditIn(language: Language): String? {
+    val credit = credit ?: return null
+    val translationLanguages = (listOfNotNull(translation) + steps.orEmpty().map { it.translation }).mapNotNull { it.shownLanguage(language) }
+    val names = translationLanguages.distinct().flatMap { credit.translation?.get(it).orEmpty() } +
+        listOfNotNull(hadith?.shownLanguage(language)).flatMap { credit.hadith?.get(it).orEmpty() }
+    return names.distinct().joinToString(", ").ifEmpty { null }
+}
+
 internal fun DhikrBookDto.toSections(language: Language): List<DhikrSection> = sections.map { section ->
     DhikrSection(
         id = section.id,
@@ -36,5 +47,5 @@ private fun DhikrBookDto.Entry.toDhikr(language: Language) = Dhikr(
     hadith = hadith?.pick(language),
     reference = reference,
     grade = grade,
-    credit = credit?.pick(language),
+    credit = creditIn(language),
 )
