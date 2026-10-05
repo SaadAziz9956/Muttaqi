@@ -35,7 +35,6 @@ import com.muttaqi.android.feature.onboarding.OnboardingGate
 import com.muttaqi.android.feature.prayer.prayerDestinations
 import com.muttaqi.android.feature.quran.QuranListRoute
 import com.muttaqi.android.feature.quran.quranDestinations
-import com.muttaqi.android.feature.settings.settingsDestinations
 import com.muttaqi.android.feature.share.shareDestinations
 import com.muttaqi.android.feature.topics.ExploreRoute
 import com.muttaqi.android.feature.topics.emotionsDestinations
@@ -96,7 +95,6 @@ fun MuttaqiApp() {
                         dhikrDestinations(navController)
                         namesDestinations(navController)
                         emotionsDestinations(navController)
-                        settingsDestinations(navController)
                     }
                     navigation<ExploreTab>(startDestination = ExploreRoute) {
                         exploreDestinations(navController)

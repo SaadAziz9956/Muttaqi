@@ -15,8 +15,6 @@ import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.ExperimentalMaterial3ExpressiveApi
-import androidx.compose.material3.Icon
-import androidx.compose.material3.IconButton
 import androidx.compose.material3.LargeFlexibleTopAppBar
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
@@ -30,7 +28,6 @@ import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.platform.ClipEntry
 import androidx.compose.ui.platform.LocalClipboard
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.LifecycleResumeEffect
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
@@ -59,7 +56,6 @@ fun HomeRoute(
     onOpenTopic: (String) -> Unit,
     onOpenSurah: (surahNumber: Int, ayahNumber: Int) -> Unit,
     onShare: (SharePassage) -> Unit,
-    onOpenSettings: () -> Unit,
 ) {
     val viewModel = koinViewModel<HomeViewModel>()
     val state by viewModel.state.collectAsStateWithLifecycle()
@@ -90,7 +86,7 @@ fun HomeRoute(
             }
         }
     }
-    HomeScreen(state, qiblaArrow = { qiblaArrow.value }, onIntent = viewModel::dispatch, onOpenSettings = onOpenSettings)
+    HomeScreen(state, qiblaArrow = { qiblaArrow.value }, onIntent = viewModel::dispatch)
 }
 
 @OptIn(ExperimentalMaterial3Api::class, ExperimentalMaterial3ExpressiveApi::class)
@@ -99,7 +95,6 @@ fun HomeScreen(
     state: HomeState,
     qiblaArrow: () -> Double?,
     onIntent: (HomeIntent) -> Unit,
-    onOpenSettings: () -> Unit = {},
     zone: ZoneId = ZoneId.systemDefault(),
 ) {
     val scrollBehavior = TopAppBarDefaults.exitUntilCollapsedScrollBehavior()
@@ -109,11 +104,6 @@ fun HomeScreen(
             LargeFlexibleTopAppBar(
                 title = { Text("Assalam - o - Alaikum") },
                 subtitle = { Text(state.hijriDate) },
-                actions = {
-                    IconButton(onClick = onOpenSettings) {
-                        Icon(painterResource(R.drawable.ic_settings), contentDescription = "Settings")
-                    }
-                },
                 scrollBehavior = scrollBehavior,
             )
         },

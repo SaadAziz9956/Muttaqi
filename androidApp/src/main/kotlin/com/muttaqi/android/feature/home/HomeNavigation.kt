@@ -10,7 +10,6 @@ import com.muttaqi.android.feature.journal.JournalListRoute
 import com.muttaqi.android.feature.names.NamesRoute
 import com.muttaqi.android.feature.prayer.QiblaRoute
 import com.muttaqi.android.feature.quran.SurahRoute
-import com.muttaqi.android.feature.settings.SettingsRoute
 import com.muttaqi.android.feature.share.ShareRoute
 import com.muttaqi.android.feature.topics.EmotionsRoute
 import com.muttaqi.android.feature.topics.TopicPageRoute
@@ -34,7 +33,6 @@ fun NavGraphBuilder.homeDestinations(navController: NavController) {
             onOpenTopic = { navController.openInTab(ExploreTab, TopicPageRoute(TopicChips.ExploreGroup, it)) },
             onOpenSurah = { surah, ayah -> navController.openInTab(QuranTab, SurahRoute(surah, ayah)) },
             onShare = { navController.navigate(ShareRoute(it)) },
-            onOpenSettings = { navController.navigate(SettingsRoute) },
         )
     }
 }
