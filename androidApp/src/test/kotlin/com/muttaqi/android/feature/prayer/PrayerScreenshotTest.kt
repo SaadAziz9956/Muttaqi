@@ -2,15 +2,13 @@ package com.muttaqi.android.feature.prayer
 
 import android.app.Application
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
-import androidx.compose.ui.Alignment
+import androidx.compose.material3.Surface
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.test.junit4.createComposeRule
 import androidx.compose.ui.unit.dp
-import com.muttaqi.android.designsystem.component.SoftBackdrop
 import com.muttaqi.android.testing.captureLightAndDark
 import com.muttaqi.shared.feature.prayer.data.qibla.AdhanQiblaRepository
 import com.muttaqi.shared.feature.prayer.data.times.AdhanPrayerTimesRepository
@@ -85,12 +83,12 @@ class PrayerScreenshotTest {
         val zone = ZoneId.of("Asia/Karachi")
         val today = AdhanPrayerTimesRepository().prayerTimes(LocalDate(2026, 9, 30), karachi)!!
         compose.captureLightAndDark("prayer_times") {
-            Box(Modifier.fillMaxSize()) {
-                SoftBackdrop()
-                Column(Modifier.padding(20.dp), verticalArrangement = Arrangement.spacedBy(28.dp), horizontalAlignment = Alignment.End) {
-                    NextPrayerPill(UpcomingPrayer(Prayer.Asr, today.asr), needsLocation = false, onSetLocation = {}, zone = zone)
-                    NextPrayerPill(upcoming = null, needsLocation = true, onSetLocation = {}, zone = zone)
-                    PrayerTimesStrip(today, next = Prayer.Asr, zone = zone)
+            Surface(Modifier.fillMaxSize()) {
+                Column(Modifier.padding(16.dp), verticalArrangement = Arrangement.spacedBy(16.dp)) {
+                    PrayerTimesCard(UpcomingPrayer(Prayer.Asr, today.asr), today, next = Prayer.Asr, zone = zone)
+                    PrayerTimesCard(UpcomingPrayer(Prayer.Fajr, today.fajr), today = null, next = null, zone = zone)
+                    PrayerTimesCard(upcoming = null, today, next = null, zone = zone)
+                    SetLocationButton(onClick = {})
                 }
             }
         }

@@ -4,75 +4,67 @@ import androidx.annotation.DrawableRes
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.background
-import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.ColumnScope
+import androidx.compose.foundation.layout.IntrinsicSize
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.heightIn
-import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.width
-import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.material3.Card
+import androidx.compose.material3.CardColors
+import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.FilledIconButton
 import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialShapes
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
+import androidx.compose.material3.toShape
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.alpha
-import androidx.compose.ui.draw.blur
-import androidx.compose.ui.draw.rotate
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.semantics.clearAndSetSemantics
 import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.semantics.onClick
 import androidx.compose.ui.semantics.role
-import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.semantics.semantics
-import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import com.muttaqi.android.R
-import com.muttaqi.android.designsystem.MuttaqiTheme
-import com.muttaqi.android.designsystem.component.QuranText
-import com.muttaqi.android.designsystem.component.SoftArtwork
-import com.muttaqi.android.designsystem.component.SoftCard
-import com.muttaqi.android.designsystem.component.SoftIconButton
-import com.muttaqi.android.designsystem.component.SoftPillSurface
-import com.muttaqi.android.feature.topics.topicIcon
+import com.muttaqi.android.designsystem.component.ArabicText
+import com.muttaqi.android.designsystem.topicSymbol
 import com.muttaqi.shared.feature.home.presentation.HomeIntent
 import com.muttaqi.shared.feature.home.presentation.HomeState
 import java.text.NumberFormat
 import kotlin.math.roundToInt
 
-private val Spacing = 14.dp
-private val TileHeight = 132.dp
+private val Spacing = 12.dp
+private val TileMinHeight = 128.dp
 
 @Composable
-internal fun HomeBento(state: HomeState, qiblaArrow: () -> Double?, onIntent: (HomeIntent) -> Unit, modifier: Modifier = Modifier) {
+internal fun HomeTiles(state: HomeState, qiblaArrow: () -> Double?, onIntent: (HomeIntent) -> Unit, modifier: Modifier = Modifier) {
     Column(modifier, verticalArrangement = Arrangement.spacedBy(Spacing)) {
-        Row(horizontalArrangement = Arrangement.spacedBy(Spacing)) {
-            QiblaTile(state, qiblaArrow, Modifier.weight(1f).height(TileHeight * 2 + Spacing)) { onIntent(HomeIntent.QiblaTapped) }
+        Row(Modifier.height(IntrinsicSize.Min), horizontalArrangement = Arrangement.spacedBy(Spacing)) {
+            QiblaTile(state, qiblaArrow, Modifier.weight(1f)) { onIntent(HomeIntent.QiblaTapped) }
             Column(Modifier.weight(1f), verticalArrangement = Arrangement.spacedBy(Spacing)) {
-                DhikrTile(state.dhikrToday, Modifier.height(TileHeight)) { onIntent(HomeIntent.DhikrTapped) }
-                NameTile(state, Modifier.height(TileHeight)) { onIntent(HomeIntent.NameTapped) }
+                DhikrTile(state.dhikrToday, Modifier.fillMaxWidth()) { onIntent(HomeIntent.DhikrTapped) }
+                NameTile(state, Modifier.fillMaxWidth()) { onIntent(HomeIntent.NameTapped) }
             }
         }
-        JournalTile(state, onIntent, Modifier.heightIn(min = 96.dp))
-        Row(horizontalArrangement = Arrangement.spacedBy(Spacing)) {
-            EmotionsTile(Modifier.weight(1f).height(TileHeight)) { onIntent(HomeIntent.EmotionsTapped) }
-            TopicTile(state, Modifier.weight(1f).height(TileHeight)) { onIntent(HomeIntent.TopicTapped) }
+        JournalTile(state, onIntent)
+        Row(Modifier.height(IntrinsicSize.Min), horizontalArrangement = Arrangement.spacedBy(Spacing)) {
+            EmotionsTile(Modifier.weight(1f)) { onIntent(HomeIntent.EmotionsTapped) }
+            TopicTile(state, Modifier.weight(1f)) { onIntent(HomeIntent.TopicTapped) }
         }
     }
 }
@@ -81,30 +73,31 @@ internal fun HomeBento(state: HomeState, qiblaArrow: () -> Double?, onIntent: (H
 private fun QiblaTile(state: HomeState, qiblaArrow: () -> Double?, modifier: Modifier, onClick: () -> Unit) {
     val qibla = state.qibla
     val bearing = qibla?.bearing?.roundToInt()
+    val colors = MaterialTheme.colorScheme
     Tile(
         label = "Qibla",
-        icon = R.drawable.ic_home_qibla,
-        artwork = SoftArtwork.Forest,
+        icon = R.drawable.ic_explore,
         onClick = onClick,
+        colors = CardDefaults.cardColors(containerColor = colors.primaryContainer, contentColor = colors.onPrimaryContainer),
+        labelColor = colors.onPrimaryContainer,
+        fillHeight = true,
         modifier = modifier.clearAndSetSemantics {
             contentDescription = if (bearing != null) "Qibla, $bearing degrees" else "Qibla"
             role = Role.Button
             onClick { onClick(); true }
         },
     ) {
-        Spacer(Modifier.weight(1f))
-        QiblaPointer(qiblaArrow, qibla?.bearing, Modifier.size(112.dp).align(Alignment.CenterHorizontally))
-        Spacer(Modifier.weight(1f))
-        if (qibla != null) {
-            Text("$bearing°", style = MaterialTheme.typography.labelLarge.copy(fontSize = 30.sp), color = Color.White)
-            Text(
-                "Makkah · ${NumberFormat.getIntegerInstance().format(qibla.distanceInKilometers)} km",
-                Modifier.alpha(0.8f),
-                style = MaterialTheme.typography.labelSmall,
-                color = Color.White,
-            )
-        } else {
-            Text("Find the Qibla", style = MaterialTheme.typography.labelLarge.copy(fontSize = 18.sp), color = Color.White)
+        QiblaPointer(qiblaArrow, qibla?.bearing, Modifier.padding(vertical = 16.dp).size(112.dp).align(Alignment.CenterHorizontally))
+        Column {
+            if (qibla != null) {
+                Text("$bearing°", style = MaterialTheme.typography.headlineMedium)
+                Text(
+                    "Makkah · ${NumberFormat.getIntegerInstance().format(qibla.distanceInKilometers)} km",
+                    style = MaterialTheme.typography.bodyMedium,
+                )
+            } else {
+                Text("Find the Qibla", style = MaterialTheme.typography.titleMedium)
+            }
         }
     }
 }
@@ -112,87 +105,78 @@ private fun QiblaTile(state: HomeState, qiblaArrow: () -> Double?, modifier: Mod
 @Composable
 private fun QiblaPointer(qiblaArrow: () -> Double?, bearing: Double?, modifier: Modifier = Modifier) {
     val arrow = qiblaArrow()
-    val target = ((arrow ?: bearing ?: 0.0) - 45).toFloat()
+    val target = (arrow ?: bearing ?: 0.0).toFloat()
     val rotation by animateFloatAsState(target, tween(250), label = "qiblaArrow")
-    Box(modifier, contentAlignment = Alignment.Center) {
-        Box(Modifier.fillMaxSize().border(1.5.dp, Color.White.copy(alpha = 0.35f), CircleShape))
-        Box(Modifier.fillMaxSize().padding(10.dp).background(Color.White.copy(alpha = 0.12f), CircleShape))
-        val turned = Modifier.size(42.dp).graphicsLayer { rotationZ = if (arrow != null) rotation else target }
+    Box(modifier.background(MaterialTheme.colorScheme.primary, MaterialShapes.Cookie9Sided.toShape()), contentAlignment = Alignment.Center) {
         Icon(
-            painterResource(R.drawable.ic_send_2_bold),
-            null,
-            turned.offset(y = 3.dp).blur(6.dp),
-            tint = Color.Black.copy(alpha = 0.2f),
+            painterResource(R.drawable.ic_navigation_filled),
+            contentDescription = null,
+            Modifier.size(48.dp).graphicsLayer { rotationZ = if (arrow != null) rotation else target },
+            tint = MaterialTheme.colorScheme.onPrimary,
         )
-        Icon(painterResource(R.drawable.ic_send_2_bold), null, turned, tint = Color.White)
     }
 }
 
 @Composable
 private fun DhikrTile(said: Int, modifier: Modifier, onClick: () -> Unit) {
-    val soft = MuttaqiTheme.soft
-    Tile(label = "Dikr", icon = R.drawable.ic_repeat_circle_linear, onClick = onClick, modifier = modifier) {
-        Spacer(Modifier.weight(1f))
+    Tile(label = "Dikr", icon = R.drawable.ic_self_improvement, onClick = onClick, modifier = modifier) {
         if (said > 0) {
-            Text(NumberFormat.getIntegerInstance().format(said), style = MaterialTheme.typography.labelLarge.copy(fontSize = 30.sp), color = soft.appPrimary)
-            Text("said today", Modifier.padding(top = 2.dp), style = MaterialTheme.typography.labelSmall, color = soft.textSecondary)
+            Column {
+                Text(
+                    NumberFormat.getIntegerInstance().format(said),
+                    style = MaterialTheme.typography.headlineLarge,
+                    color = MaterialTheme.colorScheme.primary,
+                )
+                Text("said today", style = MaterialTheme.typography.bodyMedium, color = MaterialTheme.colorScheme.onSurfaceVariant)
+            }
         } else {
-            Text("Begin today's dhikr", style = MaterialTheme.typography.labelLarge.copy(fontSize = 16.sp), color = soft.appPrimary)
+            Text("Begin today's dhikr", style = MaterialTheme.typography.titleMedium, color = MaterialTheme.colorScheme.primary)
         }
     }
 }
 
 @Composable
 private fun NameTile(state: HomeState, modifier: Modifier, onClick: () -> Unit) {
-    val soft = MuttaqiTheme.soft
-    Tile(label = "Name of the day", icon = null, artwork = SoftArtwork.Dawn, onClick = onClick, modifier = modifier) {
+    Tile(label = "Name of the day", icon = null, onClick = onClick, modifier = modifier) {
         state.nameOfTheDay?.let { name ->
-            Spacer(Modifier.weight(1f))
-            QuranText(
-                name.arabic,
-                Modifier.fillMaxWidth(),
-                fontSize = 26.sp,
-                color = soft.appPrimary,
-                textAlign = TextAlign.Right,
-                lineSpacing = 0.sp,
-            )
-            Text(
-                name.transliteration,
-                style = MaterialTheme.typography.labelLarge.copy(fontSize = 15.sp),
-                color = soft.appPrimary,
-            )
+            Column(Modifier.fillMaxWidth(), verticalArrangement = Arrangement.spacedBy(4.dp)) {
+                ArabicText(
+                    name.arabic,
+                    Modifier.fillMaxWidth(),
+                    style = MaterialTheme.typography.headlineSmall,
+                    color = MaterialTheme.colorScheme.primary,
+                )
+                Text(name.transliteration, style = MaterialTheme.typography.titleMedium)
+            }
         }
     }
 }
 
 @Composable
-private fun JournalTile(state: HomeState, onIntent: (HomeIntent) -> Unit, modifier: Modifier) {
-    val soft = MuttaqiTheme.soft
+private fun JournalTile(state: HomeState, onIntent: (HomeIntent) -> Unit, modifier: Modifier = Modifier) {
     val entry = state.journalToday
-    Box(modifier.fillMaxWidth(), contentAlignment = Alignment.Center) {
-        SoftCard(
-            Modifier.fillMaxWidth().semantics { contentDescription = "Journal" },
-            onClick = { onIntent(HomeIntent.JournalTapped) },
+    Card(
+        onClick = { onIntent(HomeIntent.JournalTapped) },
+        modifier = modifier.fillMaxWidth().semantics { contentDescription = "Journal" },
+    ) {
+        Row(
+            Modifier.fillMaxWidth().padding(16.dp),
+            horizontalArrangement = Arrangement.spacedBy(16.dp),
+            verticalAlignment = Alignment.CenterVertically,
         ) {
-            Row(Modifier.fillMaxWidth().padding(18.dp), verticalAlignment = Alignment.CenterVertically) {
-                Column(Modifier.weight(1f), verticalArrangement = Arrangement.spacedBy(8.dp)) {
-                    TileLabel("Journal", R.drawable.ic_book_linear, soft.textSecondary)
-                    Text(
-                        entry?.preview ?: "What are you grateful for today?",
-                        style = MaterialTheme.typography.labelLarge.copy(fontSize = 17.sp),
-                        color = soft.appPrimary,
-                        maxLines = 2,
-                        overflow = TextOverflow.Ellipsis,
-                    )
-                }
-                Spacer(Modifier.width(14.dp))
-                SoftIconButton(
-                    if (entry == null) R.drawable.ic_add_linear else R.drawable.ic_arrow_right_01_linear,
-                    if (entry == null) "New entry" else "Today's entry",
-                    { onIntent(HomeIntent.TodaysEntryTapped) },
-                    size = 44.dp,
-                    iconSize = 20.dp,
-                    filled = true,
+            Column(Modifier.weight(1f), verticalArrangement = Arrangement.spacedBy(8.dp)) {
+                TileLabel("Journal", R.drawable.ic_edit_note, MaterialTheme.colorScheme.onSurfaceVariant)
+                Text(
+                    entry?.preview ?: "What are you grateful for today?",
+                    style = MaterialTheme.typography.titleMedium,
+                    maxLines = 2,
+                    overflow = TextOverflow.Ellipsis,
+                )
+            }
+            FilledIconButton(onClick = { onIntent(HomeIntent.TodaysEntryTapped) }) {
+                Icon(
+                    painterResource(if (entry == null) R.drawable.ic_add else R.drawable.ic_arrow_forward),
+                    contentDescription = if (entry == null) "New entry" else "Today's entry",
                 )
             }
         }
@@ -201,29 +185,29 @@ private fun JournalTile(state: HomeState, onIntent: (HomeIntent) -> Unit, modifi
 
 @Composable
 private fun EmotionsTile(modifier: Modifier, onClick: () -> Unit) {
-    Tile(label = "Emotions", icon = R.drawable.ic_happyemoji_linear, artwork = SoftArtwork.Lagoon, onClick = onClick, modifier = modifier) {
-        Spacer(Modifier.weight(1f))
-        Text("How do you feel?", style = MaterialTheme.typography.labelLarge.copy(fontSize = 17.sp), color = MuttaqiTheme.soft.appPrimary)
+    Tile(label = "Emotions", icon = R.drawable.ic_mood, onClick = onClick, modifier = modifier, fillHeight = true) {
+        Text("How do you feel?", style = MaterialTheme.typography.titleMedium, color = MaterialTheme.colorScheme.primary)
     }
 }
 
 @Composable
 private fun TopicTile(state: HomeState, modifier: Modifier, onClick: () -> Unit) {
-    val soft = MuttaqiTheme.soft
-    Tile(label = "Topic of the day", icon = null, onClick = onClick, modifier = modifier) {
+    Tile(label = "Topic of the day", icon = null, onClick = onClick, modifier = modifier, fillHeight = true) {
         state.topicOfTheDay?.let { topic ->
-            Spacer(Modifier.weight(1f))
-            Box(Modifier.size(40.dp).background(soft.tintedSurface, CircleShape), contentAlignment = Alignment.Center) {
-                Icon(painterResource(topicIcon(topic.icon)), null, Modifier.size(22.dp), tint = soft.brandTeal)
+            Column(verticalArrangement = Arrangement.spacedBy(12.dp)) {
+                Box(
+                    Modifier.size(40.dp).background(MaterialTheme.colorScheme.secondaryContainer, MaterialShapes.Cookie6Sided.toShape()),
+                    contentAlignment = Alignment.Center,
+                ) {
+                    Icon(
+                        painterResource(topicSymbol(topic.icon)),
+                        contentDescription = null,
+                        Modifier.size(24.dp),
+                        tint = MaterialTheme.colorScheme.onSecondaryContainer,
+                    )
+                }
+                Text(topic.title, style = MaterialTheme.typography.titleMedium, color = MaterialTheme.colorScheme.primary)
             }
-            Spacer(Modifier.weight(1f))
-            Text(
-                topic.title,
-                style = MaterialTheme.typography.labelLarge.copy(fontSize = 17.sp),
-                color = soft.appPrimary,
-                maxLines = 2,
-                overflow = TextOverflow.Ellipsis,
-            )
         }
     }
 }
@@ -234,33 +218,30 @@ private fun Tile(
     @DrawableRes icon: Int?,
     onClick: () -> Unit,
     modifier: Modifier = Modifier,
-    artwork: SoftArtwork? = null,
+    colors: CardColors = CardDefaults.cardColors(),
+    labelColor: Color = MaterialTheme.colorScheme.onSurfaceVariant,
+    fillHeight: Boolean = false,
     content: @Composable ColumnScope.() -> Unit,
 ) {
-    val onArtwork = artwork == SoftArtwork.Forest
-    SoftCard(modifier, rim = 3.dp, artwork = artwork, onClick = onClick) {
-        Column(Modifier.fillMaxSize().padding(16.dp)) {
-            Row(verticalAlignment = Alignment.Top) {
-                TileLabel(label, icon, if (onArtwork) Color.White.copy(alpha = 0.85f) else MuttaqiTheme.soft.textSecondary, Modifier.weight(1f))
-                Spacer(Modifier.width(4.dp))
-                SoftPillSurface(Modifier.size(30.dp), fill = MuttaqiTheme.soft.surface.copy(alpha = 1f)) {
-                    Icon(
-                        painterResource(R.drawable.ic_arrow_right_01_linear),
-                        null,
-                        Modifier.size(14.dp).rotate(-45f),
-                        tint = MuttaqiTheme.soft.appPrimary,
-                    )
-                }
-            }
+    Card(onClick = onClick, modifier = if (fillHeight) modifier.fillMaxHeight() else modifier, colors = colors) {
+        Column(
+            Modifier
+                .fillMaxWidth()
+                .then(if (fillHeight) Modifier.fillMaxHeight() else Modifier)
+                .heightIn(min = TileMinHeight)
+                .padding(16.dp),
+            verticalArrangement = Arrangement.SpaceBetween,
+        ) {
+            TileLabel(label, icon, labelColor, Modifier.padding(bottom = 12.dp))
             content()
         }
     }
 }
 
 @Composable
-private fun TileLabel(text: String, @DrawableRes icon: Int?, tint: Color, modifier: Modifier = Modifier) {
-    Row(modifier, horizontalArrangement = Arrangement.spacedBy(6.dp), verticalAlignment = Alignment.CenterVertically) {
-        if (icon != null) Icon(painterResource(icon), null, Modifier.size(15.dp), tint = tint)
-        Text(text, style = MaterialTheme.typography.bodySmall, color = tint, maxLines = 1, overflow = TextOverflow.Ellipsis)
+private fun TileLabel(text: String, @DrawableRes icon: Int?, color: Color, modifier: Modifier = Modifier) {
+    Row(modifier, horizontalArrangement = Arrangement.spacedBy(8.dp), verticalAlignment = Alignment.CenterVertically) {
+        if (icon != null) Icon(painterResource(icon), contentDescription = null, Modifier.size(20.dp), tint = color)
+        Text(text, style = MaterialTheme.typography.labelLarge, color = color)
     }
 }
