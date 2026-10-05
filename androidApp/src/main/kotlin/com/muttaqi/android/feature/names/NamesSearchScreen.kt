@@ -8,36 +8,21 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
-import androidx.compose.foundation.text.KeyboardOptions
-import androidx.compose.foundation.text.input.clearText
-import androidx.compose.foundation.text.input.rememberTextFieldState
-import androidx.compose.foundation.text.input.setTextAndPlaceCursorAtEnd
 import androidx.compose.material3.ButtonGroupDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.ExperimentalMaterial3ExpressiveApi
 import androidx.compose.material3.HorizontalDivider
-import androidx.compose.material3.Icon
-import androidx.compose.material3.IconButton
 import androidx.compose.material3.ListItem
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
-import androidx.compose.material3.SearchBarDefaults
-import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.material3.ToggleButton
 import androidx.compose.material3.TopAppBar
-import androidx.compose.material3.rememberSearchBarState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.rememberUpdatedState
-import androidx.compose.runtime.snapshotFlow
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.focus.FocusRequester
-import androidx.compose.ui.focus.focusRequester
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.semantics.role
 import androidx.compose.ui.semantics.semantics
@@ -45,16 +30,15 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import com.muttaqi.android.R
 import com.muttaqi.android.designsystem.component.ArabicText
 import com.muttaqi.android.designsystem.component.BackButton
+import com.muttaqi.android.designsystem.component.PageSearchBar
 import com.muttaqi.android.designsystem.component.TranslationText
 import com.muttaqi.shared.feature.names.domain.model.NameSearchMode
 import com.muttaqi.shared.feature.names.presentation.NamesEffect
 import com.muttaqi.shared.feature.names.presentation.NamesIntent
 import com.muttaqi.shared.feature.names.presentation.NamesState
 import com.muttaqi.shared.feature.names.presentation.NamesViewModel
-import kotlinx.coroutines.flow.drop
 
 @Composable
 fun NamesSearchRoute(viewModel: NamesViewModel, onBack: () -> Unit) {
@@ -81,12 +65,14 @@ fun NamesSearchScreen(state: NamesState, onIntent: (NamesIntent) -> Unit, onBack
             contentPadding = PaddingValues(top = padding.calculateTopPadding() + 8.dp, bottom = padding.calculateBottomPadding() + 16.dp),
         ) {
             item(key = "field") {
-                NameSearchField(
+                PageSearchBar(
                     query = state.query,
-                    byNumber = state.searchMode == NameSearchMode.ByNumber,
                     onQueryChange = { onIntent(NamesIntent.QueryChanged(it)) },
                     onClear = { onIntent(NamesIntent.ClearQuery) },
+                    placeholder = "Type here",
                     modifier = Modifier.padding(horizontal = 16.dp),
+                    keyboardType = if (state.searchMode == NameSearchMode.ByNumber) KeyboardType.Number else KeyboardType.Text,
+                    autoFocus = true,
                 )
             }
             item(key = "modes") {
@@ -123,43 +109,6 @@ fun NamesSearchScreen(state: NamesState, onIntent: (NamesIntent) -> Unit, onBack
                 HorizontalDivider()
             }
         }
-    }
-}
-
-@OptIn(ExperimentalMaterial3Api::class)
-@Composable
-private fun NameSearchField(
-    query: String,
-    byNumber: Boolean,
-    onQueryChange: (String) -> Unit,
-    onClear: () -> Unit,
-    modifier: Modifier = Modifier,
-) {
-    val text = rememberTextFieldState(query)
-    val latestOnQueryChange by rememberUpdatedState(onQueryChange)
-    LaunchedEffect(text) { snapshotFlow { text.text.toString() }.drop(1).collect { latestOnQueryChange(it) } }
-    LaunchedEffect(query) { if (query != text.text.toString()) text.setTextAndPlaceCursorAtEnd(query) }
-    val focus = remember { FocusRequester() }
-    LaunchedEffect(Unit) { focus.requestFocus() }
-    Surface(modifier.fillMaxWidth(), shape = SearchBarDefaults.inputFieldShape, color = SearchBarDefaults.colors().containerColor) {
-        SearchBarDefaults.InputField(
-            textFieldState = text,
-            searchBarState = rememberSearchBarState(),
-            onSearch = {},
-            modifier = Modifier.fillMaxWidth().focusRequester(focus),
-            placeholder = { Text("Type here") },
-            leadingIcon = { Icon(painterResource(R.drawable.ic_search), contentDescription = null) },
-            trailingIcon = if (query.isNotEmpty()) {
-                {
-                    IconButton(onClick = { text.clearText(); onClear() }) {
-                        Icon(painterResource(R.drawable.ic_close), contentDescription = "Clear search")
-                    }
-                }
-            } else {
-                null
-            },
-            keyboardOptions = KeyboardOptions(keyboardType = if (byNumber) KeyboardType.Number else KeyboardType.Text),
-        )
     }
 }
 

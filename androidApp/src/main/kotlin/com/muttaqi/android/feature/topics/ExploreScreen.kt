@@ -1,6 +1,5 @@
 package com.muttaqi.android.feature.topics
 
-import androidx.annotation.DrawableRes
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.FlowRow
@@ -197,6 +196,3 @@ private fun NoResults(query: String) {
         )
     }
 }
-
-@DrawableRes
-internal fun topicIcon(name: String): Int = topicSymbol(name)
