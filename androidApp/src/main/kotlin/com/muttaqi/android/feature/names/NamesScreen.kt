@@ -165,7 +165,8 @@ fun NamesScreen(
                                 verticalArrangement = Arrangement.spacedBy(6.dp),
                             ) {
                                 TranslationText(hadith.text, color = soft.textSecondary, textAlign = TextAlign.Center, lineSpacing = 0.sp)
-                                Text(hadith.source, style = MaterialTheme.typography.labelSmall, color = soft.brandTeal)
+                                Text(hadith.source, style = MaterialTheme.typography.labelSmall, color = soft.brandTeal, textAlign = TextAlign.Center)
+                                Text(state.listSource, style = MaterialTheme.typography.labelSmall, color = soft.textSecondary, textAlign = TextAlign.Center)
                             }
                         }
                     }

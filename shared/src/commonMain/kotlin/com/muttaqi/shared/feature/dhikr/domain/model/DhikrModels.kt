@@ -6,7 +6,7 @@ data class Dhikr(
     val id: String,
     val title: String?,
     val arabic: String,
-    val transliteration: String,
+    val transliteration: String?,
     val translation: String?,
     val steps: List<DhikrStep>,
     val count: Int?,
@@ -20,7 +20,7 @@ data class Dhikr(
 
 data class DhikrStep(
     val arabic: String,
-    val transliteration: String,
+    val transliteration: String?,
     val translation: String?,
     val count: Int,
 )

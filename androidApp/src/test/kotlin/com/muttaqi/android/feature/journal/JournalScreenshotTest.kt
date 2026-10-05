@@ -37,7 +37,7 @@ class JournalScreenshotTest {
     private val walk = entry("walk", "Morning light", "Grateful for the quiet walk before Fajr and the cool air.", "2026-09-30T05:10:00Z")
     private val parents = entry("parents", "", "Alhamdulillah for my parents' health.\nAnd for the rain this evening.", "2026-09-29T14:00:00Z")
     private val eid = entry("eid", "Eid with the whole family", "Everyone came, even the cousins from Lahore.", "2025-06-07T09:00:00Z")
-    private val quote = DisplayedQuote("Nun. By the pen and what they inscribe", "Quran (68:1)")
+    private val quote = DisplayedQuote("Nun. By the pen and what they inscribe,", "Quran (68:1)")
 
     @Test
     fun list() = compose.captureLightAndDark("journal_list") {

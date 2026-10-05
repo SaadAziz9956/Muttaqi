@@ -128,13 +128,15 @@ struct DhikrCounterView: View {
                 .multilineTextAlignment(.trailing)
                 .frame(maxWidth: .infinity, alignment: .trailing)
 
-            Text(dhikr.transliteration)
-                .font(.custom("ReemKufi-Regular", size: 15, relativeTo: .body))
-                .foregroundStyle(.appPrimary)
-                .padding(.top, 20)
+            if let transliteration = dhikr.transliteration {
+                Text(transliteration)
+                    .font(.custom("ReemKufi-Regular", size: 15, relativeTo: .body))
+                    .foregroundStyle(.appPrimary)
+                    .padding(.top, 20)
+            }
 
             if let translation = dhikr.translation {
-                translated(translation.sentenceCased, size: 15, color: .textPrimary)
+                translated(translation, size: 15, color: .textPrimary)
                     .padding(.top, 10)
             }
         }
@@ -159,11 +161,13 @@ struct DhikrCounterView: View {
                             .foregroundStyle(.textPrimary)
                             .multilineTextAlignment(.trailing)
                     }
-                    Text(step.transliteration)
-                        .font(.custom("ReemKufi-Regular", size: 14, relativeTo: .body))
-                        .foregroundStyle(.appPrimary)
+                    if let transliteration = step.transliteration {
+                        Text(transliteration)
+                            .font(.custom("ReemKufi-Regular", size: 14, relativeTo: .body))
+                            .foregroundStyle(.appPrimary)
+                    }
                     if let translation = step.translation {
-                        translated(translation.sentenceCased, size: 13, color: .textSecondary)
+                        translated(translation, size: 13, color: .textSecondary)
                     }
                 }
                 .padding(16)
@@ -226,7 +230,7 @@ struct DhikrCounterView: View {
         VStack(spacing: 10) {
             if let step = state.currentStep {
                 let phrase = dhikr.steps[Int(step.index)]
-                Text("\(phrase.transliteration) · \(step.said) of \(phrase.count)")
+                Text([phrase.transliteration, "\(step.said) of \(phrase.count)"].compactMap { $0 }.joined(separator: " · "))
                     .font(.labelLarge)
                     .foregroundStyle(.appPrimary)
                     .contentTransition(.numericText())

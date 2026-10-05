@@ -10,6 +10,8 @@ CACHE = os.path.join(HERE, "cache", "reference")
 DATA = os.path.join(HERE, "..", "data")
 MUSHAF_FILE = os.path.join(DATA, "hafsData_v2-0.json")
 MUSHAF_SHA256 = "d2960b3217962e7e4252abdcece67bea3d6b48271e4cd3af45bbbb2dd5c872ca"
+COPIED_50_21 = "Wa jaaa'at kullu nafsim ma'ahaa saaa'iqunw wa shaheed"
+CORRECTED_50_19 = "Wajaat sakratu almawti bialhaqqi thalika ma kunta minhu taheedu"
 MIRRORS = {
     "qurani.ai": "https://api.qurani.ai/gw/qh/v1/quran/{}",
     "alquran.cloud": "https://api.alquran.cloud/v1/quran/{}",
@@ -112,6 +114,48 @@ def check_mushaf_passages(texts, book):
     return failures
 
 
+def translated(texts, label, books):
+    failures = []
+    for reference, text in texts:
+        if not text:
+            continue
+        expected = {mirror: passage(book, reference) for mirror, book in books.items()}
+        if not all(e is not None and text in e for e in expected.values()):
+            failures.append((label, reference, text, expected))
+    return failures
+
+
+def translations(o, found):
+    if isinstance(o, dict):
+        reference = f"{o['surah']}:{o['ayah']}" if "surah" in o and "ayah" in o else o.get("reference")
+        if isinstance(reference, str) and span(reference) and ("arabic" in o or "translation" in o):
+            mapping = o.get("translations") or o.get("translation") or {}
+            for key, edition_name in (("en", "en.sahih"), ("ur", "ur.jalandhry")):
+                if isinstance(mapping, dict) and key in mapping:
+                    found.append((edition_name, reference, mapping[key]))
+            if isinstance(o.get("transliteration"), str):
+                found.append(("en.transliteration", reference, o["transliteration"]))
+        for v in o.values():
+            translations(v, found)
+    elif isinstance(o, list):
+        for v in o:
+            translations(v, found)
+    return found
+
+
+def check_translations():
+    found = []
+    for name in ("Duas", "Emotions", "Explore"):
+        found += translations(json.load(open(os.path.join(DATA, f"{name}.json"), encoding="utf-8")), [])
+    failures = []
+    for edition_name in ("en.sahih", "ur.jalandhry", "en.transliteration"):
+        books = {m: edition(m, edition_name) for m in MIRRORS}
+        if edition_name == "en.transliteration":
+            books = {m: {**b, (50, 19): CORRECTED_50_19} if b[(50, 19)] == COPIED_50_21 else b for m, b in books.items()}
+        failures += translated([(r, t) for e, r, t in found if e == edition_name], edition_name, books)
+    return len(found), failures
+
+
 def main():
     nfc = lambda t: unicodedata.normalize("NFC", t)
     simple = {m: edition(m, "quran-simple") for m in MIRRORS}
@@ -133,7 +177,10 @@ def main():
     report("DIFFERS FROM THE PUBLISHED TEXT", failures)
     report("MIRRORS DISAGREE, CHECK BY HAND", disagreements)
     print(f"{total} Quran passages checked letter by letter: {len(failures)} differ, {len(disagreements)} need a manual look")
-    return 1 if failures or file_problems else 0
+    count, wrong = check_translations()
+    report("TRANSLATION DIFFERS FROM THE PUBLISHED TEXT", wrong)
+    print(f"{count} translations and transliterations checked character for character: {len(wrong)} differ")
+    return 1 if failures or file_problems or wrong else 0
 
 
 if __name__ == "__main__":

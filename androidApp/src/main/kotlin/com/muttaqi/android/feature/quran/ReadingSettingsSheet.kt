@@ -107,7 +107,7 @@ private fun ReadingModeCard(
                 ReadingMode.WithTranslation -> Column(horizontalAlignment = Alignment.CenterHorizontally, verticalArrangement = Arrangement.spacedBy(4.dp)) {
                     ArabicText(MushafSamples.BISMILLAH_OPENING_WORDS, fontSize = 12.sp, lineSpacing = 0.sp)
                     Text("Bismillaahir", fontSize = 8.sp, fontFamily = FontFamily.Default, color = soft.appPrimary)
-                    Text("In the Name of Allah", fontSize = 7.sp, fontFamily = FontFamily.Default, color = soft.textSecondary)
+                    Text("In the name of Allah", fontSize = 7.sp, fontFamily = FontFamily.Default, color = soft.textSecondary)
                     Box(Modifier.padding(horizontal = 12.dp).fillMaxWidth().height(0.5.dp).background(systemGray4()))
                     ArabicText(MushafSamples.ALHAMDU_OPENING_WORDS, fontSize = 12.sp, lineSpacing = 0.sp)
                     Text("Alhamdu lillaahi", fontSize = 8.sp, fontFamily = FontFamily.Default, color = soft.appPrimary)

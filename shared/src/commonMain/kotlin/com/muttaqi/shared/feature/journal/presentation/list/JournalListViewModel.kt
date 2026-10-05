@@ -3,7 +3,6 @@ package com.muttaqi.shared.feature.journal.presentation.list
 import androidx.lifecycle.viewModelScope
 import com.muttaqi.shared.core.mvi.MviViewModel
 import com.muttaqi.shared.core.preferences.SelectedLanguage
-import com.muttaqi.shared.core.quote.DisplayedQuote
 import com.muttaqi.shared.core.quote.PageQuotes
 import com.muttaqi.shared.core.quote.displayed
 import com.muttaqi.shared.feature.journal.domain.usecase.BuildJournalSearchIndex
@@ -27,7 +26,7 @@ class JournalListViewModel(
     init {
         launchNow {
             selectedLanguage.changes.collect { language ->
-                mutate(JournalListMutation.HeaderLoaded(PageQuotes.byThePen.displayed(language).withoutRunOn()))
+                mutate(JournalListMutation.HeaderLoaded(PageQuotes.byThePen.displayed(language)))
             }
         }
         launchNow {
@@ -56,5 +55,3 @@ class JournalListViewModel(
         }
     }
 }
-
-internal fun DisplayedQuote.withoutRunOn() = copy(text = text.trim { it == ',' || it == ';' || it.isWhitespace() })

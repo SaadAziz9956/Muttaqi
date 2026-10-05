@@ -29,6 +29,14 @@ class BundledTopicRepositoriesTest {
     }
 
     @Test
+    fun aHadithsArabicIsTheTextItsTranslationFollows() = runTest {
+        val repository = TopicsTestData.emotionRepository(StandardTestDispatcher(testScheduler))
+        assertEquals("«لَا تَغْضَبْ»", repository.emotions(Language.English).first().hadith.single().arabic)
+        assertEquals("«لا تغضب»", repository.emotions(Language.Urdu).first().hadith.single().arabic)
+        assertEquals("«لَا تَغْضَبْ»", repository.emotions(Language.Hindi).first().hadith.single().arabic)
+    }
+
+    @Test
     fun englishVersesAreCreditedToSaheehInternational() = runTest {
         val verse = TopicsTestData.emotionRepository(StandardTestDispatcher(testScheduler)).emotions(Language.English).first().verses.first()
         assertEquals("Saheeh International", verse.credit)

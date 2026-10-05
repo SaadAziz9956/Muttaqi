@@ -18,7 +18,7 @@ struct NameCard: View {
                 .foregroundStyle(.appPrimary)
                 .padding(.top, 12)
 
-            Text(name.meaning.sentenceCased)
+            Text(name.meaning)
                 .font(meaningStyle.font)
                 .foregroundStyle(.textPrimary)
                 .lineSpacing(meaningStyle.isRightToLeft ? 6 : 2)

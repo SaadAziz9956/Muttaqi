@@ -45,10 +45,10 @@ object PageQuotes {
 
     val learnAndTeachQuran = PublishedQuote(
         mapOf(
-            "en" to "The best among you [Muslims] are those who learn the Quran and teach it.",
+            "en" to "The best of you are those who learn the Qur’an and teach it.",
             "ur" to "تم میں سب سے بہتر شخص وہ ہے جو قرآن سیکھے اور اسے سکھائے",
         ),
-        "Sahih Bukhari (5027)",
+        "Sahih al-Bukhari 5027 · HadeethEnc.com",
     )
 
     val ninetyNineNames = PublishedQuote(
@@ -56,7 +56,7 @@ object PageQuotes {
             "en" to "Verily, Allah has ninety-nine names, one-hundred minus one. Whoever memorizes them all will enter Paradise.",
             "ur" to "اللہ کے ننانوے یعنی ایک کم ایک سو نام ہیں، جو ان کی حفاظت کرے گا، وہ جنت میں داخل ہوگا",
         ),
-        "Sahih al-Bukhari 7392",
+        "Sahih al-Bukhari 7392, Sahih Muslim 2677 · HadeethEnc.com",
     )
 
     val rememberingAllah = PublishedQuote(
@@ -64,7 +64,7 @@ object PageQuotes {
             "en" to "The example of the one who remembers his Lord and the one who does not remember His Lord is like the example of the living and the dead person.",
             "ur" to "اس شخص کی مثال جو اپنے رب کو یاد کرتا ہے اور جو اسے یاد نہیں کرتا، زندہ اور مردہ کی سی ہے",
         ),
-        "Sahih al-Bukhari 6407",
+        "Sahih al-Bukhari 6407 · HadeethEnc.com",
     )
 }
 

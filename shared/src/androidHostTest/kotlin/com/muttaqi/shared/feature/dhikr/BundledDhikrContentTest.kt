@@ -23,7 +23,7 @@ class BundledDhikrContentTest {
         val all = sections.flatMap { it.dhikr }
         assertTrue(all.size > 50)
         assertEquals(all.size, all.map { it.id }.toSet().size, "every dhikr has its own id, which its progress is saved under")
-        assertTrue(all.all { it.arabic.isNotBlank() && it.transliteration.isNotBlank() && it.reference.isNotBlank() })
+        assertTrue(all.all { it.arabic.isNotBlank() && it.transliteration?.isBlank() != true && it.reference.isNotBlank() })
         assertTrue(all.flatMap { it.steps }.all { it.translation != null && it.count > 0 })
     }
 

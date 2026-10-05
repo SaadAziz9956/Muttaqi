@@ -40,7 +40,6 @@ import com.muttaqi.android.designsystem.component.SoftTopBar
 import com.muttaqi.android.designsystem.component.TranslationText
 import com.muttaqi.shared.core.text.isArabicScript
 import com.muttaqi.shared.core.text.quoted
-import com.muttaqi.shared.core.text.sentenceCased
 import com.muttaqi.shared.feature.dhikr.domain.model.Dhikr
 import com.muttaqi.shared.feature.dhikr.presentation.list.DhikrListEffect
 import com.muttaqi.shared.feature.dhikr.presentation.list.DhikrListIntent
@@ -125,17 +124,17 @@ private fun SectionChips(state: DhikrListState, selectedId: String, onIntent: (D
 @Composable
 private fun DhikrRow(dhikr: Dhikr, onClick: () -> Unit, modifier: Modifier = Modifier) {
     val soft = MuttaqiTheme.soft
-    val caption = dhikr.title ?: dhikr.translation?.sentenceCased()?.quoted() ?: dhikr.transliteration
+    val caption = dhikr.title ?: dhikr.translation?.quoted() ?: dhikr.transliteration.orEmpty()
     SoftCard(
         modifier.clearAndSetSemantics {
-            contentDescription = dhikr.title ?: dhikr.transliteration
+            contentDescription = dhikr.title ?: dhikr.transliteration ?: dhikr.arabic
             dhikr.translation?.let { stateDescription = it }
         },
         cornerRadius = 24.dp,
         onClick = onClick,
     ) {
         Column(Modifier.fillMaxWidth().padding(18.dp), verticalArrangement = Arrangement.spacedBy(12.dp)) {
-            ArabicText(dhikr.arabic, Modifier.fillMaxWidth(), fontSize = 21.sp, textAlign = TextAlign.Right, lineSpacing = 0.sp, maxLines = 1)
+            ArabicText(dhikr.arabic, Modifier.fillMaxWidth(), fontSize = 21.sp, textAlign = TextAlign.Right, lineSpacing = 0.sp)
             Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(10.dp)) {
                 TranslationText(
                     caption,
@@ -143,7 +142,6 @@ private fun DhikrRow(dhikr: Dhikr, onClick: () -> Unit, modifier: Modifier = Mod
                     fontSize = 12.sp,
                     color = soft.appPrimary,
                     textAlign = if (caption.isArabicScript()) TextAlign.Right else TextAlign.Left,
-                    maxLines = 1,
                     lineSpacing = 0.sp,
                 )
                 dhikr.target?.let { target -> CountPill("$target×") }

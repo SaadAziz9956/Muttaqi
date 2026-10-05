@@ -44,6 +44,22 @@ class DhikrUseCasesTest {
     }
 
     @Test
+    fun eachTextIsCreditedToWhoeverTranslatedTheLanguageItIsShownIn() = runTest {
+        val urdu = GetDhikrSections(repository())(Language.Urdu)
+        assertEquals("Urdu translator, English hadith translator", urdu[0].dhikr[0].credit)
+        assertEquals("Urdu translator, English translator", urdu[1].dhikr.single().credit)
+        val english = GetDhikrSections(repository())(Language.English)
+        assertEquals("English translator, English hadith translator", english[0].dhikr[0].credit)
+        assertEquals("English translator", english[1].dhikr.single().credit)
+    }
+
+    @Test
+    fun aStepWithNoPublishedTransliterationHasNone() = runTest {
+        val steps = GetDhikrSections(repository())(Language.English)[1].dhikr.single().steps
+        assertEquals(listOf("SubhanAllah", "Alhamdulillah", null), steps.map { it.transliteration })
+    }
+
+    @Test
     fun whatAnEntryLeavesOutIsNull() = runTest {
         val openEnded = GetDhikr(repository())("open-ended", Language.English)!!
         assertNull(openEnded.translation)

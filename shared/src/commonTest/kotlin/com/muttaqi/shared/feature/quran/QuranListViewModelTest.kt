@@ -53,7 +53,7 @@ class QuranListViewModelTest {
         assertFalse(state.isLoading)
         assertNull(state.error)
         assertEquals(testSurahs, state.visibleSurahs)
-        assertEquals("Sahih Bukhari (5027)", state.header?.source)
+        assertEquals("Sahih al-Bukhari 5027 · HadeethEnc.com", state.header?.source)
         assertNull(state.readingProgress)
     }
 

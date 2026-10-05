@@ -49,7 +49,7 @@ class JournalListViewModelTest {
         val state = viewModel().state.value
         assertFalse(state.isLoading)
         assertEquals(listOf("walk", "parents", "cafe"), state.shownEntries.map { it.id })
-        assertEquals("Nun. By the pen and what they inscribe", state.header?.text)
+        assertEquals("Nun. By the pen and what they inscribe,", state.header?.text)
         assertEquals("Quran (68:1)", state.header?.source)
     }
 
@@ -59,7 +59,7 @@ class JournalListViewModelTest {
         language.switchTo(Language.Urdu)
         assertEquals("نٓ۔ قلم کی اور جو (اہل قلم) لکھتے ہیں اس کی قسم", viewModel.state.value.header?.text)
         language.switchTo(Language.Hindi)
-        assertEquals("Nun. By the pen and what they inscribe", viewModel.state.value.header?.text)
+        assertEquals("Nun. By the pen and what they inscribe,", viewModel.state.value.header?.text)
     }
 
     @Test

@@ -47,7 +47,7 @@ fun ArabicText(
 ) {
     val annotated = remember(text) {
         buildAnnotatedString {
-            for (char in text.withRightToLeftGuillemets()) {
+            for (char in text) {
                 if (char in arabicMarksOutsideQuranFont) {
                     withStyle(SpanStyle(fontFamily = if (char in OrnateBrackets) NastaliqFont else FontFamily.Default, fontSize = 0.9.em)) {
                         append(char)
@@ -88,7 +88,7 @@ fun TranslationText(
 ) {
     val urdu = text.isArabicScript()
     Text(
-        if (urdu) text.withRightToLeftGuillemets() else text,
+        text,
         modifier = modifier,
         color = color,
         textAlign = textAlign,
@@ -114,18 +114,6 @@ fun TranslationText(
             )
         },
     )
-}
-
-private fun String.withRightToLeftGuillemets(): String = buildString(length) {
-    for (char in this@withRightToLeftGuillemets) {
-        append(
-            when (char) {
-                '«' -> '»'
-                '»' -> '«'
-                else -> char
-            },
-        )
-    }
 }
 
 private const val QURAN_FONT_LINE_HEIGHT = 1.758f

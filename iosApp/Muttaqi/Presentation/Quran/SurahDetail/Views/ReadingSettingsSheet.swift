@@ -151,7 +151,7 @@ struct ReadingSettingsSheet: View {
                 Text("Bismillaahir")
                     .font(.system(size: 8))
                     .foregroundStyle(.appPrimary)
-                Text("In the Name of Allah")
+                Text("In the name of Allah")
                     .font(.system(size: 7))
                     .foregroundStyle(.textSecondary)
 

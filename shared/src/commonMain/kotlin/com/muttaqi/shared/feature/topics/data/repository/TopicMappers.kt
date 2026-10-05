@@ -29,7 +29,7 @@ internal fun VerseDto.toPassage(language: Language) = QuranPassage(
 )
 
 internal fun HadithDto.toPassage(language: Language) = HadithPassage(
-    arabic = arabic,
+    arabic = arabic.inLanguage(language),
     translation = translation.inLanguage(language),
     attribution = attribution.inLanguage(language),
     grade = grade.inLanguage(language),

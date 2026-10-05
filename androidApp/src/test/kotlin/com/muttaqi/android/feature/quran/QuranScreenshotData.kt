@@ -25,6 +25,8 @@ internal object QuranScreenshotData {
         Ayah(7, 7, 1, "صِرَٰطَ ٱلَّذِينَ أَنْعَمْتَ عَلَيْهِمْ غَيْرِ ٱلْمَغْضُوبِ عَلَيْهِمْ وَلَا ٱلضَّآلِّينَ", "Siraatal-lazeena an'amta 'alaihim ghayril-maghdoobi 'alaihim wa lad-daaalleen", "The path of those upon whom You have bestowed favor, not of those who have evoked [Your] anger or of those who are astray.", 1, 1, 1),
     )
 
+    val bismillahUrdu = fatiha.first().copy(translation = "شروع الله کا نام لے کر جو بڑا مہربان نہایت رحم والا ہے")
+
     val baqara = listOf(
         Ayah(8, 1, 2, "الٓمٓ", "Alif-Laaam-Meeem", "Alif, Lam, Meem.", 1, 2, 1),
         Ayah(9, 2, 2, "ذَٰلِكَ ٱلْكِتَٰبُ لَا رَيْبَ ۛ فِيهِ ۛ هُدًۭى لِّلْمُتَّقِينَ", "Zaalikal Kitaabu laa raiba feeh; udal lilmuttaqeen", "This is the Book about which there is no doubt, a guidance for those conscious of Allah -", 1, 2, 1),

@@ -19,8 +19,9 @@ data class TopicPassage(
     val translation: String,
     val source: String,
     val transliteration: String?,
+    val grade: String? = null,
 ) {
-    fun toSharePassage() = SharePassage(arabic, transliteration, translation, source)
+    fun toSharePassage() = SharePassage(arabic, transliteration, translation, listOfNotNull(source, grade).joinToString(" · "))
 }
 
 data class TopicPageState(

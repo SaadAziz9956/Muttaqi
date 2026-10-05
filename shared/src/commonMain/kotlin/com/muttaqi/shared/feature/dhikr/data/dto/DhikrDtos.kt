@@ -20,18 +20,21 @@ internal data class DhikrBookDto(val sections: List<Section>) {
         val id: String,
         val title: String? = null,
         val arabic: String,
-        val transliteration: String,
+        val transliteration: String? = null,
         val translation: Translations? = null,
         val steps: List<Step>? = null,
         val count: Int? = null,
         val hadith: Translations? = null,
         val reference: String,
         val grade: String,
-        val credit: Translations? = null,
+        val credit: Credit? = null,
     )
 
     @Serializable
-    data class Step(val arabic: String, val transliteration: String, val translation: Translations, val count: Int)
+    data class Credit(val translation: Map<String, List<String>>? = null, val hadith: Map<String, List<String>>? = null)
+
+    @Serializable
+    data class Step(val arabic: String, val transliteration: String? = null, val translation: Translations, val count: Int)
 }
 
 @Serializable

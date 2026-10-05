@@ -47,7 +47,7 @@ class QuranScreenshotTest {
     private val surahs = QuranScreenshotData.surahs
     private fun surah(number: Int) = surahs.first { it.number == number }
 
-    private val header = DisplayedQuote("The best among you [Muslims] are those who learn the Quran and teach it.", "Sahih Bukhari (5027)")
+    private val header = DisplayedQuote("The best of you are those who learn the Qur’an and teach it.", "Sahih al-Bukhari 5027 · HadeethEnc.com")
 
     private fun reader(reading: SurahReading, settings: ReadingSettings = ReadingSettings()) = SurahReaderState(
         surahNumber = reading.surah.number,
@@ -58,7 +58,7 @@ class QuranScreenshotTest {
         settings = settings,
     )
 
-    private val bismillah = QuranScreenshotData.fatiha.first().arabicText
+    private val bismillah = QuranScreenshotData.fatiha.first()
 
     private val fatiha = SurahReading(surah(1), QuranScreenshotData.fatiha, null, surah(2), bismillah)
     private val baqara = SurahReading(surah(2), QuranScreenshotData.baqara, surah(1), surah(3), bismillah)
@@ -93,13 +93,13 @@ class QuranScreenshotTest {
 
     @Test
     fun readerWithTranslation() = compose.captureLightAndDark("quran_reader") {
-        SurahReaderScreen(reader(fatiha), readingPosition = "Ayah 2 of 7", onIntent = {}, onSettings = {}, onBack = {})
+        SurahReaderScreen(reader(fatiha), readingPosition = "Ayah 1 of 7", onIntent = {}, onSettings = {}, onBack = {})
     }
 
     @Test
     fun readerInUrdu() = compose.captureLightAndDark("quran_reader_urdu") {
         SurahReaderScreen(
-            reader(SurahReading(surah(2), QuranScreenshotData.baqaraUrdu, surah(1), surah(3), bismillah), ReadingSettings(language = Language.Urdu)),
+            reader(SurahReading(surah(2), QuranScreenshotData.baqaraUrdu, surah(1), surah(3), QuranScreenshotData.bismillahUrdu), ReadingSettings(language = Language.Urdu)),
             readingPosition = "Ayah 1 of 286",
             onIntent = {},
             onSettings = {},

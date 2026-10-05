@@ -39,7 +39,7 @@ fun TafsirContent(surah: Surah?, state: TafsirState, startAyah: Int?, onRetry: (
     Column(Modifier.fillMaxSize()) {
         Column(Modifier.fillMaxWidth().padding(top = 8.dp, bottom = 16.dp), horizontalAlignment = Alignment.CenterHorizontally, verticalArrangement = Arrangement.spacedBy(4.dp)) {
             Text(surah?.englishName ?: "Tafseer", style = MaterialTheme.typography.titleMedium, color = soft.textPrimary)
-            Text("Tafseer Ibn Kathir", style = MaterialTheme.typography.bodySmall, color = soft.textSecondary)
+            Text(state.sourceTitle, style = MaterialTheme.typography.bodySmall, color = soft.textSecondary)
             if (state.showsEnglishInstead) {
                 Text(
                     "Hindi tafseer isn't available yet — showing English",

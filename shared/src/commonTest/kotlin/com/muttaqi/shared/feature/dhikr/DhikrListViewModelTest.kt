@@ -61,7 +61,7 @@ class DhikrListViewModelTest {
         assertFalse(state.isLoading)
         assertEquals(listOf("tasbih", "after-prayer"), state.sections.map { it.id })
         assertEquals("tasbih", state.selectedSection?.id)
-        assertEquals("Sahih al-Bukhari 6407", state.header?.source)
+        assertEquals("Sahih al-Bukhari 6407 · HadeethEnc.com", state.header?.source)
     }
 
     @Test

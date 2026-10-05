@@ -252,7 +252,7 @@ private fun androidx.compose.foundation.lazy.LazyListScope.loadedContent(
         item(key = "bismillah") { Arriving { Bismillah(reading.bismillahText, reading.bismillahTranslation) } }
     }
     when (state.settings.mode) {
-        ReadingMode.WithTranslation -> items(reading.displayAyahs, key = { it.number }) { ayah ->
+        ReadingMode.WithTranslation -> items(reading.ayahs, key = { it.number }) { ayah ->
             Arriving {
                 AyahCard(
                     ayah = ayah,
@@ -274,7 +274,7 @@ private fun androidx.compose.foundation.lazy.LazyListScope.loadedContent(
             Column(Modifier.padding(top = 24.dp, bottom = 72.dp), verticalArrangement = Arrangement.spacedBy(20.dp)) {
                 SurahEndNavigation(reading.previousSurah, reading.nextSurah, onIntent)
                 Text(
-                    QuranMessages.MUSHAF_CREDIT,
+                    QuranMessages.MUSHAF_CREDIT + "\n" + QuranMessages.translationCredit(state.settings.language),
                     Modifier.fillMaxWidth(),
                     style = MaterialTheme.typography.labelSmall,
                     color = MuttaqiTheme.soft.textSecondary,
@@ -323,7 +323,7 @@ private fun itemIndex(state: SurahReaderState, target: Int): Int {
     val reading = state.reading ?: return 0
     val leading = 1 + (if (reading.showsBismillah) 1 else 0)
     return when (state.settings.mode) {
-        ReadingMode.WithTranslation -> leading + reading.displayAyahs.indexOfFirst { it.number == target }.coerceAtLeast(0)
+        ReadingMode.WithTranslation -> leading + reading.ayahs.indexOfFirst { it.number == target }.coerceAtLeast(0)
         ReadingMode.ArabicOnly -> leading + 1 + reading.pages.indexOfFirst { it.id == target }.coerceAtLeast(0)
     }
 }
@@ -372,19 +372,20 @@ private fun NeighbourPill(neighbour: Surah, isNext: Boolean, onClick: () -> Unit
 }
 
 @Composable
-private fun Bismillah(text: String, translation: String) {
+private fun Bismillah(text: String, translation: String?) {
     val soft = MuttaqiTheme.soft
-    val english = !translation.isArabicScript() && translation.none { it.code in 0x0900..0x097F }
     Column(Modifier.fillMaxWidth(), horizontalAlignment = Alignment.CenterHorizontally) {
-        ArabicText(text, Modifier.padding(top = 44.dp), fontSize = 18.sp, lineSpacing = 0.sp)
-        TranslationText(
-            translation,
-            Modifier.padding(top = 18.dp, bottom = 20.dp).padding(horizontal = if (english) 60.dp else 16.dp),
-            fontSize = if (english) 12.sp else 13.sp,
-            color = soft.textSecondary,
-            maxLines = if (english) Int.MAX_VALUE else 1,
-            lineSpacing = 0.sp,
-        )
+        ArabicText(text, Modifier.padding(top = 44.dp, bottom = if (translation == null) 20.dp else 0.dp), fontSize = 18.sp, lineSpacing = 0.sp)
+        translation?.let {
+            val english = !it.isArabicScript() && it.none { char -> char.code in 0x0900..0x097F }
+            TranslationText(
+                it,
+                Modifier.padding(top = 18.dp, bottom = 20.dp).padding(horizontal = if (english) 60.dp else 16.dp),
+                fontSize = if (english) 12.sp else 13.sp,
+                color = soft.textSecondary,
+                lineSpacing = 0.sp,
+            )
+        }
     }
 }
 

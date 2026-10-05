@@ -11,7 +11,7 @@ internal object DhikrTestData {
           {"id":"tasbih","title":"Tasbih","subtitle":"Glorifying Allah","dhikr":[
             {"id":"subhanallah","arabic":"سُبْحَانَ اللَّهِ","transliteration":"SubhanAllah",
              "translation":{"en":"glory be to Allah","ur":"اللہ پاک ہے"},"count":3,
-             "hadith":{"en":"Whoever says it…"},"credit":{"en":"HadeethEnc.com","ur":"HadeethEnc.com"},
+             "hadith":{"en":"Whoever says it…"},"credit":{"translation":{"en":["English translator"],"ur":["Urdu translator"]},"hadith":{"en":["English hadith translator"]}},
              "reference":"Sahih Muslim 2695","grade":"Sahih"},
             {"id":"open-ended","arabic":"أَسْتَغْفِرُ اللَّهَ","transliteration":"Astaghfirullah",
              "reference":"Sahih al-Bukhari 6307","grade":"Sahih"}]},
@@ -20,7 +20,8 @@ internal object DhikrTestData {
              "transliteration":"SubhanAllah x2, Alhamdulillah x2, Allahu Akbar x1","steps":[
                {"arabic":"سُبْحَانَ اللَّهِ","transliteration":"SubhanAllah","translation":{"en":"glory be to Allah","ur":"اللہ پاک ہے"},"count":2},
                {"arabic":"الْحَمْدُ لِلَّهِ","transliteration":"Alhamdulillah","translation":{"en":"praise be to Allah"},"count":2},
-               {"arabic":"اللَّهُ أَكْبَرُ","transliteration":"Allahu Akbar","translation":{"en":"Allah is the Most Great"},"count":1}],
+               {"arabic":"اللَّهُ أَكْبَرُ","translation":{"en":"Allah is the Most Great"},"count":1}],
+             "credit":{"translation":{"en":["English translator"],"ur":["Urdu translator"]}},
              "reference":"Sahih Muslim 597","grade":"Sahih"}]}]}
     """.trimIndent()
 

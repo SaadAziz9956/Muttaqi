@@ -14,7 +14,7 @@ internal data class VerseDto(
 
 @Serializable
 internal data class HadithDto(
-    val arabic: String,
+    val arabic: Map<String, String>,
     val translation: Map<String, String>,
     val attribution: Map<String, String>,
     val grade: Map<String, String>,

@@ -31,5 +31,6 @@ internal data class HisnBookDto(val categories: List<Category>) {
         @SerialName("repeat") val repeatCount: Int,
         val reference: String,
         val source: String,
+        val grade: Map<String, String>? = null,
     )
 }

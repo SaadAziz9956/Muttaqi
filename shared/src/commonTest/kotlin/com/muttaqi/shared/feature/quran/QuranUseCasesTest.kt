@@ -94,25 +94,38 @@ class QuranUseCasesTest {
     }
 
     @Test
-    fun alFatihasBismillahIsItsFirstAyahAndAtTawbahHasNone() {
-        val fatiha = SurahReading(testSurah(1), testAyahs(1), null, testSurah(2), BISMILLAH)
-        assertEquals((2..7).toList(), fatiha.displayAyahs.map { it.numberInSurah })
-        assertEquals(QuranTestData.ayahs.first().arabic, fatiha.bismillahText)
-        assertEquals(QuranTestData.ayahs.first().english, fatiha.bismillahTranslation)
-        assertTrue(fatiha.showsBismillah)
+    fun alFatihasBismillahIsItsNumberedFirstAyahAndAtTawbahHasNone() {
+        val fatiha = SurahReading(testSurah(1), testAyahs(1), null, testSurah(2), testAyahs(1).first())
+        assertFalse(fatiha.showsBismillah)
+        assertEquals((1..7).toList(), fatiha.ayahs.map { it.numberInSurah })
+        assertEquals(listOf(1), fatiha.pages.map { it.number })
+        assertEquals(1, fatiha.pages.single().ayahs.first().numberInSurah)
 
-        val tawbah = SurahReading(testSurah(9), testAyahs(9), null, null, BISMILLAH)
+        val tawbah = SurahReading(testSurah(9), testAyahs(9), null, null, testAyahs(1).first())
         assertFalse(tawbah.showsBismillah)
-        assertEquals(2, tawbah.displayAyahs.size)
+        assertEquals(2, tawbah.ayahs.size)
+    }
 
-        val baqara = SurahReading(testSurah(2), testAyahs(2, Language.Urdu), null, null, BISMILLAH)
-        assertEquals(BISMILLAH, baqara.bismillahText)
-        assertEquals("In the Name of Allah—the Most Compassionate, Most Merciful.", baqara.bismillahTranslation)
+    @Test
+    fun everyOtherSurahsBismillahIsAlFatihasFirstAyahInTheReadersTranslation() = runTest {
+        val urdu = ReadSurah(library, library)(2, Language.Urdu)!!
+        assertEquals(QuranTestData.ayahs.first().arabic, urdu.bismillahText)
+        assertEquals(QuranTestData.ayahs.first().urdu, urdu.bismillahTranslation)
+
+        val english = ReadSurah(library, library)(2, Language.English)!!
+        assertEquals(QuranTestData.ayahs.first().english, english.bismillahTranslation)
+    }
+
+    @Test
+    fun theBismillahHasNoTranslationUntilTheReadersTranslationIsStored() = runTest {
+        val hindi = ReadSurah(library, library)(2, Language.Hindi)!!
+        assertEquals(QuranTestData.ayahs.first().arabic, hindi.bismillahText)
+        assertNull(hindi.bismillahTranslation)
     }
 
     @Test
     fun ayahsAreGroupedIntoTheirMushafPages() {
-        val pages = SurahReading(testSurah(2), testAyahs(2), null, null, BISMILLAH).pages
+        val pages = SurahReading(testSurah(2), testAyahs(2), null, null, testAyahs(1).first()).pages
         assertEquals(listOf(2, 3), pages.map { it.number })
         assertEquals(listOf(8, 13), pages.map { it.id })
         assertEquals(listOf(5, 3), pages.map { it.ayahs.size })
@@ -189,5 +202,3 @@ class QuranUseCasesTest {
         assertEquals(3, progress.progress(2)!!.lastAyahNumber)
     }
 }
-
-private const val BISMILLAH = "bismillah from the mushaf"

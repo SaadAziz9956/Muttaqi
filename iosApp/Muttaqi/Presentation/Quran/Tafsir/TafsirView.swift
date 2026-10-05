@@ -89,7 +89,7 @@ struct TafsirView: View {
                 .font(.titleMedium)
                 .foregroundStyle(.textPrimary)
 
-            Text("Tafseer Ibn Kathir")
+            Text(state.sourceTitle)
                 .font(.bodySmall)
                 .foregroundStyle(.textSecondary)
 

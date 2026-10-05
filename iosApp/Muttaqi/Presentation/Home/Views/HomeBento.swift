@@ -91,8 +91,7 @@ struct HomeBento: View {
                     Text(name.transliteration)
                         .font(.custom("ReemKufi-Medium", size: 15, relativeTo: .headline))
                         .foregroundStyle(.appPrimary)
-                        .lineLimit(1)
-                        .minimumScaleFactor(0.8)
+                        .fixedSize(horizontal: false, vertical: true)
                 }
             }
         }

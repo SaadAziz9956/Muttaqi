@@ -70,7 +70,7 @@ class NamesViewModelTest {
         val state = viewModel.state.value
         assertFalse(state.isLoading)
         assertEquals(4, state.names.size)
-        assertEquals("Sahih al-Bukhari 7392", state.hadith?.source)
+        assertEquals("Sahih al-Bukhari 7392, Sahih Muslim 2677 · HadeethEnc.com", state.hadith?.source)
         assertEquals(1, viewModel.position.value)
     }
 
@@ -113,7 +113,7 @@ class NamesViewModelTest {
         viewModel.effects.test {
             viewModel.dispatch(NamesIntent.ShareTapped)
             assertEquals(
-                NamesEffect.OpenShare(SharePassage("الرَّحْمَنُ", "Ar-Raḥmān", "the Most Merciful (to the creation)", "The Names of Allah (2 of 99)")),
+                NamesEffect.OpenShare(SharePassage("الرَّحْمَنُ", "Ar-Raḥmān", "the Most Merciful (to the creation)", "The Names of Allah (2 of 99) · Jami at-Tirmidhi 3507")),
                 awaitItem(),
             )
         }

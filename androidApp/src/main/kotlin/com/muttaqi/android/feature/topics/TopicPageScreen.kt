@@ -255,6 +255,7 @@ private fun PassageCard(passage: TopicPassage, onShare: () -> Unit) {
                 }
                 ShareIcon(onShare)
             }
+            passage.grade?.let { TranslationText(it, Modifier.fillMaxWidth(), fontSize = 11.sp, color = soft.textSecondary, lineSpacing = 4.sp) }
         }
     }
 }
