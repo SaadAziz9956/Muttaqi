@@ -1,17 +1,18 @@
 package com.muttaqi.android.feature.quran
 
 import android.app.Application
-import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.BottomSheetDefaults
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.test.junit4.createComposeRule
 import androidx.compose.ui.unit.dp
-import com.muttaqi.android.designsystem.MuttaqiTheme
-import com.muttaqi.android.designsystem.component.SoftBackdrop
 import com.muttaqi.android.testing.PHONE
 import com.muttaqi.android.testing.captureLightAndDark
 import com.muttaqi.shared.core.model.Language
@@ -120,12 +121,17 @@ class QuranScreenshotTest {
 
     @Test
     fun settings() = compose.captureLightAndDark("quran_settings") {
-        Sheet { ReadingSettingsContent(ReadingSettingsState(isDownloadingLanguage = true), onIntent = {}, onChooseLanguage = {}) }
+        Sheet { ReadingSettingsContent(ReadingSettingsState(isDownloadingLanguage = true), onIntent = {}) }
     }
 
     @Test
-    fun languages() = compose.captureLightAndDark("quran_languages") {
-        Sheet { LanguagePickerContent(ReadingSettingsState(language = Language.Urdu), onSelect = {}) }
+    fun settingsArabicOnlyInUrdu() = compose.captureLightAndDark("quran_settings_arabic_only") {
+        Sheet {
+            ReadingSettingsContent(
+                ReadingSettingsState(mode = ReadingMode.ArabicOnly, fontSize = FontSize(120), language = Language.Urdu),
+                onIntent = {},
+            )
+        }
     }
 
     @Test
@@ -148,17 +154,20 @@ class QuranScreenshotTest {
         }
     }
 
+    @OptIn(ExperimentalMaterial3Api::class)
     @Composable
     private fun Sheet(content: @Composable () -> Unit) {
-        Box {
-            SoftBackdrop()
-            Box(
-                Modifier
-                    .padding(top = 120.dp)
-                    .fillMaxSize()
-                    .background(MuttaqiTheme.soft.canvas, RoundedCornerShape(topStart = 28.dp, topEnd = 28.dp))
-                    .padding(top = 28.dp),
-            ) { content() }
+        Surface(Modifier.fillMaxSize(), color = MaterialTheme.colorScheme.surfaceDim) {
+            Surface(
+                Modifier.padding(top = 120.dp).fillMaxSize(),
+                shape = BottomSheetDefaults.ExpandedShape,
+                color = BottomSheetDefaults.ContainerColor,
+            ) {
+                Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                    BottomSheetDefaults.DragHandle()
+                    content()
+                }
+            }
         }
     }
 }
