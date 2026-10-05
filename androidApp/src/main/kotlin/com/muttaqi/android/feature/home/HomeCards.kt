@@ -43,7 +43,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.muttaqi.android.R
 import com.muttaqi.android.designsystem.MuttaqiTheme
-import com.muttaqi.android.designsystem.component.ArabicText
+import com.muttaqi.android.designsystem.component.QuranText
 import com.muttaqi.android.designsystem.component.SoftArtwork
 import com.muttaqi.android.designsystem.component.SoftCard
 import com.muttaqi.android.designsystem.component.SoftPillSurface
@@ -89,7 +89,7 @@ internal fun AyahOfTheDayCard(dailyAyah: DailyAyah, onIntent: (HomeIntent) -> Un
     val soft = MuttaqiTheme.soft
     DailyCardSurface(DailyCard.Ayah, onIntent, onClick = { onIntent(HomeIntent.AyahOfTheDayTapped) }) {
         CardTitle("Ayah of the Day")
-        ArabicText(dailyAyah.ayah.arabicText, Modifier.padding(top = 22.dp), fontSize = 21.sp, lineSpacing = 10.sp)
+        QuranText(dailyAyah.ayah.arabicText, Modifier.padding(top = 22.dp), fontSize = 21.sp, lineSpacing = 10.sp)
         dailyAyah.ayah.translation?.let {
             TranslationText(it, Modifier.padding(top = 12.dp), fontSize = 14.sp, lineSpacing = 4.sp)
         }
@@ -109,7 +109,7 @@ internal fun HadithOfTheDayCard(hadith: HadithPassage, onIntent: (HomeIntent) ->
     DailyCardSurface(DailyCard.Hadith, onIntent) {
         CardTitle("Hadith of the Day")
         if (hadith.arabic.isNotEmpty()) {
-            ArabicText(hadith.arabic, Modifier.padding(top = 22.dp), fontSize = 19.sp, lineSpacing = 9.sp)
+            QuranText(hadith.arabic, Modifier.padding(top = 22.dp), fontSize = 19.sp, lineSpacing = 9.sp)
         }
         TranslationText(hadith.translation, Modifier.padding(top = 12.dp), fontSize = 14.sp, lineSpacing = if (urdu) 8.sp else 4.sp)
         if (hadith.source.isArabicScript()) {
@@ -132,7 +132,7 @@ internal fun DuaOfTheDayCard(dua: QuranicDua, onIntent: (HomeIntent) -> Unit) {
     val urdu = dua.translation.isArabicScript()
     DailyCardSurface(DailyCard.Dua, onIntent, horizontalAlignment = Alignment.Start) {
         CardTitle("Dua of the Day", Modifier.fillMaxWidth())
-        ArabicText(
+        QuranText(
             dua.arabic,
             Modifier.fillMaxWidth().padding(top = 22.dp),
             fontSize = 20.sp,

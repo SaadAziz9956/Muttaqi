@@ -72,7 +72,7 @@ import androidx.compose.ui.unit.sp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.muttaqi.android.R
 import com.muttaqi.android.designsystem.MuttaqiTheme
-import com.muttaqi.android.designsystem.component.ArabicText
+import com.muttaqi.android.designsystem.component.QuranText
 import com.muttaqi.android.designsystem.component.SoftBackdrop
 import com.muttaqi.android.designsystem.component.SoftCard
 import com.muttaqi.android.designsystem.component.SoftIconButton
@@ -205,7 +205,7 @@ private fun DhikrText(dhikr: Dhikr, state: DhikrCounterState) {
                         Row(verticalAlignment = Alignment.CenterVertically) {
                             Text("${step.count}×", style = MaterialTheme.typography.labelLarge.copy(fontSize = 13.sp), color = soft.brandTeal)
                             Spacer(Modifier.width(12.dp))
-                            ArabicText(step.arabic, Modifier.weight(1f), fontSize = 22.sp, textAlign = TextAlign.Right, lineSpacing = 0.sp)
+                            QuranText(step.arabic, Modifier.weight(1f), fontSize = 22.sp, textAlign = TextAlign.Right, lineSpacing = 0.sp)
                         }
                         step.transliteration?.let { Text(it, style = MaterialTheme.typography.bodyMedium.copy(fontSize = 14.sp), color = soft.appPrimary) }
                         step.translation?.let { Translated(it, 13, soft.textSecondary) }
@@ -240,7 +240,7 @@ private fun Phrase(dhikr: Dhikr, modifier: Modifier = Modifier) {
     SoftCard(modifier, cornerRadius = 26.dp) {
         SelectionContainer {
             Column(Modifier.fillMaxWidth().padding(20.dp)) {
-                ArabicText(dhikr.arabic, Modifier.fillMaxWidth(), fontSize = 28.sp, textAlign = TextAlign.Right, lineSpacing = 12.sp)
+                QuranText(dhikr.arabic, Modifier.fillMaxWidth(), fontSize = 28.sp, textAlign = TextAlign.Right, lineSpacing = 12.sp)
                 dhikr.transliteration?.let { Text(it, Modifier.padding(top = 20.dp), style = MaterialTheme.typography.bodyMedium, color = soft.appPrimary) }
                 dhikr.translation?.let { Box(Modifier.padding(top = 10.dp)) { Translated(it, 15, soft.textPrimary) } }
             }

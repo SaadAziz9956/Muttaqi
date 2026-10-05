@@ -72,6 +72,7 @@ fun HomeRoute(
     onOpenTopic: (String) -> Unit,
     onOpenSurah: (surahNumber: Int, ayahNumber: Int) -> Unit,
     onShare: (SharePassage) -> Unit,
+    onOpenSettings: () -> Unit,
 ) {
     val viewModel = koinViewModel<HomeViewModel>()
     val state by viewModel.state.collectAsStateWithLifecycle()
@@ -102,7 +103,7 @@ fun HomeRoute(
             }
         }
     }
-    HomeScreen(state, qiblaArrow = { qiblaArrow.value }, onIntent = viewModel::dispatch)
+    HomeScreen(state, qiblaArrow = { qiblaArrow.value }, onIntent = viewModel::dispatch, onOpenSettings = onOpenSettings)
 }
 
 @Composable
@@ -110,6 +111,7 @@ fun HomeScreen(
     state: HomeState,
     qiblaArrow: () -> Double?,
     onIntent: (HomeIntent) -> Unit,
+    onOpenSettings: () -> Unit = {},
     scrollState: ScrollState = rememberScrollState(),
     zone: ZoneId = ZoneId.systemDefault(),
 ) {

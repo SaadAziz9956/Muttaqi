@@ -45,7 +45,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.muttaqi.android.R
 import com.muttaqi.android.designsystem.MuttaqiTheme
-import com.muttaqi.android.designsystem.component.ArabicText
+import com.muttaqi.android.designsystem.component.QuranText
 import com.muttaqi.android.designsystem.component.SoftArtwork
 import com.muttaqi.android.designsystem.component.SoftCard
 import com.muttaqi.android.designsystem.component.SoftIconButton
@@ -148,7 +148,7 @@ private fun NameTile(state: HomeState, modifier: Modifier, onClick: () -> Unit) 
     Tile(label = "Name of the day", icon = null, artwork = SoftArtwork.Dawn, onClick = onClick, modifier = modifier) {
         state.nameOfTheDay?.let { name ->
             Spacer(Modifier.weight(1f))
-            ArabicText(
+            QuranText(
                 name.arabic,
                 Modifier.fillMaxWidth(),
                 fontSize = 26.sp,

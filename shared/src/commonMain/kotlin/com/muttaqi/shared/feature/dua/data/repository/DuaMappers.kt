@@ -22,7 +22,7 @@ internal fun QuranicDuaDto.toQuranicDua(language: Language) = QuranicDua(
 internal fun List<QuranicDuaDto>.toRabbanaCategory(language: Language): DuaCategory {
     val entries = map { dua ->
         DuaEntry(
-            id = "quran-${dua.surah}:${dua.ayah}",
+            id = "${DuaEntry.QURAN_ID_PREFIX}${dua.surah}:${dua.ayah}",
             arabic = dua.arabic,
             transliteration = dua.transliteration,
             translation = dua.translations.inLanguage(language),

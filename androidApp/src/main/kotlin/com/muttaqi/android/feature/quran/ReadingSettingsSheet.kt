@@ -31,7 +31,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.muttaqi.android.R
 import com.muttaqi.android.designsystem.MuttaqiTheme
-import com.muttaqi.android.designsystem.component.ArabicText
+import com.muttaqi.android.designsystem.component.QuranText
 import com.muttaqi.shared.core.model.Language
 import com.muttaqi.shared.feature.quran.domain.model.ReadingMode
 import com.muttaqi.shared.feature.quran.presentation.MushafSamples
@@ -105,14 +105,14 @@ private fun ReadingModeCard(
         ) {
             when (mode) {
                 ReadingMode.WithTranslation -> Column(horizontalAlignment = Alignment.CenterHorizontally, verticalArrangement = Arrangement.spacedBy(4.dp)) {
-                    ArabicText(MushafSamples.BISMILLAH_OPENING_WORDS, fontSize = 12.sp, lineSpacing = 0.sp)
+                    QuranText(MushafSamples.BISMILLAH_OPENING_WORDS, fontSize = 12.sp, lineSpacing = 0.sp)
                     Text("Bismillaahir", fontSize = 8.sp, fontFamily = FontFamily.Default, color = soft.appPrimary)
                     Text("In the name of Allah", fontSize = 7.sp, fontFamily = FontFamily.Default, color = soft.textSecondary)
                     Box(Modifier.padding(horizontal = 12.dp).fillMaxWidth().height(0.5.dp).background(systemGray4()))
-                    ArabicText(MushafSamples.ALHAMDU_OPENING_WORDS, fontSize = 12.sp, lineSpacing = 0.sp)
+                    QuranText(MushafSamples.ALHAMDU_OPENING_WORDS, fontSize = 12.sp, lineSpacing = 0.sp)
                     Text("Alhamdu lillaahi", fontSize = 8.sp, fontFamily = FontFamily.Default, color = soft.appPrimary)
                 }
-                ReadingMode.ArabicOnly -> ArabicText(
+                ReadingMode.ArabicOnly -> QuranText(
                     MushafSamples.FATIHA_OPENING,
                     Modifier.padding(horizontal = 8.dp),
                     fontSize = 11.sp,

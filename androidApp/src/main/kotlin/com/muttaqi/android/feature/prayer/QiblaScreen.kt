@@ -72,7 +72,7 @@ import com.muttaqi.android.designsystem.component.SoftArtwork
 import com.muttaqi.android.designsystem.component.SoftBackdrop
 import com.muttaqi.android.designsystem.component.SoftCard
 import com.muttaqi.android.designsystem.component.SoftIconButton
-import com.muttaqi.android.designsystem.component.SoftLoadingIndicator
+import com.muttaqi.android.designsystem.component.DelayedLoadingIndicator
 import com.muttaqi.android.designsystem.component.brush
 import com.muttaqi.android.designsystem.component.softFloat
 import com.muttaqi.shared.feature.prayer.domain.model.LocationAccess
@@ -119,7 +119,7 @@ fun QiblaScreen(state: QiblaState, compass: QiblaCompass?, onIntent: (QiblaInten
             Box(Modifier.fillMaxSize().padding(padding), contentAlignment = Alignment.Center) {
                 FadeBetween(state.phase, key = { it::class }, contentAlignment = Alignment.Center) { phase ->
                     when (phase) {
-                        QiblaPhase.Locating -> SoftLoadingIndicator()
+                        QiblaPhase.Locating -> DelayedLoadingIndicator()
                         is QiblaPhase.NeedsLocation -> LocationNeeded(phase.access) { onIntent(QiblaIntent.LocationButtonTapped) }
                         is QiblaPhase.Ready -> Compass(phase.qibla, compass, state.isCompassAvailable)
                     }

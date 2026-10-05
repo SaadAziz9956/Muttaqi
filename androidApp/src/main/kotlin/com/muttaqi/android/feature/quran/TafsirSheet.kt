@@ -24,7 +24,7 @@ import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.muttaqi.android.designsystem.MuttaqiTheme
-import com.muttaqi.android.designsystem.component.ArabicText
+import com.muttaqi.android.designsystem.component.QuranText
 import com.muttaqi.android.designsystem.component.FadeBetween
 import com.muttaqi.android.designsystem.component.TranslationText
 import com.muttaqi.shared.core.model.Language
@@ -101,7 +101,7 @@ private fun TafsirParagraph(paragraph: String, language: Language) {
         language == Language.Urdu ->
             TranslationText(paragraph, Modifier.fillMaxWidth(), fontSize = 16.sp, textAlign = TextAlign.Right, lineSpacing = 0.sp)
         startsWithArabic(paragraph) ->
-            ArabicText(paragraph, Modifier.fillMaxWidth(), fontSize = 20.sp, textAlign = TextAlign.Right, lineSpacing = 0.sp)
+            QuranText(paragraph, Modifier.fillMaxWidth(), fontSize = 20.sp, textAlign = TextAlign.Right, lineSpacing = 0.sp)
         else -> {
             val text = remember(paragraph) { restyled(paragraph, setOf('ﷺ'), SpanStyle(fontFamily = FontFamily.Default, fontSize = 9.sp)) }
             Text(text, style = MaterialTheme.typography.bodySmall, color = soft.textPrimary)

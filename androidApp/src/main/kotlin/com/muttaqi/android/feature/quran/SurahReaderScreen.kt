@@ -68,11 +68,11 @@ import com.muttaqi.android.R
 import com.muttaqi.android.designsystem.MuttaqiTheme
 import com.muttaqi.android.designsystem.NastaliqFont
 import com.muttaqi.android.designsystem.QuranFont
-import com.muttaqi.android.designsystem.component.ArabicText
+import com.muttaqi.android.designsystem.component.QuranText
 import com.muttaqi.android.designsystem.component.SoftBackdrop
 import com.muttaqi.android.designsystem.component.SoftCard
 import com.muttaqi.android.designsystem.component.SoftIconButton
-import com.muttaqi.android.designsystem.component.SoftLoadingIndicator
+import com.muttaqi.android.designsystem.component.DelayedLoadingIndicator
 import com.muttaqi.android.designsystem.component.SoftPillSurface
 import com.muttaqi.android.designsystem.component.SoftTopBar
 import com.muttaqi.android.designsystem.component.TranslationText
@@ -333,7 +333,7 @@ private fun SurahHeader(surah: Surah?, previous: Surah?, next: Surah?, onIntent:
     val soft = MuttaqiTheme.soft
     Column(Modifier.fillMaxWidth().padding(top = 20.dp), horizontalAlignment = Alignment.CenterHorizontally) {
         if (surah != null) {
-            ArabicText(surah.name, fontSize = 40.sp, lineSpacing = 0.sp)
+            QuranText(surah.name, fontSize = 40.sp, lineSpacing = 0.sp)
         }
         Text(
             surah?.englishName.orEmpty(),
@@ -375,7 +375,7 @@ private fun NeighbourPill(neighbour: Surah, isNext: Boolean, onClick: () -> Unit
 private fun Bismillah(text: String, translation: String?) {
     val soft = MuttaqiTheme.soft
     Column(Modifier.fillMaxWidth(), horizontalAlignment = Alignment.CenterHorizontally) {
-        ArabicText(text, Modifier.padding(top = 44.dp, bottom = if (translation == null) 20.dp else 0.dp), fontSize = 18.sp, lineSpacing = 0.sp)
+        QuranText(text, Modifier.padding(top = 44.dp, bottom = if (translation == null) 20.dp else 0.dp), fontSize = 18.sp, lineSpacing = 0.sp)
         translation?.let {
             val english = !it.isArabicScript() && it.none { char -> char.code in 0x0900..0x097F }
             TranslationText(
@@ -573,6 +573,6 @@ private fun ReadingPositionPill(position: String) {
 @Composable
 internal fun Loading(modifier: Modifier = Modifier) {
     Box(modifier.fillMaxWidth(), contentAlignment = Alignment.Center) {
-        SoftLoadingIndicator()
+        DelayedLoadingIndicator()
     }
 }

@@ -11,5 +11,5 @@
         <item name="postSplashScreenTheme">@style/Theme.Muttaqi</item>
     </style>
 
-    <color name="canvas">#F3F7F5</color>
+    <color name="canvas">#F5FBF6</color>
 </resources>

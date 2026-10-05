@@ -12,6 +12,12 @@ data class DuaEntry(
     val grade: String? = null,
 ) {
     val sourceAndGrade: String get() = listOfNotNull(source, grade).joinToString(" · ")
+
+    val isQuran: Boolean get() = id.startsWith(QURAN_ID_PREFIX)
+
+    companion object {
+        const val QURAN_ID_PREFIX = "quran-"
+    }
 }
 
 data class DuaChapter(

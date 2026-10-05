@@ -31,8 +31,8 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.muttaqi.android.designsystem.MuttaqiTheme
-import com.muttaqi.android.designsystem.component.ArabicText
-import com.muttaqi.android.designsystem.component.PageHeader
+import com.muttaqi.android.designsystem.component.QuranText
+import com.muttaqi.android.designsystem.PageHeader
 import com.muttaqi.android.designsystem.component.SoftBackdrop
 import com.muttaqi.android.designsystem.component.SoftCard
 import com.muttaqi.android.designsystem.component.SoftChip
@@ -134,7 +134,7 @@ private fun DhikrRow(dhikr: Dhikr, onClick: () -> Unit, modifier: Modifier = Mod
         onClick = onClick,
     ) {
         Column(Modifier.fillMaxWidth().padding(18.dp), verticalArrangement = Arrangement.spacedBy(12.dp)) {
-            ArabicText(dhikr.arabic, Modifier.fillMaxWidth(), fontSize = 21.sp, textAlign = TextAlign.Right, lineSpacing = 0.sp)
+            QuranText(dhikr.arabic, Modifier.fillMaxWidth(), fontSize = 21.sp, textAlign = TextAlign.Right, lineSpacing = 0.sp)
             Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(10.dp)) {
                 TranslationText(
                     caption,

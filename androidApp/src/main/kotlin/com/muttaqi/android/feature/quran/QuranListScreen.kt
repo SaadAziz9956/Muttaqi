@@ -42,14 +42,14 @@ import androidx.compose.ui.unit.sp
 import androidx.lifecycle.compose.LifecycleResumeEffect
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.muttaqi.android.designsystem.MuttaqiTheme
-import com.muttaqi.android.designsystem.component.ArabicText
+import com.muttaqi.android.designsystem.component.QuranText
 import com.muttaqi.android.designsystem.component.FadeBetween
-import com.muttaqi.android.designsystem.component.PageHeader
+import com.muttaqi.android.designsystem.PageHeader
 import com.muttaqi.android.designsystem.component.SoftArtwork
 import com.muttaqi.android.designsystem.component.SoftBackdrop
 import com.muttaqi.android.designsystem.component.SoftCard
 import com.muttaqi.android.designsystem.component.SoftChip
-import com.muttaqi.android.designsystem.component.SoftLoadingIndicator
+import com.muttaqi.android.designsystem.component.DelayedLoadingIndicator
 import com.muttaqi.android.designsystem.component.SoftPillSurface
 import com.muttaqi.android.designsystem.component.SoftSearchField
 import com.muttaqi.shared.feature.quran.domain.model.ReadingProgress
@@ -89,7 +89,7 @@ fun QuranListScreen(state: QuranListState, onIntent: (QuranListIntent) -> Unit) 
         FadeBetween(state, key = { it.isLoading to (it.error != null) }) { state ->
             when {
                 state.isLoading -> Box(Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
-                    SoftLoadingIndicator()
+                    DelayedLoadingIndicator()
                 }
                 state.error != null -> LoadFailed(state.error.orEmpty(), onRetry = { onIntent(QuranListIntent.Retry) })
                 else -> LazyVerticalGrid(
@@ -165,7 +165,7 @@ private fun ContinueReadingCard(progress: ReadingProgress, onContinue: () -> Uni
                     Text("Ayah ${progress.lastAyahNumber}", style = MaterialTheme.typography.bodySmall, color = Color.White.copy(alpha = 0.8f))
                 }
                 Spacer(Modifier.width(8.dp))
-                ArabicText(progress.surahName, fontSize = 30.sp, color = Color.White, lineSpacing = 0.sp, maxLines = 1)
+                QuranText(progress.surahName, fontSize = 30.sp, color = Color.White, lineSpacing = 0.sp, maxLines = 1)
             }
             SoftPillSurface(Modifier.padding(top = 16.dp).height(38.dp), fill = Color.White, rim = false) {
                 Text(
@@ -189,7 +189,7 @@ fun SurahCard(surah: Surah, modifier: Modifier = Modifier, onClick: () -> Unit) 
                     Text("${surah.number}", style = MaterialTheme.typography.labelLarge.copy(fontSize = 13.sp), color = soft.appPrimary)
                 }
                 Spacer(Modifier.weight(1f).width(6.dp))
-                ArabicText(surah.name, fontSize = 18.sp, textAlign = TextAlign.Right, lineSpacing = 0.sp, maxLines = 1)
+                QuranText(surah.name, fontSize = 18.sp, textAlign = TextAlign.Right, lineSpacing = 0.sp, maxLines = 1)
             }
             Text(
                 surah.englishName,

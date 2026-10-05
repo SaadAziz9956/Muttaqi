@@ -25,7 +25,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.muttaqi.android.designsystem.MuttaqiTheme
 import com.muttaqi.android.designsystem.ReemKufi
-import com.muttaqi.android.designsystem.component.ArabicText
+import com.muttaqi.android.designsystem.component.QuranText
 import com.muttaqi.android.designsystem.component.SoftArtwork
 import com.muttaqi.android.designsystem.component.SoftCard
 import com.muttaqi.android.designsystem.component.TranslationText
@@ -52,7 +52,7 @@ fun NameCard(name: AllahName, modifier: Modifier = Modifier, minHeight: Dp = 300
                 style = TextStyle(fontFamily = ReemKufi, fontSize = 90.sp),
             )
             Column(Modifier.padding(horizontal = 20.dp, vertical = 48.dp), horizontalAlignment = Alignment.CenterHorizontally) {
-                ArabicText(name.arabic, fontSize = 40.sp, lineSpacing = 0.sp)
+                QuranText(name.arabic, fontSize = 40.sp, lineSpacing = 0.sp)
                 Text(
                     name.transliteration,
                     Modifier.padding(top = 12.dp),

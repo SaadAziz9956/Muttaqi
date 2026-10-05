@@ -23,7 +23,7 @@ import androidx.compose.ui.unit.Density
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.muttaqi.android.designsystem.MuttaqiTheme
-import com.muttaqi.android.designsystem.component.ArabicText
+import com.muttaqi.android.designsystem.component.QuranText
 import com.muttaqi.android.designsystem.component.SoftArtwork
 import com.muttaqi.android.designsystem.component.SoftBackdrop
 import com.muttaqi.android.designsystem.component.SoftCard
@@ -48,7 +48,7 @@ fun ShareCard(passage: SharePassage, modifier: Modifier = Modifier) {
             verticalArrangement = Arrangement.spacedBy(14.dp),
         ) {
             if (passage.arabic.isNotEmpty()) {
-                ArabicText(passage.arabic, color = Color.White, lineSpacing = 10.sp)
+                QuranText(passage.arabic, color = Color.White, lineSpacing = 10.sp)
             }
             passage.transliteration?.takeIf { it.isNotEmpty() }?.let {
                 TranslationText(it, color = soft.brandTeal, lineSpacing = 0.sp)

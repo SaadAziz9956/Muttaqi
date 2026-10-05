@@ -63,7 +63,7 @@ import androidx.compose.ui.unit.sp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.muttaqi.android.R
 import com.muttaqi.android.designsystem.MuttaqiTheme
-import com.muttaqi.android.designsystem.component.PageHeader
+import com.muttaqi.android.designsystem.PageHeader
 import com.muttaqi.android.designsystem.component.SoftSearchField
 import com.muttaqi.shared.feature.journal.domain.model.JournalEntry
 import com.muttaqi.shared.feature.journal.presentation.list.JournalListEffect
