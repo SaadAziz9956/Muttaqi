@@ -9,8 +9,6 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.rememberLazyListState
-import androidx.compose.material3.HorizontalDivider
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -28,6 +26,10 @@ import androidx.compose.ui.unit.sp
 import com.muttaqi.android.designsystem.component.FadeBetween
 import com.muttaqi.android.designsystem.component.QuranText
 import com.muttaqi.android.designsystem.component.TranslationText
+import com.muttaqi.android.designsystem.oneui.OneUi
+import com.muttaqi.android.designsystem.oneui.OneUiCard
+import com.muttaqi.android.designsystem.oneui.OneUiCardSpacing
+import com.muttaqi.android.designsystem.oneui.OneUiDefaults
 import com.muttaqi.shared.core.model.Language
 import com.muttaqi.shared.feature.quran.domain.model.Surah
 import com.muttaqi.shared.feature.quran.domain.model.TafsirEntry
@@ -36,39 +38,40 @@ import com.muttaqi.shared.feature.quran.presentation.tafsir.TafsirStatus
 
 @Composable
 fun TafsirContent(surah: Surah?, state: TafsirState, startAyah: Int?, onRetry: () -> Unit) {
+    val colors = OneUi.colors
+    val type = OneUi.typography
     Column(Modifier.fillMaxSize()) {
         Column(
-            Modifier.fillMaxWidth().padding(start = 16.dp, end = 16.dp, bottom = 16.dp),
+            Modifier.fillMaxWidth().padding(start = 24.dp, end = 24.dp, top = 4.dp, bottom = 20.dp),
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.spacedBy(4.dp),
         ) {
-            Text(surah?.englishName ?: "Tafseer", style = MaterialTheme.typography.titleLarge, textAlign = TextAlign.Center)
             Text(
-                state.sourceTitle,
-                style = MaterialTheme.typography.bodyMedium,
-                color = MaterialTheme.colorScheme.onSurfaceVariant,
+                surah?.englishName ?: "Tafseer",
+                style = type.sectionTitle.copy(fontSize = 24.sp, lineHeight = 30.sp),
+                color = colors.text,
                 textAlign = TextAlign.Center,
             )
+            Text(state.sourceTitle, style = type.listSummary, color = colors.secondaryText, textAlign = TextAlign.Center)
             if (state.showsEnglishInstead) {
                 Text(
                     "Hindi tafseer isn't available yet — showing English",
                     Modifier.padding(top = 4.dp),
-                    style = MaterialTheme.typography.bodySmall,
-                    color = MaterialTheme.colorScheme.onSurfaceVariant,
+                    style = type.caption,
+                    color = colors.secondaryText,
                     textAlign = TextAlign.Center,
                 )
             }
         }
-        HorizontalDivider()
         FadeBetween(state.status, key = { it is TafsirStatus.Loaded || it is TafsirStatus.Failed }, Modifier.fillMaxSize()) { status ->
             when (status) {
                 TafsirStatus.Idle, TafsirStatus.Loading -> Loading(Modifier.fillMaxSize())
                 is TafsirStatus.Loaded -> if (status.entries.isEmpty()) {
                     Text(
                         "No tafseer available for this surah",
-                        Modifier.fillMaxWidth().padding(top = 120.dp),
-                        style = MaterialTheme.typography.bodyMedium,
-                        color = MaterialTheme.colorScheme.onSurfaceVariant,
+                        Modifier.fillMaxWidth().padding(top = 120.dp, start = 24.dp, end = 24.dp),
+                        style = type.listSummary,
+                        color = colors.secondaryText,
                         textAlign = TextAlign.Center,
                     )
                 } else {
@@ -87,16 +90,21 @@ private fun TafsirEntries(entries: List<TafsirEntry>, language: Language, start:
         val index = entries.indexOf(start)
         if (index >= 0) list.scrollToItem(index)
     }
-    LazyColumn(state = list, contentPadding = PaddingValues(horizontal = 16.dp, vertical = 8.dp)) {
+    LazyColumn(
+        state = list,
+        contentPadding = PaddingValues(start = OneUiDefaults.ScreenMargin, end = OneUiDefaults.ScreenMargin, bottom = 24.dp),
+        verticalArrangement = Arrangement.spacedBy(OneUiCardSpacing),
+    ) {
         items(entries, key = { it.ayahNumber }) { entry ->
-            Column(Modifier.fillMaxWidth().padding(vertical = 12.dp), verticalArrangement = Arrangement.spacedBy(12.dp)) {
-                Text(
-                    if (entry.lastAyahNumber > entry.ayahNumber) "Ayah ${entry.ayahNumber}–${entry.lastAyahNumber}" else "Ayah ${entry.ayahNumber}",
-                    style = MaterialTheme.typography.titleSmall,
-                    color = MaterialTheme.colorScheme.primary,
-                )
-                entry.paragraphs.forEach { TafsirParagraph(it, language) }
-                HorizontalDivider(Modifier.padding(top = 4.dp))
+            OneUiCard(Modifier.fillMaxWidth()) {
+                Column(Modifier.fillMaxWidth(), verticalArrangement = Arrangement.spacedBy(12.dp)) {
+                    Text(
+                        if (entry.lastAyahNumber > entry.ayahNumber) "Ayah ${entry.ayahNumber}–${entry.lastAyahNumber}" else "Ayah ${entry.ayahNumber}",
+                        style = OneUi.typography.subheader,
+                        color = OneUi.colors.accent,
+                    )
+                    entry.paragraphs.forEach { TafsirParagraph(it, language) }
+                }
             }
         }
     }
@@ -104,20 +112,23 @@ private fun TafsirEntries(entries: List<TafsirEntry>, language: Language, start:
 
 @Composable
 private fun TafsirParagraph(paragraph: String, language: Language) {
+    val colors = OneUi.colors
+    val type = OneUi.typography
     when {
         language == Language.Urdu ->
             TranslationText(
                 paragraph,
                 Modifier.fillMaxWidth(),
-                style = MaterialTheme.typography.bodyLarge,
+                style = type.body,
+                color = colors.text,
                 textAlign = TextAlign.Right,
                 lineSpacing = 0.sp,
             )
         startsWithArabic(paragraph) ->
-            QuranText(paragraph, Modifier.fillMaxWidth(), fontSize = 20.sp, textAlign = TextAlign.Right, lineSpacing = 0.sp)
+            QuranText(paragraph, Modifier.fillMaxWidth(), fontSize = 20.sp, color = colors.text, textAlign = TextAlign.Right, lineSpacing = 0.sp)
         else -> {
             val text = remember(paragraph) { restyled(paragraph, setOf('ﷺ'), SpanStyle(fontFamily = FontFamily.Default, fontSize = 0.75.em)) }
-            Text(text, style = MaterialTheme.typography.bodyMedium)
+            Text(text, style = type.body, color = colors.text)
         }
     }
 }

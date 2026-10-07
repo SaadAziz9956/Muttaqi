@@ -3,23 +3,22 @@ package com.muttaqi.android.feature.share
 import android.Manifest
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.ExperimentalMaterial3ExpressiveApi
 import androidx.compose.material3.Icon
-import androidx.compose.material3.IconButton
-import androidx.compose.material3.LargeFlexibleTopAppBar
-import androidx.compose.material3.Scaffold
-import androidx.compose.material3.SnackbarHost
 import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.Text
-import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
@@ -28,17 +27,28 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.rememberGraphicsLayer
-import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.muttaqi.android.R
-import com.muttaqi.android.designsystem.component.BackButton
-import com.muttaqi.android.designsystem.component.PageQuote
+import com.muttaqi.android.designsystem.component.TranslationText
+import com.muttaqi.android.designsystem.oneui.OneUi
+import com.muttaqi.android.designsystem.oneui.OneUiHeaderQuote
+import com.muttaqi.android.designsystem.oneui.OneUiButton
+import com.muttaqi.android.designsystem.oneui.OneUiDefaults
+import com.muttaqi.android.designsystem.oneui.OneUiGroup
+import com.muttaqi.android.designsystem.oneui.OneUiListRow
+import com.muttaqi.android.designsystem.oneui.OneUiScaffold
+import com.muttaqi.android.designsystem.oneui.OneUiSnackbarHost
+import com.muttaqi.android.designsystem.oneui.OneUiSurface
+import com.muttaqi.shared.core.quote.DisplayedQuote
 import com.muttaqi.shared.core.share.SharePassage
+import com.muttaqi.shared.core.text.quoted
 import com.muttaqi.shared.feature.share.presentation.ShareEffect
 import com.muttaqi.shared.feature.share.presentation.ShareIntent
 import com.muttaqi.shared.feature.share.presentation.ShareState
@@ -86,7 +96,6 @@ fun ShareRoute(passage: SharePassage, onBack: () -> Unit) {
     }
 }
 
-@OptIn(ExperimentalMaterial3Api::class, ExperimentalMaterial3ExpressiveApi::class)
 @Composable
 fun ShareScreen(
     state: ShareState,
@@ -94,36 +103,50 @@ fun ShareScreen(
     onBack: () -> Unit,
     snackbar: SnackbarHostState = remember { SnackbarHostState() },
 ) {
-    val scrollBehavior = TopAppBarDefaults.exitUntilCollapsedScrollBehavior()
-    Scaffold(
-        modifier = Modifier.nestedScroll(scrollBehavior.nestedScrollConnection),
-        topBar = {
-            LargeFlexibleTopAppBar(
-                title = { Text("Share") },
-                navigationIcon = { BackButton(onBack) },
-                actions = {
-                    IconButton(onClick = { onIntent(ShareIntent.SaveTapped) }) {
-                        Icon(painterResource(R.drawable.ic_download), contentDescription = "Save image")
-                    }
-                    IconButton(onClick = { onIntent(ShareIntent.ShareTapped) }) {
-                        Icon(painterResource(R.drawable.ic_share), contentDescription = "Share")
-                    }
-                },
-                scrollBehavior = scrollBehavior,
-            )
-        },
-        snackbarHost = { SnackbarHost(snackbar) },
-    ) { padding ->
-        Column(
-            Modifier
-                .fillMaxSize()
-                .verticalScroll(rememberScrollState())
-                .padding(padding)
-                .padding(start = 16.dp, end = 16.dp, top = 8.dp, bottom = 16.dp),
-            verticalArrangement = Arrangement.spacedBy(16.dp),
-        ) {
-            PageQuote(state.verse)
-            ShareCard(state.passage)
+    val colors = OneUi.colors
+    OneUiSurface {
+        OneUiScaffold(
+            title = "Share",
+            onBack = onBack,
+            subtitle = { OneUiHeaderQuote(state.verse.text, state.verse.source) },
+            bottomBar = {
+                Box(
+                    Modifier
+                        .fillMaxWidth()
+                        .background(OneUi.colors.background)
+                        .navigationBarsPadding()
+                        .padding(horizontal = 24.dp, vertical = 12.dp),
+                ) {
+                    OneUiButton(
+                        "Share",
+                        onClick = { onIntent(ShareIntent.ShareTapped) },
+                        modifier = Modifier.fillMaxWidth(),
+                        icon = R.drawable.ic_share,
+                    )
+                }
+            },
+            snackbarHost = { OneUiSnackbarHost(snackbar) },
+        ) { padding ->
+            Column(
+                Modifier
+                    .fillMaxSize()
+                    .verticalScroll(rememberScrollState())
+                    .padding(top = padding.calculateTopPadding(), bottom = padding.calculateBottomPadding() + 16.dp),
+                verticalArrangement = Arrangement.spacedBy(OneUiDefaults.GroupGap),
+            ) {
+                ShareCard(state.passage, Modifier.padding(horizontal = OneUiDefaults.ScreenMargin))
+                OneUiGroup {
+                    OneUiListRow(
+                        title = "Save image",
+                        summary = "Save a copy to your gallery",
+                        onClick = { onIntent(ShareIntent.SaveTapped) },
+                        trailing = {
+                            Icon(painterResource(R.drawable.ic_download), contentDescription = null, Modifier.size(24.dp), tint = colors.accent)
+                        },
+                    )
+                }
+            }
         }
     }
 }
+

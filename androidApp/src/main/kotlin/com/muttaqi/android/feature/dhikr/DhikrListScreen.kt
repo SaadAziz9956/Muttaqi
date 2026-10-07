@@ -1,47 +1,48 @@
 package com.muttaqi.android.feature.dhikr
 
+import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.selection.selectableGroup
-import androidx.compose.material3.Card
-import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.ExperimentalMaterial3ExpressiveApi
-import androidx.compose.material3.FilterChip
-import androidx.compose.material3.FilterChipDefaults
-import androidx.compose.material3.Icon
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.MediumFlexibleTopAppBar
-import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
-import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.input.nestedscroll.nestedScroll
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.semantics.clearAndSetSemantics
 import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.semantics.stateDescription
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import com.muttaqi.android.R
 import com.muttaqi.android.designsystem.component.ArabicText
-import com.muttaqi.android.designsystem.component.BackButton
-import com.muttaqi.android.designsystem.component.PageQuote
 import com.muttaqi.android.designsystem.component.TranslationText
+import com.muttaqi.android.designsystem.oneui.OneUi
+import com.muttaqi.android.designsystem.oneui.OneUiHeaderQuote
+import com.muttaqi.android.designsystem.oneui.OneUiChip
+import com.muttaqi.android.designsystem.oneui.OneUiCountPill
+import com.muttaqi.android.designsystem.oneui.OneUiDefaults
+import com.muttaqi.android.designsystem.oneui.OneUiGroup
+import com.muttaqi.android.designsystem.oneui.OneUiScaffold
+import com.muttaqi.android.designsystem.oneui.OneUiSubheader
+import com.muttaqi.android.designsystem.oneui.OneUiSurface
+import com.muttaqi.shared.core.quote.DisplayedQuote
 import com.muttaqi.shared.core.text.quoted
 import com.muttaqi.shared.feature.dhikr.domain.model.Dhikr
+import com.muttaqi.shared.feature.dhikr.domain.model.DhikrSection
 import com.muttaqi.shared.feature.dhikr.presentation.list.DhikrListEffect
 import com.muttaqi.shared.feature.dhikr.presentation.list.DhikrListIntent
 import com.muttaqi.shared.feature.dhikr.presentation.list.DhikrListState
@@ -62,42 +63,22 @@ fun DhikrListRoute(onOpenCounter: (String) -> Unit, onBack: () -> Unit) {
     DhikrListScreen(state, viewModel::dispatch, onBack)
 }
 
-@OptIn(ExperimentalMaterial3Api::class, ExperimentalMaterial3ExpressiveApi::class)
 @Composable
 fun DhikrListScreen(state: DhikrListState, onIntent: (DhikrListIntent) -> Unit, onBack: () -> Unit) {
-    val scrollBehavior = TopAppBarDefaults.exitUntilCollapsedScrollBehavior()
     val section = state.selectedSection
-    Scaffold(
-        modifier = Modifier.nestedScroll(scrollBehavior.nestedScrollConnection),
-        topBar = {
-            MediumFlexibleTopAppBar(
-                title = { Text(TITLE) },
-                navigationIcon = { BackButton(onBack) },
-                scrollBehavior = scrollBehavior,
-            )
-        },
-    ) { padding ->
-        LazyColumn(
-            contentPadding = PaddingValues(top = padding.calculateTopPadding() + 8.dp, bottom = padding.calculateBottomPadding() + 16.dp),
-            verticalArrangement = Arrangement.spacedBy(8.dp),
-        ) {
-            state.header?.let { header -> item(key = "header") { PageQuote(header, Modifier.padding(horizontal = 16.dp)) } }
-            if (section != null) {
-                item(key = "sections") { SectionChips(state, selectedId = section.id, onIntent) }
-                item(key = "subtitle") {
-                    Text(
-                        section.subtitle,
-                        Modifier.padding(horizontal = 16.dp),
-                        style = MaterialTheme.typography.titleSmall,
-                        color = MaterialTheme.colorScheme.onSurfaceVariant,
-                    )
-                }
-                items(section.dhikr, key = { it.id }) { dhikr ->
-                    DhikrRow(
-                        dhikr,
-                        onClick = { onIntent(DhikrListIntent.DhikrTapped(dhikr.id)) },
-                        modifier = Modifier.padding(horizontal = 16.dp),
-                    )
+    OneUiSurface {
+        OneUiScaffold(
+            title = TITLE,
+            onBack = onBack,
+            subtitle = state.header?.let { header -> { OneUiHeaderQuote(header.text, header.source) } },
+        ) { padding ->
+            LazyColumn(
+                contentPadding = PaddingValues(top = padding.calculateTopPadding(), bottom = padding.calculateBottomPadding() + 16.dp),
+                verticalArrangement = Arrangement.spacedBy(OneUiDefaults.GroupGap),
+            ) {
+                if (section != null) {
+                    item(key = "sections") { SectionChips(state, selectedId = section.id, onIntent) }
+                    item(key = "section-${section.id}") { SectionGroup(section, onIntent) }
                 }
             }
         }
@@ -117,48 +98,71 @@ private fun SectionChips(state: DhikrListState, selectedId: String, onIntent: (D
     LazyRow(
         state = row,
         modifier = Modifier.selectableGroup(),
-        contentPadding = PaddingValues(horizontal = 16.dp),
+        contentPadding = PaddingValues(horizontal = OneUiDefaults.ScreenMargin),
         horizontalArrangement = Arrangement.spacedBy(8.dp),
     ) {
         items(state.sections, key = { it.id }) { section ->
-            val selected = section.id == selectedId
-            FilterChip(
-                selected = selected,
+            OneUiChip(
+                text = section.title,
+                selected = section.id == selectedId,
                 onClick = { onIntent(DhikrListIntent.SectionTapped(section.id)) },
-                label = { Text(section.title) },
-                leadingIcon = if (selected) {
-                    { Icon(painterResource(R.drawable.ic_check), contentDescription = null, Modifier.size(FilterChipDefaults.IconSize)) }
-                } else {
-                    null
-                },
             )
         }
     }
 }
 
 @Composable
-private fun DhikrRow(dhikr: Dhikr, onClick: () -> Unit, modifier: Modifier = Modifier) {
-    val caption = dhikr.title ?: dhikr.translation?.quoted() ?: dhikr.transliteration.orEmpty()
-    Card(
-        onClick = onClick,
-        modifier = modifier.fillMaxWidth().clearAndSetSemantics {
-            contentDescription = dhikr.title ?: dhikr.transliteration ?: dhikr.arabic
-            dhikr.translation?.let { stateDescription = it }
-        },
-    ) {
-        Column(Modifier.padding(16.dp), verticalArrangement = Arrangement.spacedBy(12.dp)) {
-            ArabicText(dhikr.arabic, Modifier.fillMaxWidth())
-            Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(12.dp)) {
-                TranslationText(
-                    caption,
-                    Modifier.weight(1f),
-                    style = MaterialTheme.typography.bodyMedium,
-                    color = MaterialTheme.colorScheme.onSurfaceVariant,
+private fun SectionGroup(section: DhikrSection, onIntent: (DhikrListIntent) -> Unit) {
+    Column {
+        OneUiSubheader(section.subtitle)
+        OneUiGroup {
+            section.dhikr.forEachIndexed { index, dhikr ->
+                DhikrRow(
+                    dhikr,
+                    divider = index < section.dhikr.lastIndex,
+                    onClick = { onIntent(DhikrListIntent.DhikrTapped(dhikr.id)) },
                 )
-                dhikr.target?.let { target ->
-                    Text("$target×", style = MaterialTheme.typography.labelLarge, color = MaterialTheme.colorScheme.primary)
+            }
+        }
+    }
+}
+
+@Composable
+private fun DhikrRow(dhikr: Dhikr, divider: Boolean, onClick: () -> Unit) {
+    val colors = OneUi.colors
+    val type = OneUi.typography
+    val transliteration = dhikr.transliteration?.takeIf { it.isNotBlank() }
+    val caption = dhikr.title ?: dhikr.translation?.quoted()
+    Column(
+        Modifier
+            .fillMaxWidth()
+            .clickable(onClick = onClick)
+            .clearAndSetSemantics {
+                contentDescription = dhikr.title ?: dhikr.transliteration ?: dhikr.arabic
+                dhikr.translation?.let { stateDescription = it }
+            },
+    ) {
+        Column(
+            Modifier.fillMaxWidth().padding(horizontal = OneUiDefaults.ItemPadding, vertical = 18.dp),
+            verticalArrangement = Arrangement.spacedBy(10.dp),
+        ) {
+            ArabicText(dhikr.arabic, Modifier.fillMaxWidth(), color = colors.text)
+            transliteration?.let {
+                TranslationText(it, Modifier.fillMaxWidth(), style = type.listSummary, color = colors.accent)
+            }
+            if (caption != null || dhikr.target != null) {
+                Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(12.dp)) {
+                    if (caption != null) {
+                        TranslationText(caption, Modifier.weight(1f), style = type.listSummary, color = colors.secondaryText)
+                    } else {
+                        Spacer(Modifier.weight(1f))
+                    }
+                    dhikr.target?.let { target -> OneUiCountPill("$target×") }
                 }
             }
+        }
+        if (divider) {
+            Box(Modifier.fillMaxWidth().padding(horizontal = OneUiDefaults.ItemPadding).height(1.dp).background(colors.divider))
         }
     }
 }

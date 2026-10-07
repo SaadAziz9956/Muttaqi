@@ -3,34 +3,34 @@ package com.muttaqi.android.feature.dua
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.heightIn
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.lazy.grid.GridCells
-import androidx.compose.foundation.lazy.grid.GridItemSpan
-import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
-import androidx.compose.foundation.lazy.grid.items
-import androidx.compose.material3.Card
-import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.ExperimentalMaterial3ExpressiveApi
-import androidx.compose.material3.Icon
-import androidx.compose.material3.LargeFlexibleTopAppBar
-import androidx.compose.material3.ListItem
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Scaffold
+import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material3.Text
-import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.input.nestedscroll.nestedScroll
-import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import com.muttaqi.android.R
-import com.muttaqi.android.designsystem.component.PageQuote
-import com.muttaqi.android.designsystem.component.PageSearchBar
+import com.muttaqi.android.designsystem.component.TranslationText
+import com.muttaqi.android.designsystem.oneui.LocalTabBarInset
+import com.muttaqi.android.designsystem.oneui.OneUiHeaderQuote
+import com.muttaqi.android.designsystem.oneui.OneUi
+import com.muttaqi.android.designsystem.oneui.OneUiDefaults
+import com.muttaqi.android.designsystem.oneui.OneUiGroup
+import com.muttaqi.android.designsystem.oneui.OneUiListRow
+import com.muttaqi.android.designsystem.oneui.OneUiScaffold
+import com.muttaqi.android.designsystem.oneui.OneUiSearchField
+import com.muttaqi.android.designsystem.oneui.OneUiSubheader
+import com.muttaqi.android.designsystem.oneui.OneUiSurface
+import com.muttaqi.shared.core.quote.DisplayedQuote
+import com.muttaqi.shared.core.text.quoted
+import com.muttaqi.shared.feature.dua.domain.model.DuaCategory
 import com.muttaqi.shared.feature.dua.presentation.list.DuaListEffect
 import com.muttaqi.shared.feature.dua.presentation.list.DuaListIntent
 import com.muttaqi.shared.feature.dua.presentation.list.DuaListState
@@ -52,72 +52,78 @@ fun DuaListRoute(onOpenCategory: (String) -> Unit, onOpenChapter: (String) -> Un
     DuaListScreen(state, viewModel::dispatch)
 }
 
-@OptIn(ExperimentalMaterial3Api::class, ExperimentalMaterial3ExpressiveApi::class)
 @Composable
 fun DuaListScreen(state: DuaListState, onIntent: (DuaListIntent) -> Unit) {
-    val scrollBehavior = TopAppBarDefaults.exitUntilCollapsedScrollBehavior()
-    Scaffold(
-        modifier = Modifier.nestedScroll(scrollBehavior.nestedScrollConnection),
-        topBar = { LargeFlexibleTopAppBar(title = { Text("Dua") }, scrollBehavior = scrollBehavior) },
-    ) { padding ->
-        LazyVerticalGrid(
-            columns = GridCells.Fixed(2),
-            contentPadding = PaddingValues(
-                start = 16.dp,
-                end = 16.dp,
-                top = padding.calculateTopPadding(),
-                bottom = padding.calculateBottomPadding() + 16.dp,
-            ),
-            horizontalArrangement = Arrangement.spacedBy(8.dp),
-            verticalArrangement = Arrangement.spacedBy(8.dp),
-        ) {
-            state.header?.let { header -> item(span = { GridItemSpan(maxLineSpan) }) { PageQuote(header) } }
-            item(span = { GridItemSpan(maxLineSpan) }) {
-                PageSearchBar(
-                    query = state.query,
-                    onQueryChange = { onIntent(DuaListIntent.QueryChanged(it)) },
-                    onClear = { onIntent(DuaListIntent.ClearQuery) },
-                    placeholder = "Search duas",
-                    modifier = Modifier.padding(vertical = 8.dp),
-                )
-            }
-            if (state.isSearching) {
-                if (state.results.isEmpty()) {
-                    item(span = { GridItemSpan(maxLineSpan) }) {
-                        Text(
-                            "No results for “${state.query}”",
-                            Modifier.padding(16.dp),
-                            style = MaterialTheme.typography.bodyLarge,
-                            color = MaterialTheme.colorScheme.onSurfaceVariant,
-                        )
-                    }
+    OneUiSurface {
+        OneUiScaffold(
+            title = "Dua",
+            subtitle = state.header?.let { header -> { OneUiHeaderQuote(header.text, header.source) } },
+        ) { padding ->
+            LazyColumn(
+                contentPadding = PaddingValues(
+                    top = padding.calculateTopPadding(),
+                    bottom = padding.calculateBottomPadding() + LocalTabBarInset.current + 16.dp,
+                ),
+                verticalArrangement = Arrangement.spacedBy(OneUiDefaults.GroupGap),
+            ) {
+                item(key = "search") {
+                    OneUiSearchField(
+                        query = state.query,
+                        onQueryChange = { onIntent(DuaListIntent.QueryChanged(it)) },
+                        onClear = { onIntent(DuaListIntent.ClearQuery) },
+                        placeholder = "Search duas",
+                    )
                 }
-                items(state.results, key = { it.chapter.id }, span = { GridItemSpan(maxLineSpan) }) { result ->
-                    Card(onClick = { onIntent(DuaListIntent.SearchResultTapped(result.chapter.id)) }) {
-                        ListItem(
-                            headlineContent = { Text(result.chapter.title) },
-                            supportingContent = { Text(result.category.title) },
-                            trailingContent = { Icon(painterResource(R.drawable.ic_chevron_right), contentDescription = null) },
-                        )
-                    }
-                }
-            } else {
-                items(state.categories, key = { it.id }) { category ->
-                    Card(onClick = { onIntent(DuaListIntent.CategoryTapped(category.id)) }) {
-                        Column(
-                            Modifier.fillMaxWidth().heightIn(min = 112.dp).padding(16.dp),
-                            verticalArrangement = Arrangement.SpaceBetween,
-                        ) {
-                            Text(category.title, style = MaterialTheme.typography.titleMedium)
+                if (state.isSearching) {
+                    item(key = "results") {
+                        if (state.results.isEmpty()) {
                             Text(
-                                if (category.entryCount == 1) "1 dua" else "${category.entryCount} duas",
-                                style = MaterialTheme.typography.bodyMedium,
-                                color = MaterialTheme.colorScheme.onSurfaceVariant,
+                                "No results for “${state.query}”",
+                                Modifier.fillMaxWidth().padding(24.dp),
+                                style = OneUi.typography.listSummary,
+                                color = OneUi.colors.secondaryText,
+                                textAlign = TextAlign.Center,
                             )
+                        } else {
+                            OneUiGroup {
+                                state.results.forEachIndexed { index, result ->
+                                    OneUiListRow(
+                                        title = result.chapter.title,
+                                        summary = result.category.title,
+                                        divider = index < state.results.lastIndex,
+                                        onClick = { onIntent(DuaListIntent.SearchResultTapped(result.chapter.id)) },
+                                    )
+                                }
+                            }
                         }
                     }
+                } else {
+                    val (quran, hisn) = state.categories.partition { it.id == RABBANA_ID }
+                    if (quran.isNotEmpty()) item(key = "quran") { CategoryGroup("From the Quran", quran, onIntent) }
+                    if (hisn.isNotEmpty()) item(key = "hisn") { CategoryGroup("Hisn al-Muslim", hisn, onIntent) }
                 }
             }
         }
     }
 }
+
+@Composable
+private fun CategoryGroup(title: String, categories: List<DuaCategory>, onIntent: (DuaListIntent) -> Unit) {
+    Column {
+        OneUiSubheader(title)
+        OneUiGroup {
+            categories.forEachIndexed { index, category ->
+                OneUiListRow(
+                    title = category.title,
+                    summary = duaCount(category.entryCount),
+                    divider = index < categories.lastIndex,
+                    onClick = { onIntent(DuaListIntent.CategoryTapped(category.id)) },
+                )
+            }
+        }
+    }
+}
+
+internal fun duaCount(count: Int) = if (count == 1) "1 dua" else "$count duas"
+
+private const val RABBANA_ID = "rabbana"

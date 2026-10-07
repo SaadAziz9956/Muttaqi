@@ -1,31 +1,27 @@
 package com.muttaqi.android.feature.topics
 
+import androidx.annotation.DrawableRes
+import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.FlowRow
 import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.lazy.grid.GridCells
-import androidx.compose.foundation.lazy.grid.GridItemSpan
-import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
-import androidx.compose.foundation.lazy.grid.items
+import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.LazyRow
+import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.selection.selectableGroup
-import androidx.compose.material3.Card
-import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.ExperimentalMaterial3ExpressiveApi
-import androidx.compose.material3.FilterChip
-import androidx.compose.material3.FilterChipDefaults
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material3.Icon
-import androidx.compose.material3.LargeFlexibleTopAppBar
-import androidx.compose.material3.ListItemDefaults
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Scaffold
-import androidx.compose.material3.SegmentedListItem
 import androidx.compose.material3.Text
-import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
@@ -34,17 +30,28 @@ import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.input.nestedscroll.nestedScroll
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.muttaqi.android.R
-import com.muttaqi.android.designsystem.component.PageQuote
-import com.muttaqi.android.designsystem.component.PageSearchBar
+import com.muttaqi.android.designsystem.component.TranslationText
+import com.muttaqi.android.designsystem.oneui.LocalTabBarInset
+import com.muttaqi.android.designsystem.oneui.OneUiHeaderQuote
+import com.muttaqi.android.designsystem.oneui.OneUi
+import com.muttaqi.android.designsystem.oneui.OneUiChip
+import com.muttaqi.android.designsystem.oneui.OneUiDefaults
+import com.muttaqi.android.designsystem.oneui.OneUiGroup
+import com.muttaqi.android.designsystem.oneui.OneUiScaffold
+import com.muttaqi.android.designsystem.oneui.OneUiSearchField
+import com.muttaqi.android.designsystem.oneui.OneUiSubheader
+import com.muttaqi.android.designsystem.oneui.OneUiSurface
 import com.muttaqi.android.designsystem.topicSymbol
+import com.muttaqi.shared.core.quote.DisplayedQuote
+import com.muttaqi.shared.core.text.quoted
 import com.muttaqi.shared.feature.topics.domain.model.ExploreGroup
-import com.muttaqi.shared.feature.topics.domain.model.ExploreTopic
+import com.muttaqi.shared.feature.topics.domain.model.PassageTopic
 import com.muttaqi.shared.feature.topics.domain.usecase.ExploreSearchResult
 import com.muttaqi.shared.feature.topics.presentation.explore.ExploreEffect
 import com.muttaqi.shared.feature.topics.presentation.explore.ExploreIntent
@@ -66,110 +73,126 @@ fun ExploreRoute(onOpenTopic: (String) -> Unit) {
     ExploreScreen(state, viewModel::dispatch)
 }
 
-@OptIn(ExperimentalMaterial3Api::class, ExperimentalMaterial3ExpressiveApi::class)
 @Composable
 fun ExploreScreen(state: ExploreState, onIntent: (ExploreIntent) -> Unit) {
-    val scrollBehavior = TopAppBarDefaults.exitUntilCollapsedScrollBehavior()
     var selectedGroupId by rememberSaveable { mutableStateOf<String?>(null) }
     val selectedGroup = state.groups.firstOrNull { it.id == selectedGroupId } ?: state.groups.firstOrNull()
-    Scaffold(
-        modifier = Modifier.nestedScroll(scrollBehavior.nestedScrollConnection),
-        topBar = { LargeFlexibleTopAppBar(title = { Text("Explore") }, scrollBehavior = scrollBehavior) },
-    ) { padding ->
-        LazyVerticalGrid(
-            columns = GridCells.Fixed(2),
-            contentPadding = PaddingValues(
-                start = 16.dp,
-                end = 16.dp,
-                top = padding.calculateTopPadding(),
-                bottom = padding.calculateBottomPadding() + 16.dp,
-            ),
-            horizontalArrangement = Arrangement.spacedBy(8.dp),
-            verticalArrangement = Arrangement.spacedBy(8.dp),
-        ) {
-            state.header?.let { header -> item(key = "header", span = { GridItemSpan(maxLineSpan) }) { PageQuote(header) } }
-            item(key = "search", span = { GridItemSpan(maxLineSpan) }) {
-                PageSearchBar(
-                    query = state.query,
-                    onQueryChange = { onIntent(ExploreIntent.QueryChanged(it)) },
-                    onClear = { onIntent(ExploreIntent.ClearQuery) },
-                    placeholder = "Search",
-                    modifier = Modifier.padding(vertical = 8.dp),
-                )
-            }
-            if (state.isSearching) {
-                item(key = "results", span = { GridItemSpan(maxLineSpan) }) {
-                    if (state.results.isEmpty()) {
-                        NoResults(state.query)
-                    } else {
-                        SearchResults(state.results, onOpen = { onIntent(ExploreIntent.TopicTapped(it)) })
+    OneUiSurface {
+        OneUiScaffold(
+            title = "Explore",
+            subtitle = state.header?.let { header -> { OneUiHeaderQuote(header.text, header.source) } },
+        ) { padding ->
+            LazyColumn(
+                contentPadding = PaddingValues(
+                    top = padding.calculateTopPadding(),
+                    bottom = padding.calculateBottomPadding() + LocalTabBarInset.current + 16.dp,
+                ),
+                verticalArrangement = Arrangement.spacedBy(OneUiDefaults.GroupGap),
+            ) {
+                item(key = "search") {
+                    OneUiSearchField(
+                        query = state.query,
+                        onQueryChange = { onIntent(ExploreIntent.QueryChanged(it)) },
+                        onClear = { onIntent(ExploreIntent.ClearQuery) },
+                        placeholder = "Search",
+                    )
+                }
+                if (state.isSearching) {
+                    item(key = "results") {
+                        if (state.results.isEmpty()) {
+                            NoResults(state.query)
+                        } else {
+                            SearchResults(state.results, onOpen = { onIntent(ExploreIntent.TopicTapped(it)) })
+                        }
                     }
-                }
-            } else if (selectedGroup != null) {
-                item(key = "groups", span = { GridItemSpan(maxLineSpan) }) {
-                    GroupChips(state.groups, selectedGroup.id, onSelect = { selectedGroupId = it })
-                }
-                items(selectedGroup.topics, key = { it.id }) { topic ->
-                    TopicCard(topic, onClick = { onIntent(ExploreIntent.TopicTapped(topic.id)) })
+                } else if (selectedGroup != null) {
+                    item(key = "groups") {
+                        GroupChips(state.groups, selectedGroup.id, onSelect = { selectedGroupId = it })
+                    }
+                    item(key = "topics") {
+                        Column {
+                            OneUiSubheader(selectedGroup.title)
+                            OneUiGroup {
+                                selectedGroup.topics.forEachIndexed { index, topic ->
+                                    TopicRow(
+                                        icon = topicSymbol(topic.icon),
+                                        title = topic.title,
+                                        summary = passageSummary(topic),
+                                        divider = index < selectedGroup.topics.lastIndex,
+                                        onClick = { onIntent(ExploreIntent.TopicTapped(topic.id)) },
+                                    )
+                                }
+                            }
+                        }
+                    }
                 }
             }
         }
     }
 }
 
+internal fun passageSummary(topic: PassageTopic): String = listOfNotNull(
+    topic.verses.size.takeIf { it > 0 }?.let { if (it == 1) "1 verse" else "$it verses" },
+    topic.hadith.size.takeIf { it > 0 }?.let { "$it hadith" },
+    topic.duas.size.takeIf { it > 0 }?.let { if (it == 1) "1 dua" else "$it duas" },
+).joinToString(" · ")
+
 @Composable
 private fun GroupChips(groups: List<ExploreGroup>, selectedId: String, onSelect: (String) -> Unit) {
-    FlowRow(
+    LazyRow(
         Modifier.fillMaxWidth().selectableGroup(),
+        contentPadding = PaddingValues(horizontal = OneUiDefaults.ScreenMargin),
         horizontalArrangement = Arrangement.spacedBy(8.dp),
     ) {
-        groups.forEach { group ->
-            val selected = group.id == selectedId
-            FilterChip(
-                selected = selected,
-                onClick = { onSelect(group.id) },
-                label = { Text(group.title) },
-                leadingIcon = if (selected) {
-                    { Icon(painterResource(R.drawable.ic_check), contentDescription = null, Modifier.size(FilterChipDefaults.IconSize)) }
-                } else {
-                    null
-                },
+        items(groups, key = { it.id }) { group ->
+            OneUiChip(group.title, selected = group.id == selectedId, onClick = { onSelect(group.id) })
+        }
+    }
+}
+
+@Composable
+private fun SearchResults(results: List<ExploreSearchResult>, onOpen: (String) -> Unit) {
+    OneUiGroup {
+        results.forEachIndexed { index, result ->
+            TopicRow(
+                icon = topicSymbol(result.topic.icon),
+                title = result.topic.title,
+                summary = result.group.title,
+                divider = index < results.lastIndex,
+                onClick = { onOpen(result.topic.id) },
             )
         }
     }
 }
 
 @Composable
-private fun TopicCard(topic: ExploreTopic, onClick: () -> Unit) {
-    Card(onClick = onClick) {
-        Column(
-            Modifier.fillMaxWidth().heightIn(min = 124.dp).padding(16.dp),
-            verticalArrangement = Arrangement.SpaceBetween,
+private fun TopicRow(@DrawableRes icon: Int, title: String, summary: String, divider: Boolean, onClick: () -> Unit) {
+    val colors = OneUi.colors
+    Column(Modifier.fillMaxWidth().clickable(onClick = onClick)) {
+        Row(
+            Modifier.fillMaxWidth().heightIn(min = 64.dp).padding(horizontal = OneUiDefaults.ItemPadding, vertical = 12.dp),
+            verticalAlignment = Alignment.CenterVertically,
         ) {
-            Icon(painterResource(topicSymbol(topic.icon)), contentDescription = null, tint = MaterialTheme.colorScheme.primary)
-            Text(topic.title, Modifier.padding(top = 12.dp), style = MaterialTheme.typography.titleMedium)
-        }
-    }
-}
-
-@OptIn(ExperimentalMaterial3ExpressiveApi::class)
-@Composable
-private fun SearchResults(results: List<ExploreSearchResult>, onOpen: (String) -> Unit) {
-    val colors = ListItemDefaults.segmentedColors(containerColor = MaterialTheme.colorScheme.surfaceContainer)
-    Column(verticalArrangement = Arrangement.spacedBy(ListItemDefaults.SegmentedGap)) {
-        results.forEachIndexed { index, result ->
-            SegmentedListItem(
-                onClick = { onOpen(result.topic.id) },
-                shapes = ListItemDefaults.segmentedShapes(index = index, count = results.size),
-                colors = colors,
-                leadingContent = {
-                    Icon(painterResource(topicSymbol(result.topic.icon)), contentDescription = null, tint = MaterialTheme.colorScheme.primary)
-                },
-                supportingContent = { Text(result.group.title) },
-                trailingContent = { Icon(painterResource(R.drawable.ic_chevron_right), contentDescription = null) },
+            Box(
+                Modifier.size(LeadingSize).clip(CircleShape).background(colors.accent.copy(alpha = if (colors.isDark) 0.16f else 0.1f)),
+                contentAlignment = Alignment.Center,
             ) {
-                Text(result.topic.title)
+                Icon(painterResource(icon), contentDescription = null, Modifier.size(22.dp), tint = colors.accent)
             }
+            Spacer(Modifier.width(LeadingGap))
+            Column(Modifier.weight(1f), verticalArrangement = Arrangement.spacedBy(2.dp)) {
+                Text(title, style = OneUi.typography.listTitle, color = colors.text)
+                if (summary.isNotEmpty()) Text(summary, style = OneUi.typography.listSummary, color = colors.secondaryText)
+            }
+        }
+        if (divider) {
+            Box(
+                Modifier
+                    .fillMaxWidth()
+                    .padding(start = OneUiDefaults.ItemPadding + LeadingSize + LeadingGap, end = OneUiDefaults.ItemPadding)
+                    .height(1.dp)
+                    .background(colors.divider),
+            )
         }
     }
 }
@@ -177,22 +200,20 @@ private fun SearchResults(results: List<ExploreSearchResult>, onOpen: (String) -
 @Composable
 private fun NoResults(query: String) {
     Column(
-        Modifier.fillMaxWidth().padding(horizontal = 16.dp, vertical = 32.dp),
+        Modifier.fillMaxWidth().padding(horizontal = 24.dp, vertical = 32.dp),
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.spacedBy(8.dp),
     ) {
-        Icon(
-            painterResource(R.drawable.ic_search),
-            contentDescription = null,
-            Modifier.size(48.dp),
-            tint = MaterialTheme.colorScheme.onSurfaceVariant,
-        )
-        Text("No Results for “$query”", style = MaterialTheme.typography.titleLarge, textAlign = TextAlign.Center)
+        Icon(painterResource(R.drawable.ic_search), contentDescription = null, Modifier.size(48.dp), tint = OneUi.colors.secondaryText)
+        Text("No results for “$query”", style = OneUi.typography.listTitle, color = OneUi.colors.text, textAlign = TextAlign.Center)
         Text(
             "Check the spelling or try a new search.",
-            style = MaterialTheme.typography.bodyMedium,
-            color = MaterialTheme.colorScheme.onSurfaceVariant,
+            style = OneUi.typography.listSummary,
+            color = OneUi.colors.secondaryText,
             textAlign = TextAlign.Center,
         )
     }
 }
+
+private val LeadingSize = 40.dp
+private val LeadingGap = 16.dp

@@ -12,31 +12,37 @@ import androidx.compose.animation.shrinkVertically
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.ExperimentalMaterial3ExpressiveApi
-import androidx.compose.material3.LargeFlexibleTopAppBar
-import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
-import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.platform.ClipEntry
 import androidx.compose.ui.platform.LocalClipboard
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.LifecycleResumeEffect
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import com.muttaqi.android.R
-import com.muttaqi.android.designsystem.component.PageQuote
+import com.muttaqi.android.designsystem.component.TranslationText
+import com.muttaqi.android.designsystem.oneui.LocalTabBarInset
+import com.muttaqi.android.designsystem.oneui.OneUi
+import com.muttaqi.android.designsystem.oneui.OneUiCardSpacing
+import com.muttaqi.android.designsystem.oneui.OneUiDefaults
+import com.muttaqi.android.designsystem.oneui.OneUiScaffold
+import com.muttaqi.android.designsystem.oneui.OneUiSurface
 import com.muttaqi.android.feature.prayer.PrayerTimesCard
 import com.muttaqi.android.feature.prayer.SetLocationButton
 import com.muttaqi.shared.core.quote.DisplayedQuote
 import com.muttaqi.shared.core.share.SharePassage
+import com.muttaqi.shared.core.text.quoted
 import com.muttaqi.shared.feature.home.presentation.HomeEffect
 import com.muttaqi.shared.feature.home.presentation.HomeIntent
 import com.muttaqi.shared.feature.home.presentation.HomeState
@@ -89,7 +95,6 @@ fun HomeRoute(
     HomeScreen(state, qiblaArrow = { qiblaArrow.value }, onIntent = viewModel::dispatch)
 }
 
-@OptIn(ExperimentalMaterial3Api::class, ExperimentalMaterial3ExpressiveApi::class)
 @Composable
 fun HomeScreen(
     state: HomeState,
@@ -97,61 +102,77 @@ fun HomeScreen(
     onIntent: (HomeIntent) -> Unit,
     zone: ZoneId = ZoneId.systemDefault(),
 ) {
-    val scrollBehavior = TopAppBarDefaults.exitUntilCollapsedScrollBehavior()
-    Scaffold(
-        modifier = Modifier.nestedScroll(scrollBehavior.nestedScrollConnection),
-        topBar = {
-            LargeFlexibleTopAppBar(
-                title = { Text("Assalam - o - Alaikum") },
-                subtitle = { Text(state.hijriDate) },
-                scrollBehavior = scrollBehavior,
+    val greeting = state.greeting?.let { greeting -> greeting.ayah.translation?.let { DisplayedQuote(it, "Quran (${greeting.reference})") } }
+    OneUiSurface {
+        OneUiScaffold(
+            title = "Assalam - o - Alaikum",
+            subtitle = if (state.hijriDate.isNotBlank() || greeting != null) {
+                { HomeHeader(state.hijriDate, greeting) }
+            } else {
+                null
+            },
+        ) { padding ->
+            LazyColumn(
+                contentPadding = PaddingValues(
+                    start = OneUiDefaults.ScreenMargin,
+                    end = OneUiDefaults.ScreenMargin,
+                    top = padding.calculateTopPadding(),
+                    bottom = padding.calculateBottomPadding() + LocalTabBarInset.current + 16.dp,
+                ),
+                verticalArrangement = Arrangement.spacedBy(OneUiCardSpacing),
+            ) {
+                item(key = "prayer") {
+                    val upcoming = state.nextPrayer
+                    val today = state.schedule?.today
+                    Column(Modifier.fillMaxWidth(), horizontalAlignment = Alignment.CenterHorizontally) {
+                        AnimatedVisibility(
+                            upcoming != null || today != null,
+                            enter = fadeIn() + expandVertically(),
+                            exit = fadeOut() + shrinkVertically(),
+                        ) {
+                            PrayerTimesCard(upcoming, today, state.nextPrayerToday, zone = zone)
+                        }
+                        if (state.asksForLocation) SetLocationButton(onClick = { onIntent(HomeIntent.SetLocationTapped) })
+                    }
+                }
+                item(key = "tiles") { HomeTiles(state, qiblaArrow, onIntent) }
+                val shortcuts = listOfNotNull(
+                    state.lastReading?.let { reading ->
+                        SurahShortcut(reading.surah.number, "Continue ${reading.surah.englishName}", "Ayah ${reading.ayahNumber}") {
+                            onIntent(HomeIntent.ContinueReadingTapped)
+                        }
+                    },
+                    state.fridayKahf?.let { kahf ->
+                        SurahShortcut(kahf.number, "Surah ${kahf.englishName}", "Friday") { onIntent(HomeIntent.KahfTapped) }
+                    },
+                )
+                if (shortcuts.isNotEmpty()) item(key = "shortcuts") { SurahShortcuts(shortcuts) }
+                state.ayahOfTheDay?.let { item(key = "ayah") { AyahOfTheDayCard(it, onIntent) } }
+                state.hadithOfTheDay?.let { item(key = "hadith") { HadithOfTheDayCard(it, onIntent) } }
+                state.duaOfTheDay?.let { item(key = "dua") { DuaOfTheDayCard(it, onIntent) } }
+            }
+        }
+    }
+}
+
+@Composable
+private fun HomeHeader(hijriDate: String, greeting: DisplayedQuote?) {
+    val colors = OneUi.colors
+    val type = OneUi.typography
+    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+        if (hijriDate.isNotBlank()) {
+            Text(hijriDate, style = type.listTitle, color = colors.secondaryText, textAlign = TextAlign.Center)
+        }
+        greeting?.let { quote ->
+            TranslationText(
+                quote.text.quoted(),
+                Modifier.fillMaxWidth().padding(top = if (hijriDate.isNotBlank()) 14.dp else 0.dp),
+                style = type.listSummary,
+                color = colors.secondaryText,
+                textAlign = TextAlign.Center,
             )
-        },
-    ) { padding ->
-        LazyColumn(
-            contentPadding = PaddingValues(
-                start = 16.dp,
-                end = 16.dp,
-                top = padding.calculateTopPadding(),
-                bottom = padding.calculateBottomPadding() + 16.dp,
-            ),
-            verticalArrangement = Arrangement.spacedBy(12.dp),
-        ) {
-            state.greeting?.let { greeting ->
-                greeting.ayah.translation?.let { translation ->
-                    item(key = "greeting") { PageQuote(DisplayedQuote(translation, "Quran (${greeting.reference})")) }
-                }
-            }
-            item(key = "prayer") {
-                val upcoming = state.nextPrayer
-                val today = state.schedule?.today
-                Column {
-                    AnimatedVisibility(
-                        upcoming != null || today != null,
-                        enter = fadeIn() + expandVertically(),
-                        exit = fadeOut() + shrinkVertically(),
-                    ) {
-                        PrayerTimesCard(upcoming, today, state.nextPrayerToday, zone = zone)
-                    }
-                    if (state.asksForLocation) SetLocationButton(onClick = { onIntent(HomeIntent.SetLocationTapped) })
-                }
-            }
-            item(key = "tiles") { HomeTiles(state, qiblaArrow, onIntent) }
-            state.lastReading?.let { reading ->
-                item(key = "continue") {
-                    SurahShortcut(reading.surah.number, "Continue ${reading.surah.englishName}", "Ayah ${reading.ayahNumber}") {
-                        onIntent(HomeIntent.ContinueReadingTapped)
-                    }
-                }
-            }
-            state.fridayKahf?.let { kahf ->
-                item(key = "kahf") {
-                    SurahShortcut(kahf.number, "Surah ${kahf.englishName}", "Friday") { onIntent(HomeIntent.KahfTapped) }
-                }
-            }
-            state.ayahOfTheDay?.let { item(key = "ayah") { AyahOfTheDayCard(it, onIntent) } }
-            state.hadithOfTheDay?.let { item(key = "hadith") { HadithOfTheDayCard(it, onIntent) } }
-            state.duaOfTheDay?.let { item(key = "dua") { DuaOfTheDayCard(it, onIntent) } }
+            Spacer(Modifier.height(4.dp))
+            Text(quote.source, style = type.small, color = colors.accent, textAlign = TextAlign.Center)
         }
     }
 }

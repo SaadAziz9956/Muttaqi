@@ -1,11 +1,15 @@
 package com.muttaqi.android.feature.journal
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.interaction.MutableInteractionSource
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.imePadding
 import androidx.compose.foundation.layout.padding
@@ -13,16 +17,7 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.Icon
-import androidx.compose.material3.IconButton
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
-import androidx.compose.material3.TextButton
-import androidx.compose.material3.TextField
-import androidx.compose.material3.TopAppBar
-import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.LaunchedEffect
@@ -34,17 +29,25 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.focus.focusRequester
 import androidx.compose.ui.focus.onFocusChanged
-import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.platform.LocalFocusManager
-import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardCapitalization
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.compose.LifecycleEventEffect
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.muttaqi.android.R
-import com.muttaqi.android.designsystem.component.BackButton
+import com.muttaqi.android.designsystem.oneui.OneUi
+import com.muttaqi.android.designsystem.oneui.OneUiButton
+import com.muttaqi.android.designsystem.oneui.OneUiButtonStyle
+import com.muttaqi.android.designsystem.oneui.OneUiDefaults
+import com.muttaqi.android.designsystem.oneui.OneUiGroup
+import com.muttaqi.android.designsystem.oneui.OneUiIconButton
+import com.muttaqi.android.designsystem.oneui.OneUiScaffold
+import com.muttaqi.android.designsystem.oneui.OneUiSurface
+import com.muttaqi.android.designsystem.oneui.OneUiTextField
 import com.muttaqi.shared.feature.journal.presentation.entry.JournalEntryEffect
 import com.muttaqi.shared.feature.journal.presentation.entry.JournalEntryIntent
 import com.muttaqi.shared.feature.journal.presentation.entry.JournalEntryState
@@ -70,7 +73,6 @@ fun JournalEntryRoute(entryId: String?, onBack: () -> Unit) {
     JournalEntryScreen(state, viewModel::dispatch, onBack)
 }
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun JournalEntryScreen(state: JournalEntryState, onIntent: (JournalEntryIntent) -> Unit, onBack: () -> Unit) {
     val focusManager = LocalFocusManager.current
@@ -81,7 +83,9 @@ fun JournalEntryScreen(state: JournalEntryState, onIntent: (JournalEntryIntent) 
     val editing = titleFocused || bodyFocused
     var wasEditing by remember { mutableStateOf(false) }
     val entry = state.entry
-    val scrollBehavior = TopAppBarDefaults.pinnedScrollBehavior()
+    val colors = OneUi.colors
+    val type = OneUi.typography
+    val titleStyle = type.listTitle.copy(fontSize = 22.sp, lineHeight = 30.sp, fontWeight = FontWeight.SemiBold)
 
     LaunchedEffect(editing) {
         if (wasEditing && !editing) onIntent(JournalEntryIntent.SaveNow)
@@ -91,86 +95,80 @@ fun JournalEntryScreen(state: JournalEntryState, onIntent: (JournalEntryIntent) 
         if (state.startedEmpty) titleFocus.requestFocus()
     }
 
-    Scaffold(
-        modifier = Modifier.nestedScroll(scrollBehavior.nestedScrollConnection),
-        topBar = {
-            TopAppBar(
-                title = {},
-                navigationIcon = { BackButton(onBack) },
-                actions = {
-                    if (editing) {
-                        TextButton(onClick = { focusManager.clearFocus() }) { Text("Done") }
-                    } else {
-                        IconButton(onClick = { onIntent(JournalEntryIntent.DeleteTapped) }) {
-                            Icon(painterResource(R.drawable.ic_delete), contentDescription = "Delete entry")
-                        }
-                    }
-                },
-                scrollBehavior = scrollBehavior,
-            )
-        },
-    ) { padding ->
-        if (entry != null) {
-            Column(
-                Modifier
-                    .fillMaxSize()
-                    .imePadding()
-                    .verticalScroll(rememberScrollState())
-                    .padding(top = padding.calculateTopPadding(), bottom = padding.calculateBottomPadding())
-                    .padding(horizontal = 16.dp),
-            ) {
-                Text(
-                    entry.createdAt.entryDate(),
-                    Modifier.padding(top = 8.dp),
-                    style = MaterialTheme.typography.labelLarge,
-                    color = MaterialTheme.colorScheme.onSurfaceVariant,
-                )
-
-                TextField(
-                    value = state.title,
-                    onValueChange = { title ->
-                        onIntent(JournalEntryIntent.TitleChanged(title))
-                        if (title.contains('\n')) bodyFocus.requestFocus()
-                    },
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(top = 16.dp)
-                        .focusRequester(titleFocus)
-                        .onFocusChanged { titleFocused = it.isFocused },
-                    textStyle = MaterialTheme.typography.headlineSmall,
-                    placeholder = { Text("Title", style = MaterialTheme.typography.headlineSmall) },
-                    keyboardOptions = KeyboardOptions(capitalization = KeyboardCapitalization.Sentences, imeAction = ImeAction.Next),
-                    keyboardActions = KeyboardActions(onNext = { bodyFocus.requestFocus() }),
-                )
-
-                TextField(
-                    value = state.body,
-                    onValueChange = { onIntent(JournalEntryIntent.BodyChanged(it)) },
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(top = 16.dp)
-                        .focusRequester(bodyFocus)
-                        .onFocusChanged { bodyFocused = it.isFocused },
-                    textStyle = MaterialTheme.typography.bodyLarge,
-                    placeholder = { Text("Body") },
-                    keyboardOptions = KeyboardOptions(capitalization = KeyboardCapitalization.Sentences),
-                    minLines = 8,
-                )
-
-                Spacer(
+    OneUiSurface {
+        OneUiScaffold(
+            title = entry?.createdAt?.longDate().orEmpty(),
+            onBack = onBack,
+            subtitle = entry?.let { shown -> { Text(shown.createdAt.weekday(), style = type.listSummary, color = colors.secondaryText) } },
+            expandable = !editing,
+            actions = {
+                if (editing) {
+                    OneUiButton("Done", onClick = { focusManager.clearFocus() }, style = OneUiButtonStyle.Text)
+                } else {
+                    OneUiIconButton(R.drawable.ic_delete, "Delete entry", onClick = { onIntent(JournalEntryIntent.DeleteTapped) })
+                }
+            },
+        ) { padding ->
+            if (entry != null) {
+                Column(
                     Modifier
-                        .fillMaxWidth()
-                        .heightIn(min = 240.dp)
-                        .clickable(interactionSource = remember { MutableInteractionSource() }, indication = null) { bodyFocus.requestFocus() },
-                )
+                        .fillMaxSize()
+                        .imePadding()
+                        .verticalScroll(rememberScrollState())
+                        .padding(top = padding.calculateTopPadding(), bottom = padding.calculateBottomPadding()),
+                ) {
+                    OneUiGroup {
+                        OneUiTextField(
+                            value = state.title,
+                            onValueChange = { title ->
+                                onIntent(JournalEntryIntent.TitleChanged(title))
+                                if (title.contains('\n')) bodyFocus.requestFocus()
+                            },
+                            placeholder = "Title",
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .focusRequester(titleFocus)
+                                .onFocusChanged { titleFocused = it.isFocused },
+                            textStyle = titleStyle,
+                            singleLine = false,
+                            keyboardOptions = KeyboardOptions(capitalization = KeyboardCapitalization.Sentences, imeAction = ImeAction.Next),
+                            keyboardActions = KeyboardActions(onNext = { bodyFocus.requestFocus() }),
+                            contentPadding = PaddingValues(start = OneUiDefaults.ItemPadding, end = OneUiDefaults.ItemPadding, top = 20.dp, bottom = 14.dp),
+                            filled = false,
+                        )
+                        Box(Modifier.fillMaxWidth().padding(horizontal = OneUiDefaults.ItemPadding).height(1.dp).background(colors.divider))
+                        OneUiTextField(
+                            value = state.body,
+                            onValueChange = { onIntent(JournalEntryIntent.BodyChanged(it)) },
+                            placeholder = "Body",
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .focusRequester(bodyFocus)
+                                .onFocusChanged { bodyFocused = it.isFocused },
+                            textStyle = type.body,
+                            singleLine = false,
+                            minLines = 8,
+                            keyboardOptions = KeyboardOptions(capitalization = KeyboardCapitalization.Sentences),
+                            contentPadding = PaddingValues(start = OneUiDefaults.ItemPadding, end = OneUiDefaults.ItemPadding, top = 14.dp, bottom = 20.dp),
+                            filled = false,
+                        )
+                    }
+
+                    Spacer(
+                        Modifier
+                            .fillMaxWidth()
+                            .heightIn(min = 240.dp)
+                            .clickable(interactionSource = remember { MutableInteractionSource() }, indication = null) { bodyFocus.requestFocus() },
+                    )
+                }
             }
         }
-    }
 
-    if (state.isConfirmingDelete) {
-        DeleteEntryDialog(
-            onConfirm = { onIntent(JournalEntryIntent.DeleteConfirmed) },
-            onDismiss = { onIntent(JournalEntryIntent.DeleteCancelled) },
-        )
+        if (state.isConfirmingDelete) {
+            DeleteEntryDialog(
+                onConfirm = { onIntent(JournalEntryIntent.DeleteConfirmed) },
+                onDismiss = { onIntent(JournalEntryIntent.DeleteCancelled) },
+            )
+        }
     }
 }

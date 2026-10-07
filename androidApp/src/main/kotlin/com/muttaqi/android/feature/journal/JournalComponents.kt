@@ -1,11 +1,12 @@
 package com.muttaqi.android.feature.journal
 
 import android.text.format.DateFormat
-import androidx.compose.material3.AlertDialog
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Text
-import androidx.compose.material3.TextButton
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.graphics.Shape
+import androidx.compose.ui.unit.dp
+import com.muttaqi.android.designsystem.oneui.OneUiDefaults
+import com.muttaqi.android.designsystem.oneui.OneUiDialog
 import java.time.ZoneId
 import java.time.ZonedDateTime
 import java.time.format.DateTimeFormatter
@@ -14,17 +15,21 @@ import kotlin.time.Instant
 
 @Composable
 internal fun DeleteEntryDialog(onConfirm: () -> Unit, onDismiss: () -> Unit) {
-    AlertDialog(
-        onDismissRequest = onDismiss,
-        title = { Text("Delete this entry?") },
-        text = { Text("This can't be undone.") },
-        confirmButton = {
-            TextButton(onClick = onConfirm) { Text("Delete Entry", color = MaterialTheme.colorScheme.error) }
-        },
-        dismissButton = {
-            TextButton(onClick = onDismiss) { Text("Cancel") }
-        },
+    OneUiDialog(
+        title = "Delete this entry?",
+        text = "This can't be undone.",
+        onDismiss = onDismiss,
+        confirmText = "Delete Entry",
+        onConfirm = onConfirm,
+        destructive = true,
     )
+}
+
+internal fun groupItemShape(index: Int, count: Int): Shape {
+    val radius = OneUiDefaults.ContainerRadius
+    val top = if (index == 0) radius else 0.dp
+    val bottom = if (index == count - 1) radius else 0.dp
+    return RoundedCornerShape(topStart = top, topEnd = top, bottomStart = bottom, bottomEnd = bottom)
 }
 
 private fun Instant.local(): ZonedDateTime = java.time.Instant.ofEpochMilli(toEpochMilliseconds()).atZone(ZoneId.systemDefault())
@@ -41,5 +46,6 @@ internal fun Instant.weekdayAndYear(): String {
     return if (local().year == ZonedDateTime.now().year) weekday else "$weekday · ${format("y")}"
 }
 
-internal fun Instant.entryDate(): String =
-    DateTimeFormatter.ofPattern("dd - MMM - y", Locale.getDefault()).format(local())
+internal fun Instant.longDate(): String = format("dMMMMy")
+
+internal fun Instant.weekday(): String = format("EEEE")

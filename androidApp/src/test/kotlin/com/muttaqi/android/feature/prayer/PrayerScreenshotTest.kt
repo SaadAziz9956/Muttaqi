@@ -5,10 +5,12 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.Surface
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.test.junit4.createComposeRule
 import androidx.compose.ui.unit.dp
+import com.muttaqi.android.designsystem.oneui.OneUiCardSpacing
+import com.muttaqi.android.designsystem.oneui.OneUiDefaults
+import com.muttaqi.android.designsystem.oneui.OneUiSurface
 import com.muttaqi.android.testing.captureLightAndDark
 import com.muttaqi.shared.feature.prayer.data.qibla.AdhanQiblaRepository
 import com.muttaqi.shared.feature.prayer.data.times.AdhanPrayerTimesRepository
@@ -83,8 +85,8 @@ class PrayerScreenshotTest {
         val zone = ZoneId.of("Asia/Karachi")
         val today = AdhanPrayerTimesRepository().prayerTimes(LocalDate(2026, 9, 30), karachi)!!
         compose.captureLightAndDark("prayer_times") {
-            Surface(Modifier.fillMaxSize()) {
-                Column(Modifier.padding(16.dp), verticalArrangement = Arrangement.spacedBy(16.dp)) {
+            OneUiSurface {
+                Column(Modifier.fillMaxSize().padding(horizontal = OneUiDefaults.ScreenMargin, vertical = 24.dp), verticalArrangement = Arrangement.spacedBy(OneUiCardSpacing)) {
                     PrayerTimesCard(UpcomingPrayer(Prayer.Asr, today.asr), today, next = Prayer.Asr, zone = zone)
                     PrayerTimesCard(UpcomingPrayer(Prayer.Fajr, today.fajr), today = null, next = null, zone = zone)
                     PrayerTimesCard(upcoming = null, today, next = null, zone = zone)

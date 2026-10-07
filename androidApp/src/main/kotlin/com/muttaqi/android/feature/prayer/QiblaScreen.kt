@@ -22,17 +22,9 @@ import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.material3.Button
-import androidx.compose.material3.Card
-import androidx.compose.material3.CenterAlignedTopAppBar
-import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.ExperimentalMaterial3ExpressiveApi
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material3.Icon
-import androidx.compose.material3.MaterialShapes
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
-import androidx.compose.material3.toShape
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
@@ -53,15 +45,23 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.semantics.clearAndSetSemantics
 import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.semantics.semantics
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.muttaqi.android.R
-import com.muttaqi.android.designsystem.component.BackButton
 import com.muttaqi.android.designsystem.component.DelayedLoadingIndicator
 import com.muttaqi.android.designsystem.component.FadeBetween
+import com.muttaqi.android.designsystem.oneui.OneUi
+import com.muttaqi.android.designsystem.oneui.OneUiButton
+import com.muttaqi.android.designsystem.oneui.OneUiCard
+import com.muttaqi.android.designsystem.oneui.OneUiCardSpacing
+import com.muttaqi.android.designsystem.oneui.OneUiDefaults
+import com.muttaqi.android.designsystem.oneui.OneUiScaffold
+import com.muttaqi.android.designsystem.oneui.OneUiSurface
 import com.muttaqi.shared.feature.prayer.domain.model.LocationAccess
 import com.muttaqi.shared.feature.prayer.domain.model.QiblaDirection
 import com.muttaqi.shared.feature.prayer.presentation.qibla.QiblaCompass
@@ -96,18 +96,17 @@ fun QiblaRoute(viewModel: QiblaViewModel, onBack: () -> Unit) {
     QiblaScreen(state, compass, viewModel::dispatch, onBack)
 }
 
-@OptIn(ExperimentalMaterial3Api::class, ExperimentalMaterial3ExpressiveApi::class)
 @Composable
 fun QiblaScreen(state: QiblaState, compass: QiblaCompass?, onIntent: (QiblaIntent) -> Unit, onBack: () -> Unit) {
-    Scaffold(
-        topBar = { CenterAlignedTopAppBar(title = { Text("Qibla") }, navigationIcon = { BackButton(onBack) }) },
-    ) { padding ->
-        Box(Modifier.fillMaxSize().padding(padding), contentAlignment = Alignment.Center) {
-            FadeBetween(state.phase, key = { it::class }, contentAlignment = Alignment.Center) { phase ->
-                when (phase) {
-                    QiblaPhase.Locating -> DelayedLoadingIndicator()
-                    is QiblaPhase.NeedsLocation -> LocationNeeded(phase.access) { onIntent(QiblaIntent.LocationButtonTapped) }
-                    is QiblaPhase.Ready -> Compass(phase.qibla, compass, state.isCompassAvailable)
+    OneUiSurface {
+        OneUiScaffold(title = "Qibla", onBack = onBack, expandable = false) { padding ->
+            Box(Modifier.fillMaxSize().padding(padding), contentAlignment = Alignment.Center) {
+                FadeBetween(state.phase, key = { it::class }, contentAlignment = Alignment.Center) { phase ->
+                    when (phase) {
+                        QiblaPhase.Locating -> DelayedLoadingIndicator()
+                        is QiblaPhase.NeedsLocation -> LocationNeeded(phase.access) { onIntent(QiblaIntent.LocationButtonTapped) }
+                        is QiblaPhase.Ready -> Compass(phase.qibla, compass, state.isCompassAvailable)
+                    }
                 }
             }
         }
@@ -116,6 +115,8 @@ fun QiblaScreen(state: QiblaState, compass: QiblaCompass?, onIntent: (QiblaInten
 
 @Composable
 private fun Compass(qibla: QiblaDirection, compass: QiblaCompass?, isCompassAvailable: Boolean) {
+    val colors = OneUi.colors
+    val type = OneUi.typography
     val bearing = qibla.bearing.roundToInt()
     val isAligned = compass?.isAligned == true
     val note = when {
@@ -128,33 +129,29 @@ private fun Compass(qibla: QiblaDirection, compass: QiblaCompass?, isCompassAvai
         isAligned -> "You're facing the Qibla"
         else -> "Turn ${if (compass.turnAngle > 0) "right" else "left"} ${abs(compass.turnAngle).roundToInt()}°"
     }
-    val instructionColor by animateColorAsState(
-        if (isAligned) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.onSurface,
-        spring(),
-        label = "instruction",
-    )
+    val instructionColor by animateColorAsState(if (isAligned) colors.accent else colors.text, spring(), label = "instruction")
     Column(
-        Modifier.fillMaxSize().padding(horizontal = 16.dp),
+        Modifier.fillMaxSize().padding(horizontal = OneUiDefaults.ScreenMargin),
         horizontalAlignment = Alignment.CenterHorizontally,
     ) {
         Spacer(Modifier.heightIn(min = 12.dp).weight(1f))
         QiblaDial(qibla.bearing, rotation = compass?.dialRotation ?: 0.0, isAligned = isAligned, modifier = Modifier.size(300.dp))
         Text(
             instruction,
-            Modifier.padding(top = 32.dp),
-            style = MaterialTheme.typography.headlineSmall,
+            Modifier.padding(top = 32.dp, start = 12.dp, end = 12.dp),
+            style = type.sectionTitle.copy(fontSize = 24.sp, lineHeight = 32.sp),
             color = instructionColor,
             textAlign = TextAlign.Center,
         )
-        Row(Modifier.padding(top = 24.dp), horizontalArrangement = Arrangement.spacedBy(12.dp)) {
+        Row(Modifier.padding(top = 24.dp), horizontalArrangement = Arrangement.spacedBy(OneUiCardSpacing)) {
             Stat("Bearing", "$bearing°", "from North", Modifier.weight(1f))
             Stat("Distance", "${NumberFormat.getIntegerInstance().format(qibla.distanceInKilometers)} km", "to Makkah", Modifier.weight(1f))
         }
         if (note != null) {
-            Card(Modifier.padding(top = 12.dp).fillMaxWidth()) {
-                Row(Modifier.padding(16.dp), horizontalArrangement = Arrangement.spacedBy(12.dp), verticalAlignment = Alignment.CenterVertically) {
-                    Icon(painterResource(R.drawable.ic_info), contentDescription = null, tint = MaterialTheme.colorScheme.primary)
-                    Text(note, style = MaterialTheme.typography.bodyMedium, color = MaterialTheme.colorScheme.onSurfaceVariant)
+            OneUiCard(Modifier.padding(top = OneUiCardSpacing).fillMaxWidth()) {
+                Row(horizontalArrangement = Arrangement.spacedBy(14.dp), verticalAlignment = Alignment.CenterVertically) {
+                    Icon(painterResource(R.drawable.ic_info), contentDescription = null, Modifier.size(22.dp), tint = colors.accent)
+                    Text(note, style = type.listSummary, color = colors.secondaryText)
                 }
             }
         }
@@ -164,11 +161,13 @@ private fun Compass(qibla: QiblaDirection, compass: QiblaCompass?, isCompassAvai
 
 @Composable
 private fun Stat(label: String, value: String, detail: String, modifier: Modifier = Modifier) {
-    Card(modifier) {
-        Column(Modifier.fillMaxWidth().padding(16.dp).semantics(mergeDescendants = true) {}, verticalArrangement = Arrangement.spacedBy(2.dp)) {
-            Text(label, style = MaterialTheme.typography.labelMedium, color = MaterialTheme.colorScheme.onSurfaceVariant)
-            Text(value, style = MaterialTheme.typography.headlineSmall)
-            Text(detail, style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.primary)
+    val colors = OneUi.colors
+    val type = OneUi.typography
+    OneUiCard(modifier) {
+        Column(Modifier.fillMaxWidth().semantics(mergeDescendants = true) {}, verticalArrangement = Arrangement.spacedBy(2.dp)) {
+            Text(label, style = type.caption, color = colors.secondaryText)
+            Text(value, style = type.listTitle.copy(fontSize = 26.sp, lineHeight = 32.sp, fontWeight = FontWeight.SemiBold), color = colors.text)
+            Text(detail, style = type.small, color = colors.accent)
         }
     }
 }
@@ -177,32 +176,32 @@ private val EaseOut = CubicBezierEasing(0f, 0f, 0.58f, 1f)
 
 @Composable
 fun QiblaDial(qiblaBearing: Double, rotation: Double, isAligned: Boolean, modifier: Modifier = Modifier) {
-    val colors = MaterialTheme.colorScheme
+    val colors = OneUi.colors
+    val type = OneUi.typography
     val turned by animateFloatAsState(rotation.toFloat(), tween(250, easing = EaseOut), label = "dial")
-    val accent by animateColorAsState(if (isAligned) colors.primary else colors.tertiary, spring(), label = "accent")
-    val onAccent by animateColorAsState(if (isAligned) colors.onPrimary else colors.onTertiary, spring(), label = "onAccent")
-    val pointer by animateColorAsState(if (isAligned) colors.primary else colors.onSurfaceVariant, spring(), label = "pointer")
-    val rim by animateColorAsState(if (isAligned) colors.primary else colors.outlineVariant, spring(), label = "rim")
+    val accent by animateColorAsState(if (isAligned) colors.accent else colors.text, spring(), label = "accent")
+    val onAccent by animateColorAsState(if (isAligned) colors.onAccent else colors.container, spring(), label = "onAccent")
+    val pointer by animateColorAsState(if (isAligned) colors.accent else colors.secondaryText, spring(), label = "pointer")
+    val rim by animateColorAsState(if (isAligned) colors.accent else colors.divider, spring(), label = "rim")
     val rimWidth by animateDpAsState(if (isAligned) 4.dp else 1.dp, spring(), label = "rimWidth")
-    val markerShape = MaterialShapes.Cookie9Sided.toShape()
     val letters = listOf("N", "E", "S", "W")
 
     Box(modifier.clearAndSetSemantics {}, contentAlignment = Alignment.Center) {
         Canvas(Modifier.fillMaxSize()) {
             val radius = size.minDimension / 2
-            drawCircle(colors.surfaceContainer, radius)
+            drawCircle(colors.container, radius)
             drawCircle(rim, radius - rimWidth.toPx() / 2, style = Stroke(rimWidth.toPx()))
         }
 
         Box(Modifier.fillMaxSize().graphicsLayer { rotationZ = -turned }, contentAlignment = Alignment.Center) {
             Canvas(Modifier.fillMaxSize()) {
                 val radius = size.minDimension / 2
-                drawCircle(colors.surfaceContainerHighest, radius - 22.dp.toPx())
+                drawCircle(colors.component, radius - 22.dp.toPx())
                 for (tick in 0 until 72) {
                     val major = tick % 6 == 0
                     rotate(tick * 5f) {
                         capsule(
-                            color = if (major) colors.onSurface else colors.outline,
+                            color = if (major) colors.text else colors.secondaryText.copy(alpha = 0.6f),
                             width = if (major) 2.dp.toPx() else 1.dp.toPx(),
                             height = if (major) 12.dp.toPx() else 6.dp.toPx(),
                             centreAbove = radius - 12.dp.toPx(),
@@ -216,15 +215,15 @@ fun QiblaDial(qiblaBearing: Double, rotation: Double, isAligned: Boolean, modifi
                 Text(
                     letter,
                     Modifier.polar(index * 90.0, fromCentre = 150.dp - 44.dp).graphicsLayer { rotationZ = turned },
-                    style = MaterialTheme.typography.titleMedium,
-                    color = if (letter == "N") colors.primary else colors.onSurfaceVariant,
+                    style = type.listTitle.copy(fontSize = 16.sp, fontWeight = FontWeight.SemiBold),
+                    color = if (letter == "N") colors.accent else colors.secondaryText,
                 )
             }
             Box(
                 Modifier.polar(qiblaBearing, fromCentre = 150.dp - 82.dp)
                     .graphicsLayer { rotationZ = turned }
                     .size(44.dp)
-                    .background(accent, markerShape),
+                    .background(accent, CircleShape),
                 contentAlignment = Alignment.Center,
             ) {
                 Icon(painterResource(R.drawable.ic_mosque), contentDescription = null, Modifier.size(22.dp), tint = onAccent)
@@ -235,7 +234,7 @@ fun QiblaDial(qiblaBearing: Double, rotation: Double, isAligned: Boolean, modifi
             val radius = size.minDimension / 2
             capsule(pointer, 4.dp.toPx(), 18.dp.toPx(), centreAbove = radius + 16.dp.toPx())
             drawCircle(accent, 7.dp.toPx())
-            drawCircle(colors.surface, 6.dp.toPx(), style = Stroke(2.dp.toPx()))
+            drawCircle(colors.container, 6.dp.toPx(), style = Stroke(2.dp.toPx()))
         }
     }
 }
@@ -257,21 +256,27 @@ private fun Modifier.polar(degrees: Double, fromCentre: Dp): Modifier = offset {
 
 @Composable
 private fun LocationNeeded(access: LocationAccess, onButton: () -> Unit) {
+    val colors = OneUi.colors
+    val type = OneUi.typography
     Column(
         Modifier.padding(horizontal = 32.dp).semantics(mergeDescendants = true) { contentDescription = "Location needed" },
         horizontalAlignment = Alignment.CenterHorizontally,
     ) {
-        Icon(painterResource(R.drawable.ic_location_on), contentDescription = null, Modifier.size(48.dp), tint = MaterialTheme.colorScheme.primary)
-        Text("Location needed", Modifier.padding(top = 16.dp), style = MaterialTheme.typography.headlineSmall)
+        Box(Modifier.size(80.dp).background(colors.accent.copy(alpha = 0.12f), CircleShape), contentAlignment = Alignment.Center) {
+            Icon(painterResource(R.drawable.ic_location_on), contentDescription = null, Modifier.size(40.dp), tint = colors.accent)
+        }
+        Text("Location needed", Modifier.padding(top = 20.dp), style = type.sectionTitle.copy(fontSize = 24.sp, lineHeight = 32.sp), color = colors.text)
         Text(
             "Muttaqi uses your location to find the direction of the Kaaba.",
             Modifier.padding(top = 8.dp),
-            style = MaterialTheme.typography.bodyLarge,
-            color = MaterialTheme.colorScheme.onSurfaceVariant,
+            style = type.body,
+            color = colors.secondaryText,
             textAlign = TextAlign.Center,
         )
-        Button(onClick = onButton, modifier = Modifier.padding(top = 24.dp)) {
-            Text(if (access == LocationAccess.Denied) "Open Settings" else "Allow Location")
-        }
+        OneUiButton(
+            if (access == LocationAccess.Denied) "Open Settings" else "Allow Location",
+            onClick = onButton,
+            modifier = Modifier.padding(top = 28.dp),
+        )
     }
 }

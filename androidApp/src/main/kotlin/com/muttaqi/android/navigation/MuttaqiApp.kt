@@ -1,21 +1,22 @@
 package com.muttaqi.android.navigation
 
 import androidx.annotation.DrawableRes
+import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.animation.core.tween
+import androidx.compose.animation.fadeIn
+import androidx.compose.animation.fadeOut
+import androidx.compose.animation.slideInVertically
+import androidx.compose.animation.slideOutVertically
 import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.WindowInsets
-import androidx.compose.foundation.layout.consumeWindowInsets
+import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.ExperimentalMaterial3ExpressiveApi
-import androidx.compose.material3.Icon
-import androidx.compose.material3.Scaffold
-import androidx.compose.material3.ShortNavigationBar
-import androidx.compose.material3.ShortNavigationBarItem
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.remember
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.unit.dp
 import androidx.navigation.NavDestination.Companion.hasRoute
 import androidx.navigation.NavDestination.Companion.hierarchy
 import androidx.navigation.NavGraph.Companion.findStartDestination
@@ -24,6 +25,12 @@ import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.navigation
 import androidx.navigation.compose.rememberNavController
 import com.muttaqi.android.R
+import com.muttaqi.android.designsystem.oneui.LocalTabBarInset
+import com.muttaqi.android.designsystem.oneui.OneUiDefaults
+import com.muttaqi.android.designsystem.oneui.OneUiTab
+import com.muttaqi.android.designsystem.oneui.OneUiTabBar
+import com.muttaqi.android.designsystem.oneui.OneUiTheme
+import com.muttaqi.android.designsystem.oneui.TabBarInset
 import com.muttaqi.android.feature.dhikr.dhikrDestinations
 import com.muttaqi.android.feature.dua.DuaListRoute
 import com.muttaqi.android.feature.dua.duaDestinations
@@ -61,32 +68,11 @@ fun MuttaqiApp() {
         val backStack by navController.currentBackStackEntryAsState()
         val destination = backStack?.destination
         val onTabRoot = Tab.entries.any { tab -> destination?.hasRoute(tab.root::class) == true }
+        val selected = Tab.entries.indexOfFirst { tab -> destination?.hierarchy?.any { it.hasRoute(tab.graph::class) } == true }
+        val tabs = remember { Tab.entries.map { OneUiTab(it.label, it.icon, it.selectedIcon) } }
 
-        Scaffold(
-            contentWindowInsets = WindowInsets(0, 0, 0, 0),
-            bottomBar = {
-                if (onTabRoot) {
-                    ShortNavigationBar {
-                        Tab.entries.forEach { tab ->
-                            val selected = destination?.hierarchy?.any { it.hasRoute(tab.graph::class) } == true
-                            ShortNavigationBarItem(
-                                selected = selected,
-                                onClick = {
-                                    navController.navigate(tab.graph) {
-                                        popUpTo(navController.graph.findStartDestination().id) { saveState = true }
-                                        launchSingleTop = true
-                                        restoreState = true
-                                    }
-                                },
-                                icon = { Icon(painterResource(if (selected) tab.selectedIcon else tab.icon), contentDescription = null) },
-                                label = { Text(tab.label) },
-                            )
-                        }
-                    }
-                }
-            },
-        ) { padding ->
-            Box(Modifier.fillMaxSize().padding(bottom = padding.calculateBottomPadding()).consumeWindowInsets(padding)) {
+        Box(Modifier.fillMaxSize()) {
+            CompositionLocalProvider(LocalTabBarInset provides if (onTabRoot) TabBarInset else 0.dp) {
                 NavHost(navController, startDestination = HomeTab) {
                     navigation<HomeTab>(startDestination = HomeRoute) {
                         homeDestinations(navController)
@@ -107,6 +93,27 @@ fun MuttaqiApp() {
                     }
                     topicPageDestinations(navController)
                     shareDestinations(navController)
+                }
+            }
+            AnimatedVisibility(
+                visible = onTabRoot,
+                modifier = Modifier.align(Alignment.BottomCenter),
+                enter = fadeIn(tween(200)) + slideInVertically(tween(300, easing = OneUiDefaults.Easing)) { it / 2 },
+                exit = fadeOut(tween(150)) + slideOutVertically(tween(200)) { it / 2 },
+            ) {
+                OneUiTheme {
+                    OneUiTabBar(
+                        tabs = tabs,
+                        selected = selected,
+                        onSelect = { index ->
+                            navController.navigate(Tab.entries[index].graph) {
+                                popUpTo(navController.graph.findStartDestination().id) { saveState = true }
+                                launchSingleTop = true
+                                restoreState = true
+                            }
+                        },
+                        modifier = Modifier.navigationBarsPadding(),
+                    )
                 }
             }
         }
