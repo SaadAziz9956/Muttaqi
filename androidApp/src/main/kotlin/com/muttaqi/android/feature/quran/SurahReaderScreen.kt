@@ -9,6 +9,8 @@ import androidx.compose.animation.fadeOut
 import androidx.compose.animation.slideInHorizontally
 import androidx.compose.animation.slideOutHorizontally
 import androidx.compose.animation.togetherWith
+import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -27,29 +29,16 @@ import androidx.compose.foundation.lazy.LazyListScope
 import androidx.compose.foundation.lazy.LazyListState
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.rememberLazyListState
-import androidx.compose.material3.ButtonDefaults
-import androidx.compose.material3.Card
+import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.ExperimentalMaterial3ExpressiveApi
-import androidx.compose.material3.FilledTonalButton
-import androidx.compose.material3.FloatingToolbarDefaults
-import androidx.compose.material3.HorizontalDivider
-import androidx.compose.material3.HorizontalFloatingToolbar
 import androidx.compose.material3.Icon
-import androidx.compose.material3.IconButton
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.ModalBottomSheet
-import androidx.compose.material3.OutlinedCard
-import androidx.compose.material3.Scaffold
+import androidx.compose.material3.LocalContentColor
 import androidx.compose.material3.Text
-import androidx.compose.material3.TextButton
-import androidx.compose.material3.TopAppBar
-import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.material3.rememberModalBottomSheetState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -59,13 +48,21 @@ import androidx.compose.runtime.setValue
 import androidx.compose.runtime.snapshotFlow
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.draw.shadow
+import androidx.compose.ui.geometry.Offset
+import androidx.compose.ui.input.nestedscroll.NestedScrollConnection
+import androidx.compose.ui.input.nestedscroll.NestedScrollDispatcher
+import androidx.compose.ui.input.nestedscroll.NestedScrollSource
 import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.platform.ClipEntry
 import androidx.compose.ui.platform.LocalClipboard
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.buildAnnotatedString
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.LineHeightStyle
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextDirection
@@ -78,10 +75,19 @@ import com.muttaqi.android.R
 import com.muttaqi.android.designsystem.NastaliqFont
 import com.muttaqi.android.designsystem.QuranFont
 import com.muttaqi.android.designsystem.component.ArabicText
-import com.muttaqi.android.designsystem.component.BackButton
 import com.muttaqi.android.designsystem.component.DelayedLoadingIndicator
 import com.muttaqi.android.designsystem.component.QuranText
 import com.muttaqi.android.designsystem.component.TranslationText
+import com.muttaqi.android.designsystem.oneui.OneUi
+import com.muttaqi.android.designsystem.oneui.OneUiArtwork
+import com.muttaqi.android.designsystem.oneui.OneUiBottomSheet
+import com.muttaqi.android.designsystem.oneui.OneUiButton
+import com.muttaqi.android.designsystem.oneui.OneUiCard
+import com.muttaqi.android.designsystem.oneui.OneUiCardSpacing
+import com.muttaqi.android.designsystem.oneui.OneUiDefaults
+import com.muttaqi.android.designsystem.oneui.OneUiIconButton
+import com.muttaqi.android.designsystem.oneui.OneUiScaffold
+import com.muttaqi.android.designsystem.oneui.OneUiSurface
 import com.muttaqi.shared.core.model.Language
 import com.muttaqi.shared.core.share.SharePassage
 import com.muttaqi.shared.feature.quran.domain.model.Ayah
@@ -145,13 +151,13 @@ fun SurahReaderRoute(surahNumber: Int, startAyah: Int, onShare: (SharePassage) -
     )
 
     if (showSettings) {
-        ModalBottomSheet(onDismissRequest = { showSettings = false }) {
+        OneUiBottomSheet(onDismiss = { showSettings = false }) {
             ReadingSettingsContent(settingsState, settings::dispatch)
         }
     }
     tafsirStart?.let { start ->
-        ModalBottomSheet(
-            onDismissRequest = { tafsirStart = null },
+        OneUiBottomSheet(
+            onDismiss = { tafsirStart = null },
             sheetState = rememberModalBottomSheetState(skipPartiallyExpanded = true),
         ) {
             TafsirContent(
@@ -172,72 +178,64 @@ fun SurahReaderScreen(
     onSettings: () -> Unit,
     onBack: () -> Unit,
 ) {
-    Box(Modifier.fillMaxSize()) {
-        AnimatedContent(
-            targetState = state,
-            contentKey = { it.surahNumber },
-            transitionSpec = {
-                val forward = targetState.direction == SurahDirection.Forward
-                slideInHorizontally { if (forward) it else -it } togetherWith slideOutHorizontally { if (forward) -it else it }
-            },
-            label = "surah",
-        ) { page ->
-            SurahPage(page, onIntent, onSettings, onBack)
-        }
-        AnimatedVisibility(
-            readingPosition != null,
-            Modifier.align(Alignment.BottomCenter).navigationBarsPadding().padding(bottom = 16.dp),
-            enter = fadeIn(),
-            exit = fadeOut(),
-        ) {
-            ReadingPosition(readingPosition.orEmpty())
+    OneUiSurface {
+        Box(Modifier.fillMaxSize()) {
+            AnimatedContent(
+                targetState = state,
+                contentKey = { it.surahNumber },
+                transitionSpec = {
+                    val forward = targetState.direction == SurahDirection.Forward
+                    slideInHorizontally { if (forward) it else -it } togetherWith slideOutHorizontally { if (forward) -it else it }
+                },
+                label = "surah",
+            ) { page ->
+                SurahPage(page, onIntent, onSettings, onBack)
+            }
+            AnimatedVisibility(
+                readingPosition != null,
+                Modifier.align(Alignment.BottomCenter).navigationBarsPadding().padding(bottom = 16.dp),
+                enter = fadeIn(),
+                exit = fadeOut(),
+            ) {
+                ReadingPosition(readingPosition.orEmpty())
+            }
         }
     }
 }
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 private fun SurahPage(state: SurahReaderState, onIntent: (SurahReaderIntent) -> Unit, onSettings: () -> Unit, onBack: () -> Unit) {
     val list = rememberLazyListState()
     val header = state.headerSurah
+    val collapser = remember { NestedScrollDispatcher() }
     TrackVisibleAyahs(list, onIntent)
-    ScrollToStart(state, list, onIntent)
-    val scrollBehavior = TopAppBarDefaults.pinnedScrollBehavior()
-    val showTitle by remember(list) { derivedStateOf { list.firstVisibleItemIndex > 0 } }
-    Scaffold(
-        modifier = Modifier.nestedScroll(scrollBehavior.nestedScrollConnection),
-        topBar = {
-            TopAppBar(
-                title = {
-                    AnimatedVisibility(showTitle, enter = fadeIn(), exit = fadeOut()) {
-                        Text(header?.englishName.orEmpty())
-                    }
-                },
-                navigationIcon = { BackButton(onBack) },
-                actions = {
-                    IconButton(onClick = onSettings) {
-                        Icon(painterResource(R.drawable.ic_tune), contentDescription = "Reading settings")
-                    }
-                },
-                scrollBehavior = scrollBehavior,
-            )
-        },
+    ScrollToStart(state, list, collapser, onIntent)
+    OneUiScaffold(
+        title = header?.englishName.orEmpty(),
+        onBack = onBack,
+        subtitle = header?.let { surah -> { SurahFacts(surah) } },
+        actions = { OneUiIconButton(R.drawable.ic_tune, "Reading settings", onSettings) },
     ) { padding ->
         LazyColumn(
+            Modifier.nestedScroll(PassThrough, collapser),
             state = list,
-            contentPadding = PaddingValues(start = 16.dp, end = 16.dp, top = padding.calculateTopPadding()),
-            verticalArrangement = Arrangement.spacedBy(12.dp),
+            contentPadding = PaddingValues(
+                start = OneUiDefaults.ScreenMargin,
+                end = OneUiDefaults.ScreenMargin,
+                top = padding.calculateTopPadding(),
+            ),
+            verticalArrangement = Arrangement.spacedBy(OneUiCardSpacing),
         ) {
             item(key = "header") {
-                SurahHeader(header, state.previousSurah, state.nextSurah, onIntent)
+                SurahHeader(state.previousSurah, state.nextSurah, onIntent)
             }
             when (val content = state.content) {
-                SurahReaderContent.Loading -> item(key = "loading") { Loading(Modifier.padding(top = 100.dp)) }
+                SurahReaderContent.Loading -> item(key = "loading") { Loading(Modifier.padding(top = 64.dp)) }
                 is SurahReaderContent.Failed -> item(key = "failed") {
                     LoadFailed(
                         content.message,
                         onRetry = { onIntent(SurahReaderIntent.Retry) },
-                        modifier = Modifier.padding(top = 100.dp).height(360.dp),
+                        modifier = Modifier.padding(top = 24.dp).height(360.dp),
                         suggestion = content.suggestion,
                     )
                 }
@@ -246,6 +244,8 @@ private fun SurahPage(state: SurahReaderState, onIntent: (SurahReaderIntent) -> 
         }
     }
 }
+
+private val PassThrough = object : NestedScrollConnection {}
 
 private fun LazyListScope.loadedContent(
     reading: SurahReading,
@@ -269,22 +269,22 @@ private fun LazyListScope.loadedContent(
             }
         }
         ReadingMode.ArabicOnly -> {
-            item(key = "pages-top") { Spacer(Modifier.height(4.dp)) }
+            item(key = "pages-top") { Spacer(Modifier.height(0.dp)) }
             items(reading.pages, key = { it.id }) { page -> Arriving { MushafPageCard(page, state.settings.fontSize) } }
         }
     }
     item(key = "end") {
         Arriving {
             Column(
-                Modifier.navigationBarsPadding().padding(top = 12.dp, bottom = 104.dp),
-                verticalArrangement = Arrangement.spacedBy(24.dp),
+                Modifier.navigationBarsPadding().padding(top = 8.dp, bottom = 104.dp),
+                verticalArrangement = Arrangement.spacedBy(OneUiDefaults.GroupGap),
             ) {
                 SurahEndNavigation(reading.previousSurah, reading.nextSurah, onIntent)
                 Text(
                     QuranMessages.MUSHAF_CREDIT + "\n" + QuranMessages.translationCredit(state.settings.language),
-                    Modifier.fillMaxWidth(),
-                    style = MaterialTheme.typography.bodySmall,
-                    color = MaterialTheme.colorScheme.onSurfaceVariant,
+                    Modifier.fillMaxWidth().padding(horizontal = 12.dp),
+                    style = OneUi.typography.small,
+                    color = OneUi.colors.secondaryText,
                     textAlign = TextAlign.Center,
                 )
             }
@@ -314,17 +314,20 @@ private fun TrackVisibleAyahs(list: LazyListState, onIntent: (SurahReaderIntent)
 }
 
 @Composable
-private fun ScrollToStart(state: SurahReaderState, list: LazyListState, onIntent: (SurahReaderIntent) -> Unit) {
+private fun ScrollToStart(state: SurahReaderState, list: LazyListState, collapser: NestedScrollDispatcher, onIntent: (SurahReaderIntent) -> Unit) {
     val target = state.startScrollTarget
     LaunchedEffect(target) {
         if (target == null) return@LaunchedEffect
         repeat(2) {
+            collapser.dispatchPreScroll(Offset(0f, -COLLAPSE_DISTANCE), NestedScrollSource.SideEffect)
             list.scrollToItem(itemIndex(state, target))
             delay(300)
         }
         onIntent(SurahReaderIntent.ReachedStart)
     }
 }
+
+private const val COLLAPSE_DISTANCE = 100_000f
 
 private fun itemIndex(state: SurahReaderState, target: Int): Int {
     val reading = state.reading ?: return 0
@@ -336,65 +339,77 @@ private fun itemIndex(state: SurahReaderState, target: Int): Int {
 }
 
 @Composable
-private fun SurahHeader(surah: Surah?, previous: Surah?, next: Surah?, onIntent: (SurahReaderIntent) -> Unit) {
-    Column(Modifier.fillMaxWidth().padding(top = 8.dp), horizontalAlignment = Alignment.CenterHorizontally) {
-        if (surah != null) {
-            ArabicText(surah.name, style = MaterialTheme.typography.displaySmall, textAlign = TextAlign.Center)
-        }
-        Text(surah?.englishName.orEmpty(), style = MaterialTheme.typography.headlineMedium, textAlign = TextAlign.Center)
-        if (surah != null) {
-            Text(
-                "${surah.englishNameTranslation} · ${surah.revelationType} · ${surah.numberOfAyahs} ayahs",
-                Modifier.padding(top = 4.dp),
-                style = MaterialTheme.typography.bodyMedium,
-                color = MaterialTheme.colorScheme.onSurfaceVariant,
-                textAlign = TextAlign.Center,
-            )
-        }
-        FilledTonalButton(onClick = { onIntent(SurahReaderIntent.ExplanationTapped) }, Modifier.padding(top = 16.dp)) {
-            Icon(painterResource(R.drawable.ic_book), contentDescription = null, Modifier.size(ButtonDefaults.IconSize))
-            Spacer(Modifier.size(ButtonDefaults.IconSpacing))
-            Text("Explanation")
-        }
+private fun SurahFacts(surah: Surah) {
+    val colors = OneUi.colors
+    val type = OneUi.typography
+    Column(Modifier.fillMaxWidth(), horizontalAlignment = Alignment.CenterHorizontally, verticalArrangement = Arrangement.spacedBy(2.dp)) {
+        ArabicText(
+            surah.name,
+            Modifier.fillMaxWidth(),
+            style = type.sectionTitle.copy(fontSize = 26.sp),
+            color = colors.accent,
+            textAlign = TextAlign.Center,
+        )
+        Text(
+            "${surah.englishNameTranslation} · ${surah.revelationType} · ${surah.numberOfAyahs} ayahs",
+            style = type.listSummary,
+            color = colors.secondaryText,
+            textAlign = TextAlign.Center,
+        )
+    }
+}
+
+@Composable
+private fun SurahHeader(previous: Surah?, next: Surah?, onIntent: (SurahReaderIntent) -> Unit) {
+    OneUiCard(
+        Modifier.fillMaxWidth(),
+        artwork = OneUiArtwork.Dawn,
+        contentPadding = PaddingValues(start = 8.dp, end = 8.dp, top = 20.dp, bottom = if (previous != null || next != null) 8.dp else 20.dp),
+    ) {
+        OneUiButton(
+            "Explanation",
+            onClick = { onIntent(SurahReaderIntent.ExplanationTapped) },
+            modifier = Modifier.align(Alignment.CenterHorizontally),
+            icon = R.drawable.ic_book,
+        )
         if (previous != null || next != null) {
-            Row(Modifier.fillMaxWidth().padding(top = 4.dp), verticalAlignment = Alignment.CenterVertically) {
-                previous?.let { NeighbourButton(it, isNext = false) { onIntent(SurahReaderIntent.PreviousTapped) } }
+            Row(Modifier.fillMaxWidth().padding(top = 8.dp), verticalAlignment = Alignment.CenterVertically) {
+                previous?.let { NeighbourLink(it, isNext = false) { onIntent(SurahReaderIntent.PreviousTapped) } }
                 Spacer(Modifier.weight(1f))
-                next?.let { NeighbourButton(it, isNext = true) { onIntent(SurahReaderIntent.NextTapped) } }
+                next?.let { NeighbourLink(it, isNext = true) { onIntent(SurahReaderIntent.NextTapped) } }
             }
         }
     }
 }
 
 @Composable
-private fun NeighbourButton(neighbour: Surah, isNext: Boolean, onClick: () -> Unit) {
-    TextButton(onClick = onClick) {
-        if (!isNext) {
-            Icon(painterResource(R.drawable.ic_arrow_back), contentDescription = null, Modifier.size(ButtonDefaults.IconSize))
-            Spacer(Modifier.size(ButtonDefaults.IconSpacing))
-        }
-        Text(neighbour.englishName)
-        if (isNext) {
-            Spacer(Modifier.size(ButtonDefaults.IconSpacing))
-            Icon(painterResource(R.drawable.ic_arrow_forward), contentDescription = null, Modifier.size(ButtonDefaults.IconSize))
-        }
+private fun NeighbourLink(neighbour: Surah, isNext: Boolean, onClick: () -> Unit) {
+    val color = LocalContentColor.current
+    Row(
+        Modifier
+            .clip(CircleShape)
+            .clickable(role = Role.Button, onClick = onClick)
+            .padding(horizontal = 12.dp, vertical = 12.dp),
+        horizontalArrangement = Arrangement.spacedBy(6.dp),
+        verticalAlignment = Alignment.CenterVertically,
+    ) {
+        if (!isNext) Icon(painterResource(R.drawable.ic_arrow_back), contentDescription = null, Modifier.size(18.dp), tint = color)
+        Text(neighbour.englishName, style = OneUi.typography.listSummary.copy(fontWeight = FontWeight.Medium), color = color)
+        if (isNext) Icon(painterResource(R.drawable.ic_arrow_forward), contentDescription = null, Modifier.size(18.dp), tint = color)
     }
 }
 
 @Composable
 private fun Bismillah(text: String, translation: String?) {
-    Column(
-        Modifier.fillMaxWidth().padding(vertical = 16.dp),
-        horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.spacedBy(12.dp),
-    ) {
-        QuranText(text, Modifier.fillMaxWidth(), lineSpacing = 0.sp)
+    val colors = OneUi.colors
+    OneUiCard(Modifier.fillMaxWidth(), contentPadding = PaddingValues(horizontal = OneUiDefaults.ItemPadding, vertical = 24.dp)) {
+        QuranText(text, Modifier.fillMaxWidth(), color = colors.text, lineSpacing = 0.sp)
         translation?.let {
             TranslationText(
                 it,
-                Modifier.fillMaxWidth().padding(horizontal = 16.dp),
-                style = MaterialTheme.typography.bodyMedium,
-                color = MaterialTheme.colorScheme.onSurfaceVariant,
+                Modifier.fillMaxWidth().padding(top = 12.dp),
+                style = OneUi.typography.listSummary,
+                color = colors.secondaryText,
                 textAlign = TextAlign.Center,
             )
         }
@@ -417,70 +432,79 @@ fun AyahCard(
             copied = false
         }
     }
-    Card(Modifier.fillMaxWidth()) {
-        Column(Modifier.fillMaxWidth().padding(start = 16.dp, end = 16.dp, top = 16.dp, bottom = 8.dp)) {
-            AyahArabic(ayah, fontSize)
-            ayah.transliteration?.takeIf { it.isNotEmpty() }?.let {
+    val colors = OneUi.colors
+    val type = OneUi.typography
+    Column(
+        Modifier
+            .fillMaxWidth()
+            .clip(RoundedCornerShape(OneUiDefaults.ContainerRadius))
+            .background(colors.container)
+            .padding(start = OneUiDefaults.ItemPadding, end = OneUiDefaults.ItemPadding, top = 18.dp, bottom = 8.dp),
+    ) {
+        AyahArabic(ayah, fontSize)
+        ayah.transliteration?.takeIf { it.isNotEmpty() }?.let {
+            TranslationText(
+                it,
+                Modifier.fillMaxWidth().padding(top = 12.dp),
+                style = type.body,
+                fontSize = fontSize.transliterationSize.sp,
+                color = colors.accent,
+                textAlign = TextAlign.Left,
+                lineSpacing = 0.sp,
+            )
+        }
+        ayah.translation?.takeIf { it.isNotEmpty() }?.let { translation ->
+            if (language == Language.Urdu) {
                 TranslationText(
-                    it,
-                    Modifier.fillMaxWidth().padding(top = 12.dp),
-                    fontSize = fontSize.transliterationSize.sp,
-                    color = MaterialTheme.colorScheme.primary,
+                    translation,
+                    Modifier.fillMaxWidth().padding(top = 8.dp),
+                    style = type.body,
+                    fontSize = (fontSize.translationSize - 1).sp,
+                    color = colors.text,
+                    textAlign = TextAlign.Right,
+                    lineSpacing = 0.sp,
+                )
+            } else {
+                TranslationText(
+                    "${ayah.numberInSurah}.  $translation",
+                    Modifier.fillMaxWidth().padding(top = 8.dp),
+                    style = type.body,
+                    fontSize = fontSize.translationSize.sp,
+                    color = colors.text,
                     textAlign = TextAlign.Left,
                     lineSpacing = 0.sp,
                 )
             }
-            ayah.translation?.takeIf { it.isNotEmpty() }?.let { translation ->
-                if (language == Language.Urdu) {
-                    TranslationText(
-                        translation,
-                        Modifier.fillMaxWidth().padding(top = 8.dp),
-                        fontSize = (fontSize.translationSize - 1).sp,
-                        textAlign = TextAlign.Right,
-                        lineSpacing = 0.sp,
-                    )
-                } else {
-                    TranslationText(
-                        "${ayah.numberInSurah}.  $translation",
-                        Modifier.fillMaxWidth().padding(top = 8.dp),
-                        fontSize = fontSize.translationSize.sp,
-                        textAlign = TextAlign.Left,
-                        lineSpacing = 0.sp,
-                    )
-                }
+        }
+        Row(Modifier.fillMaxWidth().padding(top = 8.dp), verticalAlignment = Alignment.CenterVertically) {
+            Text(
+                ayah.reference,
+                Modifier.weight(1f),
+                style = type.caption.copy(fontWeight = FontWeight.Medium),
+                color = colors.accent,
+            )
+            AyahAction(R.drawable.ic_book, "Explanation", onExplanation)
+            AyahAction(
+                if (copied) R.drawable.ic_check else R.drawable.ic_content_copy,
+                if (copied) "Copied" else "Copy",
+            ) {
+                onCopy()
+                copied = true
             }
-            Row(Modifier.fillMaxWidth().padding(top = 8.dp), verticalAlignment = Alignment.CenterVertically) {
-                Text(
-                    ayah.reference,
-                    Modifier.weight(1f),
-                    style = MaterialTheme.typography.labelLarge,
-                    color = MaterialTheme.colorScheme.primary,
-                )
-                IconButton(onClick = onExplanation) {
-                    Icon(painterResource(R.drawable.ic_book), contentDescription = "Explanation")
-                }
-                IconButton(
-                    onClick = {
-                        onCopy()
-                        copied = true
-                    },
-                ) {
-                    Icon(
-                        painterResource(if (copied) R.drawable.ic_check else R.drawable.ic_content_copy),
-                        contentDescription = if (copied) "Copied" else "Copy",
-                    )
-                }
-                IconButton(onClick = onShare) {
-                    Icon(painterResource(R.drawable.ic_share), contentDescription = "Share")
-                }
-            }
+            AyahAction(R.drawable.ic_share, "Share", onShare)
         }
     }
 }
 
 @Composable
+private fun AyahAction(icon: Int, description: String, onClick: () -> Unit) {
+    OneUiIconButton(icon, description, onClick, tint = OneUi.colors.secondaryText, size = 40.dp, iconSize = 20.dp)
+}
+
+@Composable
 private fun AyahArabic(ayah: Ayah, fontSize: FontSize) {
-    val markColor = MaterialTheme.colorScheme.primary
+    val colors = OneUi.colors
+    val markColor = colors.accent
     val text = remember(ayah.number, markColor) {
         buildAnnotatedString {
             append(ayah.arabicWithoutEndSign())
@@ -493,6 +517,7 @@ private fun AyahArabic(ayah: Ayah, fontSize: FontSize) {
     Text(
         text,
         Modifier.fillMaxWidth().padding(top = 6.dp),
+        color = colors.text,
         textAlign = TextAlign.Right,
         style = TextStyle(fontFamily = QuranFont, fontSize = fontSize.arabicSize.sp, textDirection = TextDirection.Rtl),
     )
@@ -500,36 +525,40 @@ private fun AyahArabic(ayah: Ayah, fontSize: FontSize) {
 
 @Composable
 fun MushafPageCard(page: MushafPage, fontSize: FontSize) {
-    val markColor = MaterialTheme.colorScheme.primary
+    val colors = OneUi.colors
+    val markColor = colors.accent
     val text = remember(page.id, markColor) {
         buildAnnotatedString {
             page.ayahs.forEachIndexed { index, ayah ->
                 append(ayah.arabicWithoutEndSign())
-                append(' ')
+                append(' ')
                 withStyle(SpanStyle(color = markColor)) { append(ayah.ayahMark) }
                 if (index < page.ayahs.lastIndex) append(' ')
             }
         }
     }
-    Card(Modifier.fillMaxWidth()) {
-        Column(Modifier.fillMaxWidth().padding(16.dp), verticalArrangement = Arrangement.spacedBy(20.dp)) {
-            Text(
-                text,
-                Modifier.fillMaxWidth(),
-                style = TextStyle(
-                    fontFamily = QuranFont,
-                    fontSize = fontSize.arabicSize.sp,
-                    lineHeight = (QURAN_FONT_LINE_HEIGHT + MUSHAF_LINE_SPACING).em,
-                    lineHeightStyle = LineHeightStyle(LineHeightStyle.Alignment.Top, LineHeightStyle.Trim.Both),
-                    textAlign = TextAlign.Justify,
-                    textDirection = TextDirection.Rtl,
-                ),
-            )
-            Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(12.dp)) {
-                HorizontalDivider(Modifier.weight(1f))
-                Text("${page.number}", style = MaterialTheme.typography.labelMedium, color = MaterialTheme.colorScheme.onSurfaceVariant)
-                HorizontalDivider(Modifier.weight(1f))
-            }
+    OneUiCard(Modifier.fillMaxWidth(), contentPadding = PaddingValues(start = OneUiDefaults.ItemPadding, end = OneUiDefaults.ItemPadding, top = 20.dp, bottom = 16.dp)) {
+        Text(
+            text,
+            Modifier.fillMaxWidth(),
+            color = colors.text,
+            style = TextStyle(
+                fontFamily = QuranFont,
+                fontSize = fontSize.arabicSize.sp,
+                lineHeight = (QURAN_FONT_LINE_HEIGHT + MUSHAF_LINE_SPACING).em,
+                lineHeightStyle = LineHeightStyle(LineHeightStyle.Alignment.Top, LineHeightStyle.Trim.Both),
+                textAlign = TextAlign.Justify,
+                textDirection = TextDirection.Rtl,
+            ),
+        )
+        Row(
+            Modifier.fillMaxWidth().padding(top = 20.dp),
+            verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.spacedBy(12.dp),
+        ) {
+            Box(Modifier.weight(1f).height(1.dp).background(colors.divider))
+            Text("${page.number}", style = OneUi.typography.caption, color = colors.secondaryText)
+            Box(Modifier.weight(1f).height(1.dp).background(colors.divider))
         }
     }
 }
@@ -539,7 +568,7 @@ private const val MUSHAF_LINE_SPACING = 0.6f
 
 @Composable
 private fun SurahEndNavigation(previous: Surah?, next: Surah?, onIntent: (SurahReaderIntent) -> Unit, modifier: Modifier = Modifier) {
-    Row(modifier.fillMaxWidth(), horizontalArrangement = Arrangement.spacedBy(12.dp)) {
+    Row(modifier.fillMaxWidth(), horizontalArrangement = Arrangement.spacedBy(OneUiCardSpacing)) {
         Box(Modifier.weight(1f)) {
             previous?.let { EndCard(it, isNext = false) { onIntent(SurahReaderIntent.PreviousTapped) } }
         }
@@ -551,32 +580,40 @@ private fun SurahEndNavigation(previous: Surah?, next: Surah?, onIntent: (SurahR
 
 @Composable
 private fun EndCard(neighbour: Surah, isNext: Boolean, onClick: () -> Unit) {
-    OutlinedCard(onClick = onClick, modifier = Modifier.fillMaxWidth()) {
+    val colors = OneUi.colors
+    val type = OneUi.typography
+    OneUiCard(
+        Modifier.fillMaxWidth(),
+        onClick = onClick,
+        contentPadding = PaddingValues(horizontal = OneUiDefaults.ItemPadding, vertical = 18.dp),
+    ) {
         Column(
-            Modifier.fillMaxWidth().padding(16.dp),
+            Modifier.fillMaxWidth(),
             horizontalAlignment = if (isNext) Alignment.End else Alignment.Start,
             verticalArrangement = Arrangement.spacedBy(4.dp),
         ) {
-            Text(
-                if (isNext) "Next" else "Previous",
-                style = MaterialTheme.typography.labelMedium,
-                color = MaterialTheme.colorScheme.onSurfaceVariant,
-            )
+            Text(if (isNext) "Next" else "Previous", style = type.caption, color = colors.secondaryText)
             Row(horizontalArrangement = Arrangement.spacedBy(4.dp), verticalAlignment = Alignment.CenterVertically) {
-                if (!isNext) Icon(painterResource(R.drawable.ic_arrow_back), contentDescription = null, Modifier.size(18.dp))
-                Text(neighbour.englishName, Modifier.weight(1f, fill = false), style = MaterialTheme.typography.titleSmall)
-                if (isNext) Icon(painterResource(R.drawable.ic_arrow_forward), contentDescription = null, Modifier.size(18.dp))
+                if (!isNext) Icon(painterResource(R.drawable.ic_arrow_back), contentDescription = null, Modifier.size(18.dp), tint = colors.accent)
+                Text(neighbour.englishName, Modifier.weight(1f, fill = false), style = type.listTitle, color = colors.text)
+                if (isNext) Icon(painterResource(R.drawable.ic_arrow_forward), contentDescription = null, Modifier.size(18.dp), tint = colors.accent)
             }
         }
     }
 }
 
-@OptIn(ExperimentalMaterial3ExpressiveApi::class)
 @Composable
 private fun ReadingPosition(position: String) {
-    HorizontalFloatingToolbar(expanded = true, colors = FloatingToolbarDefaults.vibrantFloatingToolbarColors()) {
-        AnimatedContent(position, Modifier.align(Alignment.CenterVertically), label = "position") {
-            Text(it, Modifier.padding(horizontal = 12.dp), style = MaterialTheme.typography.labelLarge)
+    val colors = OneUi.colors
+    Box(
+        Modifier
+            .shadow(12.dp, CircleShape)
+            .clip(CircleShape)
+            .background(colors.tabBar.copy(alpha = 1f))
+            .padding(horizontal = 20.dp, vertical = 12.dp),
+    ) {
+        AnimatedContent(position, label = "position") {
+            Text(it, style = OneUi.typography.listSummary.copy(fontWeight = FontWeight.SemiBold), color = colors.text)
         }
     }
 }

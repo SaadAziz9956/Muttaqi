@@ -1,34 +1,28 @@
 package com.muttaqi.android.feature.journal
 
+import androidx.compose.animation.animateContentSize
+import androidx.compose.animation.core.tween
 import androidx.compose.foundation.background
+import androidx.compose.foundation.combinedClickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.heightIn
+import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.lazy.rememberLazyListState
-import androidx.compose.material3.DropdownMenu
-import androidx.compose.material3.DropdownMenuItem
-import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.ExperimentalMaterial3ExpressiveApi
-import androidx.compose.material3.ExtendedFloatingActionButton
-import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
-import androidx.compose.material3.ListItem
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.MediumFlexibleTopAppBar
-import androidx.compose.material3.MenuDefaults
-import androidx.compose.material3.Scaffold
 import androidx.compose.material3.SwipeToDismissBox
 import androidx.compose.material3.SwipeToDismissBoxValue
 import androidx.compose.material3.Text
-import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.material3.rememberSwipeToDismissBoxState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -41,17 +35,28 @@ import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.input.nestedscroll.nestedScroll
+import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.muttaqi.android.R
-import com.muttaqi.android.designsystem.component.BackButton
-import com.muttaqi.android.designsystem.component.PageQuote
-import com.muttaqi.android.designsystem.component.PageSearchBar
+import com.muttaqi.android.designsystem.component.TranslationText
+import com.muttaqi.android.designsystem.oneui.OneUi
+import com.muttaqi.android.designsystem.oneui.OneUiHeaderQuote
+import com.muttaqi.android.designsystem.oneui.OneUiDefaults
+import com.muttaqi.android.designsystem.oneui.OneUiFab
+import com.muttaqi.android.designsystem.oneui.OneUiMenu
+import com.muttaqi.android.designsystem.oneui.OneUiMenuItem
+import com.muttaqi.android.designsystem.oneui.OneUiScaffold
+import com.muttaqi.android.designsystem.oneui.OneUiSearchField
+import com.muttaqi.android.designsystem.oneui.OneUiSubheader
+import com.muttaqi.android.designsystem.oneui.OneUiSurface
+import com.muttaqi.shared.core.quote.DisplayedQuote
+import com.muttaqi.shared.core.text.quoted
 import com.muttaqi.shared.feature.journal.domain.model.JournalEntry
 import com.muttaqi.shared.feature.journal.presentation.list.JournalListEffect
 import com.muttaqi.shared.feature.journal.presentation.list.JournalListIntent
@@ -74,163 +79,164 @@ fun JournalListRoute(onOpenEntry: (String?) -> Unit, onBack: () -> Unit) {
     JournalListScreen(state, viewModel::dispatch, onBack)
 }
 
-@OptIn(ExperimentalMaterial3Api::class, ExperimentalMaterial3ExpressiveApi::class)
 @Composable
 fun JournalListScreen(
     state: JournalListState,
     onIntent: (JournalListIntent) -> Unit,
     onBack: () -> Unit,
 ) {
-    val scrollBehavior = TopAppBarDefaults.exitUntilCollapsedScrollBehavior()
     val list = rememberLazyListState()
     val atTop by remember { derivedStateOf { list.firstVisibleItemIndex == 0 } }
     var pendingDelete by rememberSaveable { mutableStateOf<String?>(null) }
     val entries = state.shownEntries
 
-    Scaffold(
-        modifier = Modifier.nestedScroll(scrollBehavior.nestedScrollConnection),
-        topBar = {
-            MediumFlexibleTopAppBar(
-                title = { Text("Journal") },
-                navigationIcon = { BackButton(onBack) },
-                scrollBehavior = scrollBehavior,
-            )
-        },
-        floatingActionButton = {
-            ExtendedFloatingActionButton(
-                text = { Text("New entry") },
-                icon = { Icon(painterResource(R.drawable.ic_add), contentDescription = null) },
-                onClick = { onIntent(JournalListIntent.NewEntryTapped) },
-                expanded = atTop,
-            )
-        },
-    ) { padding ->
-        LazyColumn(
-            state = list,
-            modifier = Modifier.fillMaxSize(),
-            contentPadding = PaddingValues(top = padding.calculateTopPadding() + 8.dp, bottom = padding.calculateBottomPadding() + 96.dp),
-        ) {
-            state.header?.let { header -> item(key = "header") { PageQuote(header, Modifier.padding(horizontal = 16.dp)) } }
-            item(key = "search") {
-                PageSearchBar(
-                    query = state.query,
-                    onQueryChange = { onIntent(JournalListIntent.QueryChanged(it)) },
-                    onClear = { onIntent(JournalListIntent.QueryChanged("")) },
-                    placeholder = "Search",
-                    modifier = Modifier.padding(horizontal = 16.dp, vertical = 16.dp),
-                )
-            }
-            if (!state.isSearching && state.hasEntries) {
-                item(key = "notes") {
-                    Text(
-                        "Notes",
-                        Modifier.padding(start = 16.dp, end = 16.dp, bottom = 4.dp),
-                        style = MaterialTheme.typography.titleSmall,
-                        color = MaterialTheme.colorScheme.primary,
+    OneUiSurface {
+        OneUiScaffold(
+            title = "Journal",
+            onBack = onBack,
+            subtitle = state.header?.let { header -> { OneUiHeaderQuote(header.text, header.source) } },
+            floatingActionButton = {
+                Box(
+                    Modifier
+                        .offset(x = FabShadowRoom, y = FabShadowRoom)
+                        .animateContentSize(tween(250, easing = OneUiDefaults.Easing))
+                        .padding(FabShadowRoom),
+                ) {
+                    OneUiFab(
+                        icon = R.drawable.ic_add,
+                        description = "New entry",
+                        onClick = { onIntent(JournalListIntent.NewEntryTapped) },
+                        text = if (atTop) "New entry" else null,
                     )
                 }
-            }
-            items(entries, key = { it.id }) { entry ->
-                JournalEntryRow(
-                    entry,
-                    onClick = { onIntent(JournalListIntent.EntryTapped(entry.id)) },
-                    onDelete = { pendingDelete = entry.id },
-                    modifier = Modifier.animateItem(),
-                )
-            }
-            item(key = "empty") {
-                if (state.isSearching && entries.isEmpty()) {
-                    EmptyState(
-                        icon = R.drawable.ic_search,
-                        iconTint = MaterialTheme.colorScheme.onSurfaceVariant,
-                        title = "No Results for “${state.query}”",
-                        description = "Check the spelling or try a new search.",
+            },
+        ) { padding ->
+            LazyColumn(
+                state = list,
+                modifier = Modifier.fillMaxSize(),
+                contentPadding = PaddingValues(top = padding.calculateTopPadding(), bottom = padding.calculateBottomPadding() + 96.dp),
+            ) {
+                item(key = "search") {
+                    OneUiSearchField(
+                        query = state.query,
+                        onQueryChange = { onIntent(JournalListIntent.QueryChanged(it)) },
+                        onClear = { onIntent(JournalListIntent.QueryChanged("")) },
+                        placeholder = "Search",
+                        modifier = Modifier.padding(bottom = OneUiDefaults.GroupGap),
                     )
-                } else if (!state.isLoading && !state.hasEntries) {
-                    EmptyState(
-                        icon = R.drawable.ic_edit_note,
-                        iconTint = MaterialTheme.colorScheme.primary,
-                        title = "No entries yet",
-                        description = "Write down what you're grateful for today. Tap + to start.",
+                }
+                if (!state.isSearching && state.hasEntries) {
+                    item(key = "notes") { OneUiSubheader("Notes") }
+                }
+                itemsIndexed(entries, key = { _, entry -> entry.id }) { index, entry ->
+                    JournalEntryRow(
+                        entry,
+                        shape = groupItemShape(index, entries.size),
+                        divider = index < entries.lastIndex,
+                        onClick = { onIntent(JournalListIntent.EntryTapped(entry.id)) },
+                        onDelete = { pendingDelete = entry.id },
+                        modifier = Modifier.animateItem(),
                     )
+                }
+                item(key = "empty") {
+                    if (state.isSearching && entries.isEmpty()) {
+                        EmptyState(
+                            icon = R.drawable.ic_search,
+                            iconTint = OneUi.colors.secondaryText,
+                            title = "No Results for “${state.query}”",
+                            description = "Check the spelling or try a new search.",
+                        )
+                    } else if (!state.isLoading && !state.hasEntries) {
+                        EmptyState(
+                            icon = R.drawable.ic_edit_note,
+                            iconTint = OneUi.colors.accent,
+                            title = "No entries yet",
+                            description = "Write down what you're grateful for today. Tap + to start.",
+                        )
+                    }
                 }
             }
         }
-    }
 
-    pendingDelete?.let { entryId ->
-        DeleteEntryDialog(
-            onConfirm = {
-                pendingDelete = null
-                onIntent(JournalListIntent.DeleteTapped(entryId))
-            },
-            onDismiss = { pendingDelete = null },
-        )
+        pendingDelete?.let { entryId ->
+            DeleteEntryDialog(
+                onConfirm = {
+                    pendingDelete = null
+                    onIntent(JournalListIntent.DeleteTapped(entryId))
+                },
+                onDismiss = { pendingDelete = null },
+            )
+        }
     }
 }
 
-@OptIn(ExperimentalMaterial3ExpressiveApi::class)
 @Composable
-private fun JournalEntryRow(entry: JournalEntry, onClick: () -> Unit, onDelete: () -> Unit, modifier: Modifier = Modifier) {
+private fun JournalEntryRow(
+    entry: JournalEntry,
+    shape: Shape,
+    divider: Boolean,
+    onClick: () -> Unit,
+    onDelete: () -> Unit,
+    modifier: Modifier = Modifier,
+) {
+    val colors = OneUi.colors
+    val type = OneUi.typography
     val swipe = rememberSwipeToDismissBoxState()
     val scope = rememberCoroutineScope()
     var showMenu by remember { mutableStateOf(false) }
 
-    Column(modifier.fillMaxWidth()) {
-        Box {
-            SwipeToDismissBox(
-                state = swipe,
-                enableDismissFromStartToEnd = false,
-                onDismiss = { direction ->
-                    scope.launch { swipe.reset() }
-                    if (direction == SwipeToDismissBoxValue.EndToStart) onDelete()
-                },
-                backgroundContent = {
-                    if (swipe.dismissDirection == SwipeToDismissBoxValue.EndToStart) {
-                        Box(
-                            Modifier.fillMaxSize().background(MaterialTheme.colorScheme.errorContainer).padding(horizontal = 24.dp),
-                            contentAlignment = Alignment.CenterEnd,
-                        ) {
-                            Icon(painterResource(R.drawable.ic_delete), contentDescription = null, tint = MaterialTheme.colorScheme.onErrorContainer)
-                        }
+    Box(modifier.fillMaxWidth().padding(horizontal = OneUiDefaults.ScreenMargin).clip(shape)) {
+        SwipeToDismissBox(
+            state = swipe,
+            enableDismissFromStartToEnd = false,
+            onDismiss = { direction ->
+                scope.launch { swipe.reset() }
+                if (direction == SwipeToDismissBoxValue.EndToStart) onDelete()
+            },
+            backgroundContent = {
+                if (swipe.dismissDirection == SwipeToDismissBoxValue.EndToStart) {
+                    Box(
+                        Modifier.fillMaxSize().background(colors.destructive).padding(horizontal = 24.dp),
+                        contentAlignment = Alignment.CenterEnd,
+                    ) {
+                        Icon(painterResource(R.drawable.ic_delete), contentDescription = null, tint = colors.container)
                     }
-                },
+                }
+            },
+        ) {
+            Column(
+                Modifier
+                    .fillMaxWidth()
+                    .background(colors.container)
+                    .combinedClickable(onClick = onClick, onLongClick = { showMenu = true }),
             ) {
-                ListItem(
-                    onClick = onClick,
-                    onLongClick = { showMenu = true },
-                    leadingContent = {
-                        Column(Modifier.width(100.dp), horizontalAlignment = Alignment.CenterHorizontally) {
-                            Text(entry.createdAt.dayAndMonth(), style = MaterialTheme.typography.titleLarge, color = MaterialTheme.colorScheme.primary)
-                            Text(
-                                entry.createdAt.weekdayAndYear(),
-                                style = MaterialTheme.typography.labelMedium,
-                                color = MaterialTheme.colorScheme.onSurfaceVariant,
-                                textAlign = TextAlign.Center,
-                            )
-                        }
-                    },
-                    trailingContent = { Icon(painterResource(R.drawable.ic_chevron_right), contentDescription = null) },
+                Column(
+                    Modifier.fillMaxWidth().heightIn(min = 60.dp).padding(horizontal = OneUiDefaults.ItemPadding, vertical = 14.dp),
+                    verticalArrangement = Arrangement.spacedBy(2.dp),
                 ) {
-                    Text(entry.preview, maxLines = 1, overflow = TextOverflow.Ellipsis)
+                    Text(entry.preview, style = type.listTitle, color = colors.text, maxLines = 1, overflow = TextOverflow.Ellipsis)
+                    Text(
+                        "${entry.createdAt.dayAndMonth()} · ${entry.createdAt.weekdayAndYear()}",
+                        style = type.listSummary,
+                        color = colors.secondaryText,
+                    )
+                }
+                if (divider) {
+                    Box(Modifier.fillMaxWidth().padding(horizontal = OneUiDefaults.ItemPadding).height(1.dp).background(colors.divider))
                 }
             }
-            DropdownMenu(expanded = showMenu, onDismissRequest = { showMenu = false }) {
-                DropdownMenuItem(
-                    text = { Text("Delete") },
-                    leadingIcon = { Icon(painterResource(R.drawable.ic_delete), contentDescription = null) },
-                    onClick = {
-                        showMenu = false
-                        onDelete()
-                    },
-                    colors = MenuDefaults.itemColors(
-                        textColor = MaterialTheme.colorScheme.error,
-                        leadingIconColor = MaterialTheme.colorScheme.error,
-                    ),
-                )
-            }
         }
-        HorizontalDivider()
+        OneUiMenu(expanded = showMenu, onDismiss = { showMenu = false }) {
+            OneUiMenuItem(
+                text = "Delete",
+                onClick = {
+                    showMenu = false
+                    onDelete()
+                },
+                icon = R.drawable.ic_delete,
+                destructive = true,
+            )
+        }
     }
 }
 
@@ -242,12 +248,9 @@ private fun EmptyState(icon: Int, iconTint: Color, title: String, description: S
         verticalArrangement = Arrangement.spacedBy(8.dp),
     ) {
         Icon(painterResource(icon), contentDescription = null, Modifier.size(48.dp), tint = iconTint)
-        Text(title, Modifier.padding(top = 8.dp), style = MaterialTheme.typography.titleLarge, textAlign = TextAlign.Center)
-        Text(
-            description,
-            style = MaterialTheme.typography.bodyLarge,
-            color = MaterialTheme.colorScheme.onSurfaceVariant,
-            textAlign = TextAlign.Center,
-        )
+        Text(title, Modifier.padding(top = 8.dp), style = OneUi.typography.dialogTitle, color = OneUi.colors.text, textAlign = TextAlign.Center)
+        Text(description, style = OneUi.typography.listSummary, color = OneUi.colors.secondaryText, textAlign = TextAlign.Center)
     }
 }
+
+private val FabShadowRoom = 16.dp

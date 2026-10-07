@@ -1,18 +1,29 @@
 package com.muttaqi.android.feature.quran
 
 import android.app.Application
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.BottomSheetDefaults
-import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Surface
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.test.hasScrollToKeyAction
 import androidx.compose.ui.test.junit4.createComposeRule
+import androidx.compose.ui.test.onRoot
+import androidx.compose.ui.test.performScrollToKey
 import androidx.compose.ui.unit.dp
+import com.github.takahirom.roborazzi.captureRoboImage
+import com.muttaqi.android.designsystem.MuttaqiTheme
+import com.muttaqi.android.designsystem.oneui.OneUi
 import com.muttaqi.android.testing.PHONE
 import com.muttaqi.android.testing.captureLightAndDark
 import com.muttaqi.shared.core.model.Language
@@ -23,6 +34,7 @@ import com.muttaqi.shared.feature.quran.domain.model.ReadingProgress
 import com.muttaqi.shared.feature.quran.domain.model.ReadingSettings
 import com.muttaqi.shared.feature.quran.domain.model.SurahReading
 import com.muttaqi.shared.feature.quran.domain.model.TafsirEntry
+import com.muttaqi.shared.feature.quran.presentation.QuranMessages
 import com.muttaqi.shared.feature.quran.presentation.list.QuranListState
 import com.muttaqi.shared.feature.quran.presentation.list.RevelationFilter
 import com.muttaqi.shared.feature.quran.presentation.reader.SurahReaderContent
@@ -120,6 +132,46 @@ class QuranScreenshotTest {
     }
 
     @Test
+    fun listNoResults() = compose.captureLightAndDark("quran_list_no_results") {
+        QuranListScreen(
+            QuranListState(isLoading = false, header = header, surahs = surahs, query = "Yaseen", visibleSurahs = emptyList()),
+            onIntent = {},
+        )
+    }
+
+    @Test
+    fun readerEnd() {
+        var dark by mutableStateOf(false)
+        compose.setContent {
+            MuttaqiTheme(darkTheme = dark) {
+                SurahReaderScreen(reader(baqara), readingPosition = null, onIntent = {}, onSettings = {}, onBack = {})
+            }
+        }
+        compose.onNode(hasScrollToKeyAction()).performScrollToKey("end")
+        compose.onRoot().captureRoboImage("screenshots/quran_reader_end.png")
+        dark = true
+        compose.waitForIdle()
+        compose.onRoot().captureRoboImage("screenshots/quran_reader_end_dark.png")
+    }
+
+    @Test
+    fun readerFailed() = compose.captureLightAndDark("quran_reader_failed") {
+        SurahReaderScreen(
+            SurahReaderState(
+                surahNumber = 2,
+                headerSurah = surah(2),
+                previousSurah = surah(1),
+                nextSurah = surah(3),
+                content = SurahReaderContent.Failed(QuranMessages.surahFailed(2), QuranMessages.SURAH_FAILED_SUGGESTION),
+            ),
+            readingPosition = null,
+            onIntent = {},
+            onSettings = {},
+            onBack = {},
+        )
+    }
+
+    @Test
     fun settings() = compose.captureLightAndDark("quran_settings") {
         Sheet { ReadingSettingsContent(ReadingSettingsState(isDownloadingLanguage = true), onIntent = {}) }
     }
@@ -154,19 +206,21 @@ class QuranScreenshotTest {
         }
     }
 
-    @OptIn(ExperimentalMaterial3Api::class)
     @Composable
     private fun Sheet(content: @Composable () -> Unit) {
-        Surface(Modifier.fillMaxSize(), color = MaterialTheme.colorScheme.surfaceDim) {
-            Surface(
-                Modifier.padding(top = 120.dp).fillMaxSize(),
-                shape = BottomSheetDefaults.ExpandedShape,
-                color = BottomSheetDefaults.ContainerColor,
+        val colors = OneUi.colors
+        Box(Modifier.fillMaxSize().background(colors.background)) {
+            Box(Modifier.fillMaxSize().background(Color.Black.copy(alpha = 0.4f)))
+            Column(
+                Modifier
+                    .padding(top = 120.dp)
+                    .fillMaxSize()
+                    .clip(RoundedCornerShape(topStart = 28.dp, topEnd = 28.dp))
+                    .background(colors.background),
+                horizontalAlignment = Alignment.CenterHorizontally,
             ) {
-                Column(horizontalAlignment = Alignment.CenterHorizontally) {
-                    BottomSheetDefaults.DragHandle()
-                    content()
-                }
+                Box(Modifier.padding(vertical = 10.dp).size(width = 40.dp, height = 4.dp).clip(RoundedCornerShape(2.dp)).background(colors.secondaryText.copy(alpha = 0.5f)))
+                content()
             }
         }
     }

@@ -14,44 +14,54 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.ColumnScope
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.WindowInsets
+import androidx.compose.foundation.layout.displayCutout
+import androidx.compose.foundation.layout.ime
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.systemBars
+import androidx.compose.foundation.layout.union
+import androidx.compose.foundation.layout.windowInsetsPadding
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
-import androidx.compose.material3.Button
-import androidx.compose.material3.ButtonDefaults
-import androidx.compose.material3.Card
-import androidx.compose.material3.ExperimentalMaterial3ExpressiveApi
 import androidx.compose.material3.Icon
-import androidx.compose.material3.LoadingIndicator
-import androidx.compose.material3.MaterialShapes
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Scaffold
+import androidx.compose.material3.LocalContentColor
 import androidx.compose.material3.Text
-import androidx.compose.material3.TextButton
-import androidx.compose.material3.TextField
-import androidx.compose.material3.toShape
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardCapitalization
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.muttaqi.android.R
 import com.muttaqi.android.designsystem.component.ArabicText
 import com.muttaqi.android.designsystem.component.QuranText
 import com.muttaqi.android.designsystem.component.TranslationText
+import com.muttaqi.android.designsystem.oneui.OneUi
+import com.muttaqi.android.designsystem.oneui.OneUiArtwork
+import com.muttaqi.android.designsystem.oneui.OneUiButton
+import com.muttaqi.android.designsystem.oneui.OneUiButtonStyle
+import com.muttaqi.android.designsystem.oneui.OneUiCard
+import com.muttaqi.android.designsystem.oneui.OneUiDefaults
+import com.muttaqi.android.designsystem.oneui.OneUiProgress
+import com.muttaqi.android.designsystem.oneui.OneUiSurface
+import com.muttaqi.android.designsystem.oneui.OneUiTextField
 import com.muttaqi.shared.feature.onboarding.domain.model.OnboardingStep
 import com.muttaqi.shared.feature.onboarding.presentation.OnboardingEffect
 import com.muttaqi.shared.feature.onboarding.presentation.OnboardingIntent
@@ -74,8 +84,8 @@ fun OnboardingRoute(viewModel: OnboardingViewModel, onFinished: () -> Unit) {
 
 @Composable
 fun OnboardingScreen(state: OnboardingState, onIntent: (OnboardingIntent) -> Unit) {
-    Scaffold { padding ->
-        Column(Modifier.fillMaxSize().padding(padding)) {
+    OneUiSurface {
+        Column(Modifier.fillMaxSize().windowInsetsPadding(WindowInsets.systemBars.union(WindowInsets.displayCutout).union(WindowInsets.ime))) {
             AnimatedVisibility(state.step != OnboardingStep.Setup, enter = fadeIn(), exit = fadeOut()) {
                 AppName(Modifier.fillMaxWidth().padding(top = 48.dp))
             }
@@ -83,13 +93,13 @@ fun OnboardingScreen(state: OnboardingState, onIntent: (OnboardingIntent) -> Uni
                 targetState = state.step,
                 modifier = Modifier.weight(1f).fillMaxWidth(),
                 transitionSpec = {
-                    val duration = tween<IntOffset>(450)
+                    val duration = tween<IntOffset>(450, easing = OneUiDefaults.Easing)
                     (slideInHorizontally(duration) { it } + fadeIn(tween(450))) togetherWith
                         (slideOutHorizontally(duration) { -it / 3 } + fadeOut(tween(450)))
                 },
                 label = "step",
             ) { step ->
-                Column(Modifier.fillMaxSize().padding(horizontal = 16.dp), horizontalAlignment = Alignment.CenterHorizontally) {
+                Column(Modifier.fillMaxSize().padding(horizontal = OneUiDefaults.ScreenMargin), horizontalAlignment = Alignment.CenterHorizontally) {
                     when (step) {
                         OnboardingStep.Welcome -> WelcomeStep { onIntent(OnboardingIntent.Begin) }
                         OnboardingStep.Name -> NameStep(state.name, { onIntent(OnboardingIntent.NameChanged(it)) }) { onIntent(OnboardingIntent.SaveName) }
@@ -125,50 +135,38 @@ private fun AppName(modifier: Modifier = Modifier) {
     ArabicText(
         "متقي",
         modifier,
-        style = MaterialTheme.typography.displayLarge,
-        color = MaterialTheme.colorScheme.primary,
+        style = OneUi.typography.largeTitle.copy(fontSize = 57.sp),
+        color = OneUi.colors.accent,
         textAlign = TextAlign.Center,
     )
 }
 
-@OptIn(ExperimentalMaterial3ExpressiveApi::class)
+@Composable
+private fun stepTitle(): TextStyle = OneUi.typography.sectionTitle.copy(fontSize = 24.sp, lineHeight = 32.sp)
+
 @Composable
 private fun PrimaryButton(text: String, onClick: () -> Unit, modifier: Modifier = Modifier) {
-    val size = ButtonDefaults.MediumContainerHeight
-    Button(
-        onClick = onClick,
-        modifier = modifier.fillMaxWidth().heightIn(size),
-        contentPadding = ButtonDefaults.contentPaddingFor(size),
-    ) {
-        Text(text, style = ButtonDefaults.textStyleFor(size))
-    }
+    OneUiButton(text, onClick, modifier.padding(horizontal = 12.dp).fillMaxWidth().heightIn(min = 52.dp))
 }
 
-@OptIn(ExperimentalMaterial3ExpressiveApi::class)
 @Composable
 private fun SecondaryButton(text: String, onClick: () -> Unit, modifier: Modifier = Modifier) {
-    val size = ButtonDefaults.MediumContainerHeight
-    TextButton(
-        onClick = onClick,
-        modifier = modifier.fillMaxWidth().heightIn(size),
-        contentPadding = ButtonDefaults.contentPaddingFor(size),
-    ) {
-        Text(text, style = ButtonDefaults.textStyleFor(size))
-    }
+    OneUiButton(text, onClick, modifier.padding(horizontal = 12.dp).fillMaxWidth().heightIn(min = 52.dp), style = OneUiButtonStyle.Text)
 }
 
 @Composable
 private fun ColumnScope.WelcomeStep(onBegin: () -> Unit) {
     val verse = OnboardingVerses.basmala
     Spacer(Modifier.weight(1f))
-    Card(Modifier.fillMaxWidth()) {
+    OneUiCard(Modifier.fillMaxWidth(), artwork = OneUiArtwork.Forest, contentPadding = PaddingValues(horizontal = 24.dp, vertical = 40.dp)) {
+        val content = LocalContentColor.current
         Column(
-            Modifier.fillMaxWidth().padding(horizontal = 24.dp, vertical = 32.dp),
+            Modifier.fillMaxWidth(),
             horizontalAlignment = Alignment.CenterHorizontally,
-            verticalArrangement = Arrangement.spacedBy(16.dp),
+            verticalArrangement = Arrangement.spacedBy(18.dp),
         ) {
-            QuranText(verse.arabic, Modifier.fillMaxWidth(), fontSize = MaterialTheme.typography.headlineLarge.fontSize)
-            TranslationText(verse.translation, Modifier.fillMaxWidth(), textAlign = TextAlign.Center)
+            QuranText(verse.arabic, Modifier.fillMaxWidth(), fontSize = 32.sp, color = content)
+            TranslationText(verse.translation, Modifier.fillMaxWidth(), style = OneUi.typography.body, color = content.copy(alpha = 0.9f), textAlign = TextAlign.Center)
         }
     }
     Spacer(Modifier.weight(1f))
@@ -178,15 +176,15 @@ private fun ColumnScope.WelcomeStep(onBegin: () -> Unit) {
 @Composable
 private fun ColumnScope.NameStep(name: String, onNameChange: (String) -> Unit, onSave: () -> Unit) {
     Spacer(Modifier.weight(1f))
-    Text("What should we call you?", style = MaterialTheme.typography.headlineSmall, textAlign = TextAlign.Center)
-    TextField(
+    Text("What should we call you?", Modifier.padding(horizontal = 12.dp), style = stepTitle(), color = OneUi.colors.text, textAlign = TextAlign.Center)
+    OneUiTextField(
         value = name,
         onValueChange = onNameChange,
+        placeholder = "Type here...",
         modifier = Modifier.fillMaxWidth().padding(top = 24.dp),
-        placeholder = { Text("Type here...") },
-        singleLine = true,
         keyboardOptions = KeyboardOptions(capitalization = KeyboardCapitalization.Words, imeAction = ImeAction.Done),
         keyboardActions = KeyboardActions(onDone = { onSave() }),
+        contentPadding = PaddingValues(horizontal = 22.dp, vertical = 18.dp),
     )
     Spacer(Modifier.weight(1f))
     PrimaryButton("Save", onSave, Modifier.padding(bottom = 24.dp))
@@ -194,46 +192,47 @@ private fun ColumnScope.NameStep(name: String, onNameChange: (String) -> Unit, o
 
 @Composable
 private fun ColumnScope.GoalsStep(onBegin: () -> Unit) {
+    val colors = OneUi.colors
+    val type = OneUi.typography
     val verse = OnboardingVerses.lovesThePure
     Spacer(Modifier.weight(1f))
-    Card(Modifier.fillMaxWidth()) {
-        Column(Modifier.fillMaxWidth().padding(24.dp)) {
-            Text("We will help you to achieve your Muslim Goals", style = MaterialTheme.typography.titleLarge)
-            Text(
-                "by using our App on the daily basis you will",
-                Modifier.padding(top = 4.dp),
-                style = MaterialTheme.typography.bodyMedium,
-                color = MaterialTheme.colorScheme.onSurfaceVariant,
-            )
-            Column(Modifier.padding(top = 20.dp), verticalArrangement = Arrangement.spacedBy(16.dp)) {
-                GoalRow(R.drawable.ic_volunteer_activism, "Become a better Muslim")
-                GoalRow(R.drawable.ic_menu_book, "Read Quran with translation")
-                GoalRow(R.drawable.ic_self_improvement, "Zikr o Azkar")
-                GoalRow(R.drawable.ic_lightbulb, "Learn Sunnah")
-            }
+    OneUiCard(Modifier.fillMaxWidth(), contentPadding = PaddingValues(24.dp)) {
+        Text("We will help you to achieve your Muslim Goals", style = type.sectionTitle, color = colors.text)
+        Text(
+            "by using our App on the daily basis you will",
+            Modifier.padding(top = 4.dp),
+            style = type.listSummary,
+            color = colors.secondaryText,
+        )
+        Column(Modifier.padding(top = 20.dp), verticalArrangement = Arrangement.spacedBy(14.dp)) {
+            GoalRow(R.drawable.ic_volunteer_activism, "Become a better Muslim")
+            GoalRow(R.drawable.ic_menu_book, "Read Quran with translation")
+            GoalRow(R.drawable.ic_self_improvement, "Zikr o Azkar")
+            GoalRow(R.drawable.ic_lightbulb, "Learn Sunnah")
         }
     }
     Text(
         "In Shaa Allah",
         Modifier.padding(top = 20.dp),
-        style = MaterialTheme.typography.titleMedium,
-        color = MaterialTheme.colorScheme.primary,
+        style = type.listTitle.copy(fontWeight = FontWeight.Medium),
+        color = colors.accent,
     )
     Spacer(Modifier.weight(1f))
     Column(
-        Modifier.fillMaxWidth().padding(horizontal = 8.dp),
+        Modifier.fillMaxWidth().padding(horizontal = 12.dp),
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.spacedBy(8.dp),
     ) {
-        QuranText(verse.arabic, Modifier.fillMaxWidth(), fontSize = MaterialTheme.typography.headlineSmall.fontSize)
+        QuranText(verse.arabic, Modifier.fillMaxWidth(), fontSize = 24.sp, color = colors.text)
         TranslationText(
             verse.translation,
             Modifier.fillMaxWidth(),
-            style = MaterialTheme.typography.bodyMedium,
+            style = type.listSummary,
+            color = colors.text,
             textAlign = TextAlign.Center,
         )
         verse.source?.let {
-            Text(it, style = MaterialTheme.typography.labelMedium, color = MaterialTheme.colorScheme.onSurfaceVariant)
+            Text(it, style = type.caption, color = colors.secondaryText)
         }
     }
     PrimaryButton("Begin", onBegin, Modifier.padding(top = 24.dp, bottom = 24.dp))
@@ -241,9 +240,12 @@ private fun ColumnScope.GoalsStep(onBegin: () -> Unit) {
 
 @Composable
 private fun GoalRow(@DrawableRes icon: Int, text: String) {
-    Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(16.dp)) {
-        Icon(painterResource(icon), contentDescription = null, tint = MaterialTheme.colorScheme.primary)
-        Text(text, style = MaterialTheme.typography.bodyLarge)
+    val colors = OneUi.colors
+    Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(14.dp)) {
+        Box(Modifier.size(40.dp).background(colors.accent.copy(alpha = 0.12f), CircleShape), contentAlignment = Alignment.Center) {
+            Icon(painterResource(icon), contentDescription = null, Modifier.size(22.dp), tint = colors.accent)
+        }
+        Text(text, style = OneUi.typography.listTitle, color = colors.text)
     }
 }
 
@@ -257,60 +259,54 @@ private fun ColumnScope.PermissionStep(
     onAction: () -> Unit,
     onSkip: () -> Unit,
 ) {
+    val colors = OneUi.colors
+    val type = OneUi.typography
     Spacer(Modifier.weight(1f))
-    Card(Modifier.fillMaxWidth()) {
-        Column(
-            Modifier.fillMaxWidth().padding(horizontal = 24.dp, vertical = 32.dp),
-            horizontalAlignment = Alignment.CenterHorizontally,
-        ) {
-            Box(
-                Modifier.size(72.dp).background(MaterialTheme.colorScheme.primary, MaterialShapes.Cookie9Sided.toShape()),
-                contentAlignment = Alignment.Center,
-            ) {
-                Icon(painterResource(icon), contentDescription = null, Modifier.size(32.dp), tint = MaterialTheme.colorScheme.onPrimary)
+    OneUiCard(Modifier.fillMaxWidth(), contentPadding = PaddingValues(horizontal = 24.dp, vertical = 32.dp)) {
+        Column(Modifier.fillMaxWidth(), horizontalAlignment = Alignment.CenterHorizontally) {
+            Box(Modifier.size(72.dp).background(colors.accent, CircleShape), contentAlignment = Alignment.Center) {
+                Icon(painterResource(icon), contentDescription = null, Modifier.size(32.dp), tint = colors.onAccent)
             }
-            Text(title, Modifier.padding(top = 24.dp), style = MaterialTheme.typography.headlineSmall, textAlign = TextAlign.Center)
+            Text(title, Modifier.padding(top = 24.dp), style = stepTitle(), color = colors.text, textAlign = TextAlign.Center)
             Text(
                 detail,
                 Modifier.padding(top = 8.dp),
-                style = MaterialTheme.typography.bodyMedium,
-                color = MaterialTheme.colorScheme.onSurfaceVariant,
+                style = type.listSummary,
+                color = colors.secondaryText,
                 textAlign = TextAlign.Center,
             )
         }
     }
     Spacer(Modifier.weight(1f))
-    Text(question, style = MaterialTheme.typography.titleMedium, textAlign = TextAlign.Center)
+    Text(question, Modifier.padding(horizontal = 12.dp), style = type.listTitle.copy(fontWeight = FontWeight.Medium), color = colors.text, textAlign = TextAlign.Center)
     PrimaryButton(action, onAction, Modifier.padding(top = 16.dp))
     SecondaryButton("Not now", onSkip, Modifier.padding(top = 8.dp, bottom = 24.dp))
 }
 
-@OptIn(ExperimentalMaterial3ExpressiveApi::class)
 @Composable
 private fun ColumnScope.SetupStep(error: String?, onRetry: () -> Unit) {
+    val colors = OneUi.colors
+    val type = OneUi.typography
     Spacer(Modifier.weight(1f))
     AppName()
-    Card(Modifier.padding(top = 24.dp).fillMaxWidth()) {
-        Column(
-            Modifier.fillMaxWidth().padding(horizontal = 24.dp, vertical = 28.dp),
-            horizontalAlignment = Alignment.CenterHorizontally,
-        ) {
+    OneUiCard(Modifier.padding(top = 24.dp).fillMaxWidth(), contentPadding = PaddingValues(horizontal = 24.dp, vertical = 28.dp)) {
+        Column(Modifier.fillMaxWidth(), horizontalAlignment = Alignment.CenterHorizontally) {
             if (error == null) {
-                Text("Setting up for first time", style = MaterialTheme.typography.titleLarge, textAlign = TextAlign.Center)
+                Text("Setting up for first time", style = type.sectionTitle, color = colors.text, textAlign = TextAlign.Center)
                 Text(
                     "Downloading Quran data...",
                     Modifier.padding(top = 8.dp),
-                    style = MaterialTheme.typography.bodyMedium,
-                    color = MaterialTheme.colorScheme.onSurfaceVariant,
+                    style = type.listSummary,
+                    color = colors.secondaryText,
                 )
-                LoadingIndicator(Modifier.padding(top = 16.dp))
+                OneUiProgress(Modifier.padding(top = 20.dp))
             } else {
-                Text("Setup Failed", style = MaterialTheme.typography.titleLarge, textAlign = TextAlign.Center)
+                Text("Setup Failed", style = type.sectionTitle, color = colors.text, textAlign = TextAlign.Center)
                 Text(
                     error,
                     Modifier.padding(top = 8.dp),
-                    style = MaterialTheme.typography.bodyMedium,
-                    color = MaterialTheme.colorScheme.onSurfaceVariant,
+                    style = type.listSummary,
+                    color = colors.secondaryText,
                     textAlign = TextAlign.Center,
                 )
             }

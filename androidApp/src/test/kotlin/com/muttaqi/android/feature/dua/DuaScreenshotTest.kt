@@ -8,6 +8,7 @@ import com.muttaqi.shared.core.quote.DisplayedQuote
 import com.muttaqi.shared.feature.dua.domain.model.DuaCategory
 import com.muttaqi.shared.feature.dua.domain.model.DuaChapter
 import com.muttaqi.shared.feature.dua.domain.model.DuaEntry
+import com.muttaqi.shared.feature.dua.presentation.category.DuaCategoryState
 import com.muttaqi.shared.feature.dua.presentation.chapter.DuaChapterState
 import com.muttaqi.shared.feature.dua.presentation.list.DuaListState
 import org.junit.Rule
@@ -51,6 +52,26 @@ class DuaScreenshotTest {
                 categories = categories,
             ),
             onIntent = {},
+        )
+    }
+
+    @Test
+    fun category() = compose.captureLightAndDark("dua_category") {
+        DuaCategoryScreen(
+            DuaCategoryState(
+                isLoading = false,
+                category = DuaCategory(
+                    "sleep",
+                    "Sleep & Waking",
+                    listOf(
+                        chapter.copy(id = "hisn-1", title = "Supplications for when you wake up"),
+                        chapter.copy(id = "hisn-2", title = "What to say before sleeping"),
+                        chapter.copy(id = "hisn-3", title = "Invocation to say if you stir in the night"),
+                    ),
+                ),
+            ),
+            onIntent = {},
+            onBack = {},
         )
     }
 
